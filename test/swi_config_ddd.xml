@@ -65,8 +65,14 @@
           <swi:searchpattern>(\s+)((union)|(enum)|(struct))(\s*{)</swi:searchpattern>
           <swi:messagepattern>Noname '$2' detected.</swi:messagepattern>
           <swi:codecontent>purified</swi:codecontent>
+          
         </swi:rule>
-      </swi:scanner>
+
+        <swi:suppress>
+          <swi:pattern swi:message="Message pattern">Object pattern</swi:pattern>
+        </swi:suppress>
+
+        </swi:scanner>
       
       <swi:indexer:common>
         <!-- No settings currently available -->
@@ -169,7 +175,7 @@
           <swi:warning>0.60</swi:warning>
           <!--
           <swi:suppress>
-              <swi:pattern level="warning">.*</swi:pattern>
+              <swi:pattern swi:level="warning">.*</swi:pattern>
           </swi:suppress>
           -->
         </swi:exact>

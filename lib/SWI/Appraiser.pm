@@ -415,6 +415,8 @@ sub swiAppraise
                     )
                   )
                 {
+                    # TODO: apply suppress patterns here
+                    
                     my $refStr = XMLout(
                         $report->{"swi:module"}[$moduleId]
                           ->{"swi:file"}[$fileId]->{"swi:function"}[$functionId]
