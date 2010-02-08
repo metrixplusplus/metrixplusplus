@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swi:configuration>
+  
+  <swi:info>
+    <swi:version>1</swi:version>
+    <swi:project>
+      <swi:name>DDD</swi:name>
+    </swi:project>
+    <swi:history>
+      <swi:revision>
+        <swi:name>ALFA</swi:name>
+        <swi:user>avkonst</swi:user>
+        <swi:comment>Configuration for TEST project</swi:comment>
+      </swi:revision>
+    </swi:history>
+  </swi:info>
+      
+  <swi:modules>
+    <swi:module>
+      <swi:name>TEST_FOLDER</swi:name>
+      <swi:location>test</swi:location>
+      <swi:files>
+        <swi:include>.*[chCH]</swi:include>
+        <swi:exclude></swi:exclude>
+      </swi:files>
+      
+      <swi:dupfinder>
+        <swi:enabled>on</swi:enabled>
+      </swi:dupfinder>
+      
+    </swi:module>
+ 
+  </swi:modules>
+  
+  <swi:report>
+    <swi:destination>.</swi:destination>
+    <swi:xml>
+      <swi:name>swi_report_test.xml</swi:name>
+    </swi:xml>
+    <swi:notifications>
+      <swi:name>swi_report_test.log</swi:name>
+      <swi:stdout>on</swi:stdout>
+      <swi:error>
+        <swi:added>on</swi:added>
+        <swi:removed>on</swi:removed>
+        <swi:modified>on</swi:modified>
+        <swi:cloned>on</swi:cloned>
+        <swi:unmodified>on</swi:unmodified>
+      </swi:error>
+      <swi:print>
+        <swi:added>
+          <swi:failures>on</swi:failures>
+          <swi:modifications>off</swi:modifications>
+        </swi:added>
+        <swi:removed>
+          <swi:failures>on</swi:failures>
+          <swi:modifications>off</swi:modifications>
+        </swi:removed>
+        <swi:modified>
+          <swi:failures>on</swi:failures>
+          <swi:modifications>off</swi:modifications>
+        </swi:modified>
+        <swi:cloned>
+          <swi:failures>on</swi:failures>
+          <swi:modifications>off</swi:modifications>
+        </swi:cloned>
+        <swi:unmodified>
+          <swi:failures>on</swi:failures>
+          <swi:modifications>off</swi:modifications>
+        </swi:unmodified>
+      </swi:print>
+    </swi:notifications>
+    <swi:dup>
+      <swi:name>swi_report_ddd.dup</swi:name>
+    </swi:dup>
+  </swi:report>
+  
+  <swi:limits>
+    <swi:lines>
+    
+      <swi:comment:header>
+        <swi:exact>
+          <swi:info>5</swi:info>
+          <swi:notice>3</swi:notice>
+          <swi:warning>1</swi:warning>
+	  
+          <swi:suppress>
+              <swi:pattern swi:level="info">.*</swi:pattern>
+          </swi:suppress>
+	  
+        </swi:exact>
+      </swi:comment:header>
+    </swi:lines>
+
+
+    <swi:duplication>
+      <swi:symbols>
+        <swi:exact swi:relation="swi:length/swi:executable/swi:exact">
+          <swi:info>0.28</swi:info>
+          <swi:notice>0.40</swi:notice>
+          <swi:warning>0.60</swi:warning>
+        </swi:exact>
+      </swi:symbols>
+    </swi:duplication>
+
+  </swi:limits>
+
+</swi:configuration>
