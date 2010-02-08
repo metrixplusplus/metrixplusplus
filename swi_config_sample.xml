@@ -1,0 +1,924 @@
+<!--
+   
+    Software Index, Copyright 2010, Software Index Project Team
+    Link: http://swi.sourceforge.net
+
+    This file is part of Software Index Tool.
+
+    Software Index is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, version 3 of the License.
+
+    Software Index is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Software Index.  If not, see <http://www.gnu.org/licenses/>.
+   
+-->
+
+<!--
+    Configuration file is formed in XML format.
+    
+    Use this file as a 'configration file description' and
+    create new configs using this file as a baseline.
+    
+    Comments below provides with the description for all options.
+    Commented XML sections make patterns for your specific extensions.
+    Some of them demostrates usage examples.
+-->
+
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Root node 'swi:configuration' is mandatory. It's name is hardcoded. -->
+<swi:configuration>
+
+  <!-- Section 'swi:info' is used for descriptive purposes. -->
+  <swi:info>
+    <!--
+        Option 'swi:version' should be equal to 1.
+        It is reserved for further extensions.
+    -->
+    <swi:version>1</swi:version>
+    <!--
+        Option 'swi:project/swi:name' is used in the final report.
+        All objects are references in the following format:
+        YOUR_PROJECT_NAME/YOUR_MODULE_NAME/FILE/FUNCTION_NAME
+        Changes in this sections automatically reflected in the report.
+    -->
+    <swi:project>
+      <!-- Modify this option in order to refer to the actual name of your solution -->
+      <swi:name>YOUR_PROJECT_NAME</swi:name>
+    </swi:project>
+    <!--
+        This section for tracing purposes.
+        If you workflow assumes history records in project files,
+        this is the place to keep your records
+    -->
+    <swi:history>
+      <!-- Section 'swi:revision' can be repeated several times -->
+      <swi:revision>
+        <swi:name>ALFA</swi:name>
+        <swi:user>USER</swi:user>
+        <swi:comment>Sample configuration with the description created</swi:comment>
+      </swi:revision>
+      <!--
+          Add here the next 'swi:revision' section, for example:
+          <swi:revision>
+            <swi:name>BETA</swi:name>
+            <swi:user>USER</swi:user>
+            <swi:comment>Description of the next update</swi:comment>
+          </swi:revision>
+      -->
+    </swi:history>
+  </swi:info>
+
+  <!-- Section 'swi:modules' define where to get sources and how to process them. -->
+  <swi:modules>
+    <!-- Section 'swi:module' can be repeated several times -->
+    <swi:module>
+      <!--
+          Option 'swi:name' is used in the final report.
+          All objects are references in the following format:
+          YOUR_PROJECT_NAME/YOUR_MODULE_NAME/FILE/FUNCTION_NAME
+          Changes in this sections automatically reflected in the report.
+         
+          Modify this option in order to refer to the actual name of your module
+      -->
+      <swi:name>YOUR_MODULE_NAME</swi:name>
+      <!--
+          This is a full path to the directory where module's source files are stored
+          It can be relative or full path (recommended).
+          If it is relative path, you need to run Software Index tool from the relatively correct folder.
+      -->
+      <swi:location>/path/to/my/module</swi:location>
+      <!-- Section 'swi:files' which files to process and which to miss -->
+      <swi:files>
+        <!--
+            This option is a regular expression.
+            If file name (in module's location) is mathced by this expression,
+            it is included to the list for processing.
+            Otherwise, it is missed and not touched by Software Index tool.
+            The example below matches files with the following extensions:
+            .c, .h, .cpp, .hpp
+        -->
+        <swi:include>^.*[.][chCH]([pP][pP])?$</swi:include>
+        <!--
+            This option is a regular expression.
+            If file name (in module's location) is mathced by this expression,
+            it is excluded from the list for processing
+            (even if it was previously mathced by the previous option).
+            The example below matches files with the following extensions:
+            .gz.c, .gz.h, .gz.cpp, .gz.hpp
+        -->
+        <swi:exclude>^.*[.][gG][zZ][.][chCH]([pP][pP])?$</swi:exclude>
+      </swi:files>
+      
+      <!--
+          The Software Index does not parse 'preprocessor' statements, like a C/C++ compiler.
+          It just removes lines with preprocessor defines, includes, conditions and so on.
+          As a result a code may include unfolded preprocessor strings
+          which are normally replaced/removed by a compiler.
+          
+          For example, the initial code
+              line  1: #define MAXIMUM_NUMBER (100)
+              line  2: #ifdef DEBUG
+              line  3:     if (currentNumber < MAXIMUM_NUMBER) {
+              line  4:         printf("New overflow detected: %d\n", currentNumber);
+              line  5:         count++;
+              line  6:     }
+              line  7: #else
+              line  8:     if (currentNumber < MAXIMUM_NUMBER) {
+              line  9:         count++;
+              line 10:     }
+              line 11: #endif
+          is converted to:
+              line  1: 
+              line  2: 
+              line  3:     if (currentNumber < MAXIMUM_NUMBER) {
+              line  4:         printf("New overflow detected: %d\n", currentNumber);
+              line  5:         count++;
+              line  6:     }
+              line  7: 
+              line  8:     if (currentNumber < MAXIMUM_NUMBER) {
+              line  9:         count++;
+              line 10:     }
+              line 11: 
+          In the last example, the final code is parsable.
+          If all your preprocessor statements are in the similar style and does not
+          corrupt the structure of block start/end delimeters as in the example above,
+          you do not need to bother about preprocessor stuff.
+          
+          However, if the initial code includes lines like these:
+              line  1: #define MAXIMUM_NUMBER (100)
+              line  2:     if (currentNumber < MAXIMUM_NUMBER) {
+              line  3: #ifdef DEBUG
+              line  4:         printf("New overflow detected: %d\n", currentNumber);
+              line  5:         count++;
+              line  6:     }
+              line  7: #else
+              line  8:         count++;
+              line  9:     }
+              line 10: #endif
+          it is not parsable, because brackets mismatch is detected after preprocessing
+          (see lines 6 and 9 below):
+              line  1: 
+              line  2:     if (currentNumber < MAXIMUM_NUMBER) {
+              line  3: 
+              line  4:         printf("New overflow detected: %d\n", currentNumber);
+              line  5:         count++;
+              line  6:     }
+              line  7: 
+              line  8:         count++;
+              line  9:     }
+              line 10: 
+          Thus, in order to use Software Index tool it is necessary to refactor places,
+          like in the example above.
+          
+          The section 'swi:preprocessor' is useful in other cases.
+          For example, if the initial code includes the following lines:
+              line  1: #define DECLARE_HANDLER(handlerName)                  \
+              line  2:     int handlerName(unsigned int stateId,             \
+              line  3:                     unsigned int eventId,             \
+              line  4:                     struct EVENT_DATA_TYPE eventData)
+              line  5: 
+              line  6: DECLARE_HANDLER(leftButtonClick);
+              line  7: DECLARE_HANDLER(rightButtonClick);
+              line  8: 
+              line  9: DECLARE_HANDLER(leftButtonClick)
+              line 10: {
+              line 11:     /* This function is called when left mouse button is clicked */
+              line 12:     ...
+              line 13: }
+              line 14: 
+              line 15: DECLARE_HANDLER(rightButtonClick)
+              line 16: {
+              line 17:     /* This function is called when right mouse button is clicked */
+              line 18:     ...
+              line 19: }
+              line 20: 
+          Software Index tool detects function DECLARE_HANDLER twice. As a result, they will be named:
+              'DECLARE_HANDLER' and 'DECLARE_HANDLER:1' accordingly.
+          
+          The better solution is to preprocess these strings using the preprocessor feature.
+          For this particular example, it is recommended to define the rule which replaces the string:
+              lines  6,7,9,15: DECLARE_HANDLER(_xxx_)
+          by
+              lines  6,7,9,15: int _xxx_(unsigned int stateId, unsigned int eventId, struct EVENT_DATA_TYPE eventData)
+          where
+              _xxx_ is the actual function name.
+          In other words, the 'swi:preprocessor' section should include the following XML tags:
+              <swi:rule>
+                <swi:filepattern>your_regexp_file_pattern</swi:filepattern>
+                <swi:searchpattern>([^_a-zA-Z0-9])DECLARE_HANDLER\(([^_a-zA-Z0-9])\)</swi:searchpattern>
+                <swi:replacepattern>${1}int ${2}(unsigned int stateId, unsigned int eventId, struct EVENT_DATA_TYPE eventData)</swi:replacepattern>
+              </swi:rule>
+          As a result, the functions will be detected with the correct names:
+              'leftButtonClick' and 'rightButtonClick' accordingly.
+      -->
+      <swi:preprocessor>
+        <!-- Section 'swi:rule' can be repeated several times -->
+        <swi:rule>
+          <!--
+              This option is a regular expression.
+              If name of file which is under processing is mathced by this expression,
+              it is preprocessed according to the rule definitions.
+              Otherwise, it is missed and not touched by the internal preprocessor tool.
+              The example below matches files with the following extensions:
+              .h, .hpp
+          -->
+          <swi:filepattern>^.*[.][hH]([pP][pP])?$</swi:filepattern>
+          <!--
+              Options 'swi:searchpattern' and 'swi:replacepattern' are regular expressions.
+              Preprocessor searches the code by the 'swi:searchpattern' pattern.
+              If it is found it is replaced by 'swi:replacepattern' string,
+              which is interpolated before: variables ${1}, ${2}, ... are replaced by actual strings
+              from 'swi:searchpattern' regexp hooks.
+          -->
+          <swi:searchpattern>([^_a-zA-Z0-9])DECLARE_HANDLER\(([^_a-zA-Z0-9])\)</swi:searchpattern>
+          <swi:replacepattern>${1}int ${2}(unsigned int stateId, unsigned int eventId, struct EVENT_DATA_TYPE eventData)</swi:replacepattern>
+        </swi:rule>
+        <!--
+            Add here the next 'swi:rule' section, for example:
+            <swi:rule>
+              <swi:filepattern>.*</swi:filepattern>
+              <swi:searchpattern>(\s+)(union\s*)({)</swi:searchpattern>
+              <swi:replacepattern>$1$2 _noname_ $3</swi:replacepattern>
+            </swi:rule>
+        -->
+      </swi:preprocessor>
+      
+      <!--
+          Scaner tool is used for global searching and violation reporting.
+          If the scaner finds something, it reports the message which is also configured
+          and increases the exit code from the Software Index Tool.
+          
+          For example, if you codding style requires to open the block begging from the new line:
+              line  1: 
+              line  2:     if (currentNumber < MAXIMUM_NUMBER)
+              line  3:     {
+              line  4:         count++;
+              line  5:     }
+              line  6: 
+          it is possible to check it by scaner defining the 'swi:searchpattern' in the following way:
+              [\n][^{][{]
+          This regular expression matches the code which is 'badly' formated:
+              line  1: 
+              line  2:     if (currentNumber < MAXIMUM_NUMBER) {
+              line  3:         count++;
+              line  4:     }
+              line  5: 
+          
+          More examples. If you codding style does not allow to have noname structures, enums or unions:
+              line  1: 
+              line  2:     typedef struct _NAME_HERE_IS_MANDATORY_
+              line  3:     {
+              line  4:         int a;
+              line  5:     } my_type;
+              line  6: 
+          it is possible to check it by scaner defining the 'swi:searchpattern' in the following way:
+              (\s+)((union)|(enum)|(struct))(\s*{)
+          This regular expression matches the code which is 'wrongly' written:
+              line  1: 
+              line  2:     typedef struct // noname here
+              line  3:     {
+              line  4:         int a;
+              line  5:     } my_type;
+              line  6: 
+          And if the 'swi:messagepattern' equals to:
+              Noname '$2' detected.
+          the error report looks like this:
+              file.c:2: warning: Noname 'struct' detected.
+      -->
+      <swi:scanner>
+        <!-- Section 'swi:rule' can be repeated several times -->
+        <swi:rule>
+          <!--
+              This option is a regular expression.
+              If name of file which is under processing is mathced by this expression,
+              it is scaned according to the rule definitions.
+              Otherwise, it is missed and not touched by the internal scaner tool.
+              The example below matches all files.
+          -->
+          <swi:filepattern>.*</swi:filepattern>
+          <!--
+              Options 'swi:searchpattern' and 'swi:messagepattern' are regular expressions.
+              Scaner searches the code by the 'swi:searchpattern' pattern.
+              If it is found the 'swi:messagepattern' string is printed to STDERR,
+              'swi:messagepattern' string is interpolated: variables ${1}, ${2}, ... are replaced by actual strings
+              from 'swi:searchpattern' regexp hooks.
+          -->
+          <swi:searchpattern>(\s+)((union)|(enum)|(struct))(\s*{)</swi:searchpattern>
+          <swi:messagepattern>Noname '$2' detected.</swi:messagepattern>
+      	  <!--
+      	      The 'swi:codecontent' option defines the content for scanner, it can be:
+      	    
+      	          initial         - the initial source content
+      	          code            - the initial code (without comments)
+      	          comments        - comments only (no code)
+      	          nopreprocessor  - preprocessor strings excluded (without comments and preprocessor)
+      	          nostrings       - strings excluded (without comments and strings)
+      	          purified        - strings and preprocessor excluded (without comments, strings and preprocessor)
+                  commentheader   - comments before function's header
+      	          functionname    - name of a function
+                  functionhead    - purified function's header, no body
+                  functionbody    - purified function's body, no header
+      	    
+      	      By default, the 'purified' code is scanned
+      	  -->
+          <swi:codecontent>purified</swi:codecontent>
+        </swi:rule>
+        <!--
+            Add here the next 'swi:rule' section, for example:
+            <swi:rule>
+              <swi:filepattern>.*</swi:filepattern>
+              <swi:searchpattern>#define\s*([_a-zA-Z0-9]+)\s*[\(]?([0-9]+)[\)]?</swi:searchpattern>
+              <swi:messagepattern>Define '${1}' of the number '${2}'
+                   should be replaced by 'static const int ${1} = ${2};'</swi:messagepattern>
+              <swi:codecontent>nostrings</swi:codecontent>
+            </swi:rule>
+        -->
+      </swi:scanner>
+      
+      <!--
+          Indexer measures common software statistics per functions, files, modules and project.
+          They are:
+          
+              STATICTIC-GROUP / STATISTIC-NAME     - DESCRIPTION
+              =============== / ================== - ============================
+              swi:length      / swi:source         - total number of symbols
+              swi:length      / swi:blank          - number of space symbols
+              swi:length      / swi:executable     - number of executable symbols
+              swi:length      / swi:comment        - number of symbols inside comments
+              swi:length      / swi:function:name  - number of symbols in name of a function
+              swi:lines       / swi:comment:header - number of lines in a comment before a function/file
+              swi:lines       / swi:source         - total number of lines
+              swi:lines       / swi:blank          - number of empty lines
+              swi:lines       / swi:executable     - number of executable lines
+              swi:lines       / swi:comment        - number of lines with comments
+              swi:complexity  / swi:blocks         - number of blocks
+              swi:complexity  / swi:cyclomatic     - McCabe's (Mayer's) Cyclomatic complexity metric
+              swi:complexity  / swi:maxdepth       - Maximum indent level
+              swi:count       / swi:functions      - Number of functions
+              swi:count       / swi:files          - Number of files
+              swi:count       / swi:modules        - Number of modules
+              swi:checksum    / swi:source         - Checksum for the source code (compare purposes)
+              
+          Every statistic is reported incombination with the following types:
+
+              STATICTIC-TYPE  - DESCRIPTION
+              =============== - ============================
+              swi:exact       - exact value
+              swi:average     - average value within a distribution
+              swi:min         - minimum value within a distribution
+              swi:max         - maximum value within a distribution
+              swi:total       - sum of values within a distribution
+              
+          Cumulative types (swi:average, swi:min, swi:max and swi:total) are reported if they are applicable.
+      -->
+      <swi:indexer:common>
+        <!-- No settings currently available -->
+      </swi:indexer:common>
+      
+	  <!--
+	      Duplication indexer searches for identical code fragments, calculates total number of symbols
+		  in continues duplicated fragments per function, file, module and project.
+          
+          Note: blank symbols (spaces, tabulations, newlines) are ignored when strings are compared.
+		  
+		  The duplciation statistic is reported by reference 'swi:duplication/swi:symbols':
+          
+              STATICTIC-GROUP / STATISTIC-NAME     - DESCRIPTION
+              =============== / ================== - ============================
+              swi:duplication / swi:symbols        - Number of duplicated symbols
+              
+          The statistic is reported incombination with the following types:
+          
+              STATICTIC-TYPE  - DESCRIPTION
+              =============== - ============================
+              swi:exact       - exact value
+              swi:average     - average value within a distribution
+              swi:min         - minimum value within a distribution
+              swi:max         - maximum value within a distribution
+              swi:total       - sum of values within a distribution
+              
+          Cumulative types (swi:average, swi:min, swi:max and swi:total) are reported if they are applicable.
+		  
+		  This internal tool also collects pointers to duplicated fragments and prints them.
+		  Also, they can be easily extracted from the final report for other needs.
+	  -->
+      <swi:indexer:dup>
+      	<!--
+      	    The 'swi:codecontent' option defines the content for the duplicatiion searcher, it can be:
+      	    
+      	        initial         - the initial source content
+      	        code            - the initial code (without comments)
+      	        comments        - comments only (no code)
+      	        nopreprocessor  - preprocessor strings excluded (without comments and preprocessor)
+      	        nostrings       - strings excluded (without comments and strings)
+      	        purified        - strings and preprocessor excluded (without comments, strings and preprocessor)
+                commentheader   - comments before function's header
+                functionname    - name of a function
+                functionhead    - purified function's header, no body
+                functionbody    - purified function's body, no header
+      	    
+      	    By default, the 'purified' content is used.
+            
+            Recomendation: if Software Index tool detects a log of duplicated fragments
+            which are within function's header (declarations), usually it is the case when
+            where are overloaded functions with a huge list of arguments, it is recommended
+            to set 'swi:codecontent' option to 'functionbody' value.
+      	-->
+      	<swi:codecontent>purified</swi:codecontent>
+      	<!--
+      	    The 'swi:enabled' option activates/deativates the calculation of the duplication index:
+      	    
+      	        on  - the search tool is launched and the statistic is calculated
+      	        off - the search tool is not started, the statistic is reported by zeros
+      	    
+      	    By default, the this is not enabled
+      	-->
+        <swi:enabled>on</swi:enabled>
+      	<!--
+      	    The 'swi:minlength' option defines the minimal length of the duplicated fragment.
+            In other words, if the duplicated fragment is found it is at least 'swi:minlength' in length
+            Too small value, for example 10, results in excessive growth of the total duplication index
+            Too large value may cause the empty search result.
+      	-->
+        <swi:minlength>100</swi:minlength>
+      	<!--
+      	    The 'swi:proximity' option allows to report two code fragments as duplicated
+            even if they are not matched exactly till the end.
+            It helps to search 'almost' duplicated code fragments instead of 'exactly' duplicated.
+            
+            This option is a value from 1 till 100.
+            
+            For example, if there is found group of duplicated code fragments
+            which are 100 symbols in length and 'swi:proximity' is equal to 80,
+            this group will be extended by other found code fragments
+            which have 80 or more the same symbols.
+      	-->
+        <swi:proximity>100</swi:proximity>
+        <!--
+            All code fragments are related to some function.
+            Except global defines, declarations, class definitions and so on.
+            Software Index attaches global code to the 'dummy' function with name '>>>GLOBAL<<<'.
+            
+            The 'swi:globalcode' configures whether the global code should be included
+            to the scope of search for duplication.
+
+      	        on  - global code is scaned for duplication
+      	        off - global code is missed
+      	    
+      	    By default, the this option is 'off'.
+        -->
+        <swi:globalcode>on</swi:globalcode>
+      </swi:indexer:dup>
+
+    </swi:module>
+    
+    <!--
+        Add here the next 'swi:module' section.
+    -->
+
+  </swi:modules>
+  
+  <!--
+      The 'swi:report' section defines the location for reports and output settings.
+  -->
+  <swi:report>
+    <!--
+        This is a full path to the directory where report files should be stored
+        It can be relative or full path (recommended).
+        If it is relative path, you need to run Software Index tool from the relatively correct folder.
+    -->
+    <swi:destination>/path/to/the/destination/folder</swi:destination>
+    <!--
+        The main report is generated to XML format.
+        Other files are created from the XML file by converters.
+    -->
+    <swi:xml>
+      <!-- Name of final XML file in 'swi:destination' directory. -->
+      <swi:name>swi_report_sample.xml</swi:name>
+      <!--
+          Software Index process software modules independantly from their versions.
+          
+          However, if it is executed with a reference to a report generated by 
+          Software Index tool for the baseline versions of your modules
+              (baseline version - previous version of the product, the state of product
+               before the time when changes and updates and/or additions applied)
+          it has additional information and can report the modification status
+          for every statistic (increased/decreased) and for every
+          function, file and module (added, removed, modified, cloned or unmodified).
+          
+          Description of modification statuses:
+              added      - there was no object in the baseline version
+                           and it was added to the current version
+              removed    - there was object in the baseline version
+                           and it was removed from the current version
+              modified   - there was object in the baseline version
+                           and it was changed/updated
+              cloned     - there was object in the baseline version,
+                           it was not changed/updated in the new version,
+                           but duplication index (swi:duplication/swi:executable)
+                           was decreased or increased
+              unmodified - the object was now touched
+          
+          In addition to the extra info, it helps to filter the output information.
+          For example, it is possible to print limit overheads for added and
+          modified functions only (missing analogues messages for untouched objects).
+          
+          As a result, Software Index tool can be deployed to the software development
+          process without extra work and remakes in your old sources.
+          You can always start to measure/control the characteristics of
+          objectes (functions) which are affected by your recent updates only,
+          improving the total quality step-by-step (version-by-version).
+          See 'Example 1' in the next section for examples.
+          
+          The 'swi:baseline' option points out to the report for the baseline version.
+          It should be stored in 'swi:destination' directory.
+          If it is not defined,
+          it is considered that all objects (functions, files and so on) were added.
+      -->
+      <swi:baseline>swi_report_sample.xml</swi:baseline>
+    </swi:xml>
+    <!--
+        Notifications are prinited to file and to stderr stream.
+        They highlight exceeded limitations of indexes/statistics
+        and other notices, warnings and errors.
+    -->
+    <swi:notifications>
+      <!-- Name of log file in 'swi:destination' directory. -->
+      <swi:name>swi_report_sample.log</swi:name>
+      <!--
+          Flags in XML sub-tags in 'swi:error' section
+          activate/deactivate counter of errors/notifications.
+          If the object with the corresponding modification status
+          has some notification (exceeded limit, for example),
+          the error counter is increased.
+          The final value of the error counter is returned
+          to the operation system as exit code.
+          Thus, if there are no notifications/errors, exit code is zero.
+          
+          Options should be equal to some value from the list below:
+      	      on  - counter is increased
+      	      off - counter is not increased
+          
+          Example 1: 'easy deployment of the tool'
+              added      - 'on'
+              removed    - 'on' or 'off'
+              modified   - 'on'
+              cloned     - 'on' or 'off'
+              unmodified - 'off'
+              
+          Example 2: 'global control'
+              added      - 'on'
+              removed    - 'on'
+              modified   - 'on'
+              cloned     - 'on'
+              unmodified - 'on'
+
+          Example 3: 'always success (zero exit code)'
+              added      - 'off'
+              removed    - 'off'
+              modified   - 'off'
+              cloned     - 'off'
+              unmodified - 'off'
+      -->
+      <swi:error>
+        <swi:added>on</swi:added>
+        <swi:removed>on</swi:removed>
+        <swi:modified>on</swi:modified>
+        <swi:cloned>on</swi:cloned>
+        <swi:unmodified>on</swi:unmodified>
+      </swi:error>
+      <!--
+          The 'swi:print' section defines which messages should be printed
+          to the log and to stderr stream. By analogy with the previous 
+          configuration section, the flags are defined per modification status.
+          There are three types of messages which are configred by 
+          'swi:failures', 'swi:modifications' and 'swi:duplications' options.
+          
+          (*) 'swi:failures'      - notifications about broken limits
+              'swi:modifications' - notes about added/modified/cloned/removed objects
+              'swi:duplications'  - pointers to the duplicated regions in files
+          (*) 'swi:scanmessages'  - messages collected by the internal scaner tool
+                                    (see 'swi:scaner' section above)
+          
+          (*) marks types of messages which affect the exit code (see 'swi:error' section above).
+      -->
+      <swi:print>
+        <swi:added>
+          <swi:failures>on</swi:failures>
+          <swi:modifications>off</swi:modifications>
+          <swi:duplications>on</swi:duplications>
+          <swi:scanmessages>on</swi:scanmessages>
+        </swi:added>
+        <swi:removed>
+          <swi:failures>on</swi:failures>
+          <swi:modifications>off</swi:modifications>
+          <swi:duplications>on</swi:duplications>
+          <swi:scanmessages>on</swi:scanmessages>
+        </swi:removed>
+        <swi:modified>
+          <swi:failures>on</swi:failures>
+          <swi:modifications>off</swi:modifications>
+          <swi:duplications>on</swi:duplications>
+          <swi:scanmessages>on</swi:scanmessages>
+        </swi:modified>
+        <swi:cloned>
+          <swi:failures>on</swi:failures>
+          <swi:modifications>off</swi:modifications>
+          <swi:duplications>on</swi:duplications>
+          <swi:scanmessages>on</swi:scanmessages>
+        </swi:cloned>
+        <swi:unmodified>
+          <swi:failures>on</swi:failures>
+          <swi:modifications>off</swi:modifications>
+          <swi:duplications>on</swi:duplications>
+          <swi:scanmessages>on</swi:scanmessages>
+        </swi:unmodified>
+      </swi:print>
+    </swi:notifications>
+  </swi:report>
+  
+  <!--
+      Software Index tool is able to validate
+      that the particular statistic is in the acceptable range.
+      
+      Limits should be defined per:
+      STATISTIC-GROUP / STATISTIC-NAME / STATISTIC-TYPE
+      (See sections 'swi:indexer:common' and 'swi:indexer:dup' above)
+  -->
+  <swi:limits>
+    <!-- 
+        For example, if it is required to have proper (not too short)
+        comment header, it is necessary to limit the statistic:
+            'swi:lines/swi:comment:header/swi:exact'
+        It is demonstarted in the following section:
+    -->
+    <!-- STATISTIC-GROUP -->
+    <swi:lines>
+      <!-- STATISTIC-NAME -->
+      <swi:comment:header>
+        <!-- STATISTIC-TYPE -->
+        <swi:exact>
+          <!--
+              After that, actual limits should be defined for three levels:
+                  info, notice, warning
+                  
+              The common rule is that options should be in order:
+                  'swi:info' < 'swi:notice' < 'swi:warning'
+                OR:
+                  'swi:info' > 'swi:notice' > 'swi:warning'
+                  
+              Note: limits can be negative, in this case they do not have any sense.
+              
+              In the example below, no messages are printed for a function
+              if comment header before includes 5 lines at least.
+              If it is so, the 'regular' level is attached to this function.
+              If comment has 3-4 lines, level 'info' is assigned.
+              If comment has 1-2 lines, level 'notice' is assigned.
+              If ther� is no comments at all (0 lines), level 'warning' is assigned.
+          -->
+          <swi:info>5</swi:info>
+          <swi:notice>3</swi:notice>
+          <swi:warning>1</swi:warning>
+          
+          <!--
+              If some object is evaluated in non-regular level (info/notice/warning)
+              and you consider that it is too excessive to fix it
+              (or just there are no needs/benefits to do it),
+              it is possible to define the exception and suppress the notification
+              in the 'swi:suppress' section below.
+              
+              The exception should be defined in combination with 'swi:level' option.
+              If there is notification for the object:
+                  MY_PROJECT/MY_MODULE/my_file.c/myFunction
+              with 'notice' level, the 'swi:level' should be equal to 'notice'.
+              Otherwise, the notification will be still printed.
+              In other words, severity of the message and suppress level should be equal.
+              
+              Also, one rule can suppress several objects. An object is considered as
+              suppressed if it is matched by regular expression in 'swi:pattern' option.
+              
+              For example, the regexp pattern
+                  MY_PROJECT/MY_MODULE/my_file.c/.*
+              suppresses all functions in my_file.c in scope of
+              MY_MODULE module in MY_PROJECT project.
+              
+              However, it it NOT recommended to use multiple suppressing,
+              due to possible missmatch in severity of messages:
+              For example, if there are two functions:
+                  MY_PROJECT/MY_MODULE/my_file.c/myFunction1
+                  MY_PROJECT/MY_MODULE/my_file.c/myFunction2
+              and one of them is reported by the message with 'notice' level
+              but the second is evaluated in 'regular' level,
+              the 'swi:pattern' rule:
+                  MY_PROJECT/MY_MODULE/my_file.c/.*
+              will always result in the unsuppressable message,
+              either for the first or for the second function.
+              
+              It is better to suppress all objects by their full reference.
+              For example (see the previous example for prehistory)
+                  <swi:pattern swi:level="notice">^MY_PROJECT/MY_MODULE/my_file.c/myFunction1$</swi:pattern>
+              Symbols '^' and '$' are special regexp modifiers. They require immidiate borders in the name.
+          -->
+          <swi:suppress>
+            <!-- Section 'swi:pattern' can be repeated several times -->
+            <swi:pattern swi:level="notice">^MY_PROJECT/MY_MODULE/my_file.c/myFunction1$</swi:pattern>
+            <!--
+                Add here the next 'swi:pattern' section, for example:
+                <swi:pattern swi:level="warning">^.*/.*/file2.c/operator new[]$</swi:pattern>
+            -->
+          </swi:suppress>
+	  
+        </swi:exact>
+      </swi:comment:header>
+
+      <!-- STATISTIC-NAME -->
+      <swi:comment>
+        <!--
+            This is the next example of a limit for statistic.
+            It demonstrates how to limit the relative values.
+            For example, it is required to have at least 30% of comments per every function.
+            This is defined by the relation:
+            
+            'swi:lines/swi:comment/swi:exact' / 'swi:lines/swi:executable/swi:exact' * 100%.
+            
+            In this case it is necessary to limit 'swi:lines/swi:comment/swi:exact'
+            (what we do here) in the relation with 'swi:lines/swi:executable/swi:exact'.
+        -->
+        <swi:exact swi:relation="swi:lines/swi:executable/swi:exact">
+          <!-- 0.3  is 30% -->
+          <swi:info>0.3</swi:info>
+          <!-- 0.25 is 25% -->
+          <swi:notice>0.25</swi:notice>
+          <!-- 0.2  is 20% -->
+          <swi:warning>0.2</swi:warning>
+          
+          <!--
+              Add here suppress section, if it is needed. For example:
+              <swi:suppress>
+                <swi:pattern swi:level="notice">^MY_PROJECT/MY_MODULE/my_file.c/myFunction1$</swi:pattern>
+                <swi:pattern swi:level="info">^MY_PROJECT/MY_MODULE/my_file.c/myFunction2$</swi:pattern>
+              </swi:suppress>
+          -->
+        </swi:exact>
+      </swi:comment>
+      
+      <!-- STATISTIC-NAME -->
+      <swi:executable>
+        <!--
+            The previous examples require to limit the low bound of exact value.
+            This sample demonstrates the limitation for total upper value.
+            
+            For example, sometimes it is useful to require to have short files,
+            because they are easily maintainable in most cases.
+            The settings in this sections allows to do it:
+            no messages are printed for a file
+            if total number of executable lines less than or equal to 1000.
+        -->
+        <swi:total>
+          <swi:info>1000</swi:info>
+          <swi:notice>1500</swi:notice>
+          <swi:warning>2000</swi:warning>
+          
+          <!--
+              Most likely that you will need to suppress messages for modules,
+              because total value of lines in a module is a sum of lines in all files.
+          -->
+          <swi:suppress>
+            <!-- Section 'swi:pattern' can be repeated several times -->
+            <swi:pattern swi:level="warning">^MY_PROJECT/MY_MODULE$</swi:pattern>
+            <!--
+                Add here the next 'swi:pattern' section, for example:
+                <swi:pattern swi:level="warning">^MY_PROJECT/MY_MODULE$</swi:pattern>
+            -->
+          </swi:suppress>
+        </swi:total>
+      </swi:executable>
+      
+      <!-- STATISTIC-NAME -->
+      <swi:source>
+        <!--
+            This example is an extension for the previous.
+            Here the limitation is applied for total values of files, modules and project
+            at the same time.
+            
+            The settings in this sections allows to do it:
+            a) no messages (info) are printed for a file
+               if total number of source lines less than or equal to 1000.
+            b) no messages (notices) are printed for a module
+               if total number of source lines less than or equal to 10000.
+            c) no messages (notices) are printed for a project
+               if total number of source lines less than or equal to 100000.
+        -->
+        <swi:total>
+          <!-- Limit for files -->
+          <swi:info>1000</swi:info>
+          <!-- Limit for modules -->
+          <swi:notice>10000</swi:notice>
+          <!-- Limit for the project -->
+          <swi:warning>100000</swi:warning>
+          
+          <!--
+              Most likely that you will need to suppress info messages for modules and
+              notice messages for the project,
+              because total value of lines in a module is a sum of lines in all files,
+              and total value of lines in project is a sum of lines in all modules.
+          -->
+          <swi:suppress>
+            <!-- Section 'swi:pattern' can be repeated several times -->
+            <swi:pattern swi:level="info">^MY_PROJECT/MY_MODULE$</swi:pattern>
+            <swi:pattern swi:level="notice">^MY_PROJECT$</swi:pattern>
+            <!--
+                Add here the next 'swi:pattern' section, for example:
+                <swi:pattern swi:level="info">^MY_PROJECT/MY_MODULE$</swi:pattern>
+            -->
+          </swi:suppress>
+        </swi:total>
+      </swi:source>
+
+    </swi:lines>
+
+    <!-- STATISTIC-GROUP -->
+    <swi:complexity>
+      <!-- STATISTIC-NAME -->
+      <swi:cyclomatic>
+        <!-- STATISTIC-TYPE -->
+        <swi:exact>
+          <!--
+              In the example below, no messages are printed for a function
+              if cyclomatic complexity index less than or equal to 7.
+              It indicates about proper (low) level of logical
+              branching in a subroutine. Low level of this index
+              more or less grants decreased costs for mainteinability
+              and further development, minimal probability of bad fixes,
+              better and easier understanding of a logical part of SW.
+          -->
+          <swi:info>7</swi:info>
+          <swi:notice>10</swi:notice>
+          <swi:warning>15</swi:warning>
+          <!--
+              Add here suppress section, if it is needed. For example:
+              <swi:suppress>
+                <swi:pattern swi:level="notice">^MY_PROJECT/MY_MODULE/my_file.c/myFunction1$</swi:pattern>
+                <swi:pattern swi:level="info">^MY_PROJECT/MY_MODULE/my_file.c/myFunction2$</swi:pattern>
+              </swi:suppress>
+          -->
+        </swi:exact>
+      </swi:cyclomatic>
+    </swi:complexity>
+    
+    <!--
+        The following section defines the limitation for duplication index.
+        In the example, it is required to control exact relative
+        duplication index for functions and total relative
+        duplication index for files, modules and project.
+    -->
+    <!-- STATISTIC-GROUP -->
+    <swi:duplication>
+      <!-- STATISTIC-NAME -->
+      <swi:symbols>
+        <!-- STATISTIC-TYPE -->
+        <swi:exact swi:relation="swi:length/swi:executable/swi:exact">
+          <swi:info>0.30</swi:info>
+          <swi:notice>0.40</swi:notice>
+          <swi:warning>0.60</swi:warning>
+          <!--
+              Add here suppress section, if it is needed. For example:
+              <swi:suppress>
+                <swi:pattern swi:level="notice">^MY_PROJECT/MY_MODULE/my_file.c/myFunction1$</swi:pattern>
+                <swi:pattern swi:level="info">^MY_PROJECT/MY_MODULE/my_file.c/myFunction2$</swi:pattern>
+              </swi:suppress>
+          -->
+        </swi:exact>
+        
+        <!-- STATISTIC-TYPE -->
+        <swi:total swi:relation="swi:length/swi:executable/swi:total">
+          <swi:info>0.30</swi:info>
+          <swi:notice>0.40</swi:notice>
+          <swi:warning>0.60</swi:warning>
+          <!--
+              Add here suppress section, if it is needed. For example:
+              <swi:suppress>
+                <swi:pattern swi:level="warning">^MY_PROJECT/MY_MODULE/my_file.c$</swi:pattern>
+                <swi:pattern swi:level="notice">^MY_PROJECT/MY_MODULE$</swi:pattern>
+                <swi:pattern swi:level="info">^MY_PROJECT$</swi:pattern>
+              </swi:suppress>
+          -->
+        </swi:total>
+      </swi:symbols>
+    </swi:duplication>
+    
+    <!--
+        Add here more sections with definition of limits if it is needed.
+    -->
+    
+  </swi:limits>
+
+</swi:configuration>
