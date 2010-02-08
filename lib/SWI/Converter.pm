@@ -325,7 +325,10 @@ sub swiNotificationPrint
                   . $scanData->{'swi:scan:line'}
                   . ": warning: '"
                   . $scanData->{'swi:scan:message'}
-                  . "\n";
+                  . "\n\tObject         : "
+                  . $objName
+                  . "\n\tModification   : "
+                  . $objDiff . "\n\n";
                 $returnCode++;
             }
         }
