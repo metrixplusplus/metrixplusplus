@@ -14,7 +14,13 @@
       </swi:revision>
     </swi:history>
   </swi:info>
-      
+  
+  <swi:general>
+    <swi:debug>
+       <swi:enabled>off</swi:enabled>
+    </swi:debug>
+  </swi:general>
+  
   <swi:modules>
     <swi:module>
       <swi:name>DDD-SOURCES</swi:name>
@@ -69,10 +75,11 @@
         </swi:rule>
 
         <swi:suppress>
-          <swi:pattern swi:message="Message pattern">Object pattern</swi:pattern>
+          <swi:pattern swi:message="Noname 'struct'">.*</swi:pattern>
+          <swi:pattern swi:message="Noname 'useless'">.*</swi:pattern>
         </swi:suppress>
 
-        </swi:scanner>
+      </swi:scanner>
       
       <swi:indexer:common>
         <!-- No settings currently available -->
@@ -173,11 +180,12 @@
           <swi:info>0.28</swi:info>
           <swi:notice>0.40</swi:notice>
           <swi:warning>0.60</swi:warning>
-          <!--
+          
+          
           <swi:suppress>
-              <swi:pattern swi:level="warning">.*</swi:pattern>
+              <swi:pattern swi:level="warning">Useless pattern</swi:pattern>
           </swi:suppress>
-          -->
+          
         </swi:exact>
       </swi:symbols>
     </swi:duplication>

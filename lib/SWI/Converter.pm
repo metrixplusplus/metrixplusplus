@@ -318,12 +318,18 @@ sub swiNotificationPrint
     {
         foreach my $scanData ( @{$objRefs} )
         {
-            if ( $scanData->{'swi:ref:type'} eq 'scan' )
+            if (
+                $scanData->{'swi:ref:type'} eq 'scan'
+                && !(
+                    defined( $scanData->{'swi:scan:suppress'} )
+                    && $scanData->{'swi:scan:suppress'} eq 'on'
+                )
+              )
             {
                 print $file $modLocation . "/"
                   . $scanData->{'swi:scan:file'} . ":"
                   . $scanData->{'swi:scan:line'}
-                  . ": warning: '"
+                  . ": warning: "
                   . $scanData->{'swi:scan:message'}
                   . "\n\tObject         : "
                   . $objName

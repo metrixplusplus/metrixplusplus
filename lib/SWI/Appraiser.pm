@@ -407,22 +407,40 @@ sub swiAppraise
                 }
                 print $fh "        </swi:statistic>\n";
 
-                if (
-                    defined(
-                        $report->{"swi:module"}[$moduleId]
-                          ->{"swi:file"}[$fileId]->{"swi:function"}[$functionId]
-                          ->{'swi:reference'}
-                    )
-                  )
+                my $refers =
+                  $report->{"swi:module"}[$moduleId]->{"swi:file"}[$fileId]
+                  ->{"swi:function"}[$functionId]->{'swi:reference'};
+                if ( defined($refers) )
                 {
-                    # TODO: apply suppress patterns here
-                    
-                    my $refStr = XMLout(
-                        $report->{"swi:module"}[$moduleId]
-                          ->{"swi:file"}[$fileId]->{"swi:function"}[$functionId]
-                          ->{'swi:reference'},
-                        RootName => ''
-                    );
+                    foreach my $refData ( @{$refers} )
+                    {
+                        if ( $refData->{'swi:ref:type'} eq 'scan' )
+                        {
+                            foreach my $pattern (
+                                @{
+                                    $config->{'swi:modules'}
+                                      ->{"swi:module"}[$moduleId]
+                                      ->{'swi:scanner'}->{'swi:suppress'}
+                                      ->{'swi:pattern'}
+                                }
+                              )
+                            {
+                                my $msgPattern = $pattern->{'swi:message'};
+                                my $objPattern = $pattern->{'content'};
+                                if ( $refData->{'swi:scan:message'} =~
+                                       m/$msgPattern/
+                                    && "$projectName/$moduleName/$fileName/$functionName"
+                                    =~ m/$objPattern/ )
+                                {
+                                    $refData->{'swi:scan:suppress'} = 'on';
+                                    $pattern->{'swi:used'} = 1;
+                                    last;
+                                }
+                            }
+                        }
+                    }
+
+                    my $refStr = XMLout( $refers, RootName => '' );
                     $refStr =~ s/\n/\n      /g;
                     $refStr =~ s/<anon /<swi:reference /g;
                     print $fh "      ";
@@ -678,6 +696,8 @@ sub swiAppraise
     }
     print $fh "  </swi:statistic>\n";
     print $fh "</swi:report>\n";
+    
+    swiCheckUselessPatterns($config);
 
     return 0;
 }
@@ -788,7 +808,7 @@ sub swiStatisticLevelGet
         else
         {
             STATUS(
-"Wrong settings in configuration file (<limits> section): swi:limit/$keyStat/$keySubStat/$type"
+"Wrong settings in configuration file (swi:limits section): swi:limit/$keyStat/$keySubStat/$type"
             );
             $returnResult[0] = "unresolved";
         }
@@ -808,6 +828,7 @@ sub swiStatisticLevelGet
                     if ( $isFound == 0 )
                     {
                         $returnResult[1] = $pattern->{"swi:level"};
+                        $pattern->{'swi:used'} = 1;
                         $isFound = 1;
                     }
                     else
@@ -829,8 +850,8 @@ sub swiStatisticLevelGet
             else
             {
                 STATUS(
-                "Wrong settings in configuration file (<limits/suppress> section): swi:limit/$keyStat/$keySubStat/$type: "
-                . "Level is missed in pattern for the object '$objType'"
+"Wrong settings in configuration file (swi:limits section): swi:limits/$keyStat/$keySubStat/$type: "
+                      . "Level is missed in pattern for the object '$objType'"
                 );
                 $returnResult[1] = "unresolved";
                 $returnResult[2] = "[]";
@@ -890,8 +911,8 @@ sub swiReportModificationGet
       ->{$statType};
 
     if ( $objBase->{"swi:statistic"}->{"swi:checksum"}->{"swi:source"}
-        ->{$statType} != $newCrc ||
-         $objBase->{"swi:statistic"}->{"swi:length"}->{"swi:source"}
+        ->{$statType} != $newCrc
+        || $objBase->{"swi:statistic"}->{"swi:length"}->{"swi:source"}
         ->{$statType} != $newLength )
     {
         return "modified";
@@ -903,6 +924,43 @@ sub swiReportModificationGet
     }
 
     return "unmodified";
+}
+
+sub swiCheckUselessPatterns
+{
+    my $root = shift();
+    if (ref($root) eq "HASH")
+    {
+        foreach my $key (keys %{$root})
+        {
+            if ($key eq 'swi:pattern')
+            {
+                # TODO process;
+                foreach my $pattern (@{$root->{'swi:pattern'}})
+                {
+                    if (!defined($pattern->{'swi:used'}) || $pattern->{'swi:used'} == 0)
+                    {
+                        my $data = Dumper($pattern);
+                        $data =~ s/\n/ /g;
+                        $data =~ s/\s+/ /g;
+                        STATUS("Useless suppress option detected with the following content: $data");
+                    }
+                }
+                
+                return;
+            }
+            swiCheckUselessPatterns($root->{$key});         
+        }
+    }
+    elsif (ref($root) eq "ARRAY")
+    {
+        foreach (@{$root})
+        {
+            return swiCheckUselessPatterns($_);         
+        }
+    }
+    
+    return;
 }
 
 return 1;

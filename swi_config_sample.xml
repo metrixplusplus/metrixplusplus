@@ -1,22 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <!--
    
     Software Index, Copyright 2010, Software Index Project Team
     Link: http://swi.sourceforge.net
-
+    
     This file is part of Software Index Tool.
-
+    
     Software Index is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, version 3 of the License.
-
+    
     Software Index is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
     GNU General Public License for more details.
-
+    
     You should have received a copy of the GNU General Public License
     along with Software Index.  If not, see <http://www.gnu.org/licenses/>.
-   
+    
 -->
 
 <!--
@@ -29,9 +31,6 @@
     Commented XML sections make patterns for your specific extensions.
     Some of them demostrates usage examples.
 -->
-
-
-<?xml version="1.0" encoding="utf-8"?>
 
 <!-- Root node 'swi:configuration' is mandatory. It's name is hardcoded. -->
 <swi:configuration>
@@ -57,6 +56,8 @@
         This section for tracing purposes.
         If you workflow assumes history records in project files,
         this is the place to keep your records
+        
+        The section can be missed.
     -->
     <swi:history>
       <!-- Section 'swi:revision' can be repeated several times -->
@@ -75,7 +76,29 @@
       -->
     </swi:history>
   </swi:info>
-
+  
+  <!--
+      The 'swi:general' section configures global settings for the tool.
+      
+      The section can be missed.
+  -->
+  <swi:general>
+    <!--
+        Filtering of the debug information
+        
+        The section can be missed.
+    -->
+    <swi:debug>
+     <!--
+         The 'swi:enabled' option activates/deativates the tracing:
+         Possible values are 'on' and 'off'
+         
+         By default, the debug is not enabled.
+      -->
+      <swi:enabled>off</swi:enabled>
+    </swi:debug>
+  </swi:general>
+  
   <!-- Section 'swi:modules' define where to get sources and how to process them. -->
   <swi:modules>
     <!-- Section 'swi:module' can be repeated several times -->
@@ -95,7 +118,11 @@
           If it is relative path, you need to run Software Index tool from the relatively correct folder.
       -->
       <swi:location>/path/to/my/module</swi:location>
-      <!-- Section 'swi:files' which files to process and which to miss -->
+      <!--
+          Section 'swi:files' which files to process and which to miss.
+          
+          The section can be missed.
+      -->
       <swi:files>
         <!--
             This option is a regular expression.
@@ -104,6 +131,8 @@
             Otherwise, it is missed and not touched by Software Index tool.
             The example below matches files with the following extensions:
             .c, .h, .cpp, .hpp
+            
+            By default, all files are included.
         -->
         <swi:include>^.*[.][chCH]([pP][pP])?$</swi:include>
         <!--
@@ -113,6 +142,8 @@
             (even if it was previously mathced by the previous option).
             The example below matches files with the following extensions:
             .gz.c, .gz.h, .gz.cpp, .gz.hpp
+            
+            By default, no files are excluded.
         -->
         <swi:exclude>^.*[.][gG][zZ][.][chCH]([pP][pP])?$</swi:exclude>
       </swi:files>
@@ -201,7 +232,7 @@
               line 19: }
               line 20: 
           Software Index tool detects function DECLARE_HANDLER twice. As a result, they will be named:
-              'DECLARE_HANDLER' and 'DECLARE_HANDLER:1' accordingly.
+              'DECLARE_HANDLER' and 'DECLARE_HANDLER (2)' accordingly.
           
           The better solution is to preprocess these strings using the preprocessor feature.
           For this particular example, it is recommended to define the rule which replaces the string:
@@ -218,9 +249,11 @@
               </swi:rule>
           As a result, the functions will be detected with the correct names:
               'leftButtonClick' and 'rightButtonClick' accordingly.
+          
+          'swi:preprocessor' section can be missed.
       -->
       <swi:preprocessor>
-        <!-- Section 'swi:rule' can be repeated several times -->
+        <!-- Section 'swi:rule' can be missed or repeated several times -->
         <swi:rule>
           <!--
               This option is a regular expression.
@@ -292,9 +325,11 @@
               Noname '$2' detected.
           the error report looks like this:
               file.c:2: warning: Noname 'struct' detected.
+              
+          'swi:scaner' section can be missed.
       -->
       <swi:scanner>
-        <!-- Section 'swi:rule' can be repeated several times -->
+        <!-- Section 'swi:rule' can be missed or repeated several times -->
         <swi:rule>
           <!--
               This option is a regular expression.
@@ -313,22 +348,22 @@
           -->
           <swi:searchpattern>(\s+)((union)|(enum)|(struct))(\s*{)</swi:searchpattern>
           <swi:messagepattern>Noname '$2' detected.</swi:messagepattern>
-      	  <!--
-      	      The 'swi:codecontent' option defines the content for scanner, it can be:
-      	    
-      	          initial         - the initial source content
-      	          code            - the initial code (without comments)
-      	          comments        - comments only (no code)
-      	          nopreprocessor  - preprocessor strings excluded (without comments and preprocessor)
-      	          nostrings       - strings excluded (without comments and strings)
-      	          purified        - strings and preprocessor excluded (without comments, strings and preprocessor)
+            <!--
+                The 'swi:codecontent' option defines the content for scanner, it can be:
+              
+                  initial         - the initial source content
+                  code            - the initial code (without comments)
+                  comments        - comments only (no code)
+                  nopreprocessor  - preprocessor strings excluded (without comments and preprocessor)
+                  nostrings       - strings excluded (without comments and strings)
+                  purified        - strings and preprocessor excluded (without comments, strings and preprocessor)
                   commentheader   - comments before function's header
-      	          functionname    - name of a function
+                  functionname    - name of a function
                   functionhead    - purified function's header, no body
                   functionbody    - purified function's body, no header
-      	    
-      	      By default, the 'purified' code is scanned
-      	  -->
+              
+                By default, the 'purified' code is scanned
+            -->
           <swi:codecontent>purified</swi:codecontent>
         </swi:rule>
         <!--
@@ -341,6 +376,30 @@
               <swi:codecontent>nostrings</swi:codecontent>
             </swi:rule>
         -->
+        <!--
+            If some finding is acceptable and should not be considered as a violation
+            it is possible to define the exception and suppress the notification
+            in the 'swi:suppress' section below.
+        -->
+        <swi:suppress>
+          <!--
+              The exception should be defined in combination with 'swi:message' option.
+              If a scanner's message is matched by the regular expression 'swi:message'
+              and the object is matched by the regular expression in 'swi:pattern' tag,
+              the finding is ignored and not printed to the log and stderr streams.
+              
+              For example, the following pattern blocks the notification:
+                  'Noname 'enum' detected.'
+              for the object:
+                  YOUR_PROJECT_NAME/YOUR_MODULE_NAME/your_file.c/yourFunction
+          -->
+          <swi:pattern swi:message="Noname 'enum' detected.">^YOUR_PROJECT_NAME/YOUR_MODULE_NAME/your_file.c/yourFunction$</swi:pattern>
+          <!--
+              Add here the next 'swi:pattern' section, for example:
+              <swi:pattern swi:message="Noname 'struct' detected.">^.*/.*/file2.c/function2$</swi:pattern>
+          -->
+        </swi:suppress>
+        
       </swi:scanner>
       
       <!--
@@ -368,7 +427,7 @@
               swi:checksum    / swi:source         - Checksum for the source code (compare purposes)
               
           Every statistic is reported incombination with the following types:
-
+          
               STATICTIC-TYPE  - DESCRIPTION
               =============== - ============================
               swi:exact       - exact value
@@ -378,18 +437,20 @@
               swi:total       - sum of values within a distribution
               
           Cumulative types (swi:average, swi:min, swi:max and swi:total) are reported if they are applicable.
+          
+          'swi:indexer:common' section can be missed.
       -->
       <swi:indexer:common>
         <!-- No settings currently available -->
       </swi:indexer:common>
       
-	  <!--
-	      Duplication indexer searches for identical code fragments, calculates total number of symbols
-		  in continues duplicated fragments per function, file, module and project.
+      <!--
+          Duplication indexer searches for identical code fragments, calculates total number of symbols
+          in continues duplicated fragments per function, file, module and project.
           
           Note: blank symbols (spaces, tabulations, newlines) are ignored when strings are compared.
-		  
-		  The duplciation statistic is reported by reference 'swi:duplication/swi:symbols':
+          
+          The duplciation statistic is reported by reference 'swi:duplication/swi:symbols':
           
               STATICTIC-GROUP / STATISTIC-NAME     - DESCRIPTION
               =============== / ================== - ============================
@@ -406,51 +467,55 @@
               swi:total       - sum of values within a distribution
               
           Cumulative types (swi:average, swi:min, swi:max and swi:total) are reported if they are applicable.
-		  
-		  This internal tool also collects pointers to duplicated fragments and prints them.
-		  Also, they can be easily extracted from the final report for other needs.
-	  -->
+          
+          This internal tool also collects pointers to duplicated fragments and prints them.
+          Also, they can be easily extracted from the final report for other needs.
+          
+          'swi:indexer:dup' section can be missed.
+      -->
       <swi:indexer:dup>
-      	<!--
-      	    The 'swi:codecontent' option defines the content for the duplicatiion searcher, it can be:
-      	    
-      	        initial         - the initial source content
-      	        code            - the initial code (without comments)
-      	        comments        - comments only (no code)
-      	        nopreprocessor  - preprocessor strings excluded (without comments and preprocessor)
-      	        nostrings       - strings excluded (without comments and strings)
-      	        purified        - strings and preprocessor excluded (without comments, strings and preprocessor)
+        <!--
+            The 'swi:codecontent' option defines the content for the duplicatiion searcher, it can be:
+            
+                initial         - the initial source content
+                code            - the initial code (without comments)
+                comments        - comments only (no code)
+                nopreprocessor  - preprocessor strings excluded (without comments and preprocessor)
+                nostrings       - strings excluded (without comments and strings)
+                purified        - strings and preprocessor excluded (without comments, strings and preprocessor)
                 commentheader   - comments before function's header
                 functionname    - name of a function
                 functionhead    - purified function's header, no body
                 functionbody    - purified function's body, no header
-      	    
-      	    By default, the 'purified' content is used.
+              
+              By default, the 'purified' content is used.
             
             Recomendation: if Software Index tool detects a log of duplicated fragments
             which are within function's header (declarations), usually it is the case when
             where are overloaded functions with a huge list of arguments, it is recommended
             to set 'swi:codecontent' option to 'functionbody' value.
-      	-->
-      	<swi:codecontent>purified</swi:codecontent>
-      	<!--
-      	    The 'swi:enabled' option activates/deativates the calculation of the duplication index:
-      	    
-      	        on  - the search tool is launched and the statistic is calculated
-      	        off - the search tool is not started, the statistic is reported by zeros
-      	    
-      	    By default, the this is not enabled
-      	-->
+        -->
+        <swi:codecontent>purified</swi:codecontent>
+        <!--
+            The 'swi:enabled' option activates/deativates the calculation of the duplication index:
+            
+                on  - the search tool is launched and the statistic is calculated
+                off - the search tool is not started, the statistic is reported by zeros
+            
+            By default, the this is not enabled
+        -->
         <swi:enabled>on</swi:enabled>
-      	<!--
-      	    The 'swi:minlength' option defines the minimal length of the duplicated fragment.
+          <!--
+            The 'swi:minlength' option defines the minimal length of the duplicated fragment.
             In other words, if the duplicated fragment is found it is at least 'swi:minlength' in length
             Too small value, for example 10, results in excessive growth of the total duplication index
             Too large value may cause the empty search result.
-      	-->
+            
+            By default, it is equal to 100.
+          -->
         <swi:minlength>100</swi:minlength>
-      	<!--
-      	    The 'swi:proximity' option allows to report two code fragments as duplicated
+        <!--
+            The 'swi:proximity' option allows to report two code fragments as duplicated
             even if they are not matched exactly till the end.
             It helps to search 'almost' duplicated code fragments instead of 'exactly' duplicated.
             
@@ -460,7 +525,9 @@
             which are 100 symbols in length and 'swi:proximity' is equal to 80,
             this group will be extended by other found code fragments
             which have 80 or more the same symbols.
-      	-->
+            
+            By default, it is equal to 100.
+        -->
         <swi:proximity>100</swi:proximity>
         <!--
             All code fragments are related to some function.
@@ -469,11 +536,11 @@
             
             The 'swi:globalcode' configures whether the global code should be included
             to the scope of search for duplication.
-
-      	        on  - global code is scaned for duplication
-      	        off - global code is missed
-      	    
-      	    By default, the this option is 'off'.
+            
+                on  - global code is scaned for duplication
+                off - global code is missed
+            
+            By default, the this option is 'off'.
         -->
         <swi:globalcode>on</swi:globalcode>
       </swi:indexer:dup>
@@ -564,8 +631,8 @@
           Thus, if there are no notifications/errors, exit code is zero.
           
           Options should be equal to some value from the list below:
-      	      on  - counter is increased
-      	      off - counter is not increased
+                on  - counter is increased (selected by default for all)
+                off - counter is not increased
           
           Example 1: 'easy deployment of the tool'
               added      - 'on'
@@ -587,6 +654,8 @@
               modified   - 'off'
               cloned     - 'off'
               unmodified - 'off'
+              
+          'swi:error' section can be missed.
       -->
       <swi:error>
         <swi:added>on</swi:added>
@@ -609,6 +678,8 @@
                                     (see 'swi:scaner' section above)
           
           (*) marks types of messages which affect the exit code (see 'swi:error' section above).
+          
+          'swi:print' section can be missed. In this case all messages are activated by default.
       -->
       <swi:print>
         <swi:added>
@@ -652,6 +723,8 @@
       Limits should be defined per:
       STATISTIC-GROUP / STATISTIC-NAME / STATISTIC-TYPE
       (See sections 'swi:indexer:common' and 'swi:indexer:dup' above)
+      
+      'swi:limits' section can be missed.
   -->
   <swi:limits>
     <!-- 
@@ -735,7 +808,7 @@
                 <swi:pattern swi:level="warning">^.*/.*/file2.c/operator new[]$</swi:pattern>
             -->
           </swi:suppress>
-	  
+      
         </swi:exact>
       </swi:comment:header>
 
