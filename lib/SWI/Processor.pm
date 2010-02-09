@@ -232,8 +232,7 @@ sub swiProcess
         {
             if ( $file =~ m/$swiGlobalInclude/ )
             {
-                if (   defined($swiGlobalExclude)
-                    && $swiGlobalExclude ne ""
+                if ($swiGlobalExclude ne ""
                     && $file =~ m/$swiGlobalExclude/ )
                 {
                     next;
@@ -1094,13 +1093,13 @@ m/^($regexpCodeFunctionModifier)*($regexpCodeFunctionIdentifier)($regexpCodeFunc
                             PRINT( $file, $currentLine + 1, 'debug',
 "The same function detected more than once: '$word'"
                             );
-                            my $counter = 1;
+                            my $counter = 2;
                             while (
-                                defined( $result->{ $word . ":" . $counter } ) )
+                                defined( $result->{ $word . " (" . $counter . ")" } ) )
                             {
                                 $counter++;
                             }
-                            $word .= ":" . $counter;
+                            $word .= " (" . $counter . ")";
                         }
 
                         # Store data in result
