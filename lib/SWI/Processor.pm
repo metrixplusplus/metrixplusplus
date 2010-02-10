@@ -466,6 +466,11 @@ sub swiParse
         $globalBlock_Purified
     );
 
+    # Add coverage statistic
+    my $fh = new FileHandle( $location . "/" . $file, "r" )
+      or die("Can not open input file '$location/$file'!");
+
+
     return $functionsData;
 }
 

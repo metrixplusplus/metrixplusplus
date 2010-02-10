@@ -28,39 +28,42 @@ body{
 	color: #333333;
 	line-height: 1.166;
 	margin: 0px;
-	padding: 0px;
+	padding: 10px;
 	font-size: 14px;
 }
 
+pre{
+    font-size: 100%;
+}
 td{
 	background-position: left;
 	background-repeat: no-repeat;
 }
 
 a{
-	color: #3399FF;
+	color: #AA0033;
 	text-decoration: none;
 }
 
 a:link{
-	color: #3399FF;
+	color: #AA0033;
 	text-decoration: none;
 }
 
 a:visited{
-	color: #3399FF;
+	color: #AA0033;
 	text-decoration: none;
 }
 
 a:hover{
-	color: #0000FF;
+	color: #FF9933;
 	text-decoration: underline;
 }
 
 h1{
  font-family: Verdana,Arial,sans-serif;
  font-size: 130%;
- color: #330099;
+ color: #116633;
  margin: 0px;
  padding: 0px;
 }
@@ -75,15 +78,15 @@ h2{
 
 h3{
  font-family: Arial, sans-serif;
- font-size: 110%;
- color: #3366CC;
+ font-size: 120%;
+ color: #AA0033;
  margin: 0px;
  padding: 0px;
 }
 
 h4{
  font-family: Verdana,Arial,sans-serif;
- font-size: 105%;
+ font-size: 100%;
  color: #334d55;
  margin: 0px;
  padding: 0px;
@@ -112,7 +115,7 @@ ul ul ul{
 label{
 	font-family: Arial, sans-serif;
 	font-size: 100%;
-	color: #334d55;
+	color: #116633;
 }
 
 .highImportance {
@@ -120,5 +123,5 @@ label{
 }
 
 .normalImportance {
-	color: #00CC00}
+	color: #009900}
 
