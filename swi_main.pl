@@ -18,18 +18,28 @@
 #    along with Software Index.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-=head1 NAME
+=head1 OVERVIEW
 
-Software Index - the tool measures, reports and validates software statistic,
+Software Index measures, reports and validates software statistic,
 searches for duplications, scans for errors, 'coding style' violations
-and other configurable patterns.
+and occasions of broken design patterns which are defined by your design team. 
 
 =head1 SYNOPSIS
+
+In order to get the context help (this text):
 
     perl swi_main.pl -h
     perl swi_main.pl -help
     perl swi_main.pl --help
     
+In order to get the sample configuration file and it's description:
+
+    perl swi_main.pl -s
+    perl swi_main.pl -sample
+    perl swi_main.pl --sample
+
+In order to launch the tool with the prepared configuration file:
+
     perl swi_main.pl </path/to/configuration/file.xml>
 
 =head1 OPTIONS
@@ -40,28 +50,24 @@ and other configurable patterns.
 
 Prints this help page.
 
+=item -s, -sample, --sample
+
+Prints the example of configuration file and it's description.
+The sample explains every section in details and gives several usage examples.
+Use this as a start up framework for your initial configs.
+For example:
+
+    > perl swi_main.pl -sample > my_config.xml
+
 =item </path/to/configuration/file.xml>
 
-Full or relative path to the configuration file for the tool. Configuration file
-should include the predefined set of XML sections and tags. Use swi_config_sample.xml file
-(from the distributable package) as a 'configration file description'
-and create new configs using this file as a baseline. The sample explains every
-section in details and gives several usage examples.
+Full or relative path to the configuration file for the tool. 
 
 =back
 
 =head1 ENVIRONMENT
 
 The tool requires Perl Runtime Environment. Required Perl version is 5.6.x or later.
-
-=head1 INSTALLATION
-
-In order to install the distributive, unpack the distributable package to some folder.
-
-Software Index has internal tool (dupindex) which should be compiled for the target platform.
-By default, the distributable archive includes the compiled binary for PC Windows platform.
-Recompile it if you need (only one file dupindex.cpp), using g++ or some other C++ compiler.
-There is a project configuration file for users of Microsoft Visual Studio 2008.  
 
 =head1 COPYRIGHT 
 
@@ -84,22 +90,40 @@ along with Software Index.  If not, see <http://www.gnu.org/licenses/>.
 
 =cut
 
-
-
-
 use strict;
 use Cwd qw(abs_path);
 use Pod::Usage;
 
 $0 =~ m/(.*)swi_main.pl$/;
-my $globalRootDirectory      = abs_path($1);
+my $globalRootDirectory = abs_path($1);
 
-push(@INC, "$globalRootDirectory/lib");
+push( @INC, "$globalRootDirectory/lib" );
 require SWI::Launcher;
 
-if (!defined($ARGV[0]) || $ARGV[0] eq "-help" || $ARGV[0] eq "--help" || $ARGV[0] eq "-h")
+if (   !defined( $ARGV[0] )
+    || $ARGV[0] eq "-help"
+    || $ARGV[0] eq "--help"
+    || $ARGV[0] eq "-h" )
 {
-    pod2usage(-exitstatus => 0, -verbose => 2);    
+    pod2usage( -exitstatus => 0, -verbose => 2 );
+    exit 0;
 }
 
-exit swiLaunch($globalRootDirectory, @ARGV);
+if (   !defined( $ARGV[0] )
+    || $ARGV[0] eq "-sample"
+    || $ARGV[0] eq "--sample"
+    || $ARGV[0] eq "-s" )
+{
+    my $fh = new FileHandle( "$globalRootDirectory/swi_config_sample.xml", "r" )
+      or die(
+        "Can not open input file '$globalRootDirectory/swi_config_sample.xml'!"
+      );
+
+    while (<$fh>)
+    {
+        print $_;
+    }
+    exit 0;
+}
+
+exit swiLaunch( $globalRootDirectory, @ARGV );
