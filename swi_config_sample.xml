@@ -57,7 +57,7 @@
         If you workflow assumes history records in project files,
         this is the place to keep your records
         
-        The section can be missed.
+        The section is optional.
     -->
     <swi:history>
       <!-- Section 'swi:revision' can be repeated several times -->
@@ -80,13 +80,13 @@
   <!--
       The 'swi:general' section configures global settings for the tool.
       
-      The section can be missed.
+      The section is optional.
   -->
   <swi:general>
     <!--
         Filtering of the debug information
         
-        The section can be missed.
+        The section is optional.
     -->
     <swi:debug>
      <!--
@@ -121,7 +121,7 @@
       <!--
           Section 'swi:files' which files to process and which to miss.
           
-          The section can be missed.
+          The section is optional.
       -->
       <swi:files>
         <!--
@@ -250,10 +250,10 @@
           As a result, the functions will be detected with the correct names:
               'leftButtonClick' and 'rightButtonClick' accordingly.
           
-          'swi:preprocessor' section can be missed.
+          'swi:preprocessor' section is optional.
       -->
       <swi:preprocessor>
-        <!-- Section 'swi:rule' can be missed or repeated several times -->
+        <!-- Section 'swi:rule' is optional or can be repeated several times -->
         <swi:rule>
           <!--
               This option is a regular expression.
@@ -326,7 +326,7 @@
           the error report looks like this:
               file.c:2: warning: Noname 'struct' detected.
               
-          'swi:scaner' section can be missed.
+          'swi:scaner' section is optional.
       -->
       <swi:scanner>
         <!-- Section 'swi:rule' can be missed or repeated several times -->
@@ -438,7 +438,7 @@
               
           Cumulative types (swi:average, swi:min, swi:max and swi:total) are reported if they are applicable.
           
-          'swi:indexer:common' section can be missed.
+          'swi:indexer:common' section is optional.
       -->
       <swi:indexer:common>
         <!-- No settings currently available -->
@@ -471,7 +471,7 @@
           This internal tool also collects pointers to duplicated fragments and prints them.
           Also, they can be easily extracted from the final report for other needs.
           
-          'swi:indexer:dup' section can be missed.
+          'swi:indexer:dup' section is optional.
       -->
       <swi:indexer:dup>
         <!--
@@ -545,7 +545,135 @@
         <swi:globalcode>on</swi:globalcode>
       </swi:indexer:dup>
 
-    </swi:module>
+      <!--
+          gcc/g++ compilers in combination with gcov tool are able to report
+          statement and branch coverage information and statistics.
+          Software Index has a bridge to this information which is configured
+          in the 'swi:indexer:gcov' section below.
+          
+          Note: the feature works only if 'gcov' is visible in PATH environment.
+          
+          The short summary about possible coverage metrics:
+          
+          * Function coverage
+            Has each function in the program been executed?
+
+          * Statement coverage
+            Has each line of the source code been executed?
+            If at least one statement is executed, 'Function coverage' metric
+            is equal to 100% (i.e. a function is executed at least once)
+
+          * Decision coverage
+            Has each control structure (such as an if statement) evaluated both to true
+            and false?
+
+          * Condition coverage
+            Has each boolean sub-expression evaluated both to true and false?
+            More 'strict' metric than 'Decision coverage'.
+          
+          * Modified Condition/Decision Coverage (MC/DC)
+            Has every condition in a decision taken on all possible outcomes at least
+            once? Has each condition been shown to affect that decision outcome
+            independently?
+
+          * Path coverage
+            Has every possible route through a given part of the code been executed?
+
+          * Entry/exit coverage
+            Has every possible call and return of the function been executed?
+          
+          The coverage statistic is reported by the following indexes:
+          
+              STATICTIC-GROUP / STATISTIC-NAME     - DESCRIPTION (*)
+              =============== / ================== - ============================
+              swi:coverage    / swi:gsum:lines     - Total number of executable lines/statements
+                                                     (from point of compiler view)
+              swi:coverage    / swi:gsum:branches  - Total number of branches
+              swi:coverage    / swi:gsum:calls     - Total number of calls
+              swi:coverage    / swi:gcov:lines     - Number of executed lines
+                                                     (the same as 'Statement coverage' metric in the list above)
+              swi:coverage    / swi:gcov:branches  - Number of exected branches
+                                                     (no analogue in the list of coverage metrics above;
+                                                     incremented by 2 for a boolean condition (2 branches)
+                                                     if a condition is evaluated at least once
+                                                     and resulted either in true OR in false)
+              swi:coverage    / swi:gcov:takenonce - Number of branches executed at least once
+                                                     (the same as 'Condition coverage' metric in the list above;
+                                                     a boolean condition (2 branches) is totaly covered
+                                                     if a boolean sub-expression evaluated both
+                                                     to true and false at least once)
+              swi:coverage    / swi:gcov:calls     - Number of exectuted calls
+                                                     (the same as 'Entry/exit coverage' metric in the list above)
+          
+          (*) For more details about reported numbers see the documentation for 'gcov' tool.
+              
+          The statistic is reported incombination with the following types:
+          
+              STATICTIC-TYPE  - DESCRIPTION
+              =============== - ============================
+              swi:exact       - exact value
+              swi:average     - average value within a distribution
+              swi:min         - minimum value within a distribution
+              swi:max         - maximum value within a distribution
+              swi:total       - sum of values within a distribution
+          
+          Cumulative types (swi:average, swi:min, swi:max and swi:total) are reported if they are applicable.
+
+          'swi:indexer:gcov' section is optional.
+          If it is missed coverage statistic is not collected.
+      -->
+      <swi:indexer:gcov>
+        <!--
+            The 'swi:enabled' option activates/deativates the collection of coverage statistic:
+            
+                on  - active
+                off - inactive, coverage statistic is not collected and not reported
+            
+            By default, the this is not enabled
+        -->
+        <swi:enabled>on</swi:enabled>
+        <!--
+            This option is a regular expression.
+            If name of file which is under processing is mathced by this expression,
+            coverage statistic is retrieved for this file.
+            Otherwise, coverage statistic is not reported.
+            
+            By default, all files are affected.
+        -->
+        <swi:filepattern>.*</swi:filepattern>
+        <!--
+            The coverage statistic is avaialble in 'gcda' files.
+            gcov tool reads these files and reports the information.
+            
+            Every source file, if it is touched by gcov, has
+            corresponding gcda file.
+            
+            For example, if the initial source file is 'file.c' and
+            the compiled binary file is 'file.o', the
+            corresponding 'gcda' file with coverage data is 'file.gcda'
+            
+            Two options below define how to map
+            the initial source file to the file with coverage data.
+            
+            'swi:sourcefile' is a regular expression. It is applied to name of a file.
+            This operation gives variables ${1}, ${2}, ... according
+            to regexp hooks.
+            'swi:gcdafile' constructs the corresponding 'gcda' file.
+            
+            The example below demostrates the case of mapping:
+                 from 'file.c' to 'file.gcda'
+                 from 'otehrfile.h' to 'otherfile.gcda'
+                 and so on...
+            
+            If the 'gcda' file is not found, coverage statistic is not collected and not reported.
+            
+            The example below demonstrates the default mapping scheme options are missed.
+        -->
+        <swi:sourcefile>(.*)[.][cChH][pP]?[pP]?</swi:sourcefile>
+        <swi:gcdafile>${1}.gcda</swi:gcdafile>
+      </swi:indexer:gcov>
+
+      </swi:module>
     
     <!--
         Add here the next 'swi:module' section.
@@ -655,7 +783,7 @@
               cloned     - 'off'
               unmodified - 'off'
               
-          'swi:error' section can be missed.
+          'swi:error' section is optional.
       -->
       <swi:error>
         <swi:added>on</swi:added>
@@ -724,7 +852,7 @@
       STATISTIC-GROUP / STATISTIC-NAME / STATISTIC-TYPE
       (See sections 'swi:indexer:common' and 'swi:indexer:dup' above)
       
-      'swi:limits' section can be missed.
+      'swi:limits' section is optional.
   -->
   <swi:limits>
     <!-- 

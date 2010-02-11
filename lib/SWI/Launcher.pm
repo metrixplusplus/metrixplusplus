@@ -498,6 +498,28 @@ sub swiConfigurationValidate
                     $module->{'swi:indexer:dup'}->{'swi:globalcode'} = 'off';
                 }
 
+                if ( !defined( $module->{'swi:indexer:gcov'} )
+                    || ref( $module->{'swi:indexer:gcov'} ) ne 'HASH' )
+                {
+                    $module->{'swi:indexer:gcov'} = {};
+                }
+                if ( !defined( $module->{'swi:indexer:gcov'}->{'swi:enabled'} ) )
+                {
+                    $module->{'swi:indexer:gcov'}->{'swi:enabled'} = 'off';
+                }
+                if ( !defined( $module->{'swi:indexer:gcov'}->{'swi:filepattern'} ) )
+                {
+                    $module->{'swi:indexer:gcov'}->{'swi:filepattern'} = '.*';
+                }
+                if ( !defined( $module->{'swi:indexer:gcov'}->{'swi:sourcefile'} ) )
+                {
+                    $module->{'swi:indexer:gcov'}->{'swi:sourcefile'} = '(.*)[.][cChH][pP]?[pP]?';
+                }
+                if ( !defined( $module->{'swi:indexer:gcov'}->{'swi:gcdafile'} ) )
+                {
+                    $module->{'swi:indexer:gcov'}->{'swi:gcdafile'} = '${1}.gcda';
+                }
+
                 $moduleId++;
             }
         }

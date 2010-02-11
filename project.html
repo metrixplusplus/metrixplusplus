@@ -35,7 +35,7 @@
   <tr>
     <td width="350"><img src="images/logo_project.jpg" alt="Software Index Project Page" width="350" height="128" /></td>
     <td valign="bottom">      <div align="right">
-      <p><a href="http://sourceforge.net/projects/swi"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=275098&amp;type=10" alt="Get Software Index at SourceForge.net. Fast, secure and Free Open Source software downloads" width="80" height="15" border="0" /></a></p>
+      <p><a href="http://sourceforge.net/projects/swi"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=275605&amp;type=10" alt="Get Software Index at SourceForge.net. Fast, secure and Free Open Source software downloads" width="80" height="15" border="0" /></a></p>
       <p>&nbsp;</p>
       <p><a href="#Description">Description</a> | <a href="#Download">Download &amp; Installation </a> | <a href="#License">License</a> | <a href="#Documentation">Documentation</a> | <a href="#Getsupport">Get support </a>| <a href="#Fordevelopers">For developers</a></p>
     </div></td>
@@ -55,14 +55,17 @@
                 <li>Number of <span class="normalImportance">executable symbols</span> and <span class="normalImportance">lines</span> </li>
                 <li>Number of <span class="normalImportance">symbols</span> and <span class="normalImportance">lines in comments</span></li>
                 <li>Number of <span class="normalImportance">symbols</span> and<span class="normalImportance"> lines in initial source file</span></li>
-                <li>Number of <span class="normalImportance">lines in specific comments</span> (header descriptions before functions)  </li>
+                <li>Number of <span class="normalImportance">lines in specific comments</span><br />
+                (header descriptions before functions)  </li>
                 <li>Number of <span class="normalImportance">symbols in name</span> of a function </li>
                 <li>Number of <span class="normalImportance">blocks</span></li>
                 <li>Maximum <span class="normalImportance">indent level</span> (depth level) </li>
                 <li><span class="normalImportance">Cyclomatic complexity</span> (McCabe's / Mayer's) index </li>
                 <li>Number of <span class="normalImportance">functions, files, modules</span></li>
                 <li>Number of symbols in <span class="normalImportance">duplicated fragments</span></li>
-            </ul>
+                <li><span class="normalImportance">Code coverage</span> indexes<br />
+                (line coverage, branch coverage and entry/exit coverage data from external gcov tool) </li>
+          </ul>
           <h4>Parsing, scaning and searching can be performed for the different content:</h4>
           <ul>
             <li><span class="normalImportance">initial</span>         - the initial source content</li>
@@ -113,7 +116,7 @@
             <li>C++ (beta version) </li>
           </ul>
           <h3><a id="Download"></a>Download &amp; Installation</h3>
-          <p>For the installation of the <span class="normalImportance">Software Index</span> <a href="http://sourceforge.net/projects/swi/files/">download</a> the archive with all required modules and unpack it to some folder.</p>
+          <p>For the installation of the <span class="normalImportance">Software Index</span> <a href="http://sourceforge.net/projects/swi/files/">download</a> the archive with all required modules and unpack it to some folder. Also, you have got an option to get the <a href="http://swi.svn.sourceforge.net/viewvc/swi/">source code</a> from the version conrol sytem.</p>
           <p><em class="highImportance">Warning:</em> <span class="normalImportance">Software Index</span> has an internal tool (dupindex) which should be compiled for the target platform.
             By default, the distributable archive includes the compiled binary for PC Windows (x86) platform.
             Recompile it if you need (only one file: dupindex.cpp), using g++ or some other C++ compiler for your specific platform. There is a project configuration file for users of Microsoft Visual Studio 2008. </p>
@@ -129,10 +132,10 @@
                 <li>IPC::Open3</li>
                 <li> XML::Simple (included to the distributable archive with <span class="normalImportance">Software Index</span>)</li>
                 <li> String::CRC::Cksum (included to the distributable archive with <span class="normalImportance">Software Index</span>)</li>
-              </ul>
+                </ul>
             </li>
+            <li>gcov (optional, it is needed if you like to collect coverage statistic)</li>
           </ul>
-          <p>Also, you have got an option to get the <a href="http://swi.svn.sourceforge.net/viewvc/swi/">source code</a> from the version conrol sytem.</p>
           <h3><a name="License" id="Download"></a>License</h3>
           <p> This program is free software; you can redistribute it and/or modify 
             it under the terms of the GNU General Public License as published by 

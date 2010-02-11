@@ -232,7 +232,7 @@ sub swiProcess
         {
             if ( $file =~ m/$swiGlobalInclude/ )
             {
-                if ($swiGlobalExclude ne ""
+                if (   $swiGlobalExclude ne ""
                     && $file =~ m/$swiGlobalExclude/ )
                 {
                     next;
@@ -244,7 +244,9 @@ sub swiProcess
                     $swiGlobalPreprocessorRules,
                     $swiGlobalScanerRules,
                     $config->{"swi:modules"}->{"swi:module"}[$moduleId]
-                      ->{"swi:indexer:dup"}
+                      ->{"swi:indexer:dup"},
+                    $config->{"swi:modules"}->{"swi:module"}[$moduleId]
+                      ->{"swi:indexer:gcov"}
                 );
             }
         }
@@ -415,6 +417,7 @@ sub swiParse
     my $preprocessorRules = shift();
     my $scanerRules       = shift();
     my $dupfinderSettings = shift();
+    my $gcovSettings      = shift();
 
     STATUS("Parsing file: '$location/$file'.");
 
@@ -466,10 +469,18 @@ sub swiParse
         $globalBlock_Purified
     );
 
-    # Add coverage statistic
-    my $fh = new FileHandle( $location . "/" . $file, "r" )
-      or die("Can not open input file '$location/$file'!");
-
+    if ( $gcovSettings->{'swi:enabled'} eq 'on' )
+    {
+        my $filePattern = $gcovSettings->{'swi:filepattern'};
+        if ( $file =~ m/$filePattern/ )
+        {
+            swiSourceIndexGcovAdd(
+                $location, $file, $functionsData,
+                $gcovSettings->{'swi:sourcefile'},
+                $gcovSettings->{'swi:gcdafile'}
+            );
+        }
+    }
 
     return $functionsData;
 }
@@ -528,19 +539,22 @@ sub swiSourceCodeScan
 
     while ( $code =~ m/$search/g )
     {
-        
+
         my $matchPre = $`;
         my $matchStr = $&;
 
         my $linePos = swiMatchPatternCount( $matchPre . $matchStr, '\n' ) + 1;
         my $messageString = eval( 'my $tmp = "' . $message . '";' );
-        
-        push(@result, {
-                        'swi:ref:type'  => 'scan',
-                        'swi:scan:file' => $file,
-                        'swi:scan:line' => $linePos + $offset,
-                        'swi:scan:message' => $messageString
-                    });
+
+        push(
+            @result,
+            {
+                'swi:ref:type'     => 'scan',
+                'swi:scan:file'    => $file,
+                'swi:scan:line'    => $linePos + $offset,
+                'swi:scan:message' => $messageString
+            }
+        );
     }
 
     return @result;
@@ -707,6 +721,7 @@ s/($regexpCodeContainerDelimeter)?($regexpCodeContainerIdentifier$regexpCodeCont
             {
                 $block->{'commentshead'} .= $block_Comment[$i] . "\n";
             }
+
             # functionname created above
             $block->{'functionhead'} = substr(
                 $block_Purified,
@@ -853,7 +868,8 @@ s/($regexpCodeContainerDelimeter)?($regexpCodeContainerIdentifier$regexpCodeCont
                 push(
                     @{ $function->{'swi:reference'} },
                     swiSourceCodeScan(
-                        $file, $function->{'swi:line:headerstart'},
+                        $file,
+                        $function->{'swi:line:headerstart'},
                         $block->{ $rule->{'swi:codecontent'} },
                         $rule->{'swi:searchpattern'},
                         $rule->{'swi:messagepattern'}
@@ -970,6 +986,79 @@ m/duplication: file: '(.*)' function: '(.*)' possition: '(.*)' size: '(.*)'/
     }
 
     return $filesData;
+}
+
+sub swiSourceIndexGcovAdd
+{
+    my $location      = shift();
+    my $file          = shift();
+    my $functionsData = shift();
+    my $filePattern   = shift();
+    my @listTmp       = $file =~ m/$filePattern/;
+    my $gcdaFile      = eval( 'my $tmp = "' . shift() . '";' );
+
+    # Add coverage statistic
+    my $fh = new FileHandle( $location . "/" . $gcdaFile, "r" );
+    if ( !defined($fh) )
+    {
+        STATUS("gcda file is not found '$location/$gcdaFile'.");
+    }
+    else
+    {
+        my $gcovCommand = 'gcov -f -b $location/$gcdaFile';
+        STATUS("Calling command '$gcovCommand'...");
+
+        my $gcovData = `$gcovCommand`;
+        my @covData  = split( "\n\n", $gcovData );
+
+        foreach (@covData)
+        {
+            next if ( $_ =~ m/^File/ );
+            my (
+                $functionName,  $linesExec, $linesTotal, $branchesExec,
+                $branchesTotal, $takenOnce, $callsExec,  $callsTotal
+              )
+              = ( $_ =~
+m/^Function\s+\'(.*)\'\s+Lines\s+executed:(.*)%\s+of\s+(.*)\s+Branches\s+executed:(.*)%\s+of\s+(.*)\s+Taken\s+at\s+least\s+once:(.*)%\s+of\s+.*\s+Calls\s+executed:(.*)%\s+of\s+(.*)/
+              );
+
+            if ( defined( $functionsData->{$functionName} ) )
+            {
+                $functionsData->{$functionName}->{'swi:statistic'}
+                  ->{'swi:coverage'} = {
+                    'swi:gsum:lines'    => { 'swi:exact' => $linesTotal },
+                    'swi:gsum:branches' => { 'swi:exact' => $branchesTotal },
+                    'swi:gsum:calls'    => { 'swi:exact' => $callsTotal },
+                    'swi:gcov:lines'    => {
+                        'swi:exact' =>
+                          swiUtil_Round( $linesExec * $linesTotal / 100 )
+                    },
+                    'swi:gcov:branches' => {
+                        'swi:exact' =>
+                          swiUtil_Round( $branchesExec * $branchesTotal / 100 )
+                    },
+                    'swi:gcov:takenonce' => {
+                        'swi:exact' =>
+                          swiUtil_Round( $takenOnce * $branchesTotal / 100 )
+                    },
+                    'swi:gcov:calls' => {
+                        'swi:exact' =>
+                          swiUtil_Round( $callsExec * $callsTotal / 100 )
+                    }
+                  };
+            }
+            else
+            {
+                STATUS(
+"Parsing of source file is incorrect or gcda file is corrupted."
+                );
+                STATUS(
+"gcov reports the data for '$functionName' function but SWI parser did not detect it"
+                );
+                $exitCode++;
+            }
+        }
+    }
 }
 
 sub swiSourceCodeParse
@@ -1100,7 +1189,10 @@ m/^($regexpCodeFunctionModifier)*($regexpCodeFunctionIdentifier)($regexpCodeFunc
                             );
                             my $counter = 2;
                             while (
-                                defined( $result->{ $word . " (" . $counter . ")" } ) )
+                                defined(
+                                    $result->{ $word . " (" . $counter . ")" }
+                                )
+                              )
                             {
                                 $counter++;
                             }
@@ -1497,6 +1589,19 @@ sub swiUtilDirectoryCleanUp
             unlink $dir . "/" . $file;
         }
         closedir(DIR);
+    }
+}
+
+sub swiUtil_Round
+{
+    my $float = shift();
+    if ( ( $float - int($float) ) > 0.5 )
+    {
+        return int( $float + 1.0 );
+    }
+    else
+    {
+        return int($float);
     }
 }
 
