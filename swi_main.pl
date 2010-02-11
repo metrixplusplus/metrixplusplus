@@ -109,8 +109,7 @@ if (   !defined( $ARGV[0] )
     exit 0;
 }
 
-if (   !defined( $ARGV[0] )
-    || $ARGV[0] eq "-sample"
+if (   $ARGV[0] eq "-sample"
     || $ARGV[0] eq "--sample"
     || $ARGV[0] eq "-s" )
 {
