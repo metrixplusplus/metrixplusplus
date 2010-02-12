@@ -22,7 +22,9 @@
 
 Software Index measures, reports and validates software statistic,
 searches for duplications, scans for errors, 'coding style' violations
-and occasions of broken design patterns which are defined by your design team. 
+and occasions of broken design patterns which are defined by your design team.
+
+More information available at 'http://swi.sourceforge.net'.
 
 =head1 SYNOPSIS
 

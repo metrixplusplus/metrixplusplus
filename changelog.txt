@@ -20,6 +20,67 @@
 ____________________________________________
 
 
+-- 2010/02/12: VERSION 0.9.1 released
+
+       -- Date:         2010/02/12
+          Reference:    noref
+          Issue type:   bug
+          Severity:     Major
+          Module(s):    Processor
+          Description:  Calculation of length and crc statistics corrected for global code
+
+       -- Date:         2010/02/12
+          Reference:    noref
+          Issue type:   bug
+          Severity:     Major
+          Module(s):    Appraiser
+          Description:  Calculation of avarage data fixed
+
+       -- Date:         2010/02/12
+          Reference:    noref
+          Issue type:   bug
+          Severity:     Major
+          Module(s):    Duplication indexer
+          Description:  By default, it is now enabled
+
+       -- Date:         2010/02/12
+          Reference:    noref
+          Issue type:   improvement
+          Severity:     Minor
+          Module(s):    Images
+          Description:  Logos attached to the source control system
+
+       -- Date:         2010/02/12
+          Reference:    noref
+          Issue type:   improvement
+          Severity:     Minor
+          Module(s):    Parser (C++ language)
+          Description:  Excessive blank symbols are removed in names of functions-operators
+
+       -- Date:         2010/02/12
+          Reference:    noref
+          Issue type:   improvement
+          Severity:     Minor
+          Module(s):    Project description
+          Description:  Minor stylistic improvements
+
+       -- Date:         2010/02/11
+          Reference:    noref
+          Issue type:   feature
+          Severity:     Critical
+          Module(s):    Duplication indexer
+          Description:  Makefile added
+
+       -- Date:         2010/02/11
+          Reference:    noref
+          Issue type:   bug
+          Severity:     Critical
+          Module(s):    Parser
+          Description:  C language, correction for nonamed enum, struct
+
+____________________________________________
+
+
 -- 2010/02/11: VERSION 0.9.0 released for internal beta testing
 
        -- Date:         2010/02/10

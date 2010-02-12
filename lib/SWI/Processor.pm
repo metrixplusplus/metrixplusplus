@@ -112,7 +112,7 @@ my $regexpCodeContainerModifier   =
 my $regexpCodeContainerArguments = '\s*[^;]*\s*';
 my $regexpCodeContainerDelimeter = '::';
 my $regexpCodeBlockStartIgnore   =
-  '=\s*|,\s*|\s+enum\s*|\s+union\s*|\s+struct\s*';
+  '=\s*|,\s*|\s*enum\s*|\s*union\s*|\s*struct\s*';
 my $regexpCodeStringBorder_Escape =
   '(([^\\\](\\\\\\\\)*\\\\)|^([\\\](\\\\\\\\)*))';
 my $regexpCodeStringBorder_Text          = '["\']';
@@ -204,6 +204,10 @@ sub swiProcess
         $dupindexHandler =
           open3( $dupindexIn, $dupindexOut, $dupindexErr,
             "$rootLocation/dupindex/bin/dupindex.exe" );
+        if (!defined($dupindexHandler) || !defined($dupindexIn) || !defined($dupindexOut) )
+        {
+             die("Can not start the internal platform native tool '$rootLocation/dupindex/bin/dupindex.exe'");
+        }
 
         my $dupfinderSettings =
           $config->{"swi:modules"}->{"swi:module"}[$moduleId]
@@ -786,8 +790,15 @@ s/($regexpCodeContainerDelimeter)?($regexpCodeContainerIdentifier$regexpCodeCont
         $function->{'swi:reference'} = [];
 
         # Calculate swi:length->swi:source
+        # Note: this statistic is used to detect differences
+        # Global code is compared without new lines
+        my $initialContent = $block->{'initial'};
+        if ($functionName eq $regexpCodeGlobalFunctionName)
+        {
+            $initialContent =~ s/\n+//g;
+        }
         $function->{'swi:statistic'}->{'swi:length'}->{'swi:source'}
-          ->{'swi:exact'} = length( $block->{'initial'} );
+          ->{'swi:exact'} = length( $initialContent );
 
         # Calculate swi:length->swi:executable
         $function->{'swi:statistic'}->{'swi:length'}->{'swi:executable'}
@@ -848,7 +859,9 @@ s/($regexpCodeContainerDelimeter)?($regexpCodeContainerIdentifier$regexpCodeCont
           ->{'swi:exact'} = $function->{'swi:depth'};
 
         # Calculate swi:checksum->swi:index
-        my @symbols = split( //, $block->{'initial'} );
+        # Note: this statistic is used to detect differences
+        # Global code is compared without new lines
+        my @symbols = split( //, $initialContent );
         my $crcSumTotal = 0;
         for ( my $pos = 0 ; $pos <= $#symbols ; $pos++ )
         {
@@ -1140,9 +1153,11 @@ m/^($regexpCodeFunctionModifier)*($regexpCodeFunctionIdentifier)($regexpCodeFunc
                     $mod  = $`;
                     $word = $&;
 
-                    # Remove empty symbols in indetifier
+                    # Remove empty symbols in identifier
+                    $word =~ s/\s+$//;
                     $word =~ s/[\n\t ]+/ /g;
-
+                    $word =~ s/\s*$regexpCodeContainerDelimeter\s*/$regexpCodeContainerDelimeter/;
+                    
                     # Remove empty symbols in modifier
                     $mod =~ s/^\s*//;
                     $mod =~ s/\s*$//;

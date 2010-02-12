@@ -37,7 +37,7 @@
     <td valign="bottom">      <div align="right">
       <p><a href="http://sourceforge.net/projects/swi"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=275605&amp;type=10" alt="Get Software Index at SourceForge.net. Fast, secure and Free Open Source software downloads" width="80" height="15" border="0" /></a></p>
       <p>&nbsp;</p>
-      <p><a href="#Description">Description</a> | <a href="#Download">Download &amp; Installation </a> | <a href="#License">License</a> | <a href="#Documentation">Documentation</a> | <a href="#Getsupport">Get support </a>| <a href="#Fordevelopers">For developers</a></p>
+      <p><a href="#Description">Overview</a> | <a href="#Download">Download &amp; Installation </a> | <a href="#License">License</a> | <a href="#Documentation">Documentation</a> | <a href="#Getsupport">Get support </a>| <a href="#Fordevelopers">For developers</a></p>
     </div></td>
   </tr>
   <tr>
@@ -46,7 +46,7 @@
     <td colspan="2" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="10">
       
       <tr>
-        <td valign="top"><h3><a id="Description"></a>Description</h3>
+        <td valign="top"><h3><a id="Description"></a>Overview</h3>
           <p><span class="normalImportance">Software Index </span>measures, reports and validates software statistic,
             searches for duplications, scans for errors, 'coding style' violations
             and occasions of broken design patterns which are defined by your design team.</p>
@@ -60,7 +60,7 @@
                 <li>Number of <span class="normalImportance">symbols in name</span> of a function </li>
                 <li>Number of <span class="normalImportance">blocks</span></li>
                 <li>Maximum <span class="normalImportance">indent level</span> (depth level) </li>
-                <li><span class="normalImportance">Cyclomatic complexity</span> (McCabe's / Mayer's) index </li>
+                <li><span class="normalImportance">Cyclomatic complexity</span> (McCabe's / Myer's) index </li>
                 <li>Number of <span class="normalImportance">functions, files, modules</span></li>
                 <li>Number of symbols in <span class="normalImportance">duplicated fragments</span></li>
                 <li><span class="normalImportance">Code coverage</span> indexes<br />
@@ -102,7 +102,7 @@
             <li><span class="normalImportance">cloned</span> functions (objects)</li>
             <li><span class="normalImportance">unmodified</span> functions (objects)</li>
           </ul>
-          <h4>Internal tools helps to adapt the tool for your specific needs:</h4>
+          <h4>Internal tools helps to adapt Software Index for your specific needs:</h4>
           <ul>
             <li><span class="normalImportance">code preprocessor</span>: simplifies the code parsing and scaning with preprocessor definitions</li>
             <li> <span class="normalImportance">code scanner</span>: similar 'grep' tool, helps to find occasion of 'bad' coding style/formating and detect broken  rules which defined by your design team, has flexible suppress methods </li>
@@ -114,12 +114,66 @@
           <ul>
             <li>C (stable version) </li>
             <li>C++ (beta version) </li>
-          </ul>
+            </ul>
+          <h4>Limitations:</h4>
+          <ul>
+            <li>Parser does not detect functions (C language) with declarations of local variables outside of function's body. However, it is not a problem for a major part of software products. The example below demostrates problematic formatting/style:</li>
+            </ul>
+          <table width="80%" border="0" align="center" cellpadding="2" cellspacing="2">
+            <tr>
+              <td width="50%">This function is <span class="highImportance">not detectable</span> by Software Index. </td>
+              <td width="50%">This function is <span class="normalImportance">parsable</span>. </td>
+            </tr>
+            <tr>
+              <td><pre>int <strong>getMax</strong>(int* array, int length)
+<span class="highImportance">    int i = 0;
+    int curMax;</span>
+<strong>{</strong>
+    /* ... */
+<strong>}</strong></pre>                </td>
+              <td><pre>int <strong>getMax</strong>(int* array, int length)
+<strong>{</strong>
+<span class="normalImportance">    int i = 0;
+    int curMax;</span>
+    /* ... */
+<strong>}</strong></pre>
+              </td>
+            </tr>
+          </table>
+          <ul>
+            <li>Comments inside preprocessor strings are not acceptable (C/C++ languages). Otherwise, some code can be unrecognizable by Software Index.<br />
+            </li>
+            </ul>
+          <table width="80%" border="0" align="center" cellpadding="2" cellspacing="2">
+            <tr>
+              <td width="50%">This code is <span class="highImportance">not recognizable </span> by Software Index. </td>
+              <td width="50%">This code is <span class="normalImportance">parsable</span>.</td>
+            </tr>
+            <tr>
+              <td><pre>#define <strong>GET_MAX</strong>(a, b)       \
+<span class="highImportance">    /*                      \
+     * This macros returns  \
+     * maximum from a and b \
+     */                     \
+</span>    ((a &gt; b) ? a : b)</pre>
+              </td>
+              <td><pre><span class="normalImportance">/*
+ * This macros returns
+ * maximum from a and b
+ */
+</span>#define <strong>GET_MAX</strong>(a, b) \
+    ((a &gt; b) ? a : b)</pre>
+              </td>
+            </tr>
+          </table>
+          <ul>
+            <li>Interface with gcov tool is not tested for C++ language.</li>
+            </ul>
           <h3><a id="Download"></a>Download &amp; Installation</h3>
           <p>For the installation of the <span class="normalImportance">Software Index</span> <a href="http://sourceforge.net/projects/swi/files/">download</a> the archive with all required modules and unpack it to some folder. Also, you have got an option to get the <a href="http://swi.svn.sourceforge.net/viewvc/swi/">source code</a> from the version conrol sytem.</p>
           <p><em class="highImportance">Warning:</em> <span class="normalImportance">Software Index</span> has an internal tool (dupindex) which should be compiled for the target platform.
             By default, the distributable archive includes the compiled binary for PC Windows (x86) platform.
-            Recompile it if you need (only one file: dupindex.cpp), using g++ or some other C++ compiler for your specific platform. There is a project configuration file for users of Microsoft Visual Studio 2008. </p>
+            Recompile it if you need (only one file: dupindex.cpp), using g++ or some other C++ compiler for your specific platform. There is a project configuration file for users of Microsoft Visual Studio 2008. There is Makefile for users of gmake and g++ tools. </p>
           <h4>Prerequisites:</h4>
           <ul>
             <li>Perl Runtime Environment (version 5.6.x or later)</li>
@@ -150,7 +204,9 @@
           <h3><a id="Documentation"></a>Documentation</h3>
           <p>The context help is available by:</p>
           <pre>&gt; perl swi_main.pl --help</pre>
-          <p>The description of the configuration file is accessable by:</p>
+          <p>The sample/description of the configuration file is available by link:</p>
+		  <pre><a href="http://swi.svn.sourceforge.net/viewvc/swi/swi_config_sample.xml?view=markup" target="_blank">http://swi.svn.sourceforge.net/viewvc/swi/swi_config_sample.xml?view=markup</a></pre>
+          <p> In the command line context, it is accessable by:</p>
           <pre>&gt; perl swi_main.pl --sample</pre>
           <h3><a id="Getsupport"></a>Get support</h3>
           <p>The best way to get help is by <a href="https://sourceforge.net/tracker/?func=add&amp;group_id=275605&amp;atid=1170878">creating a new item</a> in the 'Request Tracker'.</p>

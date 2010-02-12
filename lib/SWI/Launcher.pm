@@ -462,7 +462,7 @@ sub swiConfigurationValidate
                 }
                 if ( !defined( $module->{'swi:indexer:dup'}->{'swi:enabled'} ) )
                 {
-                    $module->{'swi:indexer:dup'}->{'swi:enabled'} = 'off';
+                    $module->{'swi:indexer:dup'}->{'swi:enabled'} = 'on';
                 }
                 if ( !defined( $module->{'swi:indexer:dup'}->{'swi:minlength'} )
                   )

@@ -419,7 +419,7 @@
               swi:lines       / swi:executable     - number of executable lines
               swi:lines       / swi:comment        - number of lines with comments
               swi:complexity  / swi:blocks         - number of blocks
-              swi:complexity  / swi:cyclomatic     - McCabe's (Mayer's) Cyclomatic complexity metric
+              swi:complexity  / swi:cyclomatic     - McCabe's (Myer's) Cyclomatic complexity metric
               swi:complexity  / swi:maxdepth       - Maximum indent level
               swi:count       / swi:functions      - Number of functions
               swi:count       / swi:files          - Number of files
@@ -502,7 +502,7 @@
                 on  - the search tool is launched and the statistic is calculated
                 off - the search tool is not started, the statistic is reported by zeros
             
-            By default, the this is not enabled
+            By default, the this feature is enabled
         -->
         <swi:enabled>on</swi:enabled>
           <!--
@@ -883,7 +883,7 @@
               If it is so, the 'regular' level is attached to this function.
               If comment has 3-4 lines, level 'info' is assigned.
               If comment has 1-2 lines, level 'notice' is assigned.
-              If ther� is no comments at all (0 lines), level 'warning' is assigned.
+              If there are no comments at all (0 lines), level 'warning' is assigned.
           -->
           <swi:info>5</swi:info>
           <swi:notice>3</swi:notice>
