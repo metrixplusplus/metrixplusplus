@@ -113,7 +113,7 @@ sub swiAppraise
                           $subStat->{$keySubStat}->{'swi:exact'};
                         $fileStat->{$keyStat}->{$keySubStat}->{"swi:average"} =
                           $fileStat->{$keyStat}->{$keySubStat}->{"swi:total"} /
-                          $fileStat->{"swi:count"}->{"swi:functions"};
+                          $fileStat->{"swi:count"}->{"swi:functions"}->{'swi:exact'};
 
                         # add total per module
                         $moduleStat->{$keyStat}->{$keySubStat}->{"swi:total"} +=
@@ -122,7 +122,7 @@ sub swiAppraise
                           ->{"swi:average"} =
                           $moduleStat->{$keyStat}->{$keySubStat}
                           ->{"swi:total"} /
-                          $moduleStat->{"swi:count"}->{"swi:functions"};
+                          $moduleStat->{"swi:count"}->{"swi:functions"}->{'swi:exact'};
 
                         # add total per project
                         $projectStat->{$keyStat}->{$keySubStat}
@@ -132,7 +132,7 @@ sub swiAppraise
                           ->{"swi:average"} =
                           $projectStat->{$keyStat}->{$keySubStat}
                           ->{"swi:total"} /
-                          $projectStat->{"swi:count"}->{"swi:functions"};
+                          $projectStat->{"swi:count"}->{"swi:functions"}->{'swi:exact'};
 
                         # add minimum per file
                         if (
@@ -386,7 +386,7 @@ sub swiAppraise
                             $functionStat->{$keyStat}->{$keySubStat}
                               ->{'swi:exact'},
                             $functionBase->{"swi:statistic"}->{$keyStat}
-                              ->{$keySubStat}->{"swi:exact"}
+                              ->{$keySubStat}->{"swi:exact"}->{'content'}
                         );
                         print $fh "            <"
                           . $keySubStat
@@ -516,7 +516,7 @@ sub swiAppraise
                                 $fileDiff,
                                 $fileStat->{$keyStat}->{$keySubStat}->{$type},
                                 $fileBase->{"swi:statistic"}->{$keyStat}
-                                  ->{$keySubStat}->{$type}
+                                  ->{$keySubStat}->{$type}->{'content'}
 
                             );
                             print $fh "            <" . $type
@@ -597,7 +597,7 @@ sub swiAppraise
                             $moduleDiff,
                             $moduleStat->{$keyStat}->{$keySubStat}->{$type},
                             $moduleBase->{"swi:statistic"}->{$keyStat}
-                              ->{$keySubStat}->{$type}
+                              ->{$keySubStat}->{$type}->{'content'}
 
                         );
                         print $fh "          <" . $type
@@ -672,7 +672,7 @@ sub swiAppraise
                         $projectDiff,
                         $projectStat->{$keyStat}->{$keySubStat}->{$type},
                         $reportBase->{"swi:statistic"}->{$keyStat}
-                          ->{$keySubStat}->{$type}
+                          ->{$keySubStat}->{$type}->{'content'}
 
                     );
                     print $fh "        <" . $type
@@ -907,18 +907,18 @@ sub swiReportModificationGet
     my $newLength =
       $objNew->{"swi:statistic"}->{"swi:length"}->{"swi:source"}->{$statType};
     my $newDup =
-      $objNew->{"swi:statistic"}->{"swi:duplication"}->{"swi:executable"}
+      $objNew->{"swi:statistic"}->{"swi:duplication"}->{"swi:symbols"}
       ->{$statType};
 
     if ( $objBase->{"swi:statistic"}->{"swi:checksum"}->{"swi:source"}
-        ->{$statType} != $newCrc
+        ->{$statType}->{'content'} != $newCrc
         || $objBase->{"swi:statistic"}->{"swi:length"}->{"swi:source"}
-        ->{$statType} != $newLength )
+        ->{$statType}->{'content'} != $newLength )
     {
         return "modified";
     }
-    if ( $objBase->{"swi:statistic"}->{"swi:duplication"}->{"swi:executable"}
-        ->{$statType} != $newDup )
+    if ( $objBase->{"swi:statistic"}->{"swi:duplication"}->{"swi:symbols"}
+        ->{$statType}->{'content'} != $newDup )
     {
         return "cloned";
     }
@@ -935,7 +935,6 @@ sub swiCheckUselessPatterns
         {
             if ($key eq 'swi:pattern')
             {
-                # TODO process;
                 foreach my $pattern (@{$root->{'swi:pattern'}})
                 {
                     if (!defined($pattern->{'swi:used'}) || $pattern->{'swi:used'} == 0)

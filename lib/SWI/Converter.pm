@@ -63,12 +63,6 @@ sub swiConvert
       )
       or die("Can not open output file!");
 
-    if ( defined( $ENV{USER} ) )
-    {
-        print $fh "User\t" . $ENV{USER} . "\n";
-    }
-    print $fh "\n";
-
     my $projectStat     = $report->{"swi:statistic"};
     my $projectName     = $config->{"swi:info"}->{"swi:project"}->{"swi:name"};
     my $projectLocation = $config->{"swi:report"}->{"swi:destination"};
