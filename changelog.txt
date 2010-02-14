@@ -20,7 +20,37 @@
 ____________________________________________
 
 
--- 2010/02/12: VERSION 0.9.1 released
+-- 2010/02/XX: VERSION 0.9.1 released
+
+       -- Date:         2010/02/14
+          Reference:    noref
+          Issue type:   feature
+          Severity:     Major
+          Module(s):    Appraiser
+          Description:  Relative limits are possible with zero numbers
+                        Infinity/-Infinity statistics supported
+
+       -- Date:         2010/02/14
+          Reference:    noref
+          Issue type:   bug
+          Severity:     Major
+          Module(s):    Coverage indexer
+          Description:  Empty gcov data (no calls, no branches) is processed correctly now
+
+       -- Date:         2010/02/14
+          Reference:    noref
+          Issue type:   bug
+          Severity:     Minor
+          Module(s):    Converter
+          Description:  Duplication messages are deactivated by default
+                        However, they are always printed if there corresponding failures
+
+       -- Date:         2010/02/14
+          Reference:    noref
+          Issue type:   bug
+          Severity:     Minor
+          Module(s):    Scanner
+          Description:  Line offset bug fixed
 
        -- Date:         2010/02/12
           Reference:    noref

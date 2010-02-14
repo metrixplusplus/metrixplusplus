@@ -113,7 +113,8 @@ sub swiAppraise
                           $subStat->{$keySubStat}->{'swi:exact'};
                         $fileStat->{$keyStat}->{$keySubStat}->{"swi:average"} =
                           $fileStat->{$keyStat}->{$keySubStat}->{"swi:total"} /
-                          $fileStat->{"swi:count"}->{"swi:functions"}->{'swi:exact'};
+                          $fileStat->{"swi:count"}->{"swi:functions"}
+                          ->{'swi:exact'};
 
                         # add total per module
                         $moduleStat->{$keyStat}->{$keySubStat}->{"swi:total"} +=
@@ -122,7 +123,8 @@ sub swiAppraise
                           ->{"swi:average"} =
                           $moduleStat->{$keyStat}->{$keySubStat}
                           ->{"swi:total"} /
-                          $moduleStat->{"swi:count"}->{"swi:functions"}->{'swi:exact'};
+                          $moduleStat->{"swi:count"}->{"swi:functions"}
+                          ->{'swi:exact'};
 
                         # add total per project
                         $projectStat->{$keyStat}->{$keySubStat}
@@ -132,7 +134,8 @@ sub swiAppraise
                           ->{"swi:average"} =
                           $projectStat->{$keyStat}->{$keySubStat}
                           ->{"swi:total"} /
-                          $projectStat->{"swi:count"}->{"swi:functions"}->{'swi:exact'};
+                          $projectStat->{"swi:count"}->{"swi:functions"}
+                          ->{'swi:exact'};
 
                         # add minimum per file
                         if (
@@ -433,7 +436,7 @@ sub swiAppraise
                                     =~ m/$objPattern/ )
                                 {
                                     $refData->{'swi:scan:suppress'} = 'on';
-                                    $pattern->{'swi:used'} = 1;
+                                    $pattern->{'swi:used'}          = 1;
                                     last;
                                 }
                             }
@@ -696,7 +699,7 @@ sub swiAppraise
     }
     print $fh "  </swi:statistic>\n";
     print $fh "</swi:report>\n";
-    
+
     swiCheckUselessPatterns($config);
 
     return 0;
@@ -719,142 +722,177 @@ sub swiStatisticLevelGet
         defined( $config->{"swi:limits"}->{$keyStat}->{$keySubStat}->{$type} ) )
     {
         my $limit = $config->{"swi:limits"}->{$keyStat}->{$keySubStat}->{$type};
-        my $factor = 1;
 
-        if ( defined( $limit->{"swi:relation"} ) )
+        my $objectPattern = $limit->{"swi:objectpattern"};
+        if ( defined($objectPattern) && $objName !~ m/$objectPattern/ )
         {
-            my @relation = undef;
-            @relation = split( /\//, $limit->{"swi:relation"} );
-
-            $factor =
-              $objStat->{ $relation[0] }->{ $relation[1] }->{ $relation[2] };
-
-            if ( !defined($factor) || $factor == 0 )
-            {
-                STATUS(
-"Wrong configuration for the limit '$keyStat/$keySubStat/$type'. Relation "
-                      . $limit->{"swi:relation"}
-                      . " is not found or points to zero value for object '$objName'"
-                );
-                $factor = 1;
-            }
-        }
-
-        $statValue = $objStat->{$keyStat}->{$keySubStat}->{$type} / $factor;
-        $statValue = sprintf( "%.2f", $statValue );
-
-        if (   $limit->{"swi:warning"} > $limit->{"swi:notice"}
-            && $limit->{"swi:notice"} > $limit->{"swi:info"} )
-        {
-            if ( $statValue > $limit->{"swi:warning"} )
-            {
-                $returnResult[0] = "warning";
-                $returnResult[2] = "["
-                  . $statValue
-                  . " greater than "
-                  . $limit->{"swi:warning"} . "]";
-            }
-            elsif ( $statValue > $limit->{"swi:notice"} )
-            {
-                $returnResult[0] = "notice";
-                $returnResult[2] = "["
-                  . $statValue
-                  . " greater than "
-                  . $limit->{"swi:notice"} . "]";
-            }
-            elsif ( $statValue > $limit->{"swi:info"} )
-            {
-                $returnResult[0] = "info";
-                $returnResult[2] = "["
-                  . $statValue
-                  . " greater than "
-                  . $limit->{"swi:info"} . "]";
-            }
-            else
-            {
-                $returnResult[0] = "regular";
-            }
-        }
-        elsif ($limit->{"swi:warning"} < $limit->{"swi:notice"}
-            && $limit->{"swi:notice"} < $limit->{"swi:info"} )
-        {
-            if ( $statValue < $limit->{"swi:warning"} )
-            {
-                $returnResult[0] = "warning";
-                $returnResult[2] = "["
-                  . $statValue
-                  . " less than "
-                  . $limit->{"swi:warning"} . "]";
-            }
-            elsif ( $statValue < $limit->{"swi:notice"} )
-            {
-                $returnResult[0] = "notice";
-                $returnResult[2] = "["
-                  . $statValue
-                  . " less than "
-                  . $limit->{"swi:notice"} . "]";
-            }
-            elsif ( $statValue < $limit->{"swi:info"} )
-            {
-                $returnResult[0] = "info";
-                $returnResult[2] =
-                  "[" . $statValue . " less than " . $limit->{"swi:info"} . "]";
-            }
-            else
-            {
-                $returnResult[0] = "regular";
-            }
+            $returnResult[2] = '[limit not applied]';
         }
         else
         {
-            STATUS(
-"Wrong settings in configuration file (swi:limits section): swi:limit/$keyStat/$keySubStat/$type"
-            );
-            $returnResult[0] = "unresolved";
-        }
-
-        # check if suppressed
-        my $isFound = 0;
-
-      LOOPPATTERNS:
-        foreach ( @{ $limit->{"swi:suppress"}->{"swi:pattern"} } )
-        {
-            my $pattern = $_;
-            if ( ref($pattern) eq "HASH" && defined( $pattern->{"swi:level"} ) )
+            if ( defined( $limit->{"swi:relation"} ) )
             {
-                my $content = $pattern->{"content"};
-                if ( $objName =~ m/$content/ )
+                my @relation = undef;
+                @relation = split( /\//, $limit->{"swi:relation"} );
+
+                my $factor =
+                  $objStat->{ $relation[0] }->{ $relation[1] }
+                  ->{ $relation[2] };
+
+                if ( !defined($factor) || $factor == 0 )
                 {
-                    if ( $isFound == 0 )
+                    STATUS(
+"Wrong configuration for the limit '$keyStat/$keySubStat/$type'. Relation "
+                          . $limit->{"swi:relation"}
+                          . " is not found for the object '$objName'"
+                    );
+                    $factor = 0;
+                }
+                if ($factor == 0)
+                {
+                    # Devide zero by zero, equals to 1
+                    if ($objStat->{$keyStat}->{$keySubStat}->{$type} == 0)
                     {
-                        $returnResult[1] = $pattern->{"swi:level"};
-                        $pattern->{'swi:used'} = 1;
-                        $isFound = 1;
+                        $statValue = "1.00";
                     }
+                    # Devide negative number by zero, equals to -infinity
+                    elsif ($objStat->{$keyStat}->{$keySubStat}->{$type} < 0)
+                    {
+                        $statValue = "-Infinity";        
+                    }
+                    # Devide positive number by zero, equals to infinity
                     else
                     {
-
-                        # This object is matched by several patterns
-                        if ( $returnResult[1] ne $pattern->{"swi:level"} )
-                        {
-
-                            # and levels are not equal in different patterns
-                            STATUS(
-"Configuration is wrong: $objName is matched by several patterns"
-                            );
-                            $returnResult[1] = "unresolved";
-                        }
+                        $statValue = "Infinity";
                     }
+                }
+                else
+                {
+                    $statValue = $objStat->{$keyStat}->{$keySubStat}->{$type} / $factor;
+                    $statValue = sprintf( "%.2f", $statValue );
+                }
+            }
+            else
+            {
+                $statValue = sprintf( "%.2f", $objStat->{$keyStat}->{$keySubStat}->{$type} );
+            }
+
+            if (   $limit->{"swi:warning"} > $limit->{"swi:notice"}
+                && $limit->{"swi:notice"} > $limit->{"swi:info"} )
+            {
+                if ( $statValue eq "Infinity" || $statValue > $limit->{"swi:warning"} )
+                {
+                    $returnResult[0] = "warning";
+                    $returnResult[2] = "["
+                      . $statValue
+                      . " greater than "
+                      . $limit->{"swi:warning"} . "]";
+                }
+                elsif ( $statValue > $limit->{"swi:notice"} )
+                {
+                    $returnResult[0] = "notice";
+                    $returnResult[2] = "["
+                      . $statValue
+                      . " greater than "
+                      . $limit->{"swi:notice"} . "]";
+                }
+                elsif ( $statValue > $limit->{"swi:info"} )
+                {
+                    $returnResult[0] = "info";
+                    $returnResult[2] = "["
+                      . $statValue
+                      . " greater than "
+                      . $limit->{"swi:info"} . "]";
+                }
+                else
+                {
+                    $returnResult[0] = "regular";
+                }
+            }
+            elsif ($limit->{"swi:warning"} < $limit->{"swi:notice"}
+                && $limit->{"swi:notice"} < $limit->{"swi:info"} )
+            {
+                if ( $statValue eq "-Infinity" || $statValue < $limit->{"swi:warning"} )
+                {
+                    $returnResult[0] = "warning";
+                    $returnResult[2] = "["
+                      . $statValue
+                      . " less than "
+                      . $limit->{"swi:warning"} . "]";
+                }
+                elsif ( $statValue < $limit->{"swi:notice"} )
+                {
+                    $returnResult[0] = "notice";
+                    $returnResult[2] = "["
+                      . $statValue
+                      . " less than "
+                      . $limit->{"swi:notice"} . "]";
+                }
+                elsif ( $statValue < $limit->{"swi:info"} )
+                {
+                    $returnResult[0] = "info";
+                    $returnResult[2] = "["
+                      . $statValue
+                      . " less than "
+                      . $limit->{"swi:info"} . "]";
+                }
+                else
+                {
+                    $returnResult[0] = "regular";
                 }
             }
             else
             {
                 STATUS(
-"Wrong settings in configuration file (swi:limits section): swi:limits/$keyStat/$keySubStat/$type: "
-                      . "Level is missed in pattern for the object '$objType'"
+"Wrong settings in configuration file (swi:limits section): swi:limit/$keyStat/$keySubStat/$type"
                 );
-                $returnResult[1] = "unresolved";
-                $returnResult[2] = "[]";
+                $returnResult[0] = "unresolved";
+            }
+
+            # check if suppressed
+            my $isFound = 0;
+
+          LOOPPATTERNS:
+            foreach ( @{ $limit->{"swi:suppress"}->{"swi:pattern"} } )
+            {
+                my $pattern = $_;
+                if ( ref($pattern) eq "HASH"
+                    && defined( $pattern->{"swi:level"} ) )
+                {
+                    my $content = $pattern->{"content"};
+                    if ( $objName =~ m/$content/ )
+                    {
+                        if ( $isFound == 0 )
+                        {
+                            $returnResult[1]       = $pattern->{"swi:level"};
+                            $pattern->{'swi:used'} = 1;
+                            $isFound               = 1;
+                        }
+                        else
+                        {
+
+                            # This object is matched by several patterns
+                            if ( $returnResult[1] ne $pattern->{"swi:level"} )
+                            {
+
+                                # and levels are not equal in different patterns
+                                STATUS(
+"Configuration is wrong: $objName is matched by several patterns"
+                                );
+                                $returnResult[1] = "unresolved";
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    STATUS(
+"Wrong settings in configuration file (swi:limits section): swi:limits/$keyStat/$keySubStat/$type: "
+                          . "Level is missed in pattern for the object '$objType'"
+                    );
+                    $returnResult[1] = "unresolved";
+                    $returnResult[2] = "[]";
+                }
             }
         }
     }
@@ -929,36 +967,39 @@ sub swiReportModificationGet
 sub swiCheckUselessPatterns
 {
     my $root = shift();
-    if (ref($root) eq "HASH")
+    if ( ref($root) eq "HASH" )
     {
-        foreach my $key (keys %{$root})
+        foreach my $key ( keys %{$root} )
         {
-            if ($key eq 'swi:pattern')
+            if ( $key eq 'swi:pattern' )
             {
-                foreach my $pattern (@{$root->{'swi:pattern'}})
+                foreach my $pattern ( @{ $root->{'swi:pattern'} } )
                 {
-                    if (!defined($pattern->{'swi:used'}) || $pattern->{'swi:used'} == 0)
+                    if ( !defined( $pattern->{'swi:used'} )
+                        || $pattern->{'swi:used'} == 0 )
                     {
                         my $data = Dumper($pattern);
                         $data =~ s/\n/ /g;
                         $data =~ s/\s+/ /g;
-                        STATUS("Useless suppress option detected with the following content: $data");
+                        STATUS(
+"Useless suppress option detected with the following content: $data"
+                        );
                     }
                 }
-                
+
                 return;
             }
-            swiCheckUselessPatterns($root->{$key});         
+            swiCheckUselessPatterns( $root->{$key} );
         }
     }
-    elsif (ref($root) eq "ARRAY")
+    elsif ( ref($root) eq "ARRAY" )
     {
-        foreach (@{$root})
+        foreach ( @{$root} )
         {
-            return swiCheckUselessPatterns($_);         
+            return swiCheckUselessPatterns($_);
         }
     }
-    
+
     return;
 }
 

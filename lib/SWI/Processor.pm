@@ -204,9 +204,13 @@ sub swiProcess
         $dupindexHandler =
           open3( $dupindexIn, $dupindexOut, $dupindexErr,
             "$rootLocation/dupindex/bin/dupindex.exe" );
-        if (!defined($dupindexHandler) || !defined($dupindexIn) || !defined($dupindexOut) )
+        if (   !defined($dupindexHandler)
+            || !defined($dupindexIn)
+            || !defined($dupindexOut) )
         {
-             die("Can not start the internal platform native tool '$rootLocation/dupindex/bin/dupindex.exe'");
+            die(
+"Can not start the internal platform native tool '$rootLocation/dupindex/bin/dupindex.exe'"
+            );
         }
 
         my $dupfinderSettings =
@@ -655,16 +659,21 @@ sub swiSourceIndexAdd
     {
         my $function = $functionsData->{$functionName};
 
-        my $block = {};
+        my $block       = {};
+        my $blockOffset = {};
+
+        # Initialize function name
         $block->{'functionname'} = $functionName;
         $block->{'functionname'} =~
 s/($regexpCodeContainerDelimeter)?($regexpCodeContainerIdentifier$regexpCodeContainerDelimeter)*($regexpCodeFunctionIdentifier)/$3/;
+        $blockOffset->{'functionname'} = $function->{'swi:line:headerstart'};
 
         if ( $functionName ne $regexpCodeGlobalFunctionName )
         {
 
             # Get content
-            $block->{'initial'} = "";
+            $block->{'initial'}       = "";
+            $blockOffset->{'initial'} = $function->{'swi:line:commentstart'};
             for (
                 my $i = $function->{'swi:line:commentstart'} ;
                 $i <= $function->{'swi:line:blockend'} ;
@@ -673,7 +682,8 @@ s/($regexpCodeContainerDelimeter)?($regexpCodeContainerIdentifier$regexpCodeCont
             {
                 $block->{'initial'} .= $block_Initial[$i] . "\n";
             }
-            $block->{'code'} = "";
+            $block->{'code'}       = "";
+            $blockOffset->{'code'} = $function->{'swi:line:commentstart'};
             for (
                 my $i = $function->{'swi:line:commentstart'} ;
                 $i <= $function->{'swi:line:blockend'} ;
@@ -682,7 +692,8 @@ s/($regexpCodeContainerDelimeter)?($regexpCodeContainerIdentifier$regexpCodeCont
             {
                 $block->{'code'} .= $block_Code[$i] . "\n";
             }
-            $block->{'comments'} = "";
+            $block->{'comments'}       = "";
+            $blockOffset->{'comments'} = $function->{'swi:line:commentstart'};
             for (
                 my $i = $function->{'swi:line:commentstart'} ;
                 $i <= $function->{'swi:line:blockend'} ;
@@ -691,7 +702,9 @@ s/($regexpCodeContainerDelimeter)?($regexpCodeContainerIdentifier$regexpCodeCont
             {
                 $block->{'comments'} .= $block_Comment[$i] . "\n";
             }
-            $block->{'nopreprocessor'} = "";
+            $block->{'nopreprocessor'}       = "";
+            $blockOffset->{'nopreprocessor'} =
+              $function->{'swi:line:commentstart'};
             for (
                 my $i = $function->{'swi:line:commentstart'} ;
                 $i <= $function->{'swi:line:blockend'} ;
@@ -700,7 +713,8 @@ s/($regexpCodeContainerDelimeter)?($regexpCodeContainerIdentifier$regexpCodeCont
             {
                 $block->{'nopreprocessor'} .= $block_NoPrep[$i] . "\n";
             }
-            $block->{'nostrings'} = "";
+            $block->{'nostrings'}       = "";
+            $blockOffset->{'nostrings'} = $function->{'swi:line:commentstart'};
             for (
                 my $i = $function->{'swi:line:commentstart'} ;
                 $i <= $function->{'swi:line:blockend'} ;
@@ -716,7 +730,10 @@ s/($regexpCodeContainerDelimeter)?($regexpCodeContainerIdentifier$regexpCodeCont
                   $function->{'swi:pos:headerstart'}
               )
               . "\n";
-            $block->{'commentshead'} = "";
+            $blockOffset->{'purified'} = $function->{'swi:line:headerstart'};
+            $block->{'commentshead'}   = "";
+            $blockOffset->{'commentshead'} =
+              $function->{'swi:line:commentstart'};
             for (
                 my $i = $function->{'swi:line:commentstart'} ;
                 $i < $function->{'swi:line:headerstart'} ;
@@ -726,7 +743,6 @@ s/($regexpCodeContainerDelimeter)?($regexpCodeContainerIdentifier$regexpCodeCont
                 $block->{'commentshead'} .= $block_Comment[$i] . "\n";
             }
 
-            # functionname created above
             $block->{'functionhead'} = substr(
                 $block_Purified,
                 $function->{'swi:pos:headerstart'},
@@ -734,6 +750,8 @@ s/($regexpCodeContainerDelimeter)?($regexpCodeContainerIdentifier$regexpCodeCont
                   $function->{'swi:pos:headerstart'}
               )
               . "\n";
+            $blockOffset->{'functionhead'} =
+              $function->{'swi:line:headerstart'};
             $block->{'functionbody'} = substr(
                 $block_Purified,
                 $function->{'swi:pos:blockstart'},
@@ -741,25 +759,37 @@ s/($regexpCodeContainerDelimeter)?($regexpCodeContainerIdentifier$regexpCodeCont
                   $function->{'swi:pos:blockstart'}
               )
               . "\n";
+            $blockOffset->{'functionbody'} = $function->{'swi:line:blockstart'};
         }
         else
         {
             $block->{'initial'} =
               swiSourceCodeGlobalGet( $functionsData, undef, @block_Initial );
-            $block->{'code'} =
+            $blockOffset->{'initial'} = 0;
+            $block->{'code'}          =
               swiSourceCodeGlobalGet( $functionsData, undef, @block_Code );
-            $block->{'comments'} =
+            $blockOffset->{'code'} = 0;
+            $block->{'comments'}   =
               swiSourceCodeGlobalGet( $functionsData, undef, @block_Comment );
+            $blockOffset->{'comments'} = 0;
             $block->{'nopreprocessor'} =
               swiSourceCodeGlobalGet( $functionsData, undef, @block_NoPrep );
-            $block->{'nostrings'} =
+            $blockOffset->{'nopreprocessor'} = 0;
+            $block->{'nostrings'}            =
               swiSourceCodeGlobalGet( $functionsData, undef, @block_NoStr );
-            $block->{'purified'} =
+            $blockOffset->{'nostrings'} = 0;
+            $block->{'purified'}        =
               swiSourceCodeGlobalGet( $functionsData, undef, $block_Purified );
-            $block->{'commentshead'} =
+            $blockOffset->{'purified'} = 0;
+            $block->{'commentshead'}   =
               swiSourceCodeGlobalGet( $functionsData,
                 $function->{'swi:line:headerstart'},
                 @block_Comment );
+            $blockOffset->{'commentshead'} = 0;
+            $block->{'functionhead'}       = "";    # N/A
+            $blockOffset->{'functionhead'} = 0;
+            $block->{'functionbody'}       = "";    # N/A
+            $blockOffset->{'functionbody'} = 0;
         }
 
         # Initialize container
@@ -793,12 +823,12 @@ s/($regexpCodeContainerDelimeter)?($regexpCodeContainerIdentifier$regexpCodeCont
         # Note: this statistic is used to detect differences
         # Global code is compared without new lines
         my $initialContent = $block->{'initial'};
-        if ($functionName eq $regexpCodeGlobalFunctionName)
+        if ( $functionName eq $regexpCodeGlobalFunctionName )
         {
             $initialContent =~ s/\n+//g;
         }
         $function->{'swi:statistic'}->{'swi:length'}->{'swi:source'}
-          ->{'swi:exact'} = length( $initialContent );
+          ->{'swi:exact'} = length($initialContent);
 
         # Calculate swi:length->swi:executable
         $function->{'swi:statistic'}->{'swi:length'}->{'swi:executable'}
@@ -882,7 +912,7 @@ s/($regexpCodeContainerDelimeter)?($regexpCodeContainerIdentifier$regexpCodeCont
                     @{ $function->{'swi:reference'} },
                     swiSourceCodeScan(
                         $file,
-                        $function->{'swi:line:headerstart'},
+                        $blockOffset->{ $rule->{'swi:codecontent'} },
                         $block->{ $rule->{'swi:codecontent'} },
                         $rule->{'swi:searchpattern'},
                         $rule->{'swi:messagepattern'}
@@ -1014,14 +1044,16 @@ sub swiSourceIndexGcovAdd
     my $fh = new FileHandle( $location . "/" . $gcdaFile, "r" );
     if ( !defined($fh) )
     {
-        STATUS("gcda file is not found '$location/$gcdaFile'.");
+        STATUS("gcda file '$location/$gcdaFile' is not found  for the '$file' source.");
     }
     else
     {
         my $gcovCommand = 'gcov -f -b $location/$gcdaFile';
-        STATUS("Calling command '$gcovCommand'...");
-
+        
         my $gcovData = `$gcovCommand`;
+        $gcovData =~ s/No executable lines/Lines executed:100.OO% of O/g; 
+        $gcovData =~ s/No calls/Calls executed:100.00% of O/g; 
+        $gcovData =~ s/No branches/Branches executed:100.O0% of O\nTaken at least once:100.O0% of O/g; 
         my @covData  = split( "\n\n", $gcovData );
 
         foreach (@covData)
@@ -1062,9 +1094,6 @@ m/^Function\s+\'(.*)\'\s+Lines\s+executed:(.*)%\s+of\s+(.*)\s+Branches\s+execute
             }
             else
             {
-                STATUS(
-"Parsing of source file is incorrect or gcda file is corrupted."
-                );
                 STATUS(
 "gcov reports the data for '$functionName' function but SWI parser did not detect it"
                 );
@@ -1156,8 +1185,9 @@ m/^($regexpCodeFunctionModifier)*($regexpCodeFunctionIdentifier)($regexpCodeFunc
                     # Remove empty symbols in identifier
                     $word =~ s/\s+$//;
                     $word =~ s/[\n\t ]+/ /g;
-                    $word =~ s/\s*$regexpCodeContainerDelimeter\s*/$regexpCodeContainerDelimeter/;
-                    
+                    $word =~
+s/\s*$regexpCodeContainerDelimeter\s*/$regexpCodeContainerDelimeter/;
+
                     # Remove empty symbols in modifier
                     $mod =~ s/^\s*//;
                     $mod =~ s/\s*$//;

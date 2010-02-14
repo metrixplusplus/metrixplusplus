@@ -127,31 +127,31 @@
         <swi:added>
           <swi:failures>on</swi:failures>
           <swi:modifications>off</swi:modifications>
-          <swi:duplications>on</swi:duplications>
+          <swi:duplications>off</swi:duplications>
           <swi:scanmessages>on</swi:scanmessages>
         </swi:added>
         <swi:removed>
           <swi:failures>on</swi:failures>
           <swi:modifications>off</swi:modifications>
-          <swi:duplications>on</swi:duplications>
+          <swi:duplications>off</swi:duplications>
           <swi:scanmessages>on</swi:scanmessages>
         </swi:removed>
         <swi:modified>
           <swi:failures>on</swi:failures>
           <swi:modifications>off</swi:modifications>
-          <swi:duplications>on</swi:duplications>
+          <swi:duplications>off</swi:duplications>
           <swi:scanmessages>on</swi:scanmessages>
         </swi:modified>
         <swi:cloned>
           <swi:failures>on</swi:failures>
           <swi:modifications>off</swi:modifications>
-          <swi:duplications>on</swi:duplications>
+          <swi:duplications>off</swi:duplications>
           <swi:scanmessages>on</swi:scanmessages>
         </swi:cloned>
         <swi:unmodified>
           <swi:failures>on</swi:failures>
           <swi:modifications>off</swi:modifications>
-          <swi:duplications>on</swi:duplications>
+          <swi:duplications>off</swi:duplications>
           <swi:scanmessages>on</swi:scanmessages>
         </swi:unmodified>
       </swi:print>

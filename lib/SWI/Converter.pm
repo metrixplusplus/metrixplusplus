@@ -199,6 +199,7 @@ sub swiNotificationPrint
     }
 
     # Print 'swi:failures'
+    my $areThereDupViolations = 0;
     foreach my $keyStat ( keys %$objStat )
     {
         my $subStat = $objStat->{$keyStat};
@@ -241,33 +242,14 @@ sub swiNotificationPrint
                         eq "on" )
                     {
                         print $file $notification;
+                        print $file "\n";
 
-                        # Print 'swi:duplications'
                         if (   $keyStat eq "swi:duplication"
                             && $keySubStat eq "swi:symbols"
-                            && $config->{"swi:report"}->{"swi:notifications"}
-                            ->{"swi:print"}->{ "swi:" . $objDiff }
-                            ->{"swi:duplications"} eq "on" )
+                            && $type       eq 'swi:exact' )
                         {
-                            die('Internal Error occured!')
-                              if not defined($objRefs);
-                            print $file "\n";
-                            foreach my $dupData ( @{$objRefs} )
-                            {
-                                if ( $dupData->{'swi:ref:type'} eq 'dup' )
-                                {
-                                    print $file $modLocation . "/"
-                                      . $dupData->{'swi:dup:file'} . ":"
-                                      . $dupData->{'swi:dup:line'}
-                                      . ": warning: '"
-                                      . $dupData->{'swi:dup:size'}
-                                      . "' executable symbols are duplicated in '"
-                                      . $dupData->{'swi:dup:function'}
-                                      . "' function\n";
-                                }
-                            }
+                            $areThereDupViolations = 1;
                         }
-                        print $file "\n";
                     }
 
                     if ( $config->{"swi:report"}->{"swi:notifications"}
@@ -303,6 +285,35 @@ sub swiNotificationPrint
                     $returnCode++;
                 }
             }
+        }
+    }
+
+    # Print 'swi:duplications'
+    if (
+        $areThereDupViolations == 1
+        || $config->{"swi:report"}->{"swi:notifications"}->{"swi:print"}
+        ->{ "swi:" . $objDiff }->{"swi:duplications"} eq "on"
+      )
+    {
+        my $isPrinted = 0;
+        foreach my $dupData ( @{$objRefs} )
+        {
+            if ( $dupData->{'swi:ref:type'} eq 'dup' )
+            {
+                print $file $modLocation . "/"
+                  . $dupData->{'swi:dup:file'} . ":"
+                  . $dupData->{'swi:dup:line'}
+                  . ": warning: '"
+                  . $dupData->{'swi:dup:size'}
+                  . "' executable symbols are duplicated in '"
+                  . $dupData->{'swi:dup:function'}
+                  . "' function\n";
+                $isPrinted = 1;
+            }
+        }
+        if ($isPrinted == 1)
+        {
+            print $file "\n";
         }
     }
 
