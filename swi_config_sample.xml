@@ -271,7 +271,7 @@
               which is interpolated before: variables ${1}, ${2}, ... are replaced by actual strings
               from 'swi:searchpattern' regexp hooks.
           -->
-          <swi:searchpattern>([^_a-zA-Z0-9])DECLARE_HANDLER\(([^_a-zA-Z0-9])\)</swi:searchpattern>
+          <swi:searchpattern>([^_a-zA-Z0-9])DECLARE_HANDLER\(([_a-zA-Z0-9]+)\)</swi:searchpattern>
           <swi:replacepattern>${1}int ${2}(unsigned int stateId, unsigned int eventId, struct EVENT_DATA_TYPE eventData)</swi:replacepattern>
         </swi:rule>
         <!--
@@ -640,7 +640,7 @@
             
             By default, all files are affected.
         -->
-        <swi:filepattern>.*</swi:filepattern>
+        <swi:filepattern>^.*[.][cC][pP]?[pP]?$</swi:filepattern>
         <!--
             The coverage statistic is avaialble in 'gcda' files.
             gcov tool reads these files and reports the information.
@@ -662,14 +662,14 @@
             
             The example below demostrates the case of mapping:
                  from 'file.c' to 'file.gcda'
-                 from 'otehrfile.h' to 'otherfile.gcda'
+                 from 'otehrfile.c' to 'otherfile.gcda'
                  and so on...
             
             If the 'gcda' file is not found, coverage statistic is not collected and not reported.
             
-            The example below demonstrates the default mapping scheme options are missed.
+            The example below demonstrates the default mapping scheme if options are missed.
         -->
-        <swi:sourcefile>(.*)[.][cChH][pP]?[pP]?</swi:sourcefile>
+        <swi:sourcefile>(.*)[.][cC][pP]?[pP]?</swi:sourcefile>
         <swi:gcdafile>${1}.gcda</swi:gcdafile>
       </swi:indexer:gcov>
 
@@ -796,48 +796,57 @@
           The 'swi:print' section defines which messages should be printed
           to the log and to stderr stream. By analogy with the previous 
           configuration section, the flags are defined per modification status.
-          There are three types of messages which are configred by 
-          'swi:failures', 'swi:modifications' and 'swi:duplications' options.
+          There are 4 types of messages which are configred by 
+          'swi:failures', 'swi:modifications', 'swi:duplications' and 'swi:scanmessages' options.
           
-          (*) 'swi:failures'      - notifications about broken limits
-              'swi:modifications' - notes about added/modified/cloned/removed objects
-              'swi:duplications'  - pointers to the duplicated regions in files
-          (*) 'swi:scanmessages'  - messages collected by the internal scaner tool
-                                    (see 'swi:scaner' section above)
+          (*)  'swi:failures'      - notifications about broken limits
+                                     (see 'swi:limits' section below)
+                                     By default, these messages are activated
+               'swi:modifications' - notes about added/modified/cloned/removed objects
+                                     (see 'swi:xml/swi:baseline' option above
+                                     By default, these messages are activated
+          (**) 'swi:duplications'  - pointers to the duplicated regions in files
+                                     (see 'swi:indexer:dup' sections above)
+                                 (!) By default, these messages are NOT activated
+          (*)  'swi:scanmessages'  - messages collected by the internal scaner tool
+                                     (see 'swi:scaner' sections above)
+                                     By default, these messages are activated
           
-          (*) marks types of messages which affect the exit code (see 'swi:error' section above).
+          (*)  marks types of messages which affect the exit code (see 'swi:error' section above).
+          (**) these messages are always printed for an object if there failures for the index:
+               'swi:duplication/swi:symbols/swi:exact'
           
-          'swi:print' section can be missed. In this case all messages are activated by default.
+          'swi:print' section can be missed or empty. In this case default values are applied.
       -->
       <swi:print>
         <swi:added>
           <swi:failures>on</swi:failures>
           <swi:modifications>off</swi:modifications>
-          <swi:duplications>on</swi:duplications>
+          <swi:duplications>off</swi:duplications>
           <swi:scanmessages>on</swi:scanmessages>
         </swi:added>
         <swi:removed>
           <swi:failures>on</swi:failures>
           <swi:modifications>off</swi:modifications>
-          <swi:duplications>on</swi:duplications>
+          <swi:duplications>off</swi:duplications>
           <swi:scanmessages>on</swi:scanmessages>
         </swi:removed>
         <swi:modified>
           <swi:failures>on</swi:failures>
           <swi:modifications>off</swi:modifications>
-          <swi:duplications>on</swi:duplications>
+          <swi:duplications>off</swi:duplications>
           <swi:scanmessages>on</swi:scanmessages>
         </swi:modified>
         <swi:cloned>
           <swi:failures>on</swi:failures>
           <swi:modifications>off</swi:modifications>
-          <swi:duplications>on</swi:duplications>
+          <swi:duplications>off</swi:duplications>
           <swi:scanmessages>on</swi:scanmessages>
         </swi:cloned>
         <swi:unmodified>
           <swi:failures>on</swi:failures>
           <swi:modifications>off</swi:modifications>
-          <swi:duplications>on</swi:duplications>
+          <swi:duplications>off</swi:duplications>
           <swi:scanmessages>on</swi:scanmessages>
         </swi:unmodified>
       </swi:print>
@@ -888,6 +897,19 @@
           <swi:info>5</swi:info>
           <swi:notice>3</swi:notice>
           <swi:warning>1</swi:warning>
+          
+          <!--
+              The next option is a regular expression.
+              If name of object which is under processing is mathced by this expression,
+              the limit is applied to this object.
+              Otherwise, the object is missed and the level becomes 'undefined' for the object.
+              
+              For example, value '^MY_PROJECT/MY_MODULE$' requires to apply the limit
+              to the module only, missing statistics for the project, files and functions.
+              
+              By default, statistics are validated for all objects.
+          -->
+          <swi:objectpattern>.*</swi:objectpattern>
           
           <!--
               If some object is evaluated in non-regular level (info/notice/warning)
@@ -952,6 +974,14 @@
             
             In this case it is necessary to limit 'swi:lines/swi:comment/swi:exact'
             (what we do here) in the relation with 'swi:lines/swi:executable/swi:exact'.
+            
+            Note: if statistic in the relation ('swi:lines/swi:executable/swi:exact'
+            in this example) is not defined OR equal to zero,
+            result depends on the sign of the limited statistic
+            ('swi:lines/swi:comment/swi:exact' in this example):
+                if statistic > 0 than relative statistic becomes 'Infinity'
+                if statistic < 0 than relative statistic becomes '-Infinity'
+                if statistic = 0 than relative statistic becomes equals to '1.00'
         -->
         <swi:exact swi:relation="swi:lines/swi:executable/swi:exact">
           <!-- 0.3  is 30% -->
@@ -1079,7 +1109,7 @@
         The following section defines the limitation for duplication index.
         In the example, it is required to control exact relative
         duplication index for functions and total relative
-        duplication index for files, modules and project.
+        duplication index for the whole project.
     -->
     <!-- STATISTIC-GROUP -->
     <swi:duplication>
@@ -1104,6 +1134,13 @@
           <swi:info>0.30</swi:info>
           <swi:notice>0.40</swi:notice>
           <swi:warning>0.60</swi:warning>
+          <!--
+              This option explicitly defines the content for validation.
+              It requires to apply the limit to the project and
+              miss modules, files and functions.
+          -->
+          <swi:objectpattern>^MY_PROJECT$</swi:objectpattern>
+          
           <!--
               Add here suppress section, if it is needed. For example:
               <swi:suppress>

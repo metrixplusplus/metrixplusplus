@@ -722,7 +722,7 @@ sub swiUtilConfigFill_PrintSection
       )
     {
         $config->{'swi:report'}->{'swi:notifications'}->{'swi:print'}
-          ->{$modType}->{'swi:duplications'} = 'on';
+          ->{$modType}->{'swi:duplications'} = 'off';
     }
     if (
         !defined(
