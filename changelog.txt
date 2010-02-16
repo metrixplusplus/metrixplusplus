@@ -20,6 +20,18 @@
 ____________________________________________
 
 
+-- 2010/02/XX: VERSION 0.9.2 not yet released
+
+       -- Date:         2010/02/15
+          Reference:    noref
+          Issue type:   fix
+          Severity:     Minor
+          Module(s):    Parser
+          Description:  regexp for C++ function identifier corrected
+
+____________________________________________
+
+
 -- 2010/02/15: VERSION 0.9.1 released
 
        -- Date:         2010/02/14
@@ -32,14 +44,14 @@ ____________________________________________
 
        -- Date:         2010/02/14
           Reference:    noref
-          Issue type:   bug
+          Issue type:   fix
           Severity:     Major
           Module(s):    Coverage indexer
           Description:  Empty gcov data (no calls, no branches) is processed correctly now
 
        -- Date:         2010/02/14
           Reference:    noref
-          Issue type:   bug
+          Issue type:   fix
           Severity:     Minor
           Module(s):    Converter
           Description:  Duplication messages are deactivated by default
@@ -47,28 +59,28 @@ ____________________________________________
 
        -- Date:         2010/02/14
           Reference:    noref
-          Issue type:   bug
+          Issue type:   fix
           Severity:     Minor
           Module(s):    Scanner
           Description:  Line offset bug fixed
 
        -- Date:         2010/02/12
           Reference:    noref
-          Issue type:   bug
+          Issue type:   fix
           Severity:     Major
           Module(s):    Processor
           Description:  Calculation of length and crc statistics corrected for global code
 
        -- Date:         2010/02/12
           Reference:    noref
-          Issue type:   bug
+          Issue type:   fix
           Severity:     Major
           Module(s):    Appraiser
           Description:  Calculation of avarage data fixed
 
        -- Date:         2010/02/12
           Reference:    noref
-          Issue type:   bug
+          Issue type:   fix
           Severity:     Major
           Module(s):    Duplication indexer
           Description:  By default, it is now enabled
@@ -103,7 +115,7 @@ ____________________________________________
 
        -- Date:         2010/02/11
           Reference:    noref
-          Issue type:   bug
+          Issue type:   fix
           Severity:     Critical
           Module(s):    Parser
           Description:  C language, correction for nonamed enum, struct
@@ -129,7 +141,7 @@ ____________________________________________
 
        -- Date:         2010/01/10
           Reference:    noref
-          Issue type:   bug
+          Issue type:   fix
           Severity:     Critical
           Module(s):    Parser
           Description:  C language parser becomes loyal with code formating
