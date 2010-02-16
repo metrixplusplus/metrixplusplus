@@ -103,7 +103,7 @@ my $regexpCodeKeyword       = 'case|do|else|if|for|switch|while';
 my $regexpCodeStatements    =
 '\s*[^;]*[;]\s*|\s*extern\s+["]{2}\s*|\s*protected\s*[:]\s*|\s*private\s*[:]\s*|\s*public\s*[:]\s*';
 my $regexpCodeFunctionIdentifier =
-'(([_a-zA-Z:~][_a-zA-Z0-9:~]*[:][:])*operator[^a-zA-Z0-9_][^(]*)|([_a-zA-Z:~][_a-zA-Z0-9:~]*)';
+'([_a-zA-Z~][_a-zA-Z0-9~]*\s*[:][:]\s*)*((operator[^a-zA-Z0-9_][^(]*)|([_a-zA-Z~][_a-zA-Z0-9]*))';
 my $regexpCodeFunctionModifier    = '[_a-zA-Z0-9:*&><, \t\n]*\s+[*&]?[*&]?\s*';
 my $regexpCodeFunctionArguments   = '\s*\([^;]+\s*';
 my $regexpCodeContainerIdentifier = '[_a-zA-Z][_a-zA-Z0-9]*';
