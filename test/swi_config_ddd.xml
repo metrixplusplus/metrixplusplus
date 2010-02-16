@@ -105,6 +105,12 @@
         <swi:globalcode>on</swi:globalcode>
       </swi:indexer:dup>
 
+      <swi:indexer:gcov>
+        <swi:enabled>on</swi:enabled>
+        <swi:filepattern>^.*[.][cC][pP]?[pP]?$</swi:filepattern>
+        <swi:sourcefile>(.*)[.][cC][pP]?[pP]?</swi:sourcefile>
+        <swi:gcdafile>${1}.gcda</swi:gcdafile>
+      </swi:indexer:gcov>
     </swi:module>
  
   </swi:modules>
@@ -159,6 +165,7 @@
   </swi:report>
   
   <swi:limits>
+    
     <swi:lines>
       <swi:comment:header>
         <swi:exact>
@@ -190,6 +197,17 @@
       </swi:symbols>
     </swi:duplication>
     
-  </swi:limits>
+    
+    <swi:coverage>
+      <swi:gcov:lines>
+        <swi:exact swi:relation="swi:coverage/swi:gsum:lines/swi:exact">
+          <swi:info>0.99</swi:info>
+          <swi:notice>0.9</swi:notice>
+          <swi:warning>0.84</swi:warning>
+        </swi:exact>
+      </swi:gcov:lines>
+    </swi:coverage>
+
+    </swi:limits>
 
 </swi:configuration>

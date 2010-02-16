@@ -365,7 +365,8 @@ sub swiXmlReportPrint()
                     'swi:duplication' => '__REMOVE__',
                     'swi:length'      => '__REMOVE__',
                     'swi:lines'       => '__REMOVE__',
-                    'swi:checksum'    => '__REMOVE__'
+                    'swi:checksum'    => '__REMOVE__',
+                    'swi:coverage'    => '__REMOVE__'
                 }
             );
             $statStr =~ s/\n/\n        /g;
@@ -377,6 +378,7 @@ sub swiXmlReportPrint()
                 RootName => '' );
             $refStr =~ s/\n/\n      /g;
             $refStr =~ s/<anon /<swi:reference /g;
+            $refStr =~ s/<anon>\s*<\/anon>\s*/\n/g;
             print $fh "      ";
             print $fh $refStr;
             print $fh "      </swi:function>\n";
@@ -1044,17 +1046,34 @@ sub swiSourceIndexGcovAdd
     my $fh = new FileHandle( $location . "/" . $gcdaFile, "r" );
     if ( !defined($fh) )
     {
-        STATUS("gcda file '$location/$gcdaFile' is not found  for the '$file' source.");
+        STATUS(
+"gcda file '$location/$gcdaFile' is not found  for the '$file' source."
+        );
+
+        #foreach my $functionName ( keys %{$functionsData} )
+        #{
+        #    $functionsData->{$functionName}->{'swi:statistic'}
+        #      ->{'swi:coverage'} = {
+        #        'swi:gsum:lines'     => { 'swi:exact' => 0 },
+        #        'swi:gsum:branches'  => { 'swi:exact' => 0 },
+        #        'swi:gsum:calls'     => { 'swi:exact' => 0 },
+        #        'swi:gcov:lines'     => { 'swi:exact' => 0 },
+        #        'swi:gcov:branches'  => { 'swi:exact' => 0 },
+        #        'swi:gcov:takenonce' => { 'swi:exact' => 0 },
+        #        'swi:gcov:calls'     => { 'swi:exact' => 0 }
+        #      };
+        #}
     }
     else
     {
-        my $gcovCommand = 'gcov -f -b $location/$gcdaFile';
-        
+        my $gcovCommand = "gcov -f -b $location/$gcdaFile";
+
         my $gcovData = `$gcovCommand`;
-        $gcovData =~ s/No executable lines/Lines executed:100.OO% of O/g; 
-        $gcovData =~ s/No calls/Calls executed:100.00% of O/g; 
-        $gcovData =~ s/No branches/Branches executed:100.O0% of O\nTaken at least once:100.O0% of O/g; 
-        my @covData  = split( "\n\n", $gcovData );
+        $gcovData =~ s/No executable lines/Lines executed:100.OO% of O/g;
+        $gcovData =~ s/No calls/Calls executed:100.00% of O/g;
+        $gcovData =~
+s/No branches/Branches executed:100.O0% of O\nTaken at least once:100.O0% of O/g;
+        my @covData = split( "\n\n", $gcovData );
 
         foreach (@covData)
         {
