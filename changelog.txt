@@ -22,6 +22,20 @@ ____________________________________________
 
 -- 2010/02/XX: VERSION 0.9.2 not yet released
 
+       -- Date:         2010/02/16
+          Reference:    noref
+          Issue type:   fix
+          Severity:     Minor
+          Module(s):    Appraiser
+          Description:  Infinity strings changed, perl warning removed
+
+       -- Date:         2010/02/16
+          Reference:    noref
+          Issue type:   fix
+          Severity:     Critical
+          Module(s):    Gcov bridge
+          Description:  gcov usage command corrected
+          
        -- Date:         2010/02/15
           Reference:    noref
           Issue type:   fix

@@ -739,7 +739,7 @@ sub swiStatisticLevelGet
                   $objStat->{ $relation[0] }->{ $relation[1] }
                   ->{ $relation[2] };
 
-                if ( !defined($factor) || $factor == 0 )
+                if ( !defined($factor) )
                 {
                     STATUS(
 "Wrong configuration for the limit '$keyStat/$keySubStat/$type'. Relation "
@@ -758,12 +758,12 @@ sub swiStatisticLevelGet
                     # Devide negative number by zero, equals to -infinity
                     elsif ($objStat->{$keyStat}->{$keySubStat}->{$type} < 0)
                     {
-                        $statValue = "-Infinity";        
+                        $statValue = '(-)Infinity';        
                     }
                     # Devide positive number by zero, equals to infinity
                     else
                     {
-                        $statValue = "Infinity";
+                        $statValue = '(+)Infinity';
                     }
                 }
                 else
@@ -780,7 +780,15 @@ sub swiStatisticLevelGet
             if (   $limit->{"swi:warning"} > $limit->{"swi:notice"}
                 && $limit->{"swi:notice"} > $limit->{"swi:info"} )
             {
-                if ( $statValue eq "Infinity" || $statValue > $limit->{"swi:warning"} )
+                if ( $statValue eq '(-)Infinity' )
+                {
+                    $returnResult[0] = "regular";
+                    $returnResult[2] = "["
+                      . $statValue
+                      . " less than "
+                      . $limit->{"swi:info"} . "]";
+                }
+                elsif ( $statValue eq '(+)Infinity' || $statValue > $limit->{"swi:warning"} )
                 {
                     $returnResult[0] = "warning";
                     $returnResult[2] = "["
@@ -807,12 +815,24 @@ sub swiStatisticLevelGet
                 else
                 {
                     $returnResult[0] = "regular";
+                    $returnResult[2] = "["
+                      . $statValue
+                      . " less than "
+                      . $limit->{"swi:info"} . "]";
                 }
             }
             elsif ($limit->{"swi:warning"} < $limit->{"swi:notice"}
                 && $limit->{"swi:notice"} < $limit->{"swi:info"} )
             {
-                if ( $statValue eq "-Infinity" || $statValue < $limit->{"swi:warning"} )
+                if ( $statValue eq '(+)Infinity' )
+                {
+                    $returnResult[0] = "regular";
+                    $returnResult[2] = "["
+                      . $statValue
+                      . " greater than "
+                      . $limit->{"swi:info"} . "]";
+                }
+                elsif ( $statValue eq '(-)Infinity' || $statValue < $limit->{"swi:warning"} )
                 {
                     $returnResult[0] = "warning";
                     $returnResult[2] = "["
@@ -839,6 +859,10 @@ sub swiStatisticLevelGet
                 else
                 {
                     $returnResult[0] = "regular";
+                    $returnResult[2] = "["
+                      . $statValue
+                      . " greater than "
+                      . $limit->{"swi:info"} . "]";
                 }
             }
             else
