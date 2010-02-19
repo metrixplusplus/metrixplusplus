@@ -592,7 +592,8 @@ sub swiSourceCodeGlobalGet
 
     if ( !defined($endLine) )
     {
-        $endLine = $#blockCode + 100;    # Just with overhead
+        # end line is the last by default
+        $endLine = $#blockCode + 1;
     }
 
     foreach my $function ( values %{$functionsData} )
@@ -610,14 +611,26 @@ sub swiSourceCodeGlobalGet
     }
 
     my $result = "";
-    foreach (@blockCode)
+    my $emptyLines = "";
+    foreach my $line (@blockCode)
     {
+        # Check if it is necessary to finish
         $endLine--;
         if ( $endLine < 0 )
         {
             last;
         }
-        $result .= $_ . "\n";
+        
+        # attach frag only if it is not empty
+        if ($line =~ m/[^ \t]/)
+        {
+            $result .= $emptyLines . $line . "\n";
+            $emptyLines = "";      
+        }
+        else
+        {
+            $emptyLines .= $line . "\n";
+        }
     }
 
     return $result;

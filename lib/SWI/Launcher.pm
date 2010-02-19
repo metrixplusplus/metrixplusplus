@@ -107,7 +107,7 @@ sub swiLaunch
             elsif ( $result > 0 )
             {
                 STATUS("The are scan warnings and/or errors.");
-                $returnCode = $result;
+                $returnCode += $result;
             }
             else
             {
@@ -160,7 +160,7 @@ sub swiLaunch
         {
             STATUS(
                 "Report has been converted. There are exceeded limitations.");
-            $returnCode = $result;
+            $returnCode += $result;
         }
         else
         {
@@ -168,6 +168,7 @@ sub swiLaunch
         }
     }
 
+    STATUS("Execution completed with exit code '$returnCode'.");
     return $returnCode;
 }
 
