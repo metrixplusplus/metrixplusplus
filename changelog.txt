@@ -20,7 +20,7 @@
 ____________________________________________
 
 
--- 2010/02/XX: VERSION 0.9.2 not yet released
+-- 2010/02/28: VERSION 0.9.2 released
 
        -- Date:         2010/02/18
           Reference:    noref
