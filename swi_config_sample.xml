@@ -116,6 +116,10 @@
           This is a full path to the directory where module's source files are stored
           It can be relative or full path (recommended).
           If it is relative path, you need to run Software Index tool from the relatively correct folder.
+		  
+		  Directory is processed recursively. I.e. files in sub-directories are scanned as well.
+		  In the report and in 'swi:files' section below,
+		  files are referenced relatively to directory configured in 'swi:location'.
       -->
       <swi:location>/path/to/my/module</swi:location>
       <!--
@@ -133,6 +137,7 @@
             .c, .h, .cpp, .hpp
             
             By default, all files are included.
+			If it is a file in sub-directory, it's name
         -->
         <swi:include>^.*[.][chCH]([pP][pP])?$</swi:include>
         <!--

@@ -233,32 +233,50 @@ sub swiProcess
         #print $dupindexIn "\n";
         #print $dupindexIn "init_nonregular\n";
         #print $dupindexIn "\n";
+        
+        my @directories;
+        push(@directories, $swiGlobalDirectory);
 
-        opendir( DIR, $swiGlobalDirectory )
-          or die("Can not open source directory '$swiGlobalDirectory'!");
-        while ( my $file = readdir(DIR) )
+        foreach my $curDirectory (@directories)
         {
-            if ( $file =~ m/$swiGlobalInclude/ )
+            opendir( DIR, $curDirectory )
+                or die("Can not open source directory '$curDirectory'!");
+            while ( my $file = readdir(DIR) )
             {
-                if (   $swiGlobalExclude ne ""
-                    && $file =~ m/$swiGlobalExclude/ )
+                my $fullPathFile = $curDirectory . "/" . $file;
+                if ($file eq '.' || $file eq '..')
                 {
                     next;
                 }
-
-                $filesData->{$file} = swiParse(
-                    $swiGlobalDirectory,
-                    $file,
-                    $swiGlobalPreprocessorRules,
-                    $swiGlobalScanerRules,
-                    $config->{"swi:modules"}->{"swi:module"}[$moduleId]
-                      ->{"swi:indexer:dup"},
-                    $config->{"swi:modules"}->{"swi:module"}[$moduleId]
-                      ->{"swi:indexer:gcov"}
-                );
+                if (-d ($fullPathFile))
+                {
+                    push(@directories, $fullPathFile);
+                    next;
+                }
+                
+                $fullPathFile =~ s/$swiGlobalDirectory\///;
+                if ( $fullPathFile =~ m/$swiGlobalInclude/ )
+                {
+                    if (   $swiGlobalExclude ne ""
+                        && $fullPathFile =~ m/$swiGlobalExclude/ )
+                    {
+                        next;
+                    }
+                    
+                    $filesData->{$fullPathFile} = swiParse(
+                        $swiGlobalDirectory,
+                        $fullPathFile,
+                        $swiGlobalPreprocessorRules,
+                        $swiGlobalScanerRules,
+                        $config->{"swi:modules"}->{"swi:module"}[$moduleId]
+                            ->{"swi:indexer:dup"},
+                        $config->{"swi:modules"}->{"swi:module"}[$moduleId]
+                            ->{"swi:indexer:gcov"}
+                    );
+                }
             }
+            closedir(DIR);
         }
-        closedir(DIR);
 
         # Add duplication statistics
         if ( defined($swiGlobalDupfinderEnabled)
