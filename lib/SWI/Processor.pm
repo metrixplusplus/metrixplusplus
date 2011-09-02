@@ -1372,6 +1372,15 @@ m/^($regexpCodeContainerModifier)\s+($regexpCodeContainerIdentifier)($regexpCode
         else
         {
 
+            if ($deepLevel <= 0)
+            {
+                PRINT( $file, $currentLine + 1,
+                        'error',
+                        "Mismatched closing of a block. The file is not processed completely!" );
+                $exitCode++;
+                return $result;
+            }
+
             # block closer detected
             if ( $deepLevel == $isInFunction )
             {
@@ -1624,10 +1633,8 @@ sub swiMatchPatternCount
     my $pattern = shift();
     my $count   = 0;
 
-    while ( $text =~ m/$pattern/g )
-    {
-        $count++;
-    }
+    $count = () = $text =~ m/$pattern/g;
+    
     return $count;
 }
 

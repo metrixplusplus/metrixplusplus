@@ -24,12 +24,12 @@
 <!--
     Configuration file is formed in XML format.
     
-    Use this file as a 'configration file description' and
-    create new configs using this file as a baseline.
+    Use this file as a 'configuration file description' and
+    create new configurations using this file as a baseline.
     
     Comments below provides with the description for all options.
     Commented XML sections make patterns for your specific extensions.
-    Some of them demostrates usage examples.
+    Some of them demonstrates usage examples.
 -->
 
 <!-- Root node 'swi:configuration' is mandatory. It's name is hardcoded. -->
