@@ -601,14 +601,14 @@ class Loader(object):
             logging.warn("Removing existing file: " + dbfile)
             os.unlink(dbfile)
         if previous_db != None and os.path.exists(previous_db) == False:
-            raise core.api.ExitError(self, "Database file '" + previous_db + "'  does not exist")
+            raise core.api.ExitError(None, "Database file '" + previous_db + "'  does not exist")
 
         self.db.create(dbfile, clone_from=previous_db)
         
     def open_database(self, dbfile, read_only = True):
         self.db = core.db.sqlite.Database()
         if os.path.exists(dbfile) == False:
-            raise core.api.ExitError(self, "Database file '" + dbfile + "'  does not exist")
+            raise core.api.ExitError(None, "Database file '" + dbfile + "'  does not exist")
         self.db.connect(dbfile, read_only=read_only)
         
         for table in self.db.iterate_tables():

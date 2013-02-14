@@ -219,9 +219,8 @@ class CppCodeParser(object):
                 if blocks[curblk]['indent_start'] == indent_current:
                     next_block = reset_next_block(m.end())
                     if curblk == 0:
-                        print data.get_path()
-                        print cursor_current + len(self.regex_ln.findall(text, cursor_last_pos, m.start()))
-                        logging.warning("Non-matching closing bracket '}' detected")
+                        logging.warning("Non-matching closing bracket '}' detected: " + data.get_path() + ":" +
+                                        str(cursor_current + len(self.regex_ln.findall(text, cursor_last_pos, m.start()))))
                         count_mismatched_brackets += 1
                         continue
                     
