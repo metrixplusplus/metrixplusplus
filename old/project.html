@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!--
+
+    Software Index, Copyright 2010, Software Index Project Team
+    Link: http://swi.sourceforge.net
+    
+    This file is part of Software Index Tool.
+    
+    Software Index is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, version 3 of the License.
+    
+    Software Index is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with Software Index.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-5" />
+<title>Software Index Project</title>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<table border="0" align="center" cellpadding="0" cellspacing="0" width="1000">
+  <tr>
+    <td>&nbsp;</td>
+    <td valign="middle">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="350"><img src="images/logo_project.jpg" alt="Software Index Project Page" width="350" height="128" /></td>
+    <td valign="bottom">      <div align="right">
+      <p><a href="http://sourceforge.net/projects/swi"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=275605&amp;type=10" alt="Get Software Index at SourceForge.net. Fast, secure and Free Open Source software downloads" width="80" height="15" border="0" /></a></p>
+      <p>&nbsp;</p>
+      <p><a href="#Description">Overview</a> | <a href="#Download">Download &amp; Installation </a> | <a href="#License">License</a> | <a href="#Documentation">Documentation</a> | <a href="#Getsupport">Get support </a>| <a href="#Fordevelopers">For developers</a></p>
+    </div></td>
+  </tr>
+  <tr>
+    <td colspan="2"><hr></td>
+  </tr>  <tr>
+    <td colspan="2" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="10">
+      
+      <tr>
+        <td valign="top"><h3><a id="Description"></a>Overview</h3>
+          <p><span class="normalImportance">Software Index </span>measures, reports and validates software statistic,
+            searches for duplications, scans for errors, 'coding style' violations
+            and occasions of broken design patterns which are defined by your design team.</p>
+          <h4>The list of collected statistics:</h4>
+          <ul>
+                <li>Number of <span class="normalImportance">executable symbols</span> and <span class="normalImportance">lines</span> </li>
+                <li>Number of <span class="normalImportance">symbols</span> and <span class="normalImportance">lines in comments</span></li>
+                <li>Number of <span class="normalImportance">symbols</span> and<span class="normalImportance"> lines in initial source file</span></li>
+                <li>Number of <span class="normalImportance">lines in specific comments</span><br />
+                (header descriptions before functions)  </li>
+                <li>Number of <span class="normalImportance">symbols in name</span> of a function </li>
+                <li>Number of <span class="normalImportance">blocks</span></li>
+                <li>Maximum <span class="normalImportance">indent level</span> (depth level) </li>
+                <li><span class="normalImportance">Cyclomatic complexity</span> (McCabe's / Myer's) index </li>
+                <li>Number of <span class="normalImportance">functions, files, modules</span></li>
+                <li>Number of symbols in <span class="normalImportance">duplicated fragments</span></li>
+                <li><span class="normalImportance">Code coverage</span> indexes<br />
+                (line coverage, branch coverage and entry/exit coverage data from external gcov tool) </li>
+          </ul>
+          <h4>Parsing, scaning and searching can be performed for the different content:</h4>
+          <ul>
+            <li><span class="normalImportance">initial</span>         - the initial source content</li>
+            <li> <span class="normalImportance">code</span>            - the initial code (without comments)</li>
+            <li> <span class="normalImportance">comments</span>        - comments only (no code)</li>
+            <li> <span class="normalImportance">no preprocessor</span>  - preprocessor strings excluded (without comments and preprocessor)</li>
+            <li> <span class="normalImportance">no strings</span>       - strings excluded (without comments and strings)</li>
+            <li> <span class="normalImportance">purified</span>        - strings and preprocessor excluded (without comments, strings and preprocessor)</li>
+            <li> <span class="normalImportance">comment header</span>   - comments before function's header</li>
+            <li> <span class="normalImportance">function's name</span>    - name of a function</li>
+            <li> <span class="normalImportance">function's head</span>    - purified function's header, no body</li>
+            <li> <span class="normalImportance">function's body</span>    - purified function's body, no header</li>
+            </ul>
+          <h4>Every counter is collected per:</h4>
+          <ul>
+            <li>function</li>
+            <li> file</li>
+            <li>module</li>
+            <li>project</li>
+            </ul>
+          <h4>Single indexes and indexes for distributions are collected:</h4>
+          <ul>
+            <li><span class="normalImportance">exact</span> value</li>
+            <li> <span class="normalImportance">average</span> value within a distribution</li>
+            <li> <span class="normalImportance">minimum</span> value within a distribution</li>
+            <li> <span class="normalImportance">maximum</span> value within a distribution</li>
+            <li><span class="normalImportance">sum</span> of values within a distribution</li>
+            </ul>
+          <h4>Validation rules can be applied to the different content:</h4>
+          <ul>
+            <li><span class="normalImportance">added</span> functions (objects)</li>
+            <li> <span class="normalImportance">removed</span> functions (objects)</li>
+            <li> <span class="normalImportance">modified</span> functions (objects)</li>
+            <li><span class="normalImportance">cloned</span> functions (objects)</li>
+            <li><span class="normalImportance">unmodified</span> functions (objects)</li>
+          </ul>
+          <h4>Internal tools helps to adapt Software Index for your specific needs:</h4>
+          <ul>
+            <li><span class="normalImportance">code preprocessor</span>: simplifies the code parsing and scaning with preprocessor definitions</li>
+            <li> <span class="normalImportance">code scanner</span>: similar 'grep' tool, helps to find occasion of 'bad' coding style/formating and detect broken  rules which defined by your design team, has flexible suppress methods </li>
+            <li><span class="normalImportance">code indexer</span>: collect the statistics, there 3 levels of severity (info, notice, warning) for limits which are easily configurable, has flexible suppress methods</li>
+            <li><span class="normalImportance">searcher of duplicated fragments</span>: helps to find and reduce duplication in your source code</li>
+            <li><span class="normalImportance">report converter</span>: processes the final report in XML format, filters the information according configuration and dumps the info messages, notices, warnings and erros to file and stderr stream</li>
+            </ul>
+          <h4>Supported languages:</h4>
+          <ul>
+            <li>C (stable version) </li>
+            <li>C++ (beta version) </li>
+            </ul>
+          <h4>Limitations:</h4>
+          <ul>
+            <li>Parser does not detect functions (C language) with declarations of local variables outside of function's body. However, it is not a problem for a major part of software products. The example below demostrates problematic formatting/style:</li>
+            </ul>
+          <table width="80%" border="0" align="center" cellpadding="2" cellspacing="2">
+            <tr>
+              <td width="50%">This function is <span class="highImportance">not detectable</span> by Software Index. </td>
+              <td width="50%">This function is <span class="normalImportance">parsable</span>. </td>
+            </tr>
+            <tr>
+              <td><pre>int <strong>getMax</strong>(int* array, int length)
+<span class="highImportance">    int i = 0;
+    int curMax;</span>
+<strong>{</strong>
+    /* ... */
+<strong>}</strong></pre>                </td>
+              <td><pre>int <strong>getMax</strong>(int* array, int length)
+<strong>{</strong>
+<span class="normalImportance">    int i = 0;
+    int curMax;</span>
+    /* ... */
+<strong>}</strong></pre>
+              </td>
+            </tr>
+          </table>
+          <ul>
+            <li>Comments inside preprocessor strings are not acceptable (C/C++ languages). Otherwise, some code can be unrecognizable by Software Index.<br />
+            </li>
+            </ul>
+          <table width="80%" border="0" align="center" cellpadding="2" cellspacing="2">
+            <tr>
+              <td width="50%">This code is <span class="highImportance">not recognizable </span> by Software Index. </td>
+              <td width="50%">This code is <span class="normalImportance">parsable</span>.</td>
+            </tr>
+            <tr>
+              <td><pre>#define <strong>GET_MAX</strong>(a, b)       \
+<span class="highImportance">    /*                      \
+     * This macros returns  \
+     * maximum from a and b \
+     */                     \
+</span>    ((a &gt; b) ? a : b)</pre>
+              </td>
+              <td><pre><span class="normalImportance">/*
+ * This macros returns
+ * maximum from a and b
+ */
+</span>#define <strong>GET_MAX</strong>(a, b) \
+    ((a &gt; b) ? a : b)</pre>
+              </td>
+            </tr>
+          </table>
+          <ul>
+            <li>Interface with gcov tool is not tested for C++ language.</li>
+            </ul>
+          <h3><a id="Download"></a>Download &amp; Installation</h3>
+          <p>For the installation of the <span class="normalImportance">Software Index</span> <a href="http://sourceforge.net/projects/swi/files/">download</a> the archive with all required modules and unpack it to some folder. Also, you have got an option to get the <a href="http://swi.svn.sourceforge.net/viewvc/swi/">source code</a> from the version conrol sytem.</p>
+          <p><em class="highImportance">Warning:</em> <span class="normalImportance">Software Index</span> has an internal tool (dupindex) which should be compiled for the target platform.
+            By default, the distributable archive includes the compiled binary for PC Windows (x86) platform.
+            Recompile it if you need (only one file: dupindex.cpp), using g++ or some other C++ compiler for your specific platform. There is a project configuration file for users of Microsoft Visual Studio 2008. There is Makefile for users of gmake and g++ tools. </p>
+          <h4>Prerequisites:</h4>
+          <ul>
+            <li>Perl Runtime Environment (version 5.6.x or later)</li>
+            <li>Perl modules (usualy, they are all included to the standard installation package of Perl engine):
+              <ul>
+                <li>Cwd</li>
+                <li>Pod::Usage</li>
+                <li> Data::Dumper</li>
+                <li> FileHandle</li>
+                <li>IPC::Open3</li>
+                <li> XML::Simple (included to the distributable archive with <span class="normalImportance">Software Index</span>)</li>
+                <li> String::CRC::Cksum (included to the distributable archive with <span class="normalImportance">Software Index</span>)</li>
+                </ul>
+            </li>
+            <li>gcov (optional, it is needed if you like to collect coverage statistic)</li>
+          </ul>
+          <h3><a name="License" id="Download"></a>License</h3>
+          <p> This program is free software; you can redistribute it and/or modify 
+            it under the terms of the GNU General Public License as published by 
+            the Free Software Foundation; version 3 of the License.</p>
+          <p> This program is distributed in the hope that it will be useful,
+            but WITHOUT ANY WARRANTY; without even the implied warranty of
+            MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+            GNU General Public License for more details.</p>
+          <p> You should have received a copy of the GNU General Public License along
+            with the <span class="normalImportance">Software Index</span>; if not, contact <a href="mailto:avkonst@users.sourceforge.net">Project Administrator</a> and write to the Free Software Foundation, Inc.,
+            51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
+          <h3><a id="Documentation"></a>Documentation</h3>
+          <p>The context help is available by:</p>
+          <pre>&gt; perl swi_main.pl --help</pre>
+          <p>The sample/description of the configuration file is available by link:</p>
+		  <pre><a href="http://swi.svn.sourceforge.net/viewvc/swi/swi_config_sample.xml?view=markup" target="_blank">http://swi.svn.sourceforge.net/viewvc/swi/swi_config_sample.xml?view=markup</a></pre>
+          <p> In the command line context, it is accessable by:</p>
+          <pre>&gt; perl swi_main.pl --sample</pre>
+          <h3><a id="Getsupport"></a>Get support</h3>
+          <p>The best way to get help is by <a href="https://sourceforge.net/tracker/?func=add&amp;group_id=275605&amp;atid=1170878">creating a new item</a> in the 'Request Tracker'.</p>
+          <h4>Alternatives</h4>
+          <p>If you  believe the project may  have a different support resource that would be better for submitting the  particular issue, please consider the following alternatives:</p>
+          <ul>
+                <li><a href="mailto:avkonst@users.sourceforge.net">Mail to the Administrator</a> </li>
+            <li><a href="https://sourceforge.net/sendmessage.php?touser=2608471">Mail to the Administrator using WEB form</a></li>
+            <li><a href="https://sourceforge.net/tracker/?func=add&amp;group_id=275605&amp;atid=1170877">Create new bug report </a></li>
+            <li><a href="https://sourceforge.net/tracker/?func=add&amp;group_id=275605&amp;atid=1170880">Create new  feature request</a></li>
+          </ul>
+          <h4>Our time response</h4>
+          <p><span class="normalImportance">Software Index</span> is used in real, time critical software development projects. It profiles software products which should work stably 24 hours a day, 7 days a week. As a result, we catch major portion of bugs ourself before the official release of new version of the <span class="normalImportance">Software Index</span>.</p>
+          <p>In addition to this, please, notice that it is developed by enthusiasts in their free time. Thus, we can not guarantee the immediate response. However, we always try to process bug reports and support requests as soon as possible, prioritizing the support activities.</p>
+          <h3><a id="Fordevelopers"></a>For developers</h3>
+          <p>If you have troubleshooted the problem, prepared the correction and believe that it should be included to the official distributive, please create <a href="https://sourceforge.net/tracker/?func=add&amp;group_id=275605&amp;atid=1170879">new patch review request</a> and attach the Patch to the tracker.</p>
+          <p><em>Note:</em> Patch files are  simply Unified-Diff files showing the differences between your working copy and  the base revision.</p>
+          <h4>Join this project:</h4>
+          <p>In order to participate in development activities,  join this project:<br /> 
+            please, contact the project administrators of this project, as shown on the <a href="http://sourceforge.net/projects/swi/"> project summary page</a>. </p>
+          <h4> Get the source code:</h4>
+          <p> Source code for this project may be available as <a href="http://sourceforge.net/projects/swi/files/">downloads</a> or through the  Subversion SCM <a href="http://swi.svn.sourceforge.net/viewvc/swi/">repository</a> used by the project. </p>
+          <h4>Beta testing:</h4>
+          <p>You are very welcome to <a href="http://sourceforge.net/projects/swi/files/">download</a> beta versions and provide your feedback, reporting proposals and new issues in <a href="https://sourceforge.net/tracker/?group_id=275605&amp;atid=1170877">bug tracker</a> system used by the project.</p>
+          <p>If you requested a feature, we are happy to deliver it to you firstly for beta testing before including to the  final release version. </p>
+          <h4>Update project web pages:</h4>
+          <p> If you are a web page developer interested in this project, please consider reaching out to the project <a href="https://sourceforge.net/sendmessage.php?touser=2608471">Administrator</a> (per the &quot;Join this project&quot; section, above) to offer your assistance.</p></td>
+      </tr>
+    </table>
+        <hr></td>
+  </tr>
+  <tr>
+    <td colspan="2"><div align="center">      
+      <p align="right">Copyright <strong>&copy; </strong>2009 - 2010<br />  
+        <a href="mailto:avkonst@users.sourceforge.net"><span class="normalImportance">Software Index</span> Project</a></p>
+      <p align="right">License: <a href="http://www.gnu.org/licenses/gpl.txt">GPL</a></p>
+      <h3 align="right"></h3>
+    </div></td>
+  </tr>
+</table>
+<p></p>
+</body>
+</html>

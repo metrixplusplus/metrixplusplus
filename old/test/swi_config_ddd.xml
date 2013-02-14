@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<swi:configuration>
+  
+  <swi:info>
+    <swi:version>1</swi:version>
+    <swi:project>
+      <swi:name>DDD</swi:name>
+    </swi:project>
+    <swi:history>
+      <swi:revision>
+        <swi:name>ALFA</swi:name>
+        <swi:user>USER</swi:user>
+        <swi:comment>Configuration for DDD project</swi:comment>
+      </swi:revision>
+    </swi:history>
+  </swi:info>
+  
+  <swi:general>
+    <swi:debug>
+       <swi:enabled>off</swi:enabled>
+    </swi:debug>
+  </swi:general>
+  
+  <swi:modules>
+    <swi:module>
+      <swi:name>DDD-SOURCES</swi:name>
+      <swi:location>../GNU-SRC/ddd/ddd</swi:location>
+      <swi:files>
+        <swi:include>^.*[chCH]$</swi:include>
+        
+        <!--
+          Excluding the following files:
+          FILE:             - REASON:
+          
+          ddd.info.txt.gz.C - just too big file
+          vsl-lex.C         - brackets mismatch without preprocessor work
+          rxscan.C          - undefined block start without preprocessor work
+          vsl-gramma.C      - definition of local variables in old style
+        -->
+        <swi:exclude>ddd.info.txt.gz.C|vsl-lex.C|rxscan.C|vsl-gramma.C</swi:exclude>
+      </swi:files>
+      
+      <swi:preprocessor>
+        <swi:rule>
+          <swi:filepattern>^PrintGC.h$</swi:filepattern>
+          <swi:searchpattern>([^_a-zA-Z0-9])(DECLARE_TYPE_INFO)([^_a-zA-Z0-9])</swi:searchpattern>
+          <swi:replacepattern>$1$2;$3</swi:replacepattern>
+        </swi:rule>
+        <swi:rule>
+          <swi:filepattern>.*</swi:filepattern>
+          <swi:searchpattern>(\s+)(union\s*)({)</swi:searchpattern>
+          <swi:replacepattern>$1$2 _noname_ $3</swi:replacepattern>
+        </swi:rule>
+      </swi:preprocessor>
+      
+      <swi:scanner>
+      	<!--
+      	    The codecontent option defines the content for scanner, it can be:
+      	    
+      	    initial         - the initial source content
+      	    code            - the initial code (without comments)
+      	    comments        - comments only (no code)
+      	    nopreprocessor  - preprocessor strings excluded (without comments and preprocessor)
+      	    nostrings       - strings excluded (without comments and strings)
+      	    purified        - strings and preprocessor excluded (without comments, strings and preprocessor)
+      	    
+      	    By default, the 'purified' content is scanned
+      	-->
+        <swi:rule>
+          <swi:filepattern>.*</swi:filepattern>
+          <swi:searchpattern>(\s+)((union)|(enum)|(struct))(\s*{)</swi:searchpattern>
+          <swi:messagepattern>Noname '$2' detected.</swi:messagepattern>
+          <swi:codecontent>purified</swi:codecontent>
+          
+        </swi:rule>
+
+        <swi:suppress>
+          <swi:pattern swi:message="Noname 'struct'">.*</swi:pattern>
+          <swi:pattern swi:message="Noname 'useless'">.*</swi:pattern>
+        </swi:suppress>
+
+      </swi:scanner>
+      
+      <swi:indexer:common>
+        <!-- No settings currently available -->
+      </swi:indexer:common>
+      
+      <swi:indexer:dup>
+      	<!--
+      	    The codecontent option defines the content for scanner, it can be:
+      	    
+      	    initial         - the initial source content
+      	    code            - the initial code (without comments)
+      	    comments        - comments only (no code)
+      	    nopreprocessor  - preprocessor strings excluded (without comments and preprocessor)
+      	    nostrings       - strings excluded (without comments and strings)
+      	    purified        - strings and preprocessor excluded (without comments, strings and preprocessor)
+      	    
+      	    By default, the 'purified' content is scanned
+      	-->
+      	<swi:codecontent>purified</swi:codecontent>
+        <swi:enabled>on</swi:enabled>
+        <swi:minlength>100</swi:minlength>
+        <swi:proximity>100</swi:proximity>
+        <swi:globalcode>on</swi:globalcode>
+      </swi:indexer:dup>
+
+      <swi:indexer:gcov>
+        <swi:enabled>on</swi:enabled>
+        <swi:filepattern>^.*[.][cC][pP]?[pP]?$</swi:filepattern>
+        <swi:sourcefile>(.*)[.][cC][pP]?[pP]?</swi:sourcefile>
+        <swi:gcdafile>${1}.gcda</swi:gcdafile>
+      </swi:indexer:gcov>
+    </swi:module>
+ 
+  </swi:modules>
+  
+  <swi:report>
+    <swi:destination>.</swi:destination>
+    <swi:xml>
+      <swi:name>swi_report_ddd.xml</swi:name>
+    </swi:xml>
+    <swi:notifications>
+      <swi:name>swi_report_ddd.log</swi:name>
+      <swi:error>
+        <swi:added>on</swi:added>
+        <swi:removed>on</swi:removed>
+        <swi:modified>on</swi:modified>
+        <swi:cloned>on</swi:cloned>
+        <swi:unmodified>on</swi:unmodified>
+      </swi:error>
+      <swi:print>
+        <swi:added>
+          <swi:failures>on</swi:failures>
+          <swi:modifications>off</swi:modifications>
+          <swi:duplications>off</swi:duplications>
+          <swi:scanmessages>on</swi:scanmessages>
+        </swi:added>
+        <swi:removed>
+          <swi:failures>on</swi:failures>
+          <swi:modifications>off</swi:modifications>
+          <swi:duplications>off</swi:duplications>
+          <swi:scanmessages>on</swi:scanmessages>
+        </swi:removed>
+        <swi:modified>
+          <swi:failures>on</swi:failures>
+          <swi:modifications>off</swi:modifications>
+          <swi:duplications>off</swi:duplications>
+          <swi:scanmessages>on</swi:scanmessages>
+        </swi:modified>
+        <swi:cloned>
+          <swi:failures>on</swi:failures>
+          <swi:modifications>off</swi:modifications>
+          <swi:duplications>off</swi:duplications>
+          <swi:scanmessages>on</swi:scanmessages>
+        </swi:cloned>
+        <swi:unmodified>
+          <swi:failures>on</swi:failures>
+          <swi:modifications>off</swi:modifications>
+          <swi:duplications>off</swi:duplications>
+          <swi:scanmessages>on</swi:scanmessages>
+        </swi:unmodified>
+      </swi:print>
+    </swi:notifications>
+  </swi:report>
+  
+  <swi:limits>
+    
+    <swi:lines>
+      <swi:comment:header>
+        <swi:exact>
+          <swi:info>5</swi:info>
+          <swi:notice>3</swi:notice>
+          <swi:warning>1</swi:warning>
+	  
+          <swi:suppress>
+              <swi:pattern swi:level="warning">.*</swi:pattern>
+          </swi:suppress>
+	  
+        </swi:exact>
+      </swi:comment:header>
+    </swi:lines>
+
+    <swi:duplication>
+      <swi:symbols>
+        <swi:exact swi:relation="swi:length/swi:executable/swi:exact">
+          <swi:info>0.28</swi:info>
+          <swi:notice>0.40</swi:notice>
+          <swi:warning>0.60</swi:warning>
+          
+          
+          <swi:suppress>
+              <swi:pattern swi:level="warning">Useless pattern</swi:pattern>
+          </swi:suppress>
+          
+        </swi:exact>
+      </swi:symbols>
+    </swi:duplication>
+    
+    
+    <swi:coverage>
+      <swi:gcov:lines>
+        <swi:exact swi:relation="swi:coverage/swi:gsum:lines/swi:exact">
+          <swi:info>0.99</swi:info>
+          <swi:notice>0.9</swi:notice>
+          <swi:warning>0.84</swi:warning>
+        </swi:exact>
+      </swi:gcov:lines>
+    </swi:coverage>
+
+    </swi:limits>
+
+</swi:configuration>
