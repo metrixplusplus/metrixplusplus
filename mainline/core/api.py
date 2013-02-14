@@ -93,10 +93,15 @@ class Parent(object):
 
 class ExitError(Exception):
     def __init__(self, plugin, reason):
-        Exception.__init__(self, "Plugin '"
-                           + plugin.get_name()
-                           + "' requested abnormal termination: "
-                           + reason)
+        if plugin != None:
+            Exception.__init__(self, "Plugin '"
+                               + plugin.get_name()
+                               + "' requested abnormal termination: "
+                               + reason)
+        else:
+            Exception.__init__(self, "'Abnormal termination requested: "
+                               + reason)
+            
 
 def subscribe_by_parents_name(parent_name, child, callback_name='callback'):
     child.get_plugin_loader().get_plugin(parent_name).subscribe(child, callback_name)
