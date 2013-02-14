@@ -12,7 +12,7 @@ import re
 class Plugin(core.api.Plugin, core.api.IConfigurable):
     
     def declare_configuration(self, parser):
-        parser.add_option("--general.db-file", default=r'./metrix++.db',
+        parser.add_option("--general.db-file", default='./metrixpp.db',
                          help="Primary database file to write (by the collector) and post-process (by other tools) [default: %default]")
         parser.add_option("--general.db-file-prev", default=None,
                          help="Database file with data collected for the past/previous revision [default: %default].")
