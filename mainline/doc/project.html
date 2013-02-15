@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="iso-8859-5"?>
+<!--
+
+Metrix++, Copyright 2009-2013, Metrix++ Project
+Link: http://swi.sourceforge.net
+
+This file is part of Metrix++ Tool.
+
+Metrix++ is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+Metrix++ is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-5" />
+  <title>Metrix++ Project</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<table border="0" align="center" cellpadding="0" cellspacing="0" width="800">
+  <tbody>
+    <tr>
+      <td> </td>
+      <td valign="middle"> </td>
+    </tr>
+    <tr>
+      <td><img src="logo_project.png" alt="Software Index Project Page" /></td>
+      <td valign="top">
+        <div align="right">
+        <p> </p>
+
+        <p align="center"><a href="http://sourceforge.net/projects/swi"
+        class="lowImportance"><img
+        src="http://sflogo.sourceforge.net/sflogo.php?group_id=275605&amp;type=13"
+        alt="Get Software Index at SourceForge.net. Fast, secure and Free Open Source software downloads"
+        border="0" /></a></p>
+
+        <p align="center"><script type="text/javascript"
+        src="http://www.ohloh.net/p/485947/widgets/project_users_logo.js">
+        </script>
+        </p>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2"><hr />
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="highImportance"
+      style="text-align:center;margin-left:auto;margin-right:0;"><a
+        href="#Overview">Overview</a> | <a href="#Download">Download</a> | <a
+        href="#Documentation">Documentation</a> | <a href="#Support">Bur
+        report</a> | <a href="#Support">Feature request</a> | <a
+        href="#Createplugin">Create plugin</a></td>
+    </tr>
+    <tr>
+      <td colspan="2"><hr />
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" valign="top">
+        <table width="100%" border="0" cellspacing="0" cellpadding="10">
+          <tbody>
+            <tr>
+              <td valign="top"><h3 id="Overview">Overview</h3>
+
+                <p><span class="normalImportance">Metrix++</span> is the
+                platform to collect and analyse code metrics.</p>
+                <ul>
+                  <li>It has got plugin based architecture, so it is easy to
+                    add support for new languages and/or define new metrics
+                    and/or create new pre- and post-processing tools.</li>
+                  <li>Every metric has got 'turn-on' and other configuration
+                    options.</li>
+                  <li>There is no predefined thresholds for metrics or rules.
+                    You can choose and configure any limit you want.</li>
+                  <li>It scales well to big code bases. For example initial
+                    parsing of about 10000 files takes 2-3 minutes on average
+                    PC, and ONLY 10-20 seconds for iterative re-run. Reporting
+                    of summary result and exceeded limits is less than 1 - 10
+                    seconds.</li>
+                  <li>It can compare results for 2 code snapshots (collections)
+                    and differentiate added regions (classes, functions, etc.),
+                    modified regions and unchanged regions.</li>
+                  <li>As a result, easy deployment is guaranteed into legacy
+                    software, helping you to deal with legacy code effiently -
+                    either enforce 'leave it not worse than it was before' rule
+                    or motivate re-factoring.</li>
+                </ul>
+
+                <h4>Standard Plugins</h4>
+
+                <p>The distributive includes a set of standard plugins:</p>
+                <ul>
+                  <li><h4>Code parsers</h4>
+                    <ul>
+                      <li><span class="normalImportance">C/C++</span> parser
+                        recognises definition of namespaces, definition of
+                        classes/structs (including enclosed in functions) and
+                        definition of functions/operators </li>
+                    </ul>
+                  </li>
+                  <li><h4>Metrics</h4>
+                    <ul>
+                      <li><span class="normalImportance">cyclomatic
+                        complexity</span> (by McCabe) per function <span
+                        class="lowImportance">[supports C/C++
+                      language]</span></li>
+                      <li><span class="normalImportance">mismatched
+                        brackets</span> '{}'' per file <span
+                        class="lowImportance">[supports C/C++
+                      language]</span></li>
+                      <li><span class="normalImportance">processing time</span>
+                        per file <span class="lowImportance">[supports any
+                        file]</span></li>
+                    </ul>
+                  </li>
+                  <li><h4>Analysis tools</h4>
+                    <ul>
+                      <li><span class="normalImportance">export.py</span> -
+                        exporter to xml, python or plain text of detailed
+                        information per file and/or aggregated information per
+                        file or directory <span
+                        class="lowImportance">[aggregated data includes <span
+                        class="normalImportance">sum</span>, <span
+                        class="normalImportance">maximum</span>, <span
+                        class="normalImportance">minimum</span>, <span
+                        class="normalImportance">average</span> within a subset
+                        of selected files or directories]</span></li>
+                      <li><span class="normalImportance">limit.py</span> - a
+                        tool to report regions exceeding speified thresholds,
+                        which are configurable (output is plain text with
+                        metadata compatible with gcc compiler warning
+                      messages)</li>
+                    </ul>
+                  </li>
+                </ul>
+
+                <h3 id="Download">Download &amp; Installation</h3>
+
+                <p>For the installation of the <span
+                class="normalImportance">Metrix++</span> <a
+                href="http://sourceforge.net/projects/swi/files/">download</a>
+                the archive and unpack it to some folder. Also, you have got an
+                option to get the <a
+                href="http://swi.svn.sourceforge.net/viewvc/swi/">source
+                code</a> from the version conrol sytem.</p>
+
+                <h4>Prerequisites:</h4>
+
+                <p>Python Runtime Environment (version 2.7.0 or later, version
+                3.0 has not been tested)</p>
+
+                <h4>License:</h4>
+
+                <p>This program is free software; you can redistribute it
+                and/or modify it under the terms of the GNU General Public
+                License as published by the Free Software Foundation; version 3
+                of the License.</p>
+
+                <p>This program is distributed in the hope that it will be
+                useful, but WITHOUT ANY WARRANTY; without even the implied
+                warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+                PURPOSE. See the GNU General Public License for more
+                details.</p>
+
+                <p>You should have received a copy of the GNU General Public
+                License along with the <span
+                class="normalImportance">Metriix++</span>; if not, contact <a
+                href="mailto:avkonst@users.sourceforge.net">Project
+                Administrator</a> and write to the Free Software Foundation,
+                Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301
+                USA.</p>
+
+                <h3 id="Documentation">Documentation</h3>
+
+                <p>Tools are self-descriptive and have got comprehensive
+                context help. Type in you command line: python
+                &lt;tool-name&gt;.py --help</p>
+
+                <h4>Known Limitations</h4>
+
+                <p>TBD</p>
+
+                <h4>Basic Workflow</h4>
+
+                <p>TBD</p>
+
+                <h4>Dealing Legacy Code</h4>
+
+                <p>TBD</p>
+
+                <h3 id="Support">Bug Report &amp; Feature Request</h3>
+
+                <p>Any types of enquiries are welcomed by e-mail to <a
+                href="mailto:avkonst@users.sourceforge.net">project
+                administrator</a>.</p>
+
+                <h3 id="Createplugin">Create Plugin</h3>
+
+                <p>Please, consider to join the project and <span
+                class="normalImportance">contribute to the development</span>
+                of the engine or <span class="normalImportance">include you
+                plugins into the standard set</span> of plugins distributed
+                together with this tool. Contact <a
+                href="mailto:avkonst@users.sourceforge.net">project
+                administrator</a> by e-mail.</p>
+
+                <h4>New Metric</h4>
+
+                <p>TBD</p>
+
+                <h4>New Analysis Tool</h4>
+
+                <p>TBD</p>
+
+                <h4>New Language Support</h4>
+
+                <p>TBD</p>
+
+                <h4>Source Code Repository</h4>
+
+                <p>Source code is in the Subversion <a
+                href="http://swi.svn.sourceforge.net/viewvc/swi/mainline/">repository</a>
+                used by the project.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <hr />
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div align="center">
+        <p align="right">Copyright <strong>&copy; </strong>2009 - 2013<br />
+        <a href="mailto:avkonst@users.sourceforge.net"><span
+        class="normalImportance">Metrix++</span> Project</a></p>
+
+        <p align="right">License: <a
+        href="http://www.gnu.org/licenses/gpl.txt">GPL</a></p>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
