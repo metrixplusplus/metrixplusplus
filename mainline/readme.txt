@@ -17,24 +17,22 @@
 #    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-SEVERITY_INFO    = 0x01
-SEVERITY_WARNING = 0x02
-SEVERITY_ERROR   = 0x03
+===============================================================================
 
-def cout(path, cursor, level, message, details):
-    notification = path + ":" + str(cursor) + ": "
-    if level == SEVERITY_INFO:
-        notification += "info: "
-    elif level == SEVERITY_WARNING:
-        notification += "warning: "
-    elif level == SEVERITY_ERROR:
-        notification += "error: "
-    else:
-        assert(len("Invalid message severity level specified") == 0)
-    notification += message + "\n"
+    Metrix++ is a powerful engine for code metrics collection,
+    reporting and analysis and a set of plugins:
+     - parsers for programming languages,
+     - metrics counters,
+     - post processing tools.
 
-    DETAILS_OFFSET = 15
-    for each in details:
-        notification += "\t" + str(each[0]) + (" " * (DETAILS_OFFSET - len(each[0]))) + ": " + str(each[1]) + "\n"
-        
-    print notification
+    Check projects documentation for additional information:
+     - http://swi.sourceforge.net
+     - ./doc folder within the distributive
+
+    Bug reporting, feature requests and feedback:
+     - e-mail to project administrator: avkonst@users.sourceforge.net
+
+    ---
+    Thank you for using the tool!
+
+===============================================================================

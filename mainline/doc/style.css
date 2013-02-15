@@ -1,27 +1,23 @@
 /*
 
-    Software Index, Copyright 2010, Software Index Project Team
+    Metrix++, Copyright 2009-2013, Metrix++ Project
     Link: http://swi.sourceforge.net
     
-    This file is part of Software Index Tool.
+    This file is a part of Metrix++ Tool.
     
-    Software Index is free software: you can redistribute it and/or modify
+    Metrix++ is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, version 3 of the License.
     
-    Software Index is distributed in the hope that it will be useful,
+    Metrix++ is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
     GNU General Public License for more details.
     
     You should have received a copy of the GNU General Public License
-    along with Software Index.  If not, see <http://www.gnu.org/licenses/>.
- 
-*/
+    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
 
-/***********************************************/
-/* HTML tag styles                             */
-/***********************************************/ 
+*/
 
 body{
 	font-family: Arial, sans-serif;
@@ -34,8 +30,9 @@ body{
 
 pre{
     font-size: 100%;
-    padding-left: 50;
+    padding-left: 50px;
 }
+
 td{
 	background-position: left;
 	background-repeat: no-repeat;
@@ -124,5 +121,9 @@ label{
 }
 
 .normalImportance {
-	color: #009900}
+	color: #009900
+}
 
+.lowImportance{
+    color: #999999;
+}
