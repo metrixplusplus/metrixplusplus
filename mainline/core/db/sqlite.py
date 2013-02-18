@@ -1,6 +1,6 @@
 #
 #    Metrix++, Copyright 2009-2013, Metrix++ Project
-#    Link: http://swi.sourceforge.net
+#    Link: http://metrixplusplus.sourceforge.net
 #    
 #    This file is a part of Metrix++ Tool.
 #    
@@ -36,10 +36,16 @@ class Database(object):
             self.support_regions = support_regions
     
     class ColumnData(object):
-        def __init__(self, column_id, name, sql_type):
+        def __init__(self, column_id, name, sql_type, non_zero):
             self.id = column_id
             self.name = name
             self.sql_type = sql_type
+            self.non_zero = non_zero
+
+    class TagData(object):
+        def __init__(self, tag_id, name):
+            self.id = tag_id
+            self.name = name
 
     class FileData(object):
         def __init__(self, file_id, path, checksum):
@@ -87,6 +93,10 @@ class Database(object):
     class InternalCleanUpUtils(object):
         
         def clean_up_not_confirmed(self, db_loader):
+            sql = "DELETE FROM __tags__ WHERE (confirmed = 0)"
+            db_loader.log(sql)
+            db_loader.conn.execute(sql)
+
             sql = "SELECT * FROM __tables__ WHERE (confirmed = 0)"
             db_loader.log(sql)
             for table in db_loader.conn.execute(sql).fetchall():
@@ -186,6 +196,9 @@ class Database(object):
             sql = "UPDATE __columns__ SET confirmed = 0"
             self.log(sql)
             self.conn.execute(sql)
+            sql = "UPDATE __tags__ SET confirmed = 0"
+            self.log(sql)
+            self.conn.execute(sql)
             sql = "UPDATE __files__ SET confirmed = 0"
             self.log(sql)
             self.conn.execute(sql)
@@ -209,10 +222,13 @@ class Database(object):
                 sql = "CREATE TABLE __tables__ (id integer NOT NULL PRIMARY KEY, name text NOT NULL, support_regions integer NOT NULL, confirmed integer NOT NULL, UNIQUE (name))"
                 self.log(sql)
                 self.conn.execute(sql)
-                sql = "CREATE TABLE __columns__ (id integer NOT NULL PRIMARY KEY, name text NOT NULL, type text NOT NULL, table_id integer NOT_NULL, confirmed integer NOT NULL, UNIQUE (name, table_id))"
+                sql = "CREATE TABLE __columns__ (id integer NOT NULL PRIMARY KEY, name text NOT NULL, type text NOT NULL, table_id integer NOT_NULL, non_zero integer NOT NULL, confirmed integer NOT NULL, UNIQUE (name, table_id))"
                 self.log(sql)
                 self.conn.execute(sql)
-                sql = "CREATE TABLE __files__ (id integer NOT NULL PRIMARY KEY AUTOINCREMENT, path text NOT NULL, checksum integer NOT NULL, confirmed integer NOT NULL, UNIQUE(path))"
+                sql = "CREATE TABLE __tags__ (id integer NOT NULL PRIMARY KEY, name text NOT NULL UNIQUE, confirmed integer NOT NULL)"
+                self.log(sql)
+                self.conn.execute(sql)
+                sql = "CREATE TABLE __files__ (id integer NOT NULL PRIMARY KEY AUTOINCREMENT, path text NOT NULL, checksum integer NOT NULL, tag1 integer, tag2 integer, tag3 integer, confirmed integer NOT NULL, UNIQUE(path))"
                 self.log(sql)
                 self.conn.execute(sql)
                 sql = "CREATE TABLE __regions__ (file_id integer NOT NULL, region_id integer NOT NULL, name text NOT NULL, begin integer NOT NULL, end integer NOT NULL, line_begin integer NOT NULL, line_end integer NOT NULL, cursor integer NOT NULL, group_id integer NOT NULL, checksum integer NOT NULL, PRIMARY KEY (file_id, region_id))"
@@ -262,7 +278,7 @@ class Database(object):
             return False
         return True
 
-    def create_column(self, table_name, column_name, column_type):
+    def create_column(self, table_name, column_name, column_type, non_zero=False):
         assert(self.read_only == False)
         if column_type == None:
             logging.debug("Skipping column '" + column_name + "' creation for table '" + table_name + "'")
@@ -287,7 +303,7 @@ class Database(object):
         sql = "SELECT id FROM __tables__ WHERE (name = '" + table_name + "')"
         self.log(sql)
         table_id = self.conn.execute(sql).next()['id']
-        sql = "INSERT INTO __columns__ (name, type, table_id, confirmed) VALUES ('" + column_name + "', '" + column_type + "', '" + str(table_id) + "', 1)"
+        sql = "INSERT INTO __columns__ (name, type, table_id, non_zero, confirmed) VALUES ('" + column_name + "', '" + column_type + "', '" + str(table_id) + "', '" + str(int(non_zero)) + "', 1)"
         self.log(sql)
         self.conn.execute(sql)        
 
@@ -299,7 +315,7 @@ class Database(object):
         self.log(sql)
         result = self.conn.execute(sql).fetchall()
         for row in result:
-            yield self.ColumnData(int(row["id"]), str(row["name"]), str(row["type"]))
+            yield self.ColumnData(int(row["id"]), str(row["name"]), str(row["type"]), bool(row["non_zero"]))
 
     def check_column(self, table_name, column_name):
         sql = "SELECT id FROM __tables__ WHERE (name = '" + table_name + "')"
@@ -312,6 +328,37 @@ class Database(object):
             return False
         return True
     
+    def create_tag(self, tag_name):
+        assert(self.read_only == False)
+        
+        sql = "SELECT * FROM __tags__ WHERE (name = '" + tag_name + "' AND confirmed == 0)"
+        self.log(sql)
+        result = self.conn.execute(sql).fetchall()
+        if len(result) != 0:
+            sql = "UPDATE __tags__ SET confirmed = 1 WHERE (name = '" + tag_name + "')"
+            self.log(sql)
+            self.conn.execute(sql)
+            return        
+        
+        sql = "INSERT INTO __tags__ (name, confirmed) VALUES ('" + tag_name + "', 1)"
+        self.log(sql)
+        self.conn.execute(sql)        
+
+    def iterate_tags(self):
+        sql = "SELECT * FROM __tags__ WHERE (confirmed = 1)"
+        self.log(sql)
+        result = self.conn.execute(sql).fetchall()
+        for row in result:
+            yield self.TagData(int(row["id"]), str(row["name"]))
+
+    def check_tag(self, tag_name):
+        sql = "SELECT * FROM __tags__ WHERE (name = '" + tag_name + "' AND confirmed = 1)"
+        self.log(sql)
+        result = self.conn.execute(sql).fetchall()
+        if len(result) == 0:
+            return False
+        return True
+
     def create_file(self, path, checksum):
         assert(self.read_only == False)
         path = self.InternalPathUtils().normalize_path(path)

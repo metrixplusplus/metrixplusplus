@@ -1,6 +1,6 @@
 #
 #    Metrix++, Copyright 2009-2013, Metrix++ Project
-#    Link: http://swi.sourceforge.net
+#    Link: http://metrixplusplus.sourceforge.net
 #    
 #    This file is a part of Metrix++ Tool.
 #    
@@ -26,7 +26,7 @@
      - post processing tools.
 
     Check projects documentation for additional information:
-     - http://swi.sourceforge.net
+     - http://metrixplusplus.sourceforge.net
      - ./doc folder within the distributive
 
     Bug reporting, feature requests and feedback:
