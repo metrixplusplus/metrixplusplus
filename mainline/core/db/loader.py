@@ -1,6 +1,6 @@
 #
 #    Metrix++, Copyright 2009-2013, Metrix++ Project
-#    Link: http://swi.sourceforge.net
+#    Link: http://metrixplusplus.sourceforge.net
 #    
 #    This file is a part of Metrix++ Tool.
 #    
@@ -413,12 +413,15 @@ class PackagerError(Exception):
 
 class PackagerFactory(object):
 
-    def create(self, python_type):
+    def create(self, python_type, non_zero):
         if python_type == None:
             return PackagerFactory.SkipPackager()
         if python_type == int:
-            return PackagerFactory.IntPackager()
-        if python_type == float:
+            if non_zero == False:
+                return PackagerFactory.IntPackager()
+            else:
+                return PackagerFactory.IntNonZeroPackager()
+        if python_type == float and non_zero == False:
             return PackagerFactory.FloatPackager()
         if python_type == str:
             return PackagerFactory.StringPackager()
@@ -450,6 +453,8 @@ class PackagerFactory(object):
             raise core.api.InterfaceNotImplemented(self)
         def get_python_type(self):
             raise core.api.InterfaceNotImplemented(self)
+        def is_non_zero(self):
+            return False
         
     class IntPackager(IPackager):
         def pack(self, unpacked_data):
@@ -469,6 +474,14 @@ class PackagerFactory(object):
         def get_python_type(self):
             return int
     
+    class IntNonZeroPackager(IntPackager):
+        def pack(self, unpacked_data):
+            if unpacked_data == 0:
+                raise PackagerError()
+            return PackagerFactory.IntPackager.pack(self, unpacked_data)
+        def is_non_zero(self):
+            return True
+
     class FloatPackager(IPackager):
         def pack(self, unpacked_data):
             if not isinstance(unpacked_data, float):
@@ -486,6 +499,14 @@ class PackagerFactory(object):
 
         def get_python_type(self):
             return float
+
+    class FloatNonZeroPackager(FloatPackager):
+        def pack(self, unpacked_data):
+            if unpacked_data == 0:
+                raise PackagerError()
+            return PackagerFactory.FloatPackager.pack(self, unpacked_data)
+        def is_non_zero(self):
+            return True
 
     class StringPackager(IPackager):
         def pack(self, unpacked_data):
@@ -552,7 +573,7 @@ class Namespace(object):
             self.db.create_table(name, support_regions)
         else:
             for column in self.db.iterate_columns(name):
-                self.add_field(column.name, PackagerFactory().get_python_type(column.sql_type))
+                self.add_field(column.name, PackagerFactory().get_python_type(column.sql_type), non_zero=column.non_zero)
         
     def get_name(self):
         return self.name
@@ -560,16 +581,16 @@ class Namespace(object):
     def are_regions_supported(self):
         return self.support_regions
     
-    def add_field(self, field_name, python_type):
+    def add_field(self, field_name, python_type, non_zero=False):
         if not isinstance(field_name, str):
             raise FieldError(field_name, "field_name not a string")
-        packager = PackagerFactory().create(python_type)
+        packager = PackagerFactory().create(python_type, non_zero)
         if field_name in self.fields.keys():
             raise FieldError(field_name, "double used")
         self.fields[field_name] = packager
         
         if self.db.check_column(self.get_name(), field_name) == False:        
-            self.db.create_column(self.name, field_name, packager.get_sql_type())
+            self.db.create_column(self.name, field_name, packager.get_sql_type(), non_zero=non_zero)
     
     def iterate_field_names(self):
         for name in self.fields.keys():
@@ -744,8 +765,12 @@ class Loader(object):
         
         result = AggregatedData(self, path)
         for name in namespaces:
+            namespace = self.get_namespace(name)
             data = self.db.aggregate_rows(name, path_like = final_path_like)
             for field in data.keys():
+                if namespace.get_field_packager(field).is_non_zero() == True:
+                    data[field]['min'] = None
+                    data[field]['avg'] = None
                 result.set_data(name, field, data[field])
         
         return result
@@ -753,6 +778,8 @@ class Loader(object):
     def load_selected_data(self, namespace, fields = None, path = None, path_like_filter = "%", filters = []):
         if self.db == None:
             return None
+        
+        # TODO implement restriction for non_zero fields
 
         final_path_like = path_like_filter
         if path != None:
