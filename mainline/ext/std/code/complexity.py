@@ -25,7 +25,7 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.code.complexity.on", action="store_true", default=False,
-                         help="Enables processing of complexity metrics: cyclomatic by McCabe [default: %default]")
+                         help="Enables collection of complexity metrics: cyclomatic by McCabe [default: %default]")
     
     def configure(self, options):
         self.is_active = options.__dict__['std.code.complexity.on']

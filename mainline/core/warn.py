@@ -33,16 +33,24 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
         self.parser = parser
         parser.add_option("--general.warn", default='all', choices=['new', 'trend', 'touched', 'all'],
                          help="Defines the warnings mode. "
-                         "'off' - no warnings, 'new' - warnings for new regions only, "
+                         "'new' - warnings for new regions only, "
                          "'trend' - warnings for new regions and for bad trend of modified regions, "
                          "'touched' - warnings for new regions and modified regions, "
                          "'all' - all warnings active"
                          "[default: %default]")
 
         parser.add_option("--general.min-limit", action="multiopt",
-                          help='TBD')
+                          help="A threshold per 'namespace:field' metric in order to select regions, "
+                          "which have got metric value less than the specified limit. "
+                          "This option can be specified multiple times, if it is necessary to apply several limits. "
+                          "Should be in the format: <namespace>:<field>:<limit-value>, for example: "
+                          "'std.code.complexity:cyclomatic:7'.") # TODO think about better example
         parser.add_option("--general.max-limit", action="multiopt",
-                          help='TBD')
+                          help="A threshold per 'namespace:field' metric in order to select regions, "
+                          "which have got metric value more than the specified limit. "
+                          "This option can be specified multiple times, if it is necessary to apply several limits. "
+                          "Should be in the format: <namespace>:<field>:<limit-value>, for example: "
+                          "'std.code.complexity:cyclomatic:7'.")
         
     def configure(self, options):
         if options.__dict__['general.warn'] == 'new':
@@ -53,6 +61,9 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
             self.mode = self.MODE_TOUCHED
         elif options.__dict__['general.warn'] == 'all':
             self.mode = self.MODE_ALL
+            
+        if self.mode != self.MODE_ALL and options.__dict__['general.db-file-prev'] == None:
+            self.parser.error("The mode '" + options.__dict__['general.warn'] + "' for 'general.warn' option requires 'general.db-file-prev' option set")
 
         class Limit(object):
             def __init__(self, limit_type, limit, namespace, field, db_filter):
