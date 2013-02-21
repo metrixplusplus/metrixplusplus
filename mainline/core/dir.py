@@ -56,6 +56,8 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IConfigurable, core.api.
             self.reader.run(self, directory)
         
     def add_exclude_rule(self, re_compiled_pattern):
+        # TODO file name may have special regexp symbols what causes an exception
+        # For example try to run a collection with "--general.db-file=metrix++" option
         self.exclude_rules.append(re_compiled_pattern)
         
     def is_file_excluded(self, file_name):

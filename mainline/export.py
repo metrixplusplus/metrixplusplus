@@ -39,7 +39,8 @@ def main():
     parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog [options] -- <path 1> ... <path N>")
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
-    parser.add_option("--general.format", default='xml', choices=['txt', 'xml', 'python'], help="Format of the output data [default: %default]")
+    parser.add_option("--general.format", default='xml', choices=['txt', 'xml', 'python'], help="Format of the output data. "
+                      "Possible values are 'xml', 'txt' or 'python' [default: %default]")
     parser.add_option("--general.namespaces", default=None, help="Allows to enumerate namespaces of interest."
                       " If not defined all namespaces available in database file will be processed."
                       " Separate several namespaces by comma, for example 'general,std.code.complexity'"

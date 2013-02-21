@@ -105,6 +105,8 @@ def main():
                                 is_modified = False
                             diff = core.db.loader.DiffData(select_data,
                                                            file_data_prev.get_region(prev_id)).get_data(limit.namespace, limit.field)
+                            # TODO if diff is None, probably need to warn about this
+                            # a user may expect data available
 
                 if warn_plugin.is_mode_matched(limit.limit, select_data.get_data(limit.namespace, limit.field), diff, is_modified):
                     exit_code += 1
