@@ -115,7 +115,6 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
             yield each   
 
     def is_mode_matched(self, limit, value, diff, is_modified):
-        print self.mode, self.MODE_TREND, limit, value, diff, is_modified
         if is_modified == None:
             return True
         if self.mode == self.MODE_ALL:
