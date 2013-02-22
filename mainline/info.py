@@ -45,7 +45,7 @@ def main():
     loader = core.db.loader.Loader()
     loader.open_database(db_plugin.dbfile)
     loader_prev = None
-    if db_plugin.dbfile != None:
+    if db_plugin.dbfile_prev != None:
         loader_prev = core.db.loader.Loader()
         loader_prev.open_database(db_plugin.dbfile_prev)
     print "Info data:"
