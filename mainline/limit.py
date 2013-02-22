@@ -128,7 +128,6 @@ def main():
 
 
 def get_list_of_modified_files(loader, loader_prev):
-    modified_file_ids = []
     logging.info("Identifying changed files...")
     
     old_files_map = {}
@@ -137,20 +136,21 @@ def get_list_of_modified_files(loader, loader_prev):
     if len(old_files_map) == 0:
         return None
     
+    modified_file_ids = []
     for each in loader.iterate_file_data():
         if len(modified_file_ids) > 1000: # If more than 1000 files changed, skip optimisation
-            modified_file_ids = None
-            break
+            return None
         if (each.get_path() not in old_files_map.keys()) or old_files_map[each.get_path()] != each.get_checksum():
-            modified_file_ids.append(each.get_id())
+            modified_file_ids.append(str(each.get_id()))
+
+    old_files_map = None
             
-    if modified_file_ids != None:
+    if len(modified_file_ids) != 0:
         modified_file_ids = " , ".join(modified_file_ids)
         modified_file_ids = "(" + modified_file_ids + ")"
-    old_files_map = None
+        return modified_file_ids
     
-    return modified_file_ids
-    
+    return None
 
 def report_limit_exceeded(path, cursor, namespace, field, region_name, stat_level, trend_value, stat_limit, is_modified):
     message = "Metric '" + namespace + "/" + field + "' for region '" + region_name + "' exceeds the limit."

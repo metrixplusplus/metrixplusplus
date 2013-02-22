@@ -62,7 +62,7 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
         elif options.__dict__['general.warn'] == 'all':
             self.mode = self.MODE_ALL
             
-        if self.mode != self.MODE_ALL and options.__dict__['general.db-file-prev'] == None:
+        if self.mode != self.MODE_ALL and options.__dict__['general.db_file_prev'] == None:
             self.parser.error("The mode '" + options.__dict__['general.warn'] + "' for 'general.warn' option requires 'general.db-file-prev' option set")
 
         class Limit(object):
@@ -83,14 +83,14 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
                 match = re.match(pattern, each)
                 if match == None:
                     self.parser.error("Invalid format of the 'general.max-limit' option: " + each)
-                limit = Limit("max", match.group(3), match.group(1), match.group(2), (match.group(2), '>', float(match.group(3))))
+                limit = Limit("max", float(match.group(3)), match.group(1), match.group(2), (match.group(2), '>', float(match.group(3))))
                 self.limits.append(limit)
         if options.__dict__['general.min_limit'] != None:
             for each in options.__dict__['general.min_limit']:  
                 match = re.match(pattern, each)
                 if match == None:
                     self.parser.error("Invalid format of the 'general.min-limit' option: " + each)
-                limit = Limit("min", match.group(3), match.group(1), match.group(2), (match.group(2), '<', float(match.group(3))))
+                limit = Limit("min", float(match.group(3)), match.group(1), match.group(2), (match.group(2), '<', float(match.group(3))))
                 self.limits.append(limit)
                 
     def verify_namespaces(self, valid_namespaces):
@@ -115,6 +115,7 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
             yield each   
 
     def is_mode_matched(self, limit, value, diff, is_modified):
+        print self.mode, self.MODE_TREND, limit, value, diff, is_modified
         if is_modified == None:
             return True
         if self.mode == self.MODE_ALL:
