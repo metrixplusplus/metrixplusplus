@@ -47,6 +47,12 @@ class Database(object):
             self.id = tag_id
             self.name = name
 
+    class PropertyData(object):
+        def __init__(self, property_id, name, value):
+            self.id = property_id
+            self.name = name
+            self.value = value
+
     class FileData(object):
         def __init__(self, file_id, path, checksum):
             self.id = file_id
@@ -93,6 +99,9 @@ class Database(object):
     class InternalCleanUpUtils(object):
         
         def clean_up_not_confirmed(self, db_loader):
+            sql = "DELETE FROM __info__ WHERE (confirmed = 0)"
+            db_loader.log(sql)
+            db_loader.conn.execute(sql)
             sql = "DELETE FROM __tags__ WHERE (confirmed = 0)"
             db_loader.log(sql)
             db_loader.conn.execute(sql)
@@ -213,10 +222,10 @@ class Database(object):
         self.read_only = read_only
         if self.read_only == False:
             try:
-                sql = "CREATE TABLE __info__ (id integer NOT NULL PRIMARY KEY AUTOINCREMENT, property text NOT NULL, value text, UNIQUE (property) ON CONFLICT REPLACE)"
+                sql = "CREATE TABLE __info__ (id integer NOT NULL PRIMARY KEY AUTOINCREMENT, property text NOT NULL, value text, confirmed integer NOT NULL, UNIQUE (property) ON CONFLICT REPLACE)"
                 self.log(sql)
                 self.conn.execute(sql)
-                sql = "INSERT INTO __info__ (property, value) VALUES ('version', '" + self.version + "')"
+                sql = "INSERT INTO __info__ (property, value, confirmed) VALUES ('version', '" + self.version + "', 1)"
                 self.log(sql)
                 self.conn.execute(sql)
                 sql = "CREATE TABLE __tables__ (id integer NOT NULL PRIMARY KEY, name text NOT NULL, support_regions integer NOT NULL, confirmed integer NOT NULL, UNIQUE (name))"
@@ -239,7 +248,35 @@ class Database(object):
                 self.conn.execute(sql)
             except sqlite3.OperationalError as e:
                 logging.debug("sqlite3.OperationalError: " + str(e))
+                
+    def set_property(self, property_name, value):
+        ret_val = None
+        sql = "SELECT * FROM __info__ WHERE (property = '" + property_name + "')"
+        self.log(sql)
+        result = self.conn.execute(sql).fetchall()
+        if len(result) != 0:
+            ret_val = result[0]['value']
+
+        sql = "INSERT INTO __info__ (property, value, confirmed) VALUES ('" + property_name + "', '" + value + "', 1)"
+        self.log(sql)
+        self.conn.execute(sql)
+        return ret_val
         
+    def get_property(self, property_name):
+        ret_val = None
+        sql = "SELECT * FROM __info__ WHERE (property = '" + property_name + "' AND confirmed = 1)"
+        self.log(sql)
+        result = self.conn.execute(sql).fetchall()
+        if len(result) != 0:
+            ret_val = result[0]['value']
+        return ret_val
+
+    def iterate_properties(self):
+        sql = "SELECT * FROM __info__ WHERE (confirmed = 1)"
+        self.log(sql)
+        for each in self.conn.execute(sql).fetchall():
+            yield self.PropertyData(each['id'], each['property'], each['value'])
+
     def create_table(self, table_name, support_regions = False):
         assert(self.read_only == False)
 
@@ -359,6 +396,7 @@ class Database(object):
             return False
         return True
 
+    # TODO activate usage of tags
     def create_file(self, path, checksum):
         assert(self.read_only == False)
         path = self.InternalPathUtils().normalize_path(path)
@@ -373,7 +411,7 @@ class Database(object):
                     sql = "UPDATE __files__ SET confirmed = 1 WHERE (id = " + str(old_id) +")"
                     self.log(sql)
                     self.conn.execute(sql)
-                    return old_id
+                    return (old_id, False)
                 else:
                     self.InternalCleanUpUtils().clean_up_file(self, result[0]['id'])
         
@@ -383,7 +421,7 @@ class Database(object):
         cur = self.conn.cursor()
         cur.execute(sql, column_data)
         self.InternalPathUtils().update_dirs(self, path=path)
-        return cur.lastrowid
+        return (cur.lastrowid, True)
     
     def iterate_dircontent(self, path, include_subdirs = True, include_subfiles = True):
         self.InternalPathUtils().update_dirs(self)
@@ -482,8 +520,8 @@ class Database(object):
     def iterate_markers(self, file_id):
         for each in self.select_rows("__markers__", filters = [("file_id", "=", file_id)]):
             yield self.MarkerData(each['file_id'],
-                                  each['name'],
                                   each['begin'],
+                                  each['end'],
                                   each['group_id'])
 
     def add_row(self, table_name, file_id, region_id, array_data):

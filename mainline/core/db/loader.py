@@ -303,7 +303,7 @@ class FileData(LoadableData):
         if self.markers == None:
             self.markers = []
             for each in self.loader.db.iterate_markers(self.get_id()):
-                self.markers.append(self.Marker(each.begin, each.end, each.group))
+                self.markers.append(Marker(each.begin, each.end, each.group))
         
     def add_marker(self, offset_begin, offset_end, group):
         if self.markers == None:
@@ -399,8 +399,15 @@ class DiffData(Data):
     def get_data(self, namespace, field):
         new_data = self.new_data.get_data(namespace, field)
         old_data = self.old_data.get_data(namespace, field)
-        if new_data == None or old_data == None:
+        if new_data == None:
             return None
+        if old_data == None:
+            # non_zero fields has got zero value by default if missed
+            # the data can be also unavailable,
+            # because previous collection does not include that
+            # but external tools (like limit.py) should warn about this,
+            # using list of registered database properties
+            old_data = 0
         return new_data - old_data
 
 ####################################
@@ -648,6 +655,21 @@ class Loader(object):
         for table in self.db.iterate_tables():
             self.create_namespace(table.name, table.support_regions)
             
+    def set_property(self, property_name, value):
+        if self.db == None:
+            return None
+        return self.db.set_property(property_name, value)
+    
+    def get_property(self, property_name):
+        if self.db == None:
+            return None
+        return self.db.get_property(property_name)
+
+    def iterate_properties(self):
+        if self.db == None:
+            return None
+        return self.db.iterate_properties()
+            
     def create_namespace(self, name, support_regions = False):
         if self.db == None:
             return None
@@ -672,10 +694,10 @@ class Loader(object):
         if self.db == None:
             return None
 
-        new_id = self.db.create_file(path, checksum)
+        (new_id, is_updated) = self.db.create_file(path, checksum)
         result = FileData(self, path, new_id, checksum, content) 
         self.last_file_data = result
-        return result
+        return (result, is_updated)
 
     def load_file_data(self, path):
         if self.db == None:

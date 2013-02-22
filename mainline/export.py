@@ -107,8 +107,8 @@ def main():
             regions = []
             for each in file_data.iterate_regions():
                 region_data_tree = each.get_data_tree(namespaces=namespaces)
-                if regions_matcher != None and regions_matcher.is_matched(each.id):
-                    region_data_prev = file_data_prev.get_region(regions_matcher.get_prev_id(each.id))
+                if regions_matcher != None and regions_matcher.is_matched(each.get_id()):
+                    region_data_prev = file_data_prev.get_region(regions_matcher.get_prev_id(each.get_id()))
                     region_data_tree = append_diff(region_data_tree,
                                                    region_data_prev.get_data_tree(namespaces=namespaces))
                 regions.append({"info": {"name" : each.name,

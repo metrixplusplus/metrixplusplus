@@ -17,14 +17,14 @@
 #    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-import fnmatch
+
 import re
 import binascii
 import logging
 
 import core.api
 
-class Plugin(core.api.Plugin, core.api.Parent, core.api.Child, core.api.IConfigurable, core.api.ICode):
+class Plugin(core.api.Plugin, core.api.Parent, core.api.IParser, core.api.IConfigurable, core.api.ICode):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.code.cpp.files", default="*.c,*.cpp,*.h,*.hpp",
@@ -32,26 +32,28 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.Child, core.api.IConfigu
     
     def configure(self, options):
         self.files = options.__dict__['std.code.cpp.files'].split(',')
+        self.files.sort() # sorted list goes to properties
         
     def initialize(self):
-        core.api.subscribe_by_parents_name('core.dir', self)
+        self.get_plugin_loader().register_parser(self.files, self)
+
+        # trigger version property set
+        core.api.Plugin.initialize(self)
+        db_loader = self.get_plugin_loader().get_database_loader()
+        prev_ext = db_loader.set_property(self.get_name() + ":files", ','.join(self.files))
+        if prev_ext != ','.join(self.files):
+            self.is_updated = True
         
         namespace = self.get_plugin_loader().get_database_loader().create_namespace(self.get_name())
-        namespace.add_field('files', int)
-        namespace.add_field('mismatched_brackets', None)
+        namespace.add_field('mismatched_brackets', int, non_zero=True)
     
-    def callback(self, parent, data):
-        for ext in self.files:
-            if fnmatch.fnmatch(data.get_path(), ext):
-                if data.get_data(self.get_name(), 'files') != None:
-                    self.notify_children(data)
-                    return
-
-                count_mismatched_brackets = CppCodeParser().run(data)
-                data.set_data(self.get_name(), 'files', 1)
+    def process(self, parent, data, is_updated):
+        is_updated = is_updated or self.is_updated
+        if is_updated == True:
+            count_mismatched_brackets = CppCodeParser().run(data)
+            if count_mismatched_brackets != 0:
                 data.set_data(self.get_name(), 'mismatched_brackets', count_mismatched_brackets)
-                self.notify_children(data)
-                break
+        self.notify_children(data, is_updated)
             
 class CppCodeParser(object):
     
