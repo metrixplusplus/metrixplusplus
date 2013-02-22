@@ -68,13 +68,13 @@ class FileRegionsMatcher(object):
         once_filter = FileRegionsDisposableGetter(prev_file_data)
         unmatched_region_ids = []
         for (ind, region) in enumerate(file_data.iterate_regions()):
-            assert(ind + 1 == region.id)
+            assert(ind + 1 == region.get_id())
             # Identify corresponding region in previous database (attempt by checksum)
             prev_id = once_filter.get_next_id_once_by_checksum(region.checksum)
             if prev_id != None:
                 self.ids.append((prev_id, False))
             else:
-                unmatched_region_ids.append(region.id)
+                unmatched_region_ids.append(region.get_id())
                 self.ids.append((None, True))
                             
         # Identify corresponding region in previous database (attempt by name)
