@@ -39,7 +39,7 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
         # do not process files dumped by previous run of this module    
         self.get_plugin_loader().get_plugin('core.dir').add_exclude_rule(re.compile(r'.*' + Plugin.POST_NAME + r'$'))
         
-    def callback(self, parent, data):
+    def callback(self, parent, data, is_updated):
         file_name = data.get_path()
         text = data.get_content()
         

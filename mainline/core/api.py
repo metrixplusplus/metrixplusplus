@@ -20,7 +20,11 @@
 class Plugin(object):
     
     def initialize(self):
-        pass
+        self.is_updated = False
+        db_loader = self.get_plugin_loader().get_database_loader()
+        prev_version = db_loader.set_property(self.get_name() + ":version", self.get_version())
+        if prev_version != self.get_version():
+            self.is_updated = True
     
     def terminate(self):
         pass
@@ -32,6 +36,14 @@ class Plugin(object):
         if hasattr(self, 'name') == False:
             return None
         return self.name
+
+    def set_version(self, version):
+        self.version = version
+
+    def get_version(self):
+        if hasattr(self, 'version') == False:
+            return None
+        return self.version
 
     def set_plugin_loader(self, loader):
         self.plugin_loader = loader
@@ -62,6 +74,9 @@ class IRunable(object):
     def run(self, args):
         raise InterfaceNotImplemented(self)
     
+class IParser(object):
+    def process(self, parent, data, is_updated):
+        raise InterfaceNotImplemented(self)
 
 class CallbackNotImplemented(Exception):
     

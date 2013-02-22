@@ -18,14 +18,16 @@
 #
 
 import core.api
+import core.db.loader
 
 import os
-import core.db.loader
+import fnmatch
 
 class Loader(object):
 
     def __init__(self):
         self.plugins = []
+        self.parsers = []
         self.hash    = {}
         self.exit_code = 0
         self.db = core.db.loader.Loader()
@@ -44,6 +46,15 @@ class Loader(object):
             for item in reversed(self.plugins):
                 yield item['instance']
             
+    def register_parser(self, fnmatch_exp_list, parser):
+        self.parsers.append((fnmatch_exp_list, parser))
+
+    def get_parser(self, file_path):
+        for parser in self.parsers:
+            for fnmatch_exp in parser[0]:
+                if fnmatch.fnmatch(file_path, fnmatch_exp):
+                    return parser[1]
+        return None
 
     def load(self, directory, optparser):
         import sys
@@ -83,6 +94,7 @@ class Loader(object):
             item['instance'] = class_attr.__new__(class_attr)
             item['instance'].__init__()
             item['instance'].set_name(item['package'] + "." + item['module'])
+            item['instance'].set_version(item['version'])
             item['instance'].set_plugin_loader(self)
 
         for item in self.iterate_plugins():

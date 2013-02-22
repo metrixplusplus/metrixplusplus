@@ -78,20 +78,23 @@ class DirectoryReader():
                         if plugin.non_recursively == False:
                             run_recursively(plugin, full_path)
                     else:
-                        logging.info("Processing: " + full_path)
-                        ts = time.time()
-                        
-                        f = open(full_path, 'r');
-                        text = f.read();
-                        f.close()
-                        checksum = binascii.crc32(text) & 0xffffffff # to match python 3
-
-                        data = plugin.get_plugin_loader().get_database_loader().create_file_data(full_path, checksum, text)
-                        plugin.notify_children(data)
-                        if plugin.is_proctime_enabled == True:
-                            data.set_data('general', 'proctime', time.time() - ts)
-                        plugin.get_plugin_loader().get_database_loader().save_file_data(data)
-                        logging.debug("-" * 60)
+                        parser = plugin.get_plugin_loader().get_parser(full_path)
+                        if parser == None:
+                            logging.info("Skipping: " + full_path)
+                        else:
+                            logging.info("Processing: " + full_path)
+                            ts = time.time()
+                            f = open(full_path, 'r');
+                            text = f.read();
+                            f.close()
+                            checksum = binascii.crc32(text) & 0xffffffff # to match python 3
+    
+                            (data, is_updated) = plugin.get_plugin_loader().get_database_loader().create_file_data(full_path, checksum, text)
+                            parser.process(plugin, data, is_updated)
+                            if plugin.is_proctime_enabled == True:
+                                data.set_data('general', 'proctime', time.time() - ts)
+                            plugin.get_plugin_loader().get_database_loader().save_file_data(data)
+                            logging.debug("-" * 60)
                 else:
                     logging.info("Excluding: " + full_path)
                     logging.debug("-" * 60)

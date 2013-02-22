@@ -32,7 +32,7 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
         if self.is_active == True:
             core.api.subscribe_by_parents_interface(core.api.ICode, self)
 
-    def callback(self, parent, data):
+    def callback(self, parent, data, is_updated):
         
         def print_rec(data, indent, region_id):
             print ("   ." * indent) + str(data.get_region(region_id).get_type()) + " " + data.get_region(region_id).get_name() + " " + str(data.get_region(region_id).get_cursor())
