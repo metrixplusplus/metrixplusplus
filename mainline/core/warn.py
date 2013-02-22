@@ -36,7 +36,7 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
                          "'new' - warnings for new regions only, "
                          "'trend' - warnings for new regions and for bad trend of modified regions, "
                          "'touched' - warnings for new regions and modified regions, "
-                         "'all' - all warnings active"
+                         "'all' - all warnings active "
                          "[default: %default]")
 
         parser.add_option("--general.min-limit", action="multiopt",
