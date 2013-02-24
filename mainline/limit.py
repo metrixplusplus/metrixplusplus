@@ -37,7 +37,7 @@ def main():
     db_plugin = core.db.post.Plugin()
     warn_plugin = core.warn.Plugin()
 
-    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog [options] -- <path 1> ... <path N>")
+    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
     warn_plugin.declare_configuration(parser)
