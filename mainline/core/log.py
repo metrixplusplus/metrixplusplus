@@ -19,12 +19,19 @@
 
 import core.api
 import logging
+import os
 
 class Plugin(core.api.Plugin, core.api.IConfigurable):
     
-    def declare_configuration(self, parser):
-        parser.add_option("--general.log-level", default=r'INFO', choices=['DEBUG','INFO','WARNING','ERROR'],
-                         help="Defines log level. Possible values are 'DEBUG','INFO','WARNING' or 'ERROR' [default: %default]")
+    def declare_configuration(self, parser, default_value='INFO'):
+        allowed_values = ['DEBUG','INFO','WARNING','ERROR']
+        default_value_cur = default_value
+        if os.environ.has_key('general.log-level') and os.environ['general.log-level'] in allowed_values:
+            default_value_cur = os.environ['general.log-level']
+        parser.add_option("--general.log-level", default=default_value_cur, choices=allowed_values,
+                         help="Defines log level. Possible values are 'DEBUG','INFO','WARNING' or 'ERROR'. "
+                         "Default value is inherited from environment variable 'general.log-level' if set. "
+                         "Otherwise, it is '" + default_value_cur +  "' [default: %default]")
     
     def configure(self, options):
         if options.__dict__['general.log_level'] == 'ERROR':
@@ -38,7 +45,9 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
         else:
             raise AssertionError("Unhandled choice of log level")
         
-        logging.getLogger().setLevel(log_level)
+        self.level = log_level
+        logging.getLogger().setLevel(self.level)
+        os.environ['general.log-level'] = options.__dict__['general.log_level']
         logging.warn("Logging enabled with " + options.__dict__['general.log_level'] + " level")
 
 
