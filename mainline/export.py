@@ -75,7 +75,7 @@ def main():
         print "{'export': ["
 
     for (ind, path) in enumerate(paths):
-        logging.info("Processing: " + path)
+        logging.info("Processing: " + re.sub(r'''[\\]''', "/", path))
         
         aggregated_data = loader.load_aggregated_data(path, namespaces=namespaces)
         aggregated_data_tree = {}
@@ -163,7 +163,13 @@ def append_diff(main_tree, prev_tree):
                 for key in main_tree[name][field].keys():
                     if key not in prev_tree[name][field].keys():
                         continue
-                    diff[key] = main_tree[name][field][key] - prev_tree[name][field][key]
+                    main_val = main_tree[name][field][key]
+                    prev_val = prev_tree[name][field][key]
+                    if main_val == None:
+                        main_val = 0
+                    if prev_val == None:
+                        prev_val = 0
+                    diff[key] = main_val - prev_val
                 main_tree[name][field]['__diff__'] = diff
             elif (not isinstance(main_tree[name][field], dict)) and (not isinstance(prev_tree[name][field], dict)):
                 if '__diff__' not in main_tree[name]:

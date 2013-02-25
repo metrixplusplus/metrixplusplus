@@ -20,6 +20,7 @@
 
 import logging
 import time
+import re
 
 import core.log
 import core.db.loader
@@ -80,7 +81,7 @@ def main():
         modified_file_ids = get_list_of_modified_files(loader, loader_prev)
         
     for path in paths:
-        logging.info("Processing: " + path)
+        logging.info("Processing: " + re.sub(r'''[\\]''', "/", path))
         
         for limit in warn_plugin.iterate_limits():
             logging.info("Applying limit: " + str(limit))

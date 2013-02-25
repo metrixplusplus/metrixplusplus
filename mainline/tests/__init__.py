@@ -16,20 +16,3 @@
 #    You should have received a copy of the GNU General Public License
 #    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
 #
-
-
-import unittest
-import subprocess
-import os.path
-
-class TestGeneralCollect(unittest.TestCase):
-
-    def setUp(self):
-        pass
-
-    def test_default(self):
-        ret_code = subprocess.call(['python', os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'collect.py'), '--help'])
-        self.assertEqual(ret_code, 0)
-
-if __name__ == '__main__':
-    unittest.main()

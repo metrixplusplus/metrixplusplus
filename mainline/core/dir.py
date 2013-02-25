@@ -73,6 +73,7 @@ class DirectoryReader():
         def run_recursively(plugin, directory):
             for fname in os.listdir(directory):
                 full_path = os.path.join(directory, fname)
+                norm_path = re.sub(r'''[\\]''', "/", full_path)
                 if plugin.is_file_excluded(fname) == False:
                     if os.path.isdir(full_path):
                         if plugin.non_recursively == False:
@@ -80,9 +81,9 @@ class DirectoryReader():
                     else:
                         parser = plugin.get_plugin_loader().get_parser(full_path)
                         if parser == None:
-                            logging.info("Skipping: " + full_path)
+                            logging.info("Skipping: " + norm_path)
                         else:
-                            logging.info("Processing: " + full_path)
+                            logging.info("Processing: " + norm_path)
                             ts = time.time()
                             f = open(full_path, 'r');
                             text = f.read();
@@ -96,7 +97,7 @@ class DirectoryReader():
                             plugin.get_plugin_loader().get_database_loader().save_file_data(data)
                             logging.debug("-" * 60)
                 else:
-                    logging.info("Excluding: " + full_path)
+                    logging.info("Excluding: " + norm_path)
                     logging.debug("-" * 60)
         
         run_recursively(plugin, directory)
