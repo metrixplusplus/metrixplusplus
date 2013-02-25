@@ -133,6 +133,20 @@ class TestBasic(tests.common.TestCase):
                                          use_prev=True)
         self.assertExec(runner.run())
 
+    def test_help(self):
+        
+        runner = tests.common.ToolRunner('collect', ['--help'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('export', ['--help'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('limit', ['--help'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('info', ['--help'])
+        self.assertExec(runner.run())
+		
 
 if __name__ == '__main__':
     unittest.main()
