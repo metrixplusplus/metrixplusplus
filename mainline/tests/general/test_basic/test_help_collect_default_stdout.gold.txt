@@ -18,9 +18,12 @@ Options:
   --general.exclude-files=GENERAL.EXCLUDE_FILES
                         Defines the pattern to exclude files from processing
                         [default: ^[.]]
-  --general.proctime.on
+  --general.proctime-on
                         If the option is set (True), the tool measures
-                        processing time per every file [default: False]
+                        processing time per file [default: False]
+  --general.procerrors-on
+                        If the option is set (True), the tool counts number of
+                        processing/parsing errors per file [default: False]
   --general.log-level=GENERAL.LOG_LEVEL
                         Defines log level. Possible values are
                         'DEBUG','INFO','WARNING' or 'ERROR'. Default value is
@@ -34,5 +37,5 @@ Options:
                         Enumerates filename extensions to match C/C++ files
                         [default: *.c,*.h,*.cpp,*.hpp,*.cc,*.hh,*.cxx,*.hxx]
   --std.code.cs.files=STD.CODE.CS.FILES
-                        Enumerates filename extensions to match C/C++ files
+                        Enumerates filename extensions to match C# files
                         [default: *.cs]

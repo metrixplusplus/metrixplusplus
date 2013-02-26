@@ -12,12 +12,6 @@
             <std.code.complexity>
                 <cyclomatic max="2" total="15.0" avg="0.180722891566" min="0" />
             </std.code.complexity>
-            <std.code.cpp>
-                <mismatched_brackets max="3" total="3.0" avg="None" min="None" />
-            </std.code.cpp>
-            <std.code.cs>
-                <mismatched_brackets max="None" total="0.0" avg="None" min="None" />
-            </std.code.cs>
         </aggregated-data>
     </data>
 </export>

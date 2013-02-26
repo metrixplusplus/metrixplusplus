@@ -714,18 +714,6 @@ data:
 .   .   .   .   total="4.0"
 .   .   .   .   avg="0.078431372549"
 .   .   .   .   min="0"
-.   .   std.code.cpp:  
-.   .   .   mismatched_brackets: 
-.   .   .   .   max="None"
-.   .   .   .   total="0.0"
-.   .   .   .   avg="None"
-.   .   .   .   min="None"
-.   .   std.code.cs:  
-.   .   .   mismatched_brackets: 
-.   .   .   .   max="None"
-.   .   .   .   total="0.0"
-.   .   .   .   avg="None"
-.   .   .   .   min="None"
 ================================================================================
 --------------------------------------------------------------------------------
 data:  
@@ -1132,18 +1120,6 @@ data:
 .   .   .   .   total="6.0"
 .   .   .   .   avg="0.25"
 .   .   .   .   min="0"
-.   .   std.code.cpp:  
-.   .   .   mismatched_brackets: 
-.   .   .   .   max="None"
-.   .   .   .   total="0.0"
-.   .   .   .   avg="None"
-.   .   .   .   min="None"
-.   .   std.code.cs:  
-.   .   .   mismatched_brackets: 
-.   .   .   .   max="None"
-.   .   .   .   total="0.0"
-.   .   .   .   avg="None"
-.   .   .   .   min="None"
 ================================================================================
 --------------------------------------------------------------------------------
 data:  
@@ -1246,18 +1222,6 @@ data:
 .   .   .   .   total="1.0"
 .   .   .   .   avg="0.25"
 .   .   .   .   min="0"
-.   .   std.code.cpp:  
-.   .   .   mismatched_brackets: 
-.   .   .   .   max="None"
-.   .   .   .   total="0.0"
-.   .   .   .   avg="None"
-.   .   .   .   min="None"
-.   .   std.code.cs:  
-.   .   .   mismatched_brackets: 
-.   .   .   .   max="None"
-.   .   .   .   total="0.0"
-.   .   .   .   avg="None"
-.   .   .   .   min="None"
 ================================================================================
 --------------------------------------------------------------------------------
 data:  
@@ -1373,8 +1337,6 @@ data:
 .   .   .   .   .   line_end="125"
 .   .   .   .   .   offset_begin="2768"
 .   .   .   .   data: 
-.   .   std.code.cpp: 
-.   .   .   mismatched_brackets="3"
 .   subfiles:
 .   subdirs:
 .   aggregated-data:  
@@ -1384,18 +1346,6 @@ data:
 .   .   .   .   total="4.0"
 .   .   .   .   avg="1.0"
 .   .   .   .   min="0"
-.   .   std.code.cpp:  
-.   .   .   mismatched_brackets: 
-.   .   .   .   max="3"
-.   .   .   .   total="3.0"
-.   .   .   .   avg="None"
-.   .   .   .   min="None"
-.   .   std.code.cs:  
-.   .   .   mismatched_brackets: 
-.   .   .   .   max="None"
-.   .   .   .   total="0.0"
-.   .   .   .   avg="None"
-.   .   .   .   min="None"
 ================================================================================
 
 
