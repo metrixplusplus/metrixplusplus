@@ -32,7 +32,6 @@ import core.export.convert
 
 def main():
     
-    exit_code = 0
     log_plugin = core.log.Plugin()
     db_plugin = core.db.post.Plugin()
 
@@ -67,12 +66,19 @@ def main():
     else:
         paths = args
         
+    (result, exit_code) = export_to_str(out_format, paths, loader, loader_prev, namespaces)
+    print result
+    return exit_code
+
+def export_to_str(out_format, paths, loader, loader_prev, namespaces):
+    exit_code = 0
+    result = ""
     if out_format == 'txt':
-        print "=" * 80 + "\n" + "Export" + "\n" + "_" * 80 + "\n"
+        result += "=" * 80 + "\n" + "Export" + "\n" + "_" * 80 + "\n\n"
     elif out_format == 'xml':
-        print "<export>"
+        result += "<export>\n"
     elif out_format == 'python':
-        print "{'export': ["
+        result += "{'export': ["
 
     for (ind, path) in enumerate(paths):
         logging.info("Processing: " + re.sub(r'''[\\]''', "/", path))
@@ -98,29 +104,7 @@ def main():
         if file_data != None:
             file_data_tree = file_data.get_data_tree(namespaces=namespaces) 
             file_data_prev = loader_prev.load_file_data(path)
-            regions_matcher = None
-            if file_data_prev != None:
-                file_data_tree = append_diff(file_data_tree,
-                                             file_data_prev.get_data_tree(namespaces=namespaces))
-                regions_matcher = core.db.utils.FileRegionsMatcher(file_data, file_data_prev)
-            
-            regions = []
-            for each in file_data.iterate_regions():
-                region_data_tree = each.get_data_tree(namespaces=namespaces)
-                if regions_matcher != None and regions_matcher.is_matched(each.get_id()):
-                    region_data_prev = file_data_prev.get_region(regions_matcher.get_prev_id(each.get_id()))
-                    region_data_tree = append_diff(region_data_tree,
-                                                   region_data_prev.get_data_tree(namespaces=namespaces))
-                regions.append({"info": {"name" : each.name,
-                                         'type' : file_data.get_region_types()().to_str(each.get_type()),
-                                         "cursor" : each.cursor,
-                                         'line_begin': each.line_begin,
-                                         'line_end': each.line_end,
-                                         'offset_begin': each.begin,
-                                         'offset_end': each.end},
-                                "data": region_data_tree})
-                
-            file_data_tree['regions'] = regions
+            append_regions(file_data_tree, file_data, file_data_prev, namespaces)
         
         data = {"info": {"path": path, "id": ind + 1},
                 "aggregated-data": aggregated_data_tree,
@@ -129,24 +113,47 @@ def main():
                 "subfiles": subfiles}
 
         if out_format == 'txt':
-            print core.export.convert.to_txt(data, root_name = "data")
+            result += core.export.convert.to_txt(data, root_name = "data") + "\n"
         elif out_format == 'xml':
-            print core.export.convert.to_xml(data, root_name = "data")
+            result += core.export.convert.to_xml(data, root_name = "data") + "\n"
         elif out_format == 'python':
             postfix = ""
             if ind < len(paths) - 1:
                 postfix = ", "
-            print core.export.convert.to_python(data, root_name = "data") + postfix
+            result += core.export.convert.to_python(data, root_name = "data") + postfix
 
     if out_format == 'txt':
-        print "\n"
+        result += "\n"
     elif out_format == 'xml':
-        print "</export>"
+        result += "</export>"
     elif out_format == 'python':
-        print "]}"
+        result += "]}"
+        
+    return (result, exit_code)
 
-
-    return exit_code
+def append_regions(file_data_tree, file_data, file_data_prev, namespaces):
+    regions_matcher = None
+    if file_data_prev != None:
+        file_data_tree = append_diff(file_data_tree,
+                                     file_data_prev.get_data_tree(namespaces=namespaces))
+        regions_matcher = core.db.utils.FileRegionsMatcher(file_data, file_data_prev)
+    regions = []
+    for each in file_data.iterate_regions():
+        region_data_tree = each.get_data_tree(namespaces=namespaces)
+        if regions_matcher != None and regions_matcher.is_matched(each.get_id()):
+            region_data_prev = file_data_prev.get_region(regions_matcher.get_prev_id(each.get_id()))
+            region_data_tree = append_diff(region_data_tree,
+                                           region_data_prev.get_data_tree(namespaces=namespaces))
+        regions.append({"info": {"name" : each.name,
+                                 'type' : file_data.get_region_types()().to_str(each.get_type()),
+                                 "cursor" : each.cursor,
+                                 'line_begin': each.line_begin,
+                                 'line_end': each.line_end,
+                                 'offset_begin': each.begin,
+                                 'offset_end': each.end},
+                        "data": region_data_tree})
+        
+    file_data_tree['regions'] = regions
 
 def append_diff(main_tree, prev_tree):
     assert(main_tree != None)
