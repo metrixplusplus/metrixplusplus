@@ -96,16 +96,6 @@
                     <__diff__ max="0" total="2.0" avg="-0.166666666667" min="-1" />
                 </cyclomatic>
             </std.code.complexity>
-            <std.code.cpp>
-                <mismatched_brackets max="None" total="0.0" avg="None" min="None">
-                    <__diff__ max="0" total="0.0" avg="0" min="0" />
-                </mismatched_brackets>
-            </std.code.cpp>
-            <std.code.cs>
-                <mismatched_brackets max="None" total="0.0" avg="None" min="None">
-                    <__diff__ max="0" total="0.0" avg="0" min="0" />
-                </mismatched_brackets>
-            </std.code.cs>
         </aggregated-data>
     </data>
 </export>

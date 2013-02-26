@@ -18,18 +18,6 @@ data:
 .   .   .   .   total="6.0"
 .   .   .   .   avg="1.5"
 .   .   .   .   min="1"
-.   .   std.code.cpp:  
-.   .   .   mismatched_brackets: 
-.   .   .   .   max="None"
-.   .   .   .   total="0.0"
-.   .   .   .   avg="None"
-.   .   .   .   min="None"
-.   .   std.code.cs:  
-.   .   .   mismatched_brackets: 
-.   .   .   .   max="None"
-.   .   .   .   total="0.0"
-.   .   .   .   avg="None"
-.   .   .   .   min="None"
 ================================================================================
 
 

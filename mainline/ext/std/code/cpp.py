@@ -44,16 +44,13 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IParser, core.api.IConfi
         if prev_ext != ','.join(self.files):
             self.is_updated = True
         
-        namespace = self.get_plugin_loader().get_database_loader().create_namespace(self.get_name())
-        namespace.add_field('mismatched_brackets', int, non_zero=True)
-    
     def process(self, parent, data, is_updated):
         is_updated = is_updated or self.is_updated
+        count_mismatched_brackets = 0
         if is_updated == True:
             count_mismatched_brackets = CppCodeParser().run(data)
-            if count_mismatched_brackets != 0:
-                data.set_data(self.get_name(), 'mismatched_brackets', count_mismatched_brackets)
         self.notify_children(data, is_updated)
+        return count_mismatched_brackets
             
 class CppCodeParser(object):
     
