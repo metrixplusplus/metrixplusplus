@@ -483,23 +483,20 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
 
                 <p>Parser for C/C++ language can serve as <a
                 href="http://metrixplusplus.svn.sourceforge.net/viewvc/metrixplusplus/mainline/ext/std/code/cpp.py">an
-                example</a>. There useful options are avaialble for
+                example</a>. There useful options and tools are avaialble for
                 trobuleshooting purposes during development:</p>
                 <ul>
+                  <li><span class="normalImportance">debug.py tool</span> is
+                    helpful troubleshooting tool. In mode 'dumphtml' it
+                    generates html code showing code highlightings</li>
                   <li><span
-                    class="normalImportance">--std.code.dumper.on</span> If the
-                    option is set (True), HTML files are generated for every
-                    parsed file with code showing identified markers and
-                    regions (functions only) [default: False]</li>
-                  <li><span class="normalImportance">--std.code.test.on</span>
-                    Enables test plugin. Currently dumps to stdout structure of
-                    the code (tree of namespaces, classes and functions
-                    identified) after processing by a parser (for development
-                    purposes) [default: False]</li>
+                    class="normalImportance">--general.nest-regions</span> for
+                    export tool forces exporting of code structure in tree
+                    format. It can be helpful for analysis of parser's
+                  internals</li>
                   <li><span
                     class="normalImportance">--general.log-level</span>=GENERAL.LOG_LEVEL
-                    Defines log level. Possible values are
-                    'DEBUG','INFO','WARNING' or 'ERROR' [default: INFO]</li>
+                    for any tool is helpful to trace execution </li>
                 </ul>
 
                 <p>Finally, if there are any questions or enquires, please,
