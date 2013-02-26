@@ -27,3 +27,7 @@ Options:
                         be processed. Separate several namespaces by comma,
                         for example 'general,std.code.complexity' [default:
                         none]
+  --general.nest-regions
+                        If the option is set (True), data for regions is
+                        exported in the form of a tree. Otherwise, all regions
+                        are exported in plain list. [default: False]

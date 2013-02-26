@@ -149,7 +149,7 @@ class Test(tests.common.TestCase):
 
     def test_export_format(self):
 
-        runner = tests.common.ToolRunner('collect', ['--std.code.complexity.on'])
+        runner = tests.common.ToolRunner('collect', ['--std.code.complexity.on'], save_prev=True)
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('export', ['--general.format=txt'], prefix='txt')
@@ -161,6 +161,25 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('export', ['--general.format=xml'], prefix='xml')
         self.assertExec(runner.run())
         
+        runner = tests.common.ToolRunner('collect',
+                                         ['--std.code.complexity.on'],
+                                         prefix='nest',
+                                         cwd="sources_changed",
+                                         use_prev=True)
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('export',
+                                         ['--general.nest-regions'],
+                                         prefix='nest',
+                                         use_prev=True)
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('export',
+                                         ['--general.nest-regions', '--general.format=xml'],
+                                         prefix='nest_per_file',
+                                         dirs_list=['./simple.cpp'],
+                                         use_prev=True)
+        self.assertExec(runner.run())
         
 
 if __name__ == '__main__':
