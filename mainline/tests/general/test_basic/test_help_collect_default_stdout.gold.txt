@@ -36,6 +36,3 @@ Options:
   --std.code.cs.files=STD.CODE.CS.FILES
                         Enumerates filename extensions to match C/C++ files
                         [default: *.cs]
-  --std.code.dumper.on  If the option is set (True), HTML files are generated
-                        for every parsed file containing code (for
-                        troubleshooting purposes only) [default: False]
