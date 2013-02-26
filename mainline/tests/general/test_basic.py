@@ -22,7 +22,7 @@ import unittest
 
 import tests.common
 
-class TestBasic(tests.common.TestCase):
+class Test(tests.common.TestCase):
 
     def test_workflow(self):
         
@@ -146,7 +146,22 @@ class TestBasic(tests.common.TestCase):
 
         runner = tests.common.ToolRunner('info', ['--help'])
         self.assertExec(runner.run())
-		
+
+    def test_export_format(self):
+
+        runner = tests.common.ToolRunner('collect', ['--std.code.complexity.on'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('export', ['--general.format=txt'], prefix='txt')
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('export', ['--general.format=python'], prefix='python')
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('export', ['--general.format=xml'], prefix='xml')
+        self.assertExec(runner.run())
+        
+        
 
 if __name__ == '__main__':
     unittest.main()

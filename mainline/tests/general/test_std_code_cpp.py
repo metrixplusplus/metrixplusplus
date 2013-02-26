@@ -23,7 +23,7 @@ import os
 
 import tests.common
 
-class TestBasic(tests.common.TestCase):
+class Test(tests.common.TestCase):
 
     def test_parser(self):
         
@@ -34,7 +34,6 @@ class TestBasic(tests.common.TestCase):
         self.assertExec(runner.run())
         
         dirs_list = [os.path.join('.', each) for each in os.listdir(self.get_content_paths().cwd)]
-        print dirs_list
         runner = tests.common.ToolRunner('export', opts_list=['--general.format=txt'], dirs_list=dirs_list, prefix='files')
         self.assertExec(runner.run())
 
