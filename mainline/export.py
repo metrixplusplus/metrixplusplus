@@ -44,11 +44,15 @@ def main():
                       " If not defined all namespaces available in database file will be processed."
                       " Separate several namespaces by comma, for example 'general,std.code.complexity'"
                       " [default: %default]")
+    parser.add_option("--general.nest-regions", action="store_true", default=False,
+                      help="If the option is set (True), data for regions is exported in the form of a tree. "
+                      "Otherwise, all regions are exported in plain list. [default: %default]")
 
     (options, args) = parser.parse_args()
     log_plugin.configure(options)
     db_plugin.configure(options)
     out_format = options.__dict__['general.format']
+    nest_regions = options.__dict__['general.nest_regions']
     namespaces = None
     if options.__dict__['general.namespaces'] != None:
         namespaces = re.split(',', options.__dict__['general.namespaces'])
@@ -66,11 +70,11 @@ def main():
     else:
         paths = args
         
-    (result, exit_code) = export_to_str(out_format, paths, loader, loader_prev, namespaces)
+    (result, exit_code) = export_to_str(out_format, paths, loader, loader_prev, namespaces, nest_regions)
     print result
     return exit_code
 
-def export_to_str(out_format, paths, loader, loader_prev, namespaces):
+def export_to_str(out_format, paths, loader, loader_prev, namespaces, nest_regions):
     exit_code = 0
     result = ""
     if out_format == 'txt':
@@ -104,7 +108,7 @@ def export_to_str(out_format, paths, loader, loader_prev, namespaces):
         if file_data != None:
             file_data_tree = file_data.get_data_tree(namespaces=namespaces) 
             file_data_prev = loader_prev.load_file_data(path)
-            append_regions(file_data_tree, file_data, file_data_prev, namespaces)
+            append_regions(file_data_tree, file_data, file_data_prev, namespaces, nest_regions)
         
         data = {"info": {"path": path, "id": ind + 1},
                 "aggregated-data": aggregated_data_tree,
@@ -131,29 +135,52 @@ def export_to_str(out_format, paths, loader, loader_prev, namespaces):
         
     return (result, exit_code)
 
-def append_regions(file_data_tree, file_data, file_data_prev, namespaces):
+def append_regions(file_data_tree, file_data, file_data_prev, namespaces, nest_regions):
     regions_matcher = None
     if file_data_prev != None:
         file_data_tree = append_diff(file_data_tree,
                                      file_data_prev.get_data_tree(namespaces=namespaces))
         regions_matcher = core.db.utils.FileRegionsMatcher(file_data, file_data_prev)
-    regions = []
-    for each in file_data.iterate_regions():
-        region_data_tree = each.get_data_tree(namespaces=namespaces)
-        if regions_matcher != None and regions_matcher.is_matched(each.get_id()):
-            region_data_prev = file_data_prev.get_region(regions_matcher.get_prev_id(each.get_id()))
-            region_data_tree = append_diff(region_data_tree,
-                                           region_data_prev.get_data_tree(namespaces=namespaces))
-        regions.append({"info": {"name" : each.name,
-                                 'type' : file_data.get_region_types()().to_str(each.get_type()),
-                                 "cursor" : each.cursor,
-                                 'line_begin': each.line_begin,
-                                 'line_end': each.line_end,
-                                 'offset_begin': each.begin,
-                                 'offset_end': each.end},
-                        "data": region_data_tree})
-        
-    file_data_tree['regions'] = regions
+    
+    if nest_regions == False:
+        regions = []
+        for region in file_data.iterate_regions():
+            region_data_tree = region.get_data_tree(namespaces=namespaces)
+            if regions_matcher != None and regions_matcher.is_matched(region.get_id()):
+                region_data_prev = file_data_prev.get_region(regions_matcher.get_prev_id(region.get_id()))
+                region_data_tree = append_diff(region_data_tree,
+                                               region_data_prev.get_data_tree(namespaces=namespaces))
+            regions.append({"info": {"name" : region.name,
+                                     'type' : file_data.get_region_types()().to_str(region.get_type()),
+                                     "cursor" : region.cursor,
+                                     'line_begin': region.line_begin,
+                                     'line_end': region.line_end,
+                                     'offset_begin': region.begin,
+                                     'offset_end': region.end},
+                            "data": region_data_tree})
+        file_data_tree['regions'] = regions
+    else:
+        def append_rec(region_id, file_data_tree, file_data, file_data_prev, namespaces):
+            region = file_data.get_region(region_id)
+            region_data_tree = region.get_data_tree(namespaces=namespaces)
+            if regions_matcher != None and regions_matcher.is_matched(region.get_id()):
+                region_data_prev = file_data_prev.get_region(regions_matcher.get_prev_id(region.get_id()))
+                region_data_tree = append_diff(region_data_tree,
+                                               region_data_prev.get_data_tree(namespaces=namespaces))
+            result = {"info": {"name" : region.name,
+                               'type' : file_data.get_region_types()().to_str(region.get_type()),
+                               "cursor" : region.cursor,
+                               'line_begin': region.line_begin,
+                               'line_end': region.line_end,
+                               'offset_begin': region.begin,
+                               'offset_end': region.end},
+                      "data": region_data_tree,
+                      "subregions": []}
+            for sub_id in file_data.get_region(region_id).iterate_subregion_ids():
+                result['subregions'].append(append_rec(sub_id, file_data_tree, file_data, file_data_prev, namespaces))
+            return result
+        file_data_tree['regions'] = []
+        file_data_tree['regions'].append(append_rec(1, file_data_tree, file_data, file_data_prev, namespaces))
 
 def append_diff(main_tree, prev_tree):
     assert(main_tree != None)
