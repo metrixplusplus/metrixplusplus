@@ -27,11 +27,11 @@ import core.api
 class Plugin(core.api.Plugin, core.api.Parent, core.api.IParser, core.api.IConfigurable, core.api.ICode):
     
     def declare_configuration(self, parser):
-        parser.add_option("--std.code.cpp.files", default="*.c,*.h,*.cpp,*.hpp,*.cc,*.hh,*.cxx,*.hxx",
+        parser.add_option("--std.code.cs.files", default="*.cs",
                          help="Enumerates filename extensions to match C/C++ files [default: %default]")
     
     def configure(self, options):
-        self.files = options.__dict__['std.code.cpp.files'].split(',')
+        self.files = options.__dict__['std.code.cs.files'].split(',')
         self.files.sort() # sorted list goes to properties
         
     def initialize(self):
