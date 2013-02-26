@@ -29,7 +29,7 @@ class ToolRunner(object):
 
     def __init__(self,
                  tool_name,
-                 opts_list,
+                 opts_list = [],
                  dirs_list = None,
                  cwd='sources',
                  prefix = "default",
@@ -72,7 +72,7 @@ class ToolRunner(object):
         self.dirs_list = [] 
         if dirs_list != None:
             for each in dirs_list:
-                self.dirs_list = [each]
+                self.dirs_list.append(each)
                
         self.call_args = ['python', os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], tool_name + ".py")] \
                     + db_opts + opts_list + ['--'] + self.dirs_list
@@ -114,6 +114,10 @@ class ToolRunner(object):
                 f = open(real_file_stderr, 'wb');
                 f.write(child_stderr);
                 f.close()
+            else:
+                if os.path.exists(real_file_stderr):
+                    os.unlink(real_file_stderr)
+
 
         if self.save_prev == True:
             shutil.copy2(self.dbfile, self.dbfile_prev)                
@@ -193,9 +197,28 @@ class ToolRunner(object):
     
 class TestCase(unittest.TestCase):
 
-    def setUp(self):
-        logging.basicConfig(format="[TEST-LOG]: %(levelname)s:\t%(message)s", level=logging.WARN)
+    def get_content_paths(self, cwd='sources'): 
+        curframe = inspect.currentframe()
+        calframe = inspect.getouterframes(curframe, 2)
+        test_name = calframe[1][3]
+        suite_name = os.path.splitext(os.path.basename(calframe[1][1]))[0]
+        group_name = os.path.basename(os.path.dirname(calframe[1][1]))
         
+        class ContentPaths(object):
+            
+            def __init__(self, cwd, dbfile, dbfile_prev):
+                self.cwd = cwd
+                self.dbfile = dbfile
+                self.dbfile_prev = dbfile_prev
+                
+        return ContentPaths(os.path.join('tests', group_name, suite_name, cwd),
+                            os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'tests', group_name, suite_name, test_name + ".db"),
+                            os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'tests', group_name, suite_name, test_name + ".prev.db"))
+
+    def setUp(self):
+        unittest.TestCase.setUp(self)
+
+        logging.basicConfig(format="[TEST-LOG]: %(levelname)s:\t%(message)s", level=logging.WARN)
         log_level = os.environ['METRIXPLUSPLUS_LOG_LEVEL']
         if log_level == 'ERROR':
             log_level = logging.ERROR
