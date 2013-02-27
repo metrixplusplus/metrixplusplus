@@ -288,7 +288,8 @@ class CppCodeParser(object):
             # Potential function name detected...
             elif m.group('fn_name') != None:
                 # ... if outside of a function (do not detect enclosed functions, unless classes are matched)
-                if blocks[curblk]['type'] != 'function' and (next_block['name'] == "" or next_block['type'] != 'function'):
+                # different with C++: in C# function name can not go after class keyword declaration
+                if blocks[curblk]['type'] != 'function' and (next_block['name'] == ""):
                     # - 'name'
                     next_block['name'] = m.group('fn_name').strip()
                     # - 'cursor'

@@ -36,17 +36,113 @@ data:
 .   .   .   .   .   .   
 .   .   .   .   .   .   .   subregion:  
 .   .   .   .   .   .   .   .   info: 
-.   .   .   .   .   .   .   .   .   cursor="31"
-.   .   .   .   .   .   .   .   .   name="other_template"
+.   .   .   .   .   .   .   .   .   cursor="30"
+.   .   .   .   .   .   .   .   .   name="File"
 .   .   .   .   .   .   .   .   .   offset_end="9037"
 .   .   .   .   .   .   .   .   .   line_begin="30"
-.   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   type="class"
 .   .   .   .   .   .   .   .   .   line_end="437"
 .   .   .   .   .   .   .   .   .   offset_begin="1012"
-.   .   .   .   .   .   .   .   data:  
-.   .   .   .   .   .   .   .   .   std.code.complexity: 
-.   .   .   .   .   .   .   .   .   .   cyclomatic="39"
+.   .   .   .   .   .   .   .   data: 
 .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="74"
+.   .   .   .   .   .   .   .   .   .   .   name="get"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="2222"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="74"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="89"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="1961"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="3"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="95"
+.   .   .   .   .   .   .   .   .   .   .   name="get"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="2781"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="95"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="114"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="2295"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="2"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="120"
+.   .   .   .   .   .   .   .   .   .   .   name="get"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="3022"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="120"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="128"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="2888"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="1"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="134"
+.   .   .   .   .   .   .   .   .   .   .   name="get"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="3263"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="134"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="142"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="3129"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="1"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="148"
+.   .   .   .   .   .   .   .   .   .   .   name="get"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="3489"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="148"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="156"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="3355"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="1"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="160"
+.   .   .   .   .   .   .   .   .   .   .   name="Close"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="4076"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="159"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="187"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="3497"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="4"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="190"
+.   .   .   .   .   .   .   .   .   .   .   name="SetRecord"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="4794"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="189"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="226"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="4079"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="6"
+.   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
 .   .   .   .   .   .   .   .   .   .   info: 
@@ -73,14 +169,168 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
 .   .   .   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="245"
+.   .   .   .   .   .   .   .   .   .   .   name="GetFile"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="5822"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="244"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="274"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="5126"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="5"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="277"
+.   .   .   .   .   .   .   .   .   .   .   name="GetFile"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="6140"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="276"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="285"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="5825"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="1"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="288"
+.   .   .   .   .   .   .   .   .   .   .   name="AllocateFile"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="7049"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="287"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="324"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="6143"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="5"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="327"
+.   .   .   .   .   .   .   .   .   .   .   name="FindFreeFile"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="7735"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="326"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="358"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="7052"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="5"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="361"
+.   .   .   .   .   .   .   .   .   .   .   name="CloseAll"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="8342"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="360"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="387"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="7738"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="4"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="391"
+.   .   .   .   .   .   .   .   .   .   .   name="Write"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="8437"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="389"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="394"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="8345"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="398"
+.   .   .   .   .   .   .   .   .   .   .   name="WriteLine"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="8541"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="396"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="401"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="8440"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="405"
+.   .   .   .   .   .   .   .   .   .   .   name="Tab"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="8631"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="403"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="408"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="8544"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="412"
+.   .   .   .   .   .   .   .   .   .   .   name="Space"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="8726"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="410"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="415"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="8634"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="419"
+.   .   .   .   .   .   .   .   .   .   .   name="Lock"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="8839"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="417"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="422"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="8729"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
+.   .   .   .   .   .   .   .   .   .   subregions:
+.   .   .   .   .   .   .   .   
+.   .   .   .   .   .   .   .   .   subregion:  
+.   .   .   .   .   .   .   .   .   .   info: 
+.   .   .   .   .   .   .   .   .   .   .   cursor="426"
+.   .   .   .   .   .   .   .   .   .   .   name="Unlock"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="9034"
+.   .   .   .   .   .   .   .   .   .   .   line_begin="424"
+.   .   .   .   .   .   .   .   .   .   .   type="function"
+.   .   .   .   .   .   .   .   .   .   .   line_end="435"
+.   .   .   .   .   .   .   .   .   .   .   offset_begin="8842"
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="1"
+.   .   .   .   .   .   .   .   .   .   subregions:
 .   subfiles:
 .   subdirs:
 .   aggregated-data:  
 .   .   std.code.complexity:  
 .   .   .   cyclomatic: 
-.   .   .   .   max="39"
+.   .   .   .   max="6"
 .   .   .   .   total="39.0"
-.   .   .   .   avg="19.5"
+.   .   .   .   avg="2.05263157895"
 .   .   .   .   min="0"
 ================================================================================
 --------------------------------------------------------------------------------

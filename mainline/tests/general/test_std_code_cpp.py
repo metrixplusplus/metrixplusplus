@@ -39,7 +39,7 @@ class Test(tests.common.TestCase):
 
         runner = tests.common.ToolRunner('limit',
                                          ['--general.max-limit=std.code.complexity:cyclomatic:0'],
-                                         exit_code=11)
+                                         exit_code=12)
         self.assertExec(runner.run())
 
 if __name__ == '__main__':
