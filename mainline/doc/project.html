@@ -114,23 +114,28 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                     <ul>
                       <li><span class="normalImportance">C/C++</span> parser
                         recognises definition of namespaces, definition of
-                        classes/structs (including enclosed in functions) and
-                        definition of functions/operators </li>
+                        classes/structs (including enclosed in functions),
+                        templates and definition of functions/operators</li>
+                      <li><span class="normalImportance">C#</span> parser
+                        recognises definition of namespaces, definition of
+                        classes/structs (including enclosed in functions),
+                        interfaces, generics, definition of
+                      functions/operators</li>
                     </ul>
                   </li>
                   <li><h4>Metrics</h4>
                     <ul>
                       <li><span class="normalImportance">cyclomatic
                         complexity</span> (by McCabe) per function <span
-                        class="lowImportance">[supports C/C++
-                      language]</span></li>
-                      <li><span class="normalImportance">mismatched
-                        brackets</span> '{}'' per file <span
-                        class="lowImportance">[supports C/C++
-                      language]</span></li>
+                        class="lowImportance">[supports C/C++, C#
+                        languages]</span></li>
+                      <li><span class="normalImportance">processing
+                        errors</span> per file <span
+                        class="lowImportance">[supports any file
+                      type]</span></li>
                       <li><span class="normalImportance">processing time</span>
-                        per file <span class="lowImportance">[supports any
-                        file]</span></li>
+                        per file <span class="lowImportance">[supports any file
+                        type]</span></li>
                     </ul>
                   </li>
                   <li><h4>Analysis tools</h4>
@@ -150,6 +155,9 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                         which are configurable (output is plain text with
                         metadata compatible with gcc compiler warning
                       messages)</li>
+                      <li><span class="normalImportance">info.py</span> - a
+                        tool to show file metadata, such as properties,
+                        namespaces and fields recorded</li>
                     </ul>
                   </li>
                 </ul>
@@ -262,9 +270,6 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
             &lt;<span class="normalImportance">std.code.complexity</span>&gt;
                 &lt;cyclomatic max="2" total="14.0" avg="0.168674698795" min="0" /&gt;
             &lt;/<span class="normalImportance">std.code.complexity</span>&gt;
-            &lt;<span class="normalImportance">std.code.cpp</span>&gt;
-                &lt;files max="1" total="4.0" avg="1.0" min="1" /&gt;
-            &lt;/<span class="normalImportance">std.code.cpp</span>&gt;
         &lt;/aggregated-data&gt;
     &lt;/data&gt;
 &lt;/export&gt;</span>

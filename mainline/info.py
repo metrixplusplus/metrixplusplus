@@ -48,15 +48,34 @@ def main():
     if db_plugin.dbfile_prev != None:
         loader_prev = core.db.loader.Loader()
         loader_prev.open_database(db_plugin.dbfile_prev)
-    print "Info data:"
+
+    print "Properties:"
     for each in loader.iterate_properties():
         prev_value_str = ""
         if loader_prev != None:
             prev = loader_prev.get_property(each.name)
             if prev != each.value:
-                prev_value_str = " [previous value: " + loader_prev.get_property(each.name) + "]"
+                prev_value_str = " [previous file: " + loader_prev.get_property(each.name) + "]"
                 print "(!)",
         print "\t" + each.name + "\t=>\t" + each.value + prev_value_str
+
+    print "Namespaces:"
+    for each in loader.iterate_namespace_names():
+        prev_value_str = ""
+        if loader_prev != None:
+            prev = loader_prev.get_namespace(each)
+            if prev == None:
+                prev_value_str = " [previous file: missed]"
+                print "(!)",
+        print "\t" + each + prev_value_str
+        for field in loader.get_namespace(each).iterate_field_names():
+            prev_value_str = ""
+            if loader_prev != None:
+                prev = loader_prev.get_namespace(each).get_field_packager(field)
+                if prev == None:
+                    prev_value_str = " [previous file: missed]"
+                    print "(!)",
+            print "\t\t- " + field + prev_value_str
         
     return exit_code
             
