@@ -1,0 +1,17 @@
+<export>
+
+    <data>
+        <info path="" id="1" />
+        <file-data />
+        <subfiles>
+        </subfiles>
+        <subdirs>
+            <subdir>.</subdir>
+        </subdirs>
+        <aggregated-data>
+            <std.code.complexity>
+                <cyclomatic max="3" total="6.0" avg="1.5" min="1" />
+            </std.code.complexity>
+        </aggregated-data>
+    </data>
+</export>

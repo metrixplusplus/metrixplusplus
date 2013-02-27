@@ -1,0 +1,54 @@
+#
+#    Metrix++, Copyright 2009-2013, Metrix++ Project
+#    Link: http://metrixplusplus.sourceforge.net
+#    
+#    This file is a part of Metrix++ Tool.
+#    
+#    Metrix++ is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, version 3 of the License.
+#    
+#    Metrix++ is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#    GNU General Public License for more details.
+#    
+#    You should have received a copy of the GNU General Public License
+#    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+===============================================================================
+
+*** Known Limitations ***
+
+1) C/C++ parser and C# parser do not recognise definition of functions or overloaded operators
+   in case of embeded comments after identifier name and before the list of arguments.
+
+     This function is not detected by Metrix++: | This function is detected:
+     -------------------------------------------|-------------------------------------------
+         int getMax /* undesarable comment */   |     int getMax(int* array, int length)
+             (int* array, int length)           |         /* here is fine */
+         {                                      |     {
+             /* ... */                          |         /* ... */
+         }                                      |     }
+2) C/C++ parser does not recognise comments within preprocessor statements.
+   These comments are considered to be parts of a define.
+
+     This comment is not recognized by Metrix++:| This comment is recognised.
+     -------------------------------------------|-------------------------------------------
+         #define GET_MAX(a, b)    \             |     /*
+             /*                      \          |      * This macros returns
+              * This macros returns  \          |      * maximum from a and b
+              * maximum from a and b \          |      */
+              */                     \          |     #define GET_MAX(a, b) \
+             ((a > b) ? a : b)                  |         ((a > b) ? a : b)
+
+2) C# parser does not recognise getters/setters for properties, if there is a comment before a block.
+   These comments are considered to be parts of a define.
+
+     This function is not detected by Metrix++: | This function is detected:
+     -------------------------------------------|-------------------------------------------
+         get /* undesarable comment */          |     get
+         {                                      |     { /* here comment is fine */
+             /* ... */                          |         /* ... */
+         }                                      |     }
