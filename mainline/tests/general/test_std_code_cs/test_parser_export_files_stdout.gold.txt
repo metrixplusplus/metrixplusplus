@@ -14,10 +14,10 @@ data:
 .   .   .   .   info: 
 .   .   .   .   .   cursor="0"
 .   .   .   .   .   name="__global__"
-.   .   .   .   .   offset_end="9063"
+.   .   .   .   .   offset_end="9141"
 .   .   .   .   .   line_begin="1"
 .   .   .   .   .   type="global"
-.   .   .   .   .   line_end="442"
+.   .   .   .   .   line_end="448"
 .   .   .   .   .   offset_begin="0"
 .   .   .   .   data: 
 .   .   .   .   subregions:
@@ -26,10 +26,10 @@ data:
 .   .   .   .   .   .   info: 
 .   .   .   .   .   .   .   cursor="21"
 .   .   .   .   .   .   .   name="Microsoft.VisualBasic"
-.   .   .   .   .   .   .   offset_end="9026"
+.   .   .   .   .   .   .   offset_end="9104"
 .   .   .   .   .   .   .   line_begin="21"
 .   .   .   .   .   .   .   type="namespace"
-.   .   .   .   .   .   .   line_end="441"
+.   .   .   .   .   .   .   line_end="447"
 .   .   .   .   .   .   .   offset_begin="855"
 .   .   .   .   .   .   data: 
 .   .   .   .   .   .   subregions:
@@ -38,12 +38,14 @@ data:
 .   .   .   .   .   .   .   .   info: 
 .   .   .   .   .   .   .   .   .   cursor="31"
 .   .   .   .   .   .   .   .   .   name="other_template"
-.   .   .   .   .   .   .   .   .   offset_end="8959"
+.   .   .   .   .   .   .   .   .   offset_end="9037"
 .   .   .   .   .   .   .   .   .   line_begin="30"
 .   .   .   .   .   .   .   .   .   type="function"
-.   .   .   .   .   .   .   .   .   line_end="431"
+.   .   .   .   .   .   .   .   .   line_end="437"
 .   .   .   .   .   .   .   .   .   offset_begin="1012"
-.   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   cyclomatic="39"
 .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
@@ -67,17 +69,19 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   .   .   line_end="240"
 .   .   .   .   .   .   .   .   .   .   .   .   .   offset_begin="4943"
-.   .   .   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   .   .   subregions:
 .   subfiles:
 .   subdirs:
 .   aggregated-data:  
 .   .   std.code.complexity:  
 .   .   .   cyclomatic: 
-.   .   .   .   max="None"
-.   .   .   .   total="0.0"
-.   .   .   .   avg="None"
-.   .   .   .   min="None"
+.   .   .   .   max="39"
+.   .   .   .   total="39.0"
+.   .   .   .   avg="19.5"
+.   .   .   .   min="0"
 ================================================================================
 --------------------------------------------------------------------------------
 data:  
@@ -144,7 +148,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="43"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="1391"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
@@ -156,7 +162,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="48"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="1464"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
@@ -168,7 +176,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="56"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="1552"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="1"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   
 .   .   .   .   .   .   .   subregion:  
@@ -204,7 +214,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="73"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="1960"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   
 .   .   .   .   .   .   .   subregion:  
@@ -228,7 +240,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="81"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="2130"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   
 .   .   .   .   .   .   .   subregion:  
@@ -240,7 +254,9 @@ data:
 .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   line_end="94"
 .   .   .   .   .   .   .   .   .   offset_begin="2698"
-.   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   
 .   .   .   .   .   .   .   subregion:  
@@ -252,7 +268,9 @@ data:
 .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   line_end="98"
 .   .   .   .   .   .   .   .   .   offset_begin="2802"
-.   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   
 .   .   .   .   .   .   .   subregion:  
@@ -264,17 +282,19 @@ data:
 .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   line_end="104"
 .   .   .   .   .   .   .   .   .   offset_begin="2879"
-.   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   subregions:
 .   subfiles:
 .   subdirs:
 .   aggregated-data:  
 .   .   std.code.complexity:  
 .   .   .   cyclomatic: 
-.   .   .   .   max="None"
-.   .   .   .   total="0.0"
-.   .   .   .   avg="None"
-.   .   .   .   min="None"
+.   .   .   .   max="1"
+.   .   .   .   total="1.0"
+.   .   .   .   avg="0.125"
+.   .   .   .   min="0"
 ================================================================================
 --------------------------------------------------------------------------------
 data:  
@@ -353,7 +373,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="83"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="2288"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
@@ -365,7 +387,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="92"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="2802"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
@@ -377,7 +401,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="102"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="3073"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
@@ -389,7 +415,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="112"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="3336"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
@@ -401,7 +429,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="122"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="3602"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
@@ -413,7 +443,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="131"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="3863"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
@@ -425,7 +457,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="146"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="3954"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="1"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
@@ -437,7 +471,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="152"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="4354"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
@@ -449,7 +485,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="195"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="5003"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="4"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
@@ -461,7 +499,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="201"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="5946"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
@@ -473,7 +513,9 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="207"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="6134"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
@@ -485,17 +527,19 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   type="function"
 .   .   .   .   .   .   .   .   .   .   .   line_end="213"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="6302"
-.   .   .   .   .   .   .   .   .   .   data: 
+.   .   .   .   .   .   .   .   .   .   data:  
+.   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   subfiles:
 .   subdirs:
 .   aggregated-data:  
 .   .   std.code.complexity:  
 .   .   .   cyclomatic: 
-.   .   .   .   max="None"
-.   .   .   .   total="0.0"
-.   .   .   .   avg="None"
-.   .   .   .   min="None"
+.   .   .   .   max="4"
+.   .   .   .   total="5.0"
+.   .   .   .   avg="0.416666666667"
+.   .   .   .   min="0"
 ================================================================================
 
 

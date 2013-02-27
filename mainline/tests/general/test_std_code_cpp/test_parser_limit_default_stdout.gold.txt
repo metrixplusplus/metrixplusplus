@@ -62,6 +62,14 @@
 	Change trend   : None
 	Limit          : 0.0
 
+./test2.cpp:23: warning: Metric 'std.code.complexity/cyclomatic' for region 'main' exceeds the limit.
+	Metric name    : std.code.complexity/cyclomatic
+	Region name    : main
+	Metric value   : 2
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+
 ./test3.cpp:39: warning: Metric 'std.code.complexity/cyclomatic' for region 'doColor' exceeds the limit.
 	Metric name    : std.code.complexity/cyclomatic
 	Region name    : doColor

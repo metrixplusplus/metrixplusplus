@@ -23,6 +23,18 @@ namespace aaa {
 int main(int a, string b)
 {
 	return 0;
+
+	try {
+
+	}
+	catch (a) // for cyclomatic complexity test
+	{
+
+	}
+	catch (b) // for cyclomatic complexity test
+	{
+
+	}
 }
 }
 
