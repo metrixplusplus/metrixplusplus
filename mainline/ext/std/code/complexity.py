@@ -32,17 +32,27 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
         
     def initialize(self):
         if self.is_active == True:
+            # trigger version property set
+            core.api.Plugin.initialize(self)
             namespace = self.get_plugin_loader().get_database_loader().create_namespace(self.get_name(), support_regions = True)
             namespace.add_field('cyclomatic', int)
             core.api.subscribe_by_parents_name('std.code.cpp', self, 'callback_cpp')
-            # trigger version property set
-            core.api.Plugin.initialize(self)
+            core.api.subscribe_by_parents_name('std.code.cs', self, 'callback_cs')
 
     # cyclomatic complexity pattern
-    pattern = re.compile(r'''([^0-9A-Za-z_]((if)|(case)|(for)|(while))[^0-9A-Za-z_])|[&][&]|[|][|]|[?]''')
+    # - C/C++
+    pattern_cpp = re.compile(r'''([^0-9A-Za-z_]((if)|(case)|(for)|(while)|(catch))[^0-9A-Za-z_])|[&][&]|[|][|]|[?]''')
+    # - C#
+    #   supports Null-coalescing '??' and conditional '?:'
+    pattern_cs = re.compile(r'''([^0-9A-Za-z_]((if)|(case)|(for)|(foreach)|(while)|(catch))[^0-9A-Za-z_])|[&][&]|[|][|]|[?][?]?''')
 
     def callback_cpp(self, parent, data, is_updated):
-        
+        self.callback_common(parent, data, is_updated, self.pattern_cpp)
+
+    def callback_cs(self, parent, data, is_updated):
+        self.callback_common(parent, data, is_updated, self.pattern_cs)
+
+    def callback_common(self, parent, data, is_updated, pattern):
         is_updated = is_updated or self.is_updated
         if is_updated == True:
             text = data.get_content(exclude = data.get_marker_types().ALL_EXCEPT_CODE)
@@ -52,8 +62,8 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
                 start_pos = region.get_offset_begin()
                 for sub_id in region.iterate_subregion_ids():
                     # exclude sub regions, like enclosed classes
-                    count += len(self.pattern.findall(text, start_pos, data.get_region(sub_id).get_offset_begin()))
+                    count += len(pattern.findall(text, start_pos, data.get_region(sub_id).get_offset_begin()))
                     start_pos = data.get_region(sub_id).get_offset_end()
-                count += len(self.pattern.findall(text, start_pos, region.get_offset_end()))
+                count += len(pattern.findall(text, start_pos, region.get_offset_end()))
                 region.set_data(self.get_name(), 'cyclomatic', count)
 

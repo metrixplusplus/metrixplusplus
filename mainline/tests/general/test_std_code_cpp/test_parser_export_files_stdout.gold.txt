@@ -1133,10 +1133,10 @@ data:
 .   .   .   .   info: 
 .   .   .   .   .   cursor="0"
 .   .   .   .   .   name="__global__"
-.   .   .   .   .   offset_end="512"
+.   .   .   .   .   offset_end="628"
 .   .   .   .   .   line_begin="1"
 .   .   .   .   .   type="global"
-.   .   .   .   .   line_end="41"
+.   .   .   .   .   line_end="53"
 .   .   .   .   .   offset_begin="0"
 .   .   .   .   data: 
 .   .   
@@ -1194,10 +1194,10 @@ data:
 .   .   .   .   info: 
 .   .   .   .   .   cursor="22"
 .   .   .   .   .   name="aaa"
-.   .   .   .   .   offset_end="234"
+.   .   .   .   .   offset_end="350"
 .   .   .   .   .   line_begin="21"
 .   .   .   .   .   type="namespace"
-.   .   .   .   .   line_end="27"
+.   .   .   .   .   line_end="39"
 .   .   .   .   .   offset_begin="173"
 .   .   .   .   data: 
 .   .   
@@ -1205,22 +1205,22 @@ data:
 .   .   .   .   info: 
 .   .   .   .   .   cursor="23"
 .   .   .   .   .   name="main"
-.   .   .   .   .   offset_end="232"
+.   .   .   .   .   offset_end="348"
 .   .   .   .   .   line_begin="23"
 .   .   .   .   .   type="function"
-.   .   .   .   .   line_end="26"
+.   .   .   .   .   line_end="38"
 .   .   .   .   .   offset_begin="192"
 .   .   .   .   data:  
 .   .   .   .   .   std.code.complexity: 
-.   .   .   .   .   .   cyclomatic="0"
+.   .   .   .   .   .   cyclomatic="2"
 .   subfiles:
 .   subdirs:
 .   aggregated-data:  
 .   .   std.code.complexity:  
 .   .   .   cyclomatic: 
-.   .   .   .   max="1"
-.   .   .   .   total="1.0"
-.   .   .   .   avg="0.25"
+.   .   .   .   max="2"
+.   .   .   .   total="3.0"
+.   .   .   .   avg="0.75"
 .   .   .   .   min="0"
 ================================================================================
 --------------------------------------------------------------------------------

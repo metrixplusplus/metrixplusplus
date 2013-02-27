@@ -426,6 +426,12 @@ internal sealed class File // surprise
 	public void Unlock(long fromRecord, long toRecord)
 			{
 				// TODO
+				try
+				{
+				}
+				catch(a) // to test cyclomatic complexity
+				{
+				}
 			}
 
 }; // class File

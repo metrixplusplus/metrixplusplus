@@ -1,0 +1,32 @@
+./File.cs:31: warning: Metric 'std.code.complexity/cyclomatic' for region 'other_template' exceeds the limit.
+	Metric name    : std.code.complexity/cyclomatic
+	Region name    : other_template
+	Metric value   : 39
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+
+./Generics.cs:50: warning: Metric 'std.code.complexity/cyclomatic' for region 'Grow' exceeds the limit.
+	Metric name    : std.code.complexity/cyclomatic
+	Region name    : Grow
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+
+./interface.cs:135: warning: Metric 'std.code.complexity/cyclomatic' for region 'Equals' exceeds the limit.
+	Metric name    : std.code.complexity/cyclomatic
+	Region name    : Equals
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+
+./interface.cs:169: warning: Metric 'std.code.complexity/cyclomatic' for region 'ToTitleCase' exceeds the limit.
+	Metric name    : std.code.complexity/cyclomatic
+	Region name    : ToTitleCase
+	Metric value   : 4
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+
