@@ -55,34 +55,49 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IParser, core.api.IConfi
 class CppCodeParser(object):
     
     regex_cpp = re.compile(r'''
-                   /([\\](?:\n|\r|\r\n))*/(?=\n|\r|\r\n)              # Match C++ style comments (empty comment line)
-                |  /([\\](?:\n|\r|\r\n))*/.*?[^\\](?=\n|\r|\r\n)      # Match C++ style comments
+                   //(?=\n|\r|\r\n)                                   # Match C# style comments (empty comment line)
+                |  //.*?(?=\n|\r|\r\n)                                # Match C# style comments
                                                                       # NOTE: end of line is NOT consumed
-                                                                      # NOTE: ([\\](?:\n|\r|\r\n))* for new line separators,
-                                                                      # Need to support new line separators in expense of efficiency?
-                | /([\\](?:\n|\r|\r\n))*\*.*?\*([\\](?:\n|\r|\r\n))*/ # Match C style comments
+                                                                      # NOTE: it is slightly different in C++
+                | /\*\*/                                              # Match C style comments (empty comment line)
+                                                                      # NOTE: it is slightly different in C++
+                | /\*.*?\*/                                           # Match C style comments
+                                                                      # NOTE: it is slightly different in C++
                 | \'(?:\\.|[^\\\'])*\'                                # Match quoted strings
                 | "(?:\\.|[^\\"])*"                                   # Match double quoted strings
-                | (((?<=\n|\r)|^)[ \t]*[#].*?[^\\](?=\n|\r|\r\n))     # Match preprocessor
+                | (((?<=\n|\r)|^)[ \t]*[#].*?(?=\n|\r|\r\n))          # Match preprocessor
                                                                       # NOTE: end of line is NOT consumed
                                                                       # NOTE: beginning of line is NOT consumed
+                                                                      # NOTE: C# does not support backslashing as C++ does
                 | (?P<fn_name>
-                      (operator(                                      # Match C++ operator ...
-                         (\s+[_a-zA-Z][_a-zA-Z0-9]*(\s*\[\s*\])?)     # - cast, new and delete operators
+                      (operator(                                      # Match C# operator ...
+                         (\s+[_a-zA-Z][_a-zA-Z0-9]*(\s*\[\s*\])?)     # - cast, true, false operators
                        | (\s*\[\s*\])                                 # - operator []
                        | (\s*\(\s*\))                                 # - operator ()
                        | (\s*[+-\\*/=<>!%&^|~,?.]{1,3})               # - other operators (from 1 to 3 symbols)
+                                                                      #   NOTE: maybe dot and ? should not be in the list...
                       ))                                               
-                    | ([~]?[_a-zA-Z][_a-zA-Z0-9]*)                    # ... or function or constructor
-                  )\s*[(]                                             # LIMITATION: if there are comments after function name
+                    | (([~]\s*)?[_a-zA-Z][_a-zA-Z0-9]*
+                       ([.][a-zA-Z_][a-zA-Z0-9_]*)*)                  # ... or function or constructor
+                                                                      # NOTE: C# destructor can have spaces in name after ~
+                                                                      # NOTE: explicit interface implementation method has got a dot
+                    | (?P<prop_setget>get|set)                        # ... or property setter/getter
+                  )\s*(?(prop_setget)(?=[{])|[(<])
+                                                                      # LIMITATION: if there are comments after function name
                                                                       # and before '(', it is not detected
                                                                       # LIMITATION: if there are comments within operator definition,
                                                                       # if may be not detected
-                | ((?P<block_type>class|struct|namespace)             # Match C++ class or struct
-                    (?P<block_name>((\s+[a-zA-Z_][a-zA-Z0-9_]*)|(?=\s*[{])))) # noname is supported, symbol '{' is not consumed
+                                                                      # LIMITATION: if there are comments after set|get keyword,
+                                                                      # if may be not detected
+                | ((?P<block_type>class|struct|namespace|interface)   # Match class or struct or interface or namespace
+                    (?P<block_name>(\s+[a-zA-Z_][a-zA-Z0-9_]*)([.][a-zA-Z_][a-zA-Z0-9_]*)*))
+                                                                      # NOTE: noname instances are impossible in C#
+                                                                      # NOTE: names can have sub-names separated by dots
                                                                       # LIMITATION: if there are comments between keyword and name,
                                                                       # it is not detected
-                | [<>{};:]                                            # Match block start/end, brackets and statement separator
+                | [{};]                                               # Match block start/end and statement separator
+                                                                      # NOTE: C++ parser includes processing of <> and : 
+                                                                      #       to handle template definitions, it is easier in C#
                 | ((?:\n|\r|\r\n)\s*(?:\n|\r|\r\n))                   # Match double empty line
             ''',
             re.DOTALL | re.MULTILINE | re.VERBOSE
@@ -137,6 +152,8 @@ class CppCodeParser(object):
                     return data.get_region_types().STRUCT
                 elif named_type == "namespace":
                     return data.get_region_types().NAMESPACE
+                elif named_type == "interface":
+                    return data.get_region_types().INTERFACE
                 elif named_type == "__global__":
                     return data.get_region_types().GLOBAL
                 else:
@@ -189,6 +206,7 @@ class CppCodeParser(object):
 
             # Template argument closing bracket
             elif text[m.start()] == '>':
+                assert(False) # TODO should not happen
                 # Reset next block name and start (in order to skip class names in templates), if has not been confirmed before
                 if next_block['confirmed'] == False and (next_block['type'] == 'class' or next_block['type'] == 'struct'):
                     next_block['name'] = ""
@@ -196,6 +214,7 @@ class CppCodeParser(object):
                     
             # Template argument opening bracket or after class inheritance specification
             elif text[m.start()] == ':' or text[m.start()] == '<':
+                assert(False) # TODO should not happen
                 # .. if goes after calss definition
                 if next_block['type'] == 'class' or next_block['type'] == 'struct':
                     next_block['confirmed'] = True
@@ -250,13 +269,13 @@ class CppCodeParser(object):
                     count_mismatched_brackets += 1
                     indent_current = 0
 
-            # Potential namespace, struct, class
-            elif text[m.start():m.end()].startswith(('class','struct','namespace')) == True \
-                and m.group('fn_name') == None: # function name can start with keyword, for example class_id_type()
+            # Potential namespace, struct, class, interface
+            elif m.group('block_type') != None:
                 if next_block['name'] == "":
                     # - 'name'
                     next_block['name'] = m.group('block_name').strip()
                     if next_block['name'] == "":
+                        assert(False) # impossible in C#
                         next_block['name'] = '__noname__'
                     # - 'cursor'
                     cursor_current += len(self.regex_ln.findall(text, cursor_last_pos, m.start('block_name')))
@@ -267,7 +286,7 @@ class CppCodeParser(object):
                     # - 'start' detected earlier
 
             # Potential function name detected...
-            else:
+            elif m.group('fn_name') != None:
                 # ... if outside of a function (do not detect enclosed functions, unless classes are matched)
                 if blocks[curblk]['type'] != 'function' and (next_block['name'] == "" or next_block['type'] != 'function'):
                     # - 'name'
@@ -281,6 +300,8 @@ class CppCodeParser(object):
                     # - 'type'
                     next_block['type'] = 'function'
                     # - 'start' detected earlier
+            else:
+                assert(len("Unknown match by regular expression") == 0)
 
         while indent_current > 0:
             # log all

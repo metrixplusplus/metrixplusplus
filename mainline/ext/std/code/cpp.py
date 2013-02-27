@@ -60,6 +60,7 @@ class CppCodeParser(object):
                                                                       # NOTE: end of line is NOT consumed
                                                                       # NOTE: ([\\](?:\n|\r|\r\n))* for new line separators,
                                                                       # Need to support new line separators in expense of efficiency?
+                | /\*\*/                                              # Match C style comments (empty comment line)
                 | /([\\](?:\n|\r|\r\n))*\*.*?\*([\\](?:\n|\r|\r\n))*/ # Match C style comments
                 | \'(?:\\.|[^\\\'])*\'                                # Match quoted strings
                 | "(?:\\.|[^\\"])*"                                   # Match double quoted strings
@@ -251,8 +252,7 @@ class CppCodeParser(object):
                     indent_current = 0
 
             # Potential namespace, struct, class
-            elif text[m.start():m.end()].startswith(('class','struct','namespace')) == True \
-                and m.group('fn_name') == None: # function name can start with keyword, for example class_id_type()
+            elif m.group('block_type') != None:
                 if next_block['name'] == "":
                     # - 'name'
                     next_block['name'] = m.group('block_name').strip()
@@ -267,7 +267,7 @@ class CppCodeParser(object):
                     # - 'start' detected earlier
 
             # Potential function name detected...
-            else:
+            elif m.group('fn_name') != None:
                 # ... if outside of a function (do not detect enclosed functions, unless classes are matched)
                 if blocks[curblk]['type'] != 'function' and (next_block['name'] == "" or next_block['type'] != 'function'):
                     # - 'name'
@@ -281,6 +281,8 @@ class CppCodeParser(object):
                     # - 'type'
                     next_block['type'] = 'function'
                     # - 'start' detected earlier
+            else:
+                assert(len("Unknown match by regular expression") == 0)
 
         while indent_current > 0:
             # log all

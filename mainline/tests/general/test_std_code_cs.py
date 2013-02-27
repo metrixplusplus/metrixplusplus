@@ -19,6 +19,7 @@
 
 
 import unittest
+import os
 
 import tests.common
 
@@ -32,9 +33,16 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('export', ['--general.nest-regions'])
         self.assertExec(runner.run())
 
+        dirs_list = [os.path.join('.', each) for each in os.listdir(self.get_content_paths().cwd)]
+        runner = tests.common.ToolRunner('export',
+                                         opts_list=['--general.nest-regions', '--general.format=txt'],
+                                         dirs_list=dirs_list,
+                                         prefix='files')
+        self.assertExec(runner.run())
+
         runner = tests.common.ToolRunner('limit',
                                          ['--general.max-limit=std.code.complexity:cyclomatic:0'],
-                                         exit_code=11)
+                                         exit_code=0)
         self.assertExec(runner.run())
 
 if __name__ == '__main__':

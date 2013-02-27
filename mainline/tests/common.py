@@ -82,6 +82,7 @@ class ToolRunner(object):
         self.save_prev = save_prev
         
     def run(self):
+        logging.debug(self.get_description())
         child = subprocess.Popen(self.call_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                  cwd=os.path.join(self.suite_location, self.cwd))
         (child_stdout, child_stderr) =  child.communicate()
@@ -187,7 +188,7 @@ class ToolRunner(object):
         return self.cmd    
 
     def get_description(self):
-        return self.get_message() + "\nProcess: " + self.get_cmd()  + "\nCWD: " + self.cwd       
+        return self.get_message() + "\nProcess: " + self.get_cmd()  + "\nCWD: " + os.path.join(self.suite_location, self.cwd)       
 
     def get_dbfile(self):
         return self.dbfile
