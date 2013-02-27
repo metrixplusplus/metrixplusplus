@@ -6,8 +6,7 @@ Options:
                         Defines log level. Possible values are
                         'DEBUG','INFO','WARNING' or 'ERROR'. Default value is
                         inherited from environment variable
-                        'METRIXPLUSPLUS_LOG_LEVEL' if set. Otherwise, it is
-                        'ERROR' [default: ERROR]
+                        'METRIXPLUSPLUS_LOG_LEVEL' if set. [default: INFO]
   --general.db-file=GENERAL.DB_FILE
                         Primary database file to write (by the collector) and
                         post-process (by other tools) [default: ./metrixpp.db]

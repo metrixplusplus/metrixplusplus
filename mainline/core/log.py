@@ -31,7 +31,7 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
         parser.add_option("--general.log-level", default=default_value_cur, choices=allowed_values,
                          help="Defines log level. Possible values are 'DEBUG','INFO','WARNING' or 'ERROR'. "
                          "Default value is inherited from environment variable 'METRIXPLUSPLUS_LOG_LEVEL' if set. "
-                         "Otherwise, it is '" + default_value_cur +  "' [default: %default]")
+                         "[default: " + default_value + "]")
     
     def configure(self, options):
         if options.__dict__['general.log_level'] == 'ERROR':
