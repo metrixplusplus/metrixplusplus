@@ -115,6 +115,7 @@ class FileRegionData(LoadableData):
         STRUCT    = 0x04
         NAMESPACE = 0x08
         FUNCTION  = 0x10
+        INTERFACE = 0x20
         ANY       = 0xFFFFFFFF
         
         def to_str(self, group):
@@ -130,6 +131,8 @@ class FileRegionData(LoadableData):
                 return "namespace"
             elif group == self.FUNCTION:
                 return "function"
+            elif group == self.INTERFACE:
+                return "interface"
             else:
                 assert(False)
     
