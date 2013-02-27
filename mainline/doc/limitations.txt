@@ -21,7 +21,7 @@
 
 *** Known Limitations ***
 
-1) C/C++ parser does not recognise definition of functions or overloaded operators
+1) C/C++ parser and C# parser do not recognise definition of functions or overloaded operators
    in case of embeded comments after identifier name and before the list of arguments.
 
      This function is not detected by Metrix++: | This function is detected:
@@ -43,3 +43,12 @@
               */                     \          |     #define GET_MAX(a, b) \
              ((a > b) ? a : b)                  |         ((a > b) ? a : b)
 
+2) C# parser does not recognise getters/setters for properties, if there is a comment before a block.
+   These comments are considered to be parts of a define.
+
+     This function is not detected by Metrix++: | This function is detected:
+     -------------------------------------------|-------------------------------------------
+         get /* undesarable comment */          |     get
+         {                                      |     { /* here comment is fine */
+             /* ... */                          |         /* ... */
+         }                                      |     }

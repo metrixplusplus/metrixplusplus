@@ -64,6 +64,16 @@ def main():
     loader = core.db.loader.Loader()
     loader.open_database(db_plugin.dbfile)
     
+    # Check for versions consistency
+    for each in loader.iterate_properties():
+        if db_plugin.dbfile_prev != None:
+            prev = loader_prev.get_property(each.name)
+            if prev != each.value:
+                logging.warn("Previous data has got different metadata:")
+                logging.warn(" - identification of change trends can be not reliable")
+                logging.warn(" - use 'info' tool to get more details")
+                break
+    
     paths = None
     if len(args) == 0:
         paths = [""]
