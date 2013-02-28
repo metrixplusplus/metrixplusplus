@@ -207,6 +207,7 @@ public class TextInfo : IDeserializationCallback
             }
 
     // Implement IDeserializationCallback.
+    [MethodImpl(MethodImplOptions.InternalCall)]
     void IDeserializationCallback.OnDeserialization(Object sender)
             {
                 // Nothing to do here.

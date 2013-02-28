@@ -558,10 +558,10 @@ data:
 .   .   .   .   info: 
 .   .   .   .   .   cursor="0"
 .   .   .   .   .   name="__global__"
-.   .   .   .   .   offset_end="6535"
+.   .   .   .   .   offset_end="6584"
 .   .   .   .   .   line_begin="1"
 .   .   .   .   .   type="global"
-.   .   .   .   .   line_end="218"
+.   .   .   .   .   line_end="219"
 .   .   .   .   .   offset_begin="0"
 .   .   .   .   data: 
 .   .   .   .   subregions:
@@ -594,10 +594,10 @@ data:
 .   .   .   .   .   .   info: 
 .   .   .   .   .   .   .   cursor="61"
 .   .   .   .   .   .   .   name="System.Globalization"
-.   .   .   .   .   .   .   offset_end="6499"
+.   .   .   .   .   .   .   offset_end="6548"
 .   .   .   .   .   .   .   line_begin="61"
 .   .   .   .   .   .   .   type="namespace"
-.   .   .   .   .   .   .   line_end="217"
+.   .   .   .   .   .   .   line_end="218"
 .   .   .   .   .   .   .   offset_begin="2040"
 .   .   .   .   .   .   data: 
 .   .   .   .   .   .   subregions:
@@ -606,10 +606,10 @@ data:
 .   .   .   .   .   .   .   .   info: 
 .   .   .   .   .   .   .   .   .   cursor="69"
 .   .   .   .   .   .   .   .   .   name="TextInfo"
-.   .   .   .   .   .   .   .   .   offset_end="6477"
+.   .   .   .   .   .   .   .   .   offset_end="6526"
 .   .   .   .   .   .   .   .   .   line_begin="69"
 .   .   .   .   .   .   .   .   .   type="class"
-.   .   .   .   .   .   .   .   .   line_end="215"
+.   .   .   .   .   .   .   .   .   line_end="216"
 .   .   .   .   .   .   .   .   .   offset_begin="2183"
 .   .   .   .   .   .   .   .   data: 
 .   .   .   .   .   .   .   .   subregions:
@@ -770,12 +770,12 @@ data:
 .   .   .   .   .   .   .   .   
 .   .   .   .   .   .   .   .   .   subregion:  
 .   .   .   .   .   .   .   .   .   .   info: 
-.   .   .   .   .   .   .   .   .   .   .   cursor="210"
+.   .   .   .   .   .   .   .   .   .   .   cursor="211"
 .   .   .   .   .   .   .   .   .   .   .   name="IDeserializationCallback.OnDeserialization"
-.   .   .   .   .   .   .   .   .   .   .   offset_end="6474"
+.   .   .   .   .   .   .   .   .   .   .   offset_end="6523"
 .   .   .   .   .   .   .   .   .   .   .   line_begin="209"
 .   .   .   .   .   .   .   .   .   .   .   type="function"
-.   .   .   .   .   .   .   .   .   .   .   line_end="213"
+.   .   .   .   .   .   .   .   .   .   .   line_end="214"
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="6302"
 .   .   .   .   .   .   .   .   .   .   data:  
 .   .   .   .   .   .   .   .   .   .   .   std.code.complexity: 

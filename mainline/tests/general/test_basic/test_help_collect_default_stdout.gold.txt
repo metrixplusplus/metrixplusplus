@@ -38,3 +38,6 @@ Options:
   --std.code.cs.files=STD.CODE.CS.FILES
                         Enumerates filename extensions to match C# files
                         [default: *.cs]
+  --std.code.java.files=STD.CODE.JAVA.FILES
+                        Enumerates filename extensions to match Java files
+                        [default: *.java]

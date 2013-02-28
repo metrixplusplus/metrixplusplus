@@ -6,6 +6,8 @@ Properties:
 	std.code.cpp:files	=>	*.c,*.cc,*.cpp,*.cxx,*.h,*.hh,*.hpp,*.hxx
 	std.code.cs:version	=>	1.0
 	std.code.cs:files	=>	*.cs
+	std.code.java:version	=>	1.0
+	std.code.java:files	=>	*.java
 Namespaces:
 	std.code.complexity
 		- cyclomatic

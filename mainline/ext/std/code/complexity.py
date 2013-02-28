@@ -38,6 +38,7 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
             namespace.add_field('cyclomatic', int)
             core.api.subscribe_by_parents_name('std.code.cpp', self, 'callback_cpp')
             core.api.subscribe_by_parents_name('std.code.cs', self, 'callback_cs')
+            core.api.subscribe_by_parents_name('std.code.java', self, 'callback_java')
 
     # cyclomatic complexity pattern
     # - C/C++
@@ -45,12 +46,17 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
     # - C#
     #   supports Null-coalescing '??' and conditional '?:'
     pattern_cs = re.compile(r'''([^0-9A-Za-z_]((if)|(case)|(for)|(foreach)|(while)|(catch))[^0-9A-Za-z_])|[&][&]|[|][|]|[?][?]?''')
+    # - Java
+    pattern_java = re.compile(r'''([^0-9A-Za-z_]((if)|(case)|(for)|(while)|(catch))[^0-9A-Za-z_])|[&][&]|[|][|]|[?]''')
 
     def callback_cpp(self, parent, data, is_updated):
         self.callback_common(parent, data, is_updated, self.pattern_cpp)
 
     def callback_cs(self, parent, data, is_updated):
         self.callback_common(parent, data, is_updated, self.pattern_cs)
+
+    def callback_java(self, parent, data, is_updated):
+        self.callback_common(parent, data, is_updated, self.pattern_java)
 
     def callback_common(self, parent, data, is_updated, pattern):
         is_updated = is_updated or self.is_updated
