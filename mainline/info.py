@@ -32,7 +32,7 @@ def main():
     log_plugin = core.log.Plugin()
     db_plugin = core.db.post.Plugin()
 
-    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog [options]")
+    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
 
@@ -40,8 +40,6 @@ def main():
     log_plugin.configure(options)
     db_plugin.configure(options)
     
-    args = args # used
-
     loader = core.db.loader.Loader()
     loader.open_database(db_plugin.dbfile)
     loader_prev = None
@@ -54,8 +52,11 @@ def main():
         prev_value_str = ""
         if loader_prev != None:
             prev = loader_prev.get_property(each.name)
-            if prev != each.value:
-                prev_value_str = " [previous file: " + loader_prev.get_property(each.name) + "]"
+            if prev == None:
+                prev_value_str = " [new]"
+                print "(!)",
+            elif prev != each.value:
+                prev_value_str = " [modified (was: " + loader_prev.get_property(each.name) + ")]"
                 print "(!)",
         print "\t" + each.name + "\t=>\t" + each.value + prev_value_str
 
@@ -65,7 +66,7 @@ def main():
         if loader_prev != None:
             prev = loader_prev.get_namespace(each)
             if prev == None:
-                prev_value_str = " [previous file: missed]"
+                prev_value_str = " [new]"
                 print "(!)",
         print "\t" + each + prev_value_str
         for field in loader.get_namespace(each).iterate_field_names():
@@ -73,9 +74,33 @@ def main():
             if loader_prev != None:
                 prev = loader_prev.get_namespace(each).get_field_packager(field)
                 if prev == None:
-                    prev_value_str = " [previous file: missed]"
+                    prev_value_str = " [new]"
                     print "(!)",
             print "\t\t- " + field + prev_value_str
+
+    print "Files:"
+    paths = None
+    if len(args) == 0:
+        paths = [""]
+    else:
+        paths = args
+    for path in paths:
+        file_iterator = loader.iterate_file_data(path=path)
+        if file_iterator == None:
+            logging.error("Specified path '" + path + "' is invalid (not found in the database records)")
+            exit_code += 1
+            continue
+        for each in file_iterator:
+            prev_value_str = ""
+            if loader_prev != None:
+                prev = loader_prev.load_file_data(each.get_path())
+                if prev == None:
+                    prev_value_str = " [new]"
+                    print "(!)",
+                elif prev.get_checksum() != each.get_checksum():
+                    prev_value_str = " [modified]"
+                    print "(!)",
+            print "\t" + each.get_path() + prev_value_str
         
     return exit_code
             

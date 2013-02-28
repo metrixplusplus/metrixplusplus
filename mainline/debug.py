@@ -85,16 +85,37 @@ def dumphtml(args, loader):
         result += (cgi.escape(text[last_pos:]))
         last_pos = 0
         result += ('</pre></td><td><pre>')
-        styles = ['<span style="background-color:#ffff80">', '<span style="background-color:#ff80ff">']
-        for item in enumerate(data.iterate_regions(filter_group=data.get_region_types().FUNCTION)):
-            reg = item[1]
-            result += (cgi.escape(text[last_pos:reg.get_offset_begin()]))
-            result += (styles[item[0] % 2])
-            result += ('<a href="#line' + str(reg.get_cursor()) + '" id=line"' + str(reg.get_cursor()) + '"></a>')
-            result += (cgi.escape(text[reg.get_offset_begin():reg.get_offset_end()]))
+        styles = [('<span style="background-color:#F0F010">',
+                  '<span style="background-color:#F010F0">'),
+                  ('<span style="background-color:#F0F030">',
+                  '<span style="background-color:#F030F0">'),
+                  ('<span style="background-color:#F0F050">',
+                  '<span style="background-color:#F050F0">'),
+                  ('<span style="background-color:#F0F070">',
+                  '<span style="background-color:#F070F0">'),
+                  ('<span style="background-color:#F0F090">',
+                  '<span style="background-color:#F090F0">'),
+                  ('<span style="background-color:#F0F0B0">',
+                  '<span style="background-color:#F0B0F0">'),
+                  ('<span style="background-color:#F0F0D0">',
+                  '<span style="background-color:#F0D0F0">'),
+                  ('<span style="background-color:#F0F0E0">',
+                  '<span style="background-color:#F0E0F0">')]
+        
+        def proc_rec(region_id, file_data, styles, indent, pos):
+            result = (styles[indent % len(styles)][pos % 2])
+            region = file_data.get_region(region_id)
+            result += ('<a href="#line' + str(region.get_cursor()) + '" id=line"' + str(region.get_cursor()) + '"></a>')
+            last_pos = region.get_offset_begin() 
+            for (ind, sub_id) in enumerate(file_data.get_region(region_id).iterate_subregion_ids()):
+                subregion = file_data.get_region(sub_id)
+                result += (cgi.escape(text[last_pos:subregion.get_offset_begin()]))
+                result += proc_rec(sub_id, file_data, styles, indent + 3, ind)
+                last_pos = subregion.get_offset_end()
+            result += (cgi.escape(text[last_pos:region.get_offset_end()]))
             result += ('</span>')
-            last_pos = reg.get_offset_end()
-        result += (cgi.escape(text[last_pos:]))
+            return result
+        result += proc_rec(1, data, styles, 0, 0)
         result += ('</pre></td></tr></table>')
     result += ('</body></html>')
     print result

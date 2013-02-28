@@ -12,3 +12,5 @@ Namespaces:
 	std.code.complexity
 		- cyclomatic
 	general
+Files:
+	./simple.cpp
