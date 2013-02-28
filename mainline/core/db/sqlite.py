@@ -465,11 +465,9 @@ class Database(object):
         assert(len(result) == 1)
         return self.FileData(result[0]['id'], result[0]['path'], result[0]['checksum'])
 
-    def iterate_files(self):
-        sql = "SELECT * FROM __files__ WHERE (confirmed = 1)"
-        self.log(sql)
-        for row in self.conn.execute(sql).fetchall(): 
-            yield self.FileData(row['id'], row['path'], row['checksum']) 
+    def iterate_files(self, path_like = None):
+        for row in self.select_rows('__files__', path_like=path_like, filters=[('confirmed','=','1')]): 
+            yield self.FileData(row['id'], row['path'], row['checksum'])
 
     def create_region(self, file_id, region_id, name, begin, end, line_begin, line_end, cursor, group, checksum):
         assert(self.read_only == False)
@@ -563,10 +561,10 @@ class Database(object):
         what_stmt = ", ".join(column_names)
         if len(what_stmt) == 0:
             what_stmt = "*"
-        elif path_like != None:
+        elif path_like != None and table_name != '__files__':
             what_stmt += ", '__files__'.'path', '__files__'.'id'"
         inner_stmt = ""
-        if path_like != None:
+        if path_like != None and table_name != '__files__':
             inner_stmt = " INNER JOIN '__files__' ON '__files__'.'id' = '" + table_name + "'.'file_id' "
 
         where_stmt = " "

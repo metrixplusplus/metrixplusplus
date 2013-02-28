@@ -787,10 +787,10 @@ data:
 .   .   .   .   .   cursor="134"
 .   .   .   .   .   name="mycontainer"
 .   .   .   .   .   offset_end="2785"
-.   .   .   .   .   line_begin="134"
+.   .   .   .   .   line_begin="132"
 .   .   .   .   .   type="class"
 .   .   .   .   .   line_end="139"
-.   .   .   .   .   offset_begin="2662"
+.   .   .   .   .   offset_begin="2624"
 .   .   .   .   data: 
 .   .   
 .   .   .   region:  
@@ -877,7 +877,7 @@ data:
 .   .   .   .   .   line_begin="164"
 .   .   .   .   .   type="struct"
 .   .   .   .   .   line_end="252"
-.   .   .   .   .   offset_begin="3245"
+.   .   .   .   .   offset_begin="3227"
 .   .   .   .   data: 
 .   .   
 .   .   .   region:  
@@ -1031,7 +1031,7 @@ data:
 .   .   .   .   .   line_begin="261"
 .   .   .   .   .   type="function"
 .   .   .   .   .   line_end="264"
-.   .   .   .   .   offset_begin="5333"
+.   .   .   .   .   offset_begin="5315"
 .   .   .   .   data:  
 .   .   .   .   .   std.code.complexity: 
 .   .   .   .   .   .   cyclomatic="0"

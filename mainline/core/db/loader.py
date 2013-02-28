@@ -770,10 +770,30 @@ class Loader(object):
                                     region.get_id(),
                                     DataIterator(self, region, namespace, support_regions = True))
 
-    def iterate_file_data(self):
-        if self.db != None:
-            for data in self.db.iterate_files():
-                yield FileData(self, data.path, data.id, data.checksum, None)
+    def iterate_file_data(self, path = None, path_like_filter = "%"):
+        if self.db == None:
+            return None
+        
+        final_path_like = path_like_filter
+        if path != None:
+            if self.db.check_dir(path) == False and self.db.check_file(path) == False:
+                return None
+            final_path_like = path + path_like_filter
+
+        class FileDataIterator(object):
+            def iterate_file_data(self, loader, final_path_like):
+                for data in loader.db.iterate_files(path_like=final_path_like):
+                    yield FileData(loader, data.path, data.id, data.checksum, None)
+            
+            def __init__(self, loader, final_path_like):
+                self.iterator = self.iterate_file_data(loader, final_path_like)
+    
+            def __iter__(self):
+                return self.iterator
+
+        if self.db == None:
+            return None
+        return FileDataIterator(self, final_path_like)
 
     def load_aggregated_data(self, path = None, path_like_filter = "%", namespaces = None):
         if self.db == None:

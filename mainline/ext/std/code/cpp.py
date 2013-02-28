@@ -190,10 +190,9 @@ class CppCodeParser(object):
 
             # Template argument closing bracket
             elif text[m.start()] == '>':
-                # Reset next block name and start (in order to skip class names in templates), if has not been confirmed before
+                # Reset next block name (in order to skip class names in templates), if has not been confirmed before
                 if next_block['confirmed'] == False and (next_block['type'] == 'class' or next_block['type'] == 'struct'):
                     next_block['name'] = ""
-                    next_block['start'] = m.end() # potential region start
                     
             # Template argument opening bracket or after class inheritance specification
             elif text[m.start()] == ':' or text[m.start()] == '<':
