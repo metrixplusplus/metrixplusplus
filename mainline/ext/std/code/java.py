@@ -27,11 +27,11 @@ import core.api
 class Plugin(core.api.Plugin, core.api.Parent, core.api.IParser, core.api.IConfigurable, core.api.ICode):
     
     def declare_configuration(self, parser):
-        parser.add_option("--std.code.cpp.files", default="*.c,*.h,*.cpp,*.hpp,*.cc,*.hh,*.cxx,*.hxx",
-                         help="Enumerates filename extensions to match C/C++ files [default: %default]")
+        parser.add_option("--std.code.java.files", default="*.java",
+                         help="Enumerates filename extensions to match Java files [default: %default]")
     
     def configure(self, options):
-        self.files = options.__dict__['std.code.cpp.files'].split(',')
+        self.files = options.__dict__['std.code.java.files'].split(',')
         self.files.sort() # sorted list goes to properties
         
     def initialize(self):
@@ -48,42 +48,35 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IParser, core.api.IConfi
         is_updated = is_updated or self.is_updated
         count_mismatched_brackets = 0
         if is_updated == True:
-            count_mismatched_brackets = CppCodeParser().run(data)
+            count_mismatched_brackets = JavaCodeParser().run(data)
         self.notify_children(data, is_updated)
         return count_mismatched_brackets
             
-class CppCodeParser(object):
+class JavaCodeParser(object):
     
     regex_cpp = re.compile(r'''
-                   /([\\](?:\n|\r|\r\n))*/(?=\n|\r|\r\n)              # Match C++ style comments (empty comment line)
-                |  /([\\](?:\n|\r|\r\n))*/.*?[^\\](?=\n|\r|\r\n)      # Match C++ style comments
+                   //(?=\n|\r|\r\n)                                   # Match Java style comments (empty comment line)
+                |  //.*?(?=\n|\r|\r\n)                                # Match Java style comments
                                                                       # NOTE: end of line is NOT consumed
-                                                                      # NOTE: ([\\](?:\n|\r|\r\n))* for new line separators,
-                                                                      # Need to support new line separators in expense of efficiency?
+                                                                      # NOTE: it is slightly different in C++
                 | /\*\*/                                              # Match C style comments (empty comment line)
-                | /([\\](?:\n|\r|\r\n))*\*.*?\*([\\](?:\n|\r|\r\n))*/ # Match C style comments
+                                                                      # NOTE: it is slightly different in C++
+                | /\*.*?\*/                                           # Match C style comments
+                                                                      # NOTE: it is slightly different in C++
                 | \'(?:\\.|[^\\\'])*\'                                # Match quoted strings
                 | "(?:\\.|[^\\"])*"                                   # Match double quoted strings
-                | (((?<=\n|\r)|^)[ \t]*[#].*?[^\\](?=\n|\r|\r\n))     # Match preprocessor
-                                                                      # NOTE: end of line is NOT consumed
-                                                                      # NOTE: beginning of line is NOT consumed
-                | (?P<fn_name>
-                      (operator(                                      # Match C++ operator ...
-                         (\s+[_a-zA-Z][_a-zA-Z0-9]*(\s*\[\s*\])?)     # - cast, new and delete operators
-                       | (\s*\[\s*\])                                 # - operator []
-                       | (\s*\(\s*\))                                 # - operator ()
-                       | (\s*[+-\\*/=<>!%&^|~,?.]{1,3})               # - other operators (from 1 to 3 symbols)
-                      ))                                               
-                    | ([~]?[_a-zA-Z][_a-zA-Z0-9]*)                    # ... or function or constructor
-                  )\s*[(]                                             # LIMITATION: if there are comments after function name
+                | (?P<fn_name>([_$a-zA-Z][_$a-zA-Z0-9]*))\s*[(]       # Match function
+                                                                      # NOTE: Java may include $ in the name
+                                                                      # LIMITATION: if there are comments after function name
                                                                       # and before '(', it is not detected
-                                                                      # LIMITATION: if there are comments within operator definition,
-                                                                      # if may be not detected
-                | ((?P<block_type>class|struct|namespace)             # Match C++ class or struct
-                    (?P<block_name>((\s+[a-zA-Z_][a-zA-Z0-9_]*)|(?=\s*[{])))) # noname is supported, symbol '{' is not consumed
+                | ((?P<block_type>class|interface)                    # Match class or namespace
+                    (?P<block_name>(\s+[_$a-zA-Z][_$a-zA-Z0-9]*)))
+                                                                      # NOTE: noname instances are impossible in Java
                                                                       # LIMITATION: if there are comments between keyword and name,
                                                                       # it is not detected
-                | [<>{};:]                                            # Match block start/end, brackets and statement separator
+                | [{};]                                               # Match block start/end and statement separator
+                                                                      # NOTE: C++ parser includes processing of <> and : 
+                                                                      #       to handle template definitions, it is easier in Java
                 | ((?:\n|\r|\r\n)\s*(?:\n|\r|\r\n))                   # Match double empty line
             ''',
             re.DOTALL | re.MULTILINE | re.VERBOSE
@@ -134,10 +127,8 @@ class CppCodeParser(object):
                     return data.get_region_types().FUNCTION
                 elif named_type == "class":
                     return data.get_region_types().CLASS
-                elif named_type == "struct":
-                    return data.get_region_types().STRUCT
-                elif named_type == "namespace":
-                    return data.get_region_types().NAMESPACE
+                elif named_type == "interface":
+                    return data.get_region_types().INTERFACE
                 elif named_type == "__global__":
                     return data.get_region_types().GLOBAL
                 else:
@@ -152,7 +143,7 @@ class CppCodeParser(object):
     def parse(self, data):
         
         def reset_next_block(start):
-            return {'name':'', 'start':start, 'cursor':0, 'type':'', 'confirmed':False}
+            return {'name':'', 'start':start, 'cursor':0, 'type':''}
         
         count_mismatched_brackets = 0
         
@@ -178,28 +169,11 @@ class CppCodeParser(object):
             elif text[m.start()] == '"' or text[m.start()] == '\'':
                 data.add_marker(m.start() + 1, m.end() - 1, data.get_marker_types().STRING)
             
-            # Preprocessor (including internal comments)
-            elif text[m.start()] == ' ' or text[m.start()] == '\t' or text[m.start()] == '#':
-                data.add_marker(m.start(), m.end(), data.get_marker_types().PREPROCESSOR)
-
             # Statement end
             elif text[m.start()] == ';':
                 # Reset next block name and start
                 next_block['name'] = ""
                 next_block['start'] = m.end() # potential region start
-
-            # Template argument closing bracket
-            elif text[m.start()] == '>':
-                # Reset next block name and start (in order to skip class names in templates), if has not been confirmed before
-                if next_block['confirmed'] == False and (next_block['type'] == 'class' or next_block['type'] == 'struct'):
-                    next_block['name'] = ""
-                    next_block['start'] = m.end() # potential region start
-                    
-            # Template argument opening bracket or after class inheritance specification
-            elif text[m.start()] == ':' or text[m.start()] == '<':
-                # .. if goes after calss definition
-                if next_block['type'] == 'class' or next_block['type'] == 'struct':
-                    next_block['confirmed'] = True
 
             # Double end line
             elif text[m.start()] == '\n' or text[m.start()] == '\r':
@@ -251,13 +225,11 @@ class CppCodeParser(object):
                     count_mismatched_brackets += 1
                     indent_current = 0
 
-            # Potential namespace, struct, class
+            # Potential class, interface
             elif m.group('block_type') != None:
                 if next_block['name'] == "":
                     # - 'name'
                     next_block['name'] = m.group('block_name').strip()
-                    if next_block['name'] == "":
-                        next_block['name'] = '__noname__'
                     # - 'cursor'
                     cursor_current += len(self.regex_ln.findall(text, cursor_last_pos, m.start('block_name')))
                     cursor_last_pos = m.start('block_name')
@@ -268,10 +240,10 @@ class CppCodeParser(object):
 
             # Potential function name detected...
             elif m.group('fn_name') != None:
-                # ... if outside of a function (do not detect enclosed functions, unless classes are matched)
-                # wander why 'or next_block['type'] != 'function'' is in the condition?
-                # - remove it, run the tests and will see
-                if blocks[curblk]['type'] != 'function' and (next_block['name'] == "" or next_block['type'] != 'function'):
+                # ... if outside of a function
+                #     (do not detect functions enclosed directly in a function, i.e. without classes)
+                # ... and other name before has not been matched 
+                if blocks[curblk]['type'] != 'function' and (next_block['name'] == ""):
                     # - 'name'
                     next_block['name'] = m.group('fn_name').strip()
                     # - 'cursor'

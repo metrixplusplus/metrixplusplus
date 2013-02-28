@@ -48,11 +48,11 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IParser, core.api.IConfi
         is_updated = is_updated or self.is_updated
         count_mismatched_brackets = 0
         if is_updated == True:
-            count_mismatched_brackets = CppCodeParser().run(data)
+            count_mismatched_brackets = CsCodeParser().run(data)
         self.notify_children(data, is_updated)
         return count_mismatched_brackets
             
-class CppCodeParser(object):
+class CsCodeParser(object):
     
     regex_cpp = re.compile(r'''
                    //(?=\n|\r|\r\n)                                   # Match C# style comments (empty comment line)
@@ -95,7 +95,7 @@ class CppCodeParser(object):
                                                                       # NOTE: names can have sub-names separated by dots
                                                                       # LIMITATION: if there are comments between keyword and name,
                                                                       # it is not detected
-                | [{};]                                               # Match block start/end and statement separator
+                | [\[\]{};]                                               # Match block start/end and statement separator
                                                                       # NOTE: C++ parser includes processing of <> and : 
                                                                       #       to handle template definitions, it is easier in C#
                 | ((?:\n|\r|\r\n)\s*(?:\n|\r|\r\n))                   # Match double empty line
@@ -168,7 +168,7 @@ class CppCodeParser(object):
     def parse(self, data):
         
         def reset_next_block(start):
-            return {'name':'', 'start':start, 'cursor':0, 'type':'', 'confirmed':False}
+            return {'name':'', 'start':start, 'cursor':0, 'type':'', 'inside_attribute':False}
         
         count_mismatched_brackets = 0
         
@@ -204,20 +204,17 @@ class CppCodeParser(object):
                 next_block['name'] = ""
                 next_block['start'] = m.end() # potential region start
 
-            # Template argument closing bracket
-            elif text[m.start()] == '>':
-                assert(False) # TODO should not happen
-                # Reset next block name and start (in order to skip class names in templates), if has not been confirmed before
-                if next_block['confirmed'] == False and (next_block['type'] == 'class' or next_block['type'] == 'struct'):
-                    next_block['name'] = ""
-                    next_block['start'] = m.end() # potential region start
-                    
-            # Template argument opening bracket or after class inheritance specification
-            elif text[m.start()] == ':' or text[m.start()] == '<':
-                assert(False) # TODO should not happen
-                # .. if goes after calss definition
-                if next_block['type'] == 'class' or next_block['type'] == 'struct':
-                    next_block['confirmed'] = True
+            # Block openned by '[' bracket...
+            elif text[m.start()] == '[':
+                # ... may include attributes, so do not capture function names inside
+                next_block['inside_attribute'] = True
+
+            # Block closed by ']' bracket...
+            # note: do not care about nesting for simplicity -
+            #       because attribute's statement can not have symbol ']' inside 
+            elif text[m.start()] == ']':
+                # ... may include attributes, so do not capture function names inside
+                next_block['inside_attribute'] = False
 
             # Double end line
             elif text[m.start()] == '\n' or text[m.start()] == '\r':
@@ -274,9 +271,6 @@ class CppCodeParser(object):
                 if next_block['name'] == "":
                     # - 'name'
                     next_block['name'] = m.group('block_name').strip()
-                    if next_block['name'] == "":
-                        assert(False) # impossible in C#
-                        next_block['name'] = '__noname__'
                     # - 'cursor'
                     cursor_current += len(self.regex_ln.findall(text, cursor_last_pos, m.start('block_name')))
                     cursor_last_pos = m.start('block_name')
@@ -287,9 +281,11 @@ class CppCodeParser(object):
 
             # Potential function name detected...
             elif m.group('fn_name') != None:
-                # ... if outside of a function (do not detect enclosed functions, unless classes are matched)
-                # different with C++: in C# function name can not go after class keyword declaration
-                if blocks[curblk]['type'] != 'function' and (next_block['name'] == ""):
+                # ... if outside of a function
+                #     (do not detect functions enclosed directly in a function, i.e. without classes)
+                # ... and other name before has not been matched 
+                if blocks[curblk]['type'] != 'function' and (next_block['name'] == "") \
+                       and next_block['inside_attribute'] == False:
                     # - 'name'
                     next_block['name'] = m.group('fn_name').strip()
                     # - 'cursor'

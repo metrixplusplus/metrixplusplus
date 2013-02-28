@@ -21,7 +21,7 @@
 
 *** Known Limitations ***
 
-1) C/C++ parser and C# parser do not recognise definition of functions or overloaded operators
+1) C/C++, C# and Java parsers do not recognise definition of functions or overloaded operators
    in case of embeded comments after identifier name and before the list of arguments.
 
      This function is not detected by Metrix++: | This function is detected:
@@ -31,6 +31,7 @@
          {                                      |     {
              /* ... */                          |         /* ... */
          }                                      |     }
+
 2) C/C++ parser does not recognise comments within preprocessor statements.
    These comments are considered to be parts of a define.
 
@@ -43,7 +44,7 @@
               */                     \          |     #define GET_MAX(a, b) \
              ((a > b) ? a : b)                  |         ((a > b) ? a : b)
 
-2) C# parser does not recognise getters/setters for properties, if there is a comment before a block.
+3) C# parser does not recognise getters/setters for properties, if there is a comment before a block.
    These comments are considered to be parts of a define.
 
      This function is not detected by Metrix++: | This function is detected:
@@ -52,3 +53,17 @@
          {                                      |     { /* here comment is fine */
              /* ... */                          |         /* ... */
          }                                      |     }
+
+4) Java parser does not recognise anonymous inner classes.
+
+5) C/C++, C# and Java parsers do not recognise definition of classes/structs/namespaces/interface)
+   in case of embeded comments after keyword and identifier name.
+
+     This class is not detected by Metrix++:    | This class is detected:
+     -------------------------------------------|-------------------------------------------
+         class /* comment */ MyClass            |     class MyClass /* here is fine */
+         {                                      |     {
+             /* ... */                          |         /* ... */
+         }                                      |     }
+
+6) Java parser does not support parsing of identifiers which have got unicode symbols in name.
