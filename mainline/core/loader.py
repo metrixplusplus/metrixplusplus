@@ -56,7 +56,7 @@ class Loader(object):
                     return parser[1]
         return None
 
-    def load(self, directory, optparser):
+    def load(self, directory, optparser, args):
         import sys
         sys.path.append(directory)
         
@@ -101,7 +101,7 @@ class Loader(object):
             if (isinstance(item, core.api.IConfigurable)):
                 item.declare_configuration(optparser)
 
-        (options, args) = optparser.parse_args()
+        (options, args) = optparser.parse_args(args)
         for item in self.iterate_plugins():
             if (isinstance(item, core.api.IConfigurable)):
                 item.configure(options)

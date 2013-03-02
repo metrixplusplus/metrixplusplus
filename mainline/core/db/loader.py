@@ -189,6 +189,18 @@ class Marker(object):
         STRING          = 0x02
         PREPROCESSOR    = 0x04
         ALL_EXCEPT_CODE = 0x07
+
+        def to_str(self, group):
+            if group == self.NONE:
+                return "none"
+            elif group == self.COMMENT:
+                return "comment"
+            elif group == self.STRING:
+                return "string"
+            elif group == self.PREPROCESSOR:
+                return "preprocessor"
+            else:
+                assert(False)
         
     def __init__(self, offset_begin, offset_end, group):
         self.begin = offset_begin
@@ -315,12 +327,49 @@ class FileData(LoadableData):
         self.loader.db.create_marker(self.file_id, offset_begin, offset_end, group)
         
     def iterate_markers(self, filter_group = Marker.T.COMMENT |
-                         Marker.T.STRING | Marker.T.PREPROCESSOR):
+                         Marker.T.STRING | Marker.T.PREPROCESSOR,
+                         region_id = None, exclude_children = True):
         self.load_markers()
-        for each in self.markers:
-            if each.group & filter_group:
-                yield each
-    
+        if region_id == None:
+            for each in self.markers:
+                if each.group & filter_group:
+                    yield each
+        else:
+            region = self.get_region(region_id)
+            if region != None:
+                if hasattr(region, 'markers_list') == False:
+                    def cache_markers_list_req(data, region_id, marker_start_pos):
+                        region = data.get_region(region_id)
+                        region.markers_list = []
+                        region.first_marker_pos = marker_start_pos
+                        for sub_id in region.iterate_subregion_ids():
+                            subregion = data.get_region(sub_id)
+                            while len(data.markers) > marker_start_pos and \
+                                subregion.get_offset_begin() > data.markers[marker_start_pos].get_offset_begin():
+                                    region.markers_list.append(marker_start_pos)
+                                    marker_start_pos += 1
+                            marker_start_pos = cache_markers_list_req(data, sub_id, marker_start_pos)
+                        while len(data.markers) > marker_start_pos and \
+                            region.get_offset_end() > data.markers[marker_start_pos].get_offset_begin():
+                                region.markers_list.append(marker_start_pos)
+                                marker_start_pos += 1
+                        return marker_start_pos
+                    next_marker_pos = cache_markers_list_req(self, 1, 0)
+                    assert(next_marker_pos == len(self.markers))
+                if exclude_children == True:
+                    for marker_pos in region.markers_list:
+                        marker = self.markers[marker_pos]
+                        if marker.group & filter_group:
+                            yield marker
+                elif len(self.markers) > region.first_marker_pos:
+                    for marker in self.markers[region.first_marker_pos:]:
+                        if marker.get_offset_begin() >= region.get_offset_end():
+                            break
+                        if region.get_offset_begin() > marker.get_offset_begin():
+                            continue
+                        if marker.group & filter_group:
+                            yield marker
+                        
     def get_marker_types(self):
         return Marker.T
 

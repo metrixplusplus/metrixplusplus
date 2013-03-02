@@ -145,5 +145,9 @@ def subscribe_by_parents_interface(interface, child, callback_name='callback'):
             plugin.subscribe(child, callback_name)
 
 
+class ITool(object):
+    
+    def run(self, tool_args):
+        raise InterfaceNotImplemented(self)
 
 

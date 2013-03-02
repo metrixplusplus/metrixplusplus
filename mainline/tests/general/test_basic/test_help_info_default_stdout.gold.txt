@@ -1,4 +1,4 @@
-Usage: info.py [options] -- [path 1] ... [path N]
+Usage: metrixpp.py info [options] -- [path 1] ... [path N]
 
 Options:
   -h, --help            show this help message and exit

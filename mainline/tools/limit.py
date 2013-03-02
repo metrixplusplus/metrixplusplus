@@ -19,7 +19,6 @@
 
 
 import logging
-import time
 import re
 
 import core.log
@@ -30,20 +29,24 @@ import core.export.cout
 import core.warn
 import core.cmdparser
 
+import core.api
+class Tool(core.api.ITool):
+    def run(self, tool_args):
+        return main(tool_args)
 
-def main():
+def main(tool_args):
     
     exit_code = 0
     log_plugin = core.log.Plugin()
     db_plugin = core.db.post.Plugin()
     warn_plugin = core.warn.Plugin()
 
-    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog [options] -- [path 1] ... [path N]")
+    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog limit [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
     warn_plugin.declare_configuration(parser)
 
-    (options, args) = parser.parse_args()
+    (options, args) = parser.parse_args(tool_args)
     log_plugin.configure(options)
     db_plugin.configure(options)
     warn_plugin.configure(options)
@@ -171,12 +174,6 @@ def report_limit_exceeded(path, cursor, namespace, field, region_name, stat_leve
                ("Limit", stat_limit)]
     core.export.cout.cout(path, cursor, core.export.cout.SEVERITY_WARNING, message, details)
 
-if __name__ == '__main__':
-    ts = time.time()
-    core.log.set_default_format()
-    exit_code = main()
-    logging.warning("Exit code: " + str(exit_code) + ". Time spent: " + str(round((time.time() - ts), 2)) + " seconds. Done")
-    exit(exit_code)
     
     
   

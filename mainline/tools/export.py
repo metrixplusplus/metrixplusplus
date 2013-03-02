@@ -20,7 +20,6 @@
 
 
 import logging
-import time
 import re
 
 import core.log
@@ -30,12 +29,17 @@ import core.db.utils
 import core.cmdparser
 import core.export.convert
 
-def main():
+import core.api
+class Tool(core.api.ITool):
+    def run(self, tool_args):
+        return main(tool_args)
+
+def main(tool_args):
     
     log_plugin = core.log.Plugin()
     db_plugin = core.db.post.Plugin()
 
-    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog [options] -- [path 1] ... [path N]")
+    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog export [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
     parser.add_option("--general.format", default='xml', choices=['txt', 'xml', 'python'], help="Format of the output data. "
@@ -48,7 +52,7 @@ def main():
                       help="If the option is set (True), data for regions is exported in the form of a tree. "
                       "Otherwise, all regions are exported in plain list. [default: %default]")
 
-    (options, args) = parser.parse_args()
+    (options, args) = parser.parse_args(tool_args)
     log_plugin.configure(options)
     db_plugin.configure(options)
     out_format = options.__dict__['general.format']
@@ -221,12 +225,6 @@ def append_diff(main_tree, prev_tree):
                 main_tree[name]['__diff__'][field] = main_tree[name][field] - prev_tree[name][field]
     return main_tree
 
-if __name__ == '__main__':
-    ts = time.time()
-    core.log.set_default_format()
-    exit_code = main()
-    logging.warning("Exit code: " + str(exit_code) + ". Time spent: " + str(round((time.time() - ts), 2)) + " seconds. Done")
-    exit(exit_code)
     
     
   

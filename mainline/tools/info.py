@@ -19,24 +19,27 @@
 
 
 import logging
-import time
 
 import core.db.loader
 import core.db.post
 import core.log
 import core.cmdparser
 
+import core.api
+class Tool(core.api.ITool):
+    def run(self, tool_args):
+        return main(tool_args)
 
-def main():
+def main(tool_args):
     exit_code = 0
     log_plugin = core.log.Plugin()
     db_plugin = core.db.post.Plugin()
 
-    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog [options] -- [path 1] ... [path N]")
+    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog info [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
 
-    (options, args) = parser.parse_args()
+    (options, args) = parser.parse_args(tool_args)
     log_plugin.configure(options)
     db_plugin.configure(options)
     
@@ -104,9 +107,3 @@ def main():
         
     return exit_code
             
-if __name__ == '__main__':
-    ts = time.time()
-    core.log.set_default_format()
-    exit_code = main()
-    logging.warning("Exit code: " + str(exit_code) + ". Time spent: " + str(round((time.time() - ts), 2)) + " seconds. Done")
-    exit(exit_code) # number of reported messages, errors are reported as non-handled exceptions
