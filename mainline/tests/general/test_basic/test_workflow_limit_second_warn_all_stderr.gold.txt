@@ -1,4 +1,4 @@
 [LOG]: WARNING:	Logging enabled with INFO level
 [LOG]: INFO:	Processing: 
 [LOG]: INFO:	Applying limit: namespace 'std.code.complexity', filter '('cyclomatic', '>', 0.0)'
-[LOG]: WARNING:	Exit code: 6. Time spent: 0.01 seconds. Done
+[LOG]: WARNING:	Exit code: 6. Time spent: 0.03 seconds. Done

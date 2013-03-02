@@ -19,7 +19,6 @@
 
 
 import logging
-import time
 import cgi
 
 import core.log
@@ -27,17 +26,22 @@ import core.cmdparser
 import core.db.post
 import core.db.loader
 
-def main():
+import core.api
+class Tool(core.api.ITool):
+    def run(self, tool_args):
+        return main(tool_args)
+
+def main(tool_args):
     log_plugin = core.log.Plugin()
     db_plugin = core.db.post.Plugin()
 
-    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog [options] -- [path 1] ... [path N]")
+    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog debug [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
     parser.add_option("-m", "--general.mode", default='dumphtml', choices=['dumphtml'],
                          help="'dumphtml' - prints html code with code highlights for each given path [default: %default]")
 
-    (options, args) = parser.parse_args()
+    (options, args) = parser.parse_args(tool_args)
     log_plugin.configure(options)
     db_plugin.configure(options)
 
@@ -121,9 +125,3 @@ def dumphtml(args, loader):
     print result
     return exit_code
             
-if __name__ == '__main__':
-    ts = time.time()
-    core.log.set_default_format()
-    exit_code = main()
-    logging.warning("Exit code: " + str(exit_code) + ". Time spent: " + str(round((time.time() - ts), 2)) + " seconds. Done")
-    exit(exit_code) # number of reported messages, errors are reported as non-handled exceptions

@@ -1,4 +1,4 @@
-Usage: export.py [options] -- [path 1] ... [path N]
+Usage: metrixpp.py export [options] -- [path 1] ... [path N]
 
 Options:
   -h, --help            show this help message and exit
