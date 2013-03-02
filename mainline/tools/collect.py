@@ -31,7 +31,7 @@ class Tool(core.api.ITool):
 
 def main(tool_args):
     loader = core.loader.Loader()
-    parser =core.cmdparser.MultiOptionParser(usage="Usage: %prog [options] collect -- [path 1] ... [path N]")
+    parser =core.cmdparser.MultiOptionParser(usage="Usage: %prog collect [options] -- [path 1] ... [path N]")
     args = loader.load(os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'ext'), parser, tool_args)
     logging.debug("Registered plugins:")
     logging.debug(loader)
