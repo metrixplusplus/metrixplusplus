@@ -65,7 +65,8 @@ class JavaCodeParser(object):
                                                                       # NOTE: it is slightly different in C++
                 | \'(?:\\.|[^\\\'])*\'                                # Match quoted strings
                 | "(?:\\.|[^\\"])*"                                   # Match double quoted strings
-                | (?P<fn_name>([_$a-zA-Z][_$a-zA-Z0-9]*))\s*[(]       # Match function
+                | (?P<fn_name>([@]?[_$a-zA-Z][_$a-zA-Z0-9]*))\s*[(]   # Match function
+                                                                      # NOTE: Matches attributes which are excluded later
                                                                       # NOTE: Java may include $ in the name
                                                                       # LIMITATION: if there are comments after function name
                                                                       # and before '(', it is not detected
@@ -243,7 +244,7 @@ class JavaCodeParser(object):
                 # ... if outside of a function
                 #     (do not detect functions enclosed directly in a function, i.e. without classes)
                 # ... and other name before has not been matched 
-                if blocks[curblk]['type'] != 'function' and (next_block['name'] == ""):
+                if blocks[curblk]['type'] != 'function' and (next_block['name'] == "") and m.group('fn_name')[0] != '@':
                     # - 'name'
                     next_block['name'] = m.group('fn_name').strip()
                     # - 'cursor'

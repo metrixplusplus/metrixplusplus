@@ -5,8 +5,97 @@ ________________________________________________________________________________
 --------------------------------------------------------------------------------
 data:  
 .   info: 
-.   .   path=".\operator_test.hpp"
+.   .   path=".\function_ends_on_class.cpp"
 .   .   id="1"
+.   file-data:  
+.   .   regions:
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="0"
+.   .   .   .   .   name="__global__"
+.   .   .   .   .   offset_end="163"
+.   .   .   .   .   line_begin="2"
+.   .   .   .   .   type="global"
+.   .   .   .   .   line_end="20"
+.   .   .   .   .   offset_begin="1"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="2"
+.   .   .   .   .   name="my_namespace"
+.   .   .   .   .   offset_end="162"
+.   .   .   .   .   line_begin="2"
+.   .   .   .   .   type="namespace"
+.   .   .   .   .   line_end="19"
+.   .   .   .   .   offset_begin="1"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="4"
+.   .   .   .   .   name="my_class"
+.   .   .   .   .   offset_end="158"
+.   .   .   .   .   line_begin="4"
+.   .   .   .   .   type="class"
+.   .   .   .   .   line_end="17"
+.   .   .   .   .   offset_begin="27"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="5"
+.   .   .   .   .   name="function_end_on_class"
+.   .   .   .   .   offset_end="79"
+.   .   .   .   .   line_begin="5"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="8"
+.   .   .   .   .   offset_begin="45"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="9"
+.   .   .   .   .   name="function_end_on_struct"
+.   .   .   .   .   offset_end="116"
+.   .   .   .   .   line_begin="9"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="12"
+.   .   .   .   .   offset_begin="81"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="13"
+.   .   .   .   .   name="function_end_on_namespace"
+.   .   .   .   .   offset_end="156"
+.   .   .   .   .   line_begin="13"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="16"
+.   .   .   .   .   offset_begin="118"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   subfiles:
+.   subdirs:
+.   aggregated-data:  
+.   .   std.code.complexity:  
+.   .   .   cyclomatic: 
+.   .   .   .   max="0"
+.   .   .   .   total="0.0"
+.   .   .   .   avg="0.0"
+.   .   .   .   min="0"
+================================================================================
+--------------------------------------------------------------------------------
+data:  
+.   info: 
+.   .   path=".\operator_test.hpp"
+.   .   id="2"
 .   file-data:  
 .   .   regions:
 .   .   
@@ -719,7 +808,7 @@ data:
 data:  
 .   info: 
 .   .   path=".\test.c"
-.   .   id="2"
+.   .   id="3"
 .   file-data:  
 .   .   regions:
 .   .   
@@ -1125,7 +1214,7 @@ data:
 data:  
 .   info: 
 .   .   path=".\test2.cpp"
-.   .   id="3"
+.   .   id="4"
 .   file-data:  
 .   .   regions:
 .   .   
@@ -1227,7 +1316,7 @@ data:
 data:  
 .   info: 
 .   .   path=".\test3.cpp"
-.   .   id="4"
+.   .   id="5"
 .   file-data:  
 .   .   regions:
 .   .   

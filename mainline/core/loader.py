@@ -29,7 +29,6 @@ class Loader(object):
         self.plugins = []
         self.parsers = []
         self.hash    = {}
-        self.exit_code = 0
         self.db = core.db.loader.Loader()
         
     def get_database_loader(self):
@@ -116,13 +115,11 @@ class Loader(object):
             item.terminate()
 
     def run(self, args):
+        exit_code = 0
         for item in self.iterate_plugins():
             if (isinstance(item, core.api.IRunable)):
-                item.run(args)
-        return self.exit_code
-
-    def inc_exit_code(self):
-        self.exit_code += 1
+                exit_code += item.run(args)
+        return exit_code
 
     def __repr__(self):
         result = object.__repr__(self) + ' with loaded:'

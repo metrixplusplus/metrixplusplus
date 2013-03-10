@@ -35,7 +35,7 @@ class Test(tests.common.TestCase):
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('export',
-                                         ['--general.log-level=INFO'],
+                                         ['--general.log-level=INFO', '--general.format=xml'],
                                          check_stderr=[(0, -1)])
         self.assertExec(runner.run())
 
@@ -63,14 +63,14 @@ class Test(tests.common.TestCase):
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('export',
-                                         ['--general.log-level=INFO'],
+                                         ['--general.log-level=INFO', '--general.format=xml'],
                                          check_stderr=[(0, -1)],
                                          prefix='second',
                                          use_prev=True)
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('export',
-                                         ['--general.log-level=INFO'],
+                                         ['--general.log-level=INFO', '--general.format=xml'],
                                          check_stderr=[(0, -1)],
                                          prefix='second_per_file',
                                          dirs_list=['./simple.cpp'],
@@ -169,7 +169,7 @@ class Test(tests.common.TestCase):
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('export',
-                                         ['--general.nest-regions'],
+                                         ['--general.nest-regions', '--general.format=xml'],
                                          prefix='nest',
                                          use_prev=True)
         self.assertExec(runner.run())

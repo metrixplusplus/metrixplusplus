@@ -89,8 +89,6 @@ class CppCodeParser(object):
             re.DOTALL | re.MULTILINE | re.VERBOSE
         )
     
-    #TODO test false identification of class if function is named my_func_class()
-
     regex_ln = re.compile(r'(\n)|(\r)|(\r\n)')
 
     def run(self, data):

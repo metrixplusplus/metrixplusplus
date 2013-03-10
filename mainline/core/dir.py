@@ -56,9 +56,9 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IConfigurable, core.api.
         
     def run(self, args):
         if len(args) == 0:
-            self.reader.run(self, "./")
+            return self.reader.run(self, "./")
         for directory in args:
-            self.reader.run(self, directory)
+            return self.reader.run(self, directory)
         
     def add_exclude_rule(self, re_compiled_pattern):
         # TODO file name may have special regexp symbols what causes an exception
@@ -76,13 +76,14 @@ class DirectoryReader():
     def run(self, plugin, directory):
         
         def run_recursively(plugin, directory):
+            exit_code = 0
             for fname in os.listdir(directory):
                 full_path = os.path.join(directory, fname)
                 norm_path = re.sub(r'''[\\]''', "/", full_path)
                 if plugin.is_file_excluded(fname) == False:
                     if os.path.isdir(full_path):
                         if plugin.non_recursively == False:
-                            run_recursively(plugin, full_path)
+                            exit_code += run_recursively(plugin, full_path)
                     else:
                         parser = plugin.get_plugin_loader().get_parser(full_path)
                         if parser == None:
@@ -103,11 +104,15 @@ class DirectoryReader():
                                 data.set_data('general', 'procerrors', procerrors)
                             plugin.get_plugin_loader().get_database_loader().save_file_data(data)
                             logging.debug("-" * 60)
+                            exit_code += procerrors
                 else:
                     logging.info("Excluding: " + norm_path)
                     logging.debug("-" * 60)
+            return exit_code
         
-        run_recursively(plugin, directory)
+        total_errors = run_recursively(plugin, directory)
+        total_errors = total_errors # used, warnings are per file if not zero
+        return 0 # ignore errors, collection is successful anyway
     
 
 
