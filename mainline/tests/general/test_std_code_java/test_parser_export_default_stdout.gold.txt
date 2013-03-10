@@ -10,7 +10,7 @@
         </subdirs>
         <aggregated-data>
             <std.code.complexity>
-                <cyclomatic max="6" total="126.0" avg="1.06779661017" min="0" />
+                <cyclomatic max="6" total="126.0" avg="1.05882352941" min="0" />
             </std.code.complexity>
         </aggregated-data>
     </data>

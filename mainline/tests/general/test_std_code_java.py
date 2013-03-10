@@ -30,7 +30,7 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('collect', ['--std.code.complexity.on'])
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('export', ['--general.nest-regions'])
+        runner = tests.common.ToolRunner('export', ['--general.nest-regions', '--general.format=xml'])
         self.assertExec(runner.run())
 
         dirs_list = [os.path.join('.', each) for each in os.listdir(self.get_content_paths().cwd)]

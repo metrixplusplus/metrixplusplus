@@ -2,4 +2,4 @@
 [LOG]: INFO:	Excluding: ./.unused.cpp
 [LOG]: INFO:	Skipping: ./dummy.txt
 [LOG]: INFO:	Processing: ./simple.cpp
-[LOG]: WARNING:	Exit code: 0. Time spent: 1.92 seconds. Done
+[LOG]: WARNING:	Exit code: 0. Time spent: 2.4 seconds. Done
