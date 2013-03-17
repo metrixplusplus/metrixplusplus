@@ -92,18 +92,18 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                     options.</li>
                   <li>There is no predefined thresholds for metrics or rules.
                     You can choose and configure any limit you want.</li>
-                  <li>It scales well to big code bases. For example initial
-                    parsing of about 10000 files takes 2-3 minutes on average
-                    PC, and ONLY 10-20 seconds for iterative re-run. Reporting
-                    summary results and exceeded limits is less than 1 - 10
-                    seconds.</li>
+                  <li>It scales well and support big code bases. For example
+                    initial parsing of about 10000 files takes 2-3 minutes on
+                    average PC, and ONLY 10-20 seconds for iterative re-run.
+                    Reporting, analysis and other postprocessings of results
+                    take few seconds.</li>
                   <li>It can compare results for 2 code snapshots (collections)
                     and differentiate added regions (classes, functions, etc.),
                     modified regions and unchanged regions.</li>
                   <li>As a result, easy deployment is guaranteed into legacy
                     software, helping you to deal with legacy code effiently -
-                    either enforce 'leave it not worse than it was before' rule
-                    or motivate re-factoring.</li>
+                    either enforce 'make it [legacy code] not worse' or
+                    're-factor if it is touched' policies.</li>
                 </ul>
 
                 <h4>Standard Plugins</h4>
@@ -143,7 +143,7 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                   </li>
                   <li><h4>Analysis tools</h4>
                     <ul>
-                      <li><span class="normalImportance">export.py</span> -
+                      <li><span class="normalImportance">export</span> -
                         exporter to xml, python or plain text of detailed
                         information per file and/or aggregated information per
                         file or directory <span
@@ -153,14 +153,14 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                         class="normalImportance">minimum</span>, <span
                         class="normalImportance">average</span> within a subset
                         of selected files or directories]</span></li>
-                      <li><span class="normalImportance">limit.py</span> - a
-                        tool to report regions exceeding speified thresholds,
-                        which are configurable (output is plain text with
-                        metadata compatible with gcc compiler warning
-                      messages)</li>
-                      <li><span class="normalImportance">info.py</span> - a
-                        tool to show file metadata, such as properties,
-                        namespaces and fields recorded</li>
+                      <li><span class="normalImportance">limit</span> - a tool
+                        to report regions exceeding speified thresholds, which
+                        are configurable <span class="lowImportance">[output is
+                        plain text with metadata compatible with gcc compiler
+                        warning messages]</span></li>
+                      <li><span class="normalImportance">info</span> - a tool
+                        to show file metadata, such as properties, namespaces
+                        and fields recorded, files processed</li>
                     </ul>
                   </li>
                 </ul>
@@ -190,8 +190,8 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
 
                 <h4>Prerequisites:</h4>
 
-                <p>Python Runtime Environment (version 2.7.0 or later, version
-                3.0 has not been tested)</p>
+                <p>Python Runtime Environment (version 2.7.* or later, version
+                3.* has not been tested)</p>
 
                 <h4>License:</h4>
 
@@ -217,8 +217,8 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                 <h3 id="Documentation">Documentation</h3>
 
                 <p>Tools are self-descriptive and have got comprehensive
-                context help. Type in the command line: python
-                &lt;tool-name&gt;.py --help</p>
+                context help. Type in the command line: python metrixpp.py
+                &lt;tool-name&gt; --help</p>
 
                 <h4>Known Limitations</h4>
 
@@ -234,7 +234,7 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                 <p><strong>I.</strong> Start with running a collector tool,
                 enabling a collection of cyclomatic complexity:</p>
 
-                <p><pre>&gt; python <span class="highImportance">collect.py</span> <span class="normalImportance">--std.code.complexity.on</span> -- /path/to/your/project ../../path/to/some/other/project</pre>
+                <p><pre>&gt; python metixpp.py <span class="highImportance">collect</span> <span class="normalImportance">--std.code.complexity.on</span> -- /path/to/your/project ../../path/to/some/other/project</pre>
                 </p>
 
                 <p>It will generate a database file in working directory with
@@ -245,7 +245,7 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                 to calculation of crc32) for iterative re-scans, point out to
                 the dabase file collected for the previous code revision:</p>
 
-                <p><pre>&gt; python <span class="highImportance">collect.py</span> --std.code.complexity.on <span class="highImportance normalImportance">--general.db-file-prev=metrixpp-prev.db</span> --
+                <p><pre>&gt; python metrixpp.py <span class="highImportance">collect</span> --std.code.complexity.on <span class="highImportance normalImportance">--general.db-file-prev=metrixpp-prev.db</span> --
  /path/to/your/project</pre>
                 </p>
 
@@ -253,13 +253,13 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                 scan files in the current working directory. Check other
                 available options for the tool by executing:</p>
 
-                <p><pre>&gt; python <span class="highImportance">collect.py</span> <span class="normalImportance">--help</span></pre>
+                <p><pre>&gt; python metrixpp.py <span class="highImportance">collect</span> <span class="normalImportance">--help</span></pre>
                 </p>
 
                 <p><strong>II.</strong> Secondly, export data using export
                 tool.</p>
 
-                <p><pre>&gt; python <span class="highImportance">export.py</span> --
+                <p><pre>&gt; python metrixpp.py <span class="highImportance">export</span> --general.format=<span class="normalImportance">xml</span> --
 <span class="lowImportance">&lt;export&gt;
     &lt;data&gt;
         &lt;info path="" id="1" /&gt;
@@ -280,23 +280,21 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                 </p>
 
                 <p>By default, it exports all aggregated data for all files
-                scanned in xml format. It is possible to re-configure output
-                format to python or plain text. In order to narrow the scope,
-                specify a path to directory or a file. In order to export only
-                subset of metrics, specify them as well.</p>
+                scanned. In order to narrow the scope, specify a path to
+                directory or a file. In order to export only subset of metrics,
+                specify them as well. It is also possible to change output
+                format too.</p>
 
-                <p><pre>&gt; python <span class="highImportance">export.py</span> --general.format=<span class="normalImportance">python</span> --general.namespaces=<span class="normalImportance">std.code.complexity</span> --
+                <p><pre>&gt; python metrixpp.py <span class="highImportance">export</span> --general.format=<span class="normalImportance">python</span> --general.namespaces=<span class="normalImportance">std.code.complexity</span> --
  <span class="normalImportance">/path/to/your/project/subdir</span>
-<span class="lowImportance">&lt;export&gt;
-    ...
-&lt;/export&gt;</span></pre>
+<span class="lowImportance">    ...</span></pre>
                 </p>
 
                 <p>If you have got results collected for previous version,
                 point out to the file using the corresponding option and the
                 tool will add diff data.</p>
 
-                <p><pre>&gt; python <span class="highImportance">export.py</span> --general.namespaces=<span class="normalImportance">std.code.complexity</span> --general.db-file-prev=<span class="normalImportance">metrixpp-prev.db</span> --
+                <p><pre>&gt; python metrixpp.py <span class="highImportance">export</span>  --general.format=<span class="normalImportance">xml</span> --general.namespaces=<span class="normalImportance">std.code.complexity</span> --general.db-file-prev=<span class="normalImportance">metrixpp-prev.db</span> --
 <span class="lowImportance">&lt;export&gt;
     &lt;data&gt;
         &lt;info path="" id="1" /&gt;
@@ -320,13 +318,13 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
 
                 <p>Check other available options for the tool by executing:</p>
 
-                <p><pre>&gt; python <span class="highImportance">export.py</span> <span class="normalImportance">--help</span></pre>
+                <p><pre>&gt; python metrixpp.py <span class="highImportance">export</span> <span class="normalImportance">--help</span></pre>
                 </p>
 
                 <p><strong>III.</strong> Finally, identify code regions which
                 exceed a specified limit, applying it to all scanned files:</p>
 
-                <p><pre>&gt; python <span class="highImportance">limit.py</span> --general.max-limit=<span class="normalImportance">std.code.complexity</span><strong>:</strong><span class="normalImportance">cyclomatic</span><strong>:</strong><span class="normalImportance">7</span><strong> </strong>--
+                <p><pre>&gt; python metrixpp.py <span class="highImportance">limit</span> --general.max-limit=<span class="normalImportance">std.code.complexity</span><strong>:</strong><span class="normalImportance">cyclomatic</span><strong>:</strong><span class="normalImportance">7</span><strong> </strong>--
 <span class="lowImportance">/path/to/your/project/ui/notifications.cpp:72: warning: Metric '<span class="normalImportance">std.code.complexity</span>/<span class="normalImportance">cyclomatic</span>' for
  region 'doFont' exceeds the limit.
         Metric name    : <span class="normalImportance">std.code.complexity</span>/<span class="normalImportance">cyclomatic</span>
@@ -346,9 +344,9 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                 </p>
 
                 <p>You can limit the scope of analysis by defining paths to
-                directories or files.If you have got results collected for
+                directories or files. If you have got results collected for
                 previous version, point out to the file using the corresponding
-                option and the tool will notify about change status:</p>
+                option and the tool will inform about change trends:</p>
 
                 <p><pre>&gt; python <span class="highImportance">limit.py</span> --general.max-limit=std.code.complexity<strong>:</strong>cyclomatic<strong>:</strong>7
  --general.db-file-prev=<span class="normalImportance">metrixpp-prev.db</span> --
@@ -371,18 +369,18 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                 </p>
 
                 <p>Another useful option for this tool helps you to <span
-                class="highImportance">deal with legacy code</span>. It is not
-                unusual if you have got enormous number of warnings enabling
-                new thresholds for the code designed in the past, which has not
-                be profiled/targeted to specific metric limits. By default the
-                tool warns about all code regions, ignoring their change
-                status. You can reconfigure it to one of the following:</p>
+                class="highImportance">deal with legacy code</span>. It is
+                normal that you have got enormous number of warnings for the
+                code designed in the past, which has not be profiled/targeted
+                to specific metric limits. By default the tool warns about all
+                code regions, ignoring their change status. You can reconfigure
+                it to one of the following:</p>
                 <ul>
                   <li>warn only about <span class="normalImportance">new</span>
                     code regions (functions, classes):</li>
                 </ul>
 
-                <p><pre>&gt; python <span class="highImportance">limit.py</span> --general.max-limit=std.code.complexity<strong>:</strong>cyclomatic<strong>:</strong>7
+                <p><pre>&gt; python metrixpp.py <span class="highImportance">limit</span> --general.max-limit=std.code.complexity<strong>:</strong>cyclomatic<strong>:</strong>7
  --general.db-file-prev=metrixpp-prev.db <span class="normalImportance">--general.warn=<strong>new</strong></span> --</pre>
                 </p>
                 <ul>
@@ -392,7 +390,7 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                     rule 'leave not worse than it was before'):</li>
                 </ul>
 
-                <p><pre>&gt; python <span class="highImportance">limit.py</span> --general.max-limit=std.code.complexity<strong>:</strong>cyclomatic<strong>:</strong>7
+                <p><pre>&gt; python metrixpp.py <span class="highImportance">limit</span> --general.max-limit=std.code.complexity<strong>:</strong>cyclomatic<strong>:</strong>7
  --general.db-file-prev=metrixpp-prev.db <span class="normalImportance">--general.warn=<strong>trend</strong></span> --
 <span class="lowImportance normalImportance">/path/to/your/project/ui/notifications.cpp:144: warning: Metric 'std.code.complexity/cyclomatic' for
  region 'doStyle' exceeds the limit.
@@ -409,7 +407,7 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                     (motivates for refactoring of legacy code): </li>
                 </ul>
 
-                <p><pre>&gt; python <span class="highImportance">limit.py</span> --general.max-limit=std.code.complexity<strong>:</strong>cyclomatic<strong>:</strong>7
+                <p><pre>&gt; python metrixpp.py <span class="highImportance">limit</span> --general.max-limit=std.code.complexity<strong>:</strong>cyclomatic<strong>:</strong>7
  --general.db-file-prev=metrixpp-prev.db <span class="normalImportance">--general.warn=<strong>touched</strong></span> --
 <span class="lowImportance normalImportance">/path/to/your/project/ui/notifications.cpp:72: warning: Metric 'std.code.complexity/cyclomatic' for
  region 'doFont' exceeds the limit.
@@ -431,7 +429,7 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
 
                 <p>Check other available options for the tool by executing:</p>
 
-                <p><pre>&gt; python <span class="highImportance">limit.py</span> <span class="normalImportance">--help</span></pre>
+                <p><pre>&gt; python metrixpp.py <span class="highImportance">limit</span> <span class="normalImportance">--help</span></pre>
                 </p>
 
                 <h3 id="Support">Bug Report &amp; Feature Request</h3>
@@ -468,9 +466,9 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                 href="http://metrixplusplus.svn.sourceforge.net/viewvc/metrixplusplus/mainline/core/db/loader.py">core.db.loader</a>')
                 is a starting point for any new post-analysis tool. There are 2
                 standard tools (<a
-                href="http://metrixplusplus.svn.sourceforge.net/viewvc/metrixplusplus/mainline/export.py">export.py</a>
+                href="http://metrixplusplus.svn.sourceforge.net/viewvc/metrixplusplus/mainline/tools/export.py">export</a>
                 and <a
-                href="http://metrixplusplus.svn.sourceforge.net/viewvc/metrixplusplus/mainline/limit.py">limit.py</a>)
+                href="http://metrixplusplus.svn.sourceforge.net/viewvc/metrixplusplus/mainline/tools/limit.py">limit</a>)
                 available which use this API.</p>
 
                 <h4>New Language Support</h4>
@@ -494,8 +492,8 @@ along with Metrix++. If not, see <http://www.gnu.org/licenses/>.
                 example</a>. There useful options and tools are avaialble for
                 trobuleshooting purposes during development:</p>
                 <ul>
-                  <li><span class="normalImportance">debug.py tool</span> is
-                    helpful troubleshooting tool. In mode 'dumphtml' it
+                  <li><span class="normalImportance">metrixpp.py debug</span>
+                    tool is helpful troubleshooting tool. In mode 'dumphtml' it
                     generates html code showing code highlightings</li>
                   <li><span
                     class="normalImportance">--general.nest-regions</span> for
