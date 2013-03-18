@@ -30,12 +30,19 @@ WARNING: Metrix++ Project does not use svn repository,
      - metrics counters,
      - post processing tools.
 
+    Check change log for the information about new features and defect fixes:
+     - http://metrixplusplus.svn.sourceforge.net/viewvc/metrixplusplus/mainline/changelog.txt
+
     Check projects documentation for additional information:
      - http://metrixplusplus.sourceforge.net
      - ./doc folder within the distributive
 
     Bug reporting, feature requests and feedback:
      - e-mail to project administrator: avkonst@users.sourceforge.net
+
+    Follow the Project / Subscribe to Updates:
+     - Click 'Subscribe to Updates' button on sourceforge:
+       https://sourceforge.net/projects/metrixplusplus/
 
     ---
     Thank you for using the tool!
