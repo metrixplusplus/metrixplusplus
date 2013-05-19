@@ -55,16 +55,16 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IParser, core.api.IConfi
 class CppCodeParser(object):
     
     regex_cpp = re.compile(r'''
-                   /([\\](?:\n|\r|\r\n))*/(?=\n|\r|\r\n)              # Match C++ style comments (empty comment line)
-                |  /([\\](?:\n|\r|\r\n))*/.*?[^\\](?=\n|\r|\r\n)      # Match C++ style comments
+                   /([\\](?:\n|\r\n|\r))*/(?=\n|\r\n|\r)              # Match C++ style comments (empty comment line)
+                |  /([\\](?:\n|\r\n|\r))*/.*?[^\\](?=\n|\r\n|\r)      # Match C++ style comments
                                                                       # NOTE: end of line is NOT consumed
-                                                                      # NOTE: ([\\](?:\n|\r|\r\n))* for new line separators,
+                                                                      # NOTE: ([\\](?:\n|\r\n|\r))* for new line separators,
                                                                       # Need to support new line separators in expense of efficiency?
                 | /\*\*/                                              # Match C style comments (empty comment line)
-                | /([\\](?:\n|\r|\r\n))*\*.*?\*([\\](?:\n|\r|\r\n))*/ # Match C style comments
+                | /([\\](?:\n|\r\n|\r))*\*.*?\*([\\](?:\n|\r\n|\r))*/ # Match C style comments
                 | \'(?:\\.|[^\\\'])*\'                                # Match quoted strings
                 | "(?:\\.|[^\\"])*"                                   # Match double quoted strings
-                | (((?<=\n|\r)|^)[ \t]*[#].*?[^\\](?=\n|\r|\r\n))     # Match preprocessor
+                | (((?<=\n|\r)|^)[ \t]*[#].*?[^\\](?=\n|\r\n|\r))     # Match preprocessor
                                                                       # NOTE: end of line is NOT consumed
                                                                       # NOTE: beginning of line is NOT consumed
                 | (?P<fn_name>
@@ -84,12 +84,13 @@ class CppCodeParser(object):
                                                                       # LIMITATION: if there are comments between keyword and name,
                                                                       # it is not detected
                 | [<>{};:]                                            # Match block start/end, brackets and statement separator
-                | ((?:\n|\r|\r\n)\s*(?:\n|\r|\r\n))                   # Match double empty line
+                | ((?:\n|\r\n|\r)\s*(?:\n|\r\n|\r))                   # Match double empty line
             ''',
             re.DOTALL | re.MULTILINE | re.VERBOSE
         )
     
-    regex_ln = re.compile(r'(\n)|(\r)|(\r\n)')
+    # \r\n goes before \r in order to consume right number of lines on Unix for Windows files
+    regex_ln = re.compile(r'(\n)|(\r\n)|(\r)')
 
     def run(self, data):
         self.__init__() # Go to initial state if it is called twice

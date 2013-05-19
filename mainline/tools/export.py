@@ -217,7 +217,10 @@ def append_diff(main_tree, prev_tree):
                         main_val = 0
                     if prev_val == None:
                         prev_val = 0
-                    diff[key] = main_val - prev_val
+                    if isinstance(main_val, list) and isinstance(prev_val, list):
+                        main_tree[name][field][key] = append_diff_list(main_val, prev_val)
+                    else:
+                        diff[key] = main_val - prev_val
                 main_tree[name][field]['__diff__'] = diff
             elif (not isinstance(main_tree[name][field], dict)) and (not isinstance(prev_tree[name][field], dict)):
                 if '__diff__' not in main_tree[name]:
@@ -225,6 +228,17 @@ def append_diff(main_tree, prev_tree):
                 main_tree[name]['__diff__'][field] = main_tree[name][field] - prev_tree[name][field]
     return main_tree
 
-    
-    
-  
+def append_diff_list(main_list, prev_list):
+    merged_list = {}
+    for bar in main_list:
+        merged_list[bar['metric']] = {'count': bar['count'], '__diff__':0}
+    for bar in prev_list:
+        if bar['metric'] in merged_list.keys():
+            merged_list[bar['metric']]['__diff__'] = \
+                merged_list[bar['metric']]['count'] - bar['count']
+        else:
+            merged_list[bar['metric']] = {'count': 0, '__diff__':-bar['count']}
+    result = []
+    for metric in sorted(merged_list.keys()):
+        result.append({'metric':metric, 'count':merged_list[metric]['count'], '__diff__':merged_list[metric]['__diff__']})
+    return result

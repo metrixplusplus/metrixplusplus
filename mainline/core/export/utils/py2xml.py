@@ -130,7 +130,7 @@ class Py2XML():
             else:
                 childStr += "\n" + (INDENT_SPACE_SYMBOL * (indent + 1)) + "<" + objName[:-1] + ">"
                 for string in childObj:
-                    childStr += string;
+                    childStr += str(string);
                 childStr += "</" + objName[:-1] + ">"
                 
         if objName == None:

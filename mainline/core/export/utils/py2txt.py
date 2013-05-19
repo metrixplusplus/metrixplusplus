@@ -128,7 +128,7 @@ class Py2TXT():
             else:
                 childStr += "\n" + (INDENT_SPACE_SYMBOL * (indent + 1))
                 for string in childObj:
-                    childStr += string;
+                    childStr += str(string);
 
         if objName == None:
             return childStr

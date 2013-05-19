@@ -72,7 +72,13 @@
         </subdirs>
         <aggregated-data>
             <std.code.complexity>
-                <cyclomatic max="3" total="8.0" avg="1.33333333333" min="0">
+                <cyclomatic total="8.0" max="3" avg="1.33333333333" min="0">
+                    <distribution-bars>
+                        <distribution-bar count="1" __diff__="0" metric="0" />
+                        <distribution-bar count="3" __diff__="0" metric="1" />
+                        <distribution-bar count="1" __diff__="0" metric="2" />
+                        <distribution-bar count="1" __diff__="0" metric="3" />
+                    </distribution-bars>
                     <__diff__ max="0" total="2.0" avg="-0.166666666667" min="-1" />
                 </cyclomatic>
             </std.code.complexity>

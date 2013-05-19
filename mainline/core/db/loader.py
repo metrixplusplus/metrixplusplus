@@ -865,11 +865,17 @@ class Loader(object):
                 if namespace.get_field_packager(field).is_non_zero() == True:
                     data[field]['min'] = None
                     data[field]['avg'] = None
+                distribution = self.db.count_rows(name, path_like = final_path_like, group_by_column = field)
+                data[field]['distribution-bars'] = []
+                for each in distribution:
+                    data[field]['distribution-bars'].append({'metric': each[0],
+                                                             'count': each[1],
+                                                             'ratio': round((float(each[1]) / float(data[field]['count'])), 4)})
                 result.set_data(name, field, data[field])
-        
         return result
     
-    def load_selected_data(self, namespace, fields = None, path = None, path_like_filter = "%", filters = []):
+    def load_selected_data(self, namespace, fields = None, path = None, path_like_filter = "%", filters = [],
+                           sort_by = None, limit_by = None):
         if self.db == None:
             return None
         
@@ -887,8 +893,9 @@ class Loader(object):
         
         class SelectDataIterator(object):
         
-            def iterate_selected_values(self, loader, namespace_obj, final_path_like, fields, filters):
-                for row in loader.db.select_rows(namespace_obj.get_name(), path_like=final_path_like, filters=filters):
+            def iterate_selected_values(self, loader, namespace_obj, final_path_like, fields, filters, sort_by, limit_by):
+                for row in loader.db.select_rows(namespace_obj.get_name(), path_like=final_path_like, filters=filters,
+                                                 order_by=sort_by, limit_by=limit_by):
                     region_id = None
                     if namespace_obj.are_regions_supported() == True:
                         region_id = row['region_id']
@@ -900,11 +907,11 @@ class Loader(object):
                         data.set_data(namespace, field, row[field])
                     yield data
             
-            def __init__(self, loader, namespace_obj, final_path_like, fields, filters):
-                self.iterator = self.iterate_selected_values(loader, namespace_obj, final_path_like, fields, filters)
+            def __init__(self, loader, namespace_obj, final_path_like, fields, filters, sort_by, limit_by):
+                self.iterator = self.iterate_selected_values(loader, namespace_obj, final_path_like, fields, filters, sort_by, limit_by)
     
             def __iter__(self):
                 return self.iterator
 
-        return SelectDataIterator(self, namespace_obj, final_path_like, fields, filters)
+        return SelectDataIterator(self, namespace_obj, final_path_like, fields, filters, sort_by, limit_by)
     
