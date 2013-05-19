@@ -1,1 +1,1 @@
-{'export': [{'data: {'info': {'path': '', 'id': 1}, 'file-data': {}, 'subfiles': [], 'subdirs': [u'.'], 'aggregated-data': {'std.code.complexity': {'cyclomatic': {'total': 6.0, 'max': 3, 'avg': 1.5, 'min': 1}}}}}]}
+{'export': [{'data: {'info': {'path': '', 'id': 1}, 'file-data': {}, 'subfiles': [], 'subdirs': [u'.'], 'aggregated-data': {'std.code.complexity': {'cyclomatic': {'total': 6.0, 'max': 3, 'avg': 1.5, 'distribution-bars': [{'count': 3, 'metric': 1}, {'count': 1, 'metric': 3}], 'min': 1}}}}}]}

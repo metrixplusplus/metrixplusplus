@@ -545,13 +545,16 @@ class Database(object):
         cur.execute(sql, column_data)
         return cur.lastrowid
 
-    def select_rows(self, table_name, path_like = None, column_names = [], filters = []):
+    def select_rows(self, table_name, path_like = None, column_names = [], filters = [], order_by = None, limit_by = None):
         safe_column_names = []
         for each in column_names:
             safe_column_names.append("'" + each + "'")
-        return self.select_rows_unsafe(table_name, path_like = path_like, column_names = safe_column_names, filters = filters)
+        return self.select_rows_unsafe(table_name, path_like = path_like,
+                                       column_names = safe_column_names, filters = filters,
+                                       order_by = order_by, limit_by = limit_by)
 
-    def select_rows_unsafe(self, table_name, path_like = None, column_names = [], filters = []):
+    def select_rows_unsafe(self, table_name, path_like = None, column_names = [], filters = [], 
+                           group_by = None, order_by = None, limit_by = None):
         path_like = self.InternalPathUtils().normalize_path(path_like)
         if self.conn == None:
             return []
@@ -561,7 +564,7 @@ class Database(object):
         what_stmt = ", ".join(column_names)
         if len(what_stmt) == 0:
             what_stmt = "*"
-        elif path_like != None and table_name != '__files__':
+        elif path_like != None and table_name != '__files__' and group_by == None:
             what_stmt += ", '__files__'.'path', '__files__'.'id'"
         inner_stmt = ""
         if path_like != None and table_name != '__files__':
@@ -585,11 +588,26 @@ class Database(object):
                 where_stmt += " AND '__files__'.'path' LIKE ?"
                 values += (path_like, )
             where_stmt += ")"
-        else:
+        elif path_like != None:
             where_stmt = " WHERE '__files__'.'path' LIKE ?"
             values += (path_like, )
+        
+        group_stmt = ""
+        if group_by != None:
+            group_stmt = " GROUP BY (`" + group_by + "`)"
 
-        sql = "SELECT " + what_stmt + " FROM " + table_stmt + inner_stmt + where_stmt
+        order_stmt = ""
+        if order_by != None:
+            if order_by.startswith("-"):
+                order_stmt = " ORDER BY (`" + order_by[1:] + "`) DESC "
+            else:
+                order_stmt = " ORDER BY (`" + order_by + "`) "
+
+        limit_stmt = ""
+        if limit_by != None:
+            limit_stmt = " LIMIT " + str(limit_by)
+
+        sql = "SELECT " + what_stmt + " FROM " + table_stmt + inner_stmt + where_stmt + group_stmt + order_stmt + limit_stmt
         self.log(sql + " /with arguments: " + str(values))
         return self.conn.execute(sql, values).fetchall()
 
@@ -621,7 +639,7 @@ class Database(object):
         
         total_column_names = []
         for column_name in column_names:
-            for func in ['max', 'min', 'avg', 'total']:
+            for func in ['max', 'min', 'avg', 'total', 'count']:
                 total_column_names.append(func + "('" + table_name + "'.'" + column_name + "') AS " + "'" + column_name + "_" + func + "'")
              
         data = self.select_rows_unsafe(table_name, path_like = path_like, column_names = total_column_names, filters = filters)
@@ -629,10 +647,29 @@ class Database(object):
         result = {}
         for column_name in column_names:
             result[column_name] = {}
-            for func in ['max', 'min', 'avg', 'total']:
+            for func in ['max', 'min', 'avg', 'total', 'count']:
                 result[column_name][func] = data[0][column_name + "_" + func]
         return result
     
+    def count_rows(self, table_name, path_like = None, group_by_column = None, filters = []):
+        
+        count_column_names = None
+        
+        if group_by_column != None:
+            for column in self.iterate_columns(table_name):
+                if group_by_column == column.name:
+                    count_column_names = ["`" + group_by_column + "`", "COUNT(`" + group_by_column + "`)"]
+                    break
+        else:
+            count_column_names = ["COUNT(*)"]
+            
+        if count_column_names == None:
+            return []
+             
+        data = self.select_rows_unsafe(table_name, path_like = path_like, column_names = count_column_names,
+                                       filters = filters, group_by = group_by_column)
+        return data
+
     def log(self, sql):
         #import traceback
         #traceback.print_stack()

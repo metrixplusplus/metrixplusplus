@@ -63,15 +63,8 @@ def main(tool_args):
                 print "(!)",
         print "\t" + each.name + "\t=>\t" + each.value + prev_value_str
 
-    print "Namespaces:"
+    print "\nMetrics:"
     for each in loader.iterate_namespace_names():
-        prev_value_str = ""
-        if loader_prev != None:
-            prev = loader_prev.get_namespace(each)
-            if prev == None:
-                prev_value_str = " [new]"
-                print "(!)",
-        print "\t" + each + prev_value_str
         for field in loader.get_namespace(each).iterate_field_names():
             prev_value_str = ""
             if loader_prev != None:
@@ -79,9 +72,9 @@ def main(tool_args):
                 if prev == None:
                     prev_value_str = " [new]"
                     print "(!)",
-            print "\t\t- " + field + prev_value_str
+            print "\t" + each + ":" + field + prev_value_str
 
-    print "Files:"
+    print "\nFiles:"
     paths = None
     if len(args) == 0:
         paths = [""]

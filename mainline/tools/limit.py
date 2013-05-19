@@ -17,7 +17,6 @@
 #    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-
 import logging
 import re
 
@@ -45,11 +44,15 @@ def main(tool_args):
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
     warn_plugin.declare_configuration(parser)
+    parser.add_option("--general.hotspots", default=None, help="If not set (none), all exceeded limits are printed."
+                      " If set, exceeded limits are sorted (the worst is the first) and only first GENERAL.HOTSPOTS limits are printed."
+                      " [default: %default]", type=int)
 
     (options, args) = parser.parse_args(tool_args)
     log_plugin.configure(options)
     db_plugin.configure(options)
     warn_plugin.configure(options)
+    hotspots = options.__dict__['general.hotspots']
 
     loader_prev = core.db.loader.Loader()
     if db_plugin.dbfile_prev != None:
@@ -91,10 +94,19 @@ def main(tool_args):
             filters = [limit.filter]
             if modified_file_ids != None:
                 filters.append(('file_id', 'IN', modified_file_ids))
+            sort_by = None
+            limit_by = None
+            if hotspots != None:
+                sort_by = limit.field
+                if limit.type == "max":
+                    sort_by = "-" + sort_by
+                limit_by = hotspots
             selected_data = loader.load_selected_data(limit.namespace,
                                                    fields = [limit.field],
                                                    path=path,
-                                                   filters = filters)
+                                                   filters = filters,
+                                                   sort_by=sort_by,
+                                                   limit_by=limit_by)
             if selected_data == None:
                 logging.error("Specified path '" + path + "' is invalid (not found in the database records)")
                 exit_code += 1

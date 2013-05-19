@@ -40,12 +40,15 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IConfigurable, core.api.
                          help="If the option is set (True), the tool measures processing time per file [default: %default]")
         parser.add_option("--general.procerrors-on", action="store_true", default=False,
                          help="If the option is set (True), the tool counts number of processing/parsing errors per file [default: %default]")
+        parser.add_option("--general.size-on", action="store_true", default=False,
+                         help="If the option is set (True), the tool collects file size metric (in bytes) [default: %default]")
     
     def configure(self, options):
         self.non_recursively = options.__dict__['general.non_recursively']
         self.add_exclude_rule(re.compile(options.__dict__['general.exclude_files']))
         self.is_proctime_enabled = options.__dict__['general.proctime_on']
         self.is_procerrors_enabled = options.__dict__['general.procerrors_on']
+        self.is_size_enabled = options.__dict__['general.size_on']
 
     def initialize(self):
         namespace = self.get_plugin_loader().get_database_loader().create_namespace('general')
@@ -53,6 +56,8 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IConfigurable, core.api.
             namespace.add_field('proctime', float)
         if self.is_procerrors_enabled == True:
             namespace.add_field('procerrors', int)
+        if self.is_size_enabled == True:
+            namespace.add_field('size', int)
         
     def run(self, args):
         if len(args) == 0:
@@ -102,6 +107,8 @@ class DirectoryReader():
                                 data.set_data('general', 'proctime', time.time() - ts)
                             if plugin.is_procerrors_enabled == True and procerrors != None and procerrors != 0:
                                 data.set_data('general', 'procerrors', procerrors)
+                            if plugin.is_size_enabled == True:
+                                data.set_data('general', 'size', len(text))
                             plugin.get_plugin_loader().get_database_loader().save_file_data(data)
                             logging.debug("-" * 60)
                             exit_code += procerrors

@@ -55,8 +55,8 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IParser, core.api.IConfi
 class CsCodeParser(object):
     
     regex_cpp = re.compile(r'''
-                   //(?=\n|\r|\r\n)                                   # Match C# style comments (empty comment line)
-                |  //.*?(?=\n|\r|\r\n)                                # Match C# style comments
+                   //(?=\n|\r\n|\r)                                   # Match C# style comments (empty comment line)
+                |  //.*?(?=\n|\r\n|\r)                                # Match C# style comments
                                                                       # NOTE: end of line is NOT consumed
                                                                       # NOTE: it is slightly different in C++
                 | /\*\*/                                              # Match C style comments (empty comment line)
@@ -65,7 +65,7 @@ class CsCodeParser(object):
                                                                       # NOTE: it is slightly different in C++
                 | \'(?:\\.|[^\\\'])*\'                                # Match quoted strings
                 | "(?:\\.|[^\\"])*"                                   # Match double quoted strings
-                | (((?<=\n|\r)|^)[ \t]*[#].*?(?=\n|\r|\r\n))          # Match preprocessor
+                | (((?<=\n|\r)|^)[ \t]*[#].*?(?=\n|\r\n|\r))          # Match preprocessor
                                                                       # NOTE: end of line is NOT consumed
                                                                       # NOTE: beginning of line is NOT consumed
                                                                       # NOTE: C# does not support backslashing as C++ does
@@ -98,12 +98,13 @@ class CsCodeParser(object):
                 | [\[\]{};]                                               # Match block start/end and statement separator
                                                                       # NOTE: C++ parser includes processing of <> and : 
                                                                       #       to handle template definitions, it is easier in C#
-                | ((?:\n|\r|\r\n)\s*(?:\n|\r|\r\n))                   # Match double empty line
+                | ((?:\n|\r\n|\r)\s*(?:\n|\r\n|\r))                   # Match double empty line
             ''',
             re.DOTALL | re.MULTILINE | re.VERBOSE
         )
 
-    regex_ln = re.compile(r'(\n)|(\r)|(\r\n)')
+    # \r\n goes before \r in order to consume right number of lines on Unix for Windows files
+    regex_ln = re.compile(r'(\n)|(\r\n)|(\r)')
 
     def run(self, data):
         self.__init__() # Go to initial state if it is called twice

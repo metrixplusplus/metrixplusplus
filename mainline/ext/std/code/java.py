@@ -55,8 +55,8 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IParser, core.api.IConfi
 class JavaCodeParser(object):
     
     regex_cpp = re.compile(r'''
-                   //(?=\n|\r|\r\n)                                   # Match Java style comments (empty comment line)
-                |  //.*?(?=\n|\r|\r\n)                                # Match Java style comments
+                   //(?=\n|\r\n|\r)                                   # Match Java style comments (empty comment line)
+                |  //.*?(?=\n|\r\n|\r)                                # Match Java style comments
                                                                       # NOTE: end of line is NOT consumed
                                                                       # NOTE: it is slightly different in C++
                 | /\*\*/                                              # Match C style comments (empty comment line)
@@ -78,12 +78,13 @@ class JavaCodeParser(object):
                 | [{};]                                               # Match block start/end and statement separator
                                                                       # NOTE: C++ parser includes processing of <> and : 
                                                                       #       to handle template definitions, it is easier in Java
-                | ((?:\n|\r|\r\n)\s*(?:\n|\r|\r\n))                   # Match double empty line
+                | ((?:\n|\r\n|\r)\s*(?:\n|\r\n|\r))                   # Match double empty line
             ''',
             re.DOTALL | re.MULTILINE | re.VERBOSE
         )
 
-    regex_ln = re.compile(r'(\n)|(\r)|(\r\n)')
+    # \r\n goes before \r in order to consume right number of lines on Unix for Windows files
+    regex_ln = re.compile(r'(\n)|(\r\n)|(\r)')
 
     def run(self, data):
         self.__init__() # Go to initial state if it is called twice
