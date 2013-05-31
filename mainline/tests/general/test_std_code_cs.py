@@ -30,11 +30,11 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('collect', ['--std.code.complexity.on'])
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('export', ['--general.nest-regions', '--general.format=xml'])
+        runner = tests.common.ToolRunner('view', ['--general.nest-regions', '--general.format=xml'])
         self.assertExec(runner.run())
 
         dirs_list = [os.path.join('.', each) for each in os.listdir(self.get_content_paths().cwd)]
-        runner = tests.common.ToolRunner('export',
+        runner = tests.common.ToolRunner('view',
                                          opts_list=['--general.nest-regions', '--general.format=txt'],
                                          dirs_list=dirs_list,
                                          prefix='files')
