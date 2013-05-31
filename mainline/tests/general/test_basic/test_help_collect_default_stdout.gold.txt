@@ -24,6 +24,8 @@ Options:
   --general.procerrors-on
                         If the option is set (True), the tool counts number of
                         processing/parsing errors per file [default: False]
+  --general.size-on     If the option is set (True), the tool collects file
+                        size metric (in bytes) [default: False]
   --general.log-level=GENERAL.LOG_LEVEL
                         Defines log level. Possible values are
                         'DEBUG','INFO','WARNING' or 'ERROR'. Default value is

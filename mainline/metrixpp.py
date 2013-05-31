@@ -53,8 +53,8 @@ def main():
         
     if command not in available_tools:
         logging.error("Unknown action: " + str(command))
-        print "Usage: %prog <action> --help"
-        print "   or: %prog <action> [options] -- [path 1] ... [path N]"
+        print "Usage: {prog} <action> --help".format(prog=__file__)
+        print "   or: {prog} <action> [options] -- [path 1] ... [path N]".format(prog=__file__)
         print "where: actions are:"
         for each in available_tools:
             print "\t" + each
@@ -71,5 +71,9 @@ if __name__ == '__main__':
     ts = time.time()
     core.log.set_default_format()
     exit_code = main()
-    logging.warning("Exit code: " + str(exit_code) + ". Time spent: " + str(round((time.time() - ts), 2)) + " seconds. Done")
+    time_spent = round((time.time() - ts), 2)
+    if 'METRIXPLUSPLUS_TEST_GENERATE_GOLDS' in os.environ.keys() and \
+        os.environ['METRIXPLUSPLUS_TEST_GENERATE_GOLDS'] == "True":
+        time_spent = 1 # Constant value if under tests
+    logging.warning("Exit code: " + str(exit_code) + ". Time spent: " + str(time_spent) + " seconds. Done")
     exit(exit_code)
