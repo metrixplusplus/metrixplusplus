@@ -1,0 +1,22 @@
+<export>
+
+    <data>
+        <info path="" id="1" />
+        <file-data />
+        <subfiles>
+        </subfiles>
+        <subdirs>
+            <subdir>.</subdir>
+        </subdirs>
+        <aggregated-data>
+            <std.code.complexity>
+                <cyclomatic count="4" max="3" avg="1.5" total="6.0" min="1">
+                    <distribution-bars>
+                        <distribution-bar count="3" metric="1" ratio="0.75" />
+                        <distribution-bar count="1" metric="3" ratio="0.25" />
+                    </distribution-bars>
+                </cyclomatic>
+            </std.code.complexity>
+        </aggregated-data>
+    </data>
+</export>

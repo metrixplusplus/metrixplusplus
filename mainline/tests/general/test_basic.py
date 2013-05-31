@@ -34,7 +34,7 @@ class Test(tests.common.TestCase):
                                          save_prev=True)
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('export',
+        runner = tests.common.ToolRunner('view',
                                          ['--general.log-level=INFO', '--general.format=xml'],
                                          check_stderr=[(0, -1)])
         self.assertExec(runner.run())
@@ -62,14 +62,14 @@ class Test(tests.common.TestCase):
                                          use_prev=True)
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('export',
+        runner = tests.common.ToolRunner('view',
                                          ['--general.log-level=INFO', '--general.format=xml'],
                                          check_stderr=[(0, -1)],
                                          prefix='second',
                                          use_prev=True)
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('export',
+        runner = tests.common.ToolRunner('view',
                                          ['--general.log-level=INFO', '--general.format=xml'],
                                          check_stderr=[(0, -1)],
                                          prefix='second_per_file',
@@ -138,7 +138,7 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('collect', ['--help'])
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('export', ['--help'])
+        runner = tests.common.ToolRunner('view', ['--help'])
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit', ['--help'])
@@ -147,18 +147,18 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('info', ['--help'])
         self.assertExec(runner.run())
 
-    def test_export_format(self):
+    def test_view_format(self):
 
         runner = tests.common.ToolRunner('collect', ['--std.code.complexity.on'], save_prev=True)
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('export', ['--general.format=txt'], prefix='txt')
+        runner = tests.common.ToolRunner('view', ['--general.format=txt'], prefix='txt')
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('export', ['--general.format=python'], prefix='python')
+        runner = tests.common.ToolRunner('view', ['--general.format=python'], prefix='python')
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('export', ['--general.format=xml'], prefix='xml')
+        runner = tests.common.ToolRunner('view', ['--general.format=xml'], prefix='xml')
         self.assertExec(runner.run())
         
         runner = tests.common.ToolRunner('collect',
@@ -168,13 +168,13 @@ class Test(tests.common.TestCase):
                                          use_prev=True)
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('export',
+        runner = tests.common.ToolRunner('view',
                                          ['--general.nest-regions', '--general.format=xml'],
                                          prefix='nest',
                                          use_prev=True)
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('export',
+        runner = tests.common.ToolRunner('view',
                                          ['--general.nest-regions', '--general.format=xml'],
                                          prefix='nest_per_file',
                                          dirs_list=['./simple.cpp'],
