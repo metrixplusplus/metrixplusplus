@@ -86,15 +86,17 @@ data:
 .   aggregated-data:  
 .   .   std.code.complexity:  
 .   .   .   cyclomatic: 
+.   .   .   .   count="3"
 .   .   .   .   max="0"
-.   .   .   .   total="0.0"
 .   .   .   .   avg="0.0"
+.   .   .   .   total="0.0"
 .   .   .   .   min="0" 
 .   .   .   .   distribution-bars:
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="3"
 .   .   .   .   .   .   metric="0"
+.   .   .   .   .   .   ratio="1.0"
 ================================================================================
 --------------------------------------------------------------------------------
 data:  
@@ -804,23 +806,27 @@ data:
 .   aggregated-data:  
 .   .   std.code.complexity:  
 .   .   .   cyclomatic: 
+.   .   .   .   count="51"
 .   .   .   .   max="2"
-.   .   .   .   total="4.0"
 .   .   .   .   avg="0.078431372549"
+.   .   .   .   total="4.0"
 .   .   .   .   min="0" 
 .   .   .   .   distribution-bars:
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="48"
 .   .   .   .   .   .   metric="0"
+.   .   .   .   .   .   ratio="0.9412"
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="2"
 .   .   .   .   .   .   metric="1"
+.   .   .   .   .   .   ratio="0.0392"
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="1"
 .   .   .   .   .   .   metric="2"
+.   .   .   .   .   .   ratio="0.0196"
 ================================================================================
 --------------------------------------------------------------------------------
 data:  
@@ -1223,23 +1229,27 @@ data:
 .   aggregated-data:  
 .   .   std.code.complexity:  
 .   .   .   cyclomatic: 
+.   .   .   .   count="24"
 .   .   .   .   max="2"
-.   .   .   .   total="6.0"
 .   .   .   .   avg="0.25"
+.   .   .   .   total="6.0"
 .   .   .   .   min="0" 
 .   .   .   .   distribution-bars:
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="20"
 .   .   .   .   .   .   metric="0"
+.   .   .   .   .   .   ratio="0.8333"
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="2"
 .   .   .   .   .   .   metric="1"
+.   .   .   .   .   .   ratio="0.0833"
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="2"
 .   .   .   .   .   .   metric="2"
+.   .   .   .   .   .   ratio="0.0833"
 ================================================================================
 --------------------------------------------------------------------------------
 data:  
@@ -1338,23 +1348,27 @@ data:
 .   aggregated-data:  
 .   .   std.code.complexity:  
 .   .   .   cyclomatic: 
+.   .   .   .   count="4"
 .   .   .   .   max="2"
-.   .   .   .   total="3.0"
 .   .   .   .   avg="0.75"
+.   .   .   .   total="3.0"
 .   .   .   .   min="0" 
 .   .   .   .   distribution-bars:
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="2"
 .   .   .   .   .   .   metric="0"
+.   .   .   .   .   .   ratio="0.5"
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="1"
 .   .   .   .   .   .   metric="1"
+.   .   .   .   .   .   ratio="0.25"
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="1"
 .   .   .   .   .   .   metric="2"
+.   .   .   .   .   .   ratio="0.25"
 ================================================================================
 --------------------------------------------------------------------------------
 data:  
@@ -1475,23 +1489,27 @@ data:
 .   aggregated-data:  
 .   .   std.code.complexity:  
 .   .   .   cyclomatic: 
+.   .   .   .   count="4"
 .   .   .   .   max="2"
-.   .   .   .   total="4.0"
 .   .   .   .   avg="1.0"
+.   .   .   .   total="4.0"
 .   .   .   .   min="0" 
 .   .   .   .   distribution-bars:
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="1"
 .   .   .   .   .   .   metric="0"
+.   .   .   .   .   .   ratio="0.25"
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="2"
 .   .   .   .   .   .   metric="1"
+.   .   .   .   .   .   ratio="0.5"
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="1"
 .   .   .   .   .   .   metric="2"
+.   .   .   .   .   .   ratio="0.25"
 ================================================================================
 
 
