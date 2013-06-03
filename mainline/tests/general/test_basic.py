@@ -28,34 +28,34 @@ class Test(tests.common.TestCase):
         
         # first collection
         runner = tests.common.ToolRunner('collect',
-                                         ['--std.code.complexity.on',
-                                          '--general.log-level=INFO'],
+                                         ['--std.code.complexity.cyclomatic',
+                                          '--log-level=INFO'],
                                          check_stderr=[(0, -1)],
                                          save_prev=True)
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('view',
-                                         ['--general.log-level=INFO', '--general.format=xml'],
+                                         ['--log-level=INFO', '--format=xml'],
                                          check_stderr=[(0, -1)])
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
-                                         ['--general.log-level=INFO',
-                                          '--general.max-limit=std.code.complexity:cyclomatic:0'],
+                                         ['--log-level=INFO',
+                                          '--max-limit=std.code.complexity:cyclomatic:0'],
                                          check_stderr=[(0, -1)],
                                          exit_code=4)
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('info',
-                                         ['--general.log-level=INFO'],
+                                         ['--log-level=INFO'],
                                          check_stderr=[(0, -1)],
                                          exit_code=0)
         self.assertExec(runner.run())
 
         # second collection
         runner = tests.common.ToolRunner('collect',
-                                         ['--std.code.complexity.on',
-                                          '--general.log-level=INFO'],
+                                         ['--std.code.complexity.cyclomatic',
+                                          '--log-level=INFO'],
                                          check_stderr=[(0, -1)],
                                          prefix='second',
                                          cwd="sources_changed",
@@ -63,14 +63,14 @@ class Test(tests.common.TestCase):
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('view',
-                                         ['--general.log-level=INFO', '--general.format=xml'],
+                                         ['--log-level=INFO', '--format=xml'],
                                          check_stderr=[(0, -1)],
                                          prefix='second',
                                          use_prev=True)
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('view',
-                                         ['--general.log-level=INFO', '--general.format=xml'],
+                                         ['--log-level=INFO', '--format=xml'],
                                          check_stderr=[(0, -1)],
                                          prefix='second_per_file',
                                          dirs_list=['./simple.cpp'],
@@ -78,8 +78,8 @@ class Test(tests.common.TestCase):
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
-                                         ['--general.log-level=INFO',
-                                          '--general.max-limit=std.code.complexity:cyclomatic:0'],
+                                         ['--log-level=INFO',
+                                          '--max-limit=std.code.complexity:cyclomatic:0'],
                                          check_stderr=[(0, -1)],
                                          exit_code=6,
                                          prefix='second',
@@ -87,9 +87,9 @@ class Test(tests.common.TestCase):
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
-                                         ['--general.log-level=INFO',
-                                          '--general.max-limit=std.code.complexity:cyclomatic:0',
-                                          '--general.warn=all'],
+                                         ['--log-level=INFO',
+                                          '--max-limit=std.code.complexity:cyclomatic:0',
+                                          '--warn-mode=all'],
                                          check_stderr=[(0, -1)],
                                          exit_code=6,
                                          prefix='second_warn_all',
@@ -97,9 +97,9 @@ class Test(tests.common.TestCase):
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
-                                         ['--general.log-level=INFO',
-                                          '--general.max-limit=std.code.complexity:cyclomatic:0',
-                                          '--general.warn=touched'],
+                                         ['--log-level=INFO',
+                                          '--max-limit=std.code.complexity:cyclomatic:0',
+                                          '--warn-mode=touched'],
                                          check_stderr=[(0, -1)],
                                          exit_code=4,
                                          prefix='second_warn_touched',
@@ -107,9 +107,9 @@ class Test(tests.common.TestCase):
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
-                                         ['--general.log-level=INFO',
-                                          '--general.max-limit=std.code.complexity:cyclomatic:0',
-                                          '--general.warn=trend'],
+                                         ['--log-level=INFO',
+                                          '--max-limit=std.code.complexity:cyclomatic:0',
+                                          '--warn-mode=trend'],
                                          check_stderr=[(0, -1)],
                                          exit_code=3,
                                          prefix='second_warn_trend',
@@ -117,9 +117,9 @@ class Test(tests.common.TestCase):
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
-                                         ['--general.log-level=INFO',
-                                          '--general.max-limit=std.code.complexity:cyclomatic:0',
-                                          '--general.warn=new'],
+                                         ['--log-level=INFO',
+                                          '--max-limit=std.code.complexity:cyclomatic:0',
+                                          '--warn-mode=new'],
                                          check_stderr=[(0, -1)],
                                          exit_code=2,
                                          prefix='second_warn_new',
@@ -127,7 +127,7 @@ class Test(tests.common.TestCase):
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('info',
-                                         ['--general.log-level=INFO'],
+                                         ['--log-level=INFO'],
                                          check_stderr=[(0, -1)],
                                          prefix='second',
                                          use_prev=True)
@@ -135,7 +135,13 @@ class Test(tests.common.TestCase):
 
     def test_help(self):
         
+        runner = tests.common.ToolRunner('--help', exit_code=1)
+        self.assertExec(runner.run())
+
         runner = tests.common.ToolRunner('collect', ['--help'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('info', ['--help'])
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('view', ['--help'])
@@ -144,38 +150,38 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('limit', ['--help'])
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('info', ['--help'])
+        runner = tests.common.ToolRunner('export', ['--help'])
         self.assertExec(runner.run())
 
     def test_view_format(self):
 
-        runner = tests.common.ToolRunner('collect', ['--std.code.complexity.on'], save_prev=True)
+        runner = tests.common.ToolRunner('collect', ['--std.code.complexity.cyclomatic'], save_prev=True)
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('view', ['--general.format=txt'], prefix='txt')
+        runner = tests.common.ToolRunner('view', ['--format=txt'], prefix='txt')
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('view', ['--general.format=python'], prefix='python')
+        runner = tests.common.ToolRunner('view', ['--format=python'], prefix='python')
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('view', ['--general.format=xml'], prefix='xml')
+        runner = tests.common.ToolRunner('view', ['--format=xml'], prefix='xml')
         self.assertExec(runner.run())
         
         runner = tests.common.ToolRunner('collect',
-                                         ['--std.code.complexity.on'],
+                                         ['--std.code.complexity.cyclomatic'],
                                          prefix='nest',
                                          cwd="sources_changed",
                                          use_prev=True)
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('view',
-                                         ['--general.nest-regions', '--general.format=xml'],
+                                         ['--nest-regions', '--format=xml'],
                                          prefix='nest',
                                          use_prev=True)
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('view',
-                                         ['--general.nest-regions', '--general.format=xml'],
+                                         ['--nest-regions', '--format=xml'],
                                          prefix='nest_per_file',
                                          dirs_list=['./simple.cpp'],
                                          use_prev=True)

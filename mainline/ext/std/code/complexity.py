@@ -24,11 +24,11 @@ import re
 class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
     
     def declare_configuration(self, parser):
-        parser.add_option("--std.code.complexity.on", action="store_true", default=False,
-                         help="Enables collection of complexity metrics: cyclomatic by McCabe [default: %default]")
+        parser.add_option("--std.code.complexity.cyclomatic", "--sccc", action="store_true", default=False,
+                         help="Enables collection of cyclomatic complexity metric (McCabe) [default: %default]")
     
     def configure(self, options):
-        self.is_active = options.__dict__['std.code.complexity.on']
+        self.is_active = options.__dict__['std.code.complexity.cyclomatic']
         
     def initialize(self):
         if self.is_active == True:

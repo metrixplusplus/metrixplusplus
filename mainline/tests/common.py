@@ -64,9 +64,9 @@ class ToolRunner(object):
 
         self.cwd = cwd
 
-        db_opts = ['--general.db-file=' + db_file]
+        db_opts = ['--db-file=' + db_file]
         if use_prev == True:
-            db_opts.append('--general.db-file-prev=' + db_file_prev)
+            db_opts.append('--db-file-prev=' + db_file_prev)
         self.dbopts = db_opts
         
         self.dirs_list = [] 

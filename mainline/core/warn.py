@@ -31,7 +31,7 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
     
     def declare_configuration(self, parser):
         self.parser = parser
-        parser.add_option("--general.warn", default='all', choices=['new', 'trend', 'touched', 'all'],
+        parser.add_option("--warn-mode", "--wm", default='all', choices=['new', 'trend', 'touched', 'all'],
                          help="Defines the warnings mode. "
                          "'new' - warnings for new regions only, "
                          "'trend' - warnings for new regions and for bad trend of modified regions, "
@@ -39,13 +39,13 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
                          "'all' - all warnings active "
                          "[default: %default]")
 
-        parser.add_option("--general.min-limit", action="multiopt",
+        parser.add_option("--min-limit", "--min", action="multiopt",
                           help="A threshold per 'namespace:field' metric in order to select regions, "
                           "which have got metric value less than the specified limit. "
                           "This option can be specified multiple times, if it is necessary to apply several limits. "
                           "Should be in the format: <namespace>:<field>:<limit-value>, for example: "
                           "'std.code.complexity:cyclomatic:7'.") # TODO think about better example
-        parser.add_option("--general.max-limit", action="multiopt",
+        parser.add_option("--max-limit", "--max", action="multiopt",
                           help="A threshold per 'namespace:field' metric in order to select regions, "
                           "which have got metric value more than the specified limit. "
                           "This option can be specified multiple times, if it is necessary to apply several limits. "
@@ -53,17 +53,17 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
                           "'std.code.complexity:cyclomatic:7'.")
         
     def configure(self, options):
-        if options.__dict__['general.warn'] == 'new':
+        if options.__dict__['warn_mode'] == 'new':
             self.mode = self.MODE_NEW
-        elif options.__dict__['general.warn'] == 'trend':
+        elif options.__dict__['warn_mode'] == 'trend':
             self.mode = self.MODE_TREND
-        elif options.__dict__['general.warn'] == 'touched':
+        elif options.__dict__['warn_mode'] == 'touched':
             self.mode = self.MODE_TOUCHED
-        elif options.__dict__['general.warn'] == 'all':
+        elif options.__dict__['warn_mode'] == 'all':
             self.mode = self.MODE_ALL
             
-        if self.mode != self.MODE_ALL and options.__dict__['general.db_file_prev'] == None:
-            self.parser.error("The mode '" + options.__dict__['general.warn'] + "' for 'general.warn' option requires 'general.db-file-prev' option set")
+        if self.mode != self.MODE_ALL and options.__dict__['db_file_prev'] == None:
+            self.parser.error("The mode '" + options.__dict__['warn_mode'] + "' for 'general.warn' option requires '--db-file-prev' option set")
 
         class Limit(object):
             def __init__(self, limit_type, limit, namespace, field, db_filter):
@@ -78,18 +78,18 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
         
         self.limits = []
         pattern = re.compile(r'''([^:]+)[:]([^:]+)[:]([-+]?[0-9]+(?:[.][0-9]+)?)''')
-        if options.__dict__['general.max_limit'] != None:
-            for each in options.__dict__['general.max_limit']:
+        if options.__dict__['max_limit'] != None:
+            for each in options.__dict__['max_limit']:
                 match = re.match(pattern, each)
                 if match == None:
-                    self.parser.error("Invalid format of the 'general.max-limit' option: " + each)
+                    self.parser.error("Invalid format of the '--max-limit' option: " + each)
                 limit = Limit("max", float(match.group(3)), match.group(1), match.group(2), (match.group(2), '>', float(match.group(3))))
                 self.limits.append(limit)
-        if options.__dict__['general.min_limit'] != None:
-            for each in options.__dict__['general.min_limit']:  
+        if options.__dict__['min_limit'] != None:
+            for each in options.__dict__['min_limit']:  
                 match = re.match(pattern, each)
                 if match == None:
-                    self.parser.error("Invalid format of the 'general.min-limit' option: " + each)
+                    self.parser.error("Invalid format of the '--min-limit' option: " + each)
                 limit = Limit("min", float(match.group(3)), match.group(1), match.group(2), (match.group(2), '<', float(match.group(3))))
                 self.limits.append(limit)
                 

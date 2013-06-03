@@ -27,21 +27,21 @@ class Test(tests.common.TestCase):
 
     def test_parser(self):
         
-        runner = tests.common.ToolRunner('collect', ['--std.code.complexity.on'])
+        runner = tests.common.ToolRunner('collect', ['--std.code.complexity.cyclomatic'])
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('view', ['--general.nest-regions', '--general.format=xml'])
+        runner = tests.common.ToolRunner('view', ['--nest-regions', '--format=xml'])
         self.assertExec(runner.run())
 
         dirs_list = [os.path.join('.', each) for each in os.listdir(self.get_content_paths().cwd)]
         runner = tests.common.ToolRunner('view',
-                                         opts_list=['--general.nest-regions', '--general.format=txt'],
+                                         opts_list=['--nest-regions', '--format=txt'],
                                          dirs_list=dirs_list,
                                          prefix='files')
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
-                                         ['--general.max-limit=std.code.complexity:cyclomatic:0'],
+                                         ['--max-limit=std.code.complexity:cyclomatic:0'],
                                          exit_code=16)
         self.assertExec(runner.run())
 
