@@ -2,38 +2,39 @@ Usage: metrixpp.py collect [options] -- [path 1] ... [path N]
 
 Options:
   -h, --help            show this help message and exit
-  --general.db-file=GENERAL.DB_FILE
+  --db-file=DB_FILE, --dbf=DB_FILE
                         Primary database file to write (by the collector) and
                         post-process (by other tools) [default: ./metrixpp.db]
-  --general.db-file-prev=GENERAL.DB_FILE_PREV
+  --db-file-prev=DB_FILE_PREV, --dbfp=DB_FILE_PREV
                         Database file with data collected for the
                         past/previous revision. If it is set for the collector
                         tool to perform an incremental/iterative collection,
                         it may reduce the processing time significantly. Post-
                         processing tools use it in order to recognise/evaluate
                         change trends. [default: none].
-  --general.non-recursively
+  --non-recursively, --nr
                         If the option is set (True), sub-directories are not
                         processed [default: False]
-  --general.exclude-files=GENERAL.EXCLUDE_FILES
+  --exclude-files=EXCLUDE_FILES, --ef=EXCLUDE_FILES
                         Defines the pattern to exclude files from processing
                         [default: ^[.]]
-  --general.proctime-on
+  --std.general.proctime, --sgpt
                         If the option is set (True), the tool measures
                         processing time per file [default: False]
-  --general.procerrors-on
+  --std.general.procerrors, --sgpe
                         If the option is set (True), the tool counts number of
                         processing/parsing errors per file [default: False]
-  --general.size-on     If the option is set (True), the tool collects file
+  --std.general.size, --sgs
+                        If the option is set (True), the tool collects file
                         size metric (in bytes) [default: False]
-  --general.log-level=GENERAL.LOG_LEVEL
+  --log-level=LOG_LEVEL, --ll=LOG_LEVEL
                         Defines log level. Possible values are
                         'DEBUG','INFO','WARNING' or 'ERROR'. Default value is
                         inherited from environment variable
                         'METRIXPLUSPLUS_LOG_LEVEL' if set. [default: INFO]
-  --std.code.complexity.on
-                        Enables collection of complexity metrics: cyclomatic
-                        by McCabe [default: False]
+  --std.code.complexity.cyclomatic, --sccc
+                        Enables collection of cyclomatic complexity metric
+                        (McCabe) [default: False]
   --std.code.cpp.files=STD.CODE.CPP.FILES
                         Enumerates filename extensions to match C/C++ files
                         [default: *.c,*.h,*.cpp,*.hpp,*.cc,*.hh,*.cxx,*.hxx]

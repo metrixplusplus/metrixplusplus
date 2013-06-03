@@ -25,17 +25,17 @@ import re
 class Plugin(core.api.Plugin, core.api.IConfigurable):
     
     def declare_configuration(self, parser):
-        parser.add_option("--general.db-file", default='./metrixpp.db',
+        parser.add_option("--db-file", "--dbf", default='./metrixpp.db',
                          help="Primary database file to write (by the collector) and post-process (by other tools) [default: %default]")
-        parser.add_option("--general.db-file-prev", default=None,
+        parser.add_option("--db-file-prev", "--dbfp", default=None,
                          help="Database file with data collected for the past/previous revision."
                              " If it is set for the collector tool to perform an incremental/iterative collection,"
                              " it may reduce the processing time significantly."
                              " Post-processing tools use it in order to recognise/evaluate change trends. [default: %default].")
     
     def configure(self, options):
-        self.dbfile = options.__dict__['general.db_file']
-        self.dbfile_prev = options.__dict__['general.db_file_prev']
+        self.dbfile = options.__dict__['db_file']
+        self.dbfile_prev = options.__dict__['db_file_prev']
         
     def initialize(self):
         

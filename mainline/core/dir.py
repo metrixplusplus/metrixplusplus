@@ -32,26 +32,26 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IConfigurable, core.api.
         self.exclude_rules = []
     
     def declare_configuration(self, parser):
-        parser.add_option("--general.non-recursively", action="store_true", default=False,
+        parser.add_option("--non-recursively", "--nr", action="store_true", default=False,
                          help="If the option is set (True), sub-directories are not processed [default: %default]")
-        parser.add_option("--general.exclude-files", default=r'^[.]',
+        parser.add_option("--exclude-files", "--ef", default=r'^[.]',
                          help="Defines the pattern to exclude files from processing [default: %default]")
-        parser.add_option("--general.proctime-on", action="store_true", default=False,
+        parser.add_option("--std.general.proctime", "--sgpt", action="store_true", default=False,
                          help="If the option is set (True), the tool measures processing time per file [default: %default]")
-        parser.add_option("--general.procerrors-on", action="store_true", default=False,
+        parser.add_option("--std.general.procerrors", "--sgpe", action="store_true", default=False,
                          help="If the option is set (True), the tool counts number of processing/parsing errors per file [default: %default]")
-        parser.add_option("--general.size-on", action="store_true", default=False,
+        parser.add_option("--std.general.size", "--sgs", action="store_true", default=False,
                          help="If the option is set (True), the tool collects file size metric (in bytes) [default: %default]")
     
     def configure(self, options):
-        self.non_recursively = options.__dict__['general.non_recursively']
-        self.add_exclude_rule(re.compile(options.__dict__['general.exclude_files']))
-        self.is_proctime_enabled = options.__dict__['general.proctime_on']
-        self.is_procerrors_enabled = options.__dict__['general.procerrors_on']
-        self.is_size_enabled = options.__dict__['general.size_on']
+        self.non_recursively = options.__dict__['non_recursively']
+        self.add_exclude_rule(re.compile(options.__dict__['exclude_files']))
+        self.is_proctime_enabled = options.__dict__['std.general.proctime']
+        self.is_procerrors_enabled = options.__dict__['std.general.procerrors']
+        self.is_size_enabled = options.__dict__['std.general.size']
 
     def initialize(self):
-        namespace = self.get_plugin_loader().get_database_loader().create_namespace('general')
+        namespace = self.get_plugin_loader().get_database_loader().create_namespace('std.general')
         if self.is_proctime_enabled == True:
             namespace.add_field('proctime', float)
         if self.is_procerrors_enabled == True:
@@ -67,7 +67,7 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IConfigurable, core.api.
         
     def add_exclude_rule(self, re_compiled_pattern):
         # TODO file name may have special regexp symbols what causes an exception
-        # For example try to run a collection with "--general.db-file=metrix++" option
+        # For example try to run a collection with "--db-file=metrix++" option
         self.exclude_rules.append(re_compiled_pattern)
         
     def is_file_excluded(self, file_name):
@@ -104,11 +104,11 @@ class DirectoryReader():
                             (data, is_updated) = plugin.get_plugin_loader().get_database_loader().create_file_data(full_path, checksum, text)
                             procerrors = parser.process(plugin, data, is_updated)
                             if plugin.is_proctime_enabled == True:
-                                data.set_data('general', 'proctime', time.time() - ts)
+                                data.set_data('std.general', 'proctime', time.time() - ts)
                             if plugin.is_procerrors_enabled == True and procerrors != None and procerrors != 0:
-                                data.set_data('general', 'procerrors', procerrors)
+                                data.set_data('std.general', 'procerrors', procerrors)
                             if plugin.is_size_enabled == True:
-                                data.set_data('general', 'size', len(text))
+                                data.set_data('std.general', 'size', len(text))
                             plugin.get_plugin_loader().get_database_loader().save_file_data(data)
                             logging.debug("-" * 60)
                             exit_code += procerrors

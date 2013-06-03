@@ -38,7 +38,7 @@ def main(tool_args):
     parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog debug [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
-    parser.add_option("-m", "--general.mode", default='dumphtml', choices=['dumphtml'],
+    parser.add_option("-m", "--mode", default='dumphtml', choices=['dumphtml'],
                          help="'dumphtml' - prints html code with code highlights for each given path [default: %default]")
 
     (options, args) = parser.parse_args(tool_args)
@@ -48,7 +48,7 @@ def main(tool_args):
     loader = core.db.loader.Loader()
     loader.open_database(db_plugin.dbfile)
 
-    if options.__dict__['general.mode'] == 'dumphtml':
+    if options.__dict__['mode'] == 'dumphtml':
         return dumphtml(args, loader)
     
     assert(False)    

@@ -44,7 +44,7 @@ def main(tool_args):
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
     warn_plugin.declare_configuration(parser)
-    parser.add_option("--general.hotspots", default=None, help="If not set (none), all exceeded limits are printed."
+    parser.add_option("--hotspots", "--hs", default=None, help="If not set (none), all exceeded limits are printed."
                       " If set, exceeded limits are sorted (the worst is the first) and only first GENERAL.HOTSPOTS limits are printed."
                       " [default: %default]", type=int)
 
@@ -52,7 +52,7 @@ def main(tool_args):
     log_plugin.configure(options)
     db_plugin.configure(options)
     warn_plugin.configure(options)
-    hotspots = options.__dict__['general.hotspots']
+    hotspots = options.__dict__['hotspots']
 
     loader_prev = core.db.loader.Loader()
     if db_plugin.dbfile_prev != None:

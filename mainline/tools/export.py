@@ -42,24 +42,24 @@ def main(tool_args):
     parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog export [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
-    parser.add_option("--general.format", default='xml', choices=['txt', 'xml', 'python'], help="Format of the output data. "
+    parser.add_option("--format", "--ft", default='xml', choices=['txt', 'xml', 'python'], help="Format of the output data. "
                       "Possible values are 'xml', 'txt' or 'python' [default: %default]")
-    parser.add_option("--general.namespaces", default=None, help="Allows to enumerate namespaces of interest."
+    parser.add_option("--namespaces", "--ns", default=None, help="Allows to enumerate namespaces of interest."
                       " If not defined all namespaces available in database file will be processed."
                       " Separate several namespaces by comma, for example 'general,std.code.complexity'"
                       " [default: %default]")
-    parser.add_option("--general.nest-regions", action="store_true", default=False,
+    parser.add_option("--nest-regions", "--nr", action="store_true", default=False,
                       help="If the option is set (True), data for regions is exported in the form of a tree. "
                       "Otherwise, all regions are exported in plain list. [default: %default]")
 
     (options, args) = parser.parse_args(tool_args)
     log_plugin.configure(options)
     db_plugin.configure(options)
-    out_format = options.__dict__['general.format']
-    nest_regions = options.__dict__['general.nest_regions']
+    out_format = options.__dict__['format']
+    nest_regions = options.__dict__['nest_regions']
     namespaces = None
-    if options.__dict__['general.namespaces'] != None:
-        namespaces = re.split(',', options.__dict__['general.namespaces'])
+    if options.__dict__['namespaces'] != None:
+        namespaces = re.split(',', options.__dict__['namespaces'])
 
     loader_prev = core.db.loader.Loader()
     if db_plugin.dbfile_prev != None:

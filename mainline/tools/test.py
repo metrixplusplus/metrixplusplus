@@ -36,13 +36,13 @@ def main(tool_args):
 
     parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog test [options] -- [testgroup-dir-path-1[/testsuite-file-path-1]] ... [...path-N]")
     log_plugin.declare_configuration(parser, default_value='ERROR')
-    parser.add_option("-g", "--general.generate-golds", action="store_true", default=False,
+    parser.add_option("-g", "--generate-golds", "--gg", action="store_true", default=False,
                          help="If the option is set (True), new gold files are generated (replacing existing) [default: %default]")
 
     (options, args) = parser.parse_args(tool_args)
     log_plugin.configure(options)
     
-    os.environ['METRIXPLUSPLUS_TEST_GENERATE_GOLDS'] = str(options.__dict__['general.generate_golds'])
+    os.environ['METRIXPLUSPLUS_TEST_GENERATE_GOLDS'] = str(options.__dict__['generate_golds'])
     
     tests_dir = os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'tests')
     process_data= ["python", "-m", "unittest", "discover", "-v", "-s"]
