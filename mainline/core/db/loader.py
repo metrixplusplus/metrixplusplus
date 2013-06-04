@@ -81,6 +81,8 @@ class LoadableData(Data):
             packager = self.loader.get_namespace(namespace).get_field_packager(column_name)
             if packager == None:
                 continue
+            if row[column_name] == None:
+                continue
             Data.set_data(self, namespace, column_name, packager.unpack(row[column_name]))
         
     def set_data(self, namespace, field, value):
