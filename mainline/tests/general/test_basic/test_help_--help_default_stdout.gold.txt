@@ -1,5 +1,5 @@
-Usage: D:\Projects\Metrix++\metrixpp.py <action> --help
-   or: D:\Projects\Metrix++\metrixpp.py <action> [options] -- [path 1] ... [path N]
+Usage: C:\Projects\Metrix++\mainline\metrixpp.py <action> --help
+   or: C:\Projects\Metrix++\mainline\metrixpp.py <action> [options] -- [path 1] ... [path N]
 where: actions are:
 	collect
 	debug

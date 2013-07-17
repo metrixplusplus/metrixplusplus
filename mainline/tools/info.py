@@ -68,7 +68,10 @@ def main(tool_args):
         for field in loader.get_namespace(each).iterate_field_names():
             prev_value_str = ""
             if loader_prev != None:
-                prev = loader_prev.get_namespace(each).get_field_packager(field)
+                prev = None
+                prev_namespace = loader_prev.get_namespace(each)
+                if prev_namespace != None:
+                    prev = prev_namespace.get_field_packager(field)
                 if prev == None:
                     prev_value_str = " [new]"
                     print "(!)",
