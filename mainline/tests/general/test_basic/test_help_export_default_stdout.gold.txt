@@ -18,14 +18,5 @@ Options:
                         processing tools use it in order to recognise/evaluate
                         change trends. [default: none].
   --format=FORMAT, --ft=FORMAT
-                        Format of the output data. Possible values are 'xml',
-                        'txt' or 'python' [default: xml]
-  --namespaces=NAMESPACES, --ns=NAMESPACES
-                        Allows to enumerate namespaces of interest. If not
-                        defined all namespaces available in database file will
-                        be processed. Separate several namespaces by comma,
-                        for example 'general,std.code.complexity' [default:
-                        none]
-  --nest-regions, --nr  If the option is set (True), data for regions is
-                        exported in the form of a tree. Otherwise, all regions
-                        are exported in plain list. [default: False]
+                        Format of the output data. Possible values are 'xml'
+                        and 'csv' [default: csv]

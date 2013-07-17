@@ -39,7 +39,7 @@ def main(tool_args):
     log_plugin = core.log.Plugin()
     db_plugin = core.db.post.Plugin()
 
-    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog export [options] -- [path 1] ... [path N]")
+    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog view [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
     parser.add_option("--format", "--ft", default='xml', choices=['txt', 'xml', 'python'], help="Format of the output data. "
