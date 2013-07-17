@@ -21,6 +21,7 @@
 
 import logging
 import re
+import csv
 
 import core.log
 import core.db.loader
@@ -77,13 +78,24 @@ def main(tool_args):
     return exit_code
 
 def export_to_stdout(out_format, paths, loader, loader_prev):
+    class StdoutWriter(object):
+        def write(self, *args, **kwargs):
+            print args[0],
+    
     exit_code = 0
 
+
+    columnNames = ["file", "region", ]
     columns = []
     for name in loader.iterate_namespace_names():
         namespace = loader.get_namespace(name)
         for field in namespace.iterate_field_names():
             columns.append((name, field, namespace.are_regions_supported()))
+            columnNames.append(name + ":" + field)
+
+    writer = StdoutWriter()
+    csvWriter = csv.writer(writer)
+    csvWriter.writerow(columnNames)
     
     if out_format == 'xml':
         print "<export>\n"
@@ -98,8 +110,15 @@ def export_to_stdout(out_format, paths, loader, loader_prev):
         files = loader.iterate_file_data(path)
         if files != None:
             for file_data in files:
+                for reg in file_data.iterate_regions():
+                    per_reg_data = []
+                    for column in columns:
+                        per_reg_data.append(reg.get_data(column[0], column[1]))
+                    csvWriter.writerow([file_data.get_path(), reg.get_name()] + per_reg_data)
+                per_file_data = []
                 for column in columns:
-                    print column[0], column[1], file_data.get_data(column[0], column[1])
+                    per_file_data.append(file_data.get_data(column[0], column[1]))
+                csvWriter.writerow([file_data.get_path(), None] + per_file_data)
         else:
             logging.error("Specified path '" + path + "' is invalid (not found in the database records)")
             exit_code += 1

@@ -45,7 +45,7 @@ def main(tool_args):
     db_plugin.declare_configuration(parser)
     warn_plugin.declare_configuration(parser)
     parser.add_option("--hotspots", "--hs", default=None, help="If not set (none), all exceeded limits are printed."
-                      " If set, exceeded limits are sorted (the worst is the first) and only first GENERAL.HOTSPOTS limits are printed."
+                      " If set, exceeded limits are sorted (the worst is the first) and only first HOTSPOTS limits are printed."
                       " [default: %default]", type=int)
 
     (options, args) = parser.parse_args(tool_args)
