@@ -172,8 +172,6 @@ class CppCodeParser(object):
             # Comment
             if text[m.start()] == '/':
                 data.add_marker(m.start(), m.end(), data.get_marker_types().COMMENT)
-                if text[m.start():m.end()].startswith("//\n"):
-                    print text[m.start():m.end()]
             
             # String
             elif text[m.start()] == '"' or text[m.start()] == '\'':

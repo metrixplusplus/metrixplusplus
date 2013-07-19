@@ -101,7 +101,7 @@ class DirectoryReader():
                             f.close()
                             checksum = binascii.crc32(text) & 0xffffffff # to match python 3
     
-                            (data, is_updated) = plugin.get_plugin_loader().get_database_loader().create_file_data(full_path, checksum, text)
+                            (data, is_updated) = plugin.get_plugin_loader().get_database_loader().create_file_data(norm_path, checksum, text)
                             procerrors = parser.process(plugin, data, is_updated)
                             if plugin.is_proctime_enabled == True:
                                 data.set_data('std.general', 'proctime', time.time() - ts)
@@ -114,7 +114,6 @@ class DirectoryReader():
                             exit_code += procerrors
                 else:
                     logging.info("Excluding: " + norm_path)
-                    logging.debug("-" * 60)
             return exit_code
         
         total_errors = run_recursively(plugin, directory)

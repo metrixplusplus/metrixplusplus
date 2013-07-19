@@ -23,6 +23,7 @@ import os.path
 import logging
 import itertools 
 import shutil
+import traceback
 
 class Database(object):
     
@@ -122,7 +123,7 @@ class Database(object):
             sql = "SELECT __columns__.name AS column_name, __tables__.name AS table_name, __columns__.id AS column_id FROM __columns__, __tables__ WHERE (__columns__.confirmed = 0 AND __columns__.table_id = __tables__.id)"
             db_loader.log(sql)
             for column in db_loader.conn.execute(sql).fetchall():
-                logging.warn("New database file inherits useless column: '" + column['table_name'] + "'.'" + column['column_name'] + "'")
+                logging.info("New database file inherits useless column: '" + column['table_name'] + "'.'" + column['column_name'] + "'")
                 sql = "DELETE FROM __columns__ WHERE id = '" + str(column['column_id']) + "'"
                 db_loader.log(sql)
                 db_loader.conn.execute(sql)
@@ -671,6 +672,7 @@ class Database(object):
         return data
 
     def log(self, sql):
-        #import traceback
-        #traceback.print_stack()
-        logging.debug("[" + str(self.id) + "] Executing query: " + sql)
+        if logging.getLogger().getEffectiveLevel() <= logging.DEBUG:
+            logging.debug("[" + str(self.id) + "] Executing query: " + sql)
+            traceback.print_stack()
+        

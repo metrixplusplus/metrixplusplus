@@ -18,7 +18,7 @@
 #
 
 import core.api
-
+import logging
 
 # used for testing and development purposes
 class Plugin(core.api.Plugin, core.api.Child):
@@ -32,6 +32,7 @@ class Plugin(core.api.Plugin, core.api.Child):
 
         text = data.get_content()
         for region in data.iterate_regions():
-            print "Region:", region.get_name(), region.get_cursor()
+            logging.warn(region.get_name() + " " + region.get_cursor())
             for marker in data.iterate_markers(region_id=region.get_id(), exclude_children = True):
-                print "\tMarker:", data.get_marker_types()().to_str(marker.get_type()), text[marker.get_offset_begin():marker.get_offset_end()]
+                logging.warn("\tMarker: " + data.get_marker_types()().to_str(marker.get_type()) +
+                             " " + text[marker.get_offset_begin():marker.get_offset_end()])
