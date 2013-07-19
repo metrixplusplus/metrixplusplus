@@ -694,6 +694,8 @@ class Loader(object):
         self.db = core.db.sqlite.Database()
         if os.path.exists(dbfile):
             logging.warn("Removing existing file: " + dbfile)
+            # TODO can reuse existing db file to speed up the processing?
+            # TODO add option to choose to remove or to overwrite?
             os.unlink(dbfile)
         if previous_db != None and os.path.exists(previous_db) == False:
             raise core.api.ExitError(None, "Database file '" + previous_db + "'  does not exist")
