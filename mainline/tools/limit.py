@@ -143,7 +143,7 @@ def main(tool_args):
                 
                 exit_code += 1
                 region_cursor = 0
-                region_name = ""
+                region_name = None
                 if select_data.get_region() != None:
                     region_cursor = select_data.get_region().cursor
                     region_name = select_data.get_region().name
@@ -189,8 +189,9 @@ def is_metric_suppressed(metric_namespace, metric_field, loader, select_data):
     data = loader.load_file_data(select_data.get_path())
     if select_data.get_region() != None:
         data = data.get_region(select_data.get_region().get_id())
-    
-    sup_data = data.get_data('std.suppress', 'list')
+        sup_data = data.get_data('std.suppress', 'list')
+    else:
+        sup_data = data.get_data('std.suppress.file', 'list')
     if sup_data != None and sup_data.find('[' + metric_namespace + ':' + metric_field + ']') != -1:
         return True
     return False
@@ -198,7 +199,10 @@ def is_metric_suppressed(metric_namespace, metric_field, loader, select_data):
 def report_limit_exceeded(path, cursor, namespace, field, region_name,
                           stat_level, trend_value, stat_limit,
                           is_modified, is_suppressed):
-    message = "Metric '" + namespace + ":" + field + "' for region '" + region_name + "' exceeds the limit."
+    if region_name != None:
+        message = "Metric '" + namespace + ":" + field + "' for region '" + region_name + "' exceeds the limit."
+    else:
+        message = "Metric '" + namespace + ":" + field + "' exceeds the limit."
     details = [("Metric name", namespace + ":" + field),
                ("Region name", region_name),
                ("Metric value", stat_level),

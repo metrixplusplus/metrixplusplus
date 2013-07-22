@@ -1,4 +1,4 @@
-./test.c:54: warning: Metric 'std.code.length:total' for region 'no_suppress_cl' exceeds the limit.
+./test.c:56: warning: Metric 'std.code.length:total' for region 'no_suppress_cl' exceeds the limit.
 	Metric name    : std.code.length:total
 	Region name    : no_suppress_cl
 	Metric value   : 44
@@ -7,7 +7,7 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./test.c:60: warning: Metric 'std.code.length:total' for region 'nu_suppress_func' exceeds the limit.
+./test.c:62: warning: Metric 'std.code.length:total' for region 'nu_suppress_func' exceeds the limit.
 	Metric name    : std.code.length:total
 	Region name    : nu_suppress_func
 	Metric value   : 63
@@ -16,7 +16,7 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./test.c:75: warning: Metric 'std.code.length:total' for region 'func_no_suppress_within_struct' exceeds the limit.
+./test.c:77: warning: Metric 'std.code.length:total' for region 'func_no_suppress_within_struct' exceeds the limit.
 	Metric name    : std.code.length:total
 	Region name    : func_no_suppress_within_struct
 	Metric value   : 43
@@ -25,7 +25,7 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./test.c:82: warning: Metric 'std.code.length:total' for region 'suppresed_for_invalid_metric' exceeds the limit.
+./test.c:84: warning: Metric 'std.code.length:total' for region 'suppresed_for_invalid_metric' exceeds the limit.
 	Metric name    : std.code.length:total
 	Region name    : suppresed_for_invalid_metric
 	Metric value   : 80
@@ -34,7 +34,7 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./test.c:88: warning: Metric 'std.code.length:total' for region 'suppresed_for_invalid_metric' exceeds the limit.
+./test.c:90: warning: Metric 'std.code.length:total' for region 'suppresed_for_invalid_metric' exceeds the limit.
 	Metric name    : std.code.length:total
 	Region name    : suppresed_for_invalid_metric
 	Metric value   : 96
@@ -43,7 +43,7 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./test.c:116: warning: Metric 'std.code.length:total' for region 'nu_suppress_for_size' exceeds the limit.
+./test.c:118: warning: Metric 'std.code.length:total' for region 'nu_suppress_for_size' exceeds the limit.
 	Metric name    : std.code.length:total
 	Region name    : nu_suppress_for_size
 	Metric value   : 105
@@ -52,7 +52,7 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./test.c:144: warning: Metric 'std.code.length:total' for region 'bad_suppress_for_size' exceeds the limit.
+./test.c:146: warning: Metric 'std.code.length:total' for region 'bad_suppress_for_size' exceeds the limit.
 	Metric name    : std.code.length:total
 	Region name    : bad_suppress_for_size
 	Metric value   : 152

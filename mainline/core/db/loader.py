@@ -877,6 +877,9 @@ class Loader(object):
                 distribution = self.db.count_rows(name, path_like = final_path_like, group_by_column = field)
                 data[field]['distribution-bars'] = []
                 for each in distribution:
+                    if each[0] == None:
+                        continue
+                    assert(float(data[field]['count'] != 0))
                     data[field]['distribution-bars'].append({'metric': each[0],
                                                              'count': each[1],
                                                              'ratio': round((float(each[1]) / float(data[field]['count'])), 4)})

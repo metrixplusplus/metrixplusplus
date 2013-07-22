@@ -1,4 +1,4 @@
-./test.c:122: warning: Metric 'std.code.complexity:cyclomatic' for region 'no_suppress_for_cyclomatic_complexity' exceeds the limit.
+./test.c:124: warning: Metric 'std.code.complexity:cyclomatic' for region 'no_suppress_for_cyclomatic_complexity' exceeds the limit.
 	Metric name    : std.code.complexity:cyclomatic
 	Region name    : no_suppress_for_cyclomatic_complexity
 	Metric value   : 1
