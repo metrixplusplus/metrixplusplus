@@ -41,7 +41,13 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
         if self.is_active == True:
             fields.append(self.Field('count', int, non_zero=True))
             fields.append(self.Field('list', str))
+        # - init per regions table
         core.api.Plugin.initialize(self, fields=fields)
+        # - init per file table
+        core.api.Plugin.initialize(self,
+                                   namespace = self.get_name() + '.file',
+                                   support_regions = False,
+                                   fields=fields)
         
         if len(fields) != 0:
             core.api.subscribe_by_parents_interface(core.api.ICode, self, 'callback')
@@ -53,9 +59,11 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
         is_updated = is_updated or self.is_updated
         if is_updated == True:
             text = data.get_content()
+            file_count = 0
+            file_list_text = []
             for region in data.iterate_regions():
                 count = 0
-                list_text = ""
+                list_text = []
                 last_comment_end = None
                 for marker in data.iterate_markers(
                                 filter_group = data.get_marker_types().COMMENT,
@@ -79,12 +87,50 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
                                                     "' is not being collected",
                                                   [("Metric name", namespace_name + ":" + field),
                                                    ("Region name", region.get_name())])
-                            continue 
+                            continue
+                        if namespace.are_regions_supported() == False:
+                            if region.get_id() != 1:
+                                core.cout.notify(data.get_path(), region.get_cursor(),
+                                                  core.cout.SEVERITY_WARNING,
+                                                  "Suppressed metric '" + namespace_name + ":" + field +
+                                                    "' is attributed to a file, not a region. "
+                                                    "Remove it or move to the beginning of the file.",
+                                                  [("Metric name", namespace_name + ":" + field),
+                                                   ("Region name", region.get_name())])
+                                continue
+                            
+                            if m in file_list_text:
+                                core.cout.notify(data.get_path(), region.get_cursor(),
+                                              core.cout.SEVERITY_WARNING,
+                                              "Duplicate suppression of the metric '" +
+                                               namespace_name + ":" + field + "'",
+                                              [("Metric name", namespace_name + ":" + field),
+                                               ("Region name", None)])
+                                continue
+                            
+                            file_count += 1
+                            file_list_text.append(m)
+                            continue
+                        
+                        if m in list_text:
+                            core.cout.notify(data.get_path(), region.get_cursor(),
+                                          core.cout.SEVERITY_WARNING,
+                                          "Duplicate suppression of the metric '" +
+                                           namespace_name + ":" + field + "'",
+                                          [("Metric name", namespace_name + ":" + field),
+                                           ("Region name", region.get_name())])
+                            continue
+                        
                         count += 1
-                        list_text += "[" + m +"]"
+                        list_text.append(m)
+                        continue
 
-                    if count > 0:
-                        region.set_data(self.get_name(), 'count', count)
-                        region.set_data(self.get_name(), 'list', list_text)
+                if count > 0:
+                    region.set_data(self.get_name(), 'count', count)
+                    region.set_data(self.get_name(), 'list', '[' + ']['.join(list_text) + ']')
+
+            if file_count > 0:
+                data.set_data(self.get_name() + '.file', 'count', file_count)
+                data.set_data(self.get_name() + '.file', 'list', '[' + ']['.join(file_list_text) + ']')
 
 

@@ -189,7 +189,23 @@ class Test(tests.common.TestCase):
                                          dirs_list=['./simple.cpp'],
                                          use_prev=True)
         self.assertExec(runner.run())
-        
+
+    def test_std_general_metrics(self):
+
+        runner = tests.common.ToolRunner('collect',
+                                         ['--std.general.size',
+                                          '--std.general.procerrors',
+                                          '--std.general.proctime'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view', ['--format=txt'], prefix='txt')
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view',
+                                         ['--nest-regions', '--format=txt'],
+                                         prefix='nest_per_file',
+                                         dirs_list=['./simple.cpp'])
+        self.assertExec(runner.run())
 
 if __name__ == '__main__':
     unittest.main()

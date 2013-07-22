@@ -1,6 +1,8 @@
 /* comment here per global region
  *
  *	metrix++:	suppress std.code.length:total
+ *	metrix++: suppress std.general:size
+ *	metrix++: suppress std.general:size intentional duplicate
  */
 
 
@@ -156,4 +158,15 @@ int func10()
 	if (1) return;
 }
 
+/* metrix++: suppress std.code.length:total
+ * metrix++: suppress std.code.length:total */
+int duplicate_suppression_of_size()
+{
+}
+
+/* metrix++: suppress std.general:size intentional suppression per file metric
+ * metrix++: suppress std.code.length:total */
+int bad_suppression_of_file_size()
+{
+}
 

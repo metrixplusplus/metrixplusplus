@@ -30,7 +30,7 @@ class Plugin(object):
             self.name = name
             self.value = value
     
-    def initialize(self, namespace=None, fields=[], properties=[]):
+    def initialize(self, namespace=None, support_regions=True, fields=[], properties=[]):
         self.is_updated = False
         db_loader = self.get_plugin_loader().get_database_loader()
         if namespace == None:
@@ -49,7 +49,7 @@ class Plugin(object):
 
         if len(fields) != 0:
             namespace_obj = db_loader.create_namespace(namespace,
-                                                       support_regions=True,
+                                                       support_regions=support_regions,
                                                        version=self.get_version())
             for field in fields:
                 is_created = namespace_obj.add_field(field.name, field.type, non_zero=field.non_zero)

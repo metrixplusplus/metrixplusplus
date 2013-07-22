@@ -58,7 +58,7 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IConfigurable, core.api.
             fields.append(self.Field('procerrors', int))
         if self.is_size_enabled == True:
             fields.append(self.Field('size', int))
-        core.api.Plugin.initialize(self, namespace='std.general', fields=fields)
+        core.api.Plugin.initialize(self, namespace='std.general', support_regions=False, fields=fields)
         
     def run(self, args):
         if len(args) == 0:

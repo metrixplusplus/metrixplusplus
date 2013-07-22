@@ -28,7 +28,8 @@ class Test(tests.common.TestCase):
         
         runner = tests.common.ToolRunner('collect', ['--std.suppress',
                                                      '--std.code.complexity.cyclomatic',
-                                                     '--std.code.length.total'])
+                                                     '--std.code.length.total',
+                                                     '--std.general.size'])
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
@@ -51,7 +52,7 @@ class Test(tests.common.TestCase):
 
         runner = tests.common.ToolRunner('limit',
                                          ['--max-limit=std.code.length:total:0', '--disable-suppressions'],
-                                         exit_code=24,
+                                         exit_code=26,
                                          prefix='4')
         self.assertExec(runner.run())
 
@@ -59,6 +60,18 @@ class Test(tests.common.TestCase):
                                          ['--max-limit=std.code.complexity:cyclomatic:0', '--max-limit=std.code.length:total:0'],
                                          exit_code=8,
                                          prefix='5')
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('limit',
+                                         ['--max-limit=std.general:size:0'],
+                                         exit_code=0,
+                                         prefix='size')
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('limit',
+                                         ['--max-limit=std.general:size:0', '--disable-suppressions'],
+                                         exit_code=1,
+                                         prefix='size_nosup')
         self.assertExec(runner.run())
 
 if __name__ == '__main__':
