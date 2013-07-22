@@ -51,6 +51,5 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
         logging.warn("Logging enabled with " + options.__dict__['log_level'] + " level")
 
 
-
 def set_default_format():
     logging.basicConfig(format="[LOG]: %(levelname)s:\t%(message)s", level=logging.WARN)
