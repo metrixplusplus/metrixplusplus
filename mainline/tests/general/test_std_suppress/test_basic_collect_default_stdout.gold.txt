@@ -1,0 +1,16 @@
+./test.c:82: warning: Suppressed metric 'invalid:metric' is not being collected
+	Metric name    : invalid:metric
+	Region name    : suppresed_for_invalid_metric
+
+./test.c:88: warning: Suppressed metric 'std.code.length:invlaid_metric' is not being collected
+	Metric name    : std.code.length:invlaid_metric
+	Region name    : suppresed_for_invalid_metric
+
+./test.c:95: warning: Suppressed metric 'invalid:metric' is not being collected
+	Metric name    : invalid:metric
+	Region name    : suppressed_for_size_and_invalid_metric
+
+./test.c:103: warning: Suppressed metric 'invalid:metric' is not being collected
+	Metric name    : invalid:metric
+	Region name    : suppressed_for_size_and_complexity_and_invalid_metric
+
