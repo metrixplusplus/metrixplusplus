@@ -24,7 +24,7 @@ import core.log
 import core.db.loader
 import core.db.post
 import core.db.utils
-import core.export.cout
+import core.cout
 import core.warn
 import core.cmdparser
 
@@ -211,7 +211,7 @@ def report_limit_exceeded(path, cursor, namespace, field, region_name,
                ("Change trend", '{0:{1}}'.format(trend_value, '+' if trend_value else '')),
                ("Limit", stat_limit),
                ("Suppressed", is_suppressed)]
-    core.export.cout.cout(path, cursor, core.export.cout.SEVERITY_WARNING, message, details)
+    core.cout.notify(path, cursor, core.cout.SEVERITY_WARNING, message, details)
 
     
     

@@ -18,7 +18,7 @@
 #
 
 import core.api
-import core.export.cout
+import core.cout
 
 import re
 
@@ -72,8 +72,8 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
                         namespace_name, field = m.split(':')
                         namespace = self.get_plugin_loader().get_database_loader().get_namespace(namespace_name)
                         if namespace == None or namespace.get_field_packager(field) == None:
-                            core.export.cout.cout(data.get_path(), region.get_cursor(),
-                                                  core.export.cout.SEVERITY_WARNING,
+                            core.cout.notify(data.get_path(), region.get_cursor(),
+                                                  core.cout.SEVERITY_WARNING,
                                                   "Suppressed metric '" + namespace_name + ":" + field +
                                                     "' is not being collected",
                                                   [("Metric name", namespace_name + ":" + field),
