@@ -22,11 +22,11 @@ import core.api
 class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
     
     def declare_configuration(self, parser):
-        parser.add_option("--std.code.length:size", "--scls", action="store_true", default=False,
+        parser.add_option("--std.code.length.size", "--scls", action="store_true", default=False,
                          help="Enables collection of size metric (in number of symbols per region) [default: %default]")
     
     def configure(self, options):
-        self.is_active = options.__dict__['std.code.length:size']
+        self.is_active = options.__dict__['std.code.length.size']
         
     def initialize(self):
         if self.is_active == True:
