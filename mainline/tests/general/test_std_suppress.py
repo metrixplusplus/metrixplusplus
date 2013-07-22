@@ -29,7 +29,7 @@ class Test(tests.common.TestCase):
         
         runner = tests.common.ToolRunner('collect', ['--std.suppress',
                                                      '--std.code.complexity.cyclomatic',
-                                                     '--std.code.length:size'])
+                                                     '--std.code.length.size'])
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',

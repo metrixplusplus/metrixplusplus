@@ -44,7 +44,7 @@ Options:
   --std.code.java.files=STD.CODE.JAVA.FILES
                         Enumerates filename extensions to match Java files
                         [default: *.java]
-  --std.code.length:size, --scls
+  --std.code.length.size, --scls
                         Enables collection of size metric (in number of
                         symbols per region) [default: False]
   --std.suppress, --ss  If set (True), suppression markers are collected from
