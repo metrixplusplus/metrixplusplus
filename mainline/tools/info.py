@@ -64,8 +64,8 @@ def main(tool_args):
         print "\t" + each.name + "\t=>\t" + each.value + prev_value_str
 
     print "\nMetrics:"
-    for each in loader.iterate_namespace_names():
-        for field in loader.get_namespace(each).iterate_field_names():
+    for each in sorted(loader.iterate_namespace_names()):
+        for field in sorted(loader.get_namespace(each).iterate_field_names()):
             prev_value_str = ""
             if loader_prev != None:
                 prev = None

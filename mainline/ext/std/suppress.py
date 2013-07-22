@@ -25,7 +25,7 @@ import re
 class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
     
     def declare_configuration(self, parser):
-        parser.add_option("--std.suppress.code", "--ssc", action="store_true", default=False,
+        parser.add_option("--std.suppress", "--ss", action="store_true", default=False,
                          help="If set (True), suppression markers are collected from comments in code. "
                               "Suppressions are used by post-processing tools, like limit, to remove false-positive warnings. "
                               "Suppressions should be in the first comment block of a region (function/class/interface). "
@@ -34,7 +34,7 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
                               " [default: %default]")
     
     def configure(self, options):
-        self.is_active = options.__dict__['std.suppress.code']
+        self.is_active = options.__dict__['std.suppress']
         
     def initialize(self):
         if self.is_active == True:
@@ -74,9 +74,9 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
                         if namespace == None or namespace.get_field_packager(field) == None:
                             core.export.cout.cout(data.get_path(), region.get_cursor(),
                                                   core.export.cout.SEVERITY_WARNING,
-                                                  "Suppressed metric '" + namespace_name + "/" + field +
+                                                  "Suppressed metric '" + namespace_name + ":" + field +
                                                     "' is not being collected",
-                                                  [("Metric name", namespace_name + "/" + field),
+                                                  [("Metric name", namespace_name + ":" + field),
                                                    ("Region name", region.get_name())])
                             continue 
                         count += 1
