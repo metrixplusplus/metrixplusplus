@@ -1,10 +1,10 @@
 /* comment here per global region
  *
- *	metrix++:	suppress std.general:size
+ *	metrix++:	suppress std.code.length:size
  */
 
 
-/*metrix++: suppress	std.general:size*/
+/*metrix++: suppress	std.code.length:size*/
 int func()
 {
 	/* comment here */
@@ -12,25 +12,25 @@ int func()
 
 int func2()
 {
-	/*metrix++: suppress std.general:size*/
+	/*metrix++: suppress std.code.length:size*/
 }
 
-/* metrix++: suppress std.general:size */
+/* metrix++: suppress std.code.length:size */
 int func3()
 {
-	/* metrix++: suppress std.general:size*/
+	/* metrix++: suppress std.code.length:size*/
 }
 
 
 /* bla-bla */
-/* metrix++: suppress std.general:size */
+/* metrix++: suppress std.code.length:size */
 /* bla-bla */
 int func4()
 {
-	/* metrix++: suppress std.general:size*/
+	/* metrix++: suppress std.code.length:size*/
 }
 
-/* metrix++: suppress std.general:size */
+/* metrix++: suppress std.code.length:size */
 struct cl1
 {
 
@@ -38,12 +38,12 @@ struct cl1
 
 struct cl2
 {
-	/* metrix++: suppress std.general:size*/
+	/* metrix++: suppress std.code.length:size*/
 
 };
 
 // bla-bla
-//metrix++: suppress std.general:size
+//metrix++: suppress std.code.length:size
 // bla-bla
 struct cl3
 {
@@ -64,9 +64,9 @@ int nu_suppress_func()
 
 struct cl2
 {
-	/* metrix++: suppress std.general:size per class */
+	/* metrix++: suppress std.code.length:size per class */
 
-	/* metrix++: suppress std.general:size per function */
+	/* metrix++: suppress std.code.length:size per function */
 	int func4()
 	{
 
@@ -84,28 +84,28 @@ struct suppresed_for_invalid_metric
 
 };
 
-/* metrix++: suppress std.general:invlaid_metric */
+/* metrix++: suppress std.code.length:invlaid_metric */
 struct suppresed_for_invalid_metric
 {
 
 };
 
 /* metrix++: suppress invalid:metric */
-/* metrix++: suppress std.general:size */
+/* metrix++: suppress std.code.length:size */
 struct suppressed_for_size_and_invalid_metric
 {
 
 };
 
 /* metrix++: suppress invalid:metric */
-/* metrix++: suppress std.general:size */
+/* metrix++: suppress std.code.length:size */
 /* metrix++: suppress std.code.complexity:cyclomatic */
 int suppressed_for_size_and_complexity_and_invalid_metric()
 {
 	if (1) return;
 }
 
-// metrix++: suppress std.general:size asdas
+// metrix++: suppress std.code.length:size asdas
 // metrix++: suppress std.code.complexity:cyclomatic adsad
 int func7()
 {
@@ -118,13 +118,13 @@ int nu_suppress_for_size()
 	if (1) return;
 }
 
-// metrix++: suppress std.general:size adsad
+// metrix++: suppress std.code.length:size adsad
 int no_suppress_for_cyclomatic_complexity()
 {
 	if (1) return;
 }
 
-// metrix++: suppress std.general:size long-long
+// metrix++: suppress std.code.length:size long-long
 // description why it was suppressed
 // metrix++: suppress std.code.complexity:cyclomatic
 int func8()
@@ -132,7 +132,7 @@ int func8()
 	if (1) return;
 }
 
-/* metrix++: suppress std.general:size long-long */
+/* metrix++: suppress std.code.length:size long-long */
 /* description why it was suppressed */
 /* metrix++: suppress std.code.complexity:cyclomatic */
 int func9()
@@ -143,12 +143,12 @@ int func9()
 // metrix++: suppress std.code.complexity:cyclomatic adsad
 int bad_suppress_for_size()
 {
-	// metrix++: suppress std.general:size
+	// metrix++: suppress std.code.length:size
 
 	if (1) return;
 }
 
-/* metrix++: suppress std.general:size long-long
+/* metrix++: suppress std.code.length:size long-long
  * description why it was suppressed
  * metrix++: suppress std.code.complexity:cyclomatic */
 int func10()

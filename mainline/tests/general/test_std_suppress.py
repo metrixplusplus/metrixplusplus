@@ -25,21 +25,33 @@ import tests.common
 
 class Test(tests.common.TestCase):
 
-    def test_parser(self):
+    def test_basic(self):
         
-        runner = tests.common.ToolRunner('collect', ['--std.code.complexity.cyclomatic'])
-        self.assertExec(runner.run())
-
-        runner = tests.common.ToolRunner('view')
-        self.assertExec(runner.run())
-        
-        dirs_list = [os.path.join('.', each) for each in os.listdir(self.get_content_paths().cwd)]
-        runner = tests.common.ToolRunner('view', opts_list=['--format=txt'], dirs_list=dirs_list, prefix='files')
+        runner = tests.common.ToolRunner('collect', ['--std.suppress',
+                                                     '--std.code.complexity.cyclomatic',
+                                                     '--std.code.length:size'])
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
                                          ['--max-limit=std.code.complexity:cyclomatic:0'],
-                                         exit_code=12)
+                                         exit_code=1)
+
+        runner = tests.common.ToolRunner('limit',
+                                         ['--max-limit=std.code.complexity:cyclomatic:0', '--disable-suppressions'],
+                                         exit_code=8)
+
+        runner = tests.common.ToolRunner('limit',
+                                         ['--max-limit=std.code.length:size:0'],
+                                         exit_code=7)
+
+        runner = tests.common.ToolRunner('limit',
+                                         ['--max-limit=std.code.length:size:0', '--disable-suppressions'],
+                                         exit_code=24)
+
+        runner = tests.common.ToolRunner('limit',
+                                         ['--max-limit=std.code.complexity:cyclomatic:0', '--max-limit=std.code.length:size:0'],
+                                         exit_code=8)
+        
         self.assertExec(runner.run())
 
 if __name__ == '__main__':

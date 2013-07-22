@@ -866,6 +866,8 @@ class Loader(object):
             namespace = self.get_namespace(name)
             data = self.db.aggregate_rows(name, path_like = final_path_like)
             for field in data.keys():
+                if namespace.get_field_packager(field).get_python_type() == str:
+                    continue
                 if namespace.get_field_packager(field).is_non_zero() == True:
                     data[field]['min'] = None
                     data[field]['avg'] = None

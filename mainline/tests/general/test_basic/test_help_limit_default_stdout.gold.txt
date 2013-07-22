@@ -44,3 +44,6 @@ Options:
                         set, exceeded limits are sorted (the worst is the
                         first) and only first GENERAL.HOTSPOTS limits are
                         printed. [default: none]
+  --disable-suppressions, --ds
+                        If not set (none), all suppressions are ignored and
+                        associated warnings are printed. [default: False]

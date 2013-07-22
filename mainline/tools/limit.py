@@ -47,12 +47,16 @@ def main(tool_args):
     parser.add_option("--hotspots", "--hs", default=None, help="If not set (none), all exceeded limits are printed."
                       " If set, exceeded limits are sorted (the worst is the first) and only first HOTSPOTS limits are printed."
                       " [default: %default]", type=int)
+    parser.add_option("--disable-suppressions", "--ds", action="store_true", default=False,
+                      help = "If not set (none), all suppressions are ignored"
+                             " and associated warnings are printed. [default: %default]")
 
     (options, args) = parser.parse_args(tool_args)
     log_plugin.configure(options)
     db_plugin.configure(options)
     warn_plugin.configure(options)
     hotspots = options.__dict__['hotspots']
+    no_suppress = options.__dict__['disable_suppressions']
 
     loader_prev = core.db.loader.Loader()
     if db_plugin.dbfile_prev != None:
@@ -132,22 +136,32 @@ def main(tool_args):
                             diff = core.db.loader.DiffData(select_data,
                                                            file_data_prev.get_region(prev_id)).get_data(limit.namespace, limit.field)
 
-                if warn_plugin.is_mode_matched(limit.limit, select_data.get_data(limit.namespace, limit.field), diff, is_modified):
-                    exit_code += 1
-                    region_cursor = 0
-                    region_name = ""
-                    if select_data.get_region() != None:
-                        region_cursor = select_data.get_region().cursor
-                        region_name = select_data.get_region().name
-                    report_limit_exceeded(select_data.get_path(),
-                                      region_cursor,
-                                      limit.namespace,
-                                      limit.field,
-                                      region_name,
-                                      select_data.get_data(limit.namespace, limit.field),
-                                      diff,
-                                      limit.limit,
-                                      is_modified)
+                if (warn_plugin.is_mode_matched(limit.limit,
+                                                select_data.get_data(limit.namespace, limit.field),
+                                                diff,
+                                                is_modified) == False):
+                    continue
+                
+                is_sup = is_metric_suppressed(limit.namespace, limit.field, loader, select_data)
+                if is_sup == True and no_suppress == False:
+                    continue    
+                
+                exit_code += 1
+                region_cursor = 0
+                region_name = ""
+                if select_data.get_region() != None:
+                    region_cursor = select_data.get_region().cursor
+                    region_name = select_data.get_region().name
+                report_limit_exceeded(select_data.get_path(),
+                                  region_cursor,
+                                  limit.namespace,
+                                  limit.field,
+                                  region_name,
+                                  select_data.get_data(limit.namespace, limit.field),
+                                  diff,
+                                  limit.limit,
+                                  is_modified,
+                                  is_sup)
     return exit_code
 
 
@@ -176,14 +190,27 @@ def get_list_of_modified_files(loader, loader_prev):
     
     return None
 
-def report_limit_exceeded(path, cursor, namespace, field, region_name, stat_level, trend_value, stat_limit, is_modified):
-    message = "Metric '" + namespace + "/" + field + "' for region '" + region_name + "' exceeds the limit."
-    details = [("Metric name", namespace + "/" + field),
+def is_metric_suppressed(metric_namespace, metric_field, loader, select_data):
+    data = loader.load_file_data(select_data.get_path())
+    if select_data.get_region() != None:
+        data = data.get_region(select_data.get_region().get_id())
+    
+    sup_data = data.get_data('std.suppress', 'list')
+    if sup_data != None and sup_data.find('[' + metric_namespace + ':' + metric_field + ']') != -1:
+        return True
+    return False
+
+def report_limit_exceeded(path, cursor, namespace, field, region_name,
+                          stat_level, trend_value, stat_limit,
+                          is_modified, is_suppressed):
+    message = "Metric '" + namespace + ":" + field + "' for region '" + region_name + "' exceeds the limit."
+    details = [("Metric name", namespace + ":" + field),
                ("Region name", region_name),
                ("Metric value", stat_level),
                ("Modified", is_modified),
                ("Change trend", '{0:{1}}'.format(trend_value, '+' if trend_value else '')),
-               ("Limit", stat_limit)]
+               ("Limit", stat_limit),
+               ("Suppressed", is_suppressed)]
     core.export.cout.cout(path, cursor, core.export.cout.SEVERITY_WARNING, message, details)
 
     
