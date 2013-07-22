@@ -34,24 +34,32 @@ class Test(tests.common.TestCase):
 
         runner = tests.common.ToolRunner('limit',
                                          ['--max-limit=std.code.complexity:cyclomatic:0'],
-                                         exit_code=1)
+                                         exit_code=1,
+                                         prefix='1')
+        self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
                                          ['--max-limit=std.code.complexity:cyclomatic:0', '--disable-suppressions'],
-                                         exit_code=8)
+                                         exit_code=8,
+                                         prefix='2')
+        self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
                                          ['--max-limit=std.code.length:size:0'],
-                                         exit_code=7)
+                                         exit_code=7,
+                                         prefix='3')
+        self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
                                          ['--max-limit=std.code.length:size:0', '--disable-suppressions'],
-                                         exit_code=24)
+                                         exit_code=24,
+                                         prefix='4')
+        self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
                                          ['--max-limit=std.code.complexity:cyclomatic:0', '--max-limit=std.code.length:size:0'],
-                                         exit_code=8)
-        
+                                         exit_code=8,
+                                         prefix='5')
         self.assertExec(runner.run())
 
 if __name__ == '__main__':
