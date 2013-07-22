@@ -22,18 +22,19 @@ import core.api
 class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
     
     def declare_configuration(self, parser):
-        parser.add_option("--std.code.length.size", "--scls", action="store_true", default=False,
+        parser.add_option("--std.code.length.total", "--sclent", action="store_true", default=False,
                          help="Enables collection of size metric (in number of symbols per region) [default: %default]")
     
     def configure(self, options):
-        self.is_active = options.__dict__['std.code.length.size']
+        self.is_active = options.__dict__['std.code.length.total']
         
     def initialize(self):
+        fields = []
         if self.is_active == True:
-            # trigger version property set
-            core.api.Plugin.initialize(self)
-            namespace = self.get_plugin_loader().get_database_loader().create_namespace(self.get_name(), support_regions = True)
-            namespace.add_field('size', int)
+            fields.append(self.Field('total', int))
+        core.api.Plugin.initialize(self, fields=fields)
+        
+        if len(fields) != 0:
             core.api.subscribe_by_parents_interface(core.api.ICode, self, 'callback')
 
     def callback(self, parent, data, is_updated):
@@ -47,5 +48,5 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
                     size += data.get_region(sub_id).get_offset_begin() - start_pos
                     start_pos = data.get_region(sub_id).get_offset_end()
                 size += region.get_offset_end() - start_pos
-                region.set_data(self.get_name(), 'size', size)
+                region.set_data(self.get_name(), 'total', size)
 

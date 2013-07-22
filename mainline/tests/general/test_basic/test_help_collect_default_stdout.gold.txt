@@ -44,9 +44,27 @@ Options:
   --std.code.java.files=STD.CODE.JAVA.FILES
                         Enumerates filename extensions to match Java files
                         [default: *.java]
-  --std.code.length.size, --scls
+  --std.code.length.total, --sclent
                         Enables collection of size metric (in number of
                         symbols per region) [default: False]
+  --std.code.lines.code, --sclc
+                        Enables collection of lines of code metric - number of
+                        non-empty lines of code, excluding comments [default:
+                        False]
+  --std.code.lines.preprocessor, --sclp
+                        Enables collection of lines of preprocessor code
+                        metric - number of non-empty lines of preprocessor
+                        code [default: False]
+  --std.code.lines.comments, --sclcom
+                        Enables collection of lines of comments metric -
+                        number of non-empty lines of comments [default: False]
+  --std.code.lines.blank, --sclb
+                        Enables collection of blank lines metric - number of
+                        blank lines, i.e. lines without code or comments
+                        [default: False]
+  --std.code.lines.total, --sclt
+                        Enables collection of lines of comments metric -
+                        number of non-empty lines of comments [default: False]
   --std.suppress, --ss  If set (True), suppression markers are collected from
                         comments in code. Suppressions are used by post-
                         processing tools, like limit, to remove false-positive

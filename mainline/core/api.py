@@ -19,12 +19,44 @@
 
 class Plugin(object):
     
-    def initialize(self):
+    class Field(object):
+        def __init__(self, name, ftype, non_zero=False):
+            self.name = name
+            self.type = ftype
+            self.non_zero = non_zero
+
+    class Property(object):
+        def __init__(self, name, value):
+            self.name = name
+            self.value = value
+    
+    def initialize(self, namespace=None, fields=[], properties=[]):
         self.is_updated = False
         db_loader = self.get_plugin_loader().get_database_loader()
-        prev_version = db_loader.set_property(self.get_name() + ":version", self.get_version())
-        if prev_version != self.get_version():
-            self.is_updated = True
+        if namespace == None:
+            namespace = self.get_name()
+
+        if (len(fields) != 0 or len(properties) != 0):
+            prev_version = db_loader.set_property(self.get_name() + ":version", self.get_version())
+            if prev_version != self.get_version():
+                self.is_updated = True
+
+        for prop in properties:
+            assert(prop.name != 'version')
+            prev_prop = db_loader.set_property(self.get_name() + ":" + prop.name, prop.value)
+            if prev_prop != prop.value:
+                self.is_updated = True
+
+        if len(fields) != 0:
+            namespace_obj = db_loader.create_namespace(namespace,
+                                                       support_regions=True,
+                                                       version=self.get_version())
+            for field in fields:
+                is_created = namespace_obj.add_field(field.name, field.type, non_zero=field.non_zero)
+                assert(is_created != None)
+                # if field is created (not cloned from the previous db),
+                # mark the plug-in as updated in order to trigger full rescan
+                self.is_updated = self.is_updated or is_created
     
     def terminate(self):
         pass
@@ -119,6 +151,7 @@ class Parent(object):
         for child in self.children:
             yield child
 
+# TODO re-factor and remove this
 class ExitError(Exception):
     def __init__(self, plugin, reason):
         if plugin != None:
@@ -149,5 +182,4 @@ class ITool(object):
     
     def run(self, tool_args):
         raise InterfaceNotImplemented(self)
-
 

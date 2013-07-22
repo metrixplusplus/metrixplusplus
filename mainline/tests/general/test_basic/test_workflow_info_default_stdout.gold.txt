@@ -1,6 +1,5 @@
 Properties:
 	version	=>	1.0
-	core.log:version	=>	1.0
 	std.code.complexity:version	=>	1.1
 	std.code.cpp:version	=>	1.1
 	std.code.cpp:files	=>	*.c,*.cc,*.cpp,*.cxx,*.h,*.hh,*.hpp,*.hxx
