@@ -20,9 +20,9 @@
 
 import re
 import binascii
-import logging
 
 import core.api
+import core.cout
 
 class Plugin(core.api.Plugin, core.api.Parent, core.api.IParser, core.api.IConfigurable, core.api.ICode):
     
@@ -230,8 +230,10 @@ class CppCodeParser(object):
                 if blocks[curblk]['indent_start'] == indent_current:
                     next_block = reset_next_block(m.end())
                     if curblk == 0:
-                        logging.warning("Non-matching closing bracket '}' detected: " + data.get_path() + ":" +
-                                        str(cursor_current + len(self.regex_ln.findall(text, cursor_last_pos, m.start()))))
+                        core.cout.notify(data.get_path(),
+                                         cursor_current + len(self.regex_ln.findall(text, cursor_last_pos, m.start())),
+                                         core.cout.SEVERITY_WARNING,
+                                         "Non-matching closing bracket '}' detected.")
                         count_mismatched_brackets += 1
                         continue
                     
@@ -245,7 +247,10 @@ class CppCodeParser(object):
                 # shift indent left
                 indent_current -= 1
                 if indent_current < 0:
-                    logging.warning("Non-matching closing bracket '}' detected")
+                    core.cout.notify(data.get_path(),
+                                     cursor_current + len(self.regex_ln.findall(text, cursor_last_pos, m.start())),
+                                     core.cout.SEVERITY_WARNING,
+                                     "Non-matching closing bracket '}' detected.")
                     count_mismatched_brackets += 1
                     indent_current = 0
 
@@ -286,7 +291,10 @@ class CppCodeParser(object):
 
         while indent_current > 0:
             # log all
-            logging.warning("Non-matching opening bracket '{' detected")
+            core.cout.notify(data.get_path(),
+                             cursor_current + len(self.regex_ln.findall(text, cursor_last_pos, len(text))),
+                             core.cout.SEVERITY_WARNING,
+                             "Non-matching opening bracket '{' detected.")
             count_mismatched_brackets += 1
             indent_current -= 1
 
