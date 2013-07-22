@@ -18,6 +18,7 @@
 #
 
 import core.api
+import re
 
 class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
     
@@ -67,16 +68,19 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
         if len(fields) != 0:
             core.api.subscribe_by_parents_interface(core.api.ICode, self, 'callback')
 
+    pattern_line = re.compile(r'''[^\s].*''')
+
     def callback(self, parent, data, is_updated):
         is_updated = is_updated or self.is_updated
         if is_updated == True:
-            for region in data.iterate_regions():
-                size = 0
-                start_pos = region.get_offset_begin()
-                for sub_id in region.iterate_subregion_ids():
-                    # exclude sub regions, like enclosed classes
-                    size += data.get_region(sub_id).get_offset_begin() - start_pos
-                    start_pos = data.get_region(sub_id).get_offset_end()
-                size += region.get_offset_end() - start_pos
-                region.set_data(self.get_name(), 'size', size)
-
+            if self.is_active_code == True:
+                text = data.get_content(exclude = data.get_marker_types().ALL_EXCEPT_CODE)
+                for region in data.iterate_regions():
+                    count = 0
+                    start_pos = region.get_offset_begin()
+                    for sub_id in region.iterate_subregion_ids():
+                        count += len(self.pattern_line.findall(text, start_pos, data.get_region(sub_id).get_offset_begin()))
+                        start_pos = data.get_region(sub_id).get_offset_end()
+                    count += len(self.pattern_line.findall(text, start_pos, region.get_offset_end()))
+                    region.set_data(self.get_name(), 'code', count)
+    
