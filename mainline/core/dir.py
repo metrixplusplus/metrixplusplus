@@ -51,13 +51,14 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IConfigurable, core.api.
         self.is_size_enabled = options.__dict__['std.general.size']
 
     def initialize(self):
-        namespace = self.get_plugin_loader().get_database_loader().create_namespace('std.general')
+        fields = []
         if self.is_proctime_enabled == True:
-            namespace.add_field('proctime', float)
+            fields.append(self.Field('proctime', float))
         if self.is_procerrors_enabled == True:
-            namespace.add_field('procerrors', int)
+            fields.append(self.Field('procerrors', int))
         if self.is_size_enabled == True:
-            namespace.add_field('size', int)
+            fields.append(self.Field('size', int))
+        core.api.Plugin.initialize(self, namespace='std.general', fields=fields)
         
     def run(self, args):
         if len(args) == 0:

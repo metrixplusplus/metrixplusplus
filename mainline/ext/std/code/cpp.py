@@ -35,13 +35,9 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IParser, core.api.IConfi
         self.files.sort() # sorted list goes to properties
         
     def initialize(self):
-        # trigger version property set
-        core.api.Plugin.initialize(self)
-        db_loader = self.get_plugin_loader().get_database_loader()
-        prev_ext = db_loader.set_property(self.get_name() + ":files", ','.join(self.files))
-        if prev_ext != ','.join(self.files):
-            self.is_updated = True
-
+        core.api.Plugin.initialize(self, properties=[
+            self.Property('files', ','.join(self.files))
+        ])
         self.get_plugin_loader().register_parser(self.files, self)
         
     def process(self, parent, data, is_updated):

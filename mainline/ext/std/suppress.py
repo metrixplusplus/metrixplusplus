@@ -37,12 +37,13 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
         self.is_active = options.__dict__['std.suppress']
         
     def initialize(self):
+        fields = []
         if self.is_active == True:
-            # trigger version property set
-            core.api.Plugin.initialize(self)
-            namespace = self.get_plugin_loader().get_database_loader().create_namespace(self.get_name(), support_regions = True)
-            namespace.add_field('count', int, non_zero=True)
-            namespace.add_field('list', str)
+            fields.append(self.Field('count', int, non_zero=True))
+            fields.append(self.Field('list', str))
+        core.api.Plugin.initialize(self, fields=fields)
+        
+        if len(fields) != 0:
             core.api.subscribe_by_parents_interface(core.api.ICode, self, 'callback')
 
     # suppress pattern

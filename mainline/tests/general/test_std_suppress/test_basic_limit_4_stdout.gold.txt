@@ -1,77 +1,77 @@
-./test.c:0: warning: Metric 'std.code.length:size' for region '__global__' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:0: warning: Metric 'std.code.length:total' for region '__global__' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : __global__
-	Metric value   : 138
+	Metric value   : 139
 	Modified       : None
 	Change trend   : None
 	Limit          : 0.0
 	Suppressed     : True
 
-./test.c:8: warning: Metric 'std.code.length:size' for region 'func' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:8: warning: Metric 'std.code.length:total' for region 'func' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : func
-	Metric value   : 78
-	Modified       : None
-	Change trend   : None
-	Limit          : 0.0
-	Suppressed     : True
-
-./test.c:13: warning: Metric 'std.code.length:size' for region 'func2' exceeds the limit.
-	Metric name    : std.code.length:size
-	Region name    : func2
-	Metric value   : 60
-	Modified       : None
-	Change trend   : None
-	Limit          : 0.0
-	Suppressed     : True
-
-./test.c:19: warning: Metric 'std.code.length:size' for region 'func3' exceeds the limit.
-	Metric name    : std.code.length:size
-	Region name    : func3
-	Metric value   : 107
-	Modified       : None
-	Change trend   : None
-	Limit          : 0.0
-	Suppressed     : True
-
-./test.c:28: warning: Metric 'std.code.length:size' for region 'func4' exceeds the limit.
-	Metric name    : std.code.length:size
-	Region name    : func4
-	Metric value   : 135
-	Modified       : None
-	Change trend   : None
-	Limit          : 0.0
-	Suppressed     : True
-
-./test.c:34: warning: Metric 'std.code.length:size' for region 'cl1' exceeds the limit.
-	Metric name    : std.code.length:size
-	Region name    : cl1
-	Metric value   : 61
-	Modified       : None
-	Change trend   : None
-	Limit          : 0.0
-	Suppressed     : True
-
-./test.c:39: warning: Metric 'std.code.length:size' for region 'cl2' exceeds the limit.
-	Metric name    : std.code.length:size
-	Region name    : cl2
-	Metric value   : 61
-	Modified       : None
-	Change trend   : None
-	Limit          : 0.0
-	Suppressed     : True
-
-./test.c:48: warning: Metric 'std.code.length:size' for region 'cl3' exceeds the limit.
-	Metric name    : std.code.length:size
-	Region name    : cl3
 	Metric value   : 79
 	Modified       : None
 	Change trend   : None
 	Limit          : 0.0
 	Suppressed     : True
 
-./test.c:54: warning: Metric 'std.code.length:size' for region 'no_suppress_cl' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:13: warning: Metric 'std.code.length:total' for region 'func2' exceeds the limit.
+	Metric name    : std.code.length:total
+	Region name    : func2
+	Metric value   : 61
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : True
+
+./test.c:19: warning: Metric 'std.code.length:total' for region 'func3' exceeds the limit.
+	Metric name    : std.code.length:total
+	Region name    : func3
+	Metric value   : 109
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : True
+
+./test.c:28: warning: Metric 'std.code.length:total' for region 'func4' exceeds the limit.
+	Metric name    : std.code.length:total
+	Region name    : func4
+	Metric value   : 137
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : True
+
+./test.c:34: warning: Metric 'std.code.length:total' for region 'cl1' exceeds the limit.
+	Metric name    : std.code.length:total
+	Region name    : cl1
+	Metric value   : 62
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : True
+
+./test.c:39: warning: Metric 'std.code.length:total' for region 'cl2' exceeds the limit.
+	Metric name    : std.code.length:total
+	Region name    : cl2
+	Metric value   : 62
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : True
+
+./test.c:48: warning: Metric 'std.code.length:total' for region 'cl3' exceeds the limit.
+	Metric name    : std.code.length:total
+	Region name    : cl3
+	Metric value   : 80
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : True
+
+./test.c:54: warning: Metric 'std.code.length:total' for region 'no_suppress_cl' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : no_suppress_cl
 	Metric value   : 44
 	Modified       : None
@@ -79,8 +79,8 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./test.c:60: warning: Metric 'std.code.length:size' for region 'nu_suppress_func' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:60: warning: Metric 'std.code.length:total' for region 'nu_suppress_func' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : nu_suppress_func
 	Metric value   : 63
 	Modified       : None
@@ -88,26 +88,26 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./test.c:65: warning: Metric 'std.code.length:size' for region 'cl2' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:65: warning: Metric 'std.code.length:total' for region 'cl2' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : cl2
-	Metric value   : 77
-	Modified       : None
-	Change trend   : None
-	Limit          : 0.0
-	Suppressed     : True
-
-./test.c:70: warning: Metric 'std.code.length:size' for region 'func4' exceeds the limit.
-	Metric name    : std.code.length:size
-	Region name    : func4
 	Metric value   : 78
 	Modified       : None
 	Change trend   : None
 	Limit          : 0.0
 	Suppressed     : True
 
-./test.c:75: warning: Metric 'std.code.length:size' for region 'func_no_suppress_within_struct' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:70: warning: Metric 'std.code.length:total' for region 'func4' exceeds the limit.
+	Metric name    : std.code.length:total
+	Region name    : func4
+	Metric value   : 79
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : True
+
+./test.c:75: warning: Metric 'std.code.length:total' for region 'func_no_suppress_within_struct' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : func_no_suppress_within_struct
 	Metric value   : 43
 	Modified       : None
@@ -115,8 +115,8 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./test.c:82: warning: Metric 'std.code.length:size' for region 'suppresed_for_invalid_metric' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:82: warning: Metric 'std.code.length:total' for region 'suppresed_for_invalid_metric' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : suppresed_for_invalid_metric
 	Metric value   : 80
 	Modified       : None
@@ -124,8 +124,8 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./test.c:88: warning: Metric 'std.code.length:size' for region 'suppresed_for_invalid_metric' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:88: warning: Metric 'std.code.length:total' for region 'suppresed_for_invalid_metric' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : suppresed_for_invalid_metric
 	Metric value   : 96
 	Modified       : None
@@ -133,35 +133,35 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./test.c:95: warning: Metric 'std.code.length:size' for region 'suppressed_for_size_and_invalid_metric' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:95: warning: Metric 'std.code.length:total' for region 'suppressed_for_size_and_invalid_metric' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : suppressed_for_size_and_invalid_metric
-	Metric value   : 136
+	Metric value   : 137
 	Modified       : None
 	Change trend   : None
 	Limit          : 0.0
 	Suppressed     : True
 
-./test.c:103: warning: Metric 'std.code.length:size' for region 'suppressed_for_size_and_complexity_and_invalid_metric' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:103: warning: Metric 'std.code.length:total' for region 'suppressed_for_size_and_complexity_and_invalid_metric' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : suppressed_for_size_and_complexity_and_invalid_metric
-	Metric value   : 221
+	Metric value   : 222
 	Modified       : None
 	Change trend   : None
 	Limit          : 0.0
 	Suppressed     : True
 
-./test.c:110: warning: Metric 'std.code.length:size' for region 'func7' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:110: warning: Metric 'std.code.length:total' for region 'func7' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : func7
-	Metric value   : 139
+	Metric value   : 140
 	Modified       : None
 	Change trend   : None
 	Limit          : 0.0
 	Suppressed     : True
 
-./test.c:116: warning: Metric 'std.code.length:size' for region 'nu_suppress_for_size' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:116: warning: Metric 'std.code.length:total' for region 'nu_suppress_for_size' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : nu_suppress_for_size
 	Metric value   : 105
 	Modified       : None
@@ -169,46 +169,46 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./test.c:122: warning: Metric 'std.code.length:size' for region 'no_suppress_for_cyclomatic_complexity' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:122: warning: Metric 'std.code.length:total' for region 'no_suppress_for_cyclomatic_complexity' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : no_suppress_for_cyclomatic_complexity
-	Metric value   : 112
+	Metric value   : 113
 	Modified       : None
 	Change trend   : None
 	Limit          : 0.0
 	Suppressed     : True
 
-./test.c:130: warning: Metric 'std.code.length:size' for region 'func8' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:130: warning: Metric 'std.code.length:total' for region 'func8' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : func8
-	Metric value   : 174
+	Metric value   : 175
 	Modified       : None
 	Change trend   : None
 	Limit          : 0.0
 	Suppressed     : True
 
-./test.c:138: warning: Metric 'std.code.length:size' for region 'func9' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:138: warning: Metric 'std.code.length:total' for region 'func9' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : func9
-	Metric value   : 183
+	Metric value   : 184
 	Modified       : None
 	Change trend   : None
 	Limit          : 0.0
 	Suppressed     : True
 
-./test.c:144: warning: Metric 'std.code.length:size' for region 'bad_suppress_for_size' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:144: warning: Metric 'std.code.length:total' for region 'bad_suppress_for_size' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : bad_suppress_for_size
-	Metric value   : 151
+	Metric value   : 152
 	Modified       : None
 	Change trend   : None
 	Limit          : 0.0
 	Suppressed     : False
 
-./test.c:154: warning: Metric 'std.code.length:size' for region 'func10' exceeds the limit.
-	Metric name    : std.code.length:size
+./test.c:154: warning: Metric 'std.code.length:total' for region 'func10' exceeds the limit.
+	Metric name    : std.code.length:total
 	Region name    : func10
-	Metric value   : 178
+	Metric value   : 179
 	Modified       : None
 	Change trend   : None
 	Limit          : 0.0

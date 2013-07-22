@@ -31,11 +31,12 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
         self.is_active = options.__dict__['std.code.complexity.cyclomatic']
         
     def initialize(self):
+        fields = []
         if self.is_active == True:
-            # trigger version property set
-            core.api.Plugin.initialize(self)
-            namespace = self.get_plugin_loader().get_database_loader().create_namespace(self.get_name(), support_regions = True)
-            namespace.add_field('cyclomatic', int)
+            fields.append(self.Field('cyclomatic', int))
+        core.api.Plugin.initialize(self, fields=fields)
+        
+        if len(fields) != 0:
             core.api.subscribe_by_parents_name('std.code.cpp', self, 'callback_cpp')
             core.api.subscribe_by_parents_name('std.code.cs', self, 'callback_cs')
             core.api.subscribe_by_parents_name('std.code.java', self, 'callback_java')

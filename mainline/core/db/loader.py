@@ -622,7 +622,7 @@ class FieldError(Exception):
 
 class Namespace(object):
     
-    def __init__(self, db_handle, name, support_regions = False):
+    def __init__(self, db_handle, name, support_regions = False, version='1.0'):
         if not isinstance(name, str):
             raise NamespaceError(name, "name not a string")
         self.name = name
@@ -631,7 +631,7 @@ class Namespace(object):
         self.db = db_handle
         
         if self.db.check_table(name) == False:        
-            self.db.create_table(name, support_regions)
+            self.db.create_table(name, support_regions, version)
         else:
             for column in self.db.iterate_columns(name):
                 self.add_field(column.name, PackagerFactory().get_python_type(column.sql_type), non_zero=column.non_zero)
@@ -651,7 +651,10 @@ class Namespace(object):
         self.fields[field_name] = packager
         
         if self.db.check_column(self.get_name(), field_name) == False:        
-            self.db.create_column(self.name, field_name, packager.get_sql_type(), non_zero=non_zero)
+            # - False if cloned
+            # - True if created
+            return self.db.create_column(self.name, field_name, packager.get_sql_type(), non_zero=non_zero)
+        return None # if double request
     
     def iterate_field_names(self):
         for name in self.fields.keys():
@@ -726,13 +729,13 @@ class Loader(object):
             return None
         return self.db.iterate_properties()
             
-    def create_namespace(self, name, support_regions = False):
+    def create_namespace(self, name, support_regions = False, version='1.0'):
         if self.db == None:
             return None
         
         if name in self.namespaces.keys():
             raise NamespaceError(name, "double used")
-        new_namespace = Namespace(self.db, name, support_regions)
+        new_namespace = Namespace(self.db, name, support_regions, version)
         self.namespaces[name] = new_namespace
         return new_namespace
     

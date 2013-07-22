@@ -229,7 +229,7 @@ class Database(object):
                 sql = "INSERT INTO __info__ (property, value, confirmed) VALUES ('version', '" + self.version + "', 1)"
                 self.log(sql)
                 self.conn.execute(sql)
-                sql = "CREATE TABLE __tables__ (id integer NOT NULL PRIMARY KEY, name text NOT NULL, support_regions integer NOT NULL, confirmed integer NOT NULL, UNIQUE (name))"
+                sql = "CREATE TABLE __tables__ (id integer NOT NULL PRIMARY KEY, name text NOT NULL, version text NOT NULL, support_regions integer NOT NULL, confirmed integer NOT NULL, UNIQUE (name))"
                 self.log(sql)
                 self.conn.execute(sql)
                 sql = "CREATE TABLE __columns__ (id integer NOT NULL PRIMARY KEY, name text NOT NULL, type text NOT NULL, table_id integer NOT_NULL, non_zero integer NOT NULL, confirmed integer NOT NULL, UNIQUE (name, table_id))"
@@ -278,17 +278,29 @@ class Database(object):
         for each in self.conn.execute(sql).fetchall():
             yield self.PropertyData(each['id'], each['property'], each['value'])
 
-    def create_table(self, table_name, support_regions = False):
+    def create_table(self, table_name, support_regions = False, version='1.0'):
         assert(self.read_only == False)
 
         sql = "SELECT * FROM __tables__ WHERE (name = '" + table_name + "'AND confirmed == 0)"
         self.log(sql)
         result = self.conn.execute(sql).fetchall()
         if len(result) != 0:
-            sql = "UPDATE __tables__ SET confirmed = 1 WHERE (name = '" + table_name + "')"
-            self.log(sql)
-            self.conn.execute(sql)
-            return        
+            if result[0]['version'] != version:
+                # in case of changes in version, drop existing table data
+                sql = "DELETE FROM __columns__ WHERE table_id = '" + str(result[0]['id']) + "'"
+                self.log(sql)
+                self.conn.execute(sql)
+                sql = "DELETE FROM __tables__ WHERE id = '" + str(result[0]['id']) + "'"
+                self.log(sql)
+                self.conn.execute(sql)
+                sql = "DROP TABLE '" + result[0]['name'] + "'"
+                self.log(sql)
+                self.conn.execute(sql)
+            else:                
+                sql = "UPDATE __tables__ SET confirmed = 1 WHERE (name = '" + table_name + "')"
+                self.log(sql)
+                self.conn.execute(sql)
+                return False      
         
         sql = "CREATE TABLE '" + table_name + "' (file_id integer NOT NULL PRIMARY KEY)"
         if support_regions == True:
@@ -297,10 +309,11 @@ class Database(object):
             
         self.log(sql)
         self.conn.execute(sql)
-        sql = "INSERT INTO __tables__ (name, support_regions, confirmed) VALUES ('" + table_name + "', '" + str(int(support_regions)) + "', 1)"
+        sql = "INSERT INTO __tables__ (name, version, support_regions, confirmed) VALUES ('" + table_name + "', '" + version + "', '" + str(int(support_regions)) + "', 1)"
         self.log(sql)
         self.conn.execute(sql)
-        
+        return True
+
     def iterate_tables(self):
         sql = "SELECT * FROM __tables__ WHERE (confirmed = 1)"
         self.log(sql)
@@ -330,10 +343,14 @@ class Database(object):
         self.log(sql)
         result = self.conn.execute(sql).fetchall()
         if len(result) != 0:
+            # Major changes in columns should result in step up of table version,
+            # which causes drop the table in case of database reuse
+            assert(result[0]['type'] == column_type)
+            assert(result[0]['non_zero'] == non_zero)
             sql = "UPDATE __columns__ SET confirmed = 1 WHERE (table_id = '" + str(table_id) + "' AND name = '" + column_name + "')"
             self.log(sql)
             self.conn.execute(sql)
-            return        
+            return False       
         
         sql = "ALTER TABLE '" + table_name + "' ADD COLUMN '" + column_name + "' " + column_type
         self.log(sql)
@@ -343,7 +360,8 @@ class Database(object):
         table_id = self.conn.execute(sql).next()['id']
         sql = "INSERT INTO __columns__ (name, type, table_id, non_zero, confirmed) VALUES ('" + column_name + "', '" + column_type + "', '" + str(table_id) + "', '" + str(int(non_zero)) + "', 1)"
         self.log(sql)
-        self.conn.execute(sql)        
+        self.conn.execute(sql)
+        return True        
 
     def iterate_columns(self, table_name):
         sql = "SELECT id FROM __tables__ WHERE (name = '" + table_name + "')"

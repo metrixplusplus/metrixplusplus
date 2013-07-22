@@ -19,7 +19,6 @@
 
 
 import unittest
-import os
 
 import tests.common
 
@@ -29,7 +28,7 @@ class Test(tests.common.TestCase):
         
         runner = tests.common.ToolRunner('collect', ['--std.suppress',
                                                      '--std.code.complexity.cyclomatic',
-                                                     '--std.code.length.size'])
+                                                     '--std.code.length.total'])
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
@@ -45,19 +44,19 @@ class Test(tests.common.TestCase):
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
-                                         ['--max-limit=std.code.length:size:0'],
+                                         ['--max-limit=std.code.length:total:0'],
                                          exit_code=7,
                                          prefix='3')
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
-                                         ['--max-limit=std.code.length:size:0', '--disable-suppressions'],
+                                         ['--max-limit=std.code.length:total:0', '--disable-suppressions'],
                                          exit_code=24,
                                          prefix='4')
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
-                                         ['--max-limit=std.code.complexity:cyclomatic:0', '--max-limit=std.code.length:size:0'],
+                                         ['--max-limit=std.code.complexity:cyclomatic:0', '--max-limit=std.code.length:total:0'],
                                          exit_code=8,
                                          prefix='5')
         self.assertExec(runner.run())
