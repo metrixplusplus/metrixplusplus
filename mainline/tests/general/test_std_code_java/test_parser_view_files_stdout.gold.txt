@@ -5,7 +5,7 @@ ________________________________________________________________________________
 --------------------------------------------------------------------------------
 data:  
 .   info: 
-.   .   path=".\ArrayUtils.java"
+.   .   path="./ArrayUtils.java"
 .   .   id="1"
 .   file-data:  
 .   .   regions:
@@ -687,7 +687,7 @@ data:
 --------------------------------------------------------------------------------
 data:  
 .   info: 
-.   .   path=".\attrs.java"
+.   .   path="./attrs.java"
 .   .   id="2"
 .   file-data:  
 .   .   regions:
@@ -751,7 +751,7 @@ data:
 --------------------------------------------------------------------------------
 data:  
 .   info: 
-.   .   path=".\BinaryHeapPriorityQueue.java"
+.   .   path="./BinaryHeapPriorityQueue.java"
 .   .   id="3"
 .   file-data:  
 .   .   regions:
@@ -1452,7 +1452,7 @@ data:
 --------------------------------------------------------------------------------
 data:  
 .   info: 
-.   .   path=".\Generics.java"
+.   .   path="./Generics.java"
 .   .   id="4"
 .   file-data:  
 .   .   regions:

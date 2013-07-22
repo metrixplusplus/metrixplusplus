@@ -135,7 +135,10 @@ class Test(tests.common.TestCase):
 
     def test_help(self):
         
-        runner = tests.common.ToolRunner('--help', exit_code=1)
+        runner = tests.common.ToolRunner('--help')
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('unknown', exit_code=1)
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('collect', ['--help'])

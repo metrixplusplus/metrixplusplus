@@ -1,10 +1,10 @@
-Usage: C:\Projects\Metrix++\mainline\metrixpp.py <action> --help
-   or: C:\Projects\Metrix++\mainline\metrixpp.py <action> [options] -- [path 1] ... [path N]
+Usage: python metrixpp.py <action> --help
+   or: python metrixpp.py <action> [options] -- [path 1] ... [path N]
 where: actions are:
 	collect
-	debug
 	export
 	info
 	limit
-	test
 	view
+	debug	[internal]
+	test	[internal]
