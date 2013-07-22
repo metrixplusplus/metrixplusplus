@@ -18,12 +18,12 @@
 #
 
 
-import logging
-
 import core.db.loader
 import core.db.post
 import core.log
 import core.cmdparser
+
+import tools.utils
 
 import core.api
 class Tool(core.api.ITool):
@@ -84,9 +84,11 @@ def main(tool_args):
     else:
         paths = args
     for path in paths:
+        path = tools.utils.preprocess_path(path)
+
         file_iterator = loader.iterate_file_data(path=path)
         if file_iterator == None:
-            logging.error("Specified path '" + path + "' is invalid (not found in the database records)")
+            tools.utils.report_bad_path(path)
             exit_code += 1
             continue
         for each in file_iterator:

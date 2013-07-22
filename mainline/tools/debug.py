@@ -26,6 +26,8 @@ import core.cmdparser
 import core.db.post
 import core.db.loader
 
+import tools.utils
+
 import core.api
 class Tool(core.api.ITool):
     def run(self, tool_args):
@@ -58,9 +60,11 @@ def dumphtml(args, loader):
     result = ""
     result += '<html><body>'
     for path in args:
+        path = tools.utils.preprocess_path(path)
+        
         data = loader.load_file_data(path)
         if data == None:
-            logging.error("Specified path '" + path + "' is invalid (not found in the database records)")
+            tools.utils.report_bad_path(path)
             exit_code += 1
             continue
         

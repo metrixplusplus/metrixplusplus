@@ -18,7 +18,6 @@
 #
 
 import logging
-import re
 
 import core.log
 import core.db.loader
@@ -27,6 +26,8 @@ import core.db.utils
 import core.cout
 import core.warn
 import core.cmdparser
+
+import tools.utils
 
 import core.api
 class Tool(core.api.ITool):
@@ -70,14 +71,8 @@ def main(tool_args):
         warn_plugin.verify_fields(each, loader.get_namespace(each).iterate_field_names())
     
     # Check for versions consistency
-    for each in loader.iterate_properties():
-        if db_plugin.dbfile_prev != None:
-            prev = loader_prev.get_property(each.name)
-            if prev != each.value:
-                logging.warn("Previous data has got different metadata:")
-                logging.warn(" - identification of change trends can be not reliable")
-                logging.warn(" - use 'info' tool to get more details")
-                break
+    if db_plugin.dbfile_prev != None:
+        tools.utils.check_db_metadata(loader, loader_prev)
     
     paths = None
     if len(args) == 0:
@@ -91,7 +86,7 @@ def main(tool_args):
         modified_file_ids = get_list_of_modified_files(loader, loader_prev)
         
     for path in paths:
-        logging.info("Processing: " + re.sub(r'''[\\]''', "/", path))
+        path = tools.utils.preprocess_path(path)
         
         for limit in warn_plugin.iterate_limits():
             logging.info("Applying limit: " + str(limit))
@@ -112,7 +107,7 @@ def main(tool_args):
                                                    sort_by=sort_by,
                                                    limit_by=limit_by)
             if selected_data == None:
-                logging.error("Specified path '" + path + "' is invalid (not found in the database records)")
+                tools.utils.report_bad_path(path)
                 exit_code += 1
                 continue
             

@@ -20,15 +20,14 @@
 
 
 import logging
-import re
 import csv
 
 import core.log
 import core.db.loader
 import core.db.post
-import core.db.utils
 import core.cmdparser
-import core.export.convert
+
+import tools.utils
 
 import core.api
 class Tool(core.api.ITool):
@@ -104,8 +103,8 @@ def export_to_stdout(out_format, paths, loader, loader_prev):
     else:
         assert False, "Unknown output format " + out_format
 
-    for (ind, path) in enumerate(paths):
-        logging.info("Processing: " + re.sub(r'''[\\]''', "/", path))
+    for path in paths:
+        path = tools.utils.preprocess_path(path)
         
         files = loader.iterate_file_data(path)
         if files != None:
@@ -120,7 +119,7 @@ def export_to_stdout(out_format, paths, loader, loader_prev):
                     per_file_data.append(file_data.get_data(column[0], column[1]))
                 csvWriter.writerow([file_data.get_path(), None] + per_file_data)
         else:
-            logging.error("Specified path '" + path + "' is invalid (not found in the database records)")
+            tools.utils.report_bad_path(path)
             exit_code += 1
 
     if out_format == 'xml':

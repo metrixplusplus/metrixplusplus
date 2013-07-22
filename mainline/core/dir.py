@@ -80,43 +80,55 @@ class DirectoryReader():
     
     def run(self, plugin, directory):
         
+        def run_per_file(plugin, fname, full_path):
+            exit_code = 0
+            norm_path = re.sub(r'''[\\]''', "/", full_path)
+            if plugin.is_file_excluded(fname) == False:
+                if os.path.isdir(full_path):
+                    if plugin.non_recursively == False:
+                        exit_code += run_recursively(plugin, full_path)
+                else:
+                    parser = plugin.get_plugin_loader().get_parser(full_path)
+                    if parser == None:
+                        logging.info("Skipping: " + norm_path)
+                    else:
+                        logging.info("Processing: " + norm_path)
+                        ts = time.time()
+                        f = open(full_path, 'r');
+                        text = f.read();
+                        f.close()
+                        checksum = binascii.crc32(text) & 0xffffffff # to match python 3
+
+                        (data, is_updated) = plugin.get_plugin_loader().get_database_loader().create_file_data(norm_path, checksum, text)
+                        procerrors = parser.process(plugin, data, is_updated)
+                        if plugin.is_proctime_enabled == True:
+                            data.set_data('std.general', 'proctime', time.time() - ts)
+                        if plugin.is_procerrors_enabled == True and procerrors != None and procerrors != 0:
+                            data.set_data('std.general', 'procerrors', procerrors)
+                        if plugin.is_size_enabled == True:
+                            data.set_data('std.general', 'size', len(text))
+                        plugin.get_plugin_loader().get_database_loader().save_file_data(data)
+                        logging.debug("-" * 60)
+                        exit_code += procerrors
+            else:
+                logging.info("Excluding: " + norm_path)
+            return exit_code
+        
         def run_recursively(plugin, directory):
             exit_code = 0
             for fname in os.listdir(directory):
                 full_path = os.path.join(directory, fname)
-                norm_path = re.sub(r'''[\\]''', "/", full_path)
-                if plugin.is_file_excluded(fname) == False:
-                    if os.path.isdir(full_path):
-                        if plugin.non_recursively == False:
-                            exit_code += run_recursively(plugin, full_path)
-                    else:
-                        parser = plugin.get_plugin_loader().get_parser(full_path)
-                        if parser == None:
-                            logging.info("Skipping: " + norm_path)
-                        else:
-                            logging.info("Processing: " + norm_path)
-                            ts = time.time()
-                            f = open(full_path, 'r');
-                            text = f.read();
-                            f.close()
-                            checksum = binascii.crc32(text) & 0xffffffff # to match python 3
-    
-                            (data, is_updated) = plugin.get_plugin_loader().get_database_loader().create_file_data(norm_path, checksum, text)
-                            procerrors = parser.process(plugin, data, is_updated)
-                            if plugin.is_proctime_enabled == True:
-                                data.set_data('std.general', 'proctime', time.time() - ts)
-                            if plugin.is_procerrors_enabled == True and procerrors != None and procerrors != 0:
-                                data.set_data('std.general', 'procerrors', procerrors)
-                            if plugin.is_size_enabled == True:
-                                data.set_data('std.general', 'size', len(text))
-                            plugin.get_plugin_loader().get_database_loader().save_file_data(data)
-                            logging.debug("-" * 60)
-                            exit_code += procerrors
-                else:
-                    logging.info("Excluding: " + norm_path)
+                exit_code += run_per_file(plugin, fname, full_path)
             return exit_code
         
-        total_errors = run_recursively(plugin, directory)
+        if os.path.exists(directory) == False:
+            logging.error("Skipping (does not exist): " + directory)
+            return 1
+        
+        if os.path.isdir(directory):
+            total_errors = run_recursively(plugin, directory)
+        else:
+            total_errors = run_per_file(plugin, os.path.basename(directory), directory)
         total_errors = total_errors # used, warnings are per file if not zero
         return 0 # ignore errors, collection is successful anyway
     

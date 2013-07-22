@@ -31,14 +31,19 @@ def main():
     
     os.environ['METRIXPLUSPLUS_INSTALL_DIR'] = os.path.dirname(os.path.abspath(__file__))
     
+    this_file = os.path.basename(__file__)
+    
     available_tools = []
+    excluded_tools = ['utils']
+    internal_tools = ['debug', 'test']
     for fname in os.listdir(os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'tools')):
         tool_name = os.path.splitext(fname)[0]
         if tool_name == '__init__':
             continue
         if tool_name not in available_tools:
-            available_tools.append(tool_name)
-
+            if tool_name not in excluded_tools + internal_tools:
+                available_tools.append(tool_name)
+    
     exemode = None
     if len(sys.argv[1:]) != 0:
         exemode = sys.argv[1]
@@ -51,14 +56,21 @@ def main():
     if len(sys.argv[1:]) > 1:
         command = sys.argv[2]
         
-    if command not in available_tools:
-        logging.error("Unknown action: " + str(command))
-        print "Usage: {prog} <action> --help".format(prog=__file__)
-        print "   or: {prog} <action> [options] -- [path 1] ... [path N]".format(prog=__file__)
+    if command == '--help' or command == '-h' or command == '--h':
+        print "Usage: python {prog} <action> --help".format(prog=this_file)
+        print "   or: python {prog} <action> [options] -- [path 1] ... [path N]".format(prog=this_file)
         print "where: actions are:"
-        for each in available_tools:
+        for each in sorted(available_tools):
             print "\t" + each
-        return 1
+        if exemode == '-D':
+            for each in sorted(internal_tools):
+                print "\t" + each + "\t[internal]"
+        exit(0)
+        
+    if command not in available_tools + internal_tools:
+        print >> sys.stderr, "Usage: python {prog} --help\n".format(prog=this_file)
+        print >> sys.stderr, "{prog}: error: no such action: {action}".format(prog=this_file, action=command)
+        exit(1)
 
     tool = __import__('tools', globals(), locals(), [command], -1)
     module_attr = tool.__getattribute__(command)
@@ -75,5 +87,5 @@ if __name__ == '__main__':
     if 'METRIXPLUSPLUS_TEST_GENERATE_GOLDS' in os.environ.keys() and \
         os.environ['METRIXPLUSPLUS_TEST_GENERATE_GOLDS'] == "True":
         time_spent = 1 # Constant value if under tests
-    logging.warning("Exit code: " + str(exit_code) + ". Time spent: " + str(time_spent) + " seconds. Done")
+    logging.warning("Done (" + str(time_spent) +" seconds). Exit code: " + str(exit_code))
     exit(exit_code)
