@@ -43,6 +43,7 @@ def main(tool_args):
     log_plugin.configure(options)
     
     os.environ['METRIXPLUSPLUS_TEST_GENERATE_GOLDS'] = str(options.__dict__['generate_golds'])
+    os.environ['METRIXPLUSPLUS_TEST_MODE'] = str("True")
     
     tests_dir = os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'tests')
     process_data= ["python", "-m", "unittest", "discover", "-v", "-s"]
