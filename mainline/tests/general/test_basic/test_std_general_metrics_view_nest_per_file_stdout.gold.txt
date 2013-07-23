@@ -106,7 +106,7 @@ data:
 .   .   .   .   .   .   .   .   .   .   data: 
 .   .   .   .   .   .   .   .   .   .   subregions:
 .   .   std.general: 
-.   .   .   proctime="0.00300002098083"
+.   .   .   proctime="0.0019998550415"
 .   .   .   size="487"
 .   subfiles:
 .   subdirs:
@@ -121,15 +121,15 @@ data:
 .   .   .   .   distribution-bars:
 .   .   .   proctime: 
 .   .   .   .   count="1"
-.   .   .   .   max="0.00300002098083"
-.   .   .   .   avg="0.00300002098083"
-.   .   .   .   total="0.00300002098083"
-.   .   .   .   min="0.00300002098083" 
+.   .   .   .   max="0.0019998550415"
+.   .   .   .   avg="0.0019998550415"
+.   .   .   .   total="0.0019998550415"
+.   .   .   .   min="0.0019998550415" 
 .   .   .   .   distribution-bars:
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="1"
-.   .   .   .   .   .   metric="0.00300002098083"
+.   .   .   .   .   .   metric="0.0019998550415"
 .   .   .   .   .   .   ratio="1.0"
 .   .   .   size: 
 .   .   .   .   count="1"

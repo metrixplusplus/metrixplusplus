@@ -92,7 +92,7 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
                 count += len(self.pattern_line.findall(text, start_pos, data.get_region(sub_id).get_offset_begin()))
                 start_pos = data.get_region(sub_id).get_offset_end()
             count += len(self.pattern_line.findall(text, start_pos, region.get_offset_end()))
-            region.set_data(self.get_name(), 'code', count)
+            region.set_data(self.get_name(), field_name, count)
         
     def count_in_markers(self, data, marker_type, field_name):
         text = data.get_content()
