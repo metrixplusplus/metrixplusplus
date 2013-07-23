@@ -207,5 +207,23 @@ class Test(tests.common.TestCase):
                                          dirs_list=['./simple.cpp'])
         self.assertExec(runner.run())
 
+    def test_std_lines_metrics(self):
+
+        runner = tests.common.ToolRunner('collect',
+                                         ['--std.code.lines.code',
+                                          '--std.code.lines.preprocessor',
+                                          '--std.code.lines.comments',
+                                          '--std.code.lines.total'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view', ['--format=txt'], prefix='txt')
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view',
+                                         ['--nest-regions', '--format=txt'],
+                                         prefix='nest_per_file',
+                                         dirs_list=['./simple.cpp'])
+        self.assertExec(runner.run())
+
 if __name__ == '__main__':
     unittest.main()

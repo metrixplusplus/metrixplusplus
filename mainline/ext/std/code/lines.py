@@ -35,10 +35,6 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
                          help="Enables collection of lines of comments metric - "
                          "number of non-empty lines of comments "
                          "[default: %default]")
-        parser.add_option("--std.code.lines.blank", "--sclb", action="store_true", default=False,
-                         help="Enables collection of blank lines metric - "
-                         "number of blank lines, i.e. lines without code or comments "
-                         "[default: %default]")
         parser.add_option("--std.code.lines.total", "--sclt", action="store_true", default=False,
                          help="Enables collection of lines of comments metric - "
                          "number of non-empty lines of comments "
@@ -48,7 +44,6 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
         self.is_active_code = options.__dict__['std.code.lines.code']
         self.is_active_preprocessor = options.__dict__['std.code.lines.preprocessor']
         self.is_active_comments = options.__dict__['std.code.lines.comments']
-        self.is_active_blank = options.__dict__['std.code.lines.blank']
         self.is_active_total = options.__dict__['std.code.lines.total']
         
     def initialize(self):
@@ -59,8 +54,6 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
             fields.append(self.Field('preprocessor', int))
         if self.is_active_comments == True:
             fields.append(self.Field('comments', int))
-        if self.is_active_blank == True:
-            fields.append(self.Field('blank', int))
         if self.is_active_total == True:
             fields.append(self.Field('total', int))
         core.api.Plugin.initialize(self, fields=fields)
@@ -74,13 +67,41 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
         is_updated = is_updated or self.is_updated
         if is_updated == True:
             if self.is_active_code == True:
-                text = data.get_content(exclude = data.get_marker_types().ALL_EXCEPT_CODE)
-                for region in data.iterate_regions():
-                    count = 0
-                    start_pos = region.get_offset_begin()
-                    for sub_id in region.iterate_subregion_ids():
-                        count += len(self.pattern_line.findall(text, start_pos, data.get_region(sub_id).get_offset_begin()))
-                        start_pos = data.get_region(sub_id).get_offset_end()
-                    count += len(self.pattern_line.findall(text, start_pos, region.get_offset_end()))
-                    region.set_data(self.get_name(), 'code', count)
+                self.count_in_code(data,
+                                   data.get_marker_types().ALL_EXCEPT_CODE,
+                                   'code')
+            if self.is_active_preprocessor == True:
+                self.count_in_markers(data,
+                                      data.get_marker_types().PREPROCESSOR,
+                                      'preprocessor')
+            if self.is_active_comments == True:
+                self.count_in_markers(data,
+                                      data.get_marker_types().COMMENT,
+                                      'comments')
+            if self.is_active_total == True:
+                self.count_in_code(data,
+                                   data.get_marker_types().NONE,
+                                   'total')
     
+    def count_in_code(self, data, exclude, field_name):
+        text = data.get_content(exclude=exclude)
+        for region in data.iterate_regions():
+            count = 0
+            start_pos = region.get_offset_begin()
+            for sub_id in region.iterate_subregion_ids():
+                count += len(self.pattern_line.findall(text, start_pos, data.get_region(sub_id).get_offset_begin()))
+                start_pos = data.get_region(sub_id).get_offset_end()
+            count += len(self.pattern_line.findall(text, start_pos, region.get_offset_end()))
+            region.set_data(self.get_name(), 'code', count)
+        
+    def count_in_markers(self, data, marker_type, field_name):
+        text = data.get_content()
+        for region in data.iterate_regions():
+            count = 0
+            for marker in data.iterate_markers(
+                            filter_group = marker_type,
+                            region_id = region.get_id(),
+                            exclude_children = True):
+                count += len(self.pattern_line.findall(text, marker.get_offset_begin(), marker.get_offset_end()))
+            region.set_data(self.get_name(), field_name, count)
+            

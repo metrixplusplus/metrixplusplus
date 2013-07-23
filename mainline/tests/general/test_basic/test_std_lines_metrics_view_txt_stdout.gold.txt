@@ -1,0 +1,101 @@
+================================================================================
+Export
+________________________________________________________________________________
+
+--------------------------------------------------------------------------------
+data:  
+.   info: 
+.   .   path=""
+.   .   id="1"
+.   file-data: 
+.   subfiles:
+.   subdirs:
+.   .   .
+.   aggregated-data:  
+.   .   std.code.lines:  
+.   .   .   code: 
+.   .   .   .   count="8"
+.   .   .   .   max="12"
+.   .   .   .   avg="5.5"
+.   .   .   .   total="44.0"
+.   .   .   .   min="0" 
+.   .   .   .   distribution-bars:
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="0"
+.   .   .   .   .   .   ratio="0.125"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="3"
+.   .   .   .   .   .   ratio="0.125"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="4"
+.   .   .   .   .   .   ratio="0.125"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="2"
+.   .   .   .   .   .   metric="5"
+.   .   .   .   .   .   ratio="0.25"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="7"
+.   .   .   .   .   .   ratio="0.125"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="8"
+.   .   .   .   .   .   ratio="0.125"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="12"
+.   .   .   .   .   .   ratio="0.125"
+.   .   .   total: 
+.   .   .   .   count="0"
+.   .   .   .   max="None"
+.   .   .   .   avg="None"
+.   .   .   .   total="0.0"
+.   .   .   .   min="None" 
+.   .   .   .   distribution-bars:
+.   .   .   preprocessor: 
+.   .   .   .   count="8"
+.   .   .   .   max="0"
+.   .   .   .   avg="0.0"
+.   .   .   .   total="0.0"
+.   .   .   .   min="0" 
+.   .   .   .   distribution-bars:
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="8"
+.   .   .   .   .   .   metric="0"
+.   .   .   .   .   .   ratio="1.0"
+.   .   .   comments: 
+.   .   .   .   count="8"
+.   .   .   .   max="2"
+.   .   .   .   avg="0.5"
+.   .   .   .   total="4.0"
+.   .   .   .   min="0" 
+.   .   .   .   distribution-bars:
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="5"
+.   .   .   .   .   .   metric="0"
+.   .   .   .   .   .   ratio="0.625"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="2"
+.   .   .   .   .   .   metric="1"
+.   .   .   .   .   .   ratio="0.25"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="2"
+.   .   .   .   .   .   ratio="0.125"
+================================================================================
+
+

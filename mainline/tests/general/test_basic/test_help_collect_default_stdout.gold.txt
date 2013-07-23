@@ -58,10 +58,6 @@ Options:
   --std.code.lines.comments, --sclcom
                         Enables collection of lines of comments metric -
                         number of non-empty lines of comments [default: False]
-  --std.code.lines.blank, --sclb
-                        Enables collection of blank lines metric - number of
-                        blank lines, i.e. lines without code or comments
-                        [default: False]
   --std.code.lines.total, --sclt
                         Enables collection of lines of comments metric -
                         number of non-empty lines of comments [default: False]
