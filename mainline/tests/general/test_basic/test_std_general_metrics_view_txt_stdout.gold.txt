@@ -22,15 +22,15 @@ data:
 .   .   .   .   distribution-bars:
 .   .   .   proctime: 
 .   .   .   .   count="1"
-.   .   .   .   max="0.0019998550415"
-.   .   .   .   avg="0.0019998550415"
-.   .   .   .   total="0.0019998550415"
-.   .   .   .   min="0.0019998550415" 
+.   .   .   .   max="0.01"
+.   .   .   .   avg="0.01"
+.   .   .   .   total="0.01"
+.   .   .   .   min="0.01" 
 .   .   .   .   distribution-bars:
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="1"
-.   .   .   .   .   .   metric="0.0019998550415"
+.   .   .   .   .   .   metric="0.01"
 .   .   .   .   .   .   ratio="1.0"
 .   .   .   size: 
 .   .   .   .   count="1"

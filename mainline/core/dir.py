@@ -81,6 +81,10 @@ class DirectoryReader():
     
     def run(self, plugin, directory):
         
+        IS_TEST_MODE = False
+        if 'METRIXPLUSPLUS_TEST_MODE' in os.environ.keys():
+            IS_TEST_MODE = True
+        
         def run_per_file(plugin, fname, full_path):
             exit_code = 0
             norm_path = re.sub(r'''[\\]''', "/", full_path)
@@ -103,7 +107,8 @@ class DirectoryReader():
                         (data, is_updated) = plugin.get_plugin_loader().get_database_loader().create_file_data(norm_path, checksum, text)
                         procerrors = parser.process(plugin, data, is_updated)
                         if plugin.is_proctime_enabled == True:
-                            data.set_data('std.general', 'proctime', time.time() - ts)
+                            data.set_data('std.general', 'proctime',
+                                          (time.time() - ts) if IS_TEST_MODE == False else 0.01)
                         if plugin.is_procerrors_enabled == True and procerrors != None and procerrors != 0:
                             data.set_data('std.general', 'procerrors', procerrors)
                         if plugin.is_size_enabled == True:
