@@ -891,8 +891,6 @@ class Loader(object):
         if self.db == None:
             return None
         
-        # TODO implement restriction for non_zero fields
-
         final_path_like = path_like_filter
         if path != None:
             if self.db.check_dir(path) == False and self.db.check_file(path) == False:
