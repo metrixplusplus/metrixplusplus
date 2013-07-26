@@ -1,5 +1,5 @@
-Usage: python metrixpp.py <action> --help
-   or: python metrixpp.py <action> [options] -- [path 1] ... [path N]
+Usage: python metrix++.py <action> --help
+   or: python metrix++.py <action> [options] -- [path 1] ... [path N]
 where: actions are:
 	collect
 	info

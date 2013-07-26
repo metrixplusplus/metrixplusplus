@@ -31,7 +31,7 @@ def main():
     
     os.environ['METRIXPLUSPLUS_INSTALL_DIR'] = os.path.dirname(os.path.abspath(__file__))
     
-    this_file = os.path.basename(__file__)
+    this_file = os.path.basename(sys.argv[0])
     
     available_tools = []
     excluded_tools = ['utils']
@@ -79,7 +79,7 @@ def main():
     instance.__init__()
     return instance.run(sys.argv[3:])
 
-if __name__ == '__main__':
+def start():
     ts = time.time()
     core.log.set_default_format()
     exit_code = main()
@@ -89,3 +89,6 @@ if __name__ == '__main__':
         time_spent = 1 # Constant value if under tests
     logging.warning("Done (" + str(time_spent) +" seconds). Exit code: " + str(exit_code))
     exit(exit_code)
+
+if __name__ == '__main__':
+    start()

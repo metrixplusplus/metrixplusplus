@@ -1,4 +1,4 @@
-Usage: metrixpp.py view [options] -- [path 1] ... [path N]
+Usage: metrix++.py view [options] -- [path 1] ... [path N]
 
 Options:
   -h, --help            show this help message and exit
