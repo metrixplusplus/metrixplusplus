@@ -163,7 +163,7 @@
           <li><a href="#workflow_collect_section"><i class="icon-chevron-right"></i> Workflow: Collect data</a></li>
           <li><a href="#workflow_view_section"><i class="icon-chevron-right"></i> Workflow: View data</a></li>
           <li><a href="#workflow_limit_section"><i class="icon-chevron-right"></i> Workflow: Apply thresholds</a></li>
-          <li><a href="#extend_section"><i class="icon-chevron-right"></i> Create new plugin</a></li>
+          <li><a href="#extend_section"><i class="icon-chevron-right"></i> Create plugin</a></li>
           <li><a href="#contribute_section"><i class="icon-chevron-right"></i> Feedback &amp; Contribute</a></li>
         </ul>
       </div>
@@ -187,11 +187,150 @@
             <li>Assisiting on <strong>per minute</strong> basis during code refactoring and code development, where coding and quality standards matter.</li>
           </ul>
 
+          <p>The workflow explained <a href="#workflow_collect_section">below</a> demonstrates basic application principles.</p>
+
           <h3>Languages supported</h3>
-          <p>The tool can parse C/C++, C# and Java source code files.</p>
+          <p>The tool can parse C/C++, C# and Java source code files. The parser identifies certain regions in the code,
+             such as classes, functions, namespaces, interfaces, etc. It obviously detects comments, strings and code for preprocessor.
+             The identified regions form a tree of nested source code blocks, which are refered after and additionally scanned by metrics plugins.
+             This concept allows to attribute metrics per regions, what gives fine grained data and rich input to analysis tools.
+             The following example demonstrates this.</p>
+             
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Source code</th>
+                <th>Regions tree [type: name: content type]</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+<pre class="prettyprint linenums">
+// simple C++ code
+
+#include &lt;myapi.h&gt;
+
+// I explain the following class
+class MyClass {
+public:
+    int m_var; // some member
+
+    // I explain the following function
+    MyClass(): m_var(0) {
+        char str[] = "unused string"
+        
+        // nested region for better taste
+        struct MyStruct {};
+    }
+    
+    // Do not judge ugly code below
+#define get_max(a,b) ((a)>(b)?(a):(b))
+    set_max(int b) {
+        m_var = get_max(m_var, b);
+    }
+};
+// this is the last line
+</pre>
+                </td>
+                <td>
+<pre class="prettyprint linenums">
+file: __global__: comment
+file: __global__: code
+file: __global__: preprocessor
+file: __global__: code
+    class: MyClass: comment
+    class: MyClass: code
+    class: MyClass: code
+    class: MyClass: code, comment
+    class: MyClass: code
+        function: MyClass: comment
+        function: MyClass: code
+        function: MyClass: code, string
+        function: MyClass: code
+            class: MyStruct: comment
+            class: MyStruct: code
+        function: MyClass: code
+    class: MyClass: code
+        function: set_max: comment
+        function: set_max: preprocessor
+        function: set_max: code
+        function: set_max: code
+        function: set_max: code
+    class: MyClass: code
+file: __global__: comment
+</pre>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
           <h3>Metrics</h3>
-          <p>....</p>
+          <p>Metrics highlighed in blue are <strong>per file</strong> metrics. Other metrics are <strong>per region</strong> metrics.
+             Region term is explained in the previous chapter.</p>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Metric (enable option)</th>
+                <th>Brief description</th>
+                <th>Motivation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="info">
+                <td>std.general.size</td>
+                <td>Size of a file in bytes.</td>
+                <td rowspan="4"><ul><li>Monitoring growth of source code base.</li>
+                    <li>Normalizing other metrics.</li>
+                    <li>Preventing large files and regions (large things difficult to maintain).</li>
+                    <li>Predicting delivery dates by comparing S-shaped code base growth / change curves.</li></ul></td>
+              </tr>
+              <tr>
+                <td>std.code.length.total</td>
+                <td>The same as 'std.general.size' metric, but attributed to code regions.</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>std.code.lines.total</td>
+                <td>Number of non-blank lines of code of any content type (exectuable, comments, etc.)</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>std.code.lines.code</td>
+                <td>Number of non-blank lines of code excluding preprocessor, comments and strings.</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>std.code.lines.preprocessor</td>
+                <td>Number of non-blank lines of preprocessor code.</td>
+                <td><ul><li>Enforcing localisation of preprocessor code in a single place.</li>
+                    <li>Encouraging usage of safer code structures instead of preprocessor.</li></ul></td>
+              </tr>
+              <tr>
+                <td>std.code.lines.comments</td>
+                <td>Number of non-blank lines of comments.</td>
+                <td><ul><li>Low number of comments may indicate about maintainability problems.</li></ul></td>
+              </tr>
+              <tr>
+                <td>std.code.complexity.cyclomatic</td>
+                <td>McCabe cyclomatic complexity metric.</td>
+                <td><ul><li>Identification of highly complex code for review and refactoring.</li>
+                    <li>Preventing complex functions (complexity is a reason of many defects and a reason of expensive maintaintenance).</li></ul></td>
+              </tr>
+              <tr class="info">
+                <td>std.general.procerrors</td>
+                <td>Number of errors detected by Metrix++ code parser.
+                    Errors, like mismatched brackets, may result in bad identification of regions.</td>
+                <td><ul><li>Cleaning up errors to ensure reliable code scanning.</li></ul></td>
+              </tr>
+              <tr class="info">
+                <td>std.general.proctime</td>
+                <td>Seconds spent on processing a file.</td>
+                <td><ul><li>Monitor and profile tool's performance.</li></ul></td>
+              </tr>
+            </tbody>
+          </table>
+
         </section>
 
         <section id="download_section">
@@ -222,6 +361,42 @@
           <p>You should have received a copy of the GNU General Public License along with the Metrix++;
              if not, contact <a href="mailto:avkonst@users.sourceforge.net?subject=Metrix%2B%2B License">Project Administrator</a></p>
              
+        </section>
+
+        <div class="page-header">
+          <h1>Workflow</h1>
+        </div>
+        <section id="workflow_collect_section">
+          <h2>Collect data</h2>
+          <p>...</p>
+        </section>
+        <section id="workflow_view_section">
+          <h2>View data</h2>
+          <p>...</p>
+        </section>
+        <section id="workflow_limit_section">
+          <h2>Apply thresholds</h2>
+          <p>...</p>
+        </section>
+
+        <section id="extend_section">
+          <div class="page-header">
+            <h1>Create plugin</h1>
+          </div>
+          <h2>New metric</h2>
+          <p>...</p>
+          <h2>New language</h2>
+          <p>...</p>
+          <h2>New analysis tool</h2>
+          <p>...</p>
+        </section>
+
+        <section id="contribute_section">
+          <div class="page-header">
+            <h1>Feeback and contribute</h1>
+          </div>
+          <h2>Feedback</h2>
+          <p>...</p>
         </section>
 
       </div> <!-- end for sections -->
