@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Metrix++ Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <!--
+    <link href="../../style.css" rel="stylesheet">
+    -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/css/docs.css" rel="stylesheet">
+    <link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+    
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
+
+	<!--
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-146052-10']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+   -->
+  </head>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-link navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="./index.html">Metrix++</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="">
+                <a href="./index.html">Home</a>
+              </li>
+              <li class="">
+                <a href="./customize.html"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=275605&amp;type=10" alt="Get Software Index at SourceForge.net. Fast, secure and Free Open Source software downloads" border="0"></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subhead
+    ================================================== -->
+    <header class="jumbotron" id="overview">
+      <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="item active">
+            <img src="assets/img/slide-01.jpg" alt="">
+            <div class="container">
+              <div class="carousel-caption">
+                <h2>Multiple languages</h2>
+                <p class="lead">&middot; C/C++, C# and Java.</p>
+                <p class="lead">&middot; Recognises classes, interfaces, namespaces, functions, comments, preprocessor and much more.</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/img/slide-02.jpg" alt="">
+            <div class="container">
+              <div class="carousel-caption">
+                <h2>Multiple metrics</h2>
+                <p class="lead">&middot; Complexity, size and other.</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/img/slide-03.jpg" alt="">
+            <div class="container">
+              <div class="carousel-caption">
+                <h2>High performance and scalability</h2>
+                <p class="lead">&middot; Applicable to huge code bases: thousands of files per minute.</p>
+                <p class="lead">&middot; Ultra-fast feedback on iterative re-run.</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/img/slide-01.jpg" alt="">
+            <div class="container">
+              <div class="carousel-caption">
+                <h2>Effortless application to legacy code</h2>
+                <p class="lead">&middot; Recognises legacy, modified and new code.</p>
+                <p class="lead">&middot; Prevents from negative trends. Encourages positive.</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/img/slide-02.jpg" alt="">
+            <div class="container">
+              <div class="carousel-caption">
+                <h2>Configurable</h2>
+                <p class="lead">&middot; Define and apply your rules and policies.</p>
+                <p class="lead">&middot; Integrate with your workflow.</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/img/slide-03.jpg" alt="">
+            <div class="container">
+              <div class="carousel-caption">
+                <h2>Extendable via plugins</h2>
+                <p class="lead">&middot; Define your custom metric.</p>
+                <p class="lead">&middot; Add new language parser.</p>
+                <p class="lead">&middot; Create advanced post-analysis tool.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+      </div>      
+      <div class="container">
+        <div class="row">
+          <div class="span3">
+          </div>
+          <div class="span9">
+            <h5 class="text-right">Management of source code quality is possible.</h5>
+            <p class="text-right"><a href="https://sourceforge.net/projects/metrixplusplus/files/latest/download"><button type="button"class="btn btn-danger">Download</button></a> <button type="button"class="btn btn-warning">Donate</button></p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container"><div class="row">
+      
+      <!-- Docs nav
+	  ================================================== -->
+      <div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav">
+          <!--<li><img src="../../logo_project.png"/><p>&nbsp;</p></li>-->
+          <li><a href="#overview_section"><i class="icon-chevron-right"></i> Overview</a></li>
+          <li><a href="#download_section"><i class="icon-chevron-right"></i> Download &amp; Install</a></li>
+          <li><a href="#workflow_collect_section"><i class="icon-chevron-right"></i> Workflow: Collect data</a></li>
+          <li><a href="#workflow_view_section"><i class="icon-chevron-right"></i> Workflow: View data</a></li>
+          <li><a href="#workflow_limit_section"><i class="icon-chevron-right"></i> Workflow: Apply thresholds</a></li>
+          <li><a href="#extend_section"><i class="icon-chevron-right"></i> Create new plugin</a></li>
+          <li><a href="#contribute_section"><i class="icon-chevron-right"></i> Feedback &amp; Contribute</a></li>
+        </ul>
+      </div>
+      
+      <!-- Sections
+	  ================================================== -->
+      <div class="span9">
+        <!-- Overview
+        ================================================== -->
+        <section id="overview_section">
+          <div class="page-header">
+            <h1>Overview</h1>
+          </div>
+
+          <h3>Highlights</h3>
+          <p>Metrix++ is a tool to collect and analyse code metrics. Any metric is useless if it is not used.
+             Metrix++ offers great usage capabilities and assists with variety of application use cases:</p>
+          <ul>
+            <li>Monitoring trends on <strong>daily</strong> basis. In order to take actions or make right decisions earlier.</li>
+            <li>Enforcing trends on <strong>hourly</strong> basis, at every commit of code changes. In order to control quality in time, i.e. when it is not too late to redo.</li>
+            <li>Assisiting on <strong>per minute</strong> basis during code refactoring and code development, where coding and quality standards matter.</li>
+          </ul>
+
+          <h3>Languages supported</h3>
+          <p>The tool can parse C/C++, C# and Java source code files.</p>
+
+          <h3>Metrics</h3>
+          <p>....</p>
+        </section>
+
+        <section id="download_section">
+          <div class="page-header">
+            <h1>Download &amp; Install</h1>
+          </div>
+
+          <p>In order to get the tool working, <a href="https://sourceforge.net/projects/metrixplusplus/files/latest/download">dowload the archive</a> with the latest stable version
+             and unpack it to some folder. First run of the tool will trigger the installation within the folder,
+             where it was launched.</p>
+
+          <p>Corresponding checkout from the <a href="https://sourceforge.net/p/metrixplusplus/code">version control system</a> is the following:</p>
+          <pre>svn checkout <a href="https://sourceforge.net/p/metrixplusplus/code">svn://svn.code.sf.net/p/metrixplusplus/code</a>/releases/latest Metrix++</pre>
+
+          <p>In order to checkout the latest version under development, use this command:</p>
+          <pre>svn checkout <a href="https://sourceforge.net/p/metrixplusplus/code">svn://svn.code.sf.net/p/metrixplusplus/code</a>/mainline Metrix++</pre>
+
+          <h4>Prerequisites</h4>
+          <p>Python Runtime Environment (version 2.7.* or later, version 3.* has not been tested)</p>
+
+          <h4>License</h4>
+          <p>This program is free software; you can redistribute it and/or modify it
+             under the terms of the GNU General Public License as published by the
+             Free Software Foundation; version 3 of the License.</p>
+          <p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+             without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+             See the GNU General Public License for more details.</p>
+          <p>You should have received a copy of the GNU General Public License along with the Metrix++;
+             if not, contact <a href="mailto:avkonst@users.sourceforge.net?subject=Metrix%2B%2B License">Project Administrator</a></p>
+             
+        </section>
+
+      </div> <!-- end for sections -->
+    </div></div> <!-- end for row and container -->
+
+
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+        <p>Copyright <strong>&copy;</strong> 2009 - 2013, <a href="mailto:avkonst@users.sourceforge.net"><span class="normalImportance">Metrix++</span> Project</a></p>
+        <p>Code licensed under <a href="http://www.gnu.org/licenses/gpl.txt" target="_blank">GPL 3.0</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        <ul class="footer-links">
+          <li><a href="#">Report defect</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="#">Feature request</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="#">Known issues</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="#">Changelog</a></li>
+        </ul>
+      </div>
+    </footer>
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap-transition.js"></script>
+    <script src="assets/js/bootstrap-alert.js"></script>
+    <script src="assets/js/bootstrap-modal.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/js/bootstrap-tab.js"></script>
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script src="assets/js/bootstrap-popover.js"></script>
+    <script src="assets/js/bootstrap-button.js"></script>
+    <script src="assets/js/bootstrap-collapse.js"></script>
+    <script src="assets/js/bootstrap-carousel.js"></script>
+    <script src="assets/js/bootstrap-typeahead.js"></script>
+    <script src="assets/js/bootstrap-affix.js"></script>
+
+    <script>
+      !function ($) {
+        $(function(){
+          // carousel demo
+          $('#myCarousel').carousel()
+        })
+      }(window.jQuery)
+    </script>
+
+    <script src="assets/js/holder/holder.js"></script>
+    <script src="assets/js/google-code-prettify/prettify.js"></script>
+
+    <script src="assets/js/application.js"></script>
+
+
+    <!-- Analytics
+    ================================================== -->
+    <!--
+    <script>
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f0dc9fef5a1f55508000013');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+	-->
+  </body>
+</html>
