@@ -34,7 +34,7 @@ def main():
     this_file = os.path.basename(__file__)
     
     available_tools = []
-    excluded_tools = ['utils']
+    excluded_tools = ['utils', 'export']
     internal_tools = ['debug', 'test']
     for fname in os.listdir(os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'tools')):
         tool_name = os.path.splitext(fname)[0]
