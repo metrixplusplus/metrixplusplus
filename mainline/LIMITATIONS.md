@@ -5,17 +5,17 @@ in case of embeded comments after identifier name and before the list of argumen
 
     - This function is not detected by Metrix++:
     
-        int getMax /* undesarable comment */ (int* array, int length)
-        {
-            /* ... */
-        }
+            int getMax /* undesarable comment */ (int* array, int length)
+            {
+                /* ... */
+            }
       
     - This function is detected:
     
-        int getMax(int* array, int length) /* here is fine */
-        {
-          /* ... */
-        }
+            int getMax(int* array, int length) /* here is fine */
+            {
+                /* ... */
+            }
 
 + C/C++ parser does not recognise comments within preprocessor statements.
 These comments are considered to be parts of a define.
