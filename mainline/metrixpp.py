@@ -34,8 +34,8 @@ def main():
     this_file = os.path.basename(__file__)
     
     available_tools = []
-    excluded_tools = ['utils', 'export']
-    internal_tools = ['debug', 'test']
+    excluded_tools = ['utils']
+    internal_tools = ['debug', 'test', 'export']
     for fname in os.listdir(os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'tools')):
         tool_name = os.path.splitext(fname)[0]
         if tool_name == '__init__':
@@ -78,7 +78,7 @@ def main():
     instance = class_attr.__new__(class_attr)
     instance.__init__()
     return instance.run(sys.argv[3:])
-            
+
 if __name__ == '__main__':
     ts = time.time()
     core.log.set_default_format()

@@ -1,4 +1,4 @@
-# [Metrix++ 1.2.*](http://metrixplusplus.sourceforge.net)
+# [Metrix++](http://metrixplusplus.sourceforge.net)
 
 Metrix++ is an extendable tool for code metrics collection and analysis.
 Check projects documentation for additional information:
