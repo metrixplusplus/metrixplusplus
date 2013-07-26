@@ -2,9 +2,9 @@ Usage: python metrixpp.py <action> --help
    or: python metrixpp.py <action> [options] -- [path 1] ... [path N]
 where: actions are:
 	collect
-	export
 	info
 	limit
 	view
 	debug	[internal]
+	export	[internal]
 	test	[internal]
