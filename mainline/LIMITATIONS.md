@@ -3,19 +3,19 @@
 + C/C++, C# and Java parsers do not recognise definition of functions or overloaded operators
 in case of embeded comments after identifier name and before the list of arguments.
 
-  - This function is not detected by Metrix++:
-  
-      int getMax /* undesarable comment */ (int* array, int length)
-      {
-          /* ... */
-      }
+    - This function is not detected by Metrix++:
+    
+        int getMax /* undesarable comment */ (int* array, int length)
+        {
+            /* ... */
+        }
       
-  - This function is detected:
-  
-      int getMax(int* array, int length) /* here is fine */
-      {
+    - This function is detected:
+    
+        int getMax(int* array, int length) /* here is fine */
+        {
           /* ... */
-      }
+        }
 
 + C/C++ parser does not recognise comments within preprocessor statements.
 These comments are considered to be parts of a define.
