@@ -2,6 +2,7 @@
 
 Metrix++ is an extendable tool for code metrics collection and analysis.
 Check projects documentation for additional information:
+
 * [http://metrixplusplus.sourceforge.net](http://metrixplusplus.sourceforge.net)
 * ./doc folder within the distributive
 
@@ -37,4 +38,4 @@ This program is free software; you can redistribute it and/or modify it under th
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with the Metrix++; if not, contact Project Administrator
+You should have received a copy of the GNU General Public License along with the Metrix++; if not, contact [Project Administrator](mailto:mailto:avkonst@users.sourceforge.net)
