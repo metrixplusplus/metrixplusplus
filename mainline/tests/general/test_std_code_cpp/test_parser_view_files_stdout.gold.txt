@@ -15,10 +15,10 @@ data:
 .   .   .   .   .   cursor="0"
 .   .   .   .   .   name="__global__"
 .   .   .   .   .   offset_end="163"
-.   .   .   .   .   line_begin="2"
+.   .   .   .   .   line_begin="1"
 .   .   .   .   .   type="global"
 .   .   .   .   .   line_end="20"
-.   .   .   .   .   offset_begin="1"
+.   .   .   .   .   offset_begin="0"
 .   .   .   .   data: 
 .   .   
 .   .   .   region:  
@@ -111,10 +111,10 @@ data:
 .   .   .   .   .   cursor="0"
 .   .   .   .   .   name="__global__"
 .   .   .   .   .   offset_end="2068"
-.   .   .   .   .   line_begin="2"
+.   .   .   .   .   line_begin="1"
 .   .   .   .   .   type="global"
 .   .   .   .   .   line_end="86"
-.   .   .   .   .   offset_begin="1"
+.   .   .   .   .   offset_begin="0"
 .   .   .   .   data: 
 .   .   
 .   .   .   region:  

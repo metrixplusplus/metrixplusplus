@@ -67,8 +67,8 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
         is_updated = is_updated or self.is_updated
         if is_updated == True:
             if self.is_active_code == True:
-                self.count_in_code(data,
-                                   data.get_marker_types().ALL_EXCEPT_CODE,
+                self.count_in_markers(data,
+                                   data.get_marker_types().CODE,
                                    'code')
             if self.is_active_preprocessor == True:
                 self.count_in_markers(data,

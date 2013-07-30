@@ -697,10 +697,10 @@ data:
 .   .   .   .   .   cursor="0"
 .   .   .   .   .   name="__global__"
 .   .   .   .   .   offset_end="133"
-.   .   .   .   .   line_begin="2"
+.   .   .   .   .   line_begin="1"
 .   .   .   .   .   type="global"
 .   .   .   .   .   line_end="10"
-.   .   .   .   .   offset_begin="1"
+.   .   .   .   .   offset_begin="0"
 .   .   .   .   data: 
 .   .   .   .   subregions:
 .   .   .   .   

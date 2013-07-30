@@ -31,8 +31,24 @@ class Plugin(core.api.Plugin, core.api.Child):
     def callback(self, parent, data, is_updated):
 
         text = data.get_content()
+        text_comb = ""
         for region in data.iterate_regions():
-            logging.warn(region.get_name() + " " + region.get_cursor())
-            for marker in data.iterate_markers(region_id=region.get_id(), exclude_children = True):
+            logging.warn(region.get_name() + " " + str(region.get_cursor()))
+            for marker in data.iterate_markers(region_id=region.get_id(),
+                                               filter_group = data.get_marker_types().ANY,
+                                               exclude_children = True):
                 logging.warn("\tMarker: " + data.get_marker_types()().to_str(marker.get_type()) +
-                             " " + text[marker.get_offset_begin():marker.get_offset_end()])
+                             " " + str(marker.get_offset_begin()) + " " + str(marker.get_offset_end()) +
+                             " >>>" + text[marker.get_offset_begin():marker.get_offset_end()] + "<<<")
+                text_comb += text[marker.get_offset_begin():marker.get_offset_end()]
+        print "LENGTH:", len(text), len(text_comb)
+
+        text_comb = ""
+        for marker in data.iterate_markers(region_id=1,
+                                           filter_group = data.get_marker_types().ANY,
+                                           exclude_children = False):
+            logging.warn("\tMarker: " + data.get_marker_types()().to_str(marker.get_type()) +
+                         " " + str(marker.get_offset_begin()) + " " + str(marker.get_offset_end()) +
+                         " >>>" + text[marker.get_offset_begin():marker.get_offset_end()] + "<<<")
+            text_comb += text[marker.get_offset_begin():marker.get_offset_end()]
+        print "LENGTH:", len(text), len(text_comb)

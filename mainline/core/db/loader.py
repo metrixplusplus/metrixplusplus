@@ -118,7 +118,7 @@ class FileRegionData(LoadableData):
         NAMESPACE = 0x08
         FUNCTION  = 0x10
         INTERFACE = 0x20
-        ANY       = 0xFFFFFFFF
+        ANY       = 0xFF
         
         def to_str(self, group):
             if group == self.NONE:
@@ -190,7 +190,9 @@ class Marker(object):
         COMMENT         = 0x01
         STRING          = 0x02
         PREPROCESSOR    = 0x04
+        CODE            = 0x08
         ALL_EXCEPT_CODE = 0x07
+        ANY             = 0xFF
 
         def to_str(self, group):
             if group == self.NONE:
@@ -201,6 +203,8 @@ class Marker(object):
                 return "string"
             elif group == self.PREPROCESSOR:
                 return "preprocessor"
+            elif group == self.CODE:
+                return "code"
             else:
                 assert(False)
         
@@ -307,6 +311,9 @@ class FileData(LoadableData):
         self.load_regions()
         return self.regions[region_id - 1]
     
+    def get_region_types(self):
+        return FileRegionData.T
+
     def iterate_regions(self, filter_group = FileRegionData.T.ANY):
         self.load_regions()
         for each in self.regions:
@@ -332,51 +339,116 @@ class FileData(LoadableData):
                          Marker.T.STRING | Marker.T.PREPROCESSOR,
                          region_id = None, exclude_children = True):
         self.load_markers()
+
         if region_id == None:
+            # TODO bug here - does not handle CODE markers
             for each in self.markers:
                 if each.group & filter_group:
                     yield each
+        
         else:
+            # per region
             region = self.get_region(region_id)
             if region != None:
-                if hasattr(region, 'markers_list') == False:
-                    def cache_markers_list_req(data, region_id, marker_start_pos):
+                
+                # code parsers and database know about non-code markers
+                # clients want to iterate code as markers as well
+                # so, we embed code markers in run-time
+                class CodeMarker(Marker):
+                    pass
+                
+                # cache markers for all regions if it does not exist
+                if hasattr(region, '_markers_list') == False:
+                    # subroutine to populate _markers_list attribute
+                    # _markers_list does include code markers
+                    def cache_markers_list_rec(data, region_id, marker_start_ind, next_code_marker_start):
                         region = data.get_region(region_id)
-                        region.markers_list = []
-                        region.first_marker_pos = marker_start_pos
+                        region._markers_list = []
+                        region._first_marker_ind = marker_start_ind
+                        #next_code_marker_start = region.get_offset_begin()
+                        
                         for sub_id in region.iterate_subregion_ids():
                             subregion = data.get_region(sub_id)
-                            while len(data.markers) > marker_start_pos and \
-                                subregion.get_offset_begin() > data.markers[marker_start_pos].get_offset_begin():
-                                    region.markers_list.append(marker_start_pos)
-                                    marker_start_pos += 1
-                            marker_start_pos = cache_markers_list_req(data, sub_id, marker_start_pos)
-                        while len(data.markers) > marker_start_pos and \
-                            region.get_offset_end() > data.markers[marker_start_pos].get_offset_begin():
-                                region.markers_list.append(marker_start_pos)
-                                marker_start_pos += 1
-                        return marker_start_pos
-                    next_marker_pos = cache_markers_list_req(self, 1, 0)
+                            # cache all markers before the subregion
+                            while len(data.markers) > marker_start_ind and \
+                                subregion.get_offset_begin() > data.markers[marker_start_ind].get_offset_begin():
+                                    if next_code_marker_start < data.markers[marker_start_ind].get_offset_begin():
+                                        # append code markers coming before non-code marker
+                                        region._markers_list.append(CodeMarker(next_code_marker_start,
+                                                                               data.markers[marker_start_ind].get_offset_begin(),
+                                                                               Marker.T.CODE))
+                                    next_code_marker_start = data.markers[marker_start_ind].get_offset_end()
+                                    region._markers_list.append(marker_start_ind)
+                                    marker_start_ind += 1
+                                    
+                            # cache all code markers before the subregion but after the last marker
+                            if next_code_marker_start < subregion.get_offset_begin():
+                                region._markers_list.append(CodeMarker(next_code_marker_start,
+                                                                       subregion.get_offset_begin(),
+                                                                       Marker.T.CODE))
+                            next_code_marker_start = subregion.get_offset_begin()
+                                
+                            # here is the recursive call for all sub-regions
+                            (marker_start_ind, next_code_marker_start) = cache_markers_list_rec(data,
+                                                                      sub_id,
+                                                                      marker_start_ind,
+                                                                      next_code_marker_start)
+                            
+                        # cache all markers after the last subregion
+                        while len(data.markers) > marker_start_ind and \
+                            region.get_offset_end() > data.markers[marker_start_ind].get_offset_begin():
+                                # append code markers coming before non-code marker
+                                if next_code_marker_start < data.markers[marker_start_ind].get_offset_begin():
+                                    region._markers_list.append(CodeMarker(next_code_marker_start,
+                                                                           data.markers[marker_start_ind].get_offset_begin(),
+                                                                           Marker.T.CODE))
+                                next_code_marker_start = data.markers[marker_start_ind].get_offset_end()
+                                region._markers_list.append(marker_start_ind)
+                                marker_start_ind += 1
+                        
+                        # cache the last code segment after the last marker
+                        if next_code_marker_start < region.get_offset_end():
+                            region._markers_list.append(CodeMarker(next_code_marker_start,
+                                                                   region.get_offset_end(),
+                                                                   Marker.T.CODE))
+                        next_code_marker_start = region.get_offset_end()
+                        
+                        # return the starting point for the next call of this function
+                        return (marker_start_ind, next_code_marker_start)
+                    
+                    # append markers list to all regions recursively
+                    (next_marker_pos, next_code_marker_start) = cache_markers_list_rec(self, 1, 0, 0)
                     assert(next_marker_pos == len(self.markers))
+                
+                # excluding subregions
                 if exclude_children == True:
-                    for marker_pos in region.markers_list:
-                        marker = self.markers[marker_pos]
+                    for marker_ind in region._markers_list:
+                        if isinstance(marker_ind, int):
+                            marker = self.markers[marker_ind]
+                        else:
+                            marker = marker_ind # CodeMarker
                         if marker.group & filter_group:
                             yield marker
-                elif len(self.markers) > region.first_marker_pos:
-                    for marker in self.markers[region.first_marker_pos:]:
+                            
+                            
+                # including subregions
+                else:
+                    next_code_marker_start = region.get_offset_begin() #TODO bug here global region does not start at 0
+                    for marker in self.markers[region._first_marker_ind:]:
                         if marker.get_offset_begin() >= region.get_offset_end():
                             break
                         if region.get_offset_begin() > marker.get_offset_begin():
                             continue
+                        if Marker.T.CODE & filter_group and next_code_marker_start < marker.get_offset_begin():
+                            yield Marker(next_code_marker_start, marker.get_offset_begin(), Marker.T.CODE)
                         if marker.group & filter_group:
                             yield marker
-                        
+                        next_code_marker_start = marker.get_offset_end()
+                    if Marker.T.CODE & filter_group and next_code_marker_start < region.get_offset_end():
+                        yield Marker(next_code_marker_start, region.get_offset_end(), Marker.T.CODE)
+
     def get_marker_types(self):
         return Marker.T
-
-    def get_region_types(self):
-        return FileRegionData.T
 
     def are_markers_loaded(self):
         return self.markers != None
