@@ -72,7 +72,7 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="88"
 .   .   .   .   .   .   .   .   .   .   data:  
 .   .   .   .   .   .   .   .   .   .   .   std.code.lines: 
-.   .   .   .   .   .   .   .   .   .   .   .   code="10"
+.   .   .   .   .   .   .   .   .   .   .   .   code="11"
 .   .   .   .   .   .   .   .   .   .   .   .   total="12"
 .   .   .   .   .   .   .   .   .   .   .   .   preprocessor="0"
 .   .   .   .   .   .   .   .   .   .   .   .   comments="2"
@@ -151,9 +151,9 @@ data:
 .   .   std.code.lines:  
 .   .   .   code: 
 .   .   .   .   count="8"
-.   .   .   .   max="10"
-.   .   .   .   avg="5.0"
-.   .   .   .   total="40.0"
+.   .   .   .   max="11"
+.   .   .   .   avg="5.125"
+.   .   .   .   total="41.0"
 .   .   .   .   min="0" 
 .   .   .   .   distribution-bars:
 .   .   .   .   
@@ -184,7 +184,7 @@ data:
 .   .   .   .   
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="1"
-.   .   .   .   .   .   metric="10"
+.   .   .   .   .   .   metric="11"
 .   .   .   .   .   .   ratio="0.125"
 .   .   .   total: 
 .   .   .   .   count="8"
