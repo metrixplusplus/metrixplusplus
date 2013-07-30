@@ -21,8 +21,8 @@ data:
 .   .   .   .   .   offset_begin="0"
 .   .   .   .   data:  
 .   .   .   .   .   std.code.lines: 
-.   .   .   .   .   .   code="0"
 .   .   .   .   .   .   total="0"
+.   .   .   .   .   .   code="0"
 .   .   .   .   .   .   preprocessor="0"
 .   .   .   .   .   .   comments="0"
 .   .   .   .   subregions:
@@ -38,8 +38,8 @@ data:
 .   .   .   .   .   .   .   offset_begin="2"
 .   .   .   .   .   .   data:  
 .   .   .   .   .   .   .   std.code.lines: 
-.   .   .   .   .   .   .   .   code="4"
 .   .   .   .   .   .   .   .   total="5"
+.   .   .   .   .   .   .   .   code="4"
 .   .   .   .   .   .   .   .   preprocessor="0"
 .   .   .   .   .   .   .   .   comments="1"
 .   .   .   .   .   .   subregions:
@@ -55,8 +55,8 @@ data:
 .   .   .   .   .   .   .   .   .   offset_begin="76"
 .   .   .   .   .   .   .   .   data:  
 .   .   .   .   .   .   .   .   .   std.code.lines: 
-.   .   .   .   .   .   .   .   .   .   code="4"
 .   .   .   .   .   .   .   .   .   .   total="4"
+.   .   .   .   .   .   .   .   .   .   code="4"
 .   .   .   .   .   .   .   .   .   .   preprocessor="0"
 .   .   .   .   .   .   .   .   .   .   comments="0"
 .   .   .   .   .   .   .   .   subregions:
@@ -72,8 +72,8 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="88"
 .   .   .   .   .   .   .   .   .   .   data:  
 .   .   .   .   .   .   .   .   .   .   .   std.code.lines: 
-.   .   .   .   .   .   .   .   .   .   .   .   code="11"
 .   .   .   .   .   .   .   .   .   .   .   .   total="12"
+.   .   .   .   .   .   .   .   .   .   .   .   code="11"
 .   .   .   .   .   .   .   .   .   .   .   .   preprocessor="0"
 .   .   .   .   .   .   .   .   .   .   .   .   comments="2"
 .   .   .   .   .   .   .   .   .   .   subregions:
@@ -89,8 +89,8 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="237"
 .   .   .   .   .   .   .   .   .   .   data:  
 .   .   .   .   .   .   .   .   .   .   .   std.code.lines: 
-.   .   .   .   .   .   .   .   .   .   .   .   code="5"
 .   .   .   .   .   .   .   .   .   .   .   .   total="5"
+.   .   .   .   .   .   .   .   .   .   .   .   code="5"
 .   .   .   .   .   .   .   .   .   .   .   .   preprocessor="0"
 .   .   .   .   .   .   .   .   .   .   .   .   comments="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
@@ -106,8 +106,8 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   .   .   offset_begin="266"
 .   .   .   .   .   .   .   .   .   .   .   .   data:  
 .   .   .   .   .   .   .   .   .   .   .   .   .   std.code.lines: 
-.   .   .   .   .   .   .   .   .   .   .   .   .   .   code="3"
 .   .   .   .   .   .   .   .   .   .   .   .   .   .   total="3"
+.   .   .   .   .   .   .   .   .   .   .   .   .   .   code="3"
 .   .   .   .   .   .   .   .   .   .   .   .   .   .   preprocessor="0"
 .   .   .   .   .   .   .   .   .   .   .   .   .   .   comments="0"
 .   .   .   .   .   .   .   .   .   .   .   .   subregions:
@@ -123,8 +123,8 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   offset_begin="287"
 .   .   .   .   .   .   .   .   .   .   .   .   .   .   data:  
 .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   std.code.lines: 
-.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   code="7"
 .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   total="8"
+.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   code="7"
 .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   preprocessor="0"
 .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   .   comments="1"
 .   .   .   .   .   .   .   .   .   .   .   .   .   .   subregions:
@@ -140,8 +140,8 @@ data:
 .   .   .   .   .   .   .   .   .   .   .   offset_begin="389"
 .   .   .   .   .   .   .   .   .   .   data:  
 .   .   .   .   .   .   .   .   .   .   .   std.code.lines: 
-.   .   .   .   .   .   .   .   .   .   .   .   code="7"
 .   .   .   .   .   .   .   .   .   .   .   .   total="7"
+.   .   .   .   .   .   .   .   .   .   .   .   code="7"
 .   .   .   .   .   .   .   .   .   .   .   .   preprocessor="0"
 .   .   .   .   .   .   .   .   .   .   .   .   comments="0"
 .   .   .   .   .   .   .   .   .   .   subregions:
@@ -149,43 +149,6 @@ data:
 .   subdirs:
 .   aggregated-data:  
 .   .   std.code.lines:  
-.   .   .   code: 
-.   .   .   .   count="8"
-.   .   .   .   max="11"
-.   .   .   .   avg="5.125"
-.   .   .   .   total="41.0"
-.   .   .   .   min="0" 
-.   .   .   .   distribution-bars:
-.   .   .   .   
-.   .   .   .   .   distribution-bar: 
-.   .   .   .   .   .   count="1"
-.   .   .   .   .   .   metric="0"
-.   .   .   .   .   .   ratio="0.125"
-.   .   .   .   
-.   .   .   .   .   distribution-bar: 
-.   .   .   .   .   .   count="1"
-.   .   .   .   .   .   metric="3"
-.   .   .   .   .   .   ratio="0.125"
-.   .   .   .   
-.   .   .   .   .   distribution-bar: 
-.   .   .   .   .   .   count="2"
-.   .   .   .   .   .   metric="4"
-.   .   .   .   .   .   ratio="0.25"
-.   .   .   .   
-.   .   .   .   .   distribution-bar: 
-.   .   .   .   .   .   count="1"
-.   .   .   .   .   .   metric="5"
-.   .   .   .   .   .   ratio="0.125"
-.   .   .   .   
-.   .   .   .   .   distribution-bar: 
-.   .   .   .   .   .   count="2"
-.   .   .   .   .   .   metric="7"
-.   .   .   .   .   .   ratio="0.25"
-.   .   .   .   
-.   .   .   .   .   distribution-bar: 
-.   .   .   .   .   .   count="1"
-.   .   .   .   .   .   metric="11"
-.   .   .   .   .   .   ratio="0.125"
 .   .   .   total: 
 .   .   .   .   count="8"
 .   .   .   .   max="12"
@@ -227,6 +190,43 @@ data:
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="1"
 .   .   .   .   .   .   metric="12"
+.   .   .   .   .   .   ratio="0.125"
+.   .   .   code: 
+.   .   .   .   count="8"
+.   .   .   .   max="11"
+.   .   .   .   avg="5.125"
+.   .   .   .   total="41.0"
+.   .   .   .   min="0" 
+.   .   .   .   distribution-bars:
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="0"
+.   .   .   .   .   .   ratio="0.125"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="3"
+.   .   .   .   .   .   ratio="0.125"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="2"
+.   .   .   .   .   .   metric="4"
+.   .   .   .   .   .   ratio="0.25"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="5"
+.   .   .   .   .   .   ratio="0.125"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="2"
+.   .   .   .   .   .   metric="7"
+.   .   .   .   .   .   ratio="0.25"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="11"
 .   .   .   .   .   .   ratio="0.125"
 .   .   .   preprocessor: 
 .   .   .   .   count="8"

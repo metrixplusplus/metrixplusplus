@@ -184,43 +184,7 @@ class FileRegionData(LoadableData):
     def iterate_subregion_ids(self):
         return self.children
 
-class Marker(object):
-    class T(object):
-        NONE            = 0x00
-        COMMENT         = 0x01
-        STRING          = 0x02
-        PREPROCESSOR    = 0x04
-        CODE            = 0x08
-        ALL_EXCEPT_CODE = 0x07
-        ANY             = 0xFF
-
-        def to_str(self, group):
-            if group == self.NONE:
-                return "none"
-            elif group == self.COMMENT:
-                return "comment"
-            elif group == self.STRING:
-                return "string"
-            elif group == self.PREPROCESSOR:
-                return "preprocessor"
-            elif group == self.CODE:
-                return "code"
-            else:
-                assert(False)
-        
-    def __init__(self, offset_begin, offset_end, group):
-        self.begin = offset_begin
-        self.end = offset_end
-        self.group = group
-        
-    def get_offset_begin(self):
-        return self.begin
-
-    def get_offset_end(self):
-        return self.end
-
-    def get_type(self):
-        return self.group
+from  core.api import Marker
 
 class FileData(LoadableData):
     
