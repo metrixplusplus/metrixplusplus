@@ -337,15 +337,37 @@ class FileData(LoadableData):
         
     def iterate_markers(self, filter_group = Marker.T.COMMENT |
                          Marker.T.STRING | Marker.T.PREPROCESSOR,
-                         region_id = None, exclude_children = True):
+                         region_id = None, exclude_children = True, merge = False):
         self.load_markers()
+        
+        if merge == True:
+            next_marker = None
+            for marker in self.iterate_markers(filter_group, region_id, exclude_children, merge = False):
+                if next_marker != None:
+                    if next_marker.get_offset_end() == marker.get_offset_begin():
+                        # sequential markers
+                        next_marker = Marker(next_marker.get_offset_begin(),
+                                             marker.get_offset_end(),
+                                             next_marker.get_type() | marker.get_type())
+                    else:
+                        yield next_marker
+                        next_marker = None
+                if next_marker == None:
+                    next_marker = Marker(marker.get_offset_begin(),
+                                         marker.get_offset_end(),
+                                         marker.get_type())
 
         if region_id == None:
-            # TODO bug here - does not handle CODE markers
-            for each in self.markers:
-                if each.group & filter_group:
-                    yield each
-        
+            next_code_marker_start = 0
+            for marker in self.markers:
+                if Marker.T.CODE & filter_group and next_code_marker_start < marker.get_offset_begin():
+                    yield Marker(next_code_marker_start, marker.get_offset_begin(), Marker.T.CODE)
+                if marker.group & filter_group:
+                    yield marker
+                next_code_marker_start = marker.get_offset_end()
+            if Marker.T.CODE & filter_group and next_code_marker_start < len(self.get_content()):
+                yield Marker(next_code_marker_start, len(self.get_content()), Marker.T.CODE)
+            
         else:
             # per region
             region = self.get_region(region_id)
@@ -433,7 +455,7 @@ class FileData(LoadableData):
                             
                 # including subregions
                 else:
-                    next_code_marker_start = region.get_offset_begin() #TODO bug here global region does not start at 0
+                    next_code_marker_start = region.get_offset_begin()
                     for marker in self.markers[region._first_marker_ind:]:
                         if marker.get_offset_begin() >= region.get_offset_end():
                             break
