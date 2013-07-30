@@ -145,7 +145,13 @@
           </div>
           <div class="span9">
             <h5 class="text-right">Management of source code quality is possible.</h5>
-            <p class="text-right"><a href="https://sourceforge.net/projects/metrixplusplus/files/latest/download"><button type="button"class="btn btn-danger">Download</button></a> <button type="button"class="btn btn-warning">Donate</button></p>
+            <p class="text-right">
+                <a href="https://sourceforge.net/projects/metrixplusplus/files/latest/download"
+                    ><button type="button"class="btn btn-danger">Download</button></a>
+                <!--
+                <button type="button"class="btn btn-warning">Donate</button>
+                -->
+            </p>
           </div>
         </div>
       </div>
@@ -162,7 +168,11 @@
           <li><a href="#download_section"><i class="icon-chevron-right"></i> Download &amp; Install</a></li>
           <li><a href="#workflow_collect_section"><i class="icon-chevron-right"></i> Workflow: Collect data</a></li>
           <li><a href="#workflow_view_section"><i class="icon-chevron-right"></i> Workflow: View data</a></li>
+          <li><a href="#workflow_view_distributions_section"><i class="icon-hand-right"></i> &middot; distributions</a></li>
+          <li><a href="#workflow_view_details_section"><i class="icon-hand-right"></i> &middot; details</a></li>
           <li><a href="#workflow_limit_section"><i class="icon-chevron-right"></i> Workflow: Apply thresholds</a></li>
+          <li><a href="#workflow_limit_hotspots_section"><i class="icon-hand-right"></i> &middot; hotspots</a></li>
+          <li><a href="#workflow_limit_suppress_section"><i class="icon-hand-right"></i> &middot; suppressions</a></li>
           <li><a href="#extend_section"><i class="icon-chevron-right"></i> Create plugin</a></li>
           <li><a href="#contribute_section"><i class="icon-chevron-right"></i> Feedback &amp; Contribute</a></li>
         </ul>
@@ -187,7 +197,7 @@
             <li>Assisiting on <strong>per minute</strong> basis during code refactoring and code development, where coding and quality standards matter.</li>
           </ul>
 
-          <p>The workflow explained <a href="#workflow_collect_section">below</a> demonstrates basic application principles.</p>
+          <p>The workflow sections explain basic application principles.</p>
 
           <h3>Languages supported</h3>
           <p>The tool can parse C/C++, C# and Java source code files. The parser identifies certain regions in the code,
@@ -220,7 +230,7 @@ public:
     MyClass(): m_var(0) {
         char str[] = "unused string"
         
-        // nested region for better taste
+        // nested region for good measure
         struct MyStruct {};
     }
     
@@ -248,8 +258,8 @@ file: __global__: code
         function: MyClass: code
         function: MyClass: code, string
         function: MyClass: code
-            class: MyStruct: comment
-            class: MyStruct: code
+            struct: MyStruct: comment
+            struct: MyStruct: code
         function: MyClass: code
     class: MyClass: code
         function: set_max: comment
@@ -317,6 +327,16 @@ file: __global__: comment
                 <td><ul><li>Identification of highly complex code for review and refactoring.</li>
                     <li>Preventing complex functions (complexity is a reason of many defects and a reason of expensive maintaintenance).</li></ul></td>
               </tr>
+              <tr>
+                <td>std.suppress</td>
+                <td>An option enables collection of Metrix++ suppressions and 2 metrics: 'std.suppress:count' and 
+                    'std.suppress.file:count'. The first is number of suppressions per region.
+                    The second is the same but applies for file-scope metrics.</td>
+                <td><ul><li>Suppressing false-positives.</li>
+                    <li>Managing the amount of suppressions. Usually there are no false-positives to suppress with the right metric,
+                        but could be exceptions in specific cases. Managing suppressions is about managing exceptions.
+                        If there are many exceptional cases, maybe something is wrong with a metric or an application of a metric.</li></ul></td>
+              </tr>
               <tr class="info">
                 <td>std.general.procerrors</td>
                 <td>Number of errors detected by Metrix++ code parser.
@@ -377,6 +397,12 @@ file: __global__: comment
         <section id="workflow_limit_section">
           <h2>Apply thresholds</h2>
           <p>...</p>
+        </section>
+        <section id="workflow_limit_suppress_section">
+          <h3>Suppressions</h3>
+          <p>Metrix++ has got suppressions capability. Suppressions are collected from comments in code
+             and used by post-processing tools, like 'limit'. It allows to take fine grained control
+             over false-positive warnings, if there are.</p>
         </section>
 
         <section id="extend_section">

@@ -216,13 +216,13 @@ class Test(tests.common.TestCase):
                                           '--std.code.lines.total'])
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('view', ['--format=txt'], prefix='txt')
-        self.assertExec(runner.run())
-
         runner = tests.common.ToolRunner('view',
                                          ['--nest-regions', '--format=txt'],
                                          prefix='nest_per_file',
                                          dirs_list=['./simple.cpp'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view', ['--format=txt'], prefix='txt')
         self.assertExec(runner.run())
 
 if __name__ == '__main__':

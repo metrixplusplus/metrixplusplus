@@ -87,6 +87,9 @@ def dumphtml(args, loader):
                 result += ('<span style="color:#009900">')
             elif marker.get_type() == data.get_marker_types().PREPROCESSOR:
                 result += ('<span style="color:#990000">')
+            else:
+                # TODO add tests for debug tool
+                assert False, "Uknown marker type"
             result += (cgi.escape(text[marker.begin:marker.end]))
             result += ('</span>')
             last_pos = marker.end
