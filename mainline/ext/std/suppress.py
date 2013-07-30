@@ -50,7 +50,7 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
                                    fields=fields)
         
         if len(fields) != 0:
-            core.api.subscribe_by_parents_interface(core.api.ICode, self, 'callback')
+            self.subscribe_by_parents_interface(core.api.ICode)
 
     # suppress pattern
     pattern = re.compile(r'''metrix[+][+][:][ \t]+suppress[ \t]+([^ \t\r\n\*]+)''')

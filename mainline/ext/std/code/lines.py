@@ -20,7 +20,7 @@
 import core.api
 import re
 
-class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
+class Plugin(core.api.MetricPlugin, core.api.Child, core.api.IConfigurable):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.code.lines.code", "--sclc", action="store_true", default=False,
@@ -46,53 +46,36 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
         self.is_active_comments = options.__dict__['std.code.lines.comments']
         self.is_active_total = options.__dict__['std.code.lines.total']
         
-    def initialize(self):
-        fields = []
-        if self.is_active_code == True:
-            fields.append(self.Field('code', int))
-        if self.is_active_preprocessor == True:
-            fields.append(self.Field('preprocessor', int))
-        if self.is_active_comments == True:
-            fields.append(self.Field('comments', int))
-        if self.is_active_total == True:
-            fields.append(self.Field('total', int))
-        core.api.Plugin.initialize(self, fields=fields)
-        
-        if len(fields) != 0:
-            core.api.subscribe_by_parents_interface(core.api.ICode, self, 'callback')
-
     pattern_line = re.compile(r'''[^\s].*''')
+
+    def initialize(self):
+        self.add_field(self.is_active_code,
+                       self.Field('code', int),
+                       self.pattern_line,
+                       core.api.Marker.T.CODE)
+        self.add_field(self.is_active_preprocessor,
+                       self.Field('preprocessor', int),
+                       self.pattern_line,
+                       core.api.Marker.T.PREPROCESSOR)
+        self.add_field(self.is_active_comments,
+                       self.Field('comments', int),
+                       self.pattern_line,
+                       core.api.Marker.T.COMMENT)
+        self.add_field(self.is_active_total,
+                       self.Field('total', int),
+                       self.pattern_line,
+                       core.api.Marker.T.ANY,
+                       merge_markers=True)
+
+        super(Plugin, self).initialize(fields=self.get_fields())
+
+        if self.is_active() == True:
+            self.subscribe_by_parents_interface(core.api.ICode, 'callback')
 
     def callback(self, parent, data, is_updated):
         is_updated = is_updated or self.is_updated
         if is_updated == True:
-            if self.is_active_code == True:
-                self.count_in_markers(data,
-                                   data.get_marker_types().CODE,
-                                   'code')
-            if self.is_active_preprocessor == True:
-                self.count_in_markers(data,
-                                      data.get_marker_types().PREPROCESSOR,
-                                      'preprocessor')
-            if self.is_active_comments == True:
-                self.count_in_markers(data,
-                                      data.get_marker_types().COMMENT,
-                                      'comments')
-            if self.is_active_total == True:
-                self.count_in_markers(data,
-                                   data.get_marker_types().ANY,
-                                   'total',
-                                   merge=True)
-    
-    def count_in_markers(self, data, marker_type, field_name, merge=False):
-        text = data.get_content()
-        for region in data.iterate_regions():
-            count = 0
-            for marker in data.iterate_markers(
-                            filter_group = marker_type,
-                            region_id = region.get_id(),
-                            exclude_children = True,
-                            merge=merge):
-                count += len(self.pattern_line.findall(text, marker.get_offset_begin(), marker.get_offset_end()))
-            region.set_data(self.get_name(), field_name, count)
-            
+            self.count_if_active('code', data)
+            self.count_if_active('preprocessor', data)
+            self.count_if_active('comments', data)
+            self.count_if_active('total', data)

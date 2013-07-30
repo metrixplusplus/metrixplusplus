@@ -35,7 +35,7 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
         core.api.Plugin.initialize(self, fields=fields)
         
         if len(fields) != 0:
-            core.api.subscribe_by_parents_interface(core.api.ICode, self, 'callback')
+            self.subscribe_by_parents_interface(core.api.ICode, 'callback')
 
     def callback(self, parent, data, is_updated):
         is_updated = is_updated or self.is_updated

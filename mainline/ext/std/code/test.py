@@ -26,7 +26,7 @@ class Plugin(core.api.Plugin, core.api.Child):
     def initialize(self):
         return
         # do not trigger version property set, it is a module for testing purposes
-        core.api.subscribe_by_parents_interface(core.api.ICode, self)
+        self.subscribe_by_parents_interface(core.api.ICode)
 
     def callback(self, parent, data, is_updated):
 

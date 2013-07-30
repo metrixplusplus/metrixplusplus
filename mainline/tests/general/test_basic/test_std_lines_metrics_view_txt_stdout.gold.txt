@@ -13,43 +13,6 @@ data:
 .   .   .
 .   aggregated-data:  
 .   .   std.code.lines:  
-.   .   .   code: 
-.   .   .   .   count="8"
-.   .   .   .   max="11"
-.   .   .   .   avg="5.125"
-.   .   .   .   total="41.0"
-.   .   .   .   min="0" 
-.   .   .   .   distribution-bars:
-.   .   .   .   
-.   .   .   .   .   distribution-bar: 
-.   .   .   .   .   .   count="1"
-.   .   .   .   .   .   metric="0"
-.   .   .   .   .   .   ratio="0.125"
-.   .   .   .   
-.   .   .   .   .   distribution-bar: 
-.   .   .   .   .   .   count="1"
-.   .   .   .   .   .   metric="3"
-.   .   .   .   .   .   ratio="0.125"
-.   .   .   .   
-.   .   .   .   .   distribution-bar: 
-.   .   .   .   .   .   count="2"
-.   .   .   .   .   .   metric="4"
-.   .   .   .   .   .   ratio="0.25"
-.   .   .   .   
-.   .   .   .   .   distribution-bar: 
-.   .   .   .   .   .   count="1"
-.   .   .   .   .   .   metric="5"
-.   .   .   .   .   .   ratio="0.125"
-.   .   .   .   
-.   .   .   .   .   distribution-bar: 
-.   .   .   .   .   .   count="2"
-.   .   .   .   .   .   metric="7"
-.   .   .   .   .   .   ratio="0.25"
-.   .   .   .   
-.   .   .   .   .   distribution-bar: 
-.   .   .   .   .   .   count="1"
-.   .   .   .   .   .   metric="11"
-.   .   .   .   .   .   ratio="0.125"
 .   .   .   total: 
 .   .   .   .   count="8"
 .   .   .   .   max="12"
@@ -91,6 +54,43 @@ data:
 .   .   .   .   .   distribution-bar: 
 .   .   .   .   .   .   count="1"
 .   .   .   .   .   .   metric="12"
+.   .   .   .   .   .   ratio="0.125"
+.   .   .   code: 
+.   .   .   .   count="8"
+.   .   .   .   max="11"
+.   .   .   .   avg="5.125"
+.   .   .   .   total="41.0"
+.   .   .   .   min="0" 
+.   .   .   .   distribution-bars:
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="0"
+.   .   .   .   .   .   ratio="0.125"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="3"
+.   .   .   .   .   .   ratio="0.125"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="2"
+.   .   .   .   .   .   metric="4"
+.   .   .   .   .   .   ratio="0.25"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="5"
+.   .   .   .   .   .   ratio="0.125"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="2"
+.   .   .   .   .   .   metric="7"
+.   .   .   .   .   .   ratio="0.25"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="11"
 .   .   .   .   .   .   ratio="0.125"
 .   .   .   preprocessor: 
 .   .   .   .   count="8"
