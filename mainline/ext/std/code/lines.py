@@ -79,29 +79,20 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
                                       data.get_marker_types().COMMENT,
                                       'comments')
             if self.is_active_total == True:
-                self.count_in_code(data,
-                                   data.get_marker_types().NONE,
-                                   'total')
+                self.count_in_markers(data,
+                                   data.get_marker_types().ANY,
+                                   'total',
+                                   merge=True)
     
-    def count_in_code(self, data, exclude, field_name):
-        text = data.get_content(exclude=exclude)
-        for region in data.iterate_regions():
-            count = 0
-            start_pos = region.get_offset_begin()
-            for sub_id in region.iterate_subregion_ids():
-                count += len(self.pattern_line.findall(text, start_pos, data.get_region(sub_id).get_offset_begin()))
-                start_pos = data.get_region(sub_id).get_offset_end()
-            count += len(self.pattern_line.findall(text, start_pos, region.get_offset_end()))
-            region.set_data(self.get_name(), field_name, count)
-        
-    def count_in_markers(self, data, marker_type, field_name):
+    def count_in_markers(self, data, marker_type, field_name, merge=False):
         text = data.get_content()
         for region in data.iterate_regions():
             count = 0
             for marker in data.iterate_markers(
                             filter_group = marker_type,
                             region_id = region.get_id(),
-                            exclude_children = True):
+                            exclude_children = True,
+                            merge=merge):
                 count += len(self.pattern_line.findall(text, marker.get_offset_begin(), marker.get_offset_end()))
             region.set_data(self.get_name(), field_name, count)
             

@@ -340,6 +340,7 @@ class FileData(LoadableData):
                          region_id = None, exclude_children = True, merge = False):
         self.load_markers()
         
+        # merged markers
         if merge == True:
             next_marker = None
             for marker in self.iterate_markers(filter_group, region_id, exclude_children, merge = False):
@@ -356,8 +357,11 @@ class FileData(LoadableData):
                     next_marker = Marker(marker.get_offset_begin(),
                                          marker.get_offset_end(),
                                          marker.get_type())
-
-        if region_id == None:
+            if next_marker != None:
+                yield next_marker
+        
+        # all markers per file
+        elif region_id == None:
             next_code_marker_start = 0
             for marker in self.markers:
                 if Marker.T.CODE & filter_group and next_code_marker_start < marker.get_offset_begin():
@@ -367,9 +371,9 @@ class FileData(LoadableData):
                 next_code_marker_start = marker.get_offset_end()
             if Marker.T.CODE & filter_group and next_code_marker_start < len(self.get_content()):
                 yield Marker(next_code_marker_start, len(self.get_content()), Marker.T.CODE)
-            
+
+        # markers per region
         else:
-            # per region
             region = self.get_region(region_id)
             if region != None:
                 

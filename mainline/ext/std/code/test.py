@@ -52,3 +52,16 @@ class Plugin(core.api.Plugin, core.api.Child):
                          " >>>" + text[marker.get_offset_begin():marker.get_offset_end()] + "<<<")
             text_comb += text[marker.get_offset_begin():marker.get_offset_end()]
         print "LENGTH:", len(text), len(text_comb)
+
+        text_comb = ""
+        for region in data.iterate_regions():
+            logging.warn(region.get_name() + " " + str(region.get_cursor()))
+            for marker in data.iterate_markers(region_id=region.get_id(),
+                                               filter_group = data.get_marker_types().ANY,
+                                               exclude_children = True,
+                                               merge = True):
+                logging.warn("\tMarker: merged" + 
+                             " " + str(marker.get_offset_begin()) + " " + str(marker.get_offset_end()) +
+                             " >>>" + text[marker.get_offset_begin():marker.get_offset_end()] + "<<<")
+                text_comb += text[marker.get_offset_begin():marker.get_offset_end()]
+        print "LENGTH:", len(text), len(text_comb)
