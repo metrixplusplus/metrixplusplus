@@ -48,7 +48,7 @@ class Plugin(core.api.Plugin, core.api.SimpleMetricMixin, core.api.Child, core.a
                                 'java': self.pattern_java
                             },
                             marker_type_mask=core.api.Marker.T.CODE,
-                            region_type_mask=core.api.FileRegionData.T.FUNCTION)
+                            region_type_mask=core.api.Region.T.FUNCTION)
         
         super(Plugin, self).initialize(fields=self.get_fields())
         

@@ -21,14 +21,13 @@
 import logging
 import cgi
 
+import core.api
 import core.log
 import core.cmdparser
 import core.db.post
-import core.db.loader
 
 import tools.utils
 
-import core.api
 class Tool(core.api.ITool):
     def run(self, tool_args):
         return main(tool_args)
@@ -47,8 +46,9 @@ def main(tool_args):
     log_plugin.configure(options)
     db_plugin.configure(options)
 
-    loader = core.db.loader.Loader()
-    loader.open_database(db_plugin.dbfile)
+    loader = core.api.Loader()
+    if loader.open_database(db_plugin.dbfile) == False:
+        parser.error("Can not open file: " + db_plugin.dbfile)
 
     if options.__dict__['mode'] == 'dumphtml':
         return dumphtml(args, loader)

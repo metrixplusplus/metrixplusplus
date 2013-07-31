@@ -30,7 +30,7 @@ Options:
                         multiple times, if it is necessary to apply several
                         limits. Should be in the format: <namespace>:<field
                         >:<limit-value>, for example:
-                        'std.code.complexity:cyclomatic:7'.
+                        'std.code.lines:comments:1'.
   --max-limit=MAX_LIMIT, --max=MAX_LIMIT
                         A threshold per 'namespace:field' metric in order to
                         select regions, which have got metric value more than

@@ -19,7 +19,6 @@
 
 
 import core.log
-import core.db.loader
 import core.db.post
 import core.db.utils
 import core.cmdparser
@@ -52,13 +51,15 @@ def main(tool_args):
     out_format = options.__dict__['format']
     nest_regions = options.__dict__['nest_regions']
 
-    loader_prev = core.db.loader.Loader()
+    loader_prev = core.api.Loader()
     if db_plugin.dbfile_prev != None:
-        loader_prev.open_database(db_plugin.dbfile_prev)
+        if loader_prev.open_database(db_plugin.dbfile_prev) == False:
+            parser.error("Can not open file: " + db_plugin.dbfile_prev)
 
-    loader = core.db.loader.Loader()
-    loader.open_database(db_plugin.dbfile)
-    
+    loader = core.api.Loader()
+    if loader.open_database(db_plugin.dbfile) == False:
+        parser.error("Can not open file: " + db_plugin.dbfile)
+
     # Check for versions consistency
     if db_plugin.dbfile_prev != None:
         tools.utils.check_db_metadata(loader, loader_prev)
