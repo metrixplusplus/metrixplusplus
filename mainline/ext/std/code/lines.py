@@ -20,7 +20,7 @@
 import core.api
 import re
 
-class Plugin(core.api.MetricPlugin, core.api.Child, core.api.IConfigurable):
+class Plugin(core.api.Plugin, core.api.SimpleMetricMixin, core.api.Child, core.api.IConfigurable):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.code.lines.code", "--sclc", action="store_true", default=False,

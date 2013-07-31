@@ -534,7 +534,7 @@ class Plugin(BasePlugin):
                 # mark the plug-in as updated in order to trigger full rescan
                 self.is_updated = self.is_updated or is_created
 
-class MetricPlugin(Plugin):
+class SimpleMetricMixin(object):
     
     def declare_metric(self, is_active, field,
                        pattern_to_search_or_map_of_patterns,
