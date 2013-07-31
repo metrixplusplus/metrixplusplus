@@ -21,7 +21,7 @@ import core.api
 import logging
 import os
 
-class Plugin(core.api.Plugin, core.api.IConfigurable):
+class Plugin(core.api.BasePlugin, core.api.IConfigurable):
     
     def declare_configuration(self, parser, default_value='INFO'):
         allowed_values = ['DEBUG','INFO','WARNING','ERROR']
@@ -50,6 +50,9 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
         os.environ['METRIXPLUSPLUS_LOG_LEVEL'] = options.__dict__['log_level']
         logging.warn("Logging enabled with " + options.__dict__['log_level'] + " level")
 
+    def initialize(self):
+        super(Plugin, self).initialize()
+        set_default_format()
 
 def set_default_format():
     logging.basicConfig(format="[LOG]: %(levelname)s:\t%(message)s", level=logging.WARN)

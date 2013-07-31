@@ -20,7 +20,6 @@
 import logging
 
 import core.log
-import core.db.loader
 import core.db.post
 import core.db.utils
 import core.cout
@@ -59,12 +58,14 @@ def main(tool_args):
     hotspots = options.__dict__['hotspots']
     no_suppress = options.__dict__['disable_suppressions']
 
-    loader_prev = core.db.loader.Loader()
+    loader_prev = core.api.Loader()
     if db_plugin.dbfile_prev != None:
-        loader_prev.open_database(db_plugin.dbfile_prev)
+        if loader_prev.open_database(db_plugin.dbfile_prev) == False:
+            parser.error("Can not open file: " + db_plugin.dbfile_prev)
 
-    loader = core.db.loader.Loader()
-    loader.open_database(db_plugin.dbfile)
+    loader = core.api.Loader()
+    if loader.open_database(db_plugin.dbfile) == False:
+        parser.error("Can not open file: " + db_plugin.dbfile)
     
     warn_plugin.verify_namespaces(loader.iterate_namespace_names())
     for each in loader.iterate_namespace_names():
@@ -128,7 +129,7 @@ def main(tool_args):
                                 is_modified = True
                             else:
                                 is_modified = False
-                            diff = core.db.loader.DiffData(select_data,
+                            diff = core.api.DiffData(select_data,
                                                            file_data_prev.get_region(prev_id)).get_data(limit.namespace, limit.field)
 
                 if (warn_plugin.is_mode_matched(limit.limit,

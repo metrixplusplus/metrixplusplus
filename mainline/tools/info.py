@@ -18,14 +18,13 @@
 #
 
 
-import core.db.loader
+import core.api
 import core.db.post
 import core.log
 import core.cmdparser
 
 import tools.utils
 
-import core.api
 class Tool(core.api.ITool):
     def run(self, tool_args):
         return main(tool_args)
@@ -43,12 +42,15 @@ def main(tool_args):
     log_plugin.configure(options)
     db_plugin.configure(options)
     
-    loader = core.db.loader.Loader()
-    loader.open_database(db_plugin.dbfile)
+    loader = core.api.Loader()
+    if loader.open_database(db_plugin.dbfile) == False:
+        parser.error("Can not open file: " + db_plugin.dbfile)
+
     loader_prev = None
     if db_plugin.dbfile_prev != None:
-        loader_prev = core.db.loader.Loader()
-        loader_prev.open_database(db_plugin.dbfile_prev)
+        loader_prev = core.api.Loader()
+        if loader_prev.open_database(db_plugin.dbfile_prev) == False:
+            parser.error("Can not open file: " + db_plugin.dbfile_prev)
 
     print "Properties:"
     for each in loader.iterate_properties():

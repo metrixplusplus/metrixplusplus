@@ -22,14 +22,13 @@
 import logging
 import csv
 
+import core.api
 import core.log
-import core.db.loader
 import core.db.post
 import core.cmdparser
 
 import tools.utils
 
-import core.api
 class Tool(core.api.ITool):
     def run(self, tool_args):
         return main(tool_args)
@@ -50,12 +49,15 @@ def main(tool_args):
     db_plugin.configure(options)
     out_format = options.__dict__['format']
 
-    loader_prev = core.db.loader.Loader()
+    loader_prev = core.api.Loader()
     if db_plugin.dbfile_prev != None:
-        loader_prev.open_database(db_plugin.dbfile_prev)
+        if loader_prev.open_database(db_plugin.dbfile_prev) == False:
+            parser.error("Can not open file: " + db_plugin.dbfile_prev)
 
-    loader = core.db.loader.Loader()
-    loader.open_database(db_plugin.dbfile)
+
+    loader = core.api.Loader()
+    if loader.open_database(db_plugin.dbfile) == False:
+        parser.error("Can not open file: " + db_plugin.dbfile)
     
     # Check for versions consistency
     for each in loader.iterate_properties():

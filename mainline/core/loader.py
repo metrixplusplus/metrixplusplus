@@ -18,7 +18,6 @@
 #
 
 import core.api
-import core.db.loader
 
 import os
 import fnmatch
@@ -29,7 +28,7 @@ class Loader(object):
         self.plugins = []
         self.parsers = []
         self.hash    = {}
-        self.db = core.db.loader.Loader()
+        self.db = core.api.Loader()
         
     def get_database_loader(self):
         return self.db

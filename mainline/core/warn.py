@@ -44,7 +44,7 @@ class Plugin(core.api.Plugin, core.api.IConfigurable):
                           "which have got metric value less than the specified limit. "
                           "This option can be specified multiple times, if it is necessary to apply several limits. "
                           "Should be in the format: <namespace>:<field>:<limit-value>, for example: "
-                          "'std.code.complexity:cyclomatic:7'.") # TODO think about better example
+                          "'std.code.lines:comments:1'.")
         parser.add_option("--max-limit", "--max", action="multiopt",
                           help="A threshold per 'namespace:field' metric in order to select regions, "
                           "which have got metric value more than the specified limit. "
