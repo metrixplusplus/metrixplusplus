@@ -22,19 +22,19 @@ import subprocess
 import os.path
 import itertools
 
-import core.log
-import core.cmdparser
+import mpp.log
+import mpp.cmdparser
 
-import core.api
-class Tool(core.api.ITool):
+import mpp.api
+class Tool(mpp.api.ITool):
     def run(self, tool_args):
         return main(tool_args)
 
 def main(tool_args):
     exit_code = 0
-    log_plugin = core.log.Plugin()
+    log_plugin = mpp.log.Plugin()
 
-    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog test [options] -- [testgroup-dir-path-1[/testsuite-file-path-1]] ... [...path-N]")
+    parser = mpp.cmdparser.MultiOptionParser(usage="Usage: %prog test [options] -- [testgroup-dir-path-1[/testsuite-file-path-1]] ... [...path-N]")
     log_plugin.declare_configuration(parser, default_value='ERROR')
     parser.add_option("-g", "--generate-golds", "--gg", action="store_true", default=False,
                          help="If the option is set (True), new gold files are generated (replacing existing) [default: %default]")

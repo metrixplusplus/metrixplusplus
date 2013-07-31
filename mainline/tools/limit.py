@@ -19,28 +19,28 @@
 
 import logging
 
-import core.log
-import core.db.post
-import core.utils
-import core.cout
-import core.warn
-import core.cmdparser
+import mpp.log
+import mpp.db.post
+import mpp.utils
+import mpp.cout
+import mpp.warn
+import mpp.cmdparser
 
-import core.utils
+import mpp.utils
 
-import core.api
-class Tool(core.api.ITool):
+import mpp.api
+class Tool(mpp.api.ITool):
     def run(self, tool_args):
         return main(tool_args)
 
 def main(tool_args):
     
     exit_code = 0
-    log_plugin = core.log.Plugin()
-    db_plugin = core.db.post.Plugin()
-    warn_plugin = core.warn.Plugin()
+    log_plugin = mpp.log.Plugin()
+    db_plugin = mpp.db.post.Plugin()
+    warn_plugin = mpp.warn.Plugin()
 
-    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog limit [options] -- [path 1] ... [path N]")
+    parser = mpp.cmdparser.MultiOptionParser(usage="Usage: %prog limit [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
     warn_plugin.declare_configuration(parser)
@@ -58,14 +58,11 @@ def main(tool_args):
     hotspots = options.__dict__['hotspots']
     no_suppress = options.__dict__['disable_suppressions']
 
-    loader_prev = core.api.Loader()
-    if db_plugin.dbfile_prev != None:
-        if loader_prev.open_database(db_plugin.dbfile_prev) == False:
-            parser.error("Can not open file: " + db_plugin.dbfile_prev)
+    log_plugin.initialize()
+    db_plugin.initialize()
 
-    loader = core.api.Loader()
-    if loader.open_database(db_plugin.dbfile) == False:
-        parser.error("Can not open file: " + db_plugin.dbfile)
+    loader_prev = db_plugin.get_loader_prev()
+    loader = db_plugin.get_loader()
     
     warn_plugin.verify_namespaces(loader.iterate_namespace_names())
     for each in loader.iterate_namespace_names():
@@ -73,7 +70,7 @@ def main(tool_args):
     
     # Check for versions consistency
     if db_plugin.dbfile_prev != None:
-        core.utils.check_db_metadata(loader, loader_prev)
+        mpp.utils.check_db_metadata(loader, loader_prev)
     
     paths = None
     if len(args) == 0:
@@ -87,7 +84,7 @@ def main(tool_args):
         modified_file_ids = get_list_of_modified_files(loader, loader_prev)
         
     for path in paths:
-        path = core.utils.preprocess_path(path)
+        path = mpp.utils.preprocess_path(path)
         
         for limit in warn_plugin.iterate_limits():
             logging.info("Applying limit: " + str(limit))
@@ -108,7 +105,7 @@ def main(tool_args):
                                                    sort_by=sort_by,
                                                    limit_by=limit_by)
             if selected_data == None:
-                core.utils.report_bad_path(path)
+                mpp.utils.report_bad_path(path)
                 exit_code += 1
                 continue
             
@@ -122,14 +119,14 @@ def main(tool_args):
                         diff = 0
                         is_modified = False
                     else:
-                        matcher = core.utils.FileRegionsMatcher(file_data, file_data_prev)
+                        matcher = mpp.utils.FileRegionsMatcher(file_data, file_data_prev)
                         prev_id = matcher.get_prev_id(select_data.get_region().get_id())
                         if matcher.is_matched(select_data.get_region().get_id()):
                             if matcher.is_modified(select_data.get_region().get_id()):
                                 is_modified = True
                             else:
                                 is_modified = False
-                            diff = core.api.DiffData(select_data,
+                            diff = mpp.api.DiffData(select_data,
                                                            file_data_prev.get_region(prev_id)).get_data(limit.namespace, limit.field)
 
                 if (warn_plugin.is_mode_matched(limit.limit,
@@ -211,7 +208,7 @@ def report_limit_exceeded(path, cursor, namespace, field, region_name,
                ("Change trend", '{0:{1}}'.format(trend_value, '+' if trend_value else '')),
                ("Limit", stat_limit),
                ("Suppressed", is_suppressed)]
-    core.cout.notify(path, cursor, core.cout.SEVERITY_WARNING, message, details)
+    mpp.cout.notify(path, cursor, mpp.cout.SEVERITY_WARNING, message, details)
 
     
     

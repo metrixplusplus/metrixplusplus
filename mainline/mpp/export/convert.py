@@ -18,21 +18,21 @@
 #
 
 
-import os.path
+import mpp.export.utils.py2xml
+import mpp.export.utils.py2txt
 
-import mpp.loader
-import mpp.cmdparser
+def to_xml(data, root_name = None):
+    serializer = mpp.export.utils.py2xml.Py2XML()
+    return serializer.parse(data, objName=root_name)
 
-import mpp.api
-class Tool(mpp.api.ITool):
-    def run(self, tool_args):
-        return main(tool_args)
+def to_python(data, root_name = None):
+    prefix = ""
+    postfix = ""
+    if root_name != None:
+        prefix = "{'" + root_name + ": " 
+        postfix = "}"
+    return prefix + data.__repr__() + postfix
 
-def main(tool_args):
-    loader = mpp.loader.Loader()
-    parser =mpp.cmdparser.MultiOptionParser(usage="Usage: %prog collect [options] -- [path 1] ... [path N]")
-    args = loader.load(os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'ext'), parser, tool_args)
-    exit_code = loader.run(args)
-    loader.unload()
-    return exit_code
-    
+def to_txt(data, root_name = None):
+    serializer = mpp.export.utils.py2txt.Py2TXT()
+    return serializer.parse(data, objName=root_name, indent = -1)
