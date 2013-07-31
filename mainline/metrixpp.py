@@ -25,7 +25,7 @@ import os
 import subprocess
 import itertools
 
-import core.log
+import mpp.log
 
 def main():
     
@@ -81,7 +81,7 @@ def main():
 
 def start():
     ts = time.time()
-    core.log.set_default_format()
+    mpp.log.set_default_format()
     exit_code = main()
     time_spent = round((time.time() - ts), 2)
     if 'METRIXPLUSPLUS_TEST_GENERATE_GOLDS' in os.environ.keys() and \
