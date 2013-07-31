@@ -49,19 +49,19 @@ class Plugin(core.api.MetricPlugin, core.api.Child, core.api.IConfigurable):
     pattern_line = re.compile(r'''[^\s].*''')
 
     def initialize(self):
-        self.add_field(self.is_active_code,
+        self.declare_metric(self.is_active_code,
                        self.Field('code', int),
                        self.pattern_line,
                        core.api.Marker.T.CODE)
-        self.add_field(self.is_active_preprocessor,
+        self.declare_metric(self.is_active_preprocessor,
                        self.Field('preprocessor', int),
                        self.pattern_line,
                        core.api.Marker.T.PREPROCESSOR)
-        self.add_field(self.is_active_comments,
+        self.declare_metric(self.is_active_comments,
                        self.Field('comments', int),
                        self.pattern_line,
                        core.api.Marker.T.COMMENT)
-        self.add_field(self.is_active_total,
+        self.declare_metric(self.is_active_total,
                        self.Field('total', int),
                        self.pattern_line,
                        core.api.Marker.T.ANY,

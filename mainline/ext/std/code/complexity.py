@@ -21,26 +21,15 @@ import core.api
 
 import re
 
-class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
+class Plugin(core.api.MetricPlugin, core.api.Child, core.api.IConfigurable):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.code.complexity.cyclomatic", "--sccc", action="store_true", default=False,
                          help="Enables collection of cyclomatic complexity metric (McCabe) [default: %default]")
     
     def configure(self, options):
-        self.is_active = options.__dict__['std.code.complexity.cyclomatic']
+        self.is_active_cyclomatic = options.__dict__['std.code.complexity.cyclomatic']
         
-    def initialize(self):
-        fields = []
-        if self.is_active == True:
-            fields.append(self.Field('cyclomatic', int))
-        core.api.Plugin.initialize(self, fields=fields)
-        
-        if len(fields) != 0:
-            self.subscribe_by_parents_name('std.code.cpp', 'callback_cpp')
-            self.subscribe_by_parents_name('std.code.cs', 'callback_cs')
-            self.subscribe_by_parents_name('std.code.java', 'callback_java')
-
     # cyclomatic complexity pattern
     # - C/C++
     pattern_cpp = re.compile(r'''([^0-9A-Za-z_]((if)|(case)|(for)|(while)|(catch))[^0-9A-Za-z_])|[&][&]|[|][|]|[?]''')
@@ -50,27 +39,35 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
     # - Java
     pattern_java = re.compile(r'''([^0-9A-Za-z_]((if)|(case)|(for)|(while)|(catch))[^0-9A-Za-z_])|[&][&]|[|][|]|[?]''')
 
+    def initialize(self):
+        self.declare_metric(self.is_active_cyclomatic,
+                            self.Field('cyclomatic', int),
+                            {
+                                'cpp': self.pattern_cpp,
+                                'cs': self.pattern_cs,
+                                'java': self.pattern_java
+                            },
+                            marker_type_mask=core.api.Marker.T.CODE,
+                            region_type_mask=core.api.FileRegionData.T.FUNCTION)
+        
+        super(Plugin, self).initialize(fields=self.get_fields())
+        
+        if self.is_active() == True:
+            self.subscribe_by_parents_name('std.code.cpp', 'callback_cpp')
+            self.subscribe_by_parents_name('std.code.cs', 'callback_cs')
+            self.subscribe_by_parents_name('std.code.java', 'callback_java')
+
     def callback_cpp(self, parent, data, is_updated):
-        self.callback_common(parent, data, is_updated, self.pattern_cpp)
+        self.callback_common(parent, data, is_updated, 'cpp')
 
     def callback_cs(self, parent, data, is_updated):
-        self.callback_common(parent, data, is_updated, self.pattern_cs)
+        self.callback_common(parent, data, is_updated, 'cs')
 
     def callback_java(self, parent, data, is_updated):
-        self.callback_common(parent, data, is_updated, self.pattern_java)
+        self.callback_common(parent, data, is_updated, 'java')
 
-    def callback_common(self, parent, data, is_updated, pattern):
+    def callback_common(self, parent, data, is_updated, alias):
         is_updated = is_updated or self.is_updated
         if is_updated == True:
-            text = data.get_content(exclude = data.get_marker_types().ALL_EXCEPT_CODE)
-            for region in data.iterate_regions(filter_group=data.get_region_types().FUNCTION):
-                # cyclomatic complexity
-                count = 0
-                start_pos = region.get_offset_begin()
-                for sub_id in region.iterate_subregion_ids():
-                    # exclude sub regions, like enclosed classes
-                    count += len(pattern.findall(text, start_pos, data.get_region(sub_id).get_offset_begin()))
-                    start_pos = data.get_region(sub_id).get_offset_end()
-                count += len(pattern.findall(text, start_pos, region.get_offset_end()))
-                region.set_data(self.get_name(), 'cyclomatic', count)
+            self.count_if_active('cyclomatic', data, alias=alias)
 
