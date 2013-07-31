@@ -21,12 +21,12 @@ import logging
 
 import core.log
 import core.db.post
-import core.db.utils
+import core.utils
 import core.cout
 import core.warn
 import core.cmdparser
 
-import tools.utils
+import core.utils
 
 import core.api
 class Tool(core.api.ITool):
@@ -73,7 +73,7 @@ def main(tool_args):
     
     # Check for versions consistency
     if db_plugin.dbfile_prev != None:
-        tools.utils.check_db_metadata(loader, loader_prev)
+        core.utils.check_db_metadata(loader, loader_prev)
     
     paths = None
     if len(args) == 0:
@@ -87,7 +87,7 @@ def main(tool_args):
         modified_file_ids = get_list_of_modified_files(loader, loader_prev)
         
     for path in paths:
-        path = tools.utils.preprocess_path(path)
+        path = core.utils.preprocess_path(path)
         
         for limit in warn_plugin.iterate_limits():
             logging.info("Applying limit: " + str(limit))
@@ -108,7 +108,7 @@ def main(tool_args):
                                                    sort_by=sort_by,
                                                    limit_by=limit_by)
             if selected_data == None:
-                tools.utils.report_bad_path(path)
+                core.utils.report_bad_path(path)
                 exit_code += 1
                 continue
             
@@ -122,7 +122,7 @@ def main(tool_args):
                         diff = 0
                         is_modified = False
                     else:
-                        matcher = core.db.utils.FileRegionsMatcher(file_data, file_data_prev)
+                        matcher = core.utils.FileRegionsMatcher(file_data, file_data_prev)
                         prev_id = matcher.get_prev_id(select_data.get_region().get_id())
                         if matcher.is_matched(select_data.get_region().get_id()):
                             if matcher.is_modified(select_data.get_region().get_id()):

@@ -20,11 +20,11 @@
 
 import core.log
 import core.db.post
-import core.db.utils
+import core.utils
 import core.cmdparser
 import core.export.convert
 
-import tools.utils
+import core.utils
 
 import core.api
 class Tool(core.api.ITool):
@@ -51,18 +51,15 @@ def main(tool_args):
     out_format = options.__dict__['format']
     nest_regions = options.__dict__['nest_regions']
 
-    loader_prev = core.api.Loader()
-    if db_plugin.dbfile_prev != None:
-        if loader_prev.open_database(db_plugin.dbfile_prev) == False:
-            parser.error("Can not open file: " + db_plugin.dbfile_prev)
+    log_plugin.initialize()
+    db_plugin.initialize()
 
-    loader = core.api.Loader()
-    if loader.open_database(db_plugin.dbfile) == False:
-        parser.error("Can not open file: " + db_plugin.dbfile)
+    loader_prev = db_plugin.get_loader_prev()
+    loader = db_plugin.get_loader()
 
     # Check for versions consistency
     if db_plugin.dbfile_prev != None:
-        tools.utils.check_db_metadata(loader, loader_prev)
+        core.utils.check_db_metadata(loader, loader_prev)
     
     paths = None
     if len(args) == 0:
@@ -85,7 +82,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions):
         result += "{'export': ["
 
     for (ind, path) in enumerate(paths):
-        path = tools.utils.preprocess_path(path)
+        path = core.utils.preprocess_path(path)
         
         aggregated_data = loader.load_aggregated_data(path)
         aggregated_data_tree = {}
@@ -96,7 +93,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions):
             subdirs = aggregated_data.get_subdirs()
             subfiles = aggregated_data.get_subfiles()
         else:
-            tools.utils.report_bad_path(path)
+            core.utils.report_bad_path(path)
             exit_code += 1
         aggregated_data_prev = loader_prev.load_aggregated_data(path)
         if aggregated_data_prev != None:
@@ -140,7 +137,7 @@ def append_regions(file_data_tree, file_data, file_data_prev, nest_regions):
     if file_data_prev != None:
         file_data_tree = append_diff(file_data_tree,
                                      file_data_prev.get_data_tree())
-        regions_matcher = core.db.utils.FileRegionsMatcher(file_data, file_data_prev)
+        regions_matcher = core.utils.FileRegionsMatcher(file_data, file_data_prev)
     
     if nest_regions == False:
         regions = []

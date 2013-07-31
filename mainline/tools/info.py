@@ -23,7 +23,7 @@ import core.db.post
 import core.log
 import core.cmdparser
 
-import tools.utils
+import core.utils
 
 class Tool(core.api.ITool):
     def run(self, tool_args):
@@ -86,11 +86,11 @@ def main(tool_args):
     else:
         paths = args
     for path in paths:
-        path = tools.utils.preprocess_path(path)
+        path = core.utils.preprocess_path(path)
 
         file_iterator = loader.iterate_file_data(path=path)
         if file_iterator == None:
-            tools.utils.report_bad_path(path)
+            core.utils.report_bad_path(path)
             exit_code += 1
             continue
         for each in file_iterator:
