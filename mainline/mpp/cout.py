@@ -17,22 +17,24 @@
 #    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+SEVERITY_INFO    = 0x01
+SEVERITY_WARNING = 0x02
+SEVERITY_ERROR   = 0x03
 
-import os.path
+def notify(path, cursor, level, message, details = []):
+    notification = path + ":" + str(cursor) + ": "
+    if level == SEVERITY_INFO:
+        notification += "info: "
+    elif level == SEVERITY_WARNING:
+        notification += "warning: "
+    elif level == SEVERITY_ERROR:
+        notification += "error: "
+    else:
+        assert(len("Invalid message severity level specified") == 0)
+    notification += message + "\n"
 
-import mpp.loader
-import mpp.cmdparser
-
-import mpp.api
-class Tool(mpp.api.ITool):
-    def run(self, tool_args):
-        return main(tool_args)
-
-def main(tool_args):
-    loader = mpp.loader.Loader()
-    parser =mpp.cmdparser.MultiOptionParser(usage="Usage: %prog collect [options] -- [path 1] ... [path N]")
-    args = loader.load(os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'ext'), parser, tool_args)
-    exit_code = loader.run(args)
-    loader.unload()
-    return exit_code
-    
+    DETAILS_OFFSET = 15
+    for each in details:
+        notification += "\t" + str(each[0]) + (" " * (DETAILS_OFFSET - len(each[0]))) + ": " + str(each[1]) + "\n"
+        
+    print notification

@@ -21,22 +21,22 @@
 import logging
 import cgi
 
-import core.api
-import core.log
-import core.cmdparser
-import core.db.post
+import mpp.api
+import mpp.log
+import mpp.cmdparser
+import mpp.db.post
 
-import core.utils
+import mpp.utils
 
-class Tool(core.api.ITool):
+class Tool(mpp.api.ITool):
     def run(self, tool_args):
         return main(tool_args)
 
 def main(tool_args):
-    log_plugin = core.log.Plugin()
-    db_plugin = core.db.post.Plugin()
+    log_plugin = mpp.log.Plugin()
+    db_plugin = mpp.db.post.Plugin()
 
-    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog debug [options] -- [path 1] ... [path N]")
+    parser = mpp.cmdparser.MultiOptionParser(usage="Usage: %prog debug [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
     parser.add_option("-m", "--mode", default='dumphtml', choices=['dumphtml'],
@@ -46,9 +46,10 @@ def main(tool_args):
     log_plugin.configure(options)
     db_plugin.configure(options)
 
-    loader = core.api.Loader()
-    if loader.open_database(db_plugin.dbfile) == False:
-        parser.error("Can not open file: " + db_plugin.dbfile)
+    log_plugin.initialize()
+    db_plugin.initialize()
+
+    loader = db_plugin.get_loader()
 
     if options.__dict__['mode'] == 'dumphtml':
         return dumphtml(args, loader)
@@ -60,11 +61,11 @@ def dumphtml(args, loader):
     result = ""
     result += '<html><body>'
     for path in args:
-        path = core.utils.preprocess_path(path)
+        path = mpp.utils.preprocess_path(path)
         
         data = loader.load_file_data(path)
         if data == None:
-            core.utils.report_bad_path(path)
+            mpp.utils.report_bad_path(path)
             exit_code += 1
             continue
         

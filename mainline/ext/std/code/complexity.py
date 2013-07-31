@@ -17,11 +17,11 @@
 #    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-import core.api
+import mpp.api
 
 import re
 
-class Plugin(core.api.Plugin, core.api.SimpleMetricMixin, core.api.Child, core.api.IConfigurable):
+class Plugin(mpp.api.Plugin, mpp.api.SimpleMetricMixin, mpp.api.Child, mpp.api.IConfigurable):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.code.complexity.cyclomatic", "--sccc", action="store_true", default=False,
@@ -47,8 +47,8 @@ class Plugin(core.api.Plugin, core.api.SimpleMetricMixin, core.api.Child, core.a
                                 'cs': self.pattern_cs,
                                 'java': self.pattern_java
                             },
-                            marker_type_mask=core.api.Marker.T.CODE,
-                            region_type_mask=core.api.Region.T.FUNCTION)
+                            marker_type_mask=mpp.api.Marker.T.CODE,
+                            region_type_mask=mpp.api.Region.T.FUNCTION)
         
         super(Plugin, self).initialize(fields=self.get_fields())
         

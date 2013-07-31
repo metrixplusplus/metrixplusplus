@@ -17,12 +17,12 @@
 #    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-import core.api
-import core.cout
+import mpp.api
+import mpp.cout
 
 import re
 
-class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
+class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.suppress", "--ss", action="store_true", default=False,
@@ -42,15 +42,15 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
             fields.append(self.Field('count', int, non_zero=True))
             fields.append(self.Field('list', str))
         # - init per regions table
-        core.api.Plugin.initialize(self, fields=fields)
+        mpp.api.Plugin.initialize(self, fields=fields)
         # - init per file table
-        core.api.Plugin.initialize(self,
+        mpp.api.Plugin.initialize(self,
                                    namespace = self.get_name() + '.file',
                                    support_regions = False,
                                    fields=fields)
         
         if len(fields) != 0:
-            self.subscribe_by_parents_interface(core.api.ICode)
+            self.subscribe_by_parents_interface(mpp.api.ICode)
 
     # suppress pattern
     pattern = re.compile(r'''metrix[+][+][:][ \t]+suppress[ \t]+([^ \t\r\n\*]+)''')
@@ -81,8 +81,8 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
                         namespace_name, field = m.split(':')
                         namespace = self.get_plugin_loader().get_database_loader().get_namespace(namespace_name)
                         if namespace == None or namespace.get_field_packager(field) == None:
-                            core.cout.notify(data.get_path(), region.get_cursor(),
-                                                  core.cout.SEVERITY_WARNING,
+                            mpp.cout.notify(data.get_path(), region.get_cursor(),
+                                                  mpp.cout.SEVERITY_WARNING,
                                                   "Suppressed metric '" + namespace_name + ":" + field +
                                                     "' is not being collected",
                                                   [("Metric name", namespace_name + ":" + field),
@@ -90,8 +90,8 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
                             continue
                         if namespace.are_regions_supported() == False:
                             if region.get_id() != 1:
-                                core.cout.notify(data.get_path(), region.get_cursor(),
-                                                  core.cout.SEVERITY_WARNING,
+                                mpp.cout.notify(data.get_path(), region.get_cursor(),
+                                                  mpp.cout.SEVERITY_WARNING,
                                                   "Suppressed metric '" + namespace_name + ":" + field +
                                                     "' is attributed to a file, not a region. "
                                                     "Remove it or move to the beginning of the file.",
@@ -100,8 +100,8 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
                                 continue
                             
                             if m in file_list_text:
-                                core.cout.notify(data.get_path(), region.get_cursor(),
-                                              core.cout.SEVERITY_WARNING,
+                                mpp.cout.notify(data.get_path(), region.get_cursor(),
+                                              mpp.cout.SEVERITY_WARNING,
                                               "Duplicate suppression of the metric '" +
                                                namespace_name + ":" + field + "'",
                                               [("Metric name", namespace_name + ":" + field),
@@ -113,8 +113,8 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
                             continue
                         
                         if m in list_text:
-                            core.cout.notify(data.get_path(), region.get_cursor(),
-                                          core.cout.SEVERITY_WARNING,
+                            mpp.cout.notify(data.get_path(), region.get_cursor(),
+                                          mpp.cout.SEVERITY_WARNING,
                                           "Duplicate suppression of the metric '" +
                                            namespace_name + ":" + field + "'",
                                           [("Metric name", namespace_name + ":" + field),

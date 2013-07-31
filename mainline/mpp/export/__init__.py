@@ -16,23 +16,3 @@
 #    You should have received a copy of the GNU General Public License
 #    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
 #
-
-
-import os.path
-
-import mpp.loader
-import mpp.cmdparser
-
-import mpp.api
-class Tool(mpp.api.ITool):
-    def run(self, tool_args):
-        return main(tool_args)
-
-def main(tool_args):
-    loader = mpp.loader.Loader()
-    parser =mpp.cmdparser.MultiOptionParser(usage="Usage: %prog collect [options] -- [path 1] ... [path N]")
-    args = loader.load(os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'ext'), parser, tool_args)
-    exit_code = loader.run(args)
-    loader.unload()
-    return exit_code
-    

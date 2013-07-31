@@ -22,23 +22,23 @@
 import logging
 import csv
 
-import core.api
-import core.log
-import core.db.post
-import core.cmdparser
+import mpp.api
+import mpp.log
+import mpp.db.post
+import mpp.cmdparser
 
-import core.utils
+import mpp.utils
 
-class Tool(core.api.ITool):
+class Tool(mpp.api.ITool):
     def run(self, tool_args):
         return main(tool_args)
 
 def main(tool_args):
     
-    log_plugin = core.log.Plugin()
-    db_plugin = core.db.post.Plugin()
+    log_plugin = mpp.log.Plugin()
+    db_plugin = mpp.db.post.Plugin()
 
-    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog export [options] -- [path 1] ... [path N]")
+    parser = mpp.cmdparser.MultiOptionParser(usage="Usage: %prog export [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
     parser.add_option("--format", "--ft", default='csv', choices=['csv', 'xml'], help="Format of the output data. "
@@ -49,15 +49,11 @@ def main(tool_args):
     db_plugin.configure(options)
     out_format = options.__dict__['format']
 
-    loader_prev = core.api.Loader()
-    if db_plugin.dbfile_prev != None:
-        if loader_prev.open_database(db_plugin.dbfile_prev) == False:
-            parser.error("Can not open file: " + db_plugin.dbfile_prev)
+    log_plugin.initialize()
+    db_plugin.initialize()
 
-
-    loader = core.api.Loader()
-    if loader.open_database(db_plugin.dbfile) == False:
-        parser.error("Can not open file: " + db_plugin.dbfile)
+    loader_prev = db_plugin.get_loader_prev()
+    loader = db_plugin.get_loader()
     
     # Check for versions consistency
     for each in loader.iterate_properties():
@@ -106,7 +102,7 @@ def export_to_stdout(out_format, paths, loader, loader_prev):
         assert False, "Unknown output format " + out_format
 
     for path in paths:
-        path = core.utils.preprocess_path(path)
+        path = mpp.utils.preprocess_path(path)
         
         files = loader.iterate_file_data(path)
         if files != None:
@@ -121,7 +117,7 @@ def export_to_stdout(out_format, paths, loader, loader_prev):
                     per_file_data.append(file_data.get_data(column[0], column[1]))
                 csvWriter.writerow([file_data.get_path(), None] + per_file_data)
         else:
-            core.utils.report_bad_path(path)
+            mpp.utils.report_bad_path(path)
             exit_code += 1
 
     if out_format == 'xml':

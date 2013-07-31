@@ -21,10 +21,10 @@
 import re
 import binascii
 
-import core.api
-import core.cout
+import mpp.api
+import mpp.cout
 
-class Plugin(core.api.Plugin, core.api.Parent, core.api.IParser, core.api.IConfigurable, core.api.ICode):
+class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IParser, mpp.api.IConfigurable, mpp.api.ICode):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.code.java.files", default="*.java",
@@ -35,7 +35,7 @@ class Plugin(core.api.Plugin, core.api.Parent, core.api.IParser, core.api.IConfi
         self.files.sort() # sorted list goes to properties
         
     def initialize(self):
-        core.api.Plugin.initialize(self, properties=[
+        mpp.api.Plugin.initialize(self, properties=[
             self.Property('files', ','.join(self.files))
         ])
         self.get_plugin_loader().register_parser(self.files, self)
@@ -204,9 +204,9 @@ class JavaCodeParser(object):
                 if blocks[curblk]['indent_start'] == indent_current:
                     next_block = reset_next_block(m.end())
                     if curblk == 0:
-                        core.cout.notify(data.get_path(),
+                        mpp.cout.notify(data.get_path(),
                                          cursor_current + len(self.regex_ln.findall(text, cursor_last_pos, m.start())),
-                                         core.cout.SEVERITY_WARNING,
+                                         mpp.cout.SEVERITY_WARNING,
                                          "Non-matching closing bracket '}' detected.")
                         count_mismatched_brackets += 1
                         continue
@@ -221,9 +221,9 @@ class JavaCodeParser(object):
                 # shift indent left
                 indent_current -= 1
                 if indent_current < 0:
-                    core.cout.notify(data.get_path(),
+                    mpp.cout.notify(data.get_path(),
                                      cursor_current + len(self.regex_ln.findall(text, cursor_last_pos, m.start())),
-                                     core.cout.SEVERITY_WARNING,
+                                     mpp.cout.SEVERITY_WARNING,
                                      "Non-matching closing bracket '}' detected.")
                     count_mismatched_brackets += 1
                     indent_current = 0
@@ -263,9 +263,9 @@ class JavaCodeParser(object):
 
         while indent_current > 0:
             # log all
-            core.cout.notify(data.get_path(),
+            mpp.cout.notify(data.get_path(),
                              cursor_current + len(self.regex_ln.findall(text, cursor_last_pos, len(text))),
-                             core.cout.SEVERITY_WARNING,
+                             mpp.cout.SEVERITY_WARNING,
                              "Non-matching opening bracket '{' detected.")
             count_mismatched_brackets += 1
             indent_current -= 1

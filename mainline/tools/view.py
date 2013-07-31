@@ -18,25 +18,25 @@
 #
 
 
-import core.log
-import core.db.post
-import core.utils
-import core.cmdparser
-import core.export.convert
+import mpp.log
+import mpp.db.post
+import mpp.utils
+import mpp.cmdparser
+import mpp.export.convert
 
-import core.utils
+import mpp.utils
 
-import core.api
-class Tool(core.api.ITool):
+import mpp.api
+class Tool(mpp.api.ITool):
     def run(self, tool_args):
         return main(tool_args)
 
 def main(tool_args):
     
-    log_plugin = core.log.Plugin()
-    db_plugin = core.db.post.Plugin()
+    log_plugin = mpp.log.Plugin()
+    db_plugin = mpp.db.post.Plugin()
 
-    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog view [options] -- [path 1] ... [path N]")
+    parser = mpp.cmdparser.MultiOptionParser(usage="Usage: %prog view [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
     parser.add_option("--format", "--ft", default='xml', choices=['txt', 'xml', 'python'], help="Format of the output data. "
@@ -59,7 +59,7 @@ def main(tool_args):
 
     # Check for versions consistency
     if db_plugin.dbfile_prev != None:
-        core.utils.check_db_metadata(loader, loader_prev)
+        mpp.utils.check_db_metadata(loader, loader_prev)
     
     paths = None
     if len(args) == 0:
@@ -82,7 +82,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions):
         result += "{'export': ["
 
     for (ind, path) in enumerate(paths):
-        path = core.utils.preprocess_path(path)
+        path = mpp.utils.preprocess_path(path)
         
         aggregated_data = loader.load_aggregated_data(path)
         aggregated_data_tree = {}
@@ -93,7 +93,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions):
             subdirs = aggregated_data.get_subdirs()
             subfiles = aggregated_data.get_subfiles()
         else:
-            core.utils.report_bad_path(path)
+            mpp.utils.report_bad_path(path)
             exit_code += 1
         aggregated_data_prev = loader_prev.load_aggregated_data(path)
         if aggregated_data_prev != None:
@@ -114,14 +114,14 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions):
                 "subfiles": subfiles}
 
         if out_format == 'txt':
-            result += core.export.convert.to_txt(data, root_name = "data") + "\n"
+            result += mpp.export.convert.to_txt(data, root_name = "data") + "\n"
         elif out_format == 'xml':
-            result += core.export.convert.to_xml(data, root_name = "data") + "\n"
+            result += mpp.export.convert.to_xml(data, root_name = "data") + "\n"
         elif out_format == 'python':
             postfix = ""
             if ind < len(paths) - 1:
                 postfix = ", "
-            result += core.export.convert.to_python(data, root_name = "data") + postfix
+            result += mpp.export.convert.to_python(data, root_name = "data") + postfix
 
     if out_format == 'txt':
         result += "\n"
@@ -137,7 +137,7 @@ def append_regions(file_data_tree, file_data, file_data_prev, nest_regions):
     if file_data_prev != None:
         file_data_tree = append_diff(file_data_tree,
                                      file_data_prev.get_data_tree())
-        regions_matcher = core.utils.FileRegionsMatcher(file_data, file_data_prev)
+        regions_matcher = mpp.utils.FileRegionsMatcher(file_data, file_data_prev)
     
     if nest_regions == False:
         regions = []

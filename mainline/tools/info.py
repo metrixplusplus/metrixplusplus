@@ -18,23 +18,23 @@
 #
 
 
-import core.api
-import core.db.post
-import core.log
-import core.cmdparser
+import mpp.api
+import mpp.db.post
+import mpp.log
+import mpp.cmdparser
 
-import core.utils
+import mpp.utils
 
-class Tool(core.api.ITool):
+class Tool(mpp.api.ITool):
     def run(self, tool_args):
         return main(tool_args)
 
 def main(tool_args):
     exit_code = 0
-    log_plugin = core.log.Plugin()
-    db_plugin = core.db.post.Plugin()
+    log_plugin = mpp.log.Plugin()
+    db_plugin = mpp.db.post.Plugin()
 
-    parser = core.cmdparser.MultiOptionParser(usage="Usage: %prog info [options] -- [path 1] ... [path N]")
+    parser = mpp.cmdparser.MultiOptionParser(usage="Usage: %prog info [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)
     db_plugin.declare_configuration(parser)
 
@@ -42,15 +42,11 @@ def main(tool_args):
     log_plugin.configure(options)
     db_plugin.configure(options)
     
-    loader = core.api.Loader()
-    if loader.open_database(db_plugin.dbfile) == False:
-        parser.error("Can not open file: " + db_plugin.dbfile)
+    log_plugin.initialize()
+    db_plugin.initialize()
 
-    loader_prev = None
-    if db_plugin.dbfile_prev != None:
-        loader_prev = core.api.Loader()
-        if loader_prev.open_database(db_plugin.dbfile_prev) == False:
-            parser.error("Can not open file: " + db_plugin.dbfile_prev)
+    loader_prev = db_plugin.get_loader_prev(none_if_empty=True)
+    loader = db_plugin.get_loader()
 
     print "Properties:"
     for each in loader.iterate_properties():
@@ -86,11 +82,11 @@ def main(tool_args):
     else:
         paths = args
     for path in paths:
-        path = core.utils.preprocess_path(path)
+        path = mpp.utils.preprocess_path(path)
 
         file_iterator = loader.iterate_file_data(path=path)
         if file_iterator == None:
-            core.utils.report_bad_path(path)
+            mpp.utils.report_bad_path(path)
             exit_code += 1
             continue
         for each in file_iterator:

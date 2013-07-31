@@ -17,9 +17,9 @@
 #    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-import core.api
+import mpp.api
 
-class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
+class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.code.length.total", "--sclent", action="store_true", default=False,
@@ -32,10 +32,10 @@ class Plugin(core.api.Plugin, core.api.Child, core.api.IConfigurable):
         fields = []
         if self.is_active == True:
             fields.append(self.Field('total', int))
-        core.api.Plugin.initialize(self, fields=fields)
+        mpp.api.Plugin.initialize(self, fields=fields)
         
         if len(fields) != 0:
-            self.subscribe_by_parents_interface(core.api.ICode, 'callback')
+            self.subscribe_by_parents_interface(mpp.api.ICode, 'callback')
 
     def callback(self, parent, data, is_updated):
         is_updated = is_updated or self.is_updated

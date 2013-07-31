@@ -17,16 +17,16 @@
 #    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-import core.api
+import mpp.api
 import logging
 
 # used for testing and development purposes
-class Plugin(core.api.Plugin, core.api.Child):
+class Plugin(mpp.api.Plugin, mpp.api.Child):
     
     def initialize(self):
         return
         # do not trigger version property set, it is a module for testing purposes
-        self.subscribe_by_parents_interface(core.api.ICode)
+        self.subscribe_by_parents_interface(mpp.api.ICode)
 
     def callback(self, parent, data, is_updated):
 
