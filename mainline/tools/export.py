@@ -27,7 +27,7 @@ import core.log
 import core.db.post
 import core.cmdparser
 
-import tools.utils
+import core.utils
 
 class Tool(core.api.ITool):
     def run(self, tool_args):
@@ -106,7 +106,7 @@ def export_to_stdout(out_format, paths, loader, loader_prev):
         assert False, "Unknown output format " + out_format
 
     for path in paths:
-        path = tools.utils.preprocess_path(path)
+        path = core.utils.preprocess_path(path)
         
         files = loader.iterate_file_data(path)
         if files != None:
@@ -121,7 +121,7 @@ def export_to_stdout(out_format, paths, loader, loader_prev):
                     per_file_data.append(file_data.get_data(column[0], column[1]))
                 csvWriter.writerow([file_data.get_path(), None] + per_file_data)
         else:
-            tools.utils.report_bad_path(path)
+            core.utils.report_bad_path(path)
             exit_code += 1
 
     if out_format == 'xml':

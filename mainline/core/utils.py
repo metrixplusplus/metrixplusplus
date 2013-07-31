@@ -17,6 +17,9 @@
 #    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import logging
+import re
+
 class FileRegionsMatcher(object):
 
     class FileRegionsDisposableGetter(object):
@@ -91,3 +94,21 @@ class FileRegionsMatcher(object):
 
     def is_modified(self, curr_id):
         return self.ids[curr_id][1]
+
+def check_db_metadata(loader, loader_prev):
+    for each in loader.iterate_properties():
+        prev = loader_prev.get_property(each.name)
+        if prev != each.value:
+            logging.warn("Previous data file has got different metadata:")
+            logging.warn(" - identification of change trends can be not reliable")
+            logging.warn(" - use 'info' tool to view more details")
+            return 1
+    return 0
+
+def preprocess_path(path):
+    path = re.sub(r'''[\\]+''', "/", path)
+    logging.info("Processing: " + path)
+    return path
+
+def report_bad_path(path):
+    logging.error("Specified path '" + path + "' is invalid: not found in the database records.")

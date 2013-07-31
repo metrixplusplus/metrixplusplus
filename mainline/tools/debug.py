@@ -26,7 +26,7 @@ import core.log
 import core.cmdparser
 import core.db.post
 
-import tools.utils
+import core.utils
 
 class Tool(core.api.ITool):
     def run(self, tool_args):
@@ -60,11 +60,11 @@ def dumphtml(args, loader):
     result = ""
     result += '<html><body>'
     for path in args:
-        path = tools.utils.preprocess_path(path)
+        path = core.utils.preprocess_path(path)
         
         data = loader.load_file_data(path)
         if data == None:
-            tools.utils.report_bad_path(path)
+            core.utils.report_bad_path(path)
             exit_code += 1
             continue
         
