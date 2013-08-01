@@ -3,15 +3,12 @@ Usage: metrix++.py limit [options] -- [path 1] ... [path N]
 Options:
   -h, --help            show this help message and exit
   --db-file=DB_FILE, --dbf=DB_FILE
-                        Primary database file to write (by the collector) and
-                        post-process (by other tools) [default: ./metrixpp.db]
+                        Path to a database file to read and process [default:
+                        ./metrixpp.db].
   --db-file-prev=DB_FILE_PREV, --dbfp=DB_FILE_PREV
-                        Database file with data collected for the
-                        past/previous revision. If it is set for the collector
-                        tool to perform an incremental/iterative collection,
-                        it may reduce the processing time significantly. Post-
-                        processing tools use it in order to recognise/evaluate
-                        change trends. [default: none].
+                        Path to database file with data collected for the
+                        past/previous code revision. It is used to identify
+                        and evaluate/analyze change trends. [default: none].
   --log-level=LOG_LEVEL, --ll=LOG_LEVEL
                         Defines log level. Possible values are
                         'DEBUG','INFO','WARNING' or 'ERROR'. Default value is

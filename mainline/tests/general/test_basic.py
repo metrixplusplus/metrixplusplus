@@ -138,7 +138,7 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('--help')
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('unknown', exit_code=1)
+        runner = tests.common.ToolRunner('unknown', exit_code=2)
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('collect', ['--help'])
