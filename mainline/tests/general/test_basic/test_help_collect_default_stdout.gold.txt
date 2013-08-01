@@ -1,4 +1,6 @@
-Usage: metrix++.py collect [options] -- [path 1] ... [path N]
+Usage: python metrix++.py --help
+       python metrix++.py collect --help
+       python metrix++.py collect [options] -- [path 1] ... [path N]
 
 Options:
   -h, --help            show this help message and exit

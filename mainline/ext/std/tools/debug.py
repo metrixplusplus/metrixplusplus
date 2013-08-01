@@ -22,6 +22,7 @@ import logging
 import cgi
 
 import mpp.api
+import mpp.utils
 
 class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
     
@@ -63,7 +64,9 @@ def dumphtml(args, loader):
         
         result += '<table><tr><td><pre>'
         last_pos = 0
-        for marker in data.iterate_markers():
+        for marker in data.iterate_markers(filter_group= mpp.api.Marker.T.COMMENT |
+                                           mpp.api.Marker.T.STRING |
+                                           mpp.api.Marker.T.PREPROCESSOR):
             result += (cgi.escape(text[last_pos:marker.begin]))
             if marker.get_type() == data.get_marker_types().STRING:
                 result += ('<span style="color:#0000FF">')
@@ -72,7 +75,6 @@ def dumphtml(args, loader):
             elif marker.get_type() == data.get_marker_types().PREPROCESSOR:
                 result += ('<span style="color:#990000">')
             else:
-                # TODO add tests for debug tool
                 assert False, "Uknown marker type"
             result += (cgi.escape(text[marker.begin:marker.end]))
             result += ('</span>')

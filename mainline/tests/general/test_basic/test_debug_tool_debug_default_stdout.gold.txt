@@ -1,0 +1,103 @@
+<html><body><table><tr><td><pre>
+
+<span style="color:#009900">// Just produce any code in order to test basic workflow</span>
+namespace hmm
+{
+
+class A
+{
+
+	A()
+	{
+		<span style="color:#009900">/* first funtion */</span>
+		this-&gt;m_member = 10;
+		if (a &amp; b)
+		{
+			for (int i = 0; i &lt; 0 &amp;&amp; i &gt; 0; i++)
+			{
+				int a; <span style="color:#009900">// right?</span>
+			}
+		}
+	}
+
+	int func(int param = 5)
+	{
+		class embeded
+		{
+			embeded()
+			{
+				int a = 10;
+				if (true)
+				{
+					<span style="color:#009900">// again crazy</span>
+				}
+			}
+		};
+		if (a);
+	}
+
+	int never(int how_long = 999)
+	{
+		while(true)
+		{
+
+		}
+		return 1;
+	}
+
+	int m_member = 10;
+};
+
+}
+</pre></td><td><pre><span style="background-color:#F0F010"><a href="#line0" id=line"0"></a>
+
+<span style="background-color:#F0F070"><a href="#line4" id=line"4"></a>// Just produce any code in order to test basic workflow
+namespace hmm
+{
+
+<span style="background-color:#F0F0D0"><a href="#line7" id=line"7"></a>class A
+{
+
+	<span style="background-color:#F0F030"><a href="#line10" id=line"10"></a>A()
+	{
+		/* first funtion */
+		this-&gt;m_member = 10;
+		if (a &amp; b)
+		{
+			for (int i = 0; i &lt; 0 &amp;&amp; i &gt; 0; i++)
+			{
+				int a; // right?
+			}
+		}
+	}</span>
+
+	<span style="background-color:#F030F0"><a href="#line23" id=line"23"></a>int func(int param = 5)
+	{
+		<span style="background-color:#F0F090"><a href="#line25" id=line"25"></a>class embeded
+		{
+			<span style="background-color:#F0F0E0"><a href="#line27" id=line"27"></a>embeded()
+			{
+				int a = 10;
+				if (true)
+				{
+					// again crazy
+				}
+			}</span>
+		}</span>;
+		if (a);
+	}</span>
+
+	<span style="background-color:#F0F030"><a href="#line39" id=line"39"></a>int never(int how_long = 999)
+	{
+		while(true)
+		{
+
+		}
+		return 1;
+	}</span>
+
+	int m_member = 10;
+}</span>;
+
+}</span>
+</span></pre></td></tr></table></body></html>

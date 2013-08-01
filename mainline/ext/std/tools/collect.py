@@ -46,13 +46,17 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
                          help="Defines the pattern to exclude files from processing [default: %default]")
         parser.add_option("--non-recursively", "--nr", action="store_true", default=False,
                          help="If the option is set (True), sub-directories are not processed [default: %default]")
+        self.optparser = parser
     
     def configure(self, options):
-        self.non_recursively = options.__dict__['non_recursively']
-        self.add_exclude_rule(re.compile(options.__dict__['exclude_files']))
         self.is_proctime_enabled = options.__dict__['std.general.proctime']
         self.is_procerrors_enabled = options.__dict__['std.general.procerrors']
         self.is_size_enabled = options.__dict__['std.general.size']
+        try:
+            self.add_exclude_rule(re.compile(options.__dict__['exclude_files']))
+        except Exception as e:
+            self.optparser.error("option --exclude-files: " + str(e))
+        self.non_recursively = options.__dict__['non_recursively']
 
     def initialize(self):
         fields = []
@@ -83,8 +87,6 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
         return None
 
     def add_exclude_rule(self, re_compiled_pattern):
-        # TODO file name may have special regexp symbols what causes an exception
-        # For example try to run a collection with "--db-file=metrix++" option
         self.exclude_rules.append(re_compiled_pattern)
 
     def add_exclude_file(self, file_path):

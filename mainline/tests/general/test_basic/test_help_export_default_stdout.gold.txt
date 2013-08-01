@@ -1,4 +1,6 @@
-Usage: metrix++.py export [options] -- [path 1] ... [path N]
+Usage: python metrix++.py --help
+       python metrix++.py export --help
+       python metrix++.py export [options] -- [path 1] ... [path N]
 
 Options:
   -h, --help            show this help message and exit
