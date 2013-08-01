@@ -96,11 +96,11 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
     def initialize(self):
         super(Plugin, self).initialize()
         db_loader = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
-        self.verify_namespaces(db_loader.iterate_namespace_names())
+        self._verify_namespaces(db_loader.iterate_namespace_names())
         for each in db_loader.iterate_namespace_names():
-            self.verify_fields(each, db_loader.get_namespace(each).iterate_field_names())
+            self._verify_fields(each, db_loader.get_namespace(each).iterate_field_names())
     
-    def verify_namespaces(self, valid_namespaces):
+    def _verify_namespaces(self, valid_namespaces):
         valid = []
         for each in valid_namespaces:
             valid.append(each)
@@ -108,7 +108,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
             if each.namespace not in valid:
                 self.parser.error("Invalid limit option (namespace does not exist): " + each.namespace)
 
-    def verify_fields(self, namespace, valid_fields):
+    def _verify_fields(self, namespace, valid_fields):
         valid = []
         for each in valid_fields:
             valid.append(each)
