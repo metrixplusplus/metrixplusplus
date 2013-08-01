@@ -1,148 +1,79 @@
-================================================================================
-Export
-________________________________________________________________________________
+./simple.cpp:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-487
+	Line numbers   : 1-52
 
---------------------------------------------------------------------------------
-data:  
-.   info: 
-.   .   path="./simple.cpp"
-.   .   id="1"
-.   file-data:  
-.   .   regions:
-.   .   
-.   .   .   region:  
-.   .   .   .   info: 
-.   .   .   .   .   cursor="0"
-.   .   .   .   .   name="__global__"
-.   .   .   .   .   offset_end="487"
-.   .   .   .   .   line_begin="1"
-.   .   .   .   .   type="global"
-.   .   .   .   .   line_end="52"
-.   .   .   .   .   offset_begin="0"
-.   .   .   .   data: 
-.   .   .   .   subregions:
-.   .   .   .   
-.   .   .   .   .   subregion:  
-.   .   .   .   .   .   info: 
-.   .   .   .   .   .   .   cursor="4"
-.   .   .   .   .   .   .   name="hmm"
-.   .   .   .   .   .   .   offset_end="486"
-.   .   .   .   .   .   .   line_begin="3"
-.   .   .   .   .   .   .   type="namespace"
-.   .   .   .   .   .   .   line_end="51"
-.   .   .   .   .   .   .   offset_begin="2"
-.   .   .   .   .   .   data: 
-.   .   .   .   .   .   subregions:
-.   .   .   .   .   .   
-.   .   .   .   .   .   .   subregion:  
-.   .   .   .   .   .   .   .   info: 
-.   .   .   .   .   .   .   .   .   cursor="7"
-.   .   .   .   .   .   .   .   .   name="A"
-.   .   .   .   .   .   .   .   .   offset_end="482"
-.   .   .   .   .   .   .   .   .   line_begin="7"
-.   .   .   .   .   .   .   .   .   type="class"
-.   .   .   .   .   .   .   .   .   line_end="49"
-.   .   .   .   .   .   .   .   .   offset_begin="76"
-.   .   .   .   .   .   .   .   data: 
-.   .   .   .   .   .   .   .   subregions:
-.   .   .   .   .   .   .   .   
-.   .   .   .   .   .   .   .   .   subregion:  
-.   .   .   .   .   .   .   .   .   .   info: 
-.   .   .   .   .   .   .   .   .   .   .   cursor="10"
-.   .   .   .   .   .   .   .   .   .   .   name="A"
-.   .   .   .   .   .   .   .   .   .   .   offset_end="234"
-.   .   .   .   .   .   .   .   .   .   .   line_begin="10"
-.   .   .   .   .   .   .   .   .   .   .   type="function"
-.   .   .   .   .   .   .   .   .   .   .   line_end="21"
-.   .   .   .   .   .   .   .   .   .   .   offset_begin="88"
-.   .   .   .   .   .   .   .   .   .   data: 
-.   .   .   .   .   .   .   .   .   .   subregions:
-.   .   .   .   .   .   .   .   
-.   .   .   .   .   .   .   .   .   subregion:  
-.   .   .   .   .   .   .   .   .   .   info: 
-.   .   .   .   .   .   .   .   .   .   .   cursor="23"
-.   .   .   .   .   .   .   .   .   .   .   name="func"
-.   .   .   .   .   .   .   .   .   .   .   offset_end="386"
-.   .   .   .   .   .   .   .   .   .   .   line_begin="23"
-.   .   .   .   .   .   .   .   .   .   .   type="function"
-.   .   .   .   .   .   .   .   .   .   .   line_end="37"
-.   .   .   .   .   .   .   .   .   .   .   offset_begin="237"
-.   .   .   .   .   .   .   .   .   .   data: 
-.   .   .   .   .   .   .   .   .   .   subregions:
-.   .   .   .   .   .   .   .   .   .   
-.   .   .   .   .   .   .   .   .   .   .   subregion:  
-.   .   .   .   .   .   .   .   .   .   .   .   info: 
-.   .   .   .   .   .   .   .   .   .   .   .   .   cursor="25"
-.   .   .   .   .   .   .   .   .   .   .   .   .   name="embeded"
-.   .   .   .   .   .   .   .   .   .   .   .   .   offset_end="372"
-.   .   .   .   .   .   .   .   .   .   .   .   .   line_begin="25"
-.   .   .   .   .   .   .   .   .   .   .   .   .   type="class"
-.   .   .   .   .   .   .   .   .   .   .   .   .   line_end="35"
-.   .   .   .   .   .   .   .   .   .   .   .   .   offset_begin="266"
-.   .   .   .   .   .   .   .   .   .   .   .   data: 
-.   .   .   .   .   .   .   .   .   .   .   .   subregions:
-.   .   .   .   .   .   .   .   .   .   .   .   
-.   .   .   .   .   .   .   .   .   .   .   .   .   subregion:  
-.   .   .   .   .   .   .   .   .   .   .   .   .   .   info: 
-.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   cursor="27"
-.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   name="embeded"
-.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   offset_end="368"
-.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   line_begin="27"
-.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   type="function"
-.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   line_end="34"
-.   .   .   .   .   .   .   .   .   .   .   .   .   .   .   offset_begin="287"
-.   .   .   .   .   .   .   .   .   .   .   .   .   .   data: 
-.   .   .   .   .   .   .   .   .   .   .   .   .   .   subregions:
-.   .   .   .   .   .   .   .   
-.   .   .   .   .   .   .   .   .   subregion:  
-.   .   .   .   .   .   .   .   .   .   info: 
-.   .   .   .   .   .   .   .   .   .   .   cursor="39"
-.   .   .   .   .   .   .   .   .   .   .   name="never"
-.   .   .   .   .   .   .   .   .   .   .   offset_end="459"
-.   .   .   .   .   .   .   .   .   .   .   line_begin="39"
-.   .   .   .   .   .   .   .   .   .   .   type="function"
-.   .   .   .   .   .   .   .   .   .   .   line_end="46"
-.   .   .   .   .   .   .   .   .   .   .   offset_begin="389"
-.   .   .   .   .   .   .   .   .   .   data: 
-.   .   .   .   .   .   .   .   .   .   subregions:
-.   .   std.general: 
-.   .   .   proctime="0.01"
-.   .   .   size="487"
-.   subfiles:
-.   subdirs:
-.   aggregated-data:  
-.   .   std.general:  
-.   .   .   procerrors: 
-.   .   .   .   count="0"
-.   .   .   .   max="None"
-.   .   .   .   avg="None"
-.   .   .   .   total="0.0"
-.   .   .   .   min="None" 
-.   .   .   .   distribution-bars:
-.   .   .   proctime: 
-.   .   .   .   count="1"
-.   .   .   .   max="0.01"
-.   .   .   .   avg="0.01"
-.   .   .   .   total="0.01"
-.   .   .   .   min="0.01" 
-.   .   .   .   distribution-bars:
-.   .   .   .   
-.   .   .   .   .   distribution-bar: 
-.   .   .   .   .   .   count="1"
-.   .   .   .   .   .   metric="0.01"
-.   .   .   .   .   .   ratio="1.0"
-.   .   .   size: 
-.   .   .   .   count="1"
-.   .   .   .   max="487"
-.   .   .   .   avg="487.0"
-.   .   .   .   total="487.0"
-.   .   .   .   min="487" 
-.   .   .   .   distribution-bars:
-.   .   .   .   
-.   .   .   .   .   distribution-bar: 
-.   .   .   .   .   .   count="1"
-.   .   .   .   .   .   metric="487"
-.   .   .   .   .   .   ratio="1.0"
-================================================================================
+.   ./simple.cpp:4: info: Metrics per 'hmm' region
+    	Region name    : hmm
+    	Region type    : namespace
+    	Offsets        : 2-486
+    	Line numbers   : 3-51
+
+.   .   ./simple.cpp:7: info: Metrics per 'A' region
+        	Region name    : A
+        	Region type    : class
+        	Offsets        : 76-482
+        	Line numbers   : 7-49
+
+.   .   .   ./simple.cpp:10: info: Metrics per 'A' region
+            	Region name    : A
+            	Region type    : function
+            	Offsets        : 88-234
+            	Line numbers   : 10-21
+
+.   .   .   ./simple.cpp:23: info: Metrics per 'func' region
+            	Region name    : func
+            	Region type    : function
+            	Offsets        : 237-386
+            	Line numbers   : 23-37
+
+.   .   .   .   ./simple.cpp:25: info: Metrics per 'embeded' region
+                	Region name    : embeded
+                	Region type    : class
+                	Offsets        : 266-372
+                	Line numbers   : 25-35
+
+.   .   .   .   .   ./simple.cpp:27: info: Metrics per 'embeded' region
+                    	Region name    : embeded
+                    	Region type    : function
+                    	Offsets        : 287-368
+                    	Line numbers   : 27-34
+
+.   .   .   ./simple.cpp:39: info: Metrics per 'never' region
+            	Region name    : never
+            	Region type    : function
+            	Offsets        : 389-459
+            	Line numbers   : 39-46
+
+./simple.cpp:0: info: Metrics per file
+	std.general:proctime: 0.01
+	std.general:size: 487
+
+./simple.cpp:: info: Overall metrics for 'std.general:procerrors' metric
+	Average        : None
+	Minimum        : None
+	Maximum        : None
+	Total          : 0.0
+	Distribution   : 0 files/regions measured
+	  Metric value : Ratio : Number of files/regions
+
+./simple.cpp:: info: Overall metrics for 'std.general:proctime' metric
+	Average        : 0.01
+	Minimum        : 0.01
+	Maximum        : 0.01
+	Total          : 0.01
+	Distribution   : 1 files/regions measured
+	  Metric value : Ratio : Number of files/regions
+	        0.0100 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+./simple.cpp:: info: Overall metrics for 'std.general:size' metric
+	Average        : 487.0
+	Minimum        : 487
+	Maximum        : 487
+	Total          : 487.0
+	Distribution   : 1 files/regions measured
+	  Metric value : Ratio : Number of files/regions
+	           487 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
