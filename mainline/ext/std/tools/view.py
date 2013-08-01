@@ -192,54 +192,73 @@ def append_diff(main_tree, prev_tree):
 def append_diff_list(main_list, prev_list):
     merged_list = {}
     for bar in main_list:
-        merged_list[bar['metric']] = {'count': bar['count'], '__diff__':0}
+        merged_list[bar['metric']] = {'count': bar['count'], '__diff__':0, 'ratio': bar['ratio']}
     for bar in prev_list:
         if bar['metric'] in merged_list.keys():
             merged_list[bar['metric']]['__diff__'] = \
                 merged_list[bar['metric']]['count'] - bar['count']
         else:
-            merged_list[bar['metric']] = {'count': 0, '__diff__':-bar['count']}
+            merged_list[bar['metric']] = {'count': 0, '__diff__':-bar['count'], 'ratio': bar['ratio']}
     result = []
     for metric in sorted(merged_list.keys()):
-        result.append({'metric':metric, 'count':merged_list[metric]['count'], '__diff__':merged_list[metric]['__diff__']})
+        result.append({'metric':metric,
+                       'count':merged_list[metric]['count'],
+                       'ratio':merged_list[metric]['ratio'],
+                       '__diff__':merged_list[metric]['__diff__']})
     return result
+
+def cout_txt_regions(regions, indent = 0):
+    print indent, "dumping regions"
+    for region in regions:
+        print indent, 'region:', region['info']
+        for namespace in region['data'].keys():
+            diff_data = {}
+            if '__diff__' in region['data'][namespace].keys():
+                diff_data = region['data'][namespace]['__diff__']
+            for field in region['data'][namespace].keys():
+                diff_str = ""
+                if field == '__diff__':
+                    continue
+                if field in diff_data.keys():
+                    diff_str = "[" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
+                print indent, namespace, field, region['data'][namespace][field], diff_str
+        if 'subregions' in region.keys():
+            cout_txt_regions(region['subregions'], indent=indent+1)
 
 def cout_txt(data):
     print "FILE DATA"
     for key in data['file-data'].keys():
         if key == 'regions':
-            print "dumping regions"
-            for region in data['file-data'][key]:
-                print 'region:', region['info']
-                for namespace in region['data'].keys():
-                    diff_data = None
-                    diff_str = ""
-                    if '__diff__' in region['data'][namespace].keys():
-                        diff_data = region['data'][namespace]['__diff__']
-                    for field in region['data'][namespace].keys():
-                        if field == '__diff__':
-                            continue
-                        if diff_data != None:
-                            diff_str = "[" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
-                        print namespace, field, region['data'][namespace][field], diff_str
+            cout_txt_regions(data['file-data'][key])
         else:
-            print "dumping data", key, data['file-data']
-            
-            
-            diff_data = None
-            diff_str = ""
+            print "dumping per file data"
             namespace = key
+            diff_data = {}
             if '__diff__' in data['file-data'][namespace].keys():
                 diff_data = data['file-data'][namespace]['__diff__']
             for field in data['file-data'][namespace].keys():
+                diff_str = ""
                 if field == '__diff__':
                     continue
-                if diff_data != None:
-                    #diff_str = "[" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
-                    pass
+                if field in diff_data.keys():
+                    diff_str = "[" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
                 print namespace, field, data['file-data'][namespace][field], diff_str
     print "AGGREGATED DATA"
     for namespace in data['aggregated-data'].keys():
         for field in data['aggregated-data'][namespace].keys():
-            print data['aggregated-data'][namespace][field]
+            diff_data = {}
+            if '__diff__' in data['aggregated-data'][namespace][field].keys():
+                diff_data = data['aggregated-data'][namespace][field]['__diff__']
+            for attr in data['aggregated-data'][namespace][field].keys():
+                diff_str = ""
+                if attr == 'distribution-bars' or attr == '__diff__':
+                    continue
+                if attr in diff_data.keys():
+                    diff_str = "[" + ("+" if diff_data[attr] >= 0 else "") + str(diff_data[attr]) + "]"
+                print namespace, field, attr, data['aggregated-data'][namespace][field][attr], diff_str
+            for bar in data['aggregated-data'][namespace][field]['distribution-bars']:
+                diff_str = ""
+                if '__diff__' in bar.keys():
+                    diff_str = "[" + ("+" if bar['__diff__'] >= 0 else "") + str(bar['__diff__']) + "]"
+                print "bar:", '|'*int(round(bar['ratio']*100)), bar['ratio'], bar['count'], bar['metric'], diff_str 
     
