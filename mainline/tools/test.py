@@ -18,12 +18,9 @@
 #
 
 
-import subprocess
-import os.path
-import itertools
+import os
 
-import mpp.log
-import mpp.cmdparser
+import mpp.internal.loader
 
 import mpp.api
 class Tool(mpp.api.ITool):
@@ -31,37 +28,12 @@ class Tool(mpp.api.ITool):
         return main(tool_args)
 
 def main(tool_args):
-    exit_code = 0
-    log_plugin = mpp.log.Plugin()
-
-    parser = mpp.cmdparser.MultiOptionParser(usage="Usage: %prog test [options] -- [testgroup-dir-path-1[/testsuite-file-path-1]] ... [...path-N]")
-    log_plugin.declare_configuration(parser, default_value='ERROR')
-    parser.add_option("-g", "--generate-golds", "--gg", action="store_true", default=False,
-                         help="If the option is set (True), new gold files are generated (replacing existing) [default: %default]")
-
-    (options, args) = parser.parse_args(tool_args)
-    log_plugin.configure(options)
-    
-    os.environ['METRIXPLUSPLUS_TEST_GENERATE_GOLDS'] = str(options.__dict__['generate_golds'])
-    os.environ['METRIXPLUSPLUS_TEST_MODE'] = str("True")
-    
-    tests_dir = os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'tests')
-    process_data= ["python", "-m", "unittest", "discover", "-v", "-s"]
-    if len(args) == 0 or tests_dir == os.path.abspath(args[0]):
-        for fname in os.listdir(tests_dir):
-            full_path = os.path.join(tests_dir, fname)
-            if os.path.isdir(full_path) and fname != "sources":
-                exit_code += subprocess.call(itertools.chain(process_data, [full_path]),
-                                             cwd=os.environ['METRIXPLUSPLUS_INSTALL_DIR'])
-    else:
-        for arg in args:
-            if os.path.isdir(arg):
-                exit_code += subprocess.call(itertools.chain(process_data, [arg]),
-                                             cwd=os.environ['METRIXPLUSPLUS_INSTALL_DIR'])
-            else:
-                dir_name = os.path.dirname(arg)
-                file_name = os.path.basename(arg)
-                exit_code += subprocess.call(itertools.chain(process_data, [dir_name, "-p", file_name]),
-                                             cwd=os.environ['METRIXPLUSPLUS_INSTALL_DIR'])
+    loader = mpp.internal.loader.Loader()
+    mpp_paths = []
+    # TODO document this feature
+    if 'METRIXPLUSPLUS_PATH' in os.environ.keys():
+        mpp_paths = os.environ['METRIXPLUSPLUS_PATH'].split(os.pathsep)
+    args = loader.load('test', mpp_paths, tool_args)
+    exit_code = loader.run(args)
+    loader.unload()
     return exit_code
-            
