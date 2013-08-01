@@ -20,8 +20,6 @@
 import mpp.api
 
 import os.path
-import re
-
 import logging
 
 class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
@@ -56,15 +54,11 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
                 except:
                     logging.warn("Failure in removing file: " + self.dbfile)
     
-            created = self.get_plugin_loader().get_database_loader().create_database(self.dbfile, previous_db = self.dbfile_prev)
+            self.loader = mpp.api.Loader()
+            created = self.loader.create_database(self.dbfile, previous_db = self.dbfile_prev)
             if created == False:
                 self.parser.error("Failure in creating file: " + self.dbfile)
             
-            # do not process files dumped by this module
-            self.get_plugin_loader().get_plugin('mpp.dir').add_exclude_rule(re.compile(r'^' + os.path.basename(self.dbfile) + r'$'))
-            if self.dbfile_prev != None:
-                self.get_plugin_loader().get_plugin('mpp.dir').add_exclude_rule(re.compile(r'^' + os.path.basename(self.dbfile_prev) + r'$'))
-
         else:
             self.loader_prev = mpp.api.Loader()
             if self.dbfile_prev != None:
@@ -73,6 +67,12 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
             self.loader = mpp.api.Loader()
             if self.loader.open_database(self.dbfile) == False:
                 self.parser.error("Can not open file: " + self.dbfile)
+
+    def get_dbfile_path(self):
+        return self.dbfile
+
+    def get_dbfile_prev_path(self):
+        return self.dbfile_prev
 
     def get_loader(self):
         return self.loader

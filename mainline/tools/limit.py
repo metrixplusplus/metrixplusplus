@@ -20,13 +20,12 @@
 import logging
 
 import mpp.log
-import mpp.db.post
+import mpp.dbf
 import mpp.utils
 import mpp.cout
 import mpp.warn
 import mpp.cmdparser
 
-import mpp.utils
 
 import mpp.api
 class Tool(mpp.api.ITool):
@@ -37,7 +36,7 @@ def main(tool_args):
     
     exit_code = 0
     log_plugin = mpp.log.Plugin()
-    db_plugin = mpp.db.post.Plugin()
+    db_plugin = mpp.dbf.Plugin()
     warn_plugin = mpp.warn.Plugin()
 
     parser = mpp.cmdparser.MultiOptionParser(usage="Usage: %prog limit [options] -- [path 1] ... [path N]")

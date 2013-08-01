@@ -92,7 +92,14 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
                     self.parser.error("Invalid format of the '--min-limit' option: " + each)
                 limit = Limit("min", float(match.group(3)), match.group(1), match.group(2), (match.group(2), '<', float(match.group(3))))
                 self.limits.append(limit)
-                
+    
+    def initialize(self):
+        super(Plugin, self).initialize()
+        db_loader = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
+        self.verify_namespaces(db_loader.iterate_namespace_names())
+        for each in db_loader.iterate_namespace_names():
+            self.verify_fields(each, db_loader.get_namespace(each).iterate_field_names())
+    
     def verify_namespaces(self, valid_namespaces):
         valid = []
         for each in valid_namespaces:

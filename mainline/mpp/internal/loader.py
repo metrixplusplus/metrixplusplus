@@ -18,21 +18,21 @@
 #
 
 import mpp.api
+import mpp.cmdparser
 
 import os
-import fnmatch
+import sys
+import ConfigParser
+import re
+
+
 
 class Loader(object):
 
     def __init__(self):
         self.plugins = []
-        self.parsers = []
         self.hash    = {}
-        self.db = mpp.api.Loader()
         
-    def get_database_loader(self):
-        return self.db
-
     def get_plugin(self, name):
         return self.hash[name]['instance']
     
@@ -44,31 +44,23 @@ class Loader(object):
             for item in reversed(self.plugins):
                 yield item['instance']
             
-    def register_parser(self, fnmatch_exp_list, parser):
-        self.parsers.append((fnmatch_exp_list, parser))
+    def load(self, command, directories, args):
 
-    def get_parser(self, file_path):
-        for parser in self.parsers:
-            for fnmatch_exp in parser[0]:
-                if fnmatch.fnmatch(file_path, fnmatch_exp):
-                    return parser[1]
-        return None
-
-    def load(self, directory, optparser, args):
-        import sys
-        sys.path.append(directory)
-        
-        def load_recursively(manager, directory):
-            import ConfigParser
-            import re
-        
+        class IniContainer(object):
+            def __init__(self):
+                self.plugins = []
+                self.actions = []
+                self.hash    = {}
+                
+        def load_recursively(inicontainer, directory):
+            active_plugins = []
             pattern = re.compile(r'.*[.]ini$', flags=re.IGNORECASE)
         
             dirList = os.listdir(directory)
             for fname in dirList:
                 fname = os.path.join(directory, fname)
                 if os.path.isdir(fname):
-                    load_recursively(manager, fname)
+                    active_plugins += load_recursively(inicontainer, fname)
                 elif re.match(pattern, fname):
                     config = ConfigParser.ConfigParser()
                     config.read(fname)
@@ -77,15 +69,58 @@ class Loader(object):
                             'class': config.get('Plugin', 'class'),
                             'version': config.get('Plugin', 'version'),
                             'depends': config.get('Plugin', 'depends'),
-                            'enabled': config.getboolean('Plugin', 'enabled')}
+                            'actions': config.get('Plugin', 'actions'),
+                            'enabled': config.getboolean('Plugin', 'enabled'),
+                            'instance': None}
                     if item['enabled']:
-                        manager.plugins.append(item)
-                        manager.hash[item['package'] + '.' + item['module']] = item
+                        item['actions'] = item['actions'].split(',')
+                        for (ind, action) in enumerate(item['actions']):
+                            action = action.strip()
+                            item['actions'][ind] = action
+                            if action not in inicontainer.actions + ['*', 'None', 'none', 'False', 'false']:
+                                inicontainer.actions.append(action)
+                            if action == '*' or action == command:
+                                active_plugins.append(item['package'] + '.' + item['module'])
+                        inicontainer.plugins.append(item)
+                        inicontainer.hash[item['package'] + '.' + item['module']] = item
+            return active_plugins
+                        
+        def list_dependants_recursively(inicontainer, required_plugin_name):
+            assert required_plugin_name in inicontainer.hash.keys(), \
+                "depends section requires unknown plugin: " + required_plugin_name
+            item = inicontainer.hash[required_plugin_name]
+            if item['depends'] in ('None', 'none', 'False', 'false'):
+                return []
+            result = []
+            for child in item['depends'].split(','):
+                child = child.strip()
+                result += list_dependants_recursively(inicontainer, child)
+                result.append(child)
+            return result
 
-        load_recursively(self, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ext-priority'))
-        load_recursively(self, directory)
-        # TODO check dependencies
-        for item in self.plugins:
+        # configure python path for loading
+        std_ext_dir = os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'ext')
+        std_ext_priority_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        for each in [std_ext_dir] + directories:
+            sys.path.append(each)
+
+        inicontainer = IniContainer()
+        # load available plugin ini files
+        required_plugins = []
+        for each in ([std_ext_priority_dir, std_ext_dir] + directories):
+            required_plugins += load_recursively(inicontainer, each)
+            
+        # upgrade the list of required plugins
+        required_and_dependant_plugins = []
+        for name in required_plugins:
+            for each in list_dependants_recursively(inicontainer, name):
+                if each not in required_and_dependant_plugins:
+                    required_and_dependant_plugins.append(each)
+            required_and_dependant_plugins.append(name)
+            
+        # load
+        for plugin_name in required_and_dependant_plugins:
+            item = inicontainer.hash[plugin_name]
             plugin = __import__(item['package'], globals(), locals(), [item['module']], -1)
             module_attr = plugin.__getattribute__(item['module'])
             class_attr = module_attr.__getattribute__(item['class'])
@@ -94,6 +129,14 @@ class Loader(object):
             item['instance'].set_name(item['package'] + "." + item['module'])
             item['instance'].set_version(item['version'])
             item['instance'].set_plugin_loader(self)
+            self.plugins.append(item)
+            self.hash[plugin_name] = item
+
+        optparser =mpp.cmdparser.MultiOptionParser(
+            usage="Usage: %prog {command} [options] -- [path 1] ... [path N]".format(command=command))
+
+        if command not in inicontainer.actions:
+            optparser.error("Unknown action: {action}".format(action={command}))
 
         for item in self.iterate_plugins():
             if (isinstance(item, mpp.api.IConfigurable)):

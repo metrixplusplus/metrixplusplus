@@ -19,12 +19,9 @@
 
 
 import mpp.log
-import mpp.db.post
+import mpp.dbf
 import mpp.utils
 import mpp.cmdparser
-import mpp.export.convert
-
-import mpp.utils
 
 import mpp.api
 class Tool(mpp.api.ITool):
@@ -34,7 +31,7 @@ class Tool(mpp.api.ITool):
 def main(tool_args):
     
     log_plugin = mpp.log.Plugin()
-    db_plugin = mpp.db.post.Plugin()
+    db_plugin = mpp.dbf.Plugin()
 
     parser = mpp.cmdparser.MultiOptionParser(usage="Usage: %prog view [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)
@@ -114,14 +111,14 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions):
                 "subfiles": subfiles}
 
         if out_format == 'txt':
-            result += mpp.export.convert.to_txt(data, root_name = "data") + "\n"
+            result += mpp.utils.serialize_to_txt(data, root_name = "data") + "\n"
         elif out_format == 'xml':
-            result += mpp.export.convert.to_xml(data, root_name = "data") + "\n"
+            result += mpp.utils.serialize_to_xml(data, root_name = "data") + "\n"
         elif out_format == 'python':
             postfix = ""
             if ind < len(paths) - 1:
                 postfix = ", "
-            result += mpp.export.convert.to_python(data, root_name = "data") + postfix
+            result += mpp.utils.serialize_to_python(data, root_name = "data") + postfix
 
     if out_format == 'txt':
         result += "\n"

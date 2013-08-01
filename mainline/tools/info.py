@@ -19,7 +19,7 @@
 
 
 import mpp.api
-import mpp.db.post
+import mpp.dbf
 import mpp.log
 import mpp.cmdparser
 
@@ -32,7 +32,7 @@ class Tool(mpp.api.ITool):
 def main(tool_args):
     exit_code = 0
     log_plugin = mpp.log.Plugin()
-    db_plugin = mpp.db.post.Plugin()
+    db_plugin = mpp.dbf.Plugin()
 
     parser = mpp.cmdparser.MultiOptionParser(usage="Usage: %prog info [options] -- [path 1] ... [path N]")
     log_plugin.declare_configuration(parser)

@@ -38,7 +38,7 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IParser, mpp.api.IConfigura
         mpp.api.Plugin.initialize(self, properties=[
             self.Property('files', ','.join(self.files))
         ])
-        self.get_plugin_loader().register_parser(self.files, self)
+        self.get_plugin_loader().get_plugin('std.tools.collect').register_parser(self.files, self)
         
     def process(self, parent, data, is_updated):
         is_updated = is_updated or self.is_updated

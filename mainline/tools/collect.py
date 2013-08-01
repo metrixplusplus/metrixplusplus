@@ -18,10 +18,9 @@
 #
 
 
-import os.path
+import os
 
-import mpp.loader
-import mpp.cmdparser
+import mpp.internal.loader
 
 import mpp.api
 class Tool(mpp.api.ITool):
@@ -29,9 +28,12 @@ class Tool(mpp.api.ITool):
         return main(tool_args)
 
 def main(tool_args):
-    loader = mpp.loader.Loader()
-    parser =mpp.cmdparser.MultiOptionParser(usage="Usage: %prog collect [options] -- [path 1] ... [path N]")
-    args = loader.load(os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'ext'), parser, tool_args)
+    loader = mpp.internal.loader.Loader()
+    mpp_paths = []
+    # TODO document this feature
+    if 'METRIXPLUSPLUS_PATH' in os.environ.keys():
+        mpp_paths = os.environ['METRIXPLUSPLUS_PATH'].split(os.pathsep)
+    args = loader.load('collect', mpp_paths, tool_args)
     exit_code = loader.run(args)
     loader.unload()
     return exit_code

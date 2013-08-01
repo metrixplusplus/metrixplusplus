@@ -17,6 +17,9 @@
 #    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import mpp.internal.py2xml
+import mpp.internal.py2txt
+
 import logging
 import re
 
@@ -112,3 +115,19 @@ def preprocess_path(path):
 
 def report_bad_path(path):
     logging.error("Specified path '" + path + "' is invalid: not found in the database records.")
+
+def serialize_to_xml(data, root_name = None):
+    serializer = mpp.internal.py2xml.Py2XML()
+    return serializer.parse(data, objName=root_name)
+
+def serialize_to_python(data, root_name = None):
+    prefix = ""
+    postfix = ""
+    if root_name != None:
+        prefix = "{'" + root_name + ": " 
+        postfix = "}"
+    return prefix + data.__repr__() + postfix
+
+def serialize_to_txt(data, root_name = None):
+    serializer = mpp.internal.py2txt.Py2TXT()
+    return serializer.parse(data, objName=root_name, indent = -1)
