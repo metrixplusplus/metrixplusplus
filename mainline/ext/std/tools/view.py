@@ -92,6 +92,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions):
 
         if out_format == 'txt':
             result += mpp.utils.serialize_to_txt(data, root_name = "data") + "\n"
+            #cout_txt(data)
         elif out_format == 'xml':
             result += mpp.utils.serialize_to_xml(data, root_name = "data") + "\n"
         elif out_format == 'python':
@@ -202,3 +203,43 @@ def append_diff_list(main_list, prev_list):
     for metric in sorted(merged_list.keys()):
         result.append({'metric':metric, 'count':merged_list[metric]['count'], '__diff__':merged_list[metric]['__diff__']})
     return result
+
+def cout_txt(data):
+    print "FILE DATA"
+    for key in data['file-data'].keys():
+        if key == 'regions':
+            print "dumping regions"
+            for region in data['file-data'][key]:
+                print 'region:', region['info']
+                for namespace in region['data'].keys():
+                    diff_data = None
+                    diff_str = ""
+                    if '__diff__' in region['data'][namespace].keys():
+                        diff_data = region['data'][namespace]['__diff__']
+                    for field in region['data'][namespace].keys():
+                        if field == '__diff__':
+                            continue
+                        if diff_data != None:
+                            diff_str = "[" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
+                        print namespace, field, region['data'][namespace][field], diff_str
+        else:
+            print "dumping data", key, data['file-data']
+            
+            
+            diff_data = None
+            diff_str = ""
+            namespace = key
+            if '__diff__' in data['file-data'][namespace].keys():
+                diff_data = data['file-data'][namespace]['__diff__']
+            for field in data['file-data'][namespace].keys():
+                if field == '__diff__':
+                    continue
+                if diff_data != None:
+                    #diff_str = "[" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
+                    pass
+                print namespace, field, data['file-data'][namespace][field], diff_str
+    print "AGGREGATED DATA"
+    for namespace in data['aggregated-data'].keys():
+        for field in data['aggregated-data'][namespace].keys():
+            print data['aggregated-data'][namespace][field]
+    

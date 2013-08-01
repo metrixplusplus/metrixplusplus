@@ -70,6 +70,8 @@ class LoadableData(Data):
         self.changed_namespaces = []
 
     def load_namespace(self, namespace):
+        if self.region_id == None and self.loader.get_namespace(namespace).are_regions_supported() == True:
+            return
         try:
             row = self.loader.db.get_row(namespace, self.file_id, self.region_id)
         except Exception:
