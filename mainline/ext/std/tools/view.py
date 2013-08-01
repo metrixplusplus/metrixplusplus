@@ -23,9 +23,6 @@ import mpp.utils
 
 class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
     
-    def __init__(self):
-        pass
-
     def declare_configuration(self, parser):
         parser.add_option("--format", "--ft", default='xml', choices=['txt', 'xml', 'python'], help="Format of the output data. "
                           "Possible values are 'xml', 'txt' or 'python' [default: %default]")

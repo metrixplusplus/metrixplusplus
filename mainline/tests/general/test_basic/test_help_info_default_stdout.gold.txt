@@ -2,11 +2,6 @@ Usage: metrix++.py info [options] -- [path 1] ... [path N]
 
 Options:
   -h, --help            show this help message and exit
-  --log-level=LOG_LEVEL, --ll=LOG_LEVEL
-                        Defines log level. Possible values are
-                        'DEBUG','INFO','WARNING' or 'ERROR'. Default value is
-                        inherited from environment variable
-                        'METRIXPLUSPLUS_LOG_LEVEL' if set. [default: INFO]
   --db-file=DB_FILE, --dbf=DB_FILE
                         Primary database file to write (by the collector) and
                         post-process (by other tools) [default: ./metrixpp.db]
@@ -17,3 +12,8 @@ Options:
                         it may reduce the processing time significantly. Post-
                         processing tools use it in order to recognise/evaluate
                         change trends. [default: none].
+  --log-level=LOG_LEVEL, --ll=LOG_LEVEL
+                        Defines log level. Possible values are
+                        'DEBUG','INFO','WARNING' or 'ERROR'. Default value is
+                        inherited from environment variable
+                        'METRIXPLUSPLUS_LOG_LEVEL' if set. [default: INFO]
