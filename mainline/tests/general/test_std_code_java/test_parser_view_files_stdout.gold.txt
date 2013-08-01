@@ -729,8 +729,6 @@ data:
 .   .   .   .   .   .   .   .   .   std.code.complexity: 
 .   .   .   .   .   .   .   .   .   .   cyclomatic="0"
 .   .   .   .   .   .   .   .   subregions:
-.   .   std.code.complexity: 
-.   .   .   cyclomatic="0"
 .   subfiles:
 .   subdirs:
 .   aggregated-data:  
