@@ -33,7 +33,7 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
         self.exclude_rules = []
         self.exclude_files = []
         self.parsers       = []
-        
+        super(Plugin, self).__init__()
 
     def declare_configuration(self, parser):
         parser.add_option("--std.general.proctime", "--sgpt", action="store_true", default=False,

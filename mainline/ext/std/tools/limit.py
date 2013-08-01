@@ -25,9 +25,6 @@ import mpp.cout
 
 class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
     
-    def __init__(self):
-        pass
-
     def declare_configuration(self, parser):
         parser.add_option("--hotspots", "--hs", default=None, help="If not set (none), all exceeded limits are printed."
                           " If set, exceeded limits are sorted (the worst is the first) and only first HOTSPOTS limits are printed."
