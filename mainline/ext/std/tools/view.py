@@ -20,6 +20,7 @@
 
 import mpp.api
 import mpp.utils
+import mpp.cout
 
 class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
     
@@ -198,7 +199,7 @@ def append_diff_list(main_list, prev_list):
             merged_list[bar['metric']]['__diff__'] = \
                 merged_list[bar['metric']]['count'] - bar['count']
         else:
-            merged_list[bar['metric']] = {'count': 0, '__diff__':-bar['count'], 'ratio': bar['ratio']}
+            merged_list[bar['metric']] = {'count': 0, '__diff__':-bar['count'], 'ratio': 0}
     result = []
     for metric in sorted(merged_list.keys()):
         result.append({'metric':metric,
@@ -207,10 +208,14 @@ def append_diff_list(main_list, prev_list):
                        '__diff__':merged_list[metric]['__diff__']})
     return result
 
-def cout_txt_regions(regions, indent = 0):
-    print indent, "dumping regions"
+def cout_txt_regions(path, regions, indent = 0):
     for region in regions:
-        print indent, 'region:', region['info']
+        details = [
+            ('Region name', region['info']['name']),
+            ('Region type', region['info']['type']),
+            ('Offsets', str(region['info']['offset_begin']) + "-" + str(region['info']['offset_end'])),
+            ('Line numbers', str(region['info']['line_begin']) + "-" + str(region['info']['line_end']))
+        ]
         for namespace in region['data'].keys():
             diff_data = {}
             if '__diff__' in region['data'][namespace].keys():
@@ -220,18 +225,24 @@ def cout_txt_regions(regions, indent = 0):
                 if field == '__diff__':
                     continue
                 if field in diff_data.keys():
-                    diff_str = "[" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
-                print indent, namespace, field, region['data'][namespace][field], diff_str
+                    diff_str = " [" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
+                details.append((namespace + ":" + field, str(region['data'][namespace][field]) + diff_str))
+        mpp.cout.notify(path,
+                        region['info']['cursor'],
+                        mpp.cout.SEVERITY_INFO,
+                        "Metrics per '" + region['info']['name']+ "' region",
+                        details,
+                        indent=indent)
         if 'subregions' in region.keys():
-            cout_txt_regions(region['subregions'], indent=indent+1)
+            cout_txt_regions(path, region['subregions'], indent=indent+1)
 
 def cout_txt(data):
-    print "FILE DATA"
+    
+    details = []
     for key in data['file-data'].keys():
         if key == 'regions':
-            cout_txt_regions(data['file-data'][key])
+            cout_txt_regions(data['info']['path'], data['file-data'][key])
         else:
-            print "dumping per file data"
             namespace = key
             diff_data = {}
             if '__diff__' in data['file-data'][namespace].keys():
@@ -241,24 +252,56 @@ def cout_txt(data):
                 if field == '__diff__':
                     continue
                 if field in diff_data.keys():
-                    diff_str = "[" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
-                print namespace, field, data['file-data'][namespace][field], diff_str
-    print "AGGREGATED DATA"
+                    diff_str = " [" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
+                details.append((namespace + ":" + field, str(data['file-data'][namespace][field]) + diff_str))
+    if len(details) > 0:
+        mpp.cout.notify(data['info']['path'],
+                    0,
+                    mpp.cout.SEVERITY_INFO,
+                    "Metrics per file",
+                    details)
+
+    attr_map = {'count': 'Measured',
+                'total': 'Total',
+                'avg': 'Average',
+                'min': 'Minimum',
+                'max': 'Maximum'}
     for namespace in data['aggregated-data'].keys():
         for field in data['aggregated-data'][namespace].keys():
+            details = []
             diff_data = {}
             if '__diff__' in data['aggregated-data'][namespace][field].keys():
                 diff_data = data['aggregated-data'][namespace][field]['__diff__']
             for attr in data['aggregated-data'][namespace][field].keys():
                 diff_str = ""
-                if attr == 'distribution-bars' or attr == '__diff__':
+                if attr == 'distribution-bars' or attr == '__diff__' or attr == 'count':
                     continue
                 if attr in diff_data.keys():
-                    diff_str = "[" + ("+" if diff_data[attr] >= 0 else "") + str(diff_data[attr]) + "]"
-                print namespace, field, attr, data['aggregated-data'][namespace][field][attr], diff_str
+                    diff_str = " [" + ("+" if diff_data[attr] >= 0 else "") + str(diff_data[attr]) + "]"
+                details.append((attr_map[attr], str(data['aggregated-data'][namespace][field][attr]) + diff_str))
+
+            measured = data['aggregated-data'][namespace][field]['count']
+            if 'count' in diff_data.keys():
+                diff_str = ' [{0:{1}}]'.format(diff_data['count'], '+' if diff_data['count'] >= 0 else '')
+            count_str_len  = len(str(measured))
+            details.append(('Distribution', str(measured) + diff_str + ' files/regions measured'))
+            details.append(('  Metric value', 'Ratio : Number of files/regions'))
             for bar in data['aggregated-data'][namespace][field]['distribution-bars']:
                 diff_str = ""
                 if '__diff__' in bar.keys():
-                    diff_str = "[" + ("+" if bar['__diff__'] >= 0 else "") + str(bar['__diff__']) + "]"
-                print "bar:", '|'*int(round(bar['ratio']*100)), bar['ratio'], bar['count'], bar['metric'], diff_str 
-    
+                    diff_str = ' [{0:{1}}]'.format(bar['__diff__'], '+' if bar['__diff__'] >= 0 else '')
+                if isinstance(bar['metric'], float):
+                    metric_str = "{0:.4f}".format(bar['metric'])
+                else:
+                    metric_str = str(bar['metric'])
+                
+                metric_str = (" " * (mpp.cout.DETAILS_OFFSET - len(metric_str) - 1)) + metric_str
+                count_str = str(bar['count'])
+                count_str = ((" " * (count_str_len - len(count_str))) + count_str + diff_str + "\t")
+                details.append((metric_str,
+                                "{0:.3f}".format(bar['ratio']) + " : " + count_str + ('|' * int(round(bar['ratio']*100)))))
+            mpp.cout.notify(data['info']['path'],
+                    '', # no line number
+                    mpp.cout.SEVERITY_INFO,
+                    "Overall metrics for '" + namespace + ":" + field + "' metric",
+                    details)
