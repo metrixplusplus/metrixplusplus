@@ -67,10 +67,6 @@ def main(tool_args):
     for each in loader.iterate_namespace_names():
         warn_plugin.verify_fields(each, loader.get_namespace(each).iterate_field_names())
     
-    # Check for versions consistency
-    if db_plugin.dbfile_prev != None:
-        mpp.utils.check_db_metadata(loader, loader_prev)
-    
     paths = None
     if len(args) == 0:
         paths = [""]

@@ -44,7 +44,8 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
         
     def initialize(self):
         
-        if self.get_plugin_loader() != None:
+        # TODO refactor and remove self.get_plugin_loader() != None
+        if self.get_plugin_loader() != None and self.get_plugin_loader().get_action() == 'collect':
             if os.path.exists(self.dbfile):
                 logging.warn("Removing existing file: " + self.dbfile)
                 # TODO can reuse existing db file to speed up the processing?
@@ -60,13 +61,22 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
                 self.parser.error("Failure in creating file: " + self.dbfile)
             
         else:
+            self.loader = mpp.api.Loader()
+            if self.loader.open_database(self.dbfile) == False:
+                self.parser.error("Can not open file: " + self.dbfile)
             self.loader_prev = mpp.api.Loader()
             if self.dbfile_prev != None:
                 if self.loader_prev.open_database(self.dbfile_prev) == False:
                     self.parser.error("Can not open file: " + self.dbfile_prev)
-            self.loader = mpp.api.Loader()
-            if self.loader.open_database(self.dbfile) == False:
-                self.parser.error("Can not open file: " + self.dbfile)
+                self._warn_on_metadata()
+
+    def _warn_on_metadata(self):
+        for each in self.loader.iterate_properties():
+            prev = self.loader_prev.get_property(each.name)
+            if prev != each.value:
+                logging.warn("Data files have been created by different versions of the tool or with different settings.")
+                logging.warn(" - identification of some change trends can be not reliable")
+                logging.warn(" - use 'info' action to view more details")
 
     def get_dbfile_path(self):
         return self.dbfile

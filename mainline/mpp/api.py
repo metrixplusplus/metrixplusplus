@@ -1168,6 +1168,7 @@ class IParser(object):
 class ICode(object):
     pass
 
+# refactor and remove
 class ITool(object):
     def run(self, tool_args):
         raise InterfaceNotImplemented(self)

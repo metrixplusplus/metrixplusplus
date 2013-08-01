@@ -25,14 +25,16 @@ import sys
 import ConfigParser
 import re
 
-
-
 class Loader(object):
 
     def __init__(self):
         self.plugins = []
         self.hash    = {}
-        
+        self.action = None
+    
+    def get_action(self):
+        return self.action
+    
     def get_plugin(self, name):
         return self.hash[name]['instance']
     
@@ -137,6 +139,7 @@ class Loader(object):
 
         if command not in inicontainer.actions:
             optparser.error("Unknown action: {action}".format(action={command}))
+        self.action = command
 
         for item in self.iterate_plugins():
             if (isinstance(item, mpp.api.IConfigurable)):
