@@ -34,16 +34,7 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
         self.exclude_files = []
         self.parsers       = []
         
-    def register_parser(self, fnmatch_exp_list, parser):
-        self.parsers.append((fnmatch_exp_list, parser))
 
-    def get_parser(self, file_path):
-        for parser in self.parsers:
-            for fnmatch_exp in parser[0]:
-                if fnmatch.fnmatch(file_path, fnmatch_exp):
-                    return parser[1]
-        return None
-    
     def declare_configuration(self, parser):
         parser.add_option("--std.general.proctime", "--sgpt", action="store_true", default=False,
                          help="If the option is set (True), the tool measures processing time per file [default: %default]")
@@ -81,6 +72,16 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
         for directory in args:
             return self.reader.run(self, directory)
         
+    def register_parser(self, fnmatch_exp_list, parser):
+        self.parsers.append((fnmatch_exp_list, parser))
+
+    def get_parser(self, file_path):
+        for parser in self.parsers:
+            for fnmatch_exp in parser[0]:
+                if fnmatch.fnmatch(file_path, fnmatch_exp):
+                    return parser[1]
+        return None
+
     def add_exclude_rule(self, re_compiled_pattern):
         # TODO file name may have special regexp symbols what causes an exception
         # For example try to run a collection with "--db-file=metrix++" option
