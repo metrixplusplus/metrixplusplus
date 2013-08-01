@@ -225,5 +225,13 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('view', ['--format=txt'], prefix='txt')
         self.assertExec(runner.run())
 
+    def test_debug_tool(self):
+
+        runner = tests.common.ToolRunner('collect')
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('debug', dirs_list=['./simple.cpp'])
+        self.assertExec(runner.run())
+
 if __name__ == '__main__':
     unittest.main()

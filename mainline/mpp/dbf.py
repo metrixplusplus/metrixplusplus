@@ -50,12 +50,9 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
         
     def initialize(self):
         
-        # TODO refactor and remove self.get_plugin_loader() != None
-        if self.get_plugin_loader() != None and self.get_plugin_loader().get_action() == 'collect':
+        if self.get_plugin_loader().get_action() == 'collect':
             if os.path.exists(self.dbfile):
                 logging.warn("Removing existing file: " + self.dbfile)
-                # TODO can reuse existing db file to speed up the processing?
-                # TODO add option to choose to remove or to overwrite?
                 try:
                     os.unlink(self.dbfile)
                 except:

@@ -316,8 +316,7 @@ class FileData(LoadableData):
         self.markers.append(Marker(offset_begin, offset_end, group))
         self.loader.db.create_marker(self.file_id, offset_begin, offset_end, group)
         
-    def iterate_markers(self, filter_group = Marker.T.COMMENT |
-                         Marker.T.STRING | Marker.T.PREPROCESSOR,
+    def iterate_markers(self, filter_group = Marker.T.ANY,
                          region_id = None, exclude_children = True, merge = False):
         self.load_markers()
         
@@ -1088,6 +1087,10 @@ class Plugin(BasePlugin):
                 self.is_updated = self.is_updated or is_created
 
 class SimpleMetricMixin(object):
+
+    class AliasError(Exception):
+        def __init__(self, alias):
+            Exception.__init__(self, "Unknown alias: " + str(alias))
     
     def declare_metric(self, is_active, field,
                        pattern_to_search_or_map_of_patterns,
@@ -1131,8 +1134,11 @@ class SimpleMetricMixin(object):
             
         field_data = self._fields[metric_name]
         text = data.get_content()
-        # TODO raise exception if alias is bad
+        
+        if alias not in field_data[4].keys():
+            raise self.AliasError(alias)
         pattern_to_search = field_data[4][alias]
+        
         for region in data.iterate_regions(filter_group=field_data[5]):
             count = 0
             for marker in data.iterate_markers(
@@ -1167,11 +1173,6 @@ class IParser(object):
 
 class ICode(object):
     pass
-
-# refactor and remove
-class ITool(object):
-    def run(self, tool_args):
-        raise InterfaceNotImplemented(self)
 
 class CallbackNotImplemented(Exception):
     

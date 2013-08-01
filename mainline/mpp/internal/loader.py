@@ -151,7 +151,9 @@ class Loader(object):
         self.action = command
 
         optparser =mpp.cmdparser.MultiOptionParser(
-            usage="Usage: %prog {command} [options] -- [path 1] ... [path N]".format(command=command))
+            usage="Usage: python %prog --help\n"
+                  "       python %prog {command} --help\n"
+                  "       python %prog {command} [options] -- [path 1] ... [path N]".format(command=command))
 
         for item in self.iterate_plugins():
             if (isinstance(item, mpp.api.IConfigurable)):

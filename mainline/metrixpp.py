@@ -46,7 +46,6 @@ def main():
 
     loader = mpp.internal.loader.Loader()
     mpp_paths = []
-    # TODO document this feature
     if 'METRIXPLUSPLUS_PATH' in os.environ.keys():
         mpp_paths = os.environ['METRIXPLUSPLUS_PATH'].split(os.pathsep)
     args = loader.load(command, mpp_paths, sys.argv[3:])
