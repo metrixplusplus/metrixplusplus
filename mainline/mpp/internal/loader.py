@@ -18,12 +18,30 @@
 #
 
 import mpp.api
-import mpp.cmdparser
 
 import os
 import sys
 import ConfigParser
 import re
+import optparse
+
+class MultiOptionParser(optparse.OptionParser):
+    
+    class MultipleOption(optparse.Option):
+        ACTIONS = optparse.Option.ACTIONS + ("multiopt",)
+        STORE_ACTIONS = optparse.Option.STORE_ACTIONS + ("multiopt",)
+        TYPED_ACTIONS = optparse.Option.TYPED_ACTIONS + ("multiopt",)
+        ALWAYS_TYPED_ACTIONS = optparse.Option.ALWAYS_TYPED_ACTIONS + ("multiopt",)
+    
+        def take_action(self, action, dest, opt, value, values, parser):
+            if action == "multiopt":
+                values.ensure_value(dest, []).append(value)
+            else:
+                optparse.Option.take_action(self, action, dest, opt, value, values, parser)
+
+    
+    def __init__(self, *args, **kwargs):
+        optparse.OptionParser.__init__(self, *args, option_class=self.MultipleOption, **kwargs)
 
 class Loader(object):
 
@@ -134,7 +152,7 @@ class Loader(object):
             self.plugins.append(item)
             self.hash[plugin_name] = item
 
-        optparser = mpp.cmdparser.MultiOptionParser(
+        optparser = MultiOptionParser(
             usage = "Usage: python %prog --help\n" +
                     "       python %prog <action> --help\n" +
                     "       python %prog <action> [options] -- [path 1] ... [path N]\n" +
@@ -150,7 +168,7 @@ class Loader(object):
 
         self.action = command
 
-        optparser =mpp.cmdparser.MultiOptionParser(
+        optparser = MultiOptionParser(
             usage="Usage: python %prog --help\n"
                   "       python %prog {command} --help\n"
                   "       python %prog {command} [options] -- [path 1] ... [path N]".format(command=command))
