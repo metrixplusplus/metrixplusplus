@@ -25,13 +25,19 @@ import logging
 class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
     
     def declare_configuration(self, parser):
+        if self.get_plugin_loader().get_action() == 'collect':
+            dbfile_help = "Path to a database file to create and write [default: %default]."
+            dbfile_prev_help = ("Path to database file with data collected for the past/previous code revision."
+                             " If it is set, the tool will do an incremental/iterative collection."
+                             " It may reduce the time of processing significantly [default: %default].")
+        else:
+            dbfile_help = "Path to a database file to read and process [default: %default]."
+            dbfile_prev_help = ("Path to database file with data collected for the past/previous code revision."
+                                " It is used to identify and evaluate/analyze change trends. [default: %default].")
         parser.add_option("--db-file", "--dbf", default='./metrixpp.db',
-                         help="Primary database file to write (by the collector) and post-process (by other tools) [default: %default]")
+                         help=dbfile_help)
         parser.add_option("--db-file-prev", "--dbfp", default=None,
-                         help="Database file with data collected for the past/previous revision."
-                             " If it is set for the collector tool to perform an incremental/iterative collection,"
-                             " it may reduce the processing time significantly."
-                             " Post-processing tools use it in order to recognise/evaluate change trends. [default: %default].")
+                         help=dbfile_prev_help)
         self.parser = parser
     
     def configure(self, options):

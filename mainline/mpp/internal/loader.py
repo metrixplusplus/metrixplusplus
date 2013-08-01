@@ -134,12 +134,24 @@ class Loader(object):
             self.plugins.append(item)
             self.hash[plugin_name] = item
 
+        optparser = mpp.cmdparser.MultiOptionParser(
+            usage = "Usage: python %prog --help\n" +
+                    "       python %prog <action> --help\n" +
+                    "       python %prog <action> [options] -- [path 1] ... [path N]\n" +
+                    "\n" +
+                    "Actions: \n  " + "\n  ".join(inicontainer.actions))
+        if command in ['--help', '--h', '-h']:
+            optparser.print_help()
+            exit(0)
+        if command.strip() == "":
+            optparser.error("Mandatory action argument required")
+        if command not in inicontainer.actions:
+            optparser.error("Unknown action: {action}".format(action=command))
+
+        self.action = command
+
         optparser =mpp.cmdparser.MultiOptionParser(
             usage="Usage: %prog {command} [options] -- [path 1] ... [path N]".format(command=command))
-
-        if command not in inicontainer.actions:
-            optparser.error("Unknown action: {action}".format(action={command}))
-        self.action = command
 
         for item in self.iterate_plugins():
             if (isinstance(item, mpp.api.IConfigurable)):

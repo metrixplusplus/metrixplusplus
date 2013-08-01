@@ -26,23 +26,11 @@ import subprocess
 import itertools
 
 import mpp.log
+import mpp.internal.loader
 
 def main():
     
     os.environ['METRIXPLUSPLUS_INSTALL_DIR'] = os.path.dirname(os.path.abspath(__file__))
-    
-    this_file = os.path.basename(sys.argv[0])
-    
-    available_tools = []
-    excluded_tools = ['utils']
-    internal_tools = ['debug', 'test', 'export']
-    for fname in os.listdir(os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'tools')):
-        tool_name = os.path.splitext(fname)[0]
-        if tool_name == '__init__':
-            continue
-        if tool_name not in available_tools:
-            if tool_name not in excluded_tools + internal_tools:
-                available_tools.append(tool_name)
     
     exemode = None
     if len(sys.argv[1:]) != 0:
@@ -55,30 +43,17 @@ def main():
     command = ""
     if len(sys.argv[1:]) > 1:
         command = sys.argv[2]
-        
-    if command == '--help' or command == '-h' or command == '--h':
-        print "Usage: python {prog} <action> --help".format(prog=this_file)
-        print "   or: python {prog} <action> [options] -- [path 1] ... [path N]".format(prog=this_file)
-        print "where: actions are:"
-        for each in sorted(available_tools):
-            print "\t" + each
-        if exemode == '-D':
-            for each in sorted(internal_tools):
-                print "\t" + each + "\t[internal]"
-        exit(0)
-        
-    if command not in available_tools + internal_tools:
-        print >> sys.stderr, "Usage: python {prog} --help\n".format(prog=this_file)
-        print >> sys.stderr, "{prog}: error: no such action: {action}".format(prog=this_file, action=command)
-        exit(1)
 
-    tool = __import__('tools', globals(), locals(), [command], -1)
-    module_attr = tool.__getattribute__(command)
-    class_attr = module_attr.__getattribute__('Tool')
-    instance = class_attr.__new__(class_attr)
-    instance.__init__()
-    return instance.run(sys.argv[3:])
-
+    loader = mpp.internal.loader.Loader()
+    mpp_paths = []
+    # TODO document this feature
+    if 'METRIXPLUSPLUS_PATH' in os.environ.keys():
+        mpp_paths = os.environ['METRIXPLUSPLUS_PATH'].split(os.pathsep)
+    args = loader.load(command, mpp_paths, sys.argv[3:])
+    exit_code = loader.run(args)
+    loader.unload()
+    return exit_code
+    
 def start():
     ts = time.time()
     mpp.log.set_default_format()

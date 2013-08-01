@@ -18,61 +18,32 @@
 #
 
 
-
-import logging
-import csv
-
 import mpp.api
-import mpp.log
-import mpp.dbf
-import mpp.cmdparser
-
 import mpp.utils
 
-class Tool(mpp.api.ITool):
-    def run(self, tool_args):
-        return main(tool_args)
+import csv
 
-def main(tool_args):
+class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
     
-    log_plugin = mpp.log.Plugin()
-    db_plugin = mpp.dbf.Plugin()
-
-    parser = mpp.cmdparser.MultiOptionParser(usage="Usage: %prog export [options] -- [path 1] ... [path N]")
-    log_plugin.declare_configuration(parser)
-    db_plugin.declare_configuration(parser)
-    parser.add_option("--format", "--ft", default='csv', choices=['csv', 'xml'], help="Format of the output data. "
-                      "Possible values are 'xml' and 'csv' [default: %default]")
-
-    (options, args) = parser.parse_args(tool_args)
-    log_plugin.configure(options)
-    db_plugin.configure(options)
-    out_format = options.__dict__['format']
-
-    log_plugin.initialize()
-    db_plugin.initialize()
-
-    loader_prev = db_plugin.get_loader_prev()
-    loader = db_plugin.get_loader()
+    def declare_configuration(self, parser):
+        parser.add_option("--format", "--ft", default='csv', choices=['csv', 'xml'], help="Format of the output data. "
+                          "Possible values are 'xml' and 'csv' [default: %default]")
     
-    # Check for versions consistency
-    for each in loader.iterate_properties():
-        if db_plugin.dbfile_prev != None:
-            prev = loader_prev.get_property(each.name)
-            if prev != each.value:
-                logging.warn("Previous data has got different metadata:")
-                logging.warn(" - identification of change trends can be not reliable")
-                logging.warn(" - use 'info' tool to get more details")
-                break
+    def configure(self, options):
+        self.out_format = options.__dict__['format']
+
+    def run(self, args):
+        loader_prev = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader_prev()
+        loader = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
     
-    paths = None
-    if len(args) == 0:
-        paths = [""]
-    else:
-        paths = args
-        
-    exit_code = export_to_stdout(out_format, paths, loader, loader_prev)
-    return exit_code
+        paths = None
+        if len(args) == 0:
+            paths = [""]
+        else:
+            paths = args
+            
+        exit_code = export_to_stdout(self.out_format, paths, loader, loader_prev)
+        return exit_code
 
 def export_to_stdout(out_format, paths, loader, loader_prev):
     class StdoutWriter(object):
