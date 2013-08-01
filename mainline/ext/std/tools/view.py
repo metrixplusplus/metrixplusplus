@@ -52,9 +52,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
 def export_to_str(out_format, paths, loader, loader_prev, nest_regions):
     exit_code = 0
     result = ""
-    if out_format == 'txt':
-        result += "=" * 80 + "\n" + "Export" + "\n" + "_" * 80 + "\n\n"
-    elif out_format == 'xml':
+    if out_format == 'xml':
         result += "<export>\n"
     elif out_format == 'python':
         result += "{'export': ["
@@ -92,8 +90,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions):
                 "subfiles": subfiles}
 
         if out_format == 'txt':
-            result += mpp.utils.serialize_to_txt(data, root_name = "data") + "\n"
-            #cout_txt(data)
+            cout_txt(data)
         elif out_format == 'xml':
             result += mpp.utils.serialize_to_xml(data, root_name = "data") + "\n"
         elif out_format == 'python':
@@ -102,9 +99,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions):
                 postfix = ", "
             result += mpp.utils.serialize_to_python(data, root_name = "data") + postfix
 
-    if out_format == 'txt':
-        result += "\n"
-    elif out_format == 'xml':
+    if out_format == 'xml':
         result += "</export>"
     elif out_format == 'python':
         result += "]}"
@@ -305,3 +300,15 @@ def cout_txt(data):
                     mpp.cout.SEVERITY_INFO,
                     "Overall metrics for '" + namespace + ":" + field + "' metric",
                     details)
+    details = []
+    for each in data['subdirs']:
+        details.append(('Directory', each))
+    for each in data['subfiles']:
+        details.append(('File', each))
+    if len(details) > 0: 
+        mpp.cout.notify(data['info']['path'],
+                '', # no line number
+                mpp.cout.SEVERITY_INFO,
+                "Directory content:",
+                details)
+    
