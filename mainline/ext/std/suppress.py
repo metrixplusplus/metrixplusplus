@@ -79,7 +79,8 @@ class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
                     matches = self.pattern.findall(text, marker.get_offset_begin(), marker.get_offset_end())
                     for m in matches:
                         namespace_name, field = m.split(':')
-                        namespace = self.get_plugin_loader().get_database_loader().get_namespace(namespace_name)
+                        db_loader = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
+                        namespace = db_loader.get_namespace(namespace_name)
                         if namespace == None or namespace.get_field_packager(field) == None:
                             mpp.cout.notify(data.get_path(), region.get_cursor(),
                                                   mpp.cout.SEVERITY_WARNING,

@@ -19,7 +19,7 @@
 
 import logging
 import os.path
-import mpp.db.sqlite
+import mpp.internal.dbwrap
 
 ##############################################################################
 #
@@ -773,7 +773,7 @@ class Loader(object):
         self.last_file_data = None # for performance boost reasons
     
     def create_database(self, dbfile, previous_db = None):
-        self.db = mpp.db.sqlite.Database()
+        self.db = mpp.internal.dbwrap.Database()
         try:
             self.db.create(dbfile, clone_from=previous_db)
         except:
@@ -781,7 +781,7 @@ class Loader(object):
         return True
         
     def open_database(self, dbfile, read_only = True):
-        self.db = mpp.db.sqlite.Database()
+        self.db = mpp.internal.dbwrap.Database()
         if os.path.exists(dbfile) == False:
             return False
         try:
@@ -1059,9 +1059,9 @@ class Plugin(BasePlugin):
         
         if hasattr(self, 'is_updated') == False:
             self.is_updated = False # original initialization
-            
-        db_loader = self.get_plugin_loader().get_database_loader()
-        
+
+        db_loader = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
+
         if namespace == None:
             namespace = self.get_name()
 

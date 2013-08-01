@@ -12,21 +12,6 @@ Options:
                         it may reduce the processing time significantly. Post-
                         processing tools use it in order to recognise/evaluate
                         change trends. [default: none].
-  --non-recursively, --nr
-                        If the option is set (True), sub-directories are not
-                        processed [default: False]
-  --exclude-files=EXCLUDE_FILES, --ef=EXCLUDE_FILES
-                        Defines the pattern to exclude files from processing
-                        [default: ^[.]]
-  --std.general.proctime, --sgpt
-                        If the option is set (True), the tool measures
-                        processing time per file [default: False]
-  --std.general.procerrors, --sgpe
-                        If the option is set (True), the tool counts number of
-                        processing/parsing errors per file [default: False]
-  --std.general.size, --sgs
-                        If the option is set (True), the tool collects file
-                        size metric (in bytes) [default: False]
   --log-level=LOG_LEVEL, --ll=LOG_LEVEL
                         Defines log level. Possible values are
                         'DEBUG','INFO','WARNING' or 'ERROR'. Default value is
@@ -69,3 +54,18 @@ Options:
                         of suppressions: 'metrix++: suppress metric-name'. For
                         example: 'metrix++: suppress
                         std.code.complexity:cyclomatic'.  [default: False]
+  --std.general.proctime, --sgpt
+                        If the option is set (True), the tool measures
+                        processing time per file [default: False]
+  --std.general.procerrors, --sgpe
+                        If the option is set (True), the tool counts number of
+                        processing/parsing errors per file [default: False]
+  --std.general.size, --sgs
+                        If the option is set (True), the tool collects file
+                        size metric (in bytes) [default: False]
+  --exclude-files=EXCLUDE_FILES, --ef=EXCLUDE_FILES
+                        Defines the pattern to exclude files from processing
+                        [default: ^[.]]
+  --non-recursively, --nr
+                        If the option is set (True), sub-directories are not
+                        processed [default: False]

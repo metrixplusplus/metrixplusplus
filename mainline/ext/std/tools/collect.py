@@ -24,24 +24,37 @@ import os
 import logging
 import time
 import binascii
+import fnmatch
 
 class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRunable):
     
     def __init__(self):
         self.reader = DirectoryReader()
         self.exclude_rules = []
+        self.exclude_files = []
+        self.parsers       = []
+        
+    def register_parser(self, fnmatch_exp_list, parser):
+        self.parsers.append((fnmatch_exp_list, parser))
+
+    def get_parser(self, file_path):
+        for parser in self.parsers:
+            for fnmatch_exp in parser[0]:
+                if fnmatch.fnmatch(file_path, fnmatch_exp):
+                    return parser[1]
+        return None
     
     def declare_configuration(self, parser):
-        parser.add_option("--non-recursively", "--nr", action="store_true", default=False,
-                         help="If the option is set (True), sub-directories are not processed [default: %default]")
-        parser.add_option("--exclude-files", "--ef", default=r'^[.]',
-                         help="Defines the pattern to exclude files from processing [default: %default]")
         parser.add_option("--std.general.proctime", "--sgpt", action="store_true", default=False,
                          help="If the option is set (True), the tool measures processing time per file [default: %default]")
         parser.add_option("--std.general.procerrors", "--sgpe", action="store_true", default=False,
                          help="If the option is set (True), the tool counts number of processing/parsing errors per file [default: %default]")
         parser.add_option("--std.general.size", "--sgs", action="store_true", default=False,
                          help="If the option is set (True), the tool collects file size metric (in bytes) [default: %default]")
+        parser.add_option("--exclude-files", "--ef", default=r'^[.]',
+                         help="Defines the pattern to exclude files from processing [default: %default]")
+        parser.add_option("--non-recursively", "--nr", action="store_true", default=False,
+                         help="If the option is set (True), sub-directories are not processed [default: %default]")
     
     def configure(self, options):
         self.non_recursively = options.__dict__['non_recursively']
@@ -58,7 +71,9 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
             fields.append(self.Field('procerrors', int))
         if self.is_size_enabled == True:
             fields.append(self.Field('size', int))
-        mpp.api.Plugin.initialize(self, namespace='std.general', support_regions=False, fields=fields)
+        super(Plugin, self).initialize(namespace='std.general', support_regions=False, fields=fields)
+        self.add_exclude_file(self.get_plugin_loader().get_plugin('mpp.dbf').get_dbfile_path())
+        self.add_exclude_file(self.get_plugin_loader().get_plugin('mpp.dbf').get_dbfile_prev_path())
         
     def run(self, args):
         if len(args) == 0:
@@ -70,11 +85,20 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
         # TODO file name may have special regexp symbols what causes an exception
         # For example try to run a collection with "--db-file=metrix++" option
         self.exclude_rules.append(re_compiled_pattern)
-        
+
+    def add_exclude_file(self, file_path):
+        if file_path == None:
+            return
+        self.exclude_files.append(file_path)
+
     def is_file_excluded(self, file_name):
         for each in self.exclude_rules:
-            if re.match(each, file_name) != None:
+            if re.match(each, os.path.basename(file_name)) != None:
                 return True
+        for each in self.exclude_files:
+            if os.path.basename(each) == os.path.basename(file_name):
+                if os.stat(each) == os.stat(file_name):
+                    return True
         return False 
         
 class DirectoryReader():
@@ -88,12 +112,12 @@ class DirectoryReader():
         def run_per_file(plugin, fname, full_path):
             exit_code = 0
             norm_path = re.sub(r'''[\\]''', "/", full_path)
-            if plugin.is_file_excluded(fname) == False:
+            if plugin.is_file_excluded(norm_path) == False:
                 if os.path.isdir(full_path):
                     if plugin.non_recursively == False:
                         exit_code += run_recursively(plugin, full_path)
                 else:
-                    parser = plugin.get_plugin_loader().get_parser(full_path)
+                    parser = plugin.get_parser(full_path)
                     if parser == None:
                         logging.info("Skipping: " + norm_path)
                     else:
@@ -103,8 +127,9 @@ class DirectoryReader():
                         text = f.read();
                         f.close()
                         checksum = binascii.crc32(text) & 0xffffffff # to match python 3
-
-                        (data, is_updated) = plugin.get_plugin_loader().get_database_loader().create_file_data(norm_path, checksum, text)
+                        
+                        db_loader = plugin.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
+                        (data, is_updated) = db_loader.create_file_data(norm_path, checksum, text)
                         procerrors = parser.process(plugin, data, is_updated)
                         if plugin.is_proctime_enabled == True:
                             data.set_data('std.general', 'proctime',
@@ -113,7 +138,7 @@ class DirectoryReader():
                             data.set_data('std.general', 'procerrors', procerrors)
                         if plugin.is_size_enabled == True:
                             data.set_data('std.general', 'size', len(text))
-                        plugin.get_plugin_loader().get_database_loader().save_file_data(data)
+                        db_loader.save_file_data(data)
                         logging.debug("-" * 60)
                         exit_code += procerrors
             else:
