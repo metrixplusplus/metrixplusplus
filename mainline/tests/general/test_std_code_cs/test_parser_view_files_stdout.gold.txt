@@ -160,8 +160,8 @@
 	Minimum        : 0
 	Maximum        : 6
 	Total          : 39.0
-	Distribution   : 19 files/regions measured
-	  Metric value : Ratio : R-sum : Number of files/regions
+	Distribution   : 19 regions measured
+	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.316 : 0.316 :  6	||||||||||||||||||||||||||||||||
 	             1 : 0.263 : 0.579 :  5	||||||||||||||||||||||||||
 	             2 : 0.053 : 0.632 :  1	|||||
@@ -273,8 +273,8 @@
 	Minimum        : 0
 	Maximum        : 1
 	Total          : 1.0
-	Distribution   : 8 files/regions measured
-	  Metric value : Ratio : R-sum : Number of files/regions
+	Distribution   : 8 regions measured
+	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.875 : 0.875 : 7	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             1 : 0.125 : 1.000 : 1	|||||||||||||
 
@@ -397,8 +397,8 @@
 	Minimum        : 0
 	Maximum        : 4
 	Total          : 5.0
-	Distribution   : 12 files/regions measured
-	  Metric value : Ratio : R-sum : Number of files/regions
+	Distribution   : 12 regions measured
+	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.833 : 0.833 : 10	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             1 : 0.083 : 0.917 :  1	||||||||
 	             4 : 0.083 : 1.000 :  1	||||||||

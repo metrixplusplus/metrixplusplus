@@ -3,8 +3,8 @@
 	Minimum        : 1
 	Maximum        : 3
 	Total          : 6.0
-	Distribution   : 4 files/regions measured
-	  Metric value : Ratio : R-sum : Number of files/regions
+	Distribution   : 4 regions measured
+	  Metric value : Ratio : R-sum : Number of regions
 	             1 : 0.750 : 0.750 : 3	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             3 : 0.250 : 1.000 : 1	|||||||||||||||||||||||||
 
