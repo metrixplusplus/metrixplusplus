@@ -22,3 +22,7 @@ Options:
   --nest-regions, --nr  If the option is set (True), data for regions is
                         exported in the form of a tree. Otherwise, all regions
                         are exported in plain list. [default: False]
+  --max-distribution-rows=MAX_DISTRIBUTION_ROWS, --mdr=MAX_DISTRIBUTION_ROWS
+                        Maximum number of rows in distribution tables. If it
+                        is set to 0, the tool does not optimize the size of
+                        distribution tables [default: 20]

@@ -323,12 +323,12 @@
 	Maximum        : 6
 	Total          : 83.0
 	Distribution   : 43 files/regions measured
-	  Metric value : Ratio : Number of files/regions
-	             0 : 0.186 :  8	|||||||||||||||||||
-	             1 : 0.326 : 14	|||||||||||||||||||||||||||||||||
-	             2 : 0.209 :  9	|||||||||||||||||||||
-	             3 : 0.163 :  7	||||||||||||||||
-	             6 : 0.116 :  5	||||||||||||
+	  Metric value : Ratio : R-sum : Number of files/regions
+	             0 : 0.186 : 0.186 :  8	|||||||||||||||||||
+	             1 : 0.326 : 0.512 : 14	|||||||||||||||||||||||||||||||||
+	             2 : 0.209 : 0.721 :  9	|||||||||||||||||||||
+	             3 : 0.163 : 0.884 :  7	||||||||||||||||
+	             6 : 0.116 : 1.000 :  5	||||||||||||
 
 ./attrs.java:0: info: Metrics per '__global__' region
 	Region name    : __global__
@@ -355,8 +355,8 @@
 	Maximum        : 0
 	Total          : 0.0
 	Distribution   : 1 files/regions measured
-	  Metric value : Ratio : Number of files/regions
-	             0 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	  Metric value : Ratio : R-sum : Number of files/regions
+	             0 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./BinaryHeapPriorityQueue.java:0: info: Metrics per '__global__' region
 	Region name    : __global__
@@ -690,13 +690,13 @@
 	Maximum        : 6
 	Total          : 37.0
 	Distribution   : 44 files/regions measured
-	  Metric value : Ratio : Number of files/regions
-	             0 : 0.523 : 23	||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             1 : 0.295 : 13	||||||||||||||||||||||||||||||
-	             2 : 0.114 :  5	|||||||||||
-	             3 : 0.023 :  1	||
-	             5 : 0.023 :  1	||
-	             6 : 0.023 :  1	||
+	  Metric value : Ratio : R-sum : Number of files/regions
+	             0 : 0.523 : 0.523 : 23	||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.295 : 0.818 : 13	||||||||||||||||||||||||||||||
+	             2 : 0.114 : 0.932 :  5	|||||||||||
+	             3 : 0.023 : 0.955 :  1	||
+	             5 : 0.023 : 0.977 :  1	||
+	             6 : 0.023 : 1.000 :  1	||
 
 ./Generics.java:0: info: Metrics per '__global__' region
 	Region name    : __global__
@@ -939,9 +939,9 @@
 	Maximum        : 2
 	Total          : 6.0
 	Distribution   : 31 files/regions measured
-	  Metric value : Ratio : Number of files/regions
-	             0 : 0.839 : 26	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             1 : 0.129 :  4	|||||||||||||
-	             2 : 0.032 :  1	|||
+	  Metric value : Ratio : R-sum : Number of files/regions
+	             0 : 0.839 : 0.839 : 26	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.129 : 0.968 :  4	|||||||||||||
+	             2 : 0.032 : 1.000 :  1	|||
 
 

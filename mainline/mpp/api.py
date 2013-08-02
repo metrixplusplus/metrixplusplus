@@ -17,7 +17,6 @@
 #    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-import logging
 import os.path
 import mpp.internal.dbwrap
 
@@ -70,17 +69,18 @@ class LoadableData(Data):
         self.changed_namespaces = []
 
     def load_namespace(self, namespace):
-        if self.region_id == None and self.loader.get_namespace(namespace).are_regions_supported() == True:
+        namespace_obj = self.loader.get_namespace(namespace)
+        if namespace_obj == None:
             return
-        try:
-            row = self.loader.db.get_row(namespace, self.file_id, self.region_id)
-        except Exception:
-            logging.debug("No data in the database for namespace: " + namespace)
+        regions_supported = namespace_obj.are_regions_supported()
+        if ((self.region_id == None and regions_supported == True) or 
+            (self.region_id != None and regions_supported == False)):
             return
+        row = self.loader.db.get_row(namespace, self.file_id, self.region_id)
         if row == None:
-            return 
+            return
         for column_name in row.keys():
-            packager = self.loader.get_namespace(namespace).get_field_packager(column_name)
+            packager = namespace_obj.get_field_packager(column_name)
             if packager == None:
                 continue
             if row[column_name] == None:
