@@ -4,14 +4,14 @@
 	Maximum        : 12
 	Total          : 44.0
 	Distribution   : 8 files/regions measured
-	  Metric value : Ratio : Number of files/regions
-	             0 : 0.125 : 1	|||||||||||||
-	             3 : 0.125 : 1	|||||||||||||
-	             4 : 0.125 : 1	|||||||||||||
-	             5 : 0.250 : 2	|||||||||||||||||||||||||
-	             7 : 0.125 : 1	|||||||||||||
-	             8 : 0.125 : 1	|||||||||||||
-	            12 : 0.125 : 1	|||||||||||||
+	  Metric value : Ratio : R-sum : Number of files/regions
+	             0 : 0.125 : 0.125 : 1	|||||||||||||
+	             3 : 0.125 : 0.250 : 1	|||||||||||||
+	             4 : 0.125 : 0.375 : 1	|||||||||||||
+	             5 : 0.250 : 0.625 : 2	|||||||||||||||||||||||||
+	             7 : 0.125 : 0.750 : 1	|||||||||||||
+	             8 : 0.125 : 0.875 : 1	|||||||||||||
+	            12 : 0.125 : 1.000 : 1	|||||||||||||
 
 :: info: Overall metrics for 'std.code.lines:code' metric
 	Average        : 5.125
@@ -19,13 +19,13 @@
 	Maximum        : 11
 	Total          : 41.0
 	Distribution   : 8 files/regions measured
-	  Metric value : Ratio : Number of files/regions
-	             0 : 0.125 : 1	|||||||||||||
-	             3 : 0.125 : 1	|||||||||||||
-	             4 : 0.250 : 2	|||||||||||||||||||||||||
-	             5 : 0.125 : 1	|||||||||||||
-	             7 : 0.250 : 2	|||||||||||||||||||||||||
-	            11 : 0.125 : 1	|||||||||||||
+	  Metric value : Ratio : R-sum : Number of files/regions
+	             0 : 0.125 : 0.125 : 1	|||||||||||||
+	             3 : 0.125 : 0.250 : 1	|||||||||||||
+	             4 : 0.250 : 0.500 : 2	|||||||||||||||||||||||||
+	             5 : 0.125 : 0.625 : 1	|||||||||||||
+	             7 : 0.250 : 0.875 : 2	|||||||||||||||||||||||||
+	            11 : 0.125 : 1.000 : 1	|||||||||||||
 
 :: info: Overall metrics for 'std.code.lines:preprocessor' metric
 	Average        : 0.0
@@ -33,8 +33,8 @@
 	Maximum        : 0
 	Total          : 0.0
 	Distribution   : 8 files/regions measured
-	  Metric value : Ratio : Number of files/regions
-	             0 : 1.000 : 8	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	  Metric value : Ratio : R-sum : Number of files/regions
+	             0 : 1.000 : 1.000 : 8	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 :: info: Overall metrics for 'std.code.lines:comments' metric
 	Average        : 0.5
@@ -42,10 +42,10 @@
 	Maximum        : 2
 	Total          : 4.0
 	Distribution   : 8 files/regions measured
-	  Metric value : Ratio : Number of files/regions
-	             0 : 0.625 : 5	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             1 : 0.250 : 2	|||||||||||||||||||||||||
-	             2 : 0.125 : 1	|||||||||||||
+	  Metric value : Ratio : R-sum : Number of files/regions
+	             0 : 0.625 : 0.625 : 5	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.250 : 0.875 : 2	|||||||||||||||||||||||||
+	             2 : 0.125 : 1.000 : 1	|||||||||||||
 
 :: info: Directory content:
 	Directory      : .

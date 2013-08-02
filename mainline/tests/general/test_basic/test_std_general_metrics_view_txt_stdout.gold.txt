@@ -4,7 +4,7 @@
 	Maximum        : None
 	Total          : 0.0
 	Distribution   : 0 files/regions measured
-	  Metric value : Ratio : Number of files/regions
+	  Metric value : Ratio : R-sum : Number of files/regions
 
 :: info: Overall metrics for 'std.general:proctime' metric
 	Average        : 0.01
@@ -12,8 +12,8 @@
 	Maximum        : 0.01
 	Total          : 0.01
 	Distribution   : 1 files/regions measured
-	  Metric value : Ratio : Number of files/regions
-	        0.0100 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	  Metric value : Ratio : R-sum : Number of files/regions
+	        0.0100 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 :: info: Overall metrics for 'std.general:size' metric
 	Average        : 487.0
@@ -21,8 +21,8 @@
 	Maximum        : 487
 	Total          : 487.0
 	Distribution   : 1 files/regions measured
-	  Metric value : Ratio : Number of files/regions
-	           487 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	  Metric value : Ratio : R-sum : Number of files/regions
+	           487 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 :: info: Directory content:
 	Directory      : .

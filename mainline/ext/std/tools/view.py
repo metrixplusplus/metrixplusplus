@@ -25,15 +25,20 @@ import mpp.cout
 class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
     
     def declare_configuration(self, parser):
-        parser.add_option("--format", "--ft", default='txt', choices=['txt', 'xml', 'python'], help="Format of the output data. "
+        parser.add_option("--format", "--ft", default='txt', choices=['txt', 'xml', 'python'],
+                          help="Format of the output data. "
                           "Possible values are 'xml', 'txt' or 'python' [default: %default]")
         parser.add_option("--nest-regions", "--nr", action="store_true", default=False,
                           help="If the option is set (True), data for regions is exported in the form of a tree. "
                           "Otherwise, all regions are exported in plain list. [default: %default]")
+        parser.add_option("--max-distribution-rows", "--mdr", type=int, default=20,
+                          help="Maximum number of rows in distribution tables. "
+                               "If it is set to 0, the tool does not optimize the size of distribution tables [default: %default]")
     
     def configure(self, options):
         self.out_format = options.__dict__['format']
         self.nest_regions = options.__dict__['nest_regions']
+        self.dist_columns = options.__dict__['max_distribution_rows']
 
     def run(self, args):
         loader_prev = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader_prev()
@@ -45,11 +50,16 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
         else:
             paths = args
         
-        (result, exit_code) = export_to_str(self.out_format, paths, loader, loader_prev, self.nest_regions)
+        (result, exit_code) = export_to_str(self.out_format,
+                                            paths,
+                                            loader,
+                                            loader_prev,
+                                            self.nest_regions,
+                                            self.dist_columns)
         print result
         return exit_code
 
-def export_to_str(out_format, paths, loader, loader_prev, nest_regions):
+def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_columns):
     exit_code = 0
     result = ""
     if out_format == 'xml':
@@ -75,6 +85,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions):
         if aggregated_data_prev != None:
             aggregated_data_tree = append_diff(aggregated_data_tree,
                                            aggregated_data_prev.get_data_tree())
+        aggregated_data_tree = compress_dist(aggregated_data_tree, dist_columns)
         
         file_data = loader.load_file_data(path)
         file_data_tree = {}
@@ -203,6 +214,63 @@ def append_diff_list(main_list, prev_list):
                        '__diff__':merged_list[metric]['__diff__']})
     return result
 
+def compress_dist(data, columns):
+    if columns == 0:
+        return data
+    
+    for namespace in data.keys():
+        for field in data[namespace].keys():
+            metric_data = data[namespace][field]
+            distr = metric_data['distribution-bars']
+            columns = float(columns) # to trigger floating calculations
+            
+            
+            new_dist = []
+            remaining_count = metric_data['count']
+            next_consume = None
+            next_bar = None
+            for (ind, bar) in enumerate(distr):
+                if next_bar == None:
+                    # start new bar
+                    next_bar = {'count': bar['count'],
+                                'ratio': bar['ratio'],
+                                'metric_s': bar['metric'],
+                                'metric_f': bar['metric']}
+                    if '__diff__' in bar.keys():
+                        next_bar['__diff__'] = bar['__diff__']
+                    next_consume = int(round(remaining_count/ (columns - len(new_dist))))
+                else:
+                    # merge to existing bar
+                    next_bar['count'] += bar['count']
+                    next_bar['ratio'] += bar['ratio']
+                    next_bar['metric_f'] = bar['metric']
+                    if '__diff__' in bar.keys():
+                        next_bar['__diff__'] += bar['__diff__']
+                
+                next_consume -= bar['count']
+                if (next_consume <= 0 # consumed enough
+                    or (ind + 1) == len(distr)): # or the last bar
+                    # append to new distribution
+                    if isinstance(next_bar['metric_s'], float):
+                        next_bar['metric_s'] = "{0:.4f}".format(next_bar['metric_s'])
+                        next_bar['metric_f'] = "{0:.4f}".format(next_bar['metric_f'])
+                    else:
+                        next_bar['metric_s'] = str(next_bar['metric_s'])
+                        next_bar['metric_f'] = str(next_bar['metric_f'])
+                    if next_bar['metric_s'] == next_bar['metric_f']:
+                        next_bar['metric'] = next_bar['metric_s']
+                    else:
+                        next_bar['metric'] = next_bar['metric_s'] + "-" + next_bar['metric_f']
+                    del next_bar['metric_s']
+                    del next_bar['metric_f']
+                    new_dist.append(next_bar)
+                    remaining_count -= next_bar['count']
+                    next_bar = None
+                    # check that consumed all
+                    assert((ind + 1) != len(distr) or remaining_count == 0)
+            data[namespace][field]['distribution-bars'] = new_dist
+    return data
+
 def cout_txt_regions(path, regions, indent = 0):
     for region in regions:
         details = [
@@ -280,8 +348,10 @@ def cout_txt(data):
                 diff_str = ' [{0:{1}}]'.format(diff_data['count'], '+' if diff_data['count'] >= 0 else '')
             count_str_len  = len(str(measured))
             details.append(('Distribution', str(measured) + diff_str + ' files/regions measured'))
-            details.append(('  Metric value', 'Ratio : Number of files/regions'))
+            details.append(('  Metric value', 'Ratio : R-sum : Number of files/regions'))
+            sum_ratio = 0
             for bar in data['aggregated-data'][namespace][field]['distribution-bars']:
+                sum_ratio += bar['ratio']
                 diff_str = ""
                 if '__diff__' in bar.keys():
                     diff_str = ' [{0:{1}}]'.format(bar['__diff__'], '+' if bar['__diff__'] >= 0 else '')
@@ -294,7 +364,8 @@ def cout_txt(data):
                 count_str = str(bar['count'])
                 count_str = ((" " * (count_str_len - len(count_str))) + count_str + diff_str + "\t")
                 details.append((metric_str,
-                                "{0:.3f}".format(bar['ratio']) + " : " + count_str + ('|' * int(round(bar['ratio']*100)))))
+                                "{0:.3f}".format(bar['ratio']) + " : " + "{0:.3f}".format(sum_ratio) +  " : " +
+                                count_str + ('|' * int(round(bar['ratio']*100)))))
             mpp.cout.notify(data['info']['path'],
                     '', # no line number
                     mpp.cout.SEVERITY_INFO,
