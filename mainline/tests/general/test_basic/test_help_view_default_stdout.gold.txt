@@ -18,7 +18,7 @@ Options:
                         'METRIXPLUSPLUS_LOG_LEVEL' if set. [default: INFO]
   --format=FORMAT, --ft=FORMAT
                         Format of the output data. Possible values are 'xml',
-                        'txt' or 'python' [default: xml]
+                        'txt' or 'python' [default: txt]
   --nest-regions, --nr  If the option is set (True), data for regions is
                         exported in the form of a tree. Otherwise, all regions
                         are exported in plain list. [default: False]
