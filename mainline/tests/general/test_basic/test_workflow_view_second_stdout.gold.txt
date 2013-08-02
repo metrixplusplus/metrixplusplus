@@ -12,10 +12,10 @@
             <std.code.complexity>
                 <cyclomatic count="7" max="3" avg="1.57142857143" total="11.0" min="0">
                     <distribution-bars>
-                        <distribution-bar count="1" __diff__="0" metric="0" ratio="0.1429" />
-                        <distribution-bar count="3" __diff__="0" metric="1" ratio="0.4286" />
-                        <distribution-bar count="1" __diff__="0" metric="2" ratio="0.1429" />
-                        <distribution-bar count="2" __diff__="1" metric="3" ratio="0.2857" />
+                        <distribution-bar count="1" __diff__="0" metric="0" ratio="0.142857142857" />
+                        <distribution-bar count="3" __diff__="0" metric="1" ratio="0.428571428571" />
+                        <distribution-bar count="1" __diff__="0" metric="2" ratio="0.142857142857" />
+                        <distribution-bar count="2" __diff__="1" metric="3" ratio="0.285714285714" />
                     </distribution-bars>
                     <__diff__ count="3" max="0" avg="0.0714285714286" total="5.0" min="-1" />
                 </cyclomatic>
