@@ -323,10 +323,6 @@ def compress_dist(data, columns):
                         new_dist.append(next_bar)
                         next_bar = None
 
-            if sum_ratio < 0.995:
-                factor = 1.0 / sum_ratio
-                for each in new_dist:
-                    each['ratio'] *= factor
             data[namespace][field]['distribution-bars'] = new_dist
     return data
 

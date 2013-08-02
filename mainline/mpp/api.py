@@ -963,7 +963,7 @@ class Loader(object):
                     assert(float(data[field]['count'] != 0))
                     data[field]['distribution-bars'].append({'metric': each[0],
                                                              'count': each[1],
-                                                             'ratio': round((float(each[1]) / float(data[field]['count'])), 4)})
+                                                             'ratio': (float(each[1]) / float(data[field]['count']))})
                 result.set_data(name, field, data[field])
         return result
     
