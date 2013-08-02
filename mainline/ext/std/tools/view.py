@@ -25,7 +25,7 @@ import mpp.cout
 class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
     
     def declare_configuration(self, parser):
-        parser.add_option("--format", "--ft", default='xml', choices=['txt', 'xml', 'python'], help="Format of the output data. "
+        parser.add_option("--format", "--ft", default='txt', choices=['txt', 'xml', 'python'], help="Format of the output data. "
                           "Possible values are 'xml', 'txt' or 'python' [default: %default]")
         parser.add_option("--nest-regions", "--nr", action="store_true", default=False,
                           help="If the option is set (True), data for regions is exported in the form of a tree. "

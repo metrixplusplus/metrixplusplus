@@ -30,11 +30,11 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('collect', ['--std.code.complexity.cyclomatic'])
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('view')
+        runner = tests.common.ToolRunner('view', opts_list=['--format=xml'])
         self.assertExec(runner.run())
         
         dirs_list = [os.path.join('.', each) for each in os.listdir(self.get_content_paths().cwd)]
-        runner = tests.common.ToolRunner('view', opts_list=['--format=txt'], dirs_list=dirs_list, prefix='files')
+        runner = tests.common.ToolRunner('view', dirs_list=dirs_list, prefix='files')
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('limit',
