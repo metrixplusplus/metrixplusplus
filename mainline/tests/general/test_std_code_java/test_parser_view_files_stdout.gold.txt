@@ -322,8 +322,8 @@
 	Minimum        : 0
 	Maximum        : 6
 	Total          : 83.0
-	Distribution   : 43 files/regions measured
-	  Metric value : Ratio : R-sum : Number of files/regions
+	Distribution   : 43 regions measured
+	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.186 : 0.186 :  8	|||||||||||||||||||
 	             1 : 0.326 : 0.512 : 14	|||||||||||||||||||||||||||||||||
 	             2 : 0.209 : 0.721 :  9	|||||||||||||||||||||
@@ -354,8 +354,8 @@
 	Minimum        : 0
 	Maximum        : 0
 	Total          : 0.0
-	Distribution   : 1 files/regions measured
-	  Metric value : Ratio : R-sum : Number of files/regions
+	Distribution   : 1 regions measured
+	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./BinaryHeapPriorityQueue.java:0: info: Metrics per '__global__' region
@@ -689,8 +689,8 @@
 	Minimum        : 0
 	Maximum        : 6
 	Total          : 37.0
-	Distribution   : 44 files/regions measured
-	  Metric value : Ratio : R-sum : Number of files/regions
+	Distribution   : 44 regions measured
+	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.523 : 0.523 : 23	||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             1 : 0.295 : 0.818 : 13	||||||||||||||||||||||||||||||
 	             2 : 0.114 : 0.932 :  5	|||||||||||
@@ -938,8 +938,8 @@
 	Minimum        : 0
 	Maximum        : 2
 	Total          : 6.0
-	Distribution   : 31 files/regions measured
-	  Metric value : Ratio : R-sum : Number of files/regions
+	Distribution   : 31 regions measured
+	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.839 : 0.839 : 26	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             1 : 0.129 : 0.968 :  4	|||||||||||||
 	             2 : 0.032 : 1.000 :  1	|||

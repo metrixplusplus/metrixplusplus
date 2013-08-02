@@ -101,7 +101,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
                 "subfiles": subfiles}
 
         if out_format == 'txt':
-            cout_txt(data)
+            cout_txt(data, loader)
         elif out_format == 'xml':
             result += mpp.utils.serialize_to_xml(data, root_name = "data") + "\n"
         elif out_format == 'python':
@@ -224,11 +224,16 @@ def compress_dist(data, columns):
             distr = metric_data['distribution-bars']
             columns = float(columns) # to trigger floating calculations
             
+            if metric_data['count'] == 0:
+                continue
             
             new_dist = []
             remaining_count = metric_data['count']
             next_consume = None
             next_bar = None
+            max_count = 0
+            min_count = 0xFFFFFFFF
+            sum_ratio = 0
             for (ind, bar) in enumerate(distr):
                 if next_bar == None:
                     # start new bar
@@ -264,10 +269,64 @@ def compress_dist(data, columns):
                     del next_bar['metric_s']
                     del next_bar['metric_f']
                     new_dist.append(next_bar)
+                    sum_ratio += next_bar['ratio']
+                    if max_count < next_bar['count']:
+                        max_count = next_bar['count']
+                    if min_count > next_bar['count'] and next_bar['count'] != 0:
+                        min_count = next_bar['count']
                     remaining_count -= next_bar['count']
                     next_bar = None
                     # check that consumed all
                     assert((ind + 1) != len(distr) or remaining_count == 0)
+
+            if (float(max_count - min_count) / metric_data['count'] < 0.05 and
+                metric_data['count'] > 1 and
+                len(new_dist) > 1):
+                # trick here: if all bars are even in the new distribution
+                # it is better to do linear compression instead
+                new_dist = []
+                step = int(round(float(metric_data['max'] - metric_data['min']) / columns))
+                next_end_limit = metric_data['min']
+                next_bar = None
+                for (ind, bar) in enumerate(distr):
+                    if next_bar == None:
+                        # start new bar
+                        next_bar = {'count': bar['count'],
+                                    'ratio': bar['ratio'],
+                                    'metric_s': next_end_limit,
+                                    'metric_f': bar['metric']}
+                        if '__diff__' in bar.keys():
+                            next_bar['__diff__'] = bar['__diff__']
+                        next_end_limit += step
+                    else:
+                        # merge to existing bar
+                        next_bar['count'] += bar['count']
+                        next_bar['ratio'] += bar['ratio']
+                        next_bar['metric_f'] = bar['metric']
+                        if '__diff__' in bar.keys():
+                            next_bar['__diff__'] += bar['__diff__']
+                    
+                    if (next_bar['metric_f'] >= next_end_limit # consumed enough
+                        or (ind + 1) == len(distr)): # or the last bar
+                        if (ind + 1) != len(distr):
+                            next_bar['metric_f'] = next_end_limit
+                        # append to new distribution
+                        if isinstance(next_bar['metric_s'], float):
+                            next_bar['metric_s'] = "{0:.4f}".format(next_bar['metric_s'])
+                            next_bar['metric_f'] = "{0:.4f}".format(next_bar['metric_f'])
+                        else:
+                            next_bar['metric_s'] = str(next_bar['metric_s'])
+                            next_bar['metric_f'] = str(next_bar['metric_f'])
+                        next_bar['metric'] = next_bar['metric_s'] + "-" + next_bar['metric_f']
+                        del next_bar['metric_s']
+                        del next_bar['metric_f']
+                        new_dist.append(next_bar)
+                        next_bar = None
+
+            if sum_ratio < 0.995:
+                factor = 1.0 / sum_ratio
+                for each in new_dist:
+                    each['ratio'] *= factor
             data[namespace][field]['distribution-bars'] = new_dist
     return data
 
@@ -299,7 +358,7 @@ def cout_txt_regions(path, regions, indent = 0):
         if 'subregions' in region.keys():
             cout_txt_regions(path, region['subregions'], indent=indent+1)
 
-def cout_txt(data):
+def cout_txt(data, loader):
     
     details = []
     for key in data['file-data'].keys():
@@ -347,8 +406,11 @@ def cout_txt(data):
             if 'count' in diff_data.keys():
                 diff_str = ' [{0:{1}}]'.format(diff_data['count'], '+' if diff_data['count'] >= 0 else '')
             count_str_len  = len(str(measured))
-            details.append(('Distribution', str(measured) + diff_str + ' files/regions measured'))
-            details.append(('  Metric value', 'Ratio : R-sum : Number of files/regions'))
+            elem_name = 'regions'
+            if loader.get_namespace(namespace).are_regions_supported() == False:
+                elem_name = 'files'
+            details.append(('Distribution', str(measured) + diff_str + ' ' + elem_name + ' measured'))
+            details.append(('  Metric value', 'Ratio : R-sum : Number of ' + elem_name))
             sum_ratio = 0
             for bar in data['aggregated-data'][namespace][field]['distribution-bars']:
                 sum_ratio += bar['ratio']
