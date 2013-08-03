@@ -164,7 +164,7 @@ class Loader(object):
         if command.strip() == "":
             optparser.error("Mandatory action argument required")
         if command not in inicontainer.actions:
-            optparser.error("Unknown action: {action}".format(action=command))
+            optparser.error("action {action}: Unknown command".format(action=command))
 
         self.action = command
 

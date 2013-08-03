@@ -63,7 +63,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
             self.mode = self.MODE_ALL
             
         if self.mode != self.MODE_ALL and options.__dict__['db_file_prev'] == None:
-            self.parser.error("The mode '" + options.__dict__['warn_mode'] + "' for 'general.warn' option requires '--db-file-prev' option set")
+            self.parser.error("option --warn-mode: The mode '" + options.__dict__['warn_mode'] + "' requires '--db-file-prev' option set")
 
         class Limit(object):
             def __init__(self, limit_type, limit, namespace, field, db_filter):
@@ -82,14 +82,14 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
             for each in options.__dict__['max_limit']:
                 match = re.match(pattern, each)
                 if match == None:
-                    self.parser.error("Invalid format of the '--max-limit' option: " + each)
+                    self.parser.error("option --max-limit: Invalid format: " + each)
                 limit = Limit("max", float(match.group(3)), match.group(1), match.group(2), (match.group(2), '>', float(match.group(3))))
                 self.limits.append(limit)
         if options.__dict__['min_limit'] != None:
             for each in options.__dict__['min_limit']:  
                 match = re.match(pattern, each)
                 if match == None:
-                    self.parser.error("Invalid format of the '--min-limit' option: " + each)
+                    self.parser.error("option --min-limit: Invalid format: " + each)
                 limit = Limit("min", float(match.group(3)), match.group(1), match.group(2), (match.group(2), '<', float(match.group(3))))
                 self.limits.append(limit)
     
@@ -106,7 +106,8 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
             valid.append(each)
         for each in self.limits:
             if each.namespace not in valid:
-                self.parser.error("Invalid limit option (namespace does not exist): " + each.namespace)
+                self.parser.error("option --{0}-limit: metric '{1}:{2}' is not available in the database file.".
+                                  format(each.type, each.namespace, each.field))
 
     def _verify_fields(self, namespace, valid_fields):
         valid = []
@@ -115,7 +116,8 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
         for each in self.limits:
             if each.namespace == namespace:
                 if each.field not in valid:
-                    self.parser.error("Invalid limit option (field does not exist): " + each.namespace + ":" + each.field)
+                    self.parser.error("option --{0}-limit: metric '{1}:{2}' is not available in the database file.".
+                                      format(each.type, each.namespace, each.field))
                     
     def iterate_limits(self):
         for each in self.limits:
