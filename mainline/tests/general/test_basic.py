@@ -153,8 +153,8 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('limit', ['--help'])
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('export', ['--help'])
-        self.assertExec(runner.run())
+        #runner = tests.common.ToolRunner('export', ['--help'])
+        #self.assertExec(runner.run())
 
     def test_view_format(self):
 

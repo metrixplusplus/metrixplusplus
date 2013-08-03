@@ -85,6 +85,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
         if aggregated_data_prev != None:
             aggregated_data_tree = append_diff(aggregated_data_tree,
                                            aggregated_data_prev.get_data_tree())
+        aggregated_data_tree = append_suppressions(path, aggregated_data_tree, loader)
         aggregated_data_tree = compress_dist(aggregated_data_tree, dist_columns)
         
         file_data = loader.load_file_data(path)
@@ -213,6 +214,23 @@ def append_diff_list(main_list, prev_list):
                        'ratio':merged_list[metric]['ratio'],
                        '__diff__':merged_list[metric]['__diff__']})
     return result
+
+def append_suppressions(path, data, loader):
+    for namespace in data.keys():
+        for field in data[namespace].keys():
+            selected_data = loader.load_selected_data('std.suppress',
+                                       fields = ['list'],
+                                       path=path,
+                                       filters = [('list', 'LIKE', '%[{0}:{1}]%'.format(namespace, field))])
+            if selected_data == None:
+                data[namespace][field]['sup'] = 0
+            else:
+                count = 0
+                for each in selected_data:
+                    each = each # used
+                    count += 1
+                data[namespace][field]['sup'] = count
+    return data
 
 def compress_dist(data, columns):
     if columns == 0:
@@ -379,23 +397,23 @@ def cout_txt(data, loader):
                     "Metrics per file",
                     details)
 
-    attr_map = {'count': 'Measured',
-                'total': 'Total',
+    attr_map = {'total': 'Total',
                 'avg': 'Average',
                 'min': 'Minimum',
-                'max': 'Maximum'}
+                'max': 'Maximum',
+    }
     for namespace in data['aggregated-data'].keys():
         for field in data['aggregated-data'][namespace].keys():
             details = []
             diff_data = {}
             if '__diff__' in data['aggregated-data'][namespace][field].keys():
                 diff_data = data['aggregated-data'][namespace][field]['__diff__']
-            for attr in data['aggregated-data'][namespace][field].keys():
+            for attr in ['avg', 'min', 'max', 'total']:
                 diff_str = ""
-                if attr == 'distribution-bars' or attr == '__diff__' or attr == 'count':
-                    continue
                 if attr in diff_data.keys():
                     diff_str = " [" + ("+" if diff_data[attr] >= 0 else "") + str(diff_data[attr]) + "]"
+                if attr == 'avg' and data['aggregated-data'][namespace][field]['nonzero'] == True:
+                    diff_str += " (excluding zero metric values)"
                 details.append((attr_map[attr], str(data['aggregated-data'][namespace][field][attr]) + diff_str))
 
             measured = data['aggregated-data'][namespace][field]['count']
@@ -405,7 +423,11 @@ def cout_txt(data, loader):
             elem_name = 'regions'
             if loader.get_namespace(namespace).are_regions_supported() == False:
                 elem_name = 'files'
-            details.append(('Distribution', str(measured) + diff_str + ' ' + elem_name + ' measured'))
+            details.append(('Distribution',
+                            '{0}{1} {2} in total (including {3} suppressed)'.format(measured,
+                                                                                   diff_str,
+                                                                                   elem_name,
+                                                                                   data['aggregated-data'][namespace][field]['sup'])))
             details.append(('  Metric value', 'Ratio : R-sum : Number of ' + elem_name))
             sum_ratio = 0
             for bar in data['aggregated-data'][namespace][field]['distribution-bars']:

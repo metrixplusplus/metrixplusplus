@@ -10,7 +10,7 @@
         </subdirs>
         <aggregated-data>
             <std.code.complexity>
-                <cyclomatic count="119" max="6" avg="1.05882352941" total="126.0" min="0">
+                <cyclomatic nonzero="False" count="119" total="126.0" min="0" max="6" avg="1.05882352941" sup="0">
                     <distribution-bars>
                         <distribution-bar count="58" metric="0" ratio="0.487394957983" />
                         <distribution-bar count="31" metric="1" ratio="0.260504201681" />

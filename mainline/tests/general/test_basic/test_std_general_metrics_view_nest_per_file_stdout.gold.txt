@@ -55,7 +55,7 @@
 	Minimum        : None
 	Maximum        : None
 	Total          : 0.0
-	Distribution   : 0 files measured
+	Distribution   : 0 files in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of files
 
 ./simple.cpp:: info: Overall metrics for 'std.general:proctime' metric
@@ -63,7 +63,7 @@
 	Minimum        : 0.01
 	Maximum        : 0.01
 	Total          : 0.01
-	Distribution   : 1 files measured
+	Distribution   : 1 files in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of files
 	        0.0100 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
@@ -72,7 +72,7 @@
 	Minimum        : 487
 	Maximum        : 487
 	Total          : 487.0
-	Distribution   : 1 files measured
+	Distribution   : 1 files in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of files
 	           487 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 

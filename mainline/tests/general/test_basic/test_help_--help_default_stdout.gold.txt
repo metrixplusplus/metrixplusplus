@@ -5,7 +5,6 @@ Usage: python metrix++.py --help
 Actions: 
   collect
   debug
-  export
   info
   limit
   test
