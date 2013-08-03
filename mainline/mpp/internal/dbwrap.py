@@ -162,7 +162,10 @@ class Database(object):
         def normalize_path(self, path):
             if path == None:
                 return None
-            return re.sub(r'''[\\]''', "/", path)
+            path =re.sub(r'''[\\]''', "/", path)
+            if len(path) > 0 and path[len(path) - 1] == '/':
+                return path[:-1]
+            return path 
         
         def update_dirs(self, db_loader, path = None):
             if db_loader.dirs == None:

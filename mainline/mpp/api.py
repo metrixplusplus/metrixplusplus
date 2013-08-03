@@ -952,9 +952,7 @@ class Loader(object):
             for field in data.keys():
                 if namespace.get_field_packager(field).get_python_type() == str:
                     continue
-                if namespace.get_field_packager(field).is_non_zero() == True:
-                    data[field]['min'] = None
-                    data[field]['avg'] = None
+                data[field]['nonzero'] = namespace.get_field_packager(field).is_non_zero()
                 distribution = self.db.count_rows(name, path_like = final_path_like, group_by_column = field)
                 data[field]['distribution-bars'] = []
                 for each in distribution:

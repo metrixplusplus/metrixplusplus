@@ -42,7 +42,7 @@
 	Minimum        : 0
 	Maximum        : 0
 	Total          : 0.0
-	Distribution   : 3 regions measured
+	Distribution   : 3 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 1.000 : 1.000 : 3	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
@@ -426,7 +426,7 @@
 	Minimum        : 0
 	Maximum        : 2
 	Total          : 4.0
-	Distribution   : 51 regions measured
+	Distribution   : 51 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.941 : 0.941 : 48	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             1 : 0.039 : 0.980 :  2	||||
@@ -647,7 +647,7 @@
 	Minimum        : 0
 	Maximum        : 2
 	Total          : 6.0
-	Distribution   : 24 regions measured
+	Distribution   : 24 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.833 : 0.833 : 20	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             1 : 0.083 : 0.917 :  2	||||||||
@@ -704,7 +704,7 @@
 	Minimum        : 0
 	Maximum        : 2
 	Total          : 3.0
-	Distribution   : 4 regions measured
+	Distribution   : 4 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.500 : 0.500 : 2	||||||||||||||||||||||||||||||||||||||||||||||||||
 	             1 : 0.250 : 0.750 : 1	|||||||||||||||||||||||||
@@ -773,7 +773,7 @@
 	Minimum        : 0
 	Maximum        : 2
 	Total          : 4.0
-	Distribution   : 4 regions measured
+	Distribution   : 4 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.250 : 0.250 : 1	|||||||||||||||||||||||||
 	             1 : 0.500 : 0.750 : 2	||||||||||||||||||||||||||||||||||||||||||||||||||
