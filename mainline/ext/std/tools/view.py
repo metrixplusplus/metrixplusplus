@@ -17,6 +17,7 @@
 #    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import logging
 
 import mpp.api
 import mpp.utils
@@ -24,7 +25,12 @@ import mpp.cout
 
 class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
     
+    MODE_NEW     = 0x01
+    MODE_TOUCHED = 0x03
+    MODE_ALL     = 0x07
+
     def declare_configuration(self, parser):
+        self.parser = parser
         parser.add_option("--format", "--ft", default='txt', choices=['txt', 'xml', 'python'],
                           help="Format of the output data. "
                           "Possible values are 'xml', 'txt' or 'python' [default: %default]")
@@ -34,11 +40,28 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
         parser.add_option("--max-distribution-rows", "--mdr", type=int, default=20,
                           help="Maximum number of rows in distribution tables. "
                                "If it is set to 0, the tool does not optimize the size of distribution tables [default: %default]")
+        parser.add_option("--scope-mode", "--sm", default='all', choices=['new', 'touched', 'all'],
+                         help="Defines the analysis scope mode. "
+                         "'all' - all available regions and files are taken into account, "
+                         "'new' - only new regions and files are taken into account, "
+                         "'touched' - only new and modified regions and files are taken into account. "
+                         "Modes 'new' and 'touched' may require more time for processing than mode 'all' "
+                         "[default: %default]")
     
     def configure(self, options):
         self.out_format = options.__dict__['format']
         self.nest_regions = options.__dict__['nest_regions']
         self.dist_columns = options.__dict__['max_distribution_rows']
+
+        if options.__dict__['scope_mode'] == 'new':
+            self.mode = self.MODE_NEW
+        elif options.__dict__['scope_mode'] == 'touched':
+            self.mode = self.MODE_TOUCHED
+        elif options.__dict__['scope_mode'] == 'all':
+            self.mode = self.MODE_ALL
+
+        if self.mode != self.MODE_ALL and options.__dict__['db_file_prev'] == None:
+            self.parser.error("option --scope-mode: The mode '" + options.__dict__['scope_mode'] + "' requires '--db-file-prev' option set")
 
     def run(self, args):
         loader_prev = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader_prev()
@@ -55,11 +78,12 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
                                             loader,
                                             loader_prev,
                                             self.nest_regions,
-                                            self.dist_columns)
+                                            self.dist_columns,
+                                            self.mode)
         print result
         return exit_code
 
-def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_columns):
+def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_columns, mode):
     exit_code = 0
     result = ""
     if out_format == 'xml':
@@ -70,7 +94,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
     for (ind, path) in enumerate(paths):
         path = mpp.utils.preprocess_path(path)
         
-        aggregated_data = loader.load_aggregated_data(path)
+        aggregated_data, aggregated_data_prev = load_aggregated_data_with_mode(loader, loader_prev, path , mode)
         aggregated_data_tree = {}
         subdirs = []
         subfiles = []
@@ -81,7 +105,6 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
         else:
             mpp.utils.report_bad_path(path)
             exit_code += 1
-        aggregated_data_prev = loader_prev.load_aggregated_data(path)
         if aggregated_data_prev != None:
             aggregated_data_tree = append_diff(aggregated_data_tree,
                                            aggregated_data_prev.get_data_tree())
@@ -117,6 +140,140 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
         result += "]}"
         
     return (result, exit_code)
+
+def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
+    if mode == Plugin.MODE_ALL:
+        aggregated_data = loader.load_aggregated_data(path)
+        aggregated_data_prev = loader_prev.load_aggregated_data(path)
+    else:
+        assert(mode == Plugin.MODE_NEW or mode == Plugin.MODE_TOUCHED)
+        
+        class AggregatedFilteredData(mpp.api.AggregatedData):
+            
+            def __init__(self, loader, path):
+                super(AggregatedFilteredData, self).__init__(loader, path)
+                self.in_processing_mode = True
+                for name in loader.iterate_namespace_names():
+                    namespace = loader.get_namespace(name)
+                    for field in namespace.iterate_field_names():
+                        self.set_data(name, field, {
+                            'count': 0,
+                            'nonzero': namespace.get_field_packager(field).is_non_zero(),
+                            'min': None,
+                            'max': None,
+                            'total': 0.0,
+                            'avg': None,
+                            'distribution-bars': {}
+                        })
+                        
+            def get_data_tree(self, namespaces=None):
+                self.in_processing_mode = False
+                # need to convert distribution map to a list and calculate average
+                for name in loader.iterate_namespace_names():
+                    namespace = loader.get_namespace(name)
+                    for field in namespace.iterate_field_names():
+                        data = self.get_data(name, field)
+                        bars_list = []
+                        for metric_value in sorted(data['distribution-bars'].keys()):
+                            bars_list.append({'metric': metric_value,
+                                              'count': data['distribution-bars'][metric_value],
+                                              'ratio': ((float(data['distribution-bars'][metric_value]) /
+                                                          float(data['count'])))})
+                        data['distribution-bars'] = bars_list
+                        if data['count'] != 0:
+                            data['avg'] = float(data['total']) / float(data['count'])
+                        self.set_data(name, field, data)
+                return super(AggregatedFilteredData, self).get_data_tree(namespaces=namespaces)
+            
+            def _append_data(self, orig_data):
+                # flag to protect ourselves from getting incomplete data
+                # the workflow in this tool: append data first and after get it using get_data_tree()
+                assert(self.in_processing_mode == True)
+                data = orig_data.get_data_tree()
+                for namespace in data.keys():
+                    for field in data[namespace].keys():
+                        aggr_data = self.get_data(namespace, field)
+                        metric_value = data[namespace][field]
+                        if aggr_data['min'] == None or aggr_data['min'] > metric_value:
+                            aggr_data['min'] = metric_value
+                        if aggr_data['max'] == None or aggr_data['max'] < metric_value:
+                            aggr_data['max'] = metric_value
+                        aggr_data['count'] += 1
+                        aggr_data['total'] += metric_value
+                        # average is calculated later on get_data_tree
+                        if metric_value not in aggr_data['distribution-bars'].keys():
+                            aggr_data['distribution-bars'][metric_value] = 0
+                        aggr_data['distribution-bars'][metric_value] += 1
+                        self.set_data(namespace, field, aggr_data)
+            
+            def _append_file_data(self, file_data):
+                self._append_data(file_data)
+                for region in file_data.iterate_regions():
+                    self._append_data(region)
+                
+        result = AggregatedFilteredData(loader, path)
+        result_prev = AggregatedFilteredData(loader_prev, path)
+        
+        prev_file_ids = set()
+        file_data_iterator = loader.iterate_file_data(path)
+        if file_data_iterator != None:
+            for file_data in file_data_iterator:
+                file_data_prev = loader_prev.load_file_data(file_data.get_path())
+                if file_data_prev != None:
+                    prev_file_ids.add(file_data_prev.get_id())
+                    
+                if (file_data_prev == None and (mode == Plugin.MODE_NEW or mode == Plugin.MODE_TOUCHED)):
+                    # new file and required mode matched
+                    logging.info("Processing: " + file_data.get_path() + " [new]")
+                    result._append_file_data(file_data)
+                elif (file_data.get_checksum() != file_data_prev.get_checksum()):
+                    # modified file and required mode matched
+                    logging.info("Processing: " + file_data.get_path() + " [modified]")
+                    # append file data without appending regions...
+                    if (mode == Plugin.MODE_TOUCHED):
+                        # if required mode matched
+                        result._append_data(file_data)
+                        result_prev._append_data(file_data_prev)
+                    # process regions separately
+                    matcher = mpp.utils.FileRegionsMatcher(file_data, file_data_prev)
+                    prev_reg_ids = set()
+                    for region in file_data.iterate_regions():
+                        prev_id = matcher.get_prev_id(region.get_id())
+                        if prev_id != None:
+                            prev_reg_ids.add(prev_id)
+                        if (matcher.is_matched(region.get_id()) == False and
+                            (mode == Plugin.MODE_NEW or mode == Plugin.MODE_TOUCHED)):
+                            # new region
+                            logging.debug("Processing region: " + region.get_name() + " [new]")
+                            result._append_data(region)
+                        elif matcher.is_modified(region.get_id()) and mode == Plugin.MODE_TOUCHED:
+                            # modified region
+                            logging.debug("Processing region: " + region.get_name() + " [modified]")
+                            result._append_data(region)
+                            result_prev._append_data(file_data_prev.get_region(prev_id))
+                            
+                    if mode == Plugin.MODE_TOUCHED:
+                        for region_prev in file_data_prev.iterate_regions():
+                            if region_prev.get_id() not in prev_reg_ids:
+                                # deleted region
+                                logging.debug("Processing: " + region_prev.get_name() + " [deleted]")
+                                result_prev._append_data(region_prev)
+                
+        if mode == Plugin.MODE_TOUCHED:
+            file_data_prev_iterator = loader_prev.iterate_file_data(path)
+            if file_data_prev_iterator != None:
+                for file_data_prev in file_data_prev_iterator:
+                    if file_data_prev.get_id() not in prev_file_ids:
+                        # deleted file and required mode matched
+                        logging.info("Processing: " + file_data.get_path() + " [deleted]")
+                        result_prev._append_file_data(file_data_prev)
+
+        return (result, result_prev)
+            
+    return (aggregated_data, aggregated_data_prev)
+
+
+
 
 def append_regions(file_data_tree, file_data, file_data_prev, nest_regions):
     regions_matcher = None
@@ -200,7 +357,7 @@ def append_diff(main_tree, prev_tree):
 def append_diff_list(main_list, prev_list):
     merged_list = {}
     for bar in main_list:
-        merged_list[bar['metric']] = {'count': bar['count'], '__diff__':0, 'ratio': bar['ratio']}
+        merged_list[bar['metric']] = {'count': bar['count'], '__diff__':bar['count'], 'ratio': bar['ratio']}
     for bar in prev_list:
         if bar['metric'] in merged_list.keys():
             merged_list[bar['metric']]['__diff__'] = \
@@ -216,6 +373,7 @@ def append_diff_list(main_list, prev_list):
     return result
 
 def append_suppressions(path, data, loader):
+    # TODO can not append right suppressions for mode != ALL, fix it
     for namespace in data.keys():
         for field in data[namespace].keys():
             selected_data = loader.load_selected_data('std.suppress',
@@ -249,7 +407,7 @@ def compress_dist(data, columns):
             remaining_count = metric_data['count']
             next_consume = None
             next_bar = None
-            max_count = 0
+            max_count = -(0xFFFFFFFF)
             min_count = 0xFFFFFFFF
             sum_ratio = 0
             for (ind, bar) in enumerate(distr):
@@ -300,9 +458,11 @@ def compress_dist(data, columns):
                         break
 
             if (float(max_count - min_count) / metric_data['count'] < 0.05 and
-                metric_data['count'] > 1 and
+                metric_data['count'] > columns and
                 len(new_dist) > 1):
-                # trick here: if all bars are even in the new distribution
+                # trick here:
+                # if all bars are even in the new distribution AND
+                # there are many items in the distribution (> max distribution rows),
                 # it is better to do linear compression instead
                 new_dist = []
                 step = int(round(float(metric_data['max'] - metric_data['min']) / columns))
@@ -436,7 +596,10 @@ def cout_txt(data, loader):
                 sum_ratio += bar['ratio']
                 diff_str = ""
                 if '__diff__' in bar.keys():
-                    diff_str = ' [{0:{1}}]'.format(bar['__diff__'], '+' if bar['__diff__'] >= 0 else '')
+                    if bar['__diff__'] >= 0:
+                        diff_str = ' [+{0:<{1}}]'.format(bar['__diff__'], count_str_len)
+                    else:
+                        diff_str = ' [{0:<{1}}]'.format(bar['__diff__'], count_str_len+1)
                 if isinstance(bar['metric'], float):
                     metric_str = "{0:.4f}".format(bar['metric'])
                 else:
