@@ -194,7 +194,6 @@ class Marker(object):
         STRING          = 0x02
         PREPROCESSOR    = 0x04
         CODE            = 0x08
-        ALL_EXCEPT_CODE = 0x07
         ANY             = 0xFF
 
         def to_str(self, group):

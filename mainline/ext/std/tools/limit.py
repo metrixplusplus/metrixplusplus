@@ -69,11 +69,15 @@ def main(plugin, args):
                 filters.append(('file_id', 'IN', modified_file_ids))
             sort_by = None
             limit_by = None
+            limit_warnings = None
             if plugin.hotspots != None:
                 sort_by = limit.field
                 if limit.type == "max":
                     sort_by = "-" + sort_by
-                limit_by = plugin.hotspots
+                if warn_plugin.mode == warn_plugin.MODE_ALL:
+                    # if it is not ALL mode, the tool counts number of printed warnings below
+                    limit_by = plugin.hotspots
+                limit_warnings = plugin.hotspots
             selected_data = loader.load_selected_data(limit.namespace,
                                                    fields = [limit.field],
                                                    path=path,
@@ -86,6 +90,9 @@ def main(plugin, args):
                 continue
             
             for select_data in selected_data:
+                if limit_warnings != None and limit_warnings <= 0:
+                    break
+                
                 is_modified = None
                 diff = None
                 file_data = loader.load_file_data(select_data.get_path())
@@ -131,6 +138,8 @@ def main(plugin, args):
                                   limit.limit,
                                   is_modified,
                                   is_sup)
+                if limit_warnings != None:
+                    limit_warnings -= 1
     return exit_code
 
 
