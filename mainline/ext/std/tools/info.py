@@ -22,6 +22,8 @@ import mpp.api
 import mpp.cout
 import mpp.utils
 
+import os
+
 class Plugin(mpp.api.Plugin, mpp.api.IRunable):
     
     def run(self, args):
@@ -41,6 +43,11 @@ class Plugin(mpp.api.Plugin, mpp.api.IRunable):
                     prev_value_str = " [modified (was: " + loader_prev.get_property(each.name) + ")]"
             details.append((each.name, each.value + prev_value_str))
         path = self.get_plugin_loader().get_plugin('mpp.dbf').get_dbfile_path()
+        if ('METRIXPLUSPLUS_TEST_MODE' in os.environ.keys() and
+             os.environ['METRIXPLUSPLUS_TEST_MODE'] == "True"):
+            # in tests, paths come as full paths, strip it for consistent gold files
+            # TODO: if there are other path-like arguments, it is better to think about other solution
+            path = os.path.basename(path)
         mpp.cout.notify(path, '', mpp.cout.SEVERITY_INFO, 'Created using plugins and settings:', details)
     
         details = []

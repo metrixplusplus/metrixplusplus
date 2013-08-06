@@ -52,7 +52,8 @@ class Plugin(mpp.api.Plugin, mpp.api.SimpleMetricMixin, mpp.api.Child, mpp.api.I
         self.declare_metric(self.is_active_code,
                        self.Field('code', int),
                        self.pattern_line,
-                       mpp.api.Marker.T.CODE)
+                       mpp.api.Marker.T.CODE | mpp.api.Marker.T.STRING,
+                       merge_markers=True)
         self.declare_metric(self.is_active_preprocessor,
                        self.Field('preprocessor', int),
                        self.pattern_line,

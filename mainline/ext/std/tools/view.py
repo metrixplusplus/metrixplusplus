@@ -296,6 +296,8 @@ def compress_dist(data, columns):
                     next_bar = None
                     # check that consumed all
                     assert((ind + 1) != len(distr) or remaining_count == 0)
+                    if remaining_count == 0:
+                        break
 
             if (float(max_count - min_count) / metric_data['count'] < 0.05 and
                 metric_data['count'] > 1 and
