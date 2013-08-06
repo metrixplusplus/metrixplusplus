@@ -26,3 +26,11 @@ Options:
                         Maximum number of rows in distribution tables. If it
                         is set to 0, the tool does not optimize the size of
                         distribution tables [default: 20]
+  --scope-mode=SCOPE_MODE, --sm=SCOPE_MODE
+                        Defines the analysis scope mode. 'all' - all available
+                        regions and files are taken into account, 'new' - only
+                        new regions and files are taken into account,
+                        'touched' - only new and modified regions and files
+                        are taken into account. Modes 'new' and 'touched' may
+                        require more time for processing than mode 'all'
+                        [default: all]
