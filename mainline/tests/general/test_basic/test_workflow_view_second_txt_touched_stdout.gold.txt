@@ -3,7 +3,7 @@
 	Minimum        : 0 [-1]
 	Maximum        : 3 [+1]
 	Total          : 7.0 [+0.0]
-	Distribution   : 5 [-1] regions in total (including 0 suppressed)
+	Distribution   : 5 [-1] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.200 : 0.200 : 1 [+1]	||||||||||||||||||||
 	             1 : 0.400 : 0.600 : 2 [-3]	||||||||||||||||||||||||||||||||||||||||
@@ -15,7 +15,7 @@
 	Minimum        : 0 [+0]
 	Maximum        : 12 [+3]
 	Total          : 56.0 [-11.0]
-	Distribution   : 10 [-2] regions in total (including 0 suppressed)
+	Distribution   : 10 [-2] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.100 : 0.100 :  1 [+0 ]	||||||||||
 	             3 : 0.100 : 0.200 :  1 [-1 ]	||||||||||
@@ -32,7 +32,7 @@
 	Minimum        : 0 [+0]
 	Maximum        : 10 [+2]
 	Total          : 48.0 [-11.0]
-	Distribution   : 10 [-2] regions in total (including 0 suppressed)
+	Distribution   : 10 [-2] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.100 : 0.100 :  1 [+0 ]	||||||||||
 	             3 : 0.200 : 0.300 :  2 [+0 ]	||||||||||||||||||||
@@ -47,7 +47,7 @@
 	Minimum        : 0 [+0]
 	Maximum        : 2 [+1]
 	Total          : 2.0 [+1.0]
-	Distribution   : 10 [-2] regions in total (including 0 suppressed)
+	Distribution   : 10 [-2] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.900 : 0.900 :  9 [-2 ]	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             1 : 0.000 : 0.900 :  0 [-1 ]	
@@ -58,7 +58,7 @@
 	Minimum        : 0 [+0]
 	Maximum        : 2 [-1]
 	Total          : 8.0 [+0.0]
-	Distribution   : 10 [-2] regions in total (including 0 suppressed)
+	Distribution   : 10 [-2] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.400 : 0.400 :  4 [-3 ]	||||||||||||||||||||||||||||||||||||||||
 	             1 : 0.400 : 0.800 :  4 [+1 ]	||||||||||||||||||||||||||||||||||||||||

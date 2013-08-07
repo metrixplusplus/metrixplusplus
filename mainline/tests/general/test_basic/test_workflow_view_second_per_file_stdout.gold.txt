@@ -103,17 +103,18 @@
         <aggregated-data>
             <std.code.complexity>
                 <cyclomatic nonzero="False" count="6" total="8.0" min="0" max="3" avg="1.33333333333" sup="0">
+                    <__diff__ nonzero="0" count="0" avg="-0.166666666667" min="-1" max="0" total="-1.0" sup="0" />
                     <distribution-bars>
                         <distribution-bar count="1" __diff__="1" metric="0" ratio="0.166666666667" />
                         <distribution-bar count="3" __diff__="-1" metric="1" ratio="0.5" />
                         <distribution-bar count="1" __diff__="0" metric="2" ratio="0.166666666667" />
                         <distribution-bar count="1" __diff__="0" metric="3" ratio="0.166666666667" />
                     </distribution-bars>
-                    <__diff__ nonzero="0" count="0" avg="-0.166666666667" min="-1" max="0" total="-1.0" />
                 </cyclomatic>
             </std.code.complexity>
             <std.code.lines>
                 <total nonzero="False" count="10" total="56.0" min="0" max="12" avg="5.6" sup="0">
+                    <__diff__ nonzero="0" count="-1" avg="0.0545454545455" min="0" max="0" total="-5.0" sup="0" />
                     <distribution-bars>
                         <distribution-bar count="1" __diff__="0" metric="0" ratio="0.1" />
                         <distribution-bar count="1" __diff__="-1" metric="3" ratio="0.1" />
@@ -125,9 +126,9 @@
                         <distribution-bar count="1" __diff__="1" metric="9" ratio="0.1" />
                         <distribution-bar count="1" __diff__="0" metric="12" ratio="0.1" />
                     </distribution-bars>
-                    <__diff__ nonzero="0" count="-1" avg="0.0545454545455" min="0" max="0" total="-5.0" />
                 </total>
                 <code nonzero="False" count="10" total="50.0" min="0" max="11" avg="5.0" sup="0">
+                    <__diff__ nonzero="0" count="-1" avg="-0.0909090909091" min="0" max="0" total="-6.0" sup="0" />
                     <distribution-bars>
                         <distribution-bar count="1" __diff__="0" metric="0" ratio="0.1" />
                         <distribution-bar count="2" __diff__="0" metric="3" ratio="0.2" />
@@ -137,23 +138,22 @@
                         <distribution-bar count="1" __diff__="1" metric="8" ratio="0.1" />
                         <distribution-bar count="1" __diff__="0" metric="11" ratio="0.1" />
                     </distribution-bars>
-                    <__diff__ nonzero="0" count="-1" avg="-0.0909090909091" min="0" max="0" total="-6.0" />
                 </code>
                 <preprocessor nonzero="False" count="10" total="2.0" min="0" max="2" avg="0.2" sup="0">
+                    <__diff__ nonzero="0" count="-1" avg="0.109090909091" min="0" max="1" total="1.0" sup="0" />
                     <distribution-bars>
                         <distribution-bar count="9" __diff__="-1" metric="0" ratio="0.9" />
                         <distribution-bar count="0" __diff__="-1" metric="1" ratio="0" />
                         <distribution-bar count="1" __diff__="1" metric="2" ratio="0.1" />
                     </distribution-bars>
-                    <__diff__ nonzero="0" count="-1" avg="0.109090909091" min="0" max="1" total="1.0" />
                 </preprocessor>
                 <comments nonzero="False" count="10" total="7.0" min="0" max="2" avg="0.7" sup="0">
+                    <__diff__ nonzero="0" count="-1" avg="0.245454545455" min="0" max="0" total="2.0" sup="0" />
                     <distribution-bars>
                         <distribution-bar count="5" __diff__="-2" metric="0" ratio="0.5" />
                         <distribution-bar count="3" __diff__="0" metric="1" ratio="0.3" />
                         <distribution-bar count="2" __diff__="1" metric="2" ratio="0.2" />
                     </distribution-bars>
-                    <__diff__ nonzero="0" count="-1" avg="0.245454545455" min="0" max="0" total="2.0" />
                 </comments>
             </std.code.lines>
         </aggregated-data>

@@ -32,6 +32,9 @@ class Test(tests.common.TestCase):
                                                      '--std.general.size'])
         self.assertExec(runner.run())
 
+        runner = tests.common.ToolRunner('view')
+        self.assertExec(runner.run())
+
         runner = tests.common.ToolRunner('limit',
                                          ['--max-limit=std.code.complexity:cyclomatic:0'],
                                          exit_code=1,
