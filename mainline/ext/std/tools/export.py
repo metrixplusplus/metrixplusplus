@@ -45,7 +45,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IRunable):
         exit_code = 0
     
         columns = []
-        columnNames = ["file", "region", "modified", "line start", "line end"]
+        columnNames = ["file", "region", "type", "modified", "line start", "line end"]
         for name in self.loader.iterate_namespace_names():
             namespace = self.loader.get_namespace(name)
             for field in namespace.iterate_field_names():
@@ -72,6 +72,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IRunable):
                     matcher = mpp.utils.FileRegionsMatcher(file_data, file_data_prev)
                 for reg in file_data.iterate_regions():
                     per_reg_data = []
+                    per_reg_data.append(mpp.api.Region.T().to_str(reg.get_type()))
                     if matcher != None and matcher.is_matched(reg.get_id()):
                         per_reg_data.append(matcher.is_modified(reg.get_id()))
                     else:
@@ -82,6 +83,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IRunable):
                         per_reg_data.append(reg.get_data(column[0], column[1]))
                     csvWriter.writerow([file_data.get_path(), reg.get_name()] + per_reg_data)
                 per_file_data = []
+                per_file_data.append('file')
                 if file_data_prev != None:
                     per_file_data.append(file_data.get_checksum() != file_data_prev.get_checksum()) 
                 else:
