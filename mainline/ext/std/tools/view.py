@@ -95,6 +95,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
         path = mpp.utils.preprocess_path(path)
         
         aggregated_data, aggregated_data_prev = load_aggregated_data_with_mode(loader, loader_prev, path , mode)
+        
         aggregated_data_tree = {}
         subdirs = []
         subfiles = []
@@ -105,10 +106,14 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
         else:
             mpp.utils.report_bad_path(path)
             exit_code += 1
+        aggregated_data_tree = append_suppressions(path, aggregated_data_tree, loader, mode)
+
         if aggregated_data_prev != None:
+            aggregated_data_prev_tree = aggregated_data_prev.get_data_tree()
+            aggregated_data_prev_tree = append_suppressions(path, aggregated_data_prev_tree, loader, mode)
             aggregated_data_tree = append_diff(aggregated_data_tree,
-                                           aggregated_data_prev.get_data_tree())
-        aggregated_data_tree = append_suppressions(path, aggregated_data_tree, loader)
+                                               aggregated_data_prev_tree)
+            
         aggregated_data_tree = compress_dist(aggregated_data_tree, dist_columns)
         
         file_data = loader.load_file_data(path)
@@ -163,7 +168,8 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                             'max': None,
                             'total': 0.0,
                             'avg': None,
-                            'distribution-bars': {}
+                            'distribution-bars': {},
+                            'sup': 0
                         })
                         
             def get_data_tree(self, namespaces=None):
@@ -189,6 +195,7 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                 # flag to protect ourselves from getting incomplete data
                 # the workflow in this tool: append data first and after get it using get_data_tree()
                 assert(self.in_processing_mode == True)
+                sup_data = orig_data.get_data('std.suppress', 'list')
                 data = orig_data.get_data_tree()
                 for namespace in data.keys():
                     for field in data[namespace].keys():
@@ -204,6 +211,9 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                         if metric_value not in aggr_data['distribution-bars'].keys():
                             aggr_data['distribution-bars'][metric_value] = 0
                         aggr_data['distribution-bars'][metric_value] += 1
+                        if sup_data != None:
+                            if sup_data.find('{0}:{1}'.format(namespace, field)) != -1:
+                                aggr_data['sup'] += 1
                         self.set_data(namespace, field, aggr_data)
             
             def _append_file_data(self, file_data):
@@ -372,22 +382,23 @@ def append_diff_list(main_list, prev_list):
                        '__diff__':merged_list[metric]['__diff__']})
     return result
 
-def append_suppressions(path, data, loader):
-    # TODO can not append right suppressions for mode != ALL, fix it
-    for namespace in data.keys():
-        for field in data[namespace].keys():
-            selected_data = loader.load_selected_data('std.suppress',
-                                       fields = ['list'],
-                                       path=path,
-                                       filters = [('list', 'LIKE', '%[{0}:{1}]%'.format(namespace, field))])
-            if selected_data == None:
-                data[namespace][field]['sup'] = 0
-            else:
-                count = 0
-                for each in selected_data:
-                    each = each # used
-                    count += 1
-                data[namespace][field]['sup'] = count
+def append_suppressions(path, data, loader, mode):
+    if mode == Plugin.MODE_ALL:
+        # in other modes, suppressions are appended during data loading
+        for namespace in data.keys():
+            for field in data[namespace].keys():
+                selected_data = loader.load_selected_data('std.suppress',
+                                           fields = ['list'],
+                                           path=path,
+                                           filters = [('list', 'LIKE', '%[{0}:{1}]%'.format(namespace, field))])
+                if selected_data == None:
+                    data[namespace][field]['sup'] = 0
+                else:
+                    count = 0
+                    for each in selected_data:
+                        each = each # used
+                        count += 1
+                    data[namespace][field]['sup'] = count
     return data
 
 def compress_dist(data, columns):
@@ -581,16 +592,20 @@ def cout_txt(data, loader):
             measured = data['aggregated-data'][namespace][field]['count']
             if 'count' in diff_data.keys():
                 diff_str = ' [{0:{1}}]'.format(diff_data['count'], '+' if diff_data['count'] >= 0 else '')
-            count_str_len  = len(str(measured))
+            sup_diff_str = ""
+            if 'sup' in diff_data.keys():
+                sup_diff_str = ' [{0:{1}}]'.format(diff_data['sup'], '+' if diff_data['sup'] >= 0 else '')
             elem_name = 'regions'
             if loader.get_namespace(namespace).are_regions_supported() == False:
                 elem_name = 'files'
             details.append(('Distribution',
-                            '{0}{1} {2} in total (including {3} suppressed)'.format(measured,
+                            '{0}{1} {2} in total (including {3}{4} suppressed)'.format(measured,
                                                                                    diff_str,
                                                                                    elem_name,
-                                                                                   data['aggregated-data'][namespace][field]['sup'])))
+                                                                                   data['aggregated-data'][namespace][field]['sup'],
+                                                                                   sup_diff_str)))
             details.append(('  Metric value', 'Ratio : R-sum : Number of ' + elem_name))
+            count_str_len  = len(str(measured))
             sum_ratio = 0
             for bar in data['aggregated-data'][namespace][field]['distribution-bars']:
                 sum_ratio += bar['ratio']

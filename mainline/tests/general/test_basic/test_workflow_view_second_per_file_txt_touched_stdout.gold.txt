@@ -109,7 +109,7 @@
 	Minimum        : 0 [-1]
 	Maximum        : 2 [+0]
 	Total          : 4.0 [-1.0]
-	Distribution   : 4 [+0] regions in total (including 0 suppressed)
+	Distribution   : 4 [+0] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.250 : 0.250 : 1 [+1]	|||||||||||||||||||||||||
 	             1 : 0.500 : 0.750 : 2 [-1]	||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -120,7 +120,7 @@
 	Minimum        : 4 [+1]
 	Maximum        : 9 [+1]
 	Total          : 36.0 [-5.0]
-	Distribution   : 6 [-1] regions in total (including 0 suppressed)
+	Distribution   : 6 [-1] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             3 : 0.000 : 0.000 : 0 [-1]	
 	             4 : 0.333 : 0.333 : 2 [+1]	|||||||||||||||||||||||||||||||||
@@ -135,7 +135,7 @@
 	Minimum        : 3 [+0]
 	Maximum        : 8 [+1]
 	Total          : 31.0 [-6.0]
-	Distribution   : 6 [-1] regions in total (including 0 suppressed)
+	Distribution   : 6 [-1] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             3 : 0.167 : 0.167 : 1 [+0]	|||||||||||||||||
 	             4 : 0.333 : 0.500 : 2 [+0]	|||||||||||||||||||||||||||||||||
@@ -148,7 +148,7 @@
 	Minimum        : 0 [+0]
 	Maximum        : 2 [+1]
 	Total          : 2.0 [+1.0]
-	Distribution   : 6 [-1] regions in total (including 0 suppressed)
+	Distribution   : 6 [-1] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.833 : 0.833 : 5 [-1]	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             1 : 0.000 : 0.833 : 0 [-1]	
@@ -159,7 +159,7 @@
 	Minimum        : 0 [+0]
 	Maximum        : 2 [+1]
 	Total          : 5.0 [+2.0]
-	Distribution   : 6 [-1] regions in total (including 0 suppressed)
+	Distribution   : 6 [-1] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.333 : 0.333 : 2 [-2]	|||||||||||||||||||||||||||||||||
 	             1 : 0.500 : 0.833 : 3 [+0]	||||||||||||||||||||||||||||||||||||||||||||||||||
