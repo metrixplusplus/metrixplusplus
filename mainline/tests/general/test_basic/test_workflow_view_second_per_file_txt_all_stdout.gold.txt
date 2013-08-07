@@ -3,6 +3,7 @@
 	Region type    : global
 	Offsets        : 0-836
 	Line numbers   : 1-78
+	Modified       : False
 	std.code.lines:code: 0 [+0]
 	std.code.lines:total: 0 [+0]
 	std.code.lines:preprocessor: 0 [+0]
@@ -13,6 +14,7 @@
 	Region type    : namespace
 	Offsets        : 2-835
 	Line numbers   : 3-77
+	Modified       : True
 	std.code.lines:code: 4 [+0]
 	std.code.lines:total: 7 [+1]
 	std.code.lines:preprocessor: 2 [+1]
@@ -23,6 +25,7 @@
 	Region type    : class
 	Offsets        : 111-831
 	Line numbers   : 10-75
+	Modified       : True
 	std.code.lines:code: 4 [+0]
 	std.code.lines:total: 4 [+0]
 	std.code.lines:preprocessor: 0 [+0]
@@ -33,6 +36,7 @@
 	Region type    : function
 	Offsets        : 123-269
 	Line numbers   : 13-24
+	Modified       : False
 	std.code.complexity:cyclomatic: 3 [+0]
 	std.code.lines:code: 11 [+0]
 	std.code.lines:total: 12 [+0]
@@ -44,6 +48,7 @@
 	Region type    : function
 	Offsets        : 272-455
 	Line numbers   : 26-42
+	Modified       : False
 	std.code.complexity:cyclomatic: 1 [+0]
 	std.code.lines:code: 5 [+0]
 	std.code.lines:total: 5 [+0]
@@ -55,6 +60,7 @@
 	Region type    : class
 	Offsets        : 301-441
 	Line numbers   : 28-40
+	Modified       : False
 	std.code.lines:code: 3 [+0]
 	std.code.lines:total: 3 [+0]
 	std.code.lines:preprocessor: 0 [+0]
@@ -65,6 +71,7 @@
 	Region type    : function
 	Offsets        : 322-437
 	Line numbers   : 30-39
+	Modified       : True
 	std.code.complexity:cyclomatic: 2 [+1]
 	std.code.lines:code: 8 [+1]
 	std.code.lines:total: 9 [+1]
@@ -76,6 +83,7 @@
 	Region type    : function
 	Offsets        : 458-549
 	Line numbers   : 44-51
+	Modified       : True
 	std.code.complexity:cyclomatic: 1 [+0]
 	std.code.lines:code: 7 [+0]
 	std.code.lines:total: 7 [+0]
@@ -87,6 +95,7 @@
 	Region type    : function
 	Offsets        : 552-585
 	Line numbers   : 53-56
+	Modified       : None
 	std.code.complexity:cyclomatic: 0
 	std.code.lines:code: 3
 	std.code.lines:total: 4
@@ -98,6 +107,7 @@
 	Region type    : function
 	Offsets        : 588-646
 	Line numbers   : 58-62
+	Modified       : None
 	std.code.complexity:cyclomatic: 1
 	std.code.lines:code: 5
 	std.code.lines:total: 5
@@ -109,6 +119,7 @@
 	Region type    : function
 	Offsets        : 649-808
 	Line numbers   : 64-72
+	Modified       : None
 	std.code.complexity:cyclomatic: 2
 	std.suppress:count: 1
 	std.suppress:list: [std.code.complexity:cyclomatic]

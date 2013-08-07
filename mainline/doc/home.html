@@ -197,14 +197,14 @@
             <li>Assisiting on <strong>per minute</strong> basis during code refactoring and code development, where coding and quality standards matter.</li>
           </ul>
 
-          <p>The workflow sections explain basic application principles.</p>
+          <p>The workflow sections below demonstarate basic application usecases.</p>
 
           <h3>Languages supported</h3>
           <p>The tool can parse C/C++, C# and Java source code files. The parser identifies certain regions in the code,
              such as classes, functions, namespaces, interfaces, etc. It obviously detects comments, strings and code for preprocessor.
              The identified regions form a tree of nested source code blocks, which are refered after and additionally scanned by metrics plugins.
              This concept allows to attribute metrics per regions, what gives fine grained data and rich input to analysis tools.
-             The following example demonstrates this.</p>
+             The following example demonstrates regions concept.</p>
              
           <table class="table">
             <thead>
@@ -293,7 +293,8 @@ file: __global__: comment
                 <td rowspan="4"><ul><li>Monitoring growth of source code base.</li>
                     <li>Normalizing other metrics.</li>
                     <li>Preventing large files and regions (large things difficult to maintain).</li>
-                    <li>Predicting delivery dates by comparing S-shaped code base growth / change curves.</li></ul></td>
+                    <li>Predicting delivery dates by comparing
+                        <a href="http://www.compaid.com/caiInternet/casestudies/kanarticle2.pdf">S-shaped code base growth / change curves</a>.</li></ul></td>
               </tr>
               <tr>
                 <td>std.code.length.total</td>

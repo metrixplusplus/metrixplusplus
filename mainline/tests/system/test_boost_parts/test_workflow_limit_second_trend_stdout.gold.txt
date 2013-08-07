@@ -1,0 +1,18 @@
+./interprocess/detail/managed_open_or_create_impl.hpp:302: warning: Metric 'std.code.complexity:cyclomatic' for region 'priv_open_or_create' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : priv_open_or_create
+	Metric value   : 37
+	Modified       : True
+	Change trend   : +1
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/mapped_region.hpp:575: warning: Metric 'std.code.complexity:cyclomatic' for region 'mapped_region' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : mapped_region
+	Metric value   : 18
+	Modified       : True
+	Change trend   : +2
+	Limit          : 15.0
+	Suppressed     : False
+
