@@ -37,7 +37,7 @@
 ./test.c:30: warning: Metric 'std.code.length:total' for region 'func4' exceeds the limit.
 	Metric name    : std.code.length:total
 	Region name    : func4
-	Metric value   : 137
+	Metric value   : 144
 	Modified       : None
 	Change trend   : None
 	Limit          : 0.0

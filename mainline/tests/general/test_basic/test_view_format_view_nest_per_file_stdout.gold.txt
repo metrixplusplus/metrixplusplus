@@ -5,15 +5,15 @@
         <file-data>
             <regions>
                 <region>
-                    <info cursor="0" name="__global__" offset_end="674" line_begin="1" type="global" line_end="68" offset_begin="0" />
+                    <info cursor="0" name="__global__" offset_end="836" line_begin="1" type="global" line_end="78" offset_begin="0" />
                     <data />
                     <subregions>
                         <subregion>
-                            <info cursor="4" name="hmm" offset_end="673" line_begin="3" type="namespace" line_end="67" offset_begin="2" />
+                            <info cursor="4" name="hmm" offset_end="835" line_begin="3" type="namespace" line_end="77" offset_begin="2" />
                             <data />
                             <subregions>
                                 <subregion>
-                                    <info cursor="10" name="A" offset_end="669" line_begin="10" type="class" line_end="65" offset_begin="111" />
+                                    <info cursor="10" name="A" offset_end="831" line_begin="10" type="class" line_end="75" offset_begin="111" />
                                     <data />
                                     <subregions>
                                         <subregion>
@@ -78,6 +78,14 @@
                                             <subregions>
                                             </subregions>
                                         </subregion>
+                                        <subregion>
+                                            <info cursor="65" name="new_func_complex_but_suppressed" offset_end="808" line_begin="64" type="function" line_end="72" offset_begin="649" />
+                                            <data>
+                                                <std.code.complexity cyclomatic="2" />
+                                            </data>
+                                            <subregions>
+                                            </subregions>
+                                        </subregion>
                                     </subregions>
                                 </subregion>
                             </subregions>
@@ -92,13 +100,13 @@
         </subdirs>
         <aggregated-data>
             <std.code.complexity>
-                <cyclomatic nonzero="False" count="6" total="8.0" min="0" max="3" avg="1.33333333333" sup="0">
-                    <__diff__ nonzero="0" count="0" avg="-0.166666666667" min="-1" max="0" total="-1.0" sup="0" />
+                <cyclomatic nonzero="False" count="7" total="10.0" min="0" max="3" avg="1.42857142857" sup="0">
+                    <__diff__ nonzero="0" count="1" avg="-0.0714285714286" min="-1" max="0" total="1.0" sup="0" />
                     <distribution-bars>
-                        <distribution-bar count="1" __diff__="1" metric="0" ratio="0.166666666667" />
-                        <distribution-bar count="3" __diff__="-1" metric="1" ratio="0.5" />
-                        <distribution-bar count="1" __diff__="0" metric="2" ratio="0.166666666667" />
-                        <distribution-bar count="1" __diff__="0" metric="3" ratio="0.166666666667" />
+                        <distribution-bar count="1" __diff__="1" metric="0" ratio="0.142857142857" />
+                        <distribution-bar count="3" __diff__="-1" metric="1" ratio="0.428571428571" />
+                        <distribution-bar count="2" __diff__="1" metric="2" ratio="0.285714285714" />
+                        <distribution-bar count="1" __diff__="0" metric="3" ratio="0.142857142857" />
                     </distribution-bars>
                 </cyclomatic>
             </std.code.complexity>
