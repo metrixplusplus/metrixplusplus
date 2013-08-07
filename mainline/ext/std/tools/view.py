@@ -305,13 +305,16 @@ def append_regions(file_data_tree, file_data, file_data_prev, nest_regions):
         regions = []
         for region in file_data.iterate_regions():
             region_data_tree = region.get_data_tree()
+            is_modified = None
             if regions_matcher != None and regions_matcher.is_matched(region.get_id()):
                 region_data_prev = file_data_prev.get_region(regions_matcher.get_prev_id(region.get_id()))
                 region_data_tree = append_diff(region_data_tree,
                                                region_data_prev.get_data_tree())
+                is_modified = regions_matcher.is_modified(region.get_id())
             regions.append({"info": {"name" : region.name,
-                                     'type' : file_data.get_region_types()().to_str(region.get_type()),
-                                     "cursor" : region.cursor,
+                                     'type': file_data.get_region_types()().to_str(region.get_type()),
+                                     'modified': is_modified,
+                                     'cursor' : region.cursor,
                                      'line_begin': region.line_begin,
                                      'line_end': region.line_end,
                                      'offset_begin': region.begin,
@@ -322,13 +325,16 @@ def append_regions(file_data_tree, file_data, file_data_prev, nest_regions):
         def append_rec(region_id, file_data_tree, file_data, file_data_prev):
             region = file_data.get_region(region_id)
             region_data_tree = region.get_data_tree()
+            is_modified = None
             if regions_matcher != None and regions_matcher.is_matched(region.get_id()):
                 region_data_prev = file_data_prev.get_region(regions_matcher.get_prev_id(region.get_id()))
                 region_data_tree = append_diff(region_data_tree,
                                                region_data_prev.get_data_tree())
+                is_modified = regions_matcher.is_modified(region.get_id())
             result = {"info": {"name" : region.name,
                                'type' : file_data.get_region_types()().to_str(region.get_type()),
-                               "cursor" : region.cursor,
+                               'modified': is_modified,
+                               'cursor' : region.cursor,
                                'line_begin': region.line_begin,
                                'line_end': region.line_end,
                                'offset_begin': region.begin,
@@ -532,7 +538,8 @@ def cout_txt_regions(path, regions, indent = 0):
             ('Region name', region['info']['name']),
             ('Region type', region['info']['type']),
             ('Offsets', str(region['info']['offset_begin']) + "-" + str(region['info']['offset_end'])),
-            ('Line numbers', str(region['info']['line_begin']) + "-" + str(region['info']['line_end']))
+            ('Line numbers', str(region['info']['line_begin']) + "-" + str(region['info']['line_end'])),
+            ('Modified', str(region['info']['modified']))
         ]
         for namespace in region['data'].keys():
             diff_data = {}

@@ -197,6 +197,17 @@ class ToolRunner(object):
         return self.dbfile_prev
     
 class TestCase(unittest.TestCase):
+    
+    def __init__(self, methodName='runTest'):
+        unittest.TestCase.__init__(self, methodName=methodName)
+        if 'METRIXPLUSPLUS_LOG_LEVEL' not in os.environ.keys():
+            # launch of individual unit test
+            os.environ['METRIXPLUSPLUS_LOG_LEVEL'] = 'ERROR'
+            os.environ['METRIXPLUSPLUS_INSTALL_DIR'] = os.path.dirname(os.path.dirname(__file__))
+            os.environ['METRIXPLUSPLUS_TEST_MODE'] = str("True")
+            if 'METRIXPLUSPLUS_TEST_GENERATE_GOLDS' not in os.environ.keys():
+                os.environ['METRIXPLUSPLUS_TEST_GENERATE_GOLDS'] = str("False")
+            os.chdir(os.environ['METRIXPLUSPLUS_INSTALL_DIR'])
 
     def get_content_paths(self, cwd='sources'): 
         curframe = inspect.currentframe()
@@ -220,6 +231,7 @@ class TestCase(unittest.TestCase):
         unittest.TestCase.setUp(self)
 
         logging.basicConfig(format="[TEST-LOG]: %(levelname)s:\t%(message)s", level=logging.WARN)
+
         log_level = os.environ['METRIXPLUSPLUS_LOG_LEVEL']
         if log_level == 'ERROR':
             log_level = logging.ERROR
