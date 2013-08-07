@@ -1,4 +1,4 @@
-<export>
+<view>
 
     <data>
         <info path="./simple.cpp" id="1" />
@@ -181,4 +181,4 @@
             </std.code.lines>
         </aggregated-data>
     </data>
-</export>
+</view>

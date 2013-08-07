@@ -57,6 +57,11 @@ class Test(tests.common.TestCase):
                                          exit_code=0)
         self.assertExec(runner.run())
 
+        runner = tests.common.ToolRunner('export',
+                                         ['--log-level=INFO'],
+                                         check_stderr=[(0, -1)])
+        self.assertExec(runner.run())
+
         # second collection
         runner = tests.common.ToolRunner('collect',
                                          ['--std.code.complexity.cyclomatic',
@@ -183,6 +188,13 @@ class Test(tests.common.TestCase):
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('info',
+                                         ['--log-level=INFO'],
+                                         check_stderr=[(0, -1)],
+                                         prefix='second',
+                                         use_prev=True)
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('export',
                                          ['--log-level=INFO'],
                                          check_stderr=[(0, -1)],
                                          prefix='second',
