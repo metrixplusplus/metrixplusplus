@@ -61,6 +61,16 @@ class A
 		return 'A';
 	}
 
+	/* metrix++: suppress std.code.complexity:cyclomatic */
+	char new_func_complex_but_suppressed()
+	{
+		if (true && false)
+		{
+			return 'A';
+		}
+		return 'B';
+	}
+
 	int m_member = 10;
 };
 

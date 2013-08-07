@@ -8,6 +8,7 @@ test_workflow.db:: info: Created using plugins and settings:
 	std.code.java:version: 1.1
 	std.code.java:files: *.java
 	std.code.lines:version: 1.1
+	std.suppress:version: 1.0
 
 test_workflow.db:: info: Collected metrics:
 	std.code.complexity:cyclomatic: 
@@ -15,6 +16,10 @@ test_workflow.db:: info: Collected metrics:
 	std.code.lines:comments: 
 	std.code.lines:preprocessor: 
 	std.code.lines:total: 
+	std.suppress:count: 
+	std.suppress:list: 
+	std.suppress.file:count: 
+	std.suppress.file:list: 
 
 :: info: Processed files and checksums:
 	./file_deleted_in_new_sources.cpp: 0xfd51c243

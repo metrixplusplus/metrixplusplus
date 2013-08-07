@@ -18,6 +18,18 @@
                     </distribution-bars>
                 </cyclomatic>
             </std.code.complexity>
+            <std.suppress.file>
+                <count nonzero="True" count="0" total="0.0" min="None" max="None" avg="None" sup="0">
+                    <distribution-bars>
+                    </distribution-bars>
+                </count>
+            </std.suppress.file>
+            <std.suppress>
+                <count nonzero="True" count="0" total="0.0" min="None" max="None" avg="None" sup="0">
+                    <distribution-bars>
+                    </distribution-bars>
+                </count>
+            </std.suppress>
             <std.code.lines>
                 <total nonzero="False" count="16" total="87.0" min="0" max="12" avg="5.4375" sup="0">
                     <distribution-bars>

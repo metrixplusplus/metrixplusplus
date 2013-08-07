@@ -70,9 +70,9 @@ class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
                                 region_id = region.get_id(),
                                 exclude_children = True):
                     
-                    if last_comment_end != None and marker.get_offset_begin() > last_comment_end + 2:
+                    if last_comment_end != None and len(text[last_comment_end:marker.get_offset_begin()].strip()) > 0:
                         # check continues comment blocks
-                        # stop searching, if this comment block is far from the last
+                        # stop searching, if this comment block is separated from the last by non-blank string
                         break
                     last_comment_end = marker.get_offset_end()
                     

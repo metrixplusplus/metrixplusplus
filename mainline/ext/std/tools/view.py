@@ -161,6 +161,9 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                 for name in loader.iterate_namespace_names():
                     namespace = loader.get_namespace(name)
                     for field in namespace.iterate_field_names():
+                        if namespace.get_field_packager(field).get_python_type() == str:
+                            # skip string type fields
+                            continue
                         self.set_data(name, field, {
                             'count': 0,
                             'nonzero': namespace.get_field_packager(field).is_non_zero(),
@@ -178,6 +181,9 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                 for name in loader.iterate_namespace_names():
                     namespace = loader.get_namespace(name)
                     for field in namespace.iterate_field_names():
+                        if namespace.get_field_packager(field).get_python_type() == str:
+                            # skip string type fields
+                            continue
                         data = self.get_data(name, field)
                         bars_list = []
                         for metric_value in sorted(data['distribution-bars'].keys()):
@@ -201,6 +207,9 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                     for field in data[namespace].keys():
                         aggr_data = self.get_data(namespace, field)
                         metric_value = data[namespace][field]
+                        if isinstance(metric_value, str):
+                            # skip string type fields
+                            continue
                         if aggr_data['min'] == None or aggr_data['min'] > metric_value:
                             aggr_data['min'] = metric_value
                         if aggr_data['max'] == None or aggr_data['max'] < metric_value:

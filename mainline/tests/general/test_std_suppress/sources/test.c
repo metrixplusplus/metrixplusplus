@@ -25,7 +25,7 @@ int func3()
 
 
 /* bla-bla */
-/* metrix++: suppress std.code.length:total */
+       /* metrix++: suppress std.code.length:total */
 /* bla-bla */
 int func4()
 {

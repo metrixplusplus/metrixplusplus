@@ -33,6 +33,7 @@ class Test(tests.common.TestCase):
                                           '--std.code.lines.code',
                                           '--std.code.lines.preprocessor',
                                           '--std.code.lines.comments',
+                                          '--std.suppress',
                                           '--log-level=INFO'],
                                          check_stderr=[(0, -1)],
                                          save_prev=True)
@@ -63,6 +64,7 @@ class Test(tests.common.TestCase):
                                           '--std.code.lines.code',
                                           '--std.code.lines.preprocessor',
                                           '--std.code.lines.comments',
+                                          '--std.suppress',
                                           '--log-level=INFO'],
                                          check_stderr=[(0, -1)],
                                          prefix='second',
