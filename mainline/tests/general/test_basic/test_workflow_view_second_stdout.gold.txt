@@ -13,13 +13,58 @@
                 <cyclomatic nonzero="False" count="7" total="11.0" min="0" max="3" avg="1.57142857143" sup="0">
                     <distribution-bars>
                         <distribution-bar count="1" __diff__="1" metric="0" ratio="0.142857142857" />
-                        <distribution-bar count="3" __diff__="0" metric="1" ratio="0.428571428571" />
-                        <distribution-bar count="1" __diff__="1" metric="2" ratio="0.142857142857" />
+                        <distribution-bar count="3" __diff__="-3" metric="1" ratio="0.428571428571" />
+                        <distribution-bar count="1" __diff__="0" metric="2" ratio="0.142857142857" />
                         <distribution-bar count="2" __diff__="1" metric="3" ratio="0.285714285714" />
                     </distribution-bars>
-                    <__diff__ nonzero="0" count="3" avg="0.0714285714286" min="-1" max="0" total="5.0" />
+                    <__diff__ nonzero="0" count="-1" avg="0.196428571429" min="-1" max="0" total="0.0" />
                 </cyclomatic>
             </std.code.complexity>
+            <std.code.lines>
+                <total nonzero="False" count="14" total="76.0" min="0" max="12" avg="5.42857142857" sup="0">
+                    <distribution-bars>
+                        <distribution-bar count="2" __diff__="0" metric="0" ratio="0.142857142857" />
+                        <distribution-bar count="2" __diff__="-1" metric="3" ratio="0.142857142857" />
+                        <distribution-bar count="2" __diff__="1" metric="4" ratio="0.142857142857" />
+                        <distribution-bar count="3" __diff__="1" metric="5" ratio="0.214285714286" />
+                        <distribution-bar count="0" __diff__="-1" metric="6" ratio="0" />
+                        <distribution-bar count="2" __diff__="-1" metric="7" ratio="0.142857142857" />
+                        <distribution-bar count="0" __diff__="-2" metric="8" ratio="0" />
+                        <distribution-bar count="1" __diff__="0" metric="9" ratio="0.0714285714286" />
+                        <distribution-bar count="2" __diff__="1" metric="12" ratio="0.142857142857" />
+                    </distribution-bars>
+                    <__diff__ nonzero="0" count="-2" avg="-0.00892857142857" min="0" max="0" total="-11.0" />
+                </total>
+                <code nonzero="False" count="14" total="67.0" min="0" max="11" avg="4.78571428571" sup="0">
+                    <distribution-bars>
+                        <distribution-bar count="2" __diff__="0" metric="0" ratio="0.142857142857" />
+                        <distribution-bar count="3" __diff__="0" metric="3" ratio="0.214285714286" />
+                        <distribution-bar count="3" __diff__="0" metric="4" ratio="0.214285714286" />
+                        <distribution-bar count="2" __diff__="0" metric="5" ratio="0.142857142857" />
+                        <distribution-bar count="1" __diff__="-3" metric="7" ratio="0.0714285714286" />
+                        <distribution-bar count="1" __diff__="0" metric="8" ratio="0.0714285714286" />
+                        <distribution-bar count="1" __diff__="1" metric="10" ratio="0.0714285714286" />
+                        <distribution-bar count="1" __diff__="0" metric="11" ratio="0.0714285714286" />
+                    </distribution-bars>
+                    <__diff__ nonzero="0" count="-2" avg="-0.0892857142857" min="0" max="0" total="-11.0" />
+                </code>
+                <preprocessor nonzero="False" count="14" total="2.0" min="0" max="2" avg="0.142857142857" sup="0">
+                    <distribution-bars>
+                        <distribution-bar count="13" __diff__="-2" metric="0" ratio="0.928571428571" />
+                        <distribution-bar count="0" __diff__="-1" metric="1" ratio="0" />
+                        <distribution-bar count="1" __diff__="1" metric="2" ratio="0.0714285714286" />
+                    </distribution-bars>
+                    <__diff__ nonzero="0" count="-2" avg="0.0803571428571" min="0" max="1" total="1.0" />
+                </preprocessor>
+                <comments nonzero="False" count="14" total="10.0" min="0" max="2" avg="0.714285714286" sup="0">
+                    <distribution-bars>
+                        <distribution-bar count="7" __diff__="-3" metric="0" ratio="0.5" />
+                        <distribution-bar count="4" __diff__="1" metric="1" ratio="0.285714285714" />
+                        <distribution-bar count="3" __diff__="1" metric="2" ratio="0.214285714286" />
+                    </distribution-bars>
+                    <__diff__ nonzero="0" count="-2" avg="0.0892857142857" min="0" max="-1" total="0.0" />
+                </comments>
+            </std.code.lines>
         </aggregated-data>
     </data>
 </export>
