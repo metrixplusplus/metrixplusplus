@@ -1,4 +1,4 @@
-./simple.cpp:10: warning: Metric 'std.code.complexity:cyclomatic' for region 'A' exceeds the limit.
+./simple.cpp:13: warning: Metric 'std.code.complexity:cyclomatic' for region 'A' exceeds the limit.
 	Metric name    : std.code.complexity:cyclomatic
 	Region name    : A
 	Metric value   : 3
@@ -7,7 +7,7 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./simple.cpp:23: warning: Metric 'std.code.complexity:cyclomatic' for region 'func' exceeds the limit.
+./simple.cpp:26: warning: Metric 'std.code.complexity:cyclomatic' for region 'func' exceeds the limit.
 	Metric name    : std.code.complexity:cyclomatic
 	Region name    : func
 	Metric value   : 1
@@ -16,7 +16,7 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./simple.cpp:27: warning: Metric 'std.code.complexity:cyclomatic' for region 'embeded' exceeds the limit.
+./simple.cpp:30: warning: Metric 'std.code.complexity:cyclomatic' for region 'embeded' exceeds the limit.
 	Metric name    : std.code.complexity:cyclomatic
 	Region name    : embeded
 	Metric value   : 2
@@ -25,7 +25,7 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./simple.cpp:41: warning: Metric 'std.code.complexity:cyclomatic' for region 'never' exceeds the limit.
+./simple.cpp:44: warning: Metric 'std.code.complexity:cyclomatic' for region 'never' exceeds the limit.
 	Metric name    : std.code.complexity:cyclomatic
 	Region name    : never
 	Metric value   : 1
@@ -34,7 +34,7 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./simple.cpp:55: warning: Metric 'std.code.complexity:cyclomatic' for region 'new_func_complex' exceeds the limit.
+./simple.cpp:58: warning: Metric 'std.code.complexity:cyclomatic' for region 'new_func_complex' exceeds the limit.
 	Metric name    : std.code.complexity:cyclomatic
 	Region name    : new_func_complex
 	Metric value   : 1

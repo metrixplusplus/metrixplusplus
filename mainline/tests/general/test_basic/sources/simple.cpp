@@ -4,6 +4,8 @@
 namespace hmm
 {
 
+#define old_prep
+
 class A
 {
 
@@ -20,6 +22,7 @@ class A
 		}
 	}
 
+
 	int func(int param = 5)
 	{
 		class embeded
@@ -34,6 +37,22 @@ class A
 			}
 		};
 		if (a);
+	}
+
+	int func_to_be_removed_in_new_sources(int param = 5)
+	{
+		class embeded
+		{
+			embeded()
+			{
+				int a = 10;
+				if ("text")
+				{
+					/* again crazy */
+				}
+			}
+		};
+		if (a && b);
 	}
 
 	int never(int how_long = 999)

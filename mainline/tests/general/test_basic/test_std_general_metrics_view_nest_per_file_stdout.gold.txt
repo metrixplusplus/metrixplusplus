@@ -1,54 +1,72 @@
 ./simple.cpp:0: info: Metrics per '__global__' region
 	Region name    : __global__
 	Region type    : global
-	Offsets        : 0-487
-	Line numbers   : 1-52
+	Offsets        : 0-697
+	Line numbers   : 1-71
 
 .   ./simple.cpp:4: info: Metrics per 'hmm' region
     	Region name    : hmm
     	Region type    : namespace
-    	Offsets        : 2-486
-    	Line numbers   : 3-51
+    	Offsets        : 2-696
+    	Line numbers   : 3-70
 
-.   .   ./simple.cpp:7: info: Metrics per 'A' region
+.   .   ./simple.cpp:9: info: Metrics per 'A' region
         	Region name    : A
         	Region type    : class
-        	Offsets        : 76-482
-        	Line numbers   : 7-49
+        	Offsets        : 94-692
+        	Line numbers   : 9-68
 
-.   .   .   ./simple.cpp:10: info: Metrics per 'A' region
+.   .   .   ./simple.cpp:12: info: Metrics per 'A' region
             	Region name    : A
             	Region type    : function
-            	Offsets        : 88-234
-            	Line numbers   : 10-21
+            	Offsets        : 106-252
+            	Line numbers   : 12-23
 
-.   .   .   ./simple.cpp:23: info: Metrics per 'func' region
+.   .   .   ./simple.cpp:26: info: Metrics per 'func' region
             	Region name    : func
             	Region type    : function
-            	Offsets        : 237-386
-            	Line numbers   : 23-37
+            	Offsets        : 256-405
+            	Line numbers   : 26-40
 
-.   .   .   .   ./simple.cpp:25: info: Metrics per 'embeded' region
+.   .   .   .   ./simple.cpp:28: info: Metrics per 'embeded' region
                 	Region name    : embeded
                 	Region type    : class
-                	Offsets        : 266-372
-                	Line numbers   : 25-35
+                	Offsets        : 285-391
+                	Line numbers   : 28-38
 
-.   .   .   .   .   ./simple.cpp:27: info: Metrics per 'embeded' region
+.   .   .   .   .   ./simple.cpp:30: info: Metrics per 'embeded' region
                     	Region name    : embeded
                     	Region type    : function
-                    	Offsets        : 287-368
-                    	Line numbers   : 27-34
+                    	Offsets        : 306-387
+                    	Line numbers   : 30-37
 
-.   .   .   ./simple.cpp:39: info: Metrics per 'never' region
+.   .   .   ./simple.cpp:42: info: Metrics per 'func_to_be_removed_in_new_sources' region
+            	Region name    : func_to_be_removed_in_new_sources
+            	Region type    : function
+            	Offsets        : 408-596
+            	Line numbers   : 42-56
+
+.   .   .   .   ./simple.cpp:44: info: Metrics per 'embeded' region
+                	Region name    : embeded
+                	Region type    : class
+                	Offsets        : 466-577
+                	Line numbers   : 44-54
+
+.   .   .   .   .   ./simple.cpp:46: info: Metrics per 'embeded' region
+                    	Region name    : embeded
+                    	Region type    : function
+                    	Offsets        : 487-573
+                    	Line numbers   : 46-53
+
+.   .   .   ./simple.cpp:58: info: Metrics per 'never' region
             	Region name    : never
             	Region type    : function
-            	Offsets        : 389-459
-            	Line numbers   : 39-46
+            	Offsets        : 599-669
+            	Line numbers   : 58-65
 
 ./simple.cpp:0: info: Metrics per file
 	std.general:proctime: 0.01
-	std.general:size: 487
+	std.general:size: 697
 
 ./simple.cpp:: info: Overall metrics for 'std.general:procerrors' metric
 	Average        : None
@@ -68,12 +86,12 @@
 	        0.0100 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.general:size' metric
-	Average        : 487.0
-	Minimum        : 487
-	Maximum        : 487
-	Total          : 487.0
+	Average        : 697.0
+	Minimum        : 697
+	Maximum        : 697
+	Total          : 697.0
 	Distribution   : 1 files in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of files
-	           487 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	           697 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 

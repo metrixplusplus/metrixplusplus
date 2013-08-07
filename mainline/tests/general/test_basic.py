@@ -29,6 +29,10 @@ class Test(tests.common.TestCase):
         # first collection
         runner = tests.common.ToolRunner('collect',
                                          ['--std.code.complexity.cyclomatic',
+                                          '--std.code.lines.total',
+                                          '--std.code.lines.code',
+                                          '--std.code.lines.preprocessor',
+                                          '--std.code.lines.comments',
                                           '--log-level=INFO'],
                                          check_stderr=[(0, -1)],
                                          save_prev=True)
@@ -43,7 +47,7 @@ class Test(tests.common.TestCase):
                                          ['--log-level=INFO',
                                           '--max-limit=std.code.complexity:cyclomatic:0'],
                                          check_stderr=[(0, -1)],
-                                         exit_code=4)
+                                         exit_code=8)
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('info',
@@ -55,6 +59,10 @@ class Test(tests.common.TestCase):
         # second collection
         runner = tests.common.ToolRunner('collect',
                                          ['--std.code.complexity.cyclomatic',
+                                          '--std.code.lines.total',
+                                          '--std.code.lines.code',
+                                          '--std.code.lines.preprocessor',
+                                          '--std.code.lines.comments',
                                           '--log-level=INFO'],
                                          check_stderr=[(0, -1)],
                                          prefix='second',
@@ -76,6 +84,52 @@ class Test(tests.common.TestCase):
                                          dirs_list=['./simple.cpp'],
                                          use_prev=True)
         self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view',
+                                         ['--log-level=INFO', '--scope-mode=all'],
+                                         check_stderr=[(0, -1)],
+                                         prefix='second_txt_all',
+                                         use_prev=True)
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view',
+                                         ['--log-level=INFO', '--scope-mode=all'],
+                                         check_stderr=[(0, -1)],
+                                         prefix='second_per_file_txt_all',
+                                         dirs_list=['./simple.cpp'],
+                                         use_prev=True)
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view',
+                                         ['--log-level=INFO', '--scope-mode=touched'],
+                                         check_stderr=[(0, -1)],
+                                         prefix='second_txt_touched',
+                                         use_prev=True)
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view',
+                                         ['--log-level=INFO', '--scope-mode=touched'],
+                                         check_stderr=[(0, -1)],
+                                         prefix='second_per_file_txt_touched',
+                                         dirs_list=['./simple.cpp'],
+                                         use_prev=True)
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view',
+                                         ['--log-level=INFO', '--scope-mode=new'],
+                                         check_stderr=[(0, -1)],
+                                         prefix='second_txt_new',
+                                         use_prev=True)
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view',
+                                         ['--log-level=INFO', '--scope-mode=new'],
+                                         check_stderr=[(0, -1)],
+                                         prefix='second_per_file_txt_new',
+                                         dirs_list=['./simple.cpp'],
+                                         use_prev=True)
+        self.assertExec(runner.run())
+
 
         runner = tests.common.ToolRunner('limit',
                                          ['--log-level=INFO',
@@ -157,6 +211,8 @@ class Test(tests.common.TestCase):
         #self.assertExec(runner.run())
 
     def test_view_format(self):
+        
+        # note: --scope-mode is tested in workflow test above
 
         runner = tests.common.ToolRunner('collect', ['--std.code.complexity.cyclomatic'], save_prev=True)
         self.assertExec(runner.run())

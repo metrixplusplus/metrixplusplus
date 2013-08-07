@@ -4,6 +4,9 @@
 namespace hmm
 {
 
+#define old_prep
+#define new_prep
+
 class A
 {
 
