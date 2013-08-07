@@ -2,5 +2,5 @@
 [LOG]: INFO:	Processing: 
 [LOG]: INFO:	Processing: ./simple.cpp [modified]
 [LOG]: INFO:	Processing: ./simple2.cpp [new]
-[LOG]: INFO:	Processing: ./simple2.cpp [deleted]
+[LOG]: INFO:	Processing: ./file_deleted_in_new_sources.cpp [deleted]
 [LOG]: WARNING:	Done (1 seconds). Exit code: 0

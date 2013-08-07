@@ -256,7 +256,7 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                         for region_prev in file_data_prev.iterate_regions():
                             if region_prev.get_id() not in prev_reg_ids:
                                 # deleted region
-                                logging.debug("Processing: " + region_prev.get_name() + " [deleted]")
+                                logging.debug("Processing region: " + region_prev.get_name() + " [deleted]")
                                 result_prev._append_data(region_prev)
                 
         if mode == Plugin.MODE_TOUCHED:
@@ -265,7 +265,7 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                 for file_data_prev in file_data_prev_iterator:
                     if file_data_prev.get_id() not in prev_file_ids:
                         # deleted file and required mode matched
-                        logging.info("Processing: " + file_data.get_path() + " [deleted]")
+                        logging.info("Processing: " + file_data_prev.get_path() + " [deleted]")
                         result_prev._append_file_data(file_data_prev)
 
         return (result, result_prev)
