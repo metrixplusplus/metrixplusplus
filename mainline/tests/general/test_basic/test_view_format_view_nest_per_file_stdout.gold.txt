@@ -1,4 +1,4 @@
-<export>
+<view>
 
     <data>
         <info path="./simple.cpp" id="1" />
@@ -112,4 +112,4 @@
             </std.code.complexity>
         </aggregated-data>
     </data>
-</export>
+</view>

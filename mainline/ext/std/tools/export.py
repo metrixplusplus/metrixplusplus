@@ -23,18 +23,11 @@ import mpp.utils
 
 import csv
 
-class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
-    
-    def declare_configuration(self, parser):
-        parser.add_option("--format", "--ft", default='csv', choices=['csv', 'xml'], help="Format of the output data. "
-                          "Possible values are 'xml' and 'csv' [default: %default]")
-    
-    def configure(self, options):
-        self.out_format = options.__dict__['format']
+class Plugin(mpp.api.Plugin, mpp.api.IRunable):
 
     def run(self, args):
-        loader_prev = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader_prev()
-        loader = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
+        self.loader_prev = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader_prev()
+        self.loader = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
     
         paths = None
         if len(args) == 0:
@@ -42,55 +35,61 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
         else:
             paths = args
             
-        exit_code = export_to_stdout(self.out_format, paths, loader, loader_prev)
-        return exit_code
+        return self._export_to_stdout(paths)
 
-def export_to_stdout(out_format, paths, loader, loader_prev):
-    class StdoutWriter(object):
-        def write(self, *args, **kwargs):
-            print args[0],
-    
-    exit_code = 0
-
-
-    columnNames = ["file", "region", ]
-    columns = []
-    for name in loader.iterate_namespace_names():
-        namespace = loader.get_namespace(name)
-        for field in namespace.iterate_field_names():
-            columns.append((name, field, namespace.are_regions_supported()))
-            columnNames.append(name + ":" + field)
-
-    writer = StdoutWriter()
-    csvWriter = csv.writer(writer)
-    csvWriter.writerow(columnNames)
-    
-    if out_format == 'xml':
-        print "<export>\n"
-    elif out_format == 'csv':
-        print "CSV"
-    else:
-        assert False, "Unknown output format " + out_format
-
-    for path in paths:
-        path = mpp.utils.preprocess_path(path)
+    def _export_to_stdout(self, paths):
+        class StdoutWriter(object):
+            def write(self, *args, **kwargs):
+                print args[0].strip()
         
-        files = loader.iterate_file_data(path)
-        if files != None:
+        exit_code = 0
+    
+        columns = []
+        columnNames = ["file", "region", "modified", "line start", "line end"]
+        for name in self.loader.iterate_namespace_names():
+            namespace = self.loader.get_namespace(name)
+            for field in namespace.iterate_field_names():
+                columns.append((name, field))
+                columnNames.append(name + ":" + field)
+    
+        writer = StdoutWriter()
+        csvWriter = csv.writer(writer)
+        csvWriter.writerow(columnNames)
+        
+        for path in paths:
+            path = mpp.utils.preprocess_path(path)
+            
+            files = self.loader.iterate_file_data(path)
+            if files == None:
+                mpp.utils.report_bad_path(path)
+                exit_code += 1
+                continue
+                
             for file_data in files:
+                matcher = None
+                file_data_prev = self.loader_prev.load_file_data(file_data.get_path())
+                if file_data_prev != None:
+                    matcher = mpp.utils.FileRegionsMatcher(file_data, file_data_prev)
                 for reg in file_data.iterate_regions():
                     per_reg_data = []
+                    if matcher != None and matcher.is_matched(reg.get_id()):
+                        per_reg_data.append(matcher.is_modified(reg.get_id()))
+                    else:
+                        per_reg_data.append(None)
+                    per_reg_data.append(reg.get_line_begin())
+                    per_reg_data.append(reg.get_line_end())
                     for column in columns:
                         per_reg_data.append(reg.get_data(column[0], column[1]))
                     csvWriter.writerow([file_data.get_path(), reg.get_name()] + per_reg_data)
                 per_file_data = []
+                if file_data_prev != None:
+                    per_file_data.append(file_data.get_checksum() != file_data_prev.get_checksum()) 
+                else:
+                    per_file_data.append(None)
+                per_file_data.append(file_data.get_region(1).get_line_begin())
+                per_file_data.append(file_data.get_region(1).get_line_end())
                 for column in columns:
                     per_file_data.append(file_data.get_data(column[0], column[1]))
                 csvWriter.writerow([file_data.get_path(), None] + per_file_data)
-        else:
-            mpp.utils.report_bad_path(path)
-            exit_code += 1
-
-    if out_format == 'xml':
-        print "XML"
-    return 0
+    
+        return exit_code

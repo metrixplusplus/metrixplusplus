@@ -1,4 +1,4 @@
-<export>
+<view>
 
     <data>
         <info path="" id="1" />
@@ -72,4 +72,4 @@
             </std.code.lines>
         </aggregated-data>
     </data>
-</export>
+</view>

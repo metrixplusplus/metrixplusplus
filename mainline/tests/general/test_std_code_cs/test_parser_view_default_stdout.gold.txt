@@ -1,4 +1,4 @@
-<export>
+<view>
 
     <data>
         <info path="" id="1" />
@@ -24,4 +24,4 @@
             </std.code.complexity>
         </aggregated-data>
     </data>
-</export>
+</view>

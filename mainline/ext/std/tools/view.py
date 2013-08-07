@@ -87,9 +87,9 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
     exit_code = 0
     result = ""
     if out_format == 'xml':
-        result += "<export>\n"
+        result += "<view>\n"
     elif out_format == 'python':
-        result += "{'export': ["
+        result += "{'view': ["
 
     for (ind, path) in enumerate(paths):
         path = mpp.utils.preprocess_path(path)
@@ -140,7 +140,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
             result += mpp.utils.serialize_to_python(data, root_name = "data") + postfix
 
     if out_format == 'xml':
-        result += "</export>"
+        result += "</view>"
     elif out_format == 'python':
         result += "]}"
         
