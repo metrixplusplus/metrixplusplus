@@ -110,7 +110,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
 
         if aggregated_data_prev != None:
             aggregated_data_prev_tree = aggregated_data_prev.get_data_tree()
-            aggregated_data_prev_tree = append_suppressions(path, aggregated_data_prev_tree, loader, mode)
+            aggregated_data_prev_tree = append_suppressions(path, aggregated_data_prev_tree, loader_prev, mode)
             aggregated_data_tree = append_diff(aggregated_data_tree,
                                                aggregated_data_prev_tree)
             
@@ -221,7 +221,7 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                             aggr_data['distribution-bars'][metric_value] = 0
                         aggr_data['distribution-bars'][metric_value] += 1
                         if sup_data != None:
-                            if sup_data.find('{0}:{1}'.format(namespace, field)) != -1:
+                            if sup_data.find('[{0}:{1}]'.format(namespace, field)) != -1:
                                 aggr_data['sup'] += 1
                         self.set_data(namespace, field, aggr_data)
             

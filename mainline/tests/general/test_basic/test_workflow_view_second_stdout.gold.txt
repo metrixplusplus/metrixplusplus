@@ -11,7 +11,7 @@
         <aggregated-data>
             <std.code.complexity>
                 <cyclomatic nonzero="False" count="8" total="13.0" min="0" max="3" avg="1.625" sup="1">
-                    <__diff__ nonzero="0" count="0" avg="0.25" min="-1" max="0" total="2.0" sup="0" />
+                    <__diff__ nonzero="0" count="0" avg="0.25" min="-1" max="0" total="2.0" sup="1" />
                     <distribution-bars>
                         <distribution-bar count="1" __diff__="1" metric="0" ratio="0.125" />
                         <distribution-bar count="3" __diff__="-3" metric="1" ratio="0.375" />
