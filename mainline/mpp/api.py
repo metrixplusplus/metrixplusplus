@@ -1085,7 +1085,7 @@ class Plugin(BasePlugin):
                 # mark the plug-in as updated in order to trigger full rescan
                 self.is_updated = self.is_updated or is_created
 
-class SimpleMetricMixin(object):
+class MetricPluginMixin(object):
 
     class AliasError(Exception):
         def __init__(self, alias):
