@@ -20,7 +20,7 @@
 import mpp.api
 import re
 
-class Plugin(mpp.api.Plugin, mpp.api.SimpleMetricMixin, mpp.api.Child, mpp.api.IConfigurable):
+class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.IConfigurable):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.code.lines.code", "--sclc", action="store_true", default=False,
