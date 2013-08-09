@@ -331,11 +331,13 @@ file: __global__: comment
                 	the metric equal to 1 and the function has got it equal to 2:
                 	<pre class="prettyprint">
 class WeekClass {
-  int isWeekend(int day) {
-    if (day == 6 || day == 7) {
-      return true;
+    int isWeekend(int day) {
+        if (day == SATURDAY ||
+            day == SUNDAY) {
+            return true;
+        }
+        return false;
     }
-    return false;
 }
 </pre>
                 	</td>
