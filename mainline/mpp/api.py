@@ -1145,7 +1145,7 @@ class MetricPluginMixin(object):
                 counter_data = {}
                 count = 0
                 if hasattr(self, '_' + metric_name + '_count_initialize'):
-                    (count, counter_data) = self.__getattribute__('_' + metric_name + '_count_initialize')(data, alias)
+                    (count, counter_data) = self.__getattribute__('_' + metric_name + '_count_initialize')(data, alias, region)
                 for marker in data.iterate_markers(
                                 filter_group = field_data[1],
                                 region_id = region.get_id(),
@@ -1154,7 +1154,7 @@ class MetricPluginMixin(object):
                     begin = marker.get_offset_begin()
                     end = marker.get_offset_end()
                     for m in pattern_to_search.finditer(text, begin, end):
-                        count = counter_callback(data, alias, text, begin, end, m, count, counter_data)
+                        count = counter_callback(data, alias, text, begin, end, m, count, counter_data, region, marker)
                 region.set_data(namespace, metric_name, count)
         else:
             for region in data.iterate_regions(filter_group=field_data[5]):
