@@ -26,9 +26,12 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
     def declare_configuration(self, parser):
         parser.add_option("--std.code.complexity.cyclomatic", "--sccc", action="store_true", default=False,
                          help="Enables collection of cyclomatic complexity metric (McCabe) [default: %default]")
+        parser.add_option("--std.code.complexity.maxindent", "--sccmi", action="store_true", default=False,
+                         help="Enables collection of maximum indent level metric [default: %default]")
     
     def configure(self, options):
         self.is_active_cyclomatic = options.__dict__['std.code.complexity.cyclomatic']
+        self.is_active_maxindent = options.__dict__['std.code.complexity.maxindent']
         
     # cyclomatic complexity pattern
     # - C/C++
@@ -38,6 +41,8 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
     pattern_cs = re.compile(r'''([^0-9A-Za-z_]((if)|(case)|(for)|(foreach)|(while)|(catch))[^0-9A-Za-z_])|[&][&]|[|][|]|[?][?]?''')
     # - Java
     pattern_java = re.compile(r'''([^0-9A-Za-z_]((if)|(case)|(for)|(while)|(catch))[^0-9A-Za-z_])|[&][&]|[|][|]|[?]''')
+
+    pattern_indent = re.compile(r'''[}{]''')
 
     def initialize(self):
         self.declare_metric(self.is_active_cyclomatic,
@@ -49,6 +54,15 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
                             },
                             marker_type_mask=mpp.api.Marker.T.CODE,
                             region_type_mask=mpp.api.Region.T.FUNCTION)
+        self.declare_metric(self.is_active_maxindent,
+                            self.Field('maxindent', int),
+                            {
+                                'cpp': self.pattern_indent,
+                                'cs': self.pattern_indent,
+                                'java': self.pattern_indent,
+                            },
+                            marker_type_mask=mpp.api.Marker.T.CODE,
+                            region_type_mask=mpp.api.Region.T.ANY)
         
         super(Plugin, self).initialize(fields=self.get_fields())
         
@@ -70,4 +84,18 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
         is_updated = is_updated or self.is_updated
         if is_updated == True:
             self.count_if_active('cyclomatic', data, alias=alias)
+            self.count_if_active('maxindent', data, alias=alias)
 
+    def _maxindent_count_initialize(self, data, alias):
+        return (0, {'cur_level': 0})
+    
+    def _maxindent_count(self, data, alias, text, begin, end, m, count, counter_data):
+        if m.group(0) == '{':
+            counter_data['cur_level'] += 1
+            if counter_data['cur_level'] > count:
+                count = counter_data['cur_level']
+        elif m.group(0) == '}':
+            counter_data['cur_level'] -= 1
+        else:
+            assert False
+        return count
