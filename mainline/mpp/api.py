@@ -18,6 +18,7 @@
 #
 
 import os.path
+
 import mpp.internal.dbwrap
 
 ##############################################################################
@@ -1138,15 +1139,33 @@ class MetricPluginMixin(object):
             raise self.AliasError(alias)
         pattern_to_search = field_data[4][alias]
         
-        for region in data.iterate_regions(filter_group=field_data[5]):
-            count = 0
-            for marker in data.iterate_markers(
-                            filter_group = field_data[1],
-                            region_id = region.get_id(),
-                            exclude_children = field_data[2],
-                            merge=field_data[3]):
-                count += len(pattern_to_search.findall(text, marker.get_offset_begin(), marker.get_offset_end()))
-            region.set_data(namespace, metric_name, count)
+        if hasattr(self, '_' + metric_name + '_count'):
+            counter_callback = self.__getattribute__('_' + metric_name + '_count')
+            for region in data.iterate_regions(filter_group=field_data[5]):
+                counter_data = {}
+                count = 0
+                if hasattr(self, '_' + metric_name + '_count_initialize'):
+                    (count, counter_data) = self.__getattribute__('_' + metric_name + '_count_initialize')(data, alias)
+                for marker in data.iterate_markers(
+                                filter_group = field_data[1],
+                                region_id = region.get_id(),
+                                exclude_children = field_data[2],
+                                merge=field_data[3]):
+                    begin = marker.get_offset_begin()
+                    end = marker.get_offset_end()
+                    for m in pattern_to_search.finditer(text, begin, end):
+                        count = counter_callback(data, alias, text, begin, end, m, count, counter_data)
+                region.set_data(namespace, metric_name, count)
+        else:
+            for region in data.iterate_regions(filter_group=field_data[5]):
+                count = 0
+                for marker in data.iterate_markers(
+                                filter_group = field_data[1],
+                                region_id = region.get_id(),
+                                exclude_children = field_data[2],
+                                merge=field_data[3]):
+                    count += len(pattern_to_search.findall(text, marker.get_offset_begin(), marker.get_offset_end()))
+                region.set_data(namespace, metric_name, count)
 
 class InterfaceNotImplemented(Exception):
     def __init__(self, obj):
