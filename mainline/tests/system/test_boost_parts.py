@@ -94,6 +94,14 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('limit',
                                          ['--log-level=INFO',
                                           '--max-limit=std.code.complexity:cyclomatic:15',
+                                          '--hotspots=3'],
+                                         check_stderr=[(0, -1)],
+                                         exit_code=3)
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('limit',
+                                         ['--log-level=INFO',
+                                          '--max-limit=std.code.complexity:cyclomatic:15',
                                           '--warn-mode=touched'],
                                          check_stderr=[(0, -1)],
                                          prefix='second_touched',
