@@ -86,10 +86,10 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
             self.count_if_active('cyclomatic', data, alias=alias)
             self.count_if_active('maxindent', data, alias=alias)
 
-    def _maxindent_count_initialize(self, data, alias):
+    def _maxindent_count_initialize(self, data, alias, region):
         return (0, {'cur_level': 0})
     
-    def _maxindent_count(self, data, alias, text, begin, end, m, count, counter_data):
+    def _maxindent_count(self, data, alias, text, begin, end, m, count, counter_data, region, marker):
         if m.group(0) == '{':
             counter_data['cur_level'] += 1
             if counter_data['cur_level'] > count:

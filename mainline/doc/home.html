@@ -322,8 +322,23 @@ file: __global__: comment
               <tr>
                 <td>std.code.complexity.cyclomatic</td>
                 <td>McCabe cyclomatic complexity metric.</td>
-                <td><ul><li>Identification of highly complex code for review and refactoring.</li>
+                <td colspan="2"><ul><li>Identification of highly complex code for review and refactoring.</li>
                     <li>Preventing complex functions (complexity is a reason of many defects and a reason of expensive maintaintenance).</li></ul></td>
+              </tr>
+              <tr>
+                <td>std.code.complexity.maxindent</td>
+                <td>Maximum level of indentation of blocks within a region. For example, the following class has got 
+                	the metric equal to 1 and the function has got it equal to 2:
+                	<pre class="prettyprint">
+class WeekClass {
+  int isWeekend(int day) {
+    if (day == 6 || day == 7) {
+      return true;
+    }
+    return false;
+}
+</pre>
+                	</td>
               </tr>
               <tr>
                 <td>std.suppress</td>
