@@ -35,9 +35,9 @@ class Plugin(mpp.api.Plugin, mpp.api.Child):
         for region in data.iterate_regions():
             logging.warn(region.get_name() + " " + str(region.get_cursor()))
             for marker in data.iterate_markers(region_id=region.get_id(),
-                                               filter_group = data.get_marker_types().ANY,
+                                               filter_group = mpp.api.Marker.T.ANY,
                                                exclude_children = True):
-                logging.warn("\tMarker: " + data.get_marker_types()().to_str(marker.get_type()) +
+                logging.warn("\tMarker: " + mpp.api.Marker.T().to_str(marker.get_type()) +
                              " " + str(marker.get_offset_begin()) + " " + str(marker.get_offset_end()) +
                              " >>>" + text[marker.get_offset_begin():marker.get_offset_end()] + "<<<")
                 text_comb += text[marker.get_offset_begin():marker.get_offset_end()]
@@ -45,9 +45,9 @@ class Plugin(mpp.api.Plugin, mpp.api.Child):
 
         text_comb = ""
         for marker in data.iterate_markers(region_id=1,
-                                           filter_group = data.get_marker_types().ANY,
+                                           filter_group = mpp.api.Marker.T.ANY,
                                            exclude_children = False):
-            logging.warn("\tMarker: " + data.get_marker_types()().to_str(marker.get_type()) +
+            logging.warn("\tMarker: " + mpp.api.Marker.T().to_str(marker.get_type()) +
                          " " + str(marker.get_offset_begin()) + " " + str(marker.get_offset_end()) +
                          " >>>" + text[marker.get_offset_begin():marker.get_offset_end()] + "<<<")
             text_comb += text[marker.get_offset_begin():marker.get_offset_end()]
@@ -57,7 +57,7 @@ class Plugin(mpp.api.Plugin, mpp.api.Child):
         for region in data.iterate_regions():
             logging.warn(region.get_name() + " " + str(region.get_cursor()))
             for marker in data.iterate_markers(region_id=region.get_id(),
-                                               filter_group = data.get_marker_types().ANY,
+                                               filter_group = mpp.api.Marker.T.ANY,
                                                exclude_children = True,
                                                merge = True):
                 logging.warn("\tMarker: merged" + 

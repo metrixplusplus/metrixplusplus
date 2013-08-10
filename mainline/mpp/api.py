@@ -20,6 +20,7 @@
 import os.path
 
 import mpp.internal.dbwrap
+import mpp.internal.api_impl
 
 ##############################################################################
 #
@@ -81,8 +82,9 @@ class LoadableData(Data):
         if row == None:
             return
         for column_name in row.keys():
-            packager = namespace_obj.get_field_packager(column_name)
-            if packager == None:
+            try:
+                packager = namespace_obj._get_field_packager(column_name)
+            except mpp.internal.api_impl.PackagerError:
                 continue
             if row[column_name] == None:
                 continue
@@ -182,11 +184,11 @@ class Region(LoadableData):
     def get_checksum(self):
         return self.checksum
     
-    def register_subregion_id(self, child_id):
-        self.children.append(child_id)
-
     def iterate_subregion_ids(self):
         return self.children
+
+    def _register_subregion_id(self, child_id):
+        self.children.append(child_id)
 
 class Marker(object):
     class T(object):
@@ -262,7 +264,7 @@ class FileData(LoadableData):
                 break
         self.loading_tmp.append(region.get_id())
         if prev_id != None:
-            self.get_region(prev_id).register_subregion_id(region.get_id())
+            self.get_region(prev_id)._register_subregion_id(region.get_id())
         self.regions.append(region)
 
     def load_regions(self):
@@ -294,9 +296,6 @@ class FileData(LoadableData):
         self.load_regions()
         return self.regions[region_id - 1]
     
-    def get_region_types(self):
-        return Region.T
-
     def iterate_regions(self, filter_group = Region.T.ANY):
         self.load_regions()
         for each in self.regions:
@@ -455,9 +454,6 @@ class FileData(LoadableData):
                     if Marker.T.CODE & filter_group and next_code_marker_start < region.get_offset_end():
                         yield Marker(next_code_marker_start, region.get_offset_end(), Marker.T.CODE)
 
-    def get_marker_types(self):
-        return Marker.T
-
     def are_markers_loaded(self):
         return self.markers != None
 
@@ -544,141 +540,7 @@ class DiffData(Data):
             old_data = 0
         return new_data - old_data
 
-####################################
-# Packager Interface
-####################################
 
-class PackagerError(Exception):
-    def __init__(self):
-        Exception.__init__(self, "Failed to pack or unpack.")
-
-class PackagerFactory(object):
-
-    def create(self, python_type, non_zero):
-        if python_type == None:
-            return PackagerFactory.SkipPackager()
-        if python_type == int:
-            if non_zero == False:
-                return PackagerFactory.IntPackager()
-            else:
-                return PackagerFactory.IntNonZeroPackager()
-        if python_type == float and non_zero == False:
-            return PackagerFactory.FloatPackager()
-        if python_type == str:
-            return PackagerFactory.StringPackager()
-        
-        class PackagerFactoryError(Exception):
-            def __init__(self, python_type):
-                Exception.__init__(self, "Python type '" + str(python_type) + "' is not supported by the factory.")
-        raise PackagerFactoryError(python_type)
-    
-    def get_python_type(self, sql_type):
-        if sql_type == "integer":
-            return int
-        if sql_type == "real":
-            return float
-        if sql_type == "text":
-            return str
-
-        class PackagerFactoryError(Exception):
-            def __init__(self, sql_type):
-                Exception.__init__(self, "SQL type '" + str(sql_type) + "' is not supported by the factory.")
-        raise PackagerFactoryError(sql_type)
-
-    class IPackager(object):
-        def pack(self, unpacked_data):
-            raise mpp.api.InterfaceNotImplemented(self)
-        def unpack(self, packed_data):
-            raise mpp.api.InterfaceNotImplemented(self)
-        def get_sql_type(self):
-            raise mpp.api.InterfaceNotImplemented(self)
-        def get_python_type(self):
-            raise mpp.api.InterfaceNotImplemented(self)
-        def is_non_zero(self):
-            return False
-        
-    class IntPackager(IPackager):
-        def pack(self, unpacked_data):
-            if not isinstance(unpacked_data, int):
-                raise PackagerError()
-            return str(unpacked_data)
-            
-        def unpack(self, packed_data): 
-            try:
-                return int(packed_data)
-            except ValueError:
-                raise PackagerError()
-    
-        def get_sql_type(self):
-            return "integer"
-        
-        def get_python_type(self):
-            return int
-    
-    class IntNonZeroPackager(IntPackager):
-        def pack(self, unpacked_data):
-            if unpacked_data == 0:
-                raise PackagerError()
-            return PackagerFactory.IntPackager.pack(self, unpacked_data)
-        def is_non_zero(self):
-            return True
-
-    class FloatPackager(IPackager):
-        def pack(self, unpacked_data):
-            if not isinstance(unpacked_data, float):
-                raise PackagerError()
-            return str(unpacked_data)
-            
-        def unpack(self, packed_data): 
-            try:
-                return float(packed_data)
-            except ValueError:
-                raise PackagerError()
-    
-        def get_sql_type(self):
-            return "real"
-
-        def get_python_type(self):
-            return float
-
-    class FloatNonZeroPackager(FloatPackager):
-        def pack(self, unpacked_data):
-            if unpacked_data == 0:
-                raise PackagerError()
-            return PackagerFactory.FloatPackager.pack(self, unpacked_data)
-        def is_non_zero(self):
-            return True
-
-    class StringPackager(IPackager):
-        def pack(self, unpacked_data):
-            if not isinstance(unpacked_data, str):
-                raise PackagerError()
-            return str(unpacked_data)
-            
-        def unpack(self, packed_data): 
-            try:
-                return str(packed_data)
-            except ValueError:
-                raise PackagerError()
-    
-        def get_sql_type(self):
-            return "text"
-
-        def get_python_type(self):
-            return str
-    
-    class SkipPackager(IPackager):
-        def pack(self, unpacked_data):
-            return None
-            
-        def unpack(self, packed_data): 
-            return None
-    
-        def get_sql_type(self):
-            return None
-            
-        def get_python_type(self):
-            return None
             
 ####################################
 # Loader
@@ -714,7 +576,9 @@ class Namespace(object):
             self.db.create_table(name, support_regions, version)
         else:
             for column in self.db.iterate_columns(name):
-                self.add_field(column.name, PackagerFactory().get_python_type(column.sql_type), non_zero=column.non_zero)
+                self.add_field(column.name,
+                               mpp.internal.api_impl.PackagerFactory().get_python_type(column.sql_type),
+                               non_zero=column.non_zero)
         
     def get_name(self):
         return self.name
@@ -725,7 +589,7 @@ class Namespace(object):
     def add_field(self, field_name, python_type, non_zero=False):
         if not isinstance(field_name, str):
             raise FieldError(field_name, "field_name not a string")
-        packager = PackagerFactory().create(python_type, non_zero)
+        packager = mpp.internal.api_impl.PackagerFactory().create(python_type, non_zero)
         if field_name in self.fields.keys():
             raise FieldError(field_name, "double used")
         self.fields[field_name] = packager
@@ -740,17 +604,37 @@ class Namespace(object):
         for name in self.fields.keys():
             yield name
     
-    def get_field_packager(self, field_name):
+    def check_field(self, field_name):
+        try:
+            self._get_field_packager(field_name)
+        except mpp.internal.api_impl.PackagerError:
+            return False
+        return True
+
+    def get_field_sql_type(self, field_name):
+        try:
+            return self._get_field_packager(field_name).get_sql_type()
+        except mpp.internal.api_impl.PackagerError:
+            raise FieldError(field_name, 'does not exist')
+
+    def get_field_python_type(self, field_name):
+        try:
+            return self._get_field_packager(field_name).get_python_type()
+        except mpp.internal.api_impl.PackagerError:
+            raise FieldError(field_name, 'does not exist')
+
+
+    def is_field_non_zero(self, field_name):
+        try:
+            return self._get_field_packager(field_name).is_non_zero()
+        except mpp.internal.api_impl.PackagerError:
+            raise FieldError(field_name, 'does not exist')
+
+    def _get_field_packager(self, field_name):
         if field_name in self.fields.keys():
             return self.fields[field_name]
         else:
-            return None
-        
-    def get_field_sql_type(self, field_name):
-        return self.get_field_packager(field_name).get_sql_type()
-
-    def get_field_python_type(self, field_name):
-        return self.get_field_packager(field_name).get_python_type()
+            raise mpp.internal.api_impl.PackagerError("unknown field " + field_name + " requested")
     
 class DataNotPackable(Exception):
     def __init__(self, namespace, field, value, packager, extra_message):
@@ -866,8 +750,9 @@ class Loader(object):
                     if space == None:
                         raise DataNotPackable(namespace, each[0], each[1], None, "The namespace has not been found")
                     
-                    packager = space.get_field_packager(each[0])
-                    if packager == None:
+                    try:
+                        packager = space._get_field_packager(each[0])
+                    except mpp.internal.api_impl.PackagerError:
                         raise DataNotPackable(namespace, each[0], each[1], None, "The field has not been found")
         
                     if space.support_regions != support_regions:
@@ -877,7 +762,7 @@ class Loader(object):
                         packed_data = packager.pack(each[1])
                         if packed_data == None:
                             continue
-                    except PackagerError:
+                    except mpp.internal.api_impl.PackagerError:
                         raise DataNotPackable(namespace, each[0], each[1], packager, "Packager raised exception")
                     
                     yield (each[0], packed_data)
@@ -950,9 +835,9 @@ class Loader(object):
             namespace = self.get_namespace(name)
             data = self.db.aggregate_rows(name, path_like = final_path_like)
             for field in data.keys():
-                if namespace.get_field_packager(field).get_python_type() == str:
+                if namespace.get_field_python_type(field) == str:
                     continue
-                data[field]['nonzero'] = namespace.get_field_packager(field).is_non_zero()
+                data[field]['nonzero'] = namespace.is_field_non_zero(field)
                 distribution = self.db.count_rows(name, path_like = final_path_like, group_by_column = field)
                 data[field]['distribution-bars'] = []
                 for each in distribution:
@@ -1032,13 +917,19 @@ class BasePlugin(object):
             return None
         return self.version
 
-    def set_plugin_loader(self, loader):
+    def _set_plugin_loader(self, loader):
         self.plugin_loader = loader
 
-    def get_plugin_loader(self):
+    def _get_plugin_loader(self):
         if hasattr(self, 'plugin_loader') == False:
             return None
         return self.plugin_loader
+    
+    def get_plugin(self, plugin_name):
+        return self._get_plugin_loader().get_plugin(plugin_name)
+
+    def get_action(self):
+        return self._get_plugin_loader().get_action()
 
 class Plugin(BasePlugin):
 
@@ -1059,7 +950,7 @@ class Plugin(BasePlugin):
         if hasattr(self, 'is_updated') == False:
             self.is_updated = False # original initialization
 
-        db_loader = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
+        db_loader = self.get_plugin('mpp.dbf').get_loader()
 
         if namespace == None:
             namespace = self.get_name()
@@ -1208,10 +1099,10 @@ class Child(object):
         self.__getattribute__(callback_name)(parent, *args)
 
     def subscribe_by_parents_name(self, parent_name, callback_name='callback'):
-        self.get_plugin_loader().get_plugin(parent_name).subscribe(self, callback_name)
+        self.get_plugin(parent_name).subscribe(self, callback_name)
     
     def subscribe_by_parents_interface(self, interface, callback_name='callback'):
-        for plugin in self.get_plugin_loader().iterate_plugins():
+        for plugin in self._get_plugin_loader().iterate_plugins():
             if isinstance(plugin, interface):
                 plugin.subscribe(self, callback_name)
 

@@ -29,8 +29,8 @@ class Plugin(mpp.api.Plugin, mpp.api.IRunable):
     def run(self, args):
         exit_code = 0
     
-        loader_prev = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader_prev(none_if_empty=True)
-        loader = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
+        loader_prev = self.get_plugin('mpp.dbf').get_loader_prev(none_if_empty=True)
+        loader = self.get_plugin('mpp.dbf').get_loader()
     
         details = []
         for each in loader.iterate_properties():
@@ -42,7 +42,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IRunable):
                 elif prev != each.value:
                     prev_value_str = " [modified (was: " + loader_prev.get_property(each.name) + ")]"
             details.append((each.name, each.value + prev_value_str))
-        path = self.get_plugin_loader().get_plugin('mpp.dbf').get_dbfile_path()
+        path = self.get_plugin('mpp.dbf').get_dbfile_path()
         if ('METRIXPLUSPLUS_TEST_MODE' in os.environ.keys() and
              os.environ['METRIXPLUSPLUS_TEST_MODE'] == "True"):
             # in tests, paths come as full paths, strip it for consistent gold files
@@ -55,11 +55,11 @@ class Plugin(mpp.api.Plugin, mpp.api.IRunable):
             for field in sorted(loader.get_namespace(each).iterate_field_names()):
                 prev_value_str = ""
                 if loader_prev != None:
-                    prev = None
+                    prev = False
                     prev_namespace = loader_prev.get_namespace(each)
                     if prev_namespace != None:
-                        prev = prev_namespace.get_field_packager(field)
-                    if prev == None:
+                        prev = prev_namespace.check_field(field)
+                    if prev == False:
                         prev_value_str = " [new]"
                 details.append((each + ':' + field,  prev_value_str))
         mpp.cout.notify(path, '', mpp.cout.SEVERITY_INFO, 'Collected metrics:', details)

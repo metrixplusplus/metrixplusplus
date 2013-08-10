@@ -105,7 +105,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
 
     def initialize(self):
         super(Plugin, self).initialize()
-        db_loader = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
+        db_loader = self.get_plugin('mpp.dbf').get_loader()
         self._verify_namespaces(db_loader.iterate_namespace_names())
         for each in db_loader.iterate_namespace_names():
             self._verify_fields(each, db_loader.get_namespace(each).iterate_field_names())
@@ -155,8 +155,8 @@ def main(plugin, args):
     
     exit_code = 0
 
-    loader_prev = plugin.get_plugin_loader().get_plugin('mpp.dbf').get_loader_prev()
-    loader = plugin.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
+    loader_prev = plugin.get_plugin('mpp.dbf').get_loader_prev()
+    loader = plugin.get_plugin('mpp.dbf').get_loader()
     
     paths = None
     if len(args) == 0:

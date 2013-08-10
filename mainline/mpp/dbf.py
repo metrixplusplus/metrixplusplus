@@ -25,7 +25,7 @@ import logging
 class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
     
     def declare_configuration(self, parser):
-        if self.get_plugin_loader().get_action() == 'collect':
+        if self.get_action() == 'collect':
             dbfile_help = "Path to a database file to create and write [default: %default]."
             dbfile_prev_help = ("Path to database file with data collected for the past/previous code revision."
                              " If it is set, the tool will do an incremental/iterative collection."
@@ -50,7 +50,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
         
     def initialize(self):
         
-        if self.get_plugin_loader().get_action() == 'collect':
+        if self.get_action() == 'collect':
             if os.path.exists(self.dbfile):
                 logging.warn("Removing existing file: " + self.dbfile)
                 try:

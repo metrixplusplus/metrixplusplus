@@ -34,7 +34,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
         self.mode = options.__dict__['mode']
 
     def run(self, args):
-        loader = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
+        loader = self.get_plugin('mpp.dbf').get_loader()
     
         if self.mode == 'dumphtml':
             return dumphtml(args, loader)
@@ -68,11 +68,11 @@ def dumphtml(args, loader):
                                            mpp.api.Marker.T.STRING |
                                            mpp.api.Marker.T.PREPROCESSOR):
             result += (cgi.escape(text[last_pos:marker.begin]))
-            if marker.get_type() == data.get_marker_types().STRING:
+            if marker.get_type() == mpp.api.Marker.T.STRING:
                 result += ('<span style="color:#0000FF">')
-            elif marker.get_type() == data.get_marker_types().COMMENT:
+            elif marker.get_type() == mpp.api.Marker.T.COMMENT:
                 result += ('<span style="color:#009900">')
-            elif marker.get_type() == data.get_marker_types().PREPROCESSOR:
+            elif marker.get_type() == mpp.api.Marker.T.PREPROCESSOR:
                 result += ('<span style="color:#990000">')
             else:
                 assert False, "Uknown marker type"

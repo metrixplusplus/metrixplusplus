@@ -66,7 +66,7 @@ class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
                 list_text = []
                 last_comment_end = None
                 for marker in data.iterate_markers(
-                                filter_group = data.get_marker_types().COMMENT,
+                                filter_group = mpp.api.Marker.T.COMMENT,
                                 region_id = region.get_id(),
                                 exclude_children = True):
                     
@@ -79,9 +79,9 @@ class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
                     matches = self.pattern.findall(text, marker.get_offset_begin(), marker.get_offset_end())
                     for m in matches:
                         namespace_name, field = m.split(':')
-                        db_loader = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
+                        db_loader = self.get_plugin('mpp.dbf').get_loader()
                         namespace = db_loader.get_namespace(namespace_name)
-                        if namespace == None or namespace.get_field_packager(field) == None:
+                        if namespace == None or namespace.check_field(field) == False:
                             mpp.cout.notify(data.get_path(), region.get_cursor(),
                                                   mpp.cout.SEVERITY_WARNING,
                                                   "Suppressed metric '" + namespace_name + ":" + field +

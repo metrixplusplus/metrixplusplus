@@ -33,5 +33,5 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.Child):
             self.subscribe_by_parents_interface(mpp.api.ICode, 'callback')
 
     def callback(self, parent, data, is_updated):
-        print parent, data.get_path(), is_updated
+        print parent.get_name(), data.get_path(), is_updated
         
