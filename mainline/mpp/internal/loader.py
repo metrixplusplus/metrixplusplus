@@ -148,7 +148,7 @@ class Loader(object):
             item['instance'].__init__()
             item['instance'].set_name(item['package'] + "." + item['module'])
             item['instance'].set_version(item['version'])
-            item['instance'].set_plugin_loader(self)
+            item['instance']._set_plugin_loader(self)
             self.plugins.append(item)
             self.hash[plugin_name] = item
 

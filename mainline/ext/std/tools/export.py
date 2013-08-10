@@ -26,8 +26,8 @@ import csv
 class Plugin(mpp.api.Plugin, mpp.api.IRunable):
 
     def run(self, args):
-        self.loader_prev = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader_prev()
-        self.loader = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
+        self.loader_prev = self.get_plugin('mpp.dbf').get_loader_prev()
+        self.loader = self.get_plugin('mpp.dbf').get_loader()
     
         paths = None
         if len(args) == 0:

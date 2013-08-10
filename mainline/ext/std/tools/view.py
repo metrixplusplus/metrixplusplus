@@ -64,8 +64,8 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
             self.parser.error("option --scope-mode: The mode '" + options.__dict__['scope_mode'] + "' requires '--db-file-prev' option set")
 
     def run(self, args):
-        loader_prev = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader_prev()
-        loader = self.get_plugin_loader().get_plugin('mpp.dbf').get_loader()
+        loader_prev = self.get_plugin('mpp.dbf').get_loader_prev()
+        loader = self.get_plugin('mpp.dbf').get_loader()
     
         paths = None
         if len(args) == 0:
@@ -161,12 +161,12 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                 for name in loader.iterate_namespace_names():
                     namespace = loader.get_namespace(name)
                     for field in namespace.iterate_field_names():
-                        if namespace.get_field_packager(field).get_python_type() == str:
+                        if namespace.get_field_python_type(field) == str:
                             # skip string type fields
                             continue
                         self.set_data(name, field, {
                             'count': 0,
-                            'nonzero': namespace.get_field_packager(field).is_non_zero(),
+                            'nonzero': namespace.is_field_non_zero(field),
                             'min': None,
                             'max': None,
                             'total': 0.0,
@@ -181,7 +181,7 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                 for name in loader.iterate_namespace_names():
                     namespace = loader.get_namespace(name)
                     for field in namespace.iterate_field_names():
-                        if namespace.get_field_packager(field).get_python_type() == str:
+                        if namespace.get_field_python_type(field) == str:
                             # skip string type fields
                             continue
                         data = self.get_data(name, field)
@@ -312,7 +312,7 @@ def append_regions(file_data_tree, file_data, file_data_prev, nest_regions):
                                                region_data_prev.get_data_tree())
                 is_modified = regions_matcher.is_modified(region.get_id())
             regions.append({"info": {"name" : region.name,
-                                     'type': file_data.get_region_types()().to_str(region.get_type()),
+                                     'type': mpp.api.Region.T().to_str(region.get_type()),
                                      'modified': is_modified,
                                      'cursor' : region.cursor,
                                      'line_begin': region.line_begin,
@@ -332,7 +332,7 @@ def append_regions(file_data_tree, file_data, file_data_prev, nest_regions):
                                                region_data_prev.get_data_tree())
                 is_modified = regions_matcher.is_modified(region.get_id())
             result = {"info": {"name" : region.name,
-                               'type' : file_data.get_region_types()().to_str(region.get_type()),
+                               'type' : mpp.api.Region.T().to_str(region.get_type()),
                                'modified': is_modified,
                                'cursor' : region.cursor,
                                'line_begin': region.line_begin,

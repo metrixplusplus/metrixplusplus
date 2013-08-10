@@ -38,7 +38,7 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IParser, mpp.api.IConfigura
         mpp.api.Plugin.initialize(self, properties=[
             self.Property('files', ','.join(self.files))
         ])
-        self.get_plugin_loader().get_plugin('std.tools.collect').register_parser(self.files, self)
+        self.get_plugin('std.tools.collect').register_parser(self.files, self)
         
     def process(self, parent, data, is_updated):
         is_updated = is_updated or self.is_updated
@@ -124,13 +124,13 @@ class JavaCodeParser(object):
         def add_regions_rec(self, data, blocks):
             def get_type_id(data, named_type):
                 if named_type == "function":
-                    return data.get_region_types().FUNCTION
+                    return mpp.api.Region.T.FUNCTION
                 elif named_type == "class":
-                    return data.get_region_types().CLASS
+                    return mpp.api.Region.T.CLASS
                 elif named_type == "interface":
-                    return data.get_region_types().INTERFACE
+                    return mpp.api.Region.T.INTERFACE
                 elif named_type == "__global__":
-                    return data.get_region_types().GLOBAL
+                    return mpp.api.Region.T.GLOBAL
                 else:
                     assert(False)
             for each in blocks:
@@ -161,11 +161,11 @@ class JavaCodeParser(object):
         for m in re.finditer(self.regex_cpp, text):
             # Comment
             if text[m.start()] == '/':
-                data.add_marker(m.start(), m.end(), data.get_marker_types().COMMENT)
+                data.add_marker(m.start(), m.end(), mpp.api.Marker.T.COMMENT)
             
             # String
             elif text[m.start()] == '"' or text[m.start()] == '\'':
-                data.add_marker(m.start() + 1, m.end() - 1, data.get_marker_types().STRING)
+                data.add_marker(m.start() + 1, m.end() - 1, mpp.api.Marker.T.STRING)
             
             # Statement end
             elif text[m.start()] == ';':

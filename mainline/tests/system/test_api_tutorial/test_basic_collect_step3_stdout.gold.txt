@@ -1,1 +1,1 @@
-<std.code.cpp.Plugin object at 0x0000000002746B70> ./test.cpp True
+std.code.cpp ./test.cpp True
