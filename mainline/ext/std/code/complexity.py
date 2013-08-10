@@ -62,6 +62,7 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
                                 'java': self.pattern_indent,
                             },
                             marker_type_mask=mpp.api.Marker.T.CODE,
+                            # TODO shall scan all regions?, it is likely actual to functions
                             region_type_mask=mpp.api.Region.T.ANY)
         
         super(Plugin, self).initialize(fields=self.get_fields())
