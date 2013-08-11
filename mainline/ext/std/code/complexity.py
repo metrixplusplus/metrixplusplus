@@ -72,15 +72,15 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
             self.subscribe_by_parents_name('std.code.cs')
             self.subscribe_by_parents_name('std.code.java')
 
-    def _maxindent_count_initialize(self, data, alias, region):
+    def _maxindent_count_initialize(self, alias, data, region):
         return (0, {'cur_level': 0})
     
-    def _maxindent_count(self, data, alias, text, begin, end, m, count, counter_data, region, marker):
-        if m.group(0) == '{':
+    def _maxindent_count(self, alias, data, region, marker, match, count, counter_data):
+        if match.group(0) == '{':
             counter_data['cur_level'] += 1
             if counter_data['cur_level'] > count:
                 count = counter_data['cur_level']
-        elif m.group(0) == '}':
+        elif match.group(0) == '}':
             counter_data['cur_level'] -= 1
         else:
             assert False
