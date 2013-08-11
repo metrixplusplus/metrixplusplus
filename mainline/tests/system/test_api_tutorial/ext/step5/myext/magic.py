@@ -45,7 +45,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.Child, mpp.api.Metri
         if self.is_active() == True:
             self.subscribe_by_parents_interface(mpp.api.ICode)
             
-    def _numbers_count(self, data, alias, text, begin, end, m, count, counter_data, region, marker):
-        if m.group(0).startswith('const'):
+    def _numbers_count(self, alias, data, region, marker, match, count, counter_data):
+        if match.group(0).startswith('const'):
             return count
         return count + 1
