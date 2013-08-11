@@ -42,12 +42,5 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.Child, mpp.api.Metri
         
         # subscribe to all code parsers if at least one metric is active
         if self.is_active() == True:
-            self.subscribe_by_parents_interface(mpp.api.ICode, 'callback')
-    
-    def callback(self, parent, data, is_updated):
-        # count if metric is enabled, 
-        # and (optimization for the case of iterative rescan:)
-        # if file is updated or this plugin's settings are updated
-        if is_updated or self.is_updated:
-            self.count_if_active('numbers', data)
-        
+            self.subscribe_by_parents_interface(mpp.api.ICode)
+           

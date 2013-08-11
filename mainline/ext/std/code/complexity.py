@@ -48,18 +48,18 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
         self.declare_metric(self.is_active_cyclomatic,
                             self.Field('cyclomatic', int),
                             {
-                                'cpp': self.pattern_cpp,
-                                'cs': self.pattern_cs,
-                                'java': self.pattern_java
+                                'std.code.cpp': self.pattern_cpp,
+                                'std.code.cs': self.pattern_cs,
+                                'std.code.java': self.pattern_java
                             },
                             marker_type_mask=mpp.api.Marker.T.CODE,
                             region_type_mask=mpp.api.Region.T.FUNCTION)
         self.declare_metric(self.is_active_maxindent,
                             self.Field('maxindent', int),
                             {
-                                'cpp': self.pattern_indent,
-                                'cs': self.pattern_indent,
-                                'java': self.pattern_indent,
+                                'std.code.cpp': self.pattern_indent,
+                                'std.code.cs': self.pattern_indent,
+                                'std.code.java': self.pattern_indent,
                             },
                             marker_type_mask=mpp.api.Marker.T.CODE,
                             # TODO shall scan all regions?, it is likely actual to functions
@@ -68,24 +68,9 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
         super(Plugin, self).initialize(fields=self.get_fields())
         
         if self.is_active() == True:
-            self.subscribe_by_parents_name('std.code.cpp', 'callback_cpp')
-            self.subscribe_by_parents_name('std.code.cs', 'callback_cs')
-            self.subscribe_by_parents_name('std.code.java', 'callback_java')
-
-    def callback_cpp(self, parent, data, is_updated):
-        self.callback_common(parent, data, is_updated, 'cpp')
-
-    def callback_cs(self, parent, data, is_updated):
-        self.callback_common(parent, data, is_updated, 'cs')
-
-    def callback_java(self, parent, data, is_updated):
-        self.callback_common(parent, data, is_updated, 'java')
-
-    def callback_common(self, parent, data, is_updated, alias):
-        is_updated = is_updated or self.is_updated
-        if is_updated == True:
-            self.count_if_active('cyclomatic', data, alias=alias)
-            self.count_if_active('maxindent', data, alias=alias)
+            self.subscribe_by_parents_name('std.code.cpp')
+            self.subscribe_by_parents_name('std.code.cs')
+            self.subscribe_by_parents_name('std.code.java')
 
     def _maxindent_count_initialize(self, data, alias, region):
         return (0, {'cur_level': 0})

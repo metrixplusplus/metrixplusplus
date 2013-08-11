@@ -546,27 +546,27 @@ class DiffData(Data):
 # Loader
 ####################################
 
-class NamespaceError(Exception):
-    def __init__(self, namespace, reason):
-        Exception.__init__(self, "Namespace '"
-                        + namespace 
+class Namespace(object):
+    
+    class NamespaceError(Exception):
+        def __init__(self, namespace, reason):
+            Exception.__init__(self, "Namespace '"
+                            + namespace 
+                            + "': '"
+                            + reason
+                            + "'")
+    
+    class FieldError(Exception):
+        def __init__(self, field, reason):
+            Exception.__init__(self, "Field '"
+                        + field 
                         + "': '"
                         + reason
                         + "'")
 
-class FieldError(Exception):
-    def __init__(self, field, reason):
-        Exception.__init__(self, "Field '"
-                    + field 
-                    + "': '"
-                    + reason
-                    + "'")
-
-class Namespace(object):
-    
     def __init__(self, db_handle, name, support_regions = False, version='1.0'):
         if not isinstance(name, str):
-            raise NamespaceError(name, "name not a string")
+            raise Namespace.NamespaceError(name, "name not a string")
         self.name = name
         self.support_regions = support_regions
         self.fields = {}
@@ -588,10 +588,10 @@ class Namespace(object):
     
     def add_field(self, field_name, python_type, non_zero=False):
         if not isinstance(field_name, str):
-            raise FieldError(field_name, "field_name not a string")
+            raise Namespace.FieldError(field_name, "field_name not a string")
         packager = mpp.internal.api_impl.PackagerFactory().create(python_type, non_zero)
         if field_name in self.fields.keys():
-            raise FieldError(field_name, "double used")
+            raise Namespace.FieldError(field_name, "double used")
         self.fields[field_name] = packager
         
         if self.db.check_column(self.get_name(), field_name) == False:        
@@ -615,20 +615,20 @@ class Namespace(object):
         try:
             return self._get_field_packager(field_name).get_sql_type()
         except mpp.internal.api_impl.PackagerError:
-            raise FieldError(field_name, 'does not exist')
+            raise Namespace.FieldError(field_name, 'does not exist')
 
     def get_field_python_type(self, field_name):
         try:
             return self._get_field_packager(field_name).get_python_type()
         except mpp.internal.api_impl.PackagerError:
-            raise FieldError(field_name, 'does not exist')
+            raise Namespace.FieldError(field_name, 'does not exist')
 
 
     def is_field_non_zero(self, field_name):
         try:
             return self._get_field_packager(field_name).is_non_zero()
         except mpp.internal.api_impl.PackagerError:
-            raise FieldError(field_name, 'does not exist')
+            raise Namespace.FieldError(field_name, 'does not exist')
 
     def _get_field_packager(self, field_name):
         if field_name in self.fields.keys():
@@ -636,20 +636,6 @@ class Namespace(object):
         else:
             raise mpp.internal.api_impl.PackagerError("unknown field " + field_name + " requested")
     
-class DataNotPackable(Exception):
-    def __init__(self, namespace, field, value, packager, extra_message):
-        Exception.__init__(self, "Data '"
-                           + str(value)
-                           + "' of type "
-                           + str(value.__class__) 
-                           + " referred by '"
-                           + namespace
-                           + "=>"
-                           + field
-                           + "' is not packable by registered packager '"
-                           + str(packager.__class__)
-                           + "': " + extra_message)
-
 class Loader(object):
     
     def __init__(self):
@@ -699,7 +685,7 @@ class Loader(object):
             return None
         
         if name in self.namespaces.keys():
-            raise NamespaceError(name, "double used")
+            raise Namespace.NamespaceError(name, "double used")
         new_namespace = Namespace(self.db, name, support_regions, version)
         self.namespaces[name] = new_namespace
         return new_namespace
@@ -738,6 +724,20 @@ class Loader(object):
         self.last_file_data = result
         return result
 
+    class DataNotPackable(Exception):
+        def __init__(self, namespace, field, value, packager, extra_message):
+            Exception.__init__(self, "Data '"
+                               + str(value)
+                               + "' of type "
+                               + str(value.__class__) 
+                               + " referred by '"
+                               + namespace
+                               + "=>"
+                               + field
+                               + "' is not packable by registered packager '"
+                               + str(packager.__class__)
+                               + "': " + extra_message)
+
     def save_file_data(self, file_data):
         if self.db == None:
             return None
@@ -748,22 +748,22 @@ class Loader(object):
                 for each in data.iterate_fields(namespace):
                     space = self.loader.get_namespace(namespace)
                     if space == None:
-                        raise DataNotPackable(namespace, each[0], each[1], None, "The namespace has not been found")
+                        raise Loader.DataNotPackable(namespace, each[0], each[1], None, "The namespace has not been found")
                     
                     try:
                         packager = space._get_field_packager(each[0])
                     except mpp.internal.api_impl.PackagerError:
-                        raise DataNotPackable(namespace, each[0], each[1], None, "The field has not been found")
+                        raise Loader.DataNotPackable(namespace, each[0], each[1], None, "The field has not been found")
         
                     if space.support_regions != support_regions:
-                        raise DataNotPackable(namespace, each[0], each[1], packager, "Incompatible support for regions")
+                        raise Loader.DataNotPackable(namespace, each[0], each[1], packager, "Incompatible support for regions")
                     
                     try:
                         packed_data = packager.pack(each[1])
                         if packed_data == None:
                             continue
                     except mpp.internal.api_impl.PackagerError:
-                        raise DataNotPackable(namespace, each[0], each[1], packager, "Packager raised exception")
+                        raise Loader.DataNotPackable(namespace, each[0], each[1], packager, "Packager raised exception")
                     
                     yield (each[0], packed_data)
             
@@ -995,7 +995,7 @@ class MetricPluginMixin(object):
         if isinstance(pattern_to_search_or_map_of_patterns, dict):
             map_of_patterns = pattern_to_search_or_map_of_patterns
         else:
-            map_of_patterns = {'default': pattern_to_search_or_map_of_patterns}
+            map_of_patterns = {'*': pattern_to_search_or_map_of_patterns}
 
         if is_active == True:
             self._fields[field.name] = (field,
@@ -1016,7 +1016,19 @@ class MetricPluginMixin(object):
             result.append(self._fields[key][0])
         return result
     
-    def count_if_active(self, metric_name, data, namespace=None, alias='default'):
+    def callback(self, parent, data, is_updated):
+        # count if metric is enabled, 
+        # and (optimization for the case of iterative rescan:)
+        # if file is updated or this plugin's settings are updated
+        is_updated = is_updated or self.is_updated
+        if is_updated == True:
+            for field in self.get_fields():
+                self.count_if_active(field.name, data, alias=parent.get_name())
+        # if parent, notify children
+        if isinstance(self, Parent):
+            self.notify_children(data, is_updated)
+
+    def count_if_active(self, metric_name, data, namespace=None, alias='*'):
         if self.is_active(metric_name) == False:
             return
         
@@ -1027,7 +1039,10 @@ class MetricPluginMixin(object):
         text = data.get_content()
         
         if alias not in field_data[4].keys():
-            raise self.AliasError(alias)
+            if '*' not in field_data[4].keys():
+                raise self.AliasError(alias)
+            else:
+                alias = '*'
         pattern_to_search = field_data[4][alias]
         
         if hasattr(self, '_' + metric_name + '_count'):
