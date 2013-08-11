@@ -1061,7 +1061,8 @@ class MetricPluginMixin(object):
                     end = marker.get_offset_end()
                     for match in pattern_to_search.finditer(text, begin, end):
                         count = counter_callback(alias, data, region, marker, match, count, counter_data)
-                region.set_data(namespace, metric_name, count)
+                if count != 0 or field_data[0].non_zero == False:
+                    region.set_data(namespace, metric_name, count)
         else:
             for region in data.iterate_regions(filter_group=field_data[5]):
                 count = 0
@@ -1071,7 +1072,8 @@ class MetricPluginMixin(object):
                                 exclude_children = field_data[2],
                                 merge=field_data[3]):
                     count += len(pattern_to_search.findall(text, marker.get_offset_begin(), marker.get_offset_end()))
-                region.set_data(namespace, metric_name, count)
+                if count != 0 or field_data[0].non_zero == False:
+                    region.set_data(namespace, metric_name, count)
 
 class InterfaceNotImplemented(Exception):
     def __init__(self, obj):
@@ -1116,6 +1118,10 @@ class Child(object):
     def subscribe_by_parents_name(self, parent_name, callback_name='callback'):
         self.get_plugin(parent_name).subscribe(self, callback_name)
     
+    def subscribe_by_parents_names(self, parent_names, callback_name='callback'):
+        for parent_name in parent_names:
+            self.get_plugin(parent_name).subscribe(self, callback_name)
+
     def subscribe_by_parents_interface(self, interface, callback_name='callback'):
         for plugin in self._get_plugin_loader().iterate_plugins():
             if isinstance(plugin, interface):

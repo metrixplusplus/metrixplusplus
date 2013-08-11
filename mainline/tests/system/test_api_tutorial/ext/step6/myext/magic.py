@@ -34,12 +34,24 @@ class Plugin(mpp.api.Plugin,
         self.is_active_numbers = options.__dict__['myext.magic.numbers']
     
     def initialize(self):
-        # improve pattern to find declarations of constants
-        pattern_to_search = re.compile(
+        # specialized pattern for java
+        pattern_to_search_java = re.compile(
+            r'''(const\s+([_$a-zA-Z][_$a-zA-Z0-9]*\s+)+[=]\s*)?[-+]?[0-9]+''')
+        # pattern for C++ and C# languages
+        pattern_to_search_cpp_cs = re.compile(
             r'''(const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)?[-+]?[0-9]+''')
+        # pattern for all other languages
+        pattern_to_search = re.compile(
+            r'''[0-9]+''')
         self.declare_metric(self.is_active_numbers,
                             self.Field('numbers', int),
-                            pattern_to_search, # and use it here
+                            # dictionary of patterns instead of a single one
+                            {
+                             'std.code.java': pattern_to_search_java,
+                             'std.code.cpp': pattern_to_search_cpp_cs,
+                             'std.code.cs': pattern_to_search_cpp_cs,
+                             '*': pattern_to_search
+                            },
                             marker_type_mask=mpp.api.Marker.T.CODE,
                             region_type_mask=mpp.api.Region.T.ANY)
         
@@ -47,10 +59,7 @@ class Plugin(mpp.api.Plugin,
         
         if self.is_active() == True:
             self.subscribe_by_parents_interface(mpp.api.ICode)
-    
-    # implement custom counter behavior:
-    # increments counter by 1 only if single number spotted,
-    # but not declaration of a constant
+
     def _numbers_count(self, alias, data, region, marker, match, count, counter_data):
         if match.group(0).startswith('const'):
             return count

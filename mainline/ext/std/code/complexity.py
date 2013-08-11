@@ -68,9 +68,11 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
         super(Plugin, self).initialize(fields=self.get_fields())
         
         if self.is_active() == True:
-            self.subscribe_by_parents_name('std.code.cpp')
-            self.subscribe_by_parents_name('std.code.cs')
-            self.subscribe_by_parents_name('std.code.java')
+            self.subscribe_by_parents_names([
+                'std.code.cpp',
+                'std.code.cs',
+                'std.code.java'
+            ])
 
     def _maxindent_count_initialize(self, alias, data, region):
         return (0, {'cur_level': 0})
