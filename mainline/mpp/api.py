@@ -32,7 +32,7 @@ class Data(object):
 
     def __init__(self):
         self.data = {}
-
+        
     def get_data(self, namespace, field):
         if namespace not in self.data.keys():
             return None
@@ -44,7 +44,7 @@ class Data(object):
         if namespace not in self.data:
             self.data[namespace] = {}
         self.data[namespace][field] = value
-    
+
     def iterate_namespaces(self):
         for namespace in self.data.keys():
             yield namespace
