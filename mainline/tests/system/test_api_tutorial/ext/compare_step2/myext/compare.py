@@ -27,23 +27,15 @@ class Plugin(mpp.api.Plugin, mpp.api.IRunable):
         # get data file reader using standard metrix++ plugin
         loader = self.get_plugin('mpp.dbf').get_loader()
         
-        # configure default paths if there are no paths specified
-        # in command line
-        paths = None
-        if len(args) == 0:
-            paths = [""]
-        else:
-            paths = args
-
-        # iterate and print files for every path in paths
+        # iterate and print file length for every path in args
         exit_code = 0
-        for path in paths:
+        for path in (args if len(args) > 0 else [""]):
             file_iterator = loader.iterate_file_data(path)
             if file_iterator == None:
                 mpp.utils.report_bad_path(path)
                 exit_code += 1
                 continue
             for file_data in file_iterator:
-                print file_data.get_path(), file_data.get_checksum()
+                print file_data.get_path()
         return exit_code
 
