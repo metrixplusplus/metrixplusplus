@@ -25,7 +25,7 @@ import tests.common
 
 class Test(tests.common.TestCase):
 
-    def test_basic(self):
+    def test_metric_plugin_api(self):
         
         #
         # WARNING:
@@ -36,60 +36,27 @@ class Test(tests.common.TestCase):
         if 'METRIXPLUSPLUS_PATH' in os.environ.keys():
             METRIXPLUSPLUS_PATH = os.environ['METRIXPLUSPLUS_PATH']
         
-        os.environ['METRIXPLUSPLUS_PATH'] = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                                         'test_api_tutorial', 'ext', 'step1')
-        runner = tests.common.ToolRunner('collect',
+        for step in range(8):
+            opts = ['--log-level=INFO']
+            if step > 1:
+                opts.append('--myext.magic.numbers')
+            
+            os.environ['METRIXPLUSPLUS_PATH'] = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                                             'test_api_tutorial', 'ext', 'step' + str(step))
+            runner = tests.common.ToolRunner('collect',
+                                             opts,
+                                             prefix='step' + str(step),
+                                             check_stderr=[(0, -1)])
+            self.assertExec(runner.run())
+            
+            if step < 4:
+                continue
+            
+            runner = tests.common.ToolRunner('view',
                                          ['--log-level=INFO'],
-                                         prefix='step1',
+                                         prefix='step' + str(step),
                                          check_stderr=[(0, -1)])
-        self.assertExec(runner.run())
-
-        os.environ['METRIXPLUSPLUS_PATH'] = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                                         'test_api_tutorial', 'ext', 'step2')
-        runner = tests.common.ToolRunner('collect',
-                                         ['--log-level=INFO',
-                                          '--myext.magic.numbers'],
-                                         prefix='step2',
-                                         check_stderr=[(0, -1)])
-        self.assertExec(runner.run())
-
-        os.environ['METRIXPLUSPLUS_PATH'] = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                                         'test_api_tutorial', 'ext', 'step3')
-        runner = tests.common.ToolRunner('collect',
-                                         ['--log-level=INFO',
-                                          '--myext.magic.numbers'],
-                                         prefix='step3',
-                                         check_stderr=[(0, -1)])
-        self.assertExec(runner.run())
-
-        os.environ['METRIXPLUSPLUS_PATH'] = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                                         'test_api_tutorial', 'ext', 'step4')
-        runner = tests.common.ToolRunner('collect',
-                                         ['--log-level=INFO',
-                                          '--myext.magic.numbers'],
-                                         prefix='step4',
-                                         check_stderr=[(0, -1)])
-        self.assertExec(runner.run())
-        runner = tests.common.ToolRunner('view',
-                                         ['--log-level=INFO'],
-                                         prefix='step4',
-                                         check_stderr=[(0, -1)])
-        self.assertExec(runner.run())
-
-        os.environ['METRIXPLUSPLUS_PATH'] = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                                         'test_api_tutorial', 'ext', 'step5')
-        runner = tests.common.ToolRunner('collect',
-                                         ['--log-level=INFO',
-                                          '--myext.magic.numbers'],
-                                         prefix='step5',
-                                         check_stderr=[(0, -1)])
-        self.assertExec(runner.run())
-        runner = tests.common.ToolRunner('view',
-                                         ['--log-level=INFO'],
-                                         prefix='step5',
-                                         check_stderr=[(0, -1)])
-        self.assertExec(runner.run())
-
+            self.assertExec(runner.run())
 
         if METRIXPLUSPLUS_PATH != None:
             os.environ['METRIXPLUSPLUS_PATH'] = METRIXPLUSPLUS_PATH

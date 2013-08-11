@@ -74,8 +74,10 @@ class Loader(object):
                 
         def load_recursively(inicontainer, directory):
             active_plugins = []
+            if os.path.exists(directory) == False or os.path.isdir(directory) == False:
+                return active_plugins
+
             pattern = re.compile(r'.*[.]ini$', flags=re.IGNORECASE)
-        
             dirList = os.listdir(directory)
             for fname in dirList:
                 fname = os.path.join(directory, fname)

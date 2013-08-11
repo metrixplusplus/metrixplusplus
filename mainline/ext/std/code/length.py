@@ -35,7 +35,7 @@ class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
         mpp.api.Plugin.initialize(self, fields=fields)
         
         if len(fields) != 0:
-            self.subscribe_by_parents_interface(mpp.api.ICode, 'callback')
+            self.subscribe_by_parents_interface(mpp.api.ICode)
 
     def callback(self, parent, data, is_updated):
         is_updated = is_updated or self.is_updated

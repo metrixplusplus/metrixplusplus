@@ -18,3 +18,13 @@ int main(int a = 1, int b = -2)
 		a = 4;
 	}
 }
+
+int plain_func()
+{
+	const unsigned int c = 3;
+}
+
+int simple_func()
+{
+	const unsigned int c = c;
+}

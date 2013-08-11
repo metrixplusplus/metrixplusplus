@@ -1,5 +1,5 @@
 :: info: Overall metrics for 'myext.magic:numbers' metric
-	Average        : 4.0
+	Average        : 4.0 (excluding zero metric values)
 	Minimum        : 2
 	Maximum        : 6
 	Total          : 8.0
