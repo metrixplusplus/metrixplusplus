@@ -71,12 +71,4 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
         super(Plugin, self).initialize(fields=self.get_fields())
 
         if self.is_active() == True:
-            self.subscribe_by_parents_interface(mpp.api.ICode, 'callback')
-
-    def callback(self, parent, data, is_updated):
-        is_updated = is_updated or self.is_updated
-        if is_updated == True:
-            self.count_if_active('code', data)
-            self.count_if_active('preprocessor', data)
-            self.count_if_active('comments', data)
-            self.count_if_active('total', data)
+            self.subscribe_by_parents_interface(mpp.api.ICode)
