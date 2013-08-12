@@ -1,0 +1,31 @@
+:: info: Overall metrics for 'std.general:procerrors' metric
+	Average        : None
+	Minimum        : None
+	Maximum        : None
+	Total          : 0.0
+	Distribution   : 0 files in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of files
+
+:: info: Overall metrics for 'std.general:proctime' metric
+	Average        : 0.01
+	Minimum        : 0.01
+	Maximum        : 0.01
+	Total          : 0.02
+	Distribution   : 2 files in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of files
+	        0.0100 : 1.000 : 1.000 : 2	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+:: info: Overall metrics for 'std.general:size' metric
+	Average        : 488.0
+	Minimum        : 279
+	Maximum        : 697
+	Total          : 976.0
+	Distribution   : 2 files in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of files
+	           279 : 0.500 : 0.500 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
+	           697 : 0.500 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
+
+:: info: Directory content:
+	Directory      : .
+
+

@@ -1,0 +1,1515 @@
+================================================================================
+Export
+________________________________________________________________________________
+
+--------------------------------------------------------------------------------
+data:  
+.   info: 
+.   .   path=".\function_ends_on_class.cpp"
+.   .   id="1"
+.   file-data:  
+.   .   regions:
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="0"
+.   .   .   .   .   name="__global__"
+.   .   .   .   .   offset_end="163"
+.   .   .   .   .   line_begin="2"
+.   .   .   .   .   type="global"
+.   .   .   .   .   line_end="20"
+.   .   .   .   .   offset_begin="1"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="2"
+.   .   .   .   .   name="my_namespace"
+.   .   .   .   .   offset_end="162"
+.   .   .   .   .   line_begin="2"
+.   .   .   .   .   type="namespace"
+.   .   .   .   .   line_end="19"
+.   .   .   .   .   offset_begin="1"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="4"
+.   .   .   .   .   name="my_class"
+.   .   .   .   .   offset_end="158"
+.   .   .   .   .   line_begin="4"
+.   .   .   .   .   type="class"
+.   .   .   .   .   line_end="17"
+.   .   .   .   .   offset_begin="27"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="5"
+.   .   .   .   .   name="function_end_on_class"
+.   .   .   .   .   offset_end="79"
+.   .   .   .   .   line_begin="5"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="8"
+.   .   .   .   .   offset_begin="45"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="9"
+.   .   .   .   .   name="function_end_on_struct"
+.   .   .   .   .   offset_end="116"
+.   .   .   .   .   line_begin="9"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="12"
+.   .   .   .   .   offset_begin="81"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="13"
+.   .   .   .   .   name="function_end_on_namespace"
+.   .   .   .   .   offset_end="156"
+.   .   .   .   .   line_begin="13"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="16"
+.   .   .   .   .   offset_begin="118"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   subfiles:
+.   subdirs:
+.   aggregated-data:  
+.   .   std.code.complexity:  
+.   .   .   cyclomatic: 
+.   .   .   .   count="3"
+.   .   .   .   max="0"
+.   .   .   .   avg="0.0"
+.   .   .   .   total="0.0"
+.   .   .   .   min="0" 
+.   .   .   .   distribution-bars:
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="3"
+.   .   .   .   .   .   metric="0"
+.   .   .   .   .   .   ratio="1.0"
+================================================================================
+--------------------------------------------------------------------------------
+data:  
+.   info: 
+.   .   path=".\operator_test.hpp"
+.   .   id="2"
+.   file-data:  
+.   .   regions:
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="0"
+.   .   .   .   .   name="__global__"
+.   .   .   .   .   offset_end="2068"
+.   .   .   .   .   line_begin="2"
+.   .   .   .   .   type="global"
+.   .   .   .   .   line_end="86"
+.   .   .   .   .   offset_begin="1"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="2"
+.   .   .   .   .   name="__noname__"
+.   .   .   .   .   offset_end="1146"
+.   .   .   .   .   line_begin="2"
+.   .   .   .   .   type="namespace"
+.   .   .   .   .   line_end="32"
+.   .   .   .   .   offset_begin="1"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="6"
+.   .   .   .   .   name="policy_mcr"
+.   .   .   .   .   offset_end="1118"
+.   .   .   .   .   line_begin="3"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="29"
+.   .   .   .   .   offset_begin="13"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="2"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="31"
+.   .   .   .   .   name="function_after"
+.   .   .   .   .   offset_end="1144"
+.   .   .   .   .   line_begin="31"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="31"
+.   .   .   .   .   offset_begin="1126"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="35"
+.   .   .   .   .   name="ALL_operators"
+.   .   .   .   .   offset_end="2066"
+.   .   .   .   .   line_begin="35"
+.   .   .   .   .   type="class"
+.   .   .   .   .   line_end="85"
+.   .   .   .   .   offset_begin="1149"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="36"
+.   .   .   .   .   name="operator int"
+.   .   .   .   .   offset_end="1190"
+.   .   .   .   .   line_begin="36"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="36"
+.   .   .   .   .   offset_begin="1172"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="37"
+.   .   .   .   .   name="operator new"
+.   .   .   .   .   offset_end="1210"
+.   .   .   .   .   line_begin="37"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="37"
+.   .   .   .   .   offset_begin="1192"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="38"
+.   .   .   .   .   name="operator delete"
+.   .   .   .   .   offset_end="1233"
+.   .   .   .   .   line_begin="38"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="38"
+.   .   .   .   .   offset_begin="1212"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="39"
+.   .   .   .   .   name="operator new[ ]"
+.   .   .   .   .   offset_end="1256"
+.   .   .   .   .   line_begin="39"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="39"
+.   .   .   .   .   offset_begin="1235"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="40"
+.   .   .   .   .   name="operator delete []"
+.   .   .   .   .   offset_end="1282"
+.   .   .   .   .   line_begin="40"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="40"
+.   .   .   .   .   offset_begin="1258"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="41"
+.   .   .   .   .   name="operator+"
+.   .   .   .   .   offset_end="1299"
+.   .   .   .   .   line_begin="41"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="41"
+.   .   .   .   .   offset_begin="1284"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="42"
+.   .   .   .   .   name="operator -"
+.   .   .   .   .   offset_end="1317"
+.   .   .   .   .   line_begin="42"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="42"
+.   .   .   .   .   offset_begin="1301"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="43"
+.   .   .   .   .   name="operator *"
+.   .   .   .   .   offset_end="1335"
+.   .   .   .   .   line_begin="43"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="43"
+.   .   .   .   .   offset_begin="1319"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="44"
+.   .   .   .   .   name="operator /"
+.   .   .   .   .   offset_end="1353"
+.   .   .   .   .   line_begin="44"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="44"
+.   .   .   .   .   offset_begin="1337"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="45"
+.   .   .   .   .   name="operator="
+.   .   .   .   .   offset_end="1370"
+.   .   .   .   .   line_begin="45"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="45"
+.   .   .   .   .   offset_begin="1355"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="46"
+.   .   .   .   .   name="operator<"
+.   .   .   .   .   offset_end="1387"
+.   .   .   .   .   line_begin="46"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="46"
+.   .   .   .   .   offset_begin="1372"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="47"
+.   .   .   .   .   name="operator >"
+.   .   .   .   .   offset_end="1405"
+.   .   .   .   .   line_begin="47"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="47"
+.   .   .   .   .   offset_begin="1389"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="48"
+.   .   .   .   .   name="operator+="
+.   .   .   .   .   offset_end="1423"
+.   .   .   .   .   line_begin="48"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="48"
+.   .   .   .   .   offset_begin="1407"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="49"
+.   .   .   .   .   name="operator -="
+.   .   .   .   .   offset_end="1442"
+.   .   .   .   .   line_begin="49"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="49"
+.   .   .   .   .   offset_begin="1425"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="50"
+.   .   .   .   .   name="operator*="
+.   .   .   .   .   offset_end="1460"
+.   .   .   .   .   line_begin="50"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="50"
+.   .   .   .   .   offset_begin="1444"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="51"
+.   .   .   .   .   name="operator/="
+.   .   .   .   .   offset_end="1478"
+.   .   .   .   .   line_begin="51"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="51"
+.   .   .   .   .   offset_begin="1462"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="52"
+.   .   .   .   .   name="operator<<"
+.   .   .   .   .   offset_end="1495"
+.   .   .   .   .   line_begin="52"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="52"
+.   .   .   .   .   offset_begin="1480"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="53"
+.   .   .   .   .   name="operator >>"
+.   .   .   .   .   offset_end="1514"
+.   .   .   .   .   line_begin="53"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="53"
+.   .   .   .   .   offset_begin="1497"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="54"
+.   .   .   .   .   name="operator <<="
+.   .   .   .   .   offset_end="1533"
+.   .   .   .   .   line_begin="54"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="54"
+.   .   .   .   .   offset_begin="1516"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="55"
+.   .   .   .   .   name="operator>>="
+.   .   .   .   .   offset_end="1551"
+.   .   .   .   .   line_begin="55"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="55"
+.   .   .   .   .   offset_begin="1535"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="56"
+.   .   .   .   .   name="operator=="
+.   .   .   .   .   offset_end="1568"
+.   .   .   .   .   line_begin="56"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="56"
+.   .   .   .   .   offset_begin="1553"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="57"
+.   .   .   .   .   name="operator!="
+.   .   .   .   .   offset_end="1585"
+.   .   .   .   .   line_begin="57"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="57"
+.   .   .   .   .   offset_begin="1570"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="58"
+.   .   .   .   .   name="operator<="
+.   .   .   .   .   offset_end="1602"
+.   .   .   .   .   line_begin="58"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="58"
+.   .   .   .   .   offset_begin="1587"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="59"
+.   .   .   .   .   name="operator >="
+.   .   .   .   .   offset_end="1621"
+.   .   .   .   .   line_begin="59"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="59"
+.   .   .   .   .   offset_begin="1604"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="60"
+.   .   .   .   .   name="operator ++"
+.   .   .   .   .   offset_end="1640"
+.   .   .   .   .   line_begin="60"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="60"
+.   .   .   .   .   offset_begin="1623"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="61"
+.   .   .   .   .   name="operator--"
+.   .   .   .   .   offset_end="1657"
+.   .   .   .   .   line_begin="61"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="61"
+.   .   .   .   .   offset_begin="1642"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="62"
+.   .   .   .   .   name="operator%"
+.   .   .   .   .   offset_end="1673"
+.   .   .   .   .   line_begin="62"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="62"
+.   .   .   .   .   offset_begin="1659"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="63"
+.   .   .   .   .   name="operator &"
+.   .   .   .   .   offset_end="1690"
+.   .   .   .   .   line_begin="63"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="63"
+.   .   .   .   .   offset_begin="1675"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="64"
+.   .   .   .   .   name="operator ^"
+.   .   .   .   .   offset_end="1707"
+.   .   .   .   .   line_begin="64"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="64"
+.   .   .   .   .   offset_begin="1692"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="65"
+.   .   .   .   .   name="operator !"
+.   .   .   .   .   offset_end="1724"
+.   .   .   .   .   line_begin="65"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="65"
+.   .   .   .   .   offset_begin="1709"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="66"
+.   .   .   .   .   name="operator|"
+.   .   .   .   .   offset_end="1740"
+.   .   .   .   .   line_begin="66"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="66"
+.   .   .   .   .   offset_begin="1726"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="67"
+.   .   .   .   .   name="operator~"
+.   .   .   .   .   offset_end="1756"
+.   .   .   .   .   line_begin="67"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="67"
+.   .   .   .   .   offset_begin="1742"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="68"
+.   .   .   .   .   name="operator &="
+.   .   .   .   .   offset_end="1774"
+.   .   .   .   .   line_begin="68"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="68"
+.   .   .   .   .   offset_begin="1758"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="69"
+.   .   .   .   .   name="operator ^="
+.   .   .   .   .   offset_end="1792"
+.   .   .   .   .   line_begin="69"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="69"
+.   .   .   .   .   offset_begin="1776"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="70"
+.   .   .   .   .   name="operator |="
+.   .   .   .   .   offset_end="1810"
+.   .   .   .   .   line_begin="70"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="70"
+.   .   .   .   .   offset_begin="1794"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="71"
+.   .   .   .   .   name="operator &&"
+.   .   .   .   .   offset_end="1828"
+.   .   .   .   .   line_begin="71"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="71"
+.   .   .   .   .   offset_begin="1812"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="1"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="72"
+.   .   .   .   .   name="operator ||"
+.   .   .   .   .   offset_end="1848"
+.   .   .   .   .   line_begin="72"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="72"
+.   .   .   .   .   offset_begin="1830"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="1"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="73"
+.   .   .   .   .   name="operator %="
+.   .   .   .   .   offset_end="1866"
+.   .   .   .   .   line_begin="73"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="73"
+.   .   .   .   .   offset_begin="1850"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="74"
+.   .   .   .   .   name="operator []"
+.   .   .   .   .   offset_end="1886"
+.   .   .   .   .   line_begin="74"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="74"
+.   .   .   .   .   offset_begin="1868"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="75"
+.   .   .   .   .   name="operator  ()"
+.   .   .   .   .   offset_end="1907"
+.   .   .   .   .   line_begin="75"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="75"
+.   .   .   .   .   offset_begin="1888"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="76"
+.   .   .   .   .   name="operator()"
+.   .   .   .   .   offset_end="1925"
+.   .   .   .   .   line_begin="76"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="76"
+.   .   .   .   .   offset_begin="1909"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="77"
+.   .   .   .   .   name="operator()"
+.   .   .   .   .   offset_end="1941"
+.   .   .   .   .   line_begin="77"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="77"
+.   .   .   .   .   offset_begin="1927"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="78"
+.   .   .   .   .   name="operator()"
+.   .   .   .   .   offset_end="1960"
+.   .   .   .   .   line_begin="78"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="78"
+.   .   .   .   .   offset_begin="1943"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="79"
+.   .   .   .   .   name="operator ()"
+.   .   .   .   .   offset_end="1978"
+.   .   .   .   .   line_begin="79"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="79"
+.   .   .   .   .   offset_begin="1962"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="80"
+.   .   .   .   .   name="operator ()"
+.   .   .   .   .   offset_end="1995"
+.   .   .   .   .   line_begin="80"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="80"
+.   .   .   .   .   offset_begin="1980"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="81"
+.   .   .   .   .   name="operator ,"
+.   .   .   .   .   offset_end="2012"
+.   .   .   .   .   line_begin="81"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="81"
+.   .   .   .   .   offset_begin="1997"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="82"
+.   .   .   .   .   name="operator ->*"
+.   .   .   .   .   offset_end="2031"
+.   .   .   .   .   line_begin="82"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="82"
+.   .   .   .   .   offset_begin="2014"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="83"
+.   .   .   .   .   name="operator->"
+.   .   .   .   .   offset_end="2048"
+.   .   .   .   .   line_begin="83"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="83"
+.   .   .   .   .   offset_begin="2033"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="84"
+.   .   .   .   .   name="operator."
+.   .   .   .   .   offset_end="2064"
+.   .   .   .   .   line_begin="84"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="84"
+.   .   .   .   .   offset_begin="2050"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   subfiles:
+.   subdirs:
+.   aggregated-data:  
+.   .   std.code.complexity:  
+.   .   .   cyclomatic: 
+.   .   .   .   count="51"
+.   .   .   .   max="2"
+.   .   .   .   avg="0.078431372549"
+.   .   .   .   total="4.0"
+.   .   .   .   min="0" 
+.   .   .   .   distribution-bars:
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="48"
+.   .   .   .   .   .   metric="0"
+.   .   .   .   .   .   ratio="0.9412"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="2"
+.   .   .   .   .   .   metric="1"
+.   .   .   .   .   .   ratio="0.0392"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="2"
+.   .   .   .   .   .   ratio="0.0196"
+================================================================================
+--------------------------------------------------------------------------------
+data:  
+.   info: 
+.   .   path=".\test.c"
+.   .   id="3"
+.   file-data:  
+.   .   regions:
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="0"
+.   .   .   .   .   name="__global__"
+.   .   .   .   .   offset_end="8296"
+.   .   .   .   .   line_begin="1"
+.   .   .   .   .   type="global"
+.   .   .   .   .   line_end="359"
+.   .   .   .   .   offset_begin="0"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="12"
+.   .   .   .   .   name="function_start"
+.   .   .   .   .   offset_end="159"
+.   .   .   .   .   line_begin="12"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="14"
+.   .   .   .   .   offset_begin="88"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="108"
+.   .   .   .   .   name="boost"
+.   .   .   .   .   offset_end="5407"
+.   .   .   .   .   line_begin="108"
+.   .   .   .   .   type="namespace"
+.   .   .   .   .   line_end="266"
+.   .   .   .   .   offset_begin="2048"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="125"
+.   .   .   .   .   name="tessss"
+.   .   .   .   .   offset_end="2551"
+.   .   .   .   .   line_begin="125"
+.   .   .   .   .   type="class"
+.   .   .   .   .   line_end="125"
+.   .   .   .   .   offset_begin="2516"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="125"
+.   .   .   .   .   name="funct"
+.   .   .   .   .   offset_end="2550"
+.   .   .   .   .   line_begin="125"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="125"
+.   .   .   .   .   offset_begin="2541"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="134"
+.   .   .   .   .   name="mycontainer"
+.   .   .   .   .   offset_end="2785"
+.   .   .   .   .   line_begin="132"
+.   .   .   .   .   type="class"
+.   .   .   .   .   line_end="139"
+.   .   .   .   .   offset_begin="2624"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="137"
+.   .   .   .   .   name="mycontainer"
+.   .   .   .   .   offset_end="2745"
+.   .   .   .   .   line_begin="136"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="137"
+.   .   .   .   .   offset_begin="2699"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="138"
+.   .   .   .   .   name="increase"
+.   .   .   .   .   offset_end="2783"
+.   .   .   .   .   line_begin="138"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="138"
+.   .   .   .   .   offset_begin="2750"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="143"
+.   .   .   .   .   name="mycontainer"
+.   .   .   .   .   offset_end="3054"
+.   .   .   .   .   line_begin="141"
+.   .   .   .   .   type="class"
+.   .   .   .   .   line_end="153"
+.   .   .   .   .   offset_begin="2788"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="146"
+.   .   .   .   .   name="mycontainer"
+.   .   .   .   .   offset_end="2930"
+.   .   .   .   .   line_begin="145"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="146"
+.   .   .   .   .   offset_begin="2881"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="147"
+.   .   .   .   .   name="uppercase"
+.   .   .   .   .   offset_end="3052"
+.   .   .   .   .   line_begin="147"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="152"
+.   .   .   .   .   offset_begin="2935"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="2"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="156"
+.   .   .   .   .   name="main"
+.   .   .   .   .   offset_end="3225"
+.   .   .   .   .   line_begin="155"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="162"
+.   .   .   .   .   offset_begin="3057"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="164"
+.   .   .   .   .   name="scoped_ptr"
+.   .   .   .   .   offset_end="5142"
+.   .   .   .   .   line_begin="164"
+.   .   .   .   .   type="struct"
+.   .   .   .   .   line_end="252"
+.   .   .   .   .   offset_begin="3227"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="185"
+.   .   .   .   .   name="scoped_ptr"
+.   .   .   .   .   offset_end="3790"
+.   .   .   .   .   line_begin="185"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="190"
+.   .   .   .   .   offset_begin="3619"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="192"
+.   .   .   .   .   name="scoped_ptr"
+.   .   .   .   .   offset_end="3988"
+.   .   .   .   .   line_begin="192"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="198"
+.   .   .   .   .   offset_begin="3796"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="202"
+.   .   .   .   .   name="scoped_ptr"
+.   .   .   .   .   offset_end="4206"
+.   .   .   .   .   line_begin="202"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="207"
+.   .   .   .   .   offset_begin="4021"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="210"
+.   .   .   .   .   name="~scoped_ptr"
+.   .   .   .   .   offset_end="4389"
+.   .   .   .   .   line_begin="209"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="216"
+.   .   .   .   .   offset_begin="4208"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="216"
+.   .   .   .   .   name="reset"
+.   .   .   .   .   offset_end="4543"
+.   .   .   .   .   line_begin="216"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="220"
+.   .   .   .   .   offset_begin="4389"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="1"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="220"
+.   .   .   .   .   name="operator*"
+.   .   .   .   .   offset_end="4645"
+.   .   .   .   .   line_begin="220"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="224"
+.   .   .   .   .   offset_begin="4543"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="226"
+.   .   .   .   .   name="operator->"
+.   .   .   .   .   offset_end="4753"
+.   .   .   .   .   line_begin="226"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="230"
+.   .   .   .   .   offset_begin="4651"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="232"
+.   .   .   .   .   name="operator  float"
+.   .   .   .   .   offset_end="4866"
+.   .   .   .   .   line_begin="232"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="236"
+.   .   .   .   .   offset_begin="4759"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="238"
+.   .   .   .   .   name="get"
+.   .   .   .   .   offset_end="4934"
+.   .   .   .   .   line_begin="238"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="241"
+.   .   .   .   .   offset_begin="4872"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="246"
+.   .   .   .   .   name="swap"
+.   .   .   .   .   offset_end="5140"
+.   .   .   .   .   line_begin="246"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="251"
+.   .   .   .   .   offset_begin="5026"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="254"
+.   .   .   .   .   name="swap"
+.   .   .   .   .   offset_end="5262"
+.   .   .   .   .   line_begin="254"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="257"
+.   .   .   .   .   offset_begin="5145"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="261"
+.   .   .   .   .   name="get_pointer"
+.   .   .   .   .   offset_end="5404"
+.   .   .   .   .   line_begin="261"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="264"
+.   .   .   .   .   offset_begin="5315"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="276"
+.   .   .   .   .   name="Central"
+.   .   .   .   .   offset_end="8219"
+.   .   .   .   .   line_begin="276"
+.   .   .   .   .   type="class"
+.   .   .   .   .   line_end="346"
+.   .   .   .   .   offset_begin="5586"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="277"
+.   .   .   .   .   name="register"
+.   .   .   .   .   offset_end="6269"
+.   .   .   .   .   line_begin="277"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="294"
+.   .   .   .   .   offset_begin="5613"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="296"
+.   .   .   .   .   name="save"
+.   .   .   .   .   offset_end="7372"
+.   .   .   .   .   line_begin="296"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="321"
+.   .   .   .   .   offset_begin="6275"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="1"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="323"
+.   .   .   .   .   name="show"
+.   .   .   .   .   offset_end="7821"
+.   .   .   .   .   line_begin="323"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="330"
+.   .   .   .   .   offset_begin="7378"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="332"
+.   .   .   .   .   name="main"
+.   .   .   .   .   offset_end="8216"
+.   .   .   .   .   line_begin="332"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="344"
+.   .   .   .   .   offset_begin="7827"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="2"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="349"
+.   .   .   .   .   name="f1"
+.   .   .   .   .   offset_end="8228"
+.   .   .   .   .   line_begin="349"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="349"
+.   .   .   .   .   offset_begin="8222"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   subfiles:
+.   subdirs:
+.   aggregated-data:  
+.   .   std.code.complexity:  
+.   .   .   cyclomatic: 
+.   .   .   .   count="24"
+.   .   .   .   max="2"
+.   .   .   .   avg="0.25"
+.   .   .   .   total="6.0"
+.   .   .   .   min="0" 
+.   .   .   .   distribution-bars:
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="20"
+.   .   .   .   .   .   metric="0"
+.   .   .   .   .   .   ratio="0.8333"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="2"
+.   .   .   .   .   .   metric="1"
+.   .   .   .   .   .   ratio="0.0833"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="2"
+.   .   .   .   .   .   metric="2"
+.   .   .   .   .   .   ratio="0.0833"
+================================================================================
+--------------------------------------------------------------------------------
+data:  
+.   info: 
+.   .   path=".\test2.cpp"
+.   .   id="4"
+.   file-data:  
+.   .   regions:
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="0"
+.   .   .   .   .   name="__global__"
+.   .   .   .   .   offset_end="628"
+.   .   .   .   .   line_begin="1"
+.   .   .   .   .   type="global"
+.   .   .   .   .   line_end="53"
+.   .   .   .   .   offset_begin="0"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="5"
+.   .   .   .   .   name="A"
+.   .   .   .   .   offset_end="170"
+.   .   .   .   .   line_begin="5"
+.   .   .   .   .   type="class"
+.   .   .   .   .   line_end="19"
+.   .   .   .   .   offset_begin="39"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="7"
+.   .   .   .   .   name="A"
+.   .   .   .   .   offset_end="87"
+.   .   .   .   .   line_begin="7"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="10"
+.   .   .   .   .   offset_begin="50"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="1"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="10"
+.   .   .   .   .   name="method"
+.   .   .   .   .   offset_end="117"
+.   .   .   .   .   line_begin="10"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="13"
+.   .   .   .   .   offset_begin="87"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="13"
+.   .   .   .   .   name="operator ++"
+.   .   .   .   .   offset_end="153"
+.   .   .   .   .   line_begin="13"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="16"
+.   .   .   .   .   offset_begin="117"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="22"
+.   .   .   .   .   name="aaa"
+.   .   .   .   .   offset_end="350"
+.   .   .   .   .   line_begin="21"
+.   .   .   .   .   type="namespace"
+.   .   .   .   .   line_end="39"
+.   .   .   .   .   offset_begin="173"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="23"
+.   .   .   .   .   name="main"
+.   .   .   .   .   offset_end="348"
+.   .   .   .   .   line_begin="23"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="38"
+.   .   .   .   .   offset_begin="192"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="2"
+.   subfiles:
+.   subdirs:
+.   aggregated-data:  
+.   .   std.code.complexity:  
+.   .   .   cyclomatic: 
+.   .   .   .   count="4"
+.   .   .   .   max="2"
+.   .   .   .   avg="0.75"
+.   .   .   .   total="3.0"
+.   .   .   .   min="0" 
+.   .   .   .   distribution-bars:
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="2"
+.   .   .   .   .   .   metric="0"
+.   .   .   .   .   .   ratio="0.5"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="1"
+.   .   .   .   .   .   ratio="0.25"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="2"
+.   .   .   .   .   .   ratio="0.25"
+================================================================================
+--------------------------------------------------------------------------------
+data:  
+.   info: 
+.   .   path=".\test3.cpp"
+.   .   id="5"
+.   file-data:  
+.   .   regions:
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="0"
+.   .   .   .   .   name="__global__"
+.   .   .   .   .   offset_end="2797"
+.   .   .   .   .   line_begin="1"
+.   .   .   .   .   type="global"
+.   .   .   .   .   line_end="110"
+.   .   .   .   .   offset_begin="0"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="37"
+.   .   .   .   .   name="Tester"
+.   .   .   .   .   offset_end="2192"
+.   .   .   .   .   line_begin="37"
+.   .   .   .   .   type="class"
+.   .   .   .   .   line_end="68"
+.   .   .   .   .   offset_begin="1672"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="39"
+.   .   .   .   .   name="doColor"
+.   .   .   .   .   offset_end="1871"
+.   .   .   .   .   line_begin="38"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="48"
+.   .   .   .   .   offset_begin="1703"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="1"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="53"
+.   .   .   .   .   name="doFont"
+.   .   .   .   .   offset_end="2189"
+.   .   .   .   .   line_begin="53"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="66"
+.   .   .   .   .   offset_begin="1923"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="1"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="72"
+.   .   .   .   .   name="doFont222"
+.   .   .   .   .   offset_end="2561"
+.   .   .   .   .   line_begin="68"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="87"
+.   .   .   .   .   offset_begin="2194"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="2"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="90"
+.   .   .   .   .   name="not_closed"
+.   .   .   .   .   offset_end="2797"
+.   .   .   .   .   line_begin="110"
+.   .   .   .   .   type="namespace"
+.   .   .   .   .   line_end="130"
+.   .   .   .   .   offset_begin="2566"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="91"
+.   .   .   .   .   name="main"
+.   .   .   .   .   offset_end="2753"
+.   .   .   .   .   line_begin="110"
+.   .   .   .   .   type="function"
+.   .   .   .   .   line_end="120"
+.   .   .   .   .   offset_begin="2589"
+.   .   .   .   data:  
+.   .   .   .   .   std.code.complexity: 
+.   .   .   .   .   .   cyclomatic="0"
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="102"
+.   .   .   .   .   name="__noname__"
+.   .   .   .   .   offset_end="2793"
+.   .   .   .   .   line_begin="122"
+.   .   .   .   .   type="namespace"
+.   .   .   .   .   line_end="126"
+.   .   .   .   .   offset_begin="2755"
+.   .   .   .   data: 
+.   .   
+.   .   .   region:  
+.   .   .   .   info: 
+.   .   .   .   .   cursor="103"
+.   .   .   .   .   name="__noname__"
+.   .   .   .   .   offset_end="2787"
+.   .   .   .   .   line_begin="123"
+.   .   .   .   .   type="struct"
+.   .   .   .   .   line_end="125"
+.   .   .   .   .   offset_begin="2768"
+.   .   .   .   data: 
+.   subfiles:
+.   subdirs:
+.   aggregated-data:  
+.   .   std.code.complexity:  
+.   .   .   cyclomatic: 
+.   .   .   .   count="4"
+.   .   .   .   max="2"
+.   .   .   .   avg="1.0"
+.   .   .   .   total="4.0"
+.   .   .   .   min="0" 
+.   .   .   .   distribution-bars:
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="0"
+.   .   .   .   .   .   ratio="0.25"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="2"
+.   .   .   .   .   .   metric="1"
+.   .   .   .   .   .   ratio="0.5"
+.   .   .   .   
+.   .   .   .   .   distribution-bar: 
+.   .   .   .   .   .   count="1"
+.   .   .   .   .   .   metric="2"
+.   .   .   .   .   .   ratio="0.25"
+================================================================================
+
+

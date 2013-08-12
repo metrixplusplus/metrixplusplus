@@ -1,0 +1,6 @@
+./test3.cpp:68: warning: Non-matching closing bracket '}' detected.
+
+./test3.cpp:88: warning: Non-matching closing bracket '}' detected.
+
+./test3.cpp:110: warning: Non-matching opening bracket '{' detected.
+

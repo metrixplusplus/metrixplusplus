@@ -1,0 +1,75 @@
+<view>
+
+    <data>
+        <info path="" id="1" />
+        <file-data />
+        <subfiles>
+        </subfiles>
+        <subdirs>
+            <subdir>.</subdir>
+        </subdirs>
+        <aggregated-data>
+            <std.code.complexity>
+                <cyclomatic nonzero="False" count="8" total="11.0" min="1" max="3" avg="1.375" sup="0">
+                    <distribution-bars>
+                        <distribution-bar count="6" metric="1" ratio="0.75" />
+                        <distribution-bar count="1" metric="2" ratio="0.125" />
+                        <distribution-bar count="1" metric="3" ratio="0.125" />
+                    </distribution-bars>
+                </cyclomatic>
+            </std.code.complexity>
+            <std.suppress.file>
+                <count nonzero="True" count="0" total="0.0" min="None" max="None" avg="None" sup="0">
+                    <distribution-bars>
+                    </distribution-bars>
+                </count>
+            </std.suppress.file>
+            <std.suppress>
+                <count nonzero="True" count="0" total="0.0" min="None" max="None" avg="None" sup="0">
+                    <distribution-bars>
+                    </distribution-bars>
+                </count>
+            </std.suppress>
+            <std.code.lines>
+                <total nonzero="False" count="16" total="87.0" min="0" max="12" avg="5.4375" sup="0">
+                    <distribution-bars>
+                        <distribution-bar count="2" metric="0" ratio="0.125" />
+                        <distribution-bar count="3" metric="3" ratio="0.1875" />
+                        <distribution-bar count="1" metric="4" ratio="0.0625" />
+                        <distribution-bar count="2" metric="5" ratio="0.125" />
+                        <distribution-bar count="1" metric="6" ratio="0.0625" />
+                        <distribution-bar count="3" metric="7" ratio="0.1875" />
+                        <distribution-bar count="2" metric="8" ratio="0.125" />
+                        <distribution-bar count="1" metric="9" ratio="0.0625" />
+                        <distribution-bar count="1" metric="12" ratio="0.0625" />
+                    </distribution-bars>
+                </total>
+                <code nonzero="False" count="16" total="78.0" min="0" max="11" avg="4.875" sup="0">
+                    <distribution-bars>
+                        <distribution-bar count="2" metric="0" ratio="0.125" />
+                        <distribution-bar count="3" metric="3" ratio="0.1875" />
+                        <distribution-bar count="3" metric="4" ratio="0.1875" />
+                        <distribution-bar count="2" metric="5" ratio="0.125" />
+                        <distribution-bar count="4" metric="7" ratio="0.25" />
+                        <distribution-bar count="1" metric="8" ratio="0.0625" />
+                        <distribution-bar count="1" metric="11" ratio="0.0625" />
+                    </distribution-bars>
+                </code>
+                <preprocessor nonzero="False" count="16" total="1.0" min="0" max="1" avg="0.0625" sup="0">
+                    <distribution-bars>
+                        <distribution-bar count="15" metric="0" ratio="0.9375" />
+                        <distribution-bar count="1" metric="1" ratio="0.0625" />
+                    </distribution-bars>
+                </preprocessor>
+                <comments nonzero="False" count="16" total="10.0" min="0" max="3" avg="0.625" sup="0">
+                    <distribution-bars>
+                        <distribution-bar count="10" metric="0" ratio="0.625" />
+                        <distribution-bar count="3" metric="1" ratio="0.1875" />
+                        <distribution-bar count="2" metric="2" ratio="0.125" />
+                        <distribution-bar count="1" metric="3" ratio="0.0625" />
+                    </distribution-bars>
+                </comments>
+            </std.code.lines>
+        </aggregated-data>
+    </data>
+</view>
