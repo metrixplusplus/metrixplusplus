@@ -27,8 +27,7 @@ And constructed with the following guidelines:
 ## Issue tracker and feedback 
 
 Have a bug or a feature request or any feedback?
-[Please submit a ticket](https://sourceforge.net/p/metrixplusplus/tickets/new/) or
-[email to project administrator](mailto:mailto:avkonst@users.sourceforge.net).
+[Please submit a ticket](https://sourceforge.net/p/metrixplusplus/tickets/new/).
 
 
 
