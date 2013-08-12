@@ -325,6 +325,20 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('view')
         self.assertExec(runner.run())
 
+        runner = tests.common.ToolRunner('collect',
+                                         ['--std.code.magic.numbers', '--std.code.magic.numbers.simplier'],
+                                         prefix='nozeros',)
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view',
+                                         ['--nest-regions'],
+                                         prefix='nozeros_nest_per_file',
+                                         dirs_list=['./simple.cpp'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view', prefix='nozeros')
+        self.assertExec(runner.run())
+
     def test_debug_tool(self):
 
         runner = tests.common.ToolRunner('collect')
