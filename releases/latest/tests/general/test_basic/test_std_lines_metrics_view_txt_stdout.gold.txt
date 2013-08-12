@@ -1,0 +1,58 @@
+:: info: Overall metrics for 'std.code.lines:total' metric
+	Average        : 5.4375
+	Minimum        : 0
+	Maximum        : 12
+	Total          : 87.0
+	Distribution   : 16 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.125 : 0.125 :  2	|||||||||||||
+	             3 : 0.188 : 0.312 :  3	|||||||||||||||||||
+	             4 : 0.062 : 0.375 :  1	||||||
+	             5 : 0.125 : 0.500 :  2	|||||||||||||
+	             6 : 0.062 : 0.562 :  1	||||||
+	             7 : 0.188 : 0.750 :  3	|||||||||||||||||||
+	             8 : 0.125 : 0.875 :  2	|||||||||||||
+	             9 : 0.062 : 0.938 :  1	||||||
+	            12 : 0.062 : 1.000 :  1	||||||
+
+:: info: Overall metrics for 'std.code.lines:code' metric
+	Average        : 4.875
+	Minimum        : 0
+	Maximum        : 11
+	Total          : 78.0
+	Distribution   : 16 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.125 : 0.125 :  2	|||||||||||||
+	             3 : 0.188 : 0.312 :  3	|||||||||||||||||||
+	             4 : 0.188 : 0.500 :  3	|||||||||||||||||||
+	             5 : 0.125 : 0.625 :  2	|||||||||||||
+	             7 : 0.250 : 0.875 :  4	|||||||||||||||||||||||||
+	             8 : 0.062 : 0.938 :  1	||||||
+	            11 : 0.062 : 1.000 :  1	||||||
+
+:: info: Overall metrics for 'std.code.lines:preprocessor' metric
+	Average        : 0.0625
+	Minimum        : 0
+	Maximum        : 1
+	Total          : 1.0
+	Distribution   : 16 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.938 : 0.938 : 15	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.062 : 1.000 :  1	||||||
+
+:: info: Overall metrics for 'std.code.lines:comments' metric
+	Average        : 0.625
+	Minimum        : 0
+	Maximum        : 3
+	Total          : 10.0
+	Distribution   : 16 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.625 : 0.625 : 10	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.188 : 0.812 :  3	|||||||||||||||||||
+	             2 : 0.125 : 0.938 :  2	|||||||||||||
+	             3 : 0.062 : 1.000 :  1	||||||
+
+:: info: Directory content:
+	Directory      : .
+
+

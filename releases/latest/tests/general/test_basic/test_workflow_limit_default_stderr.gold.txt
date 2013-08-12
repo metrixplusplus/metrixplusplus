@@ -1,0 +1,4 @@
+[LOG]: WARNING:	Logging enabled with INFO level
+[LOG]: INFO:	Processing: 
+[LOG]: INFO:	Applying limit: namespace 'std.code.complexity', filter '('cyclomatic', '>', 0.0)'
+[LOG]: WARNING:	Done (1 seconds). Exit code: 8

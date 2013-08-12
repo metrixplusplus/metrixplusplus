@@ -1,0 +1,5 @@
+[LOG]: WARNING:	Logging enabled with INFO level
+[LOG]: INFO:	Processing: 
+[LOG]: INFO:	Processing: ./simple.cpp [modified]
+[LOG]: INFO:	Processing: ./simple2.cpp [new]
+[LOG]: WARNING:	Done (1 seconds). Exit code: 0

@@ -1,0 +1,15 @@
+:: info: Overall metrics for 'std.code.magic:numbers' metric
+	Average        : 1.55555555556 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 4
+	Total          : 14.0
+	Distribution   : 9 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.667 : 0.667 : 6	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             2 : 0.222 : 0.889 : 2	||||||||||||||||||||||
+	             4 : 0.111 : 1.000 : 1	|||||||||||
+
+:: info: Directory content:
+	Directory      : .
+
+

@@ -1,0 +1,36 @@
+Usage: python metrix++.py --help
+       python metrix++.py view --help
+       python metrix++.py view [options] -- [path 1] ... [path N]
+
+Options:
+  -h, --help            show this help message and exit
+  --db-file=DB_FILE, --dbf=DB_FILE
+                        Path to a database file to read and process [default:
+                        ./metrixpp.db].
+  --db-file-prev=DB_FILE_PREV, --dbfp=DB_FILE_PREV
+                        Path to database file with data collected for the
+                        past/previous code revision. It is used to identify
+                        and evaluate/analyze change trends. [default: none].
+  --log-level=LOG_LEVEL, --ll=LOG_LEVEL
+                        Defines log level. Possible values are
+                        'DEBUG','INFO','WARNING' or 'ERROR'. Default value is
+                        inherited from environment variable
+                        'METRIXPLUSPLUS_LOG_LEVEL' if set. [default: INFO]
+  --format=FORMAT, --ft=FORMAT
+                        Format of the output data. Possible values are 'xml',
+                        'txt' or 'python' [default: txt]
+  --nest-regions, --nr  If the option is set (True), data for regions is
+                        exported in the form of a tree. Otherwise, all regions
+                        are exported in plain list. [default: False]
+  --max-distribution-rows=MAX_DISTRIBUTION_ROWS, --mdr=MAX_DISTRIBUTION_ROWS
+                        Maximum number of rows in distribution tables. If it
+                        is set to 0, the tool does not optimize the size of
+                        distribution tables [default: 20]
+  --scope-mode=SCOPE_MODE, --sm=SCOPE_MODE
+                        Defines the analysis scope mode. 'all' - all available
+                        regions and files are taken into account, 'new' - only
+                        new regions and files are taken into account,
+                        'touched' - only new and modified regions and files
+                        are taken into account. Modes 'new' and 'touched' may
+                        require more time for processing than mode 'all'
+                        [default: all]
