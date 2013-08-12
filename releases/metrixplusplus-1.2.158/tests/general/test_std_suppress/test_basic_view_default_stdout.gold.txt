@@ -1,0 +1,66 @@
+:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 0.470588235294
+	Minimum        : 0
+	Maximum        : 1
+	Total          : 8.0
+	Distribution   : 17 regions in total (including 7 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.529 : 0.529 :  9	|||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.471 : 1.000 :  8	|||||||||||||||||||||||||||||||||||||||||||||||
+
+:: info: Overall metrics for 'std.general:size' metric
+	Average        : 3023.0
+	Minimum        : 3023
+	Maximum        : 3023
+	Total          : 3023.0
+	Distribution   : 1 files in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of files
+	          3023 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+:: info: Overall metrics for 'std.suppress.file:count' metric
+	Average        : 1.0 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 1
+	Total          : 1.0
+	Distribution   : 1 files in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of files
+	             1 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+:: info: Overall metrics for 'std.suppress:count' metric
+	Average        : 1.2380952381 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 2
+	Total          : 26.0
+	Distribution   : 21 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.762 : 0.762 : 16	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             2 : 0.238 : 1.000 :  5	||||||||||||||||||||||||
+
+:: info: Overall metrics for 'std.code.length:total' metric
+	Average        : 116.269230769
+	Minimum        : 43
+	Maximum        : 242
+	Total          : 3023.0
+	Distribution   : 26 regions in total (including 19 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	         43-53 : 0.115 : 0.115 :  3	||||||||||||
+	         53-63 : 0.115 : 0.231 :  3	||||||||||||
+	         63-73 : 0.038 : 0.269 :  1	||||
+	         73-83 : 0.192 : 0.462 :  5	|||||||||||||||||||
+	         83-93 : 0.038 : 0.500 :  1	||||
+	        93-103 : 0.038 : 0.538 :  1	||||
+	       103-113 : 0.038 : 0.577 :  1	||||
+	       113-123 : 0.038 : 0.615 :  1	||||
+	       123-133 : 0.038 : 0.654 :  1	||||
+	       133-143 : 0.077 : 0.731 :  2	||||||||
+	       143-153 : 0.077 : 0.808 :  2	||||||||
+	       153-163 : 0.038 : 0.846 :  1	||||
+	       163-173 : 0.038 : 0.885 :  1	||||
+	       173-183 : 0.038 : 0.923 :  1	||||
+	       183-193 : 0.038 : 0.962 :  1	||||
+	       193-242 : 0.038 : 1.000 :  1	||||
+
+:: info: Directory content:
+	Directory      : .
+
+

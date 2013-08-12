@@ -1,0 +1,3 @@
+[LOG]: WARNING:	Logging enabled with INFO level
+[LOG]: INFO:	Processing: ./interprocess/detail/managed_open_or_create_impl.hpp
+[LOG]: WARNING:	Done (1 seconds). Exit code: 0

@@ -1,0 +1,401 @@
+./interprocess/detail/managed_open_or_create_impl.hpp:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-15057
+	Line numbers   : 1-490
+	Modified       : False
+	std.code.lines:code: 0 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:31: info: Metrics per 'boost' region
+	Region name    : boost
+	Region type    : namespace
+	Offsets        : 1321-14915
+	Line numbers   : 31-485
+	Modified       : False
+	std.code.lines:code: 2 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:32: info: Metrics per 'interprocess' region
+	Region name    : interprocess
+	Region type    : namespace
+	Offsets        : 1339-14885
+	Line numbers   : 32-484
+	Modified       : False
+	std.code.lines:code: 6 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:35: info: Metrics per 'ipcdetail' region
+	Region name    : ipcdetail
+	Region type    : namespace
+	Offsets        : 1365-1424
+	Line numbers   : 34-35
+	Modified       : False
+	std.code.lines:code: 1 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:39: info: Metrics per 'managed_open_or_create_impl_device_id_t' region
+	Region name    : managed_open_or_create_impl_device_id_t
+	Region type    : struct
+	Offsets        : 1427-1540
+	Line numbers   : 38-42
+	Modified       : False
+	std.code.lines:code: 5 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:50: info: Metrics per 'managed_open_or_create_impl_device_id_t' region
+	Region name    : managed_open_or_create_impl_device_id_t
+	Region type    : struct
+	Offsets        : 1650-1768
+	Line numbers   : 49-53
+	Modified       : False
+	std.code.lines:code: 5 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:59: info: Metrics per 'ipcdetail' region
+	Region name    : ipcdetail
+	Region type    : namespace
+	Offsets        : 1842-14857
+	Line numbers   : 59-482
+	Modified       : True
+	std.code.lines:code: 5 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:63: info: Metrics per 'managed_open_or_create_impl_device_holder' region
+	Region name    : managed_open_or_create_impl_device_holder
+	Region type    : class
+	Offsets        : 1866-2164
+	Line numbers   : 62-71
+	Modified       : False
+	std.code.lines:code: 4 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:66: info: Metrics per 'get_device' region
+	Region name    : get_device
+	Region type    : function
+	Offsets        : 1972-2064
+	Line numbers   : 65-67
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 3 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:69: info: Metrics per 'get_device' region
+	Region name    : get_device
+	Region type    : function
+	Offsets        : 2069-2162
+	Line numbers   : 69-70
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 2 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:74: info: Metrics per 'managed_open_or_create_impl_device_holder' region
+	Region name    : managed_open_or_create_impl_device_holder
+	Region type    : class
+	Offsets        : 2167-2451
+	Line numbers   : 73-85
+	Modified       : False
+	std.code.lines:code: 6 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:77: info: Metrics per 'get_device' region
+	Region name    : get_device
+	Region type    : function
+	Offsets        : 2280-2342
+	Line numbers   : 76-78
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 3 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:80: info: Metrics per 'get_device' region
+	Region name    : get_device
+	Region type    : function
+	Offsets        : 2347-2410
+	Line numbers   : 80-81
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 2 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:87: info: Metrics per 'DeviceAbstraction' region
+	Region name    : DeviceAbstraction
+	Region type    : class
+	Offsets        : 2454-14853
+	Line numbers   : 87-480
+	Modified       : True
+	std.code.lines:code: 27 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:113: info: Metrics per 'managed_open_or_create_impl' region
+	Region name    : managed_open_or_create_impl
+	Region type    : function
+	Offsets        : 3358-3393
+	Line numbers   : 113-114
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 2 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:116: info: Metrics per 'managed_open_or_create_impl' region
+	Region name    : managed_open_or_create_impl
+	Region type    : function
+	Offsets        : 3398-3800
+	Line numbers   : 116-131
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 16 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:133: info: Metrics per 'managed_open_or_create_impl' region
+	Region name    : managed_open_or_create_impl
+	Region type    : function
+	Offsets        : 3805-4132
+	Line numbers   : 133-146
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 14 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:149: info: Metrics per 'managed_open_or_create_impl' region
+	Region name    : managed_open_or_create_impl
+	Region type    : function
+	Offsets        : 4138-4549
+	Line numbers   : 149-164
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 16 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:167: info: Metrics per 'managed_open_or_create_impl' region
+	Region name    : managed_open_or_create_impl
+	Region type    : function
+	Offsets        : 4554-5028
+	Line numbers   : 166-183
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 18 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:186: info: Metrics per 'managed_open_or_create_impl' region
+	Region name    : managed_open_or_create_impl
+	Region type    : function
+	Offsets        : 5033-5433
+	Line numbers   : 185-200
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 16 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:203: info: Metrics per 'managed_open_or_create_impl' region
+	Region name    : managed_open_or_create_impl
+	Region type    : function
+	Offsets        : 5438-5922
+	Line numbers   : 202-219
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 18 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:221: info: Metrics per 'managed_open_or_create_impl' region
+	Region name    : managed_open_or_create_impl
+	Region type    : function
+	Offsets        : 5927-6032
+	Line numbers   : 221-222
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 2 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:224: info: Metrics per 'operator=' region
+	Region name    : operator=
+	Region type    : function
+	Offsets        : 6037-6236
+	Line numbers   : 224-229
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 6 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:231: info: Metrics per '~managed_open_or_create_impl' region
+	Region name    : ~managed_open_or_create_impl
+	Region type    : function
+	Offsets        : 6241-6277
+	Line numbers   : 231-232
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 2 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:234: info: Metrics per 'get_user_size' region
+	Region name    : get_user_size
+	Region type    : function
+	Offsets        : 6282-6391
+	Line numbers   : 234-235
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 2 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:237: info: Metrics per 'get_user_address' region
+	Region name    : get_user_address
+	Region type    : function
+	Offsets        : 6396-6526
+	Line numbers   : 237-238
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 2 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:240: info: Metrics per 'get_real_size' region
+	Region name    : get_real_size
+	Region type    : function
+	Offsets        : 6531-6608
+	Line numbers   : 240-241
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 2 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:243: info: Metrics per 'get_real_address' region
+	Region name    : get_real_address
+	Region type    : function
+	Offsets        : 6613-6691
+	Line numbers   : 243-244
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 2 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:246: info: Metrics per 'swap' region
+	Region name    : swap
+	Region type    : function
+	Offsets        : 6696-6808
+	Line numbers   : 246-249
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 4 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:251: info: Metrics per 'flush' region
+	Region name    : flush
+	Region type    : function
+	Offsets        : 6813-6866
+	Line numbers   : 251-252
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 2 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:254: info: Metrics per 'get_mapped_region' region
+	Region name    : get_mapped_region
+	Region type    : function
+	Offsets        : 6871-6950
+	Line numbers   : 254-255
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 2 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:258: info: Metrics per 'get_device' region
+	Region name    : get_device
+	Region type    : function
+	Offsets        : 6956-7033
+	Line numbers   : 258-259
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 2 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:261: info: Metrics per 'get_device' region
+	Region name    : get_device
+	Region type    : function
+	Offsets        : 7038-7127
+	Line numbers   : 261-262
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 2 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:268: info: Metrics per 'truncate_device' region
+	Region name    : truncate_device
+	Region type    : function
+	Offsets        : 7145-7301
+	Line numbers   : 266-269
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 3 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:272: info: Metrics per 'truncate_device' region
+	Region name    : truncate_device
+	Region type    : function
+	Offsets        : 7314-7440
+	Line numbers   : 271-273
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 3 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:277: info: Metrics per 'check_offset_t_size' region
+	Region name    : check_offset_t_size
+	Region type    : function
+	Offsets        : 7446-7543
+	Line numbers   : 276-278
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 3 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:281: info: Metrics per 'check_offset_t_size' region
+	Region name    : check_offset_t_size
+	Region type    : function
+	Offsets        : 7556-7687
+	Line numbers   : 280-282
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 3 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:286: info: Metrics per 'create_device' region
+	Region name    : create_device
+	Region type    : function
+	Offsets        : 7692-8034
+	Line numbers   : 284-291
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 7 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:294: info: Metrics per 'create_device' region
+	Region name    : create_device
+	Region type    : function
+	Offsets        : 8039-8309
+	Line numbers   : 293-299
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 7 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:302: info: Metrics per 'priv_open_or_create' region
+	Region name    : priv_open_or_create
+	Region type    : function
+	Offsets        : 8314-14526
+	Line numbers   : 301-467
+	Modified       : True
+	std.code.complexity:cyclomatic: 37 [+1]
+	std.code.lines:code: 148 [+4]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:469: info: Metrics per 'swap' region
+	Region name    : swap
+	Region type    : function
+	Offsets        : 14531-14652
+	Line numbers   : 469-472
+	Modified       : True
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 4 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:476: info: Metrics per 'dont_close_on_destruction' region
+	Region name    : dont_close_on_destruction
+	Region type    : function
+	Offsets        : 14706-14812
+	Line numbers   : 476-477
+	Modified       : False
+	std.code.complexity:cyclomatic: 0 [+0]
+	std.code.lines:code: 2 [+0]
+
+./interprocess/detail/managed_open_or_create_impl.hpp:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 1.15625 [+0.03125]
+	Minimum        : 0 [+0]
+	Maximum        : 37 [+1]
+	Total          : 37.0 [+1.0]
+	Distribution   : 32 [+0] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.969 : 0.969 : 31 [+0 ]	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	            36 : 0.000 : 0.969 :  0 [-1 ]	
+	            37 : 0.031 : 1.000 :  1 [+1 ]	|||
+
+./interprocess/detail/managed_open_or_create_impl.hpp:: info: Overall metrics for 'std.code.lines:code' metric
+	Average        : 9.07142857143 [+0.0952380952381]
+	Minimum        : 0 [+0]
+	Maximum        : 148 [+4]
+	Total          : 381.0 [+4.0]
+	Distribution   : 42 [+0] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	           0-1 : 0.048 : 0.048 :  2 [+0 ]	|||||
+	             2 : 0.357 : 0.405 : 15 [+0 ]	||||||||||||||||||||||||||||||||||||
+	             3 : 0.143 : 0.548 :  6 [+0 ]	||||||||||||||
+	             4 : 0.071 : 0.619 :  3 [+0 ]	|||||||
+	             5 : 0.071 : 0.690 :  3 [+0 ]	|||||||
+	             6 : 0.071 : 0.762 :  3 [+0 ]	|||||||
+	             7 : 0.048 : 0.810 :  2 [+0 ]	|||||
+	            14 : 0.024 : 0.833 :  1 [+0 ]	||
+	            16 : 0.071 : 0.905 :  3 [+0 ]	|||||||
+	            18 : 0.048 : 0.952 :  2 [+0 ]	|||||
+	            27 : 0.024 : 0.976 :  1 [+0 ]	||
+	           144 : 0.000 : 0.976 :  0 [-1 ]	
+	           148 : 0.024 : 1.000 :  1 [+1 ]	||
+
+

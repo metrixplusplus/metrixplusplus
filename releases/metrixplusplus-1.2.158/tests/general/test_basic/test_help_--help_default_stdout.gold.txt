@@ -1,0 +1,15 @@
+Usage: python metrix++.py --help
+       python metrix++.py <action> --help
+       python metrix++.py <action> [options] -- [path 1] ... [path N]
+
+Actions: 
+  collect
+  debug
+  export
+  info
+  limit
+  test
+  view
+
+Options:
+  -h, --help  show this help message and exit

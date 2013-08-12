@@ -1,0 +1,88 @@
+:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 1.625 [+0.25]
+	Minimum        : 0 [-1]
+	Maximum        : 3 [+0]
+	Total          : 13.0 [+2.0]
+	Distribution   : 8 [+0] regions in total (including 1 [+1] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.125 : 0.125 : 1 [+1]	|||||||||||||
+	             1 : 0.375 : 0.500 : 3 [-3]	||||||||||||||||||||||||||||||||||||||
+	             2 : 0.250 : 0.750 : 2 [+1]	|||||||||||||||||||||||||
+	             3 : 0.250 : 1.000 : 2 [+1]	|||||||||||||||||||||||||
+
+:: info: Overall metrics for 'std.suppress.file:count' metric
+	Average        : None [+0] (excluding zero metric values)
+	Minimum        : None [+0]
+	Maximum        : None [+0]
+	Total          : 0.0 [+0.0]
+	Distribution   : 0 [+0] files in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of files
+
+:: info: Overall metrics for 'std.suppress:count' metric
+	Average        : 1.0 [+1.0] (excluding zero metric values)
+	Minimum        : 1 [+1]
+	Maximum        : 1 [+1]
+	Total          : 1.0 [+1.0]
+	Distribution   : 1 [+1] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 1.000 : 1.000 : 1 [+1]	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+:: info: Overall metrics for 'std.code.lines:total' metric
+	Average        : 5.66666666667 [+0.229166666667]
+	Minimum        : 0 [+0]
+	Maximum        : 12 [+0]
+	Total          : 85.0 [-2.0]
+	Distribution   : 15 [-1] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.133 : 0.133 :  2 [+0 ]	|||||||||||||
+	             3 : 0.133 : 0.267 :  2 [-1 ]	|||||||||||||
+	             4 : 0.133 : 0.400 :  2 [+1 ]	|||||||||||||
+	             5 : 0.200 : 0.600 :  3 [+1 ]	||||||||||||||||||||
+	             6 : 0.000 : 0.600 :  0 [-1 ]	
+	             7 : 0.133 : 0.733 :  2 [-1 ]	|||||||||||||
+	             8 : 0.000 : 0.733 :  0 [-2 ]	
+	             9 : 0.133 : 0.867 :  2 [+1 ]	|||||||||||||
+	            12 : 0.133 : 1.000 :  2 [+1 ]	|||||||||||||
+
+:: info: Overall metrics for 'std.code.lines:code' metric
+	Average        : 5.0 [+0.125]
+	Minimum        : 0 [+0]
+	Maximum        : 11 [+0]
+	Total          : 75.0 [-3.0]
+	Distribution   : 15 [-1] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.133 : 0.133 :  2 [+0 ]	|||||||||||||
+	             3 : 0.200 : 0.333 :  3 [+0 ]	||||||||||||||||||||
+	             4 : 0.200 : 0.533 :  3 [+0 ]	||||||||||||||||||||
+	             5 : 0.133 : 0.667 :  2 [+0 ]	|||||||||||||
+	             7 : 0.067 : 0.733 :  1 [-3 ]	|||||||
+	             8 : 0.133 : 0.867 :  2 [+1 ]	|||||||||||||
+	            10 : 0.067 : 0.933 :  1 [+1 ]	|||||||
+	            11 : 0.067 : 1.000 :  1 [+0 ]	|||||||
+
+:: info: Overall metrics for 'std.code.lines:preprocessor' metric
+	Average        : 0.133333333333 [+0.0708333333333]
+	Minimum        : 0 [+0]
+	Maximum        : 2 [+1]
+	Total          : 2.0 [+1.0]
+	Distribution   : 15 [-1] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.933 : 0.933 : 14 [-1 ]	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.000 : 0.933 :  0 [-1 ]	
+	             2 : 0.067 : 1.000 :  1 [+1 ]	|||||||
+
+:: info: Overall metrics for 'std.code.lines:comments' metric
+	Average        : 0.733333333333 [+0.108333333333]
+	Minimum        : 0 [+0]
+	Maximum        : 2 [-1]
+	Total          : 11.0 [+1.0]
+	Distribution   : 15 [-1] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.467 : 0.467 :  7 [-3 ]	|||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.333 : 0.800 :  5 [+2 ]	|||||||||||||||||||||||||||||||||
+	             2 : 0.200 : 1.000 :  3 [+1 ]	||||||||||||||||||||
+
+:: info: Directory content:
+	Directory      : .
+
+

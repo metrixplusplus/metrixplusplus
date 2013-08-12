@@ -1,0 +1,2 @@
+./interprocess/detail/os_file_functions.hpp:697: warning: Non-matching opening bracket '{' detected.
+

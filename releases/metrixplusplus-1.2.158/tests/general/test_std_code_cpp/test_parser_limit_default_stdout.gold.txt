@@ -1,0 +1,108 @@
+./operator_test.hpp:6: warning: Metric 'std.code.complexity:cyclomatic' for region 'policy_mcr' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : policy_mcr
+	Metric value   : 2
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./operator_test.hpp:71: warning: Metric 'std.code.complexity:cyclomatic' for region 'operator &&' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : operator &&
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./operator_test.hpp:72: warning: Metric 'std.code.complexity:cyclomatic' for region 'operator ||' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : operator ||
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./test.c:147: warning: Metric 'std.code.complexity:cyclomatic' for region 'uppercase' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : uppercase
+	Metric value   : 2
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./test.c:216: warning: Metric 'std.code.complexity:cyclomatic' for region 'reset' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : reset
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./test.c:296: warning: Metric 'std.code.complexity:cyclomatic' for region 'save' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : save
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./test.c:332: warning: Metric 'std.code.complexity:cyclomatic' for region 'main' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : main
+	Metric value   : 2
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./test2.cpp:7: warning: Metric 'std.code.complexity:cyclomatic' for region 'A' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : A
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./test2.cpp:23: warning: Metric 'std.code.complexity:cyclomatic' for region 'main' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : main
+	Metric value   : 2
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./test3.cpp:39: warning: Metric 'std.code.complexity:cyclomatic' for region 'doColor' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : doColor
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./test3.cpp:53: warning: Metric 'std.code.complexity:cyclomatic' for region 'doFont' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : doFont
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./test3.cpp:72: warning: Metric 'std.code.complexity:cyclomatic' for region 'doFont222' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : doFont222
+	Metric value   : 2
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
