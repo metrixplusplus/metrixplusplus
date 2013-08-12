@@ -18,6 +18,7 @@
 #
 
 import os.path
+import sys
 
 import mpp.internal.dbwrap
 import mpp.internal.api_impl
@@ -981,8 +982,51 @@ class MetricPluginMixin(object):
 
     class AliasError(Exception):
         def __init__(self, alias):
-            Exception.__init__(self, "Unknown alias: " + str(alias))
-    
+            Exception.__init__(self, "Unknown pattern alias: " + str(alias))
+            
+    class PlainCounter(object):
+        
+        def __init__(self, plugin, alias, data, region):
+            self.plugin = plugin
+            self.alias = alias
+            self.data = data
+            self.region = region
+            self.result = 0
+            
+        def count(self, marker, pattern_to_search):
+            self.result += len(pattern_to_search.findall(self.data.get_content(),
+                                                       marker.get_offset_begin(),
+                                                       marker.get_offset_end()))
+        
+        def get_result(self):
+            return self.result
+
+    class IterIncrementCounter(PlainCounter):
+        
+        def count(self, marker, pattern_to_search):
+            self.marker = marker
+            self.pattern_to_search = pattern_to_search
+            for match in pattern_to_search.finditer(self.data.get_content(),
+                                                    marker.get_offset_begin(),
+                                                    marker.get_offset_end()):
+                self.result += self.increment(match)
+        
+        def increment(self, match):
+            return 1
+
+    class IterAssignCounter(PlainCounter):
+        
+        def count(self, marker, pattern_to_search):
+            self.marker = marker
+            self.pattern_to_search = pattern_to_search
+            for match in pattern_to_search.finditer(self.data.get_content(),
+                                                    marker.get_offset_begin(),
+                                                    marker.get_offset_end()):
+                self.result = self.assign(match)
+        
+        def assign(self, match):
+            return self.result
+
     def declare_metric(self, is_active, field,
                        pattern_to_search_or_map_of_patterns,
                        marker_type_mask=Marker.T.ANY,
@@ -996,6 +1040,12 @@ class MetricPluginMixin(object):
             map_of_patterns = pattern_to_search_or_map_of_patterns
         else:
             map_of_patterns = {'*': pattern_to_search_or_map_of_patterns}
+        # client may suply with pattern or pair of pattern + counter class
+        for key in map_of_patterns.keys():
+            if isinstance(map_of_patterns[key], tuple) == False:
+                # if it is not a pair, create a pair using default counter class
+                map_of_patterns[key] = (map_of_patterns[key],
+                                        MetricPluginMixin.PlainCounter)
 
         if is_active == True:
             self._fields[field.name] = (field,
@@ -1036,48 +1086,27 @@ class MetricPluginMixin(object):
             namespace = self.get_name()
             
         field_data = self._fields[metric_name]
-        text = data.get_content()
-        
         if alias not in field_data[4].keys():
             if '*' not in field_data[4].keys():
                 raise self.AliasError(alias)
             else:
                 alias = '*'
-        pattern_to_search = field_data[4][alias]
+        (pattern_to_search, counter_class) = field_data[4][alias]
         
-        if hasattr(self, '_' + metric_name + '_count'):
-            counter_callback = self.__getattribute__('_' + metric_name + '_count')
-            for region in data.iterate_regions(filter_group=field_data[5]):
-                counter_data = {}
-                count = 0
-                if hasattr(self, '_' + metric_name + '_count_initialize'):
-                    (count, counter_data) = self.__getattribute__('_' + metric_name + '_count_initialize')(alias, data, region)
-                for marker in data.iterate_markers(
-                                filter_group = field_data[1],
-                                region_id = region.get_id(),
-                                exclude_children = field_data[2],
-                                merge=field_data[3]):
-                    begin = marker.get_offset_begin()
-                    end = marker.get_offset_end()
-                    for match in pattern_to_search.finditer(text, begin, end):
-                        count = counter_callback(alias, data, region, marker, match, count, counter_data)
-                if count != 0 or field_data[0].non_zero == False:
-                    region.set_data(namespace, metric_name, count)
-        else:
-            for region in data.iterate_regions(filter_group=field_data[5]):
-                count = 0
-                for marker in data.iterate_markers(
-                                filter_group = field_data[1],
-                                region_id = region.get_id(),
-                                exclude_children = field_data[2],
-                                merge=field_data[3]):
-                    count += len(pattern_to_search.findall(text, marker.get_offset_begin(), marker.get_offset_end()))
-                if count != 0 or field_data[0].non_zero == False:
-                    region.set_data(namespace, metric_name, count)
+        for region in data.iterate_regions(filter_group=field_data[5]):
+            counter = counter_class(self, alias, data, region)
+            for marker in data.iterate_markers(
+                            filter_group = field_data[1],
+                            region_id = region.get_id(),
+                            exclude_children = field_data[2],
+                            merge=field_data[3]):
+                counter.count(marker, pattern_to_search)
+            count = counter.get_result()
+            if count != 0 or field_data[0].non_zero == False:
+                region.set_data(namespace, metric_name, count)
 
 class InterfaceNotImplemented(Exception):
     def __init__(self, obj):
-        import sys
         Exception.__init__(self, "Method '"
                             + sys._getframe(1).f_code.co_name
                             + "' has not been implemented for "
