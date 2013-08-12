@@ -44,10 +44,12 @@ class Test(tests.common.TestCase):
         # so, if the test is changed, html docs should be updated accordingly
         #
         
-        for step in range(8):
+        for step in range(9):
             opts = ['--log-level=INFO']
             if step > 1:
                 opts.append('--myext.magic.numbers')
+            if step > 7:
+                opts.append('--myext.magic.numbers.simplier')
             
             os.environ['METRIXPLUSPLUS_PATH'] = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                                              'test_api_tutorial', 'ext', 'step' + str(step))
