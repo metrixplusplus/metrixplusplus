@@ -45,11 +45,11 @@ class Plugin(mpp.api.Plugin,
             r'''[0-9]+''')
         self.declare_metric(self.is_active_numbers,
                             self.Field('numbers', int),
-                            # dictionary of patterns instead of a single one
+                            # dictionary of pairs instead of a single pair
                             {
-                             'std.code.java': pattern_to_search_java,
-                             'std.code.cpp': pattern_to_search_cpp_cs,
-                             'std.code.cs': pattern_to_search_cpp_cs,
+                             'std.code.java': (pattern_to_search_java, self.NumbersCounter),
+                             'std.code.cpp': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             'std.code.cs': (pattern_to_search_cpp_cs, self.NumbersCounter),
                              '*': pattern_to_search
                             },
                             marker_type_mask=mpp.api.Marker.T.CODE,
@@ -60,7 +60,8 @@ class Plugin(mpp.api.Plugin,
         if self.is_active() == True:
             self.subscribe_by_parents_interface(mpp.api.ICode)
 
-    def _numbers_count(self, alias, data, region, marker, match, count, counter_data):
-        if match.group(0).startswith('const'):
-            return count
-        return count + 1
+    class NumbersCounter(mpp.api.MetricPluginMixin.IterIncrementCounter):
+        def increment(self, match):
+            if match.group(0).startswith('const'):
+                return 0
+            return 1

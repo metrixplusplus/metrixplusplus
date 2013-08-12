@@ -1216,7 +1216,8 @@ class Plugin(mpp.api.Plugin,
             r'''(const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)?[-+]?[0-9]+''')
         self.declare_metric(self.is_active_numbers,
                             self.Field('numbers', int),
-                            pattern_to_search, # and use it here
+                            # give a pair of pattern + custom counter logic class
+                            (pattern_to_search, self.NumbersCounter),
                             marker_type_mask=mpp.api.Marker.T.CODE,
                             region_type_mask=mpp.api.Region.T.ANY)
         
@@ -1228,10 +1229,11 @@ class Plugin(mpp.api.Plugin,
     # implement custom counter behavior:
     # increments counter by 1 only if single number spotted,
     # but not declaration of a constant
-    def _numbers_count(self, alias, data, region, marker, match, count, counter_data):
-        if match.group(0).startswith('const'):
-            return count
-        return count + 1
+    class NumbersCounter(mpp.api.MetricPluginMixin.IterIncrementCounter):
+        def increment(self, match):
+            if match.group(0).startswith('const'):
+                return 0
+            return 1
 </pre>
              <li>Initialy counter is initialized by zero, but it is possible to 
              	change it as well by implementing a function with name '_&lt;metric_name&gt;_count_initialize'.
@@ -1275,11 +1277,11 @@ class Plugin(mpp.api.Plugin,
             r'''[0-9]+''')
         self.declare_metric(self.is_active_numbers,
                             self.Field('numbers', int),
-                            # dictionary of patterns instead of a single one
+                            # dictionary of pairs instead of a single pair
                             {
-                             'std.code.java': pattern_to_search_java,
-                             'std.code.cpp': pattern_to_search_cpp_cs,
-                             'std.code.cs': pattern_to_search_cpp_cs,
+                             'std.code.java': (pattern_to_search_java, self.NumbersCounter),
+                             'std.code.cpp': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             'std.code.cs': (pattern_to_search_cpp_cs, self.NumbersCounter),
                              '*': pattern_to_search
                             },
                             marker_type_mask=mpp.api.Marker.T.CODE,
@@ -1290,10 +1292,11 @@ class Plugin(mpp.api.Plugin,
         if self.is_active() == True:
             self.subscribe_by_parents_interface(mpp.api.ICode)
 
-    def _numbers_count(self, alias, data, region, marker, match, count, counter_data):
-        if match.group(0).startswith('const'):
-            return count
-        return count + 1
+    class NumbersCounter(mpp.api.MetricPluginMixin.IterIncrementCounter):
+        def increment(self, match):
+            if match.group(0).startswith('const'):
+                return 0
+            return 1
 </pre>
              <li>Keys in the dictionary of patterns are names of parent plugins (references to code parsers).
              	The key '*' refers to any parser.</li>
@@ -1337,9 +1340,9 @@ class Plugin(mpp.api.Plugin,
                                 # store only non-zero results
                                 non_zero=True),
                             {
-                             'std.code.java': pattern_to_search_java,
-                             'std.code.cpp': pattern_to_search_cpp_cs,
-                             'std.code.cs': pattern_to_search_cpp_cs,
+                             'std.code.java': (pattern_to_search_java, self.NumbersCounter),
+                             'std.code.cpp': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             'std.code.cs': (pattern_to_search_cpp_cs, self.NumbersCounter),
                              '*': pattern_to_search
                             },
                             marker_type_mask=mpp.api.Marker.T.CODE,
@@ -1350,10 +1353,11 @@ class Plugin(mpp.api.Plugin,
         if self.is_active() == True:
             self.subscribe_by_parents_interface(mpp.api.ICode)
 
-    def _numbers_count(self, alias, data, region, marker, match, count, counter_data):
-        if match.group(0).startswith('const'):
-            return count
-        return count + 1
+    class NumbersCounter(mpp.api.MetricPluginMixin.IterIncrementCounter):
+        def increment(self, match):
+            if match.group(0).startswith('const'):
+                return 0
+            return 1
 </pre>
             <li>Now run Metrix++ to collect and view the results.</li>
           <pre>&gt; python "/path/to/metrix++.py" collect --myext.magic.numbers</pre>
@@ -1399,9 +1403,9 @@ class Plugin(mpp.api.Plugin,
                             self.Field('numbers', int,
                                 non_zero=True),
                             {
-                             'std.code.java': pattern_to_search_java,
-                             'std.code.cpp': pattern_to_search_cpp_cs,
-                             'std.code.cs': pattern_to_search_cpp_cs,
+                             'std.code.java': (pattern_to_search_java, self.NumbersCounter),
+                             'std.code.cpp': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             'std.code.cs': (pattern_to_search_cpp_cs, self.NumbersCounter),
                              '*': pattern_to_search
                             },
                             marker_type_mask=mpp.api.Marker.T.CODE,
@@ -1415,13 +1419,13 @@ class Plugin(mpp.api.Plugin,
         if self.is_active() == True:
             self.subscribe_by_parents_interface(mpp.api.ICode)
 
-    def _numbers_count(self, alias, data, region, marker, match, count, counter_data):
-        if (match.group(0).startswith('const') or
-            # use new option to exclude 0 and 1 numbers
-            (self.is_active_numbers_simplier == True and
-             match.group(0) in ['0', '1', '-1', '+1'])):
-            return count
-        return count + 1
+    class NumbersCounter(mpp.api.MetricPluginMixin.IterIncrementCounter):
+        def increment(self, match):
+            if (match.group(0).startswith('const') or
+                (self.plugin.is_active_numbers_simplier == True and
+                 match.group(0) in ['0', '1', '-1', '+1'])):
+                return 0
+            return 1
 </pre>
             <li>Now run Metrix++ to collect and view the results.</li>
           <pre>&gt; python "/path/to/metrix++.py" collect --myext.magic.numbers</pre>

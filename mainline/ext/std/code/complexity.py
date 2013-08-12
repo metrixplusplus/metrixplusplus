@@ -57,9 +57,9 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
         self.declare_metric(self.is_active_maxindent,
                             self.Field('maxindent', int),
                             {
-                                'std.code.cpp': self.pattern_indent,
-                                'std.code.cs': self.pattern_indent,
-                                'std.code.java': self.pattern_indent,
+                                'std.code.cpp': (self.pattern_indent, self.MaxIndentCounter),
+                                'std.code.cs': (self.pattern_indent, self.MaxIndentCounter),
+                                'std.code.java': (self.pattern_indent, self.MaxIndentCounter),
                             },
                             marker_type_mask=mpp.api.Marker.T.CODE,
                             region_type_mask=mpp.api.Region.T.FUNCTION)
@@ -73,16 +73,20 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
                 'std.code.java'
             ])
 
-    def _maxindent_count_initialize(self, alias, data, region):
-        return (0, {'cur_level': 0})
-    
-    def _maxindent_count(self, alias, data, region, marker, match, count, counter_data):
-        if match.group(0) == '{':
-            counter_data['cur_level'] += 1
-            if counter_data['cur_level'] > count:
-                count = counter_data['cur_level']
-        elif match.group(0) == '}':
-            counter_data['cur_level'] -= 1
-        else:
-            assert False
-        return count
+    class MaxIndentCounter(mpp.api.MetricPluginMixin.IterAssignCounter):
+        
+        def __init__(self, plugin, alias, data, region):
+            super(Plugin.MaxIndentCounter, self).__init__(plugin, alias, data, region)
+            self.current_level = 0
+            
+        def assign(self, match):
+            result = self.result
+            if match.group(0) == '{':
+                self.current_level += 1
+                if self.current_level > self.result:
+                    result = self.current_level
+            elif match.group(0) == '}':
+                self.current_level -= 1
+            else:
+                assert False
+            return result

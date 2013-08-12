@@ -18,6 +18,7 @@
 #
 
 import logging
+import sys
 
 import mpp.api
 import mpp.utils
@@ -433,8 +434,8 @@ def compress_dist(data, columns):
             remaining_count = metric_data['count']
             next_consume = None
             next_bar = None
-            max_count = -(0xFFFFFFFF)
-            min_count = 0xFFFFFFFF
+            max_count = -sys.maxint - 1
+            min_count = sys.maxint
             sum_ratio = 0
             for (ind, bar) in enumerate(distr):
                 if next_bar == None:

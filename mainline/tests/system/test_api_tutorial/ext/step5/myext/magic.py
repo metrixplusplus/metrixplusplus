@@ -39,7 +39,8 @@ class Plugin(mpp.api.Plugin,
             r'''(const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)?[-+]?[0-9]+''')
         self.declare_metric(self.is_active_numbers,
                             self.Field('numbers', int),
-                            pattern_to_search, # and use it here
+                            # give a pair of pattern + custom counter logic class
+                            (pattern_to_search, self.NumbersCounter),
                             marker_type_mask=mpp.api.Marker.T.CODE,
                             region_type_mask=mpp.api.Region.T.ANY)
         
@@ -51,7 +52,8 @@ class Plugin(mpp.api.Plugin,
     # implement custom counter behavior:
     # increments counter by 1 only if single number spotted,
     # but not declaration of a constant
-    def _numbers_count(self, alias, data, region, marker, match, count, counter_data):
-        if match.group(0).startswith('const'):
-            return count
-        return count + 1
+    class NumbersCounter(mpp.api.MetricPluginMixin.IterIncrementCounter):
+        def increment(self, match):
+            if match.group(0).startswith('const'):
+                return 0
+            return 1
