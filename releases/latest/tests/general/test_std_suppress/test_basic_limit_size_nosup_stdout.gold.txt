@@ -1,0 +1,9 @@
+./test.c:0: warning: Metric 'std.general:size' exceeds the limit.
+	Metric name    : std.general:size
+	Region name    : None
+	Metric value   : 3023
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : True
+

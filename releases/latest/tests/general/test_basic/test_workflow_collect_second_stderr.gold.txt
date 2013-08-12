@@ -1,0 +1,5 @@
+[LOG]: WARNING:	Logging enabled with INFO level
+[LOG]: INFO:	Excluding: ./.unused.cpp
+[LOG]: INFO:	Processing: ./simple.cpp
+[LOG]: INFO:	Processing: ./simple2.cpp
+[LOG]: WARNING:	Done (1 seconds). Exit code: 0
