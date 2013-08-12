@@ -50,6 +50,12 @@ Options:
   --std.code.lines.total, --sclt
                         Enables collection of lines of comments metric -
                         number of non-empty lines of comments [default: False]
+  --std.code.magic.numbers, --scmn
+                        Enables collection of magic numbers metric [default:
+                        False]
+  --std.code.magic.numbers.simplier, --scmns
+                        Is set, 0, -1 and 1 numbers are not counted in
+                        'std.code.magic.numbers' metric [default: False]
   --std.suppress, --ss  If set (True), suppression markers are collected from
                         comments in code. Suppressions are used by post-
                         processing tools, like limit, to remove false-positive

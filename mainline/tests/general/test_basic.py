@@ -310,6 +310,21 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('view')
         self.assertExec(runner.run())
 
+    def test_std_code_magic(self):
+
+        runner = tests.common.ToolRunner('collect',
+                                         ['--std.code.magic.numbers'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view',
+                                         ['--nest-regions'],
+                                         prefix='nest_per_file',
+                                         dirs_list=['./simple.cpp'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view')
+        self.assertExec(runner.run())
+
     def test_debug_tool(self):
 
         runner = tests.common.ToolRunner('collect')
