@@ -668,7 +668,7 @@ class Loader(object):
     def set_property(self, property_name, value):
         if self.db == None:
             return None
-        return self.db.set_property(property_name, value)
+        return self.db.set_property(property_name, str(value))
     
     def get_property(self, property_name):
         if self.db == None:
