@@ -34,6 +34,8 @@ class Test(tests.common.TestCase):
     def tearDown(self):
         if self.METRIXPLUSPLUS_PATH != None:
             os.environ['METRIXPLUSPLUS_PATH'] = self.METRIXPLUSPLUS_PATH
+        else:
+            del os.environ['METRIXPLUSPLUS_PATH']
         tests.common.TestCase.tearDown(self)
 
     def test_metric_plugin_api(self):
