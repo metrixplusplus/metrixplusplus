@@ -26,7 +26,7 @@
             	Offsets        : 106-252
             	Line numbers   : 12-23
             	Modified       : None
-            	std.code.magic:numbers: 4
+            	std.code.magic:numbers: 1
 
 .   .   .   ./simple.cpp:26: info: Metrics per 'func' region
             	Region name    : func
@@ -80,17 +80,15 @@
             	Offsets        : 599-669
             	Line numbers   : 58-65
             	Modified       : None
-            	std.code.magic:numbers: 2
+            	std.code.magic:numbers: 1
 
 ./simple.cpp:: info: Overall metrics for 'std.code.magic:numbers' metric
-	Average        : 1.57142857143 (excluding zero metric values)
+	Average        : 1.0 (excluding zero metric values)
 	Minimum        : 1
-	Maximum        : 4
-	Total          : 11.0
+	Maximum        : 1
+	Total          : 7.0
 	Distribution   : 7 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 0.714 : 0.714 : 5	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             2 : 0.143 : 0.857 : 1	||||||||||||||
-	             4 : 0.143 : 1.000 : 1	||||||||||||||
+	             1 : 1.000 : 1.000 : 7	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
