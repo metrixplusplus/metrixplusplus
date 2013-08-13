@@ -1,3 +1,7 @@
+## 1.3 (August, 2013)
+- Deprecated and dropped support for callback based implementation of advanced counters
+(use MetricPluginMixin.*Counter classes instead)
+
 ## 1.2 (August, 2013)
 - **Feature** suppressions capability for limit tool
 - **Feature** distribution tables and graphs in viewer
