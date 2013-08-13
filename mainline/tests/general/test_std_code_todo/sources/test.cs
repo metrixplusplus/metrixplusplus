@@ -19,17 +19,17 @@ class MainClass
 		//HACK is here
 		//XXX is here
 		//All here: TODO,ToDo,FIXME,FixMe,TBD,HACK,XXX
-		// no heretodoss
-		// no heretodo
-		// no todoss
+		// no hereTODOss
+		// no hereTODO
+		// no TODOss
 		//TOBEDONE
 		
 		char a[] = "TODO string TOBEDONE";
 	}
 
 		//All here: TODO,ToDo,FIXME,FixMe,TBD,HACK,XXX
-		// no heretodoss
-		// no heretodo
-		// no todoss
+		// no hereTODOss
+		// no hereTODO
+		// no TODOss
 		//TOBEDONE
 }
