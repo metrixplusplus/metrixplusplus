@@ -13,4 +13,5 @@ int main()
 	// no heretodo
 	// no todoss
 	//TOBEDONE
+	char a[] = "TODO string TOBEDONE";
 }
