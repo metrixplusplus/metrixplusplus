@@ -11,14 +11,16 @@
     	Offsets        : 1-272
     	Line numbers   : 2-17
     	Modified       : None
+    	std.code.todo:strings: 1
 
 ./test.cpp:: info: Overall metrics for 'std.code.todo:strings' metric
-	Average        : None (excluding zero metric values)
-	Minimum        : None
-	Maximum        : None
-	Total          : 0.0
-	Distribution   : 0 regions in total (including 0 suppressed)
+	Average        : 1.0 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 1
+	Total          : 1.0
+	Distribution   : 1 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./test.cs:0: info: Metrics per '__global__' region
 	Region name    : __global__
@@ -40,13 +42,15 @@
         	Offsets        : 141-430
         	Line numbers   : 12-28
         	Modified       : None
+        	std.code.todo:strings: 1
 
 ./test.cs:: info: Overall metrics for 'std.code.todo:strings' metric
-	Average        : None (excluding zero metric values)
-	Minimum        : None
-	Maximum        : None
-	Total          : 0.0
-	Distribution   : 0 regions in total (including 0 suppressed)
+	Average        : 1.0 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 1
+	Total          : 1.0
+	Distribution   : 1 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 

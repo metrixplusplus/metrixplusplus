@@ -1,6 +1,8 @@
 ## 1.3 (August, 2013)
 - Deprecated and dropped support for callback based implementation of advanced counters
 (use MetricPluginMixin.*Counter classes instead)
+- New metric: std.code.todo:comments - number of todo markers in comments.
+- New metric: std.code.todo:strings - number of todo markers in strings.
 
 ## 1.2 (August, 2013)
 - **Feature** suppressions capability for limit tool
