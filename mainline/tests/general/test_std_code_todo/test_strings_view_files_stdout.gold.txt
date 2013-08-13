@@ -1,15 +1,15 @@
 ./test.cpp:0: info: Metrics per '__global__' region
 	Region name    : __global__
 	Region type    : global
-	Offsets        : 0-237
-	Line numbers   : 1-17
+	Offsets        : 0-273
+	Line numbers   : 1-18
 	Modified       : None
 
 .   ./test.cpp:2: info: Metrics per 'main' region
     	Region name    : main
     	Region type    : function
-    	Offsets        : 1-236
-    	Line numbers   : 2-16
+    	Offsets        : 1-272
+    	Line numbers   : 2-17
     	Modified       : None
 
 ./test.cpp:: info: Overall metrics for 'std.code.todo:strings' metric
@@ -23,22 +23,22 @@
 ./test.cs:0: info: Metrics per '__global__' region
 	Region name    : __global__
 	Region type    : global
-	Offsets        : 0-507
-	Line numbers   : 1-34
+	Offsets        : 0-547
+	Line numbers   : 1-36
 	Modified       : None
 
 .   ./test.cs:2: info: Metrics per 'MainClass' region
     	Region name    : MainClass
     	Region type    : class
-    	Offsets        : 1-506
-    	Line numbers   : 2-33
+    	Offsets        : 1-546
+    	Line numbers   : 2-35
     	Modified       : None
 
 .   .   ./test.cs:12: info: Metrics per 'main' region
         	Region name    : main
         	Region type    : function
-        	Offsets        : 141-390
-        	Line numbers   : 12-26
+        	Offsets        : 141-430
+        	Line numbers   : 12-28
         	Modified       : None
 
 ./test.cs:: info: Overall metrics for 'std.code.todo:strings' metric

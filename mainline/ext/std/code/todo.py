@@ -46,7 +46,7 @@ class Plugin(mpp.api.Plugin,
             if re.match(r'''^[A-Za-z0-9]+$''', tag) == None:
                 self.parser.error('option --std.code.todo.tags: tag {0} includes not allowed symbols'.
                                   format(tag))
-        self.pattern_to_search = re.compile('[^a-zA-Z]{0}[^a-zA-Z]'.format('|'.join(self.tags_list)))
+        self.pattern_to_search = re.compile('([^a-zA-Z]({0})(?=[^a-zA-Z]))|([^a-zA-Z]({0})$)'.format('|'.join(self.tags_list)))
 
     def initialize(self):
         self.declare_metric(self.is_active_comments,

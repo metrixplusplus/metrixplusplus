@@ -23,6 +23,8 @@ class MainClass
 		// no heretodo
 		// no todoss
 		//TOBEDONE
+		
+		char a[] = "TODO string TOBEDONE";
 	}
 
 		//All here: TODO,ToDo,FIXME,FixMe,TBD,HACK,XXX
