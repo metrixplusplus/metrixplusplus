@@ -88,6 +88,7 @@ class Database(object):
         
         self.last_used_id += 1
         self.id = self.last_used_id
+        self._tables_cache = None
     
     def __del__(self):
         if self.conn != None:
@@ -116,6 +117,7 @@ class Database(object):
                 sql = "DELETE FROM __tables__ WHERE id = '" + str(table['id']) + "'"
                 db_loader.log(sql)
                 db_loader.conn.execute(sql)
+                self._tables_cache = None # reset cache when a list of tables is modified
                 sql = "DROP TABLE '" + table['name'] + "'"
                 db_loader.log(sql)
                 db_loader.conn.execute(sql)
@@ -128,22 +130,31 @@ class Database(object):
                 db_loader.log(sql)
                 db_loader.conn.execute(sql)
                 sql = "UPDATE '" + column['table_name'] + "' SET '" + column['column_name'] + "' = NULL"
+                # TODO bug here: collect with column, recollect without, recollect with again
+                # it will be impossible to create the column in the table
                 db_loader.log(sql)
                 db_loader.conn.execute(sql)
             
             self.clean_up_file(db_loader)
 
         def clean_up_file(self, db_loader, file_id = None):
-            sql = "SELECT * FROM __tables__"
-            db_loader.log(sql)
-            for table in itertools.chain(db_loader.conn.execute(sql).fetchall(), [{'name':'__regions__'}, {'name':'__markers__'}]):
+            # this function is called on every updated file, so cache table names
+            if db_loader._tables_cache == None:
+                db_loader._tables_cache = []
+                sql = "SELECT * FROM __tables__"
+                db_loader.log(sql)
+                for table in db_loader.conn.execute(sql).fetchall():
+                    db_loader._tables_cache.append(table['name'])
+
+            for table_name in itertools.chain(db_loader._tables_cache, ['__regions__', '__markers__']):
                 sql = ""
                 if file_id == None:
-                    sql = "DELETE FROM '" + table['name'] + "' WHERE file_id IN (SELECT __files__.id FROM __files__ WHERE __files__.confirmed = 0)"
+                    sql = "DELETE FROM '" + table_name + "' WHERE file_id IN (SELECT __files__.id FROM __files__ WHERE __files__.confirmed = 0)"
                 else:
-                    sql = "DELETE FROM '" + table['name'] + "' WHERE (file_id = " + str(file_id) + ")"
+                    sql = "DELETE FROM '" + table_name + "' WHERE (file_id = " + str(file_id) + ")"
                 db_loader.log(sql)
                 db_loader.conn.execute(sql)
+            
             
     class InternalPathUtils(object):
         
@@ -206,6 +217,7 @@ class Database(object):
             sql = "UPDATE __tables__ SET confirmed = 0"
             self.log(sql)
             self.conn.execute(sql)
+            self._tables_cache = None # reset cache when a list of tables is modified
             sql = "UPDATE __columns__ SET confirmed = 0"
             self.log(sql)
             self.conn.execute(sql)
@@ -235,6 +247,7 @@ class Database(object):
                 sql = "CREATE TABLE __tables__ (id integer NOT NULL PRIMARY KEY, name text NOT NULL, version text NOT NULL, support_regions integer NOT NULL, confirmed integer NOT NULL, UNIQUE (name))"
                 self.log(sql)
                 self.conn.execute(sql)
+                self._tables_cache = None # reset cache when a list of tables is modified
                 sql = "CREATE TABLE __columns__ (id integer NOT NULL PRIMARY KEY, name text NOT NULL, type text NOT NULL, table_id integer NOT_NULL, non_zero integer NOT NULL, confirmed integer NOT NULL, UNIQUE (name, table_id))"
                 self.log(sql)
                 self.conn.execute(sql)
@@ -284,6 +297,8 @@ class Database(object):
     def create_table(self, table_name, support_regions = False, version='1.0'):
         assert(self.read_only == False)
 
+        self._tables_cache = None # reset cache when a list of tables is modified
+        
         sql = "SELECT * FROM __tables__ WHERE (name = '" + table_name + "'AND confirmed == 0)"
         self.log(sql)
         result = self.conn.execute(sql).fetchall()

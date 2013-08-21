@@ -287,7 +287,12 @@ class FileData(LoadableData):
         
     def add_region(self, region_name, offset_begin, offset_end, line_begin, line_end, cursor_line, group, checksum):
         if self.regions == None:
-            self.regions = [] # do not load in time of collection
+            # # do not load regions and markers in time of collection
+            # if region is added first by parser, set markers to empty list as well
+            # because if there are no markers in a file, it forces loading of markers
+            # during iterate_markers call
+            self.regions = []
+            self.markers = []
         new_id = len(self.regions) + 1
         self._internal_append_region(Region(self.loader, self.get_id(), new_id, region_name, offset_begin, offset_end, line_begin, line_end, cursor_line, group, checksum))
         self.loader.db.create_region(self.file_id, new_id, region_name, offset_begin, offset_end, line_begin, line_end, cursor_line, group, checksum)
@@ -308,15 +313,25 @@ class FileData(LoadableData):
 
     def load_markers(self):
         if self.markers == None:
+            # TODO add assert in case of an attempt to load data during collection
+            assert(False) # TODO not used in post-processing tools for while, need to be fixed
             self.markers = []
             for each in self.loader.db.iterate_markers(self.get_id()):
                 self.markers.append(Marker(each.begin, each.end, each.group))
         
     def add_marker(self, offset_begin, offset_end, group):
         if self.markers == None:
-            self.markers = [] # do not load in time of collection
+            # # do not load regions and markers in time of collection
+            # if marker is added first by parser, set regions to empty list as well
+            # because if there are no regions in a file, it forces loading of regions
+            # during iterate_regions call
+            self.regions = []
+            self.markers = []
         self.markers.append(Marker(offset_begin, offset_end, group))
-        self.loader.db.create_marker(self.file_id, offset_begin, offset_end, group)
+        # TODO drop collecting markers, it is faster to double parse
+        # it is not the same with regions, it is faster to load regions
+        # on iterative re-run
+        #self.loader.db.create_marker(self.file_id, offset_begin, offset_end, group)
         
     def iterate_markers(self, filter_group = Marker.T.ANY,
                          region_id = None, exclude_children = True, merge = False):
@@ -775,6 +790,8 @@ class Loader(object):
             def __iter__(self):
                 return self.iterator
         
+        # TODO can construct to add multiple rows at one sql query
+        # to improve the performance
         for namespace in file_data.iterate_namespaces():
             if file_data.is_namespace_updated(namespace) == False:
                 continue
@@ -958,13 +975,13 @@ class Plugin(BasePlugin):
 
         if (len(fields) != 0 or len(properties) != 0):
             prev_version = db_loader.set_property(self.get_name() + ":version", self.get_version())
-            if prev_version != self.get_version():
+            if str(prev_version) != str(self.get_version()):
                 self.is_updated = True
 
         for prop in properties:
             assert(prop.name != 'version')
             prev_prop = db_loader.set_property(self.get_name() + ":" + prop.name, prop.value)
-            if prev_prop != prop.value:
+            if str(prev_prop) != str(prop.value):
                 self.is_updated = True
 
         if len(fields) != 0:

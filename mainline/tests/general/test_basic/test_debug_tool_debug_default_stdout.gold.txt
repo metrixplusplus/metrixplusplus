@@ -1,74 +1,4 @@
-<html><body><table><tr><td><pre>
-
-<span style="color:#009900">// Just produce any code in order to test basic workflow</span>
-namespace hmm
-{
-
-<span style="color:#990000">#define old_prep</span>
-
-class A
-{
-
-	A()
-	{
-		<span style="color:#009900">/* first funtion */</span>
-		this-&gt;m_member = 10;
-		if (a &amp; b)
-		{
-			for (int i = 0; i &lt; 0 &amp;&amp; i &gt; 0; i++)
-			{
-				int a; <span style="color:#009900">// right?</span>
-			}
-		}
-	}
-
-
-	int func(int param = 5)
-	{
-		class embeded
-		{
-			embeded()
-			{
-				int a = 10;
-				if (true)
-				{
-					<span style="color:#009900">// again crazy</span>
-				}
-			}
-		};
-		if (a);
-	}
-
-	int func_to_be_removed_in_new_sources(int param = 5)
-	{
-		class embeded
-		{
-			embeded()
-			{
-				int a = 10;
-				if ("<span style="color:#0000FF">text</span>")
-				{
-					<span style="color:#009900">/* again crazy */</span>
-				}
-			}
-		};
-		if (a &amp;&amp; b);
-	}
-
-	int never(int how_long = 999)
-	{
-		while(true)
-		{
-
-		}
-		return 1;
-	}
-
-	int m_member = 10;
-};
-
-}
-</pre></td><td><pre><span style="background-color:#F0F010"><a href="#line0" id=line"0"></a>
+<html><body><table><tr><td><pre><span style="background-color:#F0F010"><a href="#line0" id=line"0"></a>
 
 <span style="background-color:#F0F070"><a href="#line4" id=line"4"></a>// Just produce any code in order to test basic workflow
 namespace hmm
@@ -82,7 +12,7 @@ namespace hmm
 	<span style="background-color:#F0F030"><a href="#line12" id=line"12"></a>A()
 	{
 		/* first funtion */
-		this-&gt;m_member = 10;
+		this-&gt;m_me88er = 10;
 		if (a &amp; b)
 		{
 			for (int i = 0; i &lt; 0 &amp;&amp; i &gt; 0; i++)
@@ -134,7 +64,7 @@ namespace hmm
 		return 1;
 	}</span>
 
-	int m_member = 10;
+	int m_me88er = 10;
 }</span>;
 
 }</span>

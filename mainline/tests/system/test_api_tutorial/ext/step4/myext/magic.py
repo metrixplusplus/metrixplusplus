@@ -39,7 +39,7 @@ class Plugin(mpp.api.Plugin,
         self.declare_metric(
             self.is_active_numbers, # to count if active in callback
             self.Field('numbers', int), # field name and type in the database
-            re.compile(r'''[0-9]+'''), # pattern to search
+            re.compile(r'''\b[0-9]+\b'''), # pattern to search
             marker_type_mask=mpp.api.Marker.T.CODE, # search in code
             region_type_mask=mpp.api.Region.T.ANY) # search in all types of regions
         
