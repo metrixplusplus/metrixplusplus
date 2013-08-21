@@ -12,7 +12,7 @@ class A
 	A()
 	{
 		/* first funtion */
-		this->m_member = 10;
+		this->m_me88er = 10;
 		if (a & b)
 		{
 			for (int i = 0; i < 0 && i > 0; i++)
@@ -64,7 +64,7 @@ class A
 		return 1;
 	}
 
-	int m_member = 10;
+	int m_me88er = 10;
 };
 
 }

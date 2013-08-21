@@ -3,6 +3,8 @@
 (use MetricPluginMixin.*Counter classes instead)
 - New metric: std.code.todo:comments - number of todo markers in comments.
 - New metric: std.code.todo:strings - number of todo markers in strings.
+- Defect fixed: critical performance issue for iterative runs
+- Defect fixed: fixed counting of magic numbers
 
 ## 1.2 (August, 2013)
 - **Feature** suppressions capability for limit tool

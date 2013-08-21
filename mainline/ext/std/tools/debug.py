@@ -62,26 +62,27 @@ def dumphtml(args, loader):
         text = fh.read()
         fh.close()
         
+        # TODO fix highlightning of markers
+#        result += '<table><tr><td><pre>'
+#        last_pos = 0
+#        for marker in data.iterate_markers(filter_group= mpp.api.Marker.T.COMMENT |
+#                                           mpp.api.Marker.T.STRING |
+#                                           mpp.api.Marker.T.PREPROCESSOR):
+#            result += (cgi.escape(text[last_pos:marker.begin]))
+#            if marker.get_type() == mpp.api.Marker.T.STRING:
+#                result += ('<span style="color:#0000FF">')
+#            elif marker.get_type() == mpp.api.Marker.T.COMMENT:
+#                result += ('<span style="color:#009900">')
+#            elif marker.get_type() == mpp.api.Marker.T.PREPROCESSOR:
+#                result += ('<span style="color:#990000">')
+#            else:
+#                assert False, "Uknown marker type"
+#            result += (cgi.escape(text[marker.begin:marker.end]))
+#            result += ('</span>')
+#            last_pos = marker.end
+#        result += (cgi.escape(text[last_pos:]))
+#        result += ('</pre></td><td><pre>')
         result += '<table><tr><td><pre>'
-        last_pos = 0
-        for marker in data.iterate_markers(filter_group= mpp.api.Marker.T.COMMENT |
-                                           mpp.api.Marker.T.STRING |
-                                           mpp.api.Marker.T.PREPROCESSOR):
-            result += (cgi.escape(text[last_pos:marker.begin]))
-            if marker.get_type() == mpp.api.Marker.T.STRING:
-                result += ('<span style="color:#0000FF">')
-            elif marker.get_type() == mpp.api.Marker.T.COMMENT:
-                result += ('<span style="color:#009900">')
-            elif marker.get_type() == mpp.api.Marker.T.PREPROCESSOR:
-                result += ('<span style="color:#990000">')
-            else:
-                assert False, "Uknown marker type"
-            result += (cgi.escape(text[marker.begin:marker.end]))
-            result += ('</span>')
-            last_pos = marker.end
-        result += (cgi.escape(text[last_pos:]))
-        last_pos = 0
-        result += ('</pre></td><td><pre>')
         styles = [('<span style="background-color:#F0F010">',
                   '<span style="background-color:#F010F0">'),
                   ('<span style="background-color:#F0F030">',

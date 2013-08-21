@@ -38,7 +38,9 @@ def main():
     if exemode != "-R" and exemode != "-D":
         exemode = '-D' # TODO implement install and release mode
         # inject '-D' or '-R' option
-        exit(subprocess.call(itertools.chain([sys.executable, sys.argv[0], '-D'], sys.argv[1:])))
+        #profile_args = ['-m', 'cProfile']
+        profile_args = []
+        exit(subprocess.call(itertools.chain([sys.executable], profile_args, [sys.argv[0], '-D'], sys.argv[1:])))
 
     command = ""
     if len(sys.argv[1:]) > 1:

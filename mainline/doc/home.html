@@ -1161,7 +1161,7 @@ class Plugin(mpp.api.Plugin,
         self.declare_metric(
             self.is_active_numbers, # to count if active in callback
             self.Field('numbers', int), # field name and type in the database
-            re.compile(r'''[0-9]+'''), # pattern to search
+            re.compile(r'''\b[0-9]+\b'''), # pattern to search
             marker_type_mask=mpp.api.Marker.T.CODE, # search in code
             region_type_mask=mpp.api.Region.T.ANY) # search in all types of regions
         
@@ -1220,7 +1220,7 @@ class Plugin(mpp.api.Plugin,
     def initialize(self):
         # improve pattern to find declarations of constants
         pattern_to_search = re.compile(
-            r'''(const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)?[-+]?[0-9]+''')
+            r'''((const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
         self.declare_metric(self.is_active_numbers,
                             self.Field('numbers', int),
                             # give a pair of pattern + custom counter logic class
@@ -1275,13 +1275,13 @@ class Plugin(mpp.api.Plugin,
     def initialize(self):
         # specialized pattern for java
         pattern_to_search_java = re.compile(
-            r'''(const\s+([_$a-zA-Z][_$a-zA-Z0-9]*\s+)+[=]\s*)?[-+]?[0-9]+''')
+            r'''((const\s+([_$a-zA-Z][_$a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
         # pattern for C++ and C# languages
         pattern_to_search_cpp_cs = re.compile(
-            r'''(const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)?[-+]?[0-9]+''')
+            r'''((const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
         # pattern for all other languages
         pattern_to_search = re.compile(
-            r'''[0-9]+''')
+            r'''\b[0-9]+\b''')
         self.declare_metric(self.is_active_numbers,
                             self.Field('numbers', int),
                             # dictionary of pairs instead of a single pair
@@ -1336,11 +1336,11 @@ class Plugin(mpp.api.Plugin,
     
     def initialize(self):
         pattern_to_search_java = re.compile(
-            r'''(const\s+([_$a-zA-Z][_$a-zA-Z0-9]*\s+)+[=]\s*)?[-+]?[0-9]+''')
+            r'''((const\s+([_$a-zA-Z][_$a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
         pattern_to_search_cpp_cs = re.compile(
-            r'''(const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)?[-+]?[0-9]+''')
+            r'''((const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
         pattern_to_search = re.compile(
-            r'''[0-9]+''')
+            r'''\b[0-9]+\b''')
         self.declare_metric(self.is_active_numbers,
                             self.Field('numbers', int,
                                 # optimize the size of datafile:
@@ -1401,11 +1401,11 @@ class Plugin(mpp.api.Plugin,
     
     def initialize(self):
         pattern_to_search_java = re.compile(
-            r'''(const\s+([_$a-zA-Z][_$a-zA-Z0-9]*\s+)+[=]\s*)?[-+]?[0-9]+''')
+            r'''((const\s+([_$a-zA-Z][_$a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
         pattern_to_search_cpp_cs = re.compile(
-            r'''(const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)?[-+]?[0-9]+''')
+            r'''((const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
         pattern_to_search = re.compile(
-            r'''[0-9]+''')
+            r'''\b[0-9]+\b''')
         self.declare_metric(self.is_active_numbers,
                             self.Field('numbers', int,
                                 non_zero=True),

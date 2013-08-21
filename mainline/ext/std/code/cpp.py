@@ -45,7 +45,13 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IParser, mpp.api.IConfigura
         count_mismatched_brackets = 0
         if is_updated == True:
             count_mismatched_brackets = CppCodeParser().run(data)
+        #else:
+        #    data.load_regions()
+            #data.load_markers()
         self.notify_children(data, is_updated)
+        # TODO: if not updated number of parser errors is zero, should read from the prev database
+        # but reading of number of errors from the database will slow the process
+        # maybe it is better to return zero always?
         return count_mismatched_brackets
             
 class CppCodeParser(object):
