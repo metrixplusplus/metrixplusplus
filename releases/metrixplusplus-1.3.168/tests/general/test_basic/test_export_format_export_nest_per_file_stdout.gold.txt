@@ -1,0 +1,107 @@
+<export>
+
+    <data>
+        <info path="./simple.cpp" id="1" />
+        <file-data>
+            <regions>
+                <region>
+                    <info cursor="0" name="__global__" offset_end="639" line_begin="3" type="global" line_end="65" offset_begin="2" />
+                    <data />
+                    <subregions>
+                        <subregion>
+                            <info cursor="4" name="hmm" offset_end="638" line_begin="3" type="namespace" line_end="64" offset_begin="2" />
+                            <data />
+                            <subregions>
+                                <subregion>
+                                    <info cursor="7" name="A" offset_end="634" line_begin="7" type="class" line_end="62" offset_begin="76" />
+                                    <data />
+                                    <subregions>
+                                        <subregion>
+                                            <info cursor="10" name="A" offset_end="234" line_begin="10" type="function" line_end="21" offset_begin="88" />
+                                            <data>
+                                                <std.code.complexity cyclomatic="3">
+                                                    <__diff__ cyclomatic="0" />
+                                                </std.code.complexity>
+                                            </data>
+                                            <subregions>
+                                            </subregions>
+                                        </subregion>
+                                        <subregion>
+                                            <info cursor="23" name="func" offset_end="420" line_begin="23" type="function" line_end="39" offset_begin="237" />
+                                            <data>
+                                                <std.code.complexity cyclomatic="1">
+                                                    <__diff__ cyclomatic="0" />
+                                                </std.code.complexity>
+                                            </data>
+                                            <subregions>
+                                                <subregion>
+                                                    <info cursor="25" name="embeded" offset_end="406" line_begin="25" type="class" line_end="37" offset_begin="266" />
+                                                    <data />
+                                                    <subregions>
+                                                        <subregion>
+                                                            <info cursor="27" name="embeded" offset_end="402" line_begin="27" type="function" line_end="36" offset_begin="287" />
+                                                            <data>
+                                                                <std.code.complexity cyclomatic="2">
+                                                                    <__diff__ cyclomatic="1" />
+                                                                </std.code.complexity>
+                                                            </data>
+                                                            <subregions>
+                                                            </subregions>
+                                                        </subregion>
+                                                    </subregions>
+                                                </subregion>
+                                            </subregions>
+                                        </subregion>
+                                        <subregion>
+                                            <info cursor="41" name="never" offset_end="514" line_begin="41" type="function" line_end="48" offset_begin="423" />
+                                            <data>
+                                                <std.code.complexity cyclomatic="1">
+                                                    <__diff__ cyclomatic="0" />
+                                                </std.code.complexity>
+                                            </data>
+                                            <subregions>
+                                            </subregions>
+                                        </subregion>
+                                        <subregion>
+                                            <info cursor="50" name="new_func" offset_end="550" line_begin="50" type="function" line_end="53" offset_begin="517" />
+                                            <data>
+                                                <std.code.complexity cyclomatic="0" />
+                                            </data>
+                                            <subregions>
+                                            </subregions>
+                                        </subregion>
+                                        <subregion>
+                                            <info cursor="55" name="new_func_complex" offset_end="611" line_begin="55" type="function" line_end="59" offset_begin="553" />
+                                            <data>
+                                                <std.code.complexity cyclomatic="1" />
+                                            </data>
+                                            <subregions>
+                                            </subregions>
+                                        </subregion>
+                                    </subregions>
+                                </subregion>
+                            </subregions>
+                        </subregion>
+                    </subregions>
+                </region>
+            </regions>
+        </file-data>
+        <subfiles>
+        </subfiles>
+        <subdirs>
+        </subdirs>
+        <aggregated-data>
+            <std.code.complexity>
+                <cyclomatic count="6" max="3" avg="1.33333333333" total="8.0" min="0">
+                    <distribution-bars>
+                        <distribution-bar count="1" __diff__="0" metric="0" />
+                        <distribution-bar count="3" __diff__="0" metric="1" />
+                        <distribution-bar count="1" __diff__="0" metric="2" />
+                        <distribution-bar count="1" __diff__="0" metric="3" />
+                    </distribution-bars>
+                    <__diff__ count="2" max="0" avg="-0.166666666667" total="2.0" min="-1" />
+                </cyclomatic>
+            </std.code.complexity>
+        </aggregated-data>
+    </data>
+</export>

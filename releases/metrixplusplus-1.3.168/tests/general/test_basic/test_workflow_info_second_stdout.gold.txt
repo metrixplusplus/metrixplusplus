@@ -1,0 +1,31 @@
+test_workflow.db:: info: Created using plugins and settings:
+	version        : 1.0
+	std.code.complexity:version: 1.1
+	std.code.cpp:version: 1.1
+	std.code.cpp:files: *.c,*.cc,*.cpp,*.cxx,*.h,*.hh,*.hpp,*.hxx
+	std.code.cs:version: 1.0
+	std.code.cs:files: *.cs
+	std.code.java:version: 1.1
+	std.code.java:files: *.java
+	std.code.lines:version: 1.1
+	std.code.magic:version: 1.1
+	std.code.magic:number.simplier: False
+	std.code.todo:version: 1.0
+	std.code.todo:tags: FIXME,FixMe,HACK,TBD,TODO,ToDo,XXX
+	std.suppress:version: 1.0
+
+test_workflow.db:: info: Collected metrics:
+	std.code.complexity:cyclomatic: 
+	std.code.lines:code: 
+	std.code.lines:comments: 
+	std.code.lines:preprocessor: 
+	std.code.lines:total: 
+	std.suppress:count: 
+	std.suppress:list: 
+	std.suppress.file:count: 
+	std.suppress.file:list: 
+
+:: info: Processed files and checksums:
+	./simple.cpp   : 0xa0fb97eb [modified]
+	./simple2.cpp  : 0x44023f81 [new]
+

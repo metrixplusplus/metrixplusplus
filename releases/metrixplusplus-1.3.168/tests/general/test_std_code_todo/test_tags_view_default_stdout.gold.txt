@@ -1,0 +1,22 @@
+:: info: Overall metrics for 'std.code.todo:strings' metric
+	Average        : 2.0 (excluding zero metric values)
+	Minimum        : 2
+	Maximum        : 2
+	Total          : 4.0
+	Distribution   : 2 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             2 : 1.000 : 1.000 : 2	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+:: info: Overall metrics for 'std.code.todo:comments' metric
+	Average        : 5.0 (excluding zero metric values)
+	Minimum        : 5
+	Maximum        : 5
+	Total          : 15.0
+	Distribution   : 3 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             5 : 1.000 : 1.000 : 3	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+:: info: Directory content:
+	Directory      : .
+
+

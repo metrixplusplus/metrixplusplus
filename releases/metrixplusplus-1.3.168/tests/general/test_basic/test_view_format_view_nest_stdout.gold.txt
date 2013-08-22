@@ -1,0 +1,25 @@
+<view>
+
+    <data>
+        <info path="" id="1" />
+        <file-data />
+        <subfiles>
+        </subfiles>
+        <subdirs>
+            <subdir>.</subdir>
+        </subdirs>
+        <aggregated-data>
+            <std.code.complexity>
+                <cyclomatic nonzero="False" count="8" total="13.0" min="0" max="3" avg="1.625" sup="0">
+                    <__diff__ nonzero="0" count="0" avg="0.25" min="-1" max="0" total="2.0" sup="0" />
+                    <distribution-bars>
+                        <distribution-bar count="1" __diff__="1" metric="0" ratio="0.125" />
+                        <distribution-bar count="3" __diff__="-3" metric="1" ratio="0.375" />
+                        <distribution-bar count="2" __diff__="1" metric="2" ratio="0.25" />
+                        <distribution-bar count="2" __diff__="1" metric="3" ratio="0.25" />
+                    </distribution-bars>
+                </cyclomatic>
+            </std.code.complexity>
+        </aggregated-data>
+    </data>
+</view>

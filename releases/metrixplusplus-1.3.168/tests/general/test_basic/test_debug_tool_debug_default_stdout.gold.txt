@@ -1,0 +1,71 @@
+<html><body><table><tr><td><pre><span style="background-color:#F0F010"><a href="#line0" id=line"0"></a>
+
+<span style="background-color:#F0F070"><a href="#line4" id=line"4"></a>// Just produce any code in order to test basic workflow
+namespace hmm
+{
+
+#define old_prep
+
+<span style="background-color:#F0F0D0"><a href="#line9" id=line"9"></a>class A
+{
+
+	<span style="background-color:#F0F030"><a href="#line12" id=line"12"></a>A()
+	{
+		/* first funtion */
+		this-&gt;m_me88er = 10;
+		if (a &amp; b)
+		{
+			for (int i = 0; i &lt; 0 &amp;&amp; i &gt; 0; i++)
+			{
+				int a; // right?
+			}
+		}
+	}</span>
+
+
+	<span style="background-color:#F030F0"><a href="#line26" id=line"26"></a>int func(int param = 5)
+	{
+		<span style="background-color:#F0F090"><a href="#line28" id=line"28"></a>class embeded
+		{
+			<span style="background-color:#F0F0E0"><a href="#line30" id=line"30"></a>embeded()
+			{
+				int a = 10;
+				if (true)
+				{
+					// again crazy
+				}
+			}</span>
+		}</span>;
+		if (a);
+	}</span>
+
+	<span style="background-color:#F0F030"><a href="#line42" id=line"42"></a>int func_to_be_removed_in_new_sources(int param = 5)
+	{
+		<span style="background-color:#F0F090"><a href="#line44" id=line"44"></a>class embeded
+		{
+			<span style="background-color:#F0F0E0"><a href="#line46" id=line"46"></a>embeded()
+			{
+				int a = 10;
+				if ("text")
+				{
+					/* again crazy */
+				}
+			}</span>
+		}</span>;
+		if (a &amp;&amp; b);
+	}</span>
+
+	<span style="background-color:#F030F0"><a href="#line58" id=line"58"></a>int never(int how_long = 999)
+	{
+		while(true)
+		{
+
+		}
+		return 1;
+	}</span>
+
+	int m_me88er = 10;
+}</span>;
+
+}</span>
+</span></pre></td></tr></table></body></html>

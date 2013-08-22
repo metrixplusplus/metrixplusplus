@@ -1,0 +1,72 @@
+./file_deleted_in_new_sources.cpp:12: warning: Metric 'std.code.complexity:cyclomatic' for region 'B' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : B
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./file_deleted_in_new_sources.cpp:26: warning: Metric 'std.code.complexity:cyclomatic' for region 'never_old' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : never_old
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./simple.cpp:12: warning: Metric 'std.code.complexity:cyclomatic' for region 'A' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : A
+	Metric value   : 3
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./simple.cpp:26: warning: Metric 'std.code.complexity:cyclomatic' for region 'func' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : func
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./simple.cpp:30: warning: Metric 'std.code.complexity:cyclomatic' for region 'embeded' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : embeded
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./simple.cpp:42: warning: Metric 'std.code.complexity:cyclomatic' for region 'func_to_be_removed_in_new_sources' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : func_to_be_removed_in_new_sources
+	Metric value   : 2
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./simple.cpp:46: warning: Metric 'std.code.complexity:cyclomatic' for region 'embeded' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : embeded
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./simple.cpp:58: warning: Metric 'std.code.complexity:cyclomatic' for region 'never' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : never
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+

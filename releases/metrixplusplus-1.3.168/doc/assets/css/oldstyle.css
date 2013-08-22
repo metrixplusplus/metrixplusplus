@@ -1,0 +1,130 @@
+/*
+
+    Metrix++, Copyright 2009-2013, Metrix++ Project
+    Link: http://metrixplusplus.sourceforge.net
+    
+    This file is a part of Metrix++ Tool.
+    
+    Metrix++ is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, version 3 of the License.
+    
+    Metrix++ is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
+
+*/
+
+body{
+	font-family: Arial, sans-serif;
+	color: #333333;
+	line-height: 1.166;
+	margin: 0px;
+	padding: 10px;
+	font-size: 14px;
+}
+
+pre{
+    font-size: 100%;
+    padding-left: 50px;
+    font-family:Courier;
+}
+
+td{
+	background-position: left;
+	background-repeat: no-repeat;
+}
+
+a{
+	color: #AA0033;
+	text-decoration: none;
+}
+
+a:link{
+	color: #AA0033;
+	text-decoration: none;
+}
+
+a:visited{
+	color: #AA0033;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #FF9933;
+	text-decoration: underline;
+}
+
+h1{
+ font-family: Verdana,Arial,sans-serif;
+ font-size: 130%;
+ color: #116633;
+ margin: 0px;
+ padding: 0px;
+}
+
+h2{
+ font-family: Arial,sans-serif;
+ font-size: 120%;
+ color: #330099;
+ margin: 0px;
+ padding: 0px;
+}
+
+h3{
+ font-family: Arial, sans-serif;
+ font-size: 120%;
+ color: #AA0033;
+ margin: 0px;
+ padding: 0px;
+}
+
+h4{
+ font-family: Verdana,Arial,sans-serif;
+ font-size: 100%;
+ color: #334d55;
+ margin: 0px;
+ padding: 0px;
+}
+
+h5{
+ margin: 0px;
+ padding: 0px;
+ font-family: Verdana,Arial,sans-serif;
+ font-size: 100%;
+ color: #334d55;
+}
+
+ul{
+ list-style-type: disc;
+}
+
+ul ul{
+ list-style-type: circle;
+}
+
+ul ul ul{
+ list-style-type: disc;
+}
+
+label{
+	font-family: Arial, sans-serif;
+	font-size: 100%;
+	color: #116633;
+}
+
+.highImportance {
+	color: #FF0000
+}
+
+.normalImportance {
+	color: #009900
+}
+
+.lowImportance{
+    color: #999999;
+}

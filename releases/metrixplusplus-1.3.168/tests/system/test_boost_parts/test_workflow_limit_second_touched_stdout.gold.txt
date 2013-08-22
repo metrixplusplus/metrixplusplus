@@ -1,0 +1,54 @@
+./interprocess/detail/managed_open_or_create_impl.hpp:302: warning: Metric 'std.code.complexity:cyclomatic' for region 'priv_open_or_create' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : priv_open_or_create
+	Metric value   : 37
+	Modified       : True
+	Change trend   : +1
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/ipc/message_queue.hpp:375: warning: Metric 'std.code.complexity:cyclomatic' for region 'insert_at' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : insert_at
+	Metric value   : 16
+	Modified       : True
+	Change trend   : 0
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/mapped_region.hpp:575: warning: Metric 'std.code.complexity:cyclomatic' for region 'mapped_region' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : mapped_region
+	Metric value   : 18
+	Modified       : True
+	Change trend   : +2
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/mem_algo/detail/mem_algo_common.hpp:452: warning: Metric 'std.code.complexity:cyclomatic' for region 'priv_allocate_many' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : priv_allocate_many
+	Metric value   : 20
+	Modified       : True
+	Change trend   : 0
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/mem_algo/rbtree_best_fit.hpp:787: warning: Metric 'std.code.complexity:cyclomatic' for region 'priv_expand_both_sides' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : priv_expand_both_sides
+	Metric value   : 17
+	Modified       : True
+	Change trend   : 0
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/sync/windows/named_sync.hpp:98: warning: Metric 'std.code.complexity:cyclomatic' for region 'open_or_create' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : open_or_create
+	Metric value   : 18
+	Modified       : True
+	Change trend   : 0
+	Limit          : 15.0
+	Suppressed     : False
+

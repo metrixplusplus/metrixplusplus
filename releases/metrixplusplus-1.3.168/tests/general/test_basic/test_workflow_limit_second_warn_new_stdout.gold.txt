@@ -1,0 +1,18 @@
+./simple.cpp:58: warning: Metric 'std.code.complexity:cyclomatic' for region 'new_func_complex' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : new_func_complex
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./simple2.cpp:10: warning: Metric 'std.code.complexity:cyclomatic' for region 'New_A' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : New_A
+	Metric value   : 3
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
