@@ -1,0 +1,36 @@
+:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 0.652173913043 [+0.652173913043]
+	Minimum        : 0 [+0]
+	Maximum        : 7 [+7]
+	Total          : 15.0 [+15.0]
+	Distribution   : 23 [+23] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.696 : 0.696 : 16 [+16]	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.217 : 0.913 :  5 [+5 ]	||||||||||||||||||||||
+	             3 : 0.043 : 0.957 :  1 [+1 ]	||||
+	             7 : 0.043 : 1.000 :  1 [+1 ]	||||
+
+:: info: Overall metrics for 'std.code.lines:code' metric
+	Average        : 6.45 [+6.45]
+	Minimum        : 0 [+0]
+	Maximum        : 51 [+51]
+	Total          : 258.0 [+258.0]
+	Distribution   : 40 [+40] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.050 : 0.050 :  2 [+2 ]	|||||
+	           1-2 : 0.275 : 0.325 : 11 [+11]	||||||||||||||||||||||||||||
+	             3 : 0.125 : 0.450 :  5 [+5 ]	|||||||||||||
+	             4 : 0.075 : 0.525 :  3 [+3 ]	||||||||
+	             5 : 0.100 : 0.625 :  4 [+4 ]	||||||||||
+	             6 : 0.125 : 0.750 :  5 [+5 ]	|||||||||||||
+	             8 : 0.050 : 0.800 :  2 [+2 ]	|||||
+	             9 : 0.025 : 0.825 :  1 [+1 ]	|||
+	            11 : 0.050 : 0.875 :  2 [+2 ]	|||||
+	            12 : 0.050 : 0.925 :  2 [+2 ]	|||||
+	            19 : 0.050 : 0.975 :  2 [+2 ]	|||||
+	            51 : 0.025 : 1.000 :  1 [+1 ]	|||
+
+:: info: Directory content:
+	Directory      : .
+
+

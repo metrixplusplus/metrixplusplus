@@ -1,0 +1,27 @@
+./interprocess/detail/managed_open_or_create_impl.hpp:302: warning: Metric 'std.code.complexity:cyclomatic' for region 'priv_open_or_create' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : priv_open_or_create
+	Metric value   : 37
+	Modified       : None
+	Change trend   : None
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/streams/vectorstream.hpp:284: warning: Metric 'std.code.complexity:cyclomatic' for region 'seekoff' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : seekoff
+	Metric value   : 25
+	Modified       : None
+	Change trend   : None
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/streams/bufferstream.hpp:174: warning: Metric 'std.code.complexity:cyclomatic' for region 'seekoff' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : seekoff
+	Metric value   : 23
+	Modified       : None
+	Change trend   : None
+	Limit          : 15.0
+	Suppressed     : False
+

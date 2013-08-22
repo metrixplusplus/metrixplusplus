@@ -1,0 +1,96 @@
+./simple.cpp:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-697
+	Line numbers   : 1-71
+	Modified       : None
+
+.   ./simple.cpp:4: info: Metrics per 'hmm' region
+    	Region name    : hmm
+    	Region type    : namespace
+    	Offsets        : 2-696
+    	Line numbers   : 3-70
+    	Modified       : None
+
+.   .   ./simple.cpp:9: info: Metrics per 'A' region
+        	Region name    : A
+        	Region type    : class
+        	Offsets        : 94-692
+        	Line numbers   : 9-68
+        	Modified       : None
+        	std.code.magic:numbers: 1
+
+.   .   .   ./simple.cpp:12: info: Metrics per 'A' region
+            	Region name    : A
+            	Region type    : function
+            	Offsets        : 106-252
+            	Line numbers   : 12-23
+            	Modified       : None
+            	std.code.magic:numbers: 4
+
+.   .   .   ./simple.cpp:26: info: Metrics per 'func' region
+            	Region name    : func
+            	Region type    : function
+            	Offsets        : 256-405
+            	Line numbers   : 26-40
+            	Modified       : None
+            	std.code.magic:numbers: 1
+
+.   .   .   .   ./simple.cpp:28: info: Metrics per 'embeded' region
+                	Region name    : embeded
+                	Region type    : class
+                	Offsets        : 285-391
+                	Line numbers   : 28-38
+                	Modified       : None
+
+.   .   .   .   .   ./simple.cpp:30: info: Metrics per 'embeded' region
+                    	Region name    : embeded
+                    	Region type    : function
+                    	Offsets        : 306-387
+                    	Line numbers   : 30-37
+                    	Modified       : None
+                    	std.code.magic:numbers: 1
+
+.   .   .   ./simple.cpp:42: info: Metrics per 'func_to_be_removed_in_new_sources' region
+            	Region name    : func_to_be_removed_in_new_sources
+            	Region type    : function
+            	Offsets        : 408-596
+            	Line numbers   : 42-56
+            	Modified       : None
+            	std.code.magic:numbers: 1
+
+.   .   .   .   ./simple.cpp:44: info: Metrics per 'embeded' region
+                	Region name    : embeded
+                	Region type    : class
+                	Offsets        : 466-577
+                	Line numbers   : 44-54
+                	Modified       : None
+
+.   .   .   .   .   ./simple.cpp:46: info: Metrics per 'embeded' region
+                    	Region name    : embeded
+                    	Region type    : function
+                    	Offsets        : 487-573
+                    	Line numbers   : 46-53
+                    	Modified       : None
+                    	std.code.magic:numbers: 1
+
+.   .   .   ./simple.cpp:58: info: Metrics per 'never' region
+            	Region name    : never
+            	Region type    : function
+            	Offsets        : 599-669
+            	Line numbers   : 58-65
+            	Modified       : None
+            	std.code.magic:numbers: 2
+
+./simple.cpp:: info: Overall metrics for 'std.code.magic:numbers' metric
+	Average        : 1.57142857143 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 4
+	Total          : 11.0
+	Distribution   : 7 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.714 : 0.714 : 5	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             2 : 0.143 : 0.857 : 1	||||||||||||||
+	             4 : 0.143 : 1.000 : 1	||||||||||||||
+
+

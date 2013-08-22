@@ -1,0 +1,72 @@
+./test.c:105: warning: Metric 'std.code.complexity:cyclomatic' for region 'suppressed_for_size_and_complexity_and_invalid_metric' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : suppressed_for_size_and_complexity_and_invalid_metric
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : True
+
+./test.c:112: warning: Metric 'std.code.complexity:cyclomatic' for region 'func7' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : func7
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : True
+
+./test.c:118: warning: Metric 'std.code.complexity:cyclomatic' for region 'nu_suppress_for_size' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : nu_suppress_for_size
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : True
+
+./test.c:124: warning: Metric 'std.code.complexity:cyclomatic' for region 'no_suppress_for_cyclomatic_complexity' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : no_suppress_for_cyclomatic_complexity
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./test.c:132: warning: Metric 'std.code.complexity:cyclomatic' for region 'func8' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : func8
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : True
+
+./test.c:140: warning: Metric 'std.code.complexity:cyclomatic' for region 'func9' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : func9
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : True
+
+./test.c:146: warning: Metric 'std.code.complexity:cyclomatic' for region 'bad_suppress_for_size' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : bad_suppress_for_size
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : True
+
+./test.c:156: warning: Metric 'std.code.complexity:cyclomatic' for region 'func10' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : func10
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : True
+

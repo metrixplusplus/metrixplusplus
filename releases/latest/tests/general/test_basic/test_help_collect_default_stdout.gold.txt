@@ -1,0 +1,90 @@
+Usage: python metrix++.py --help
+       python metrix++.py collect --help
+       python metrix++.py collect [options] -- [path 1] ... [path N]
+
+Options:
+  -h, --help            show this help message and exit
+  --db-file=DB_FILE, --dbf=DB_FILE
+                        Path to a database file to create and write [default:
+                        ./metrixpp.db].
+  --db-file-prev=DB_FILE_PREV, --dbfp=DB_FILE_PREV
+                        Path to database file with data collected for the
+                        past/previous code revision. If it is set, the tool
+                        will do an incremental/iterative collection. It may
+                        reduce the time of processing significantly [default:
+                        none].
+  --log-level=LOG_LEVEL, --ll=LOG_LEVEL
+                        Defines log level. Possible values are
+                        'DEBUG','INFO','WARNING' or 'ERROR'. Default value is
+                        inherited from environment variable
+                        'METRIXPLUSPLUS_LOG_LEVEL' if set. [default: INFO]
+  --std.code.complexity.cyclomatic, --sccc
+                        Enables collection of cyclomatic complexity metric
+                        (McCabe) [default: False]
+  --std.code.complexity.maxindent, --sccmi
+                        Enables collection of maximum indent level metric
+                        [default: False]
+  --std.code.cpp.files=STD.CODE.CPP.FILES
+                        Enumerates filename extensions to match C/C++ files
+                        [default: *.c,*.h,*.cpp,*.hpp,*.cc,*.hh,*.cxx,*.hxx]
+  --std.code.cs.files=STD.CODE.CS.FILES
+                        Enumerates filename extensions to match C# files
+                        [default: *.cs]
+  --std.code.java.files=STD.CODE.JAVA.FILES
+                        Enumerates filename extensions to match Java files
+                        [default: *.java]
+  --std.code.length.total, --sclent
+                        Enables collection of size metric (in number of
+                        symbols per region) [default: False]
+  --std.code.lines.code, --sclc
+                        Enables collection of lines of code metric - number of
+                        non-empty lines of code, excluding comments [default:
+                        False]
+  --std.code.lines.preprocessor, --sclp
+                        Enables collection of lines of preprocessor code
+                        metric - number of non-empty lines of preprocessor
+                        code [default: False]
+  --std.code.lines.comments, --sclcom
+                        Enables collection of lines of comments metric -
+                        number of non-empty lines of comments [default: False]
+  --std.code.lines.total, --sclt
+                        Enables collection of lines of comments metric -
+                        number of non-empty lines of comments [default: False]
+  --std.code.magic.numbers, --scmn
+                        Enables collection of magic numbers metric [default:
+                        False]
+  --std.code.magic.numbers.simplier, --scmns
+                        Is set, 0, -1 and 1 numbers are not counted in
+                        'std.code.magic.numbers' metric [default: False]
+  --std.code.todo.comments, --sctc
+                        Enables collection of number of todo/fixme/etc markers
+                        in comments [default: False]
+  --std.code.todo.strings, --scts
+                        Enables collection of number of todo/fixme/etc markers
+                        in strings [default: False]
+  --std.code.todo.tags=STD.CODE.TODO.TAGS, --sctt=STD.CODE.TODO.TAGS
+                        A list of typical todo markers to search, separated by
+                        comma [default: TODO,ToDo,FIXME,FixMe,TBD,HACK,XXX]
+  --std.suppress, --ss  If set (True), suppression markers are collected from
+                        comments in code. Suppressions are used by post-
+                        processing tools, like limit, to remove false-positive
+                        warnings. Suppressions should be in the first comment
+                        block of a region (function/class/interface). Format
+                        of suppressions: 'metrix++: suppress metric-name'. For
+                        example: 'metrix++: suppress
+                        std.code.complexity:cyclomatic'.  [default: False]
+  --std.general.proctime, --sgpt
+                        If the option is set (True), the tool measures
+                        processing time per file [default: False]
+  --std.general.procerrors, --sgpe
+                        If the option is set (True), the tool counts number of
+                        processing/parsing errors per file [default: False]
+  --std.general.size, --sgs
+                        If the option is set (True), the tool collects file
+                        size metric (in bytes) [default: False]
+  --exclude-files=EXCLUDE_FILES, --ef=EXCLUDE_FILES
+                        Defines the pattern to exclude files from processing
+                        [default: ^[.]]
+  --non-recursively, --nr
+                        If the option is set (True), sub-directories are not
+                        processed [default: False]
