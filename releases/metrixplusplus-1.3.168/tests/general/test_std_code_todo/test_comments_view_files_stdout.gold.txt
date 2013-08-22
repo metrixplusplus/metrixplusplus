@@ -1,0 +1,57 @@
+./test.cpp:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-273
+	Line numbers   : 1-18
+	Modified       : None
+
+.   ./test.cpp:2: info: Metrics per 'main' region
+    	Region name    : main
+    	Region type    : function
+    	Offsets        : 1-272
+    	Line numbers   : 2-17
+    	Modified       : None
+    	std.code.todo:comments: 14
+
+./test.cpp:: info: Overall metrics for 'std.code.todo:comments' metric
+	Average        : 14.0 (excluding zero metric values)
+	Minimum        : 14
+	Maximum        : 14
+	Total          : 14.0
+	Distribution   : 1 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	            14 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+./test.cs:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-547
+	Line numbers   : 1-36
+	Modified       : None
+
+.   ./test.cs:2: info: Metrics per 'MainClass' region
+    	Region name    : MainClass
+    	Region type    : class
+    	Offsets        : 1-546
+    	Line numbers   : 2-35
+    	Modified       : None
+    	std.code.todo:comments: 14
+
+.   .   ./test.cs:12: info: Metrics per 'main' region
+        	Region name    : main
+        	Region type    : function
+        	Offsets        : 141-430
+        	Line numbers   : 12-28
+        	Modified       : None
+        	std.code.todo:comments: 14
+
+./test.cs:: info: Overall metrics for 'std.code.todo:comments' metric
+	Average        : 14.0 (excluding zero metric values)
+	Minimum        : 14
+	Maximum        : 14
+	Total          : 28.0
+	Distribution   : 2 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	            14 : 1.000 : 1.000 : 2	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+

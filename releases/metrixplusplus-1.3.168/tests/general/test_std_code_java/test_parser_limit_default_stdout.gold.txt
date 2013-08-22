@@ -1,0 +1,54 @@
+./ArrayUtils.java:59: warning: Metric 'std.code.complexity:cyclomatic' for region 'removeAt' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : removeAt
+	Metric value   : 6
+	Modified       : None
+	Change trend   : None
+	Limit          : 5.0
+	Suppressed     : False
+
+./ArrayUtils.java:84: warning: Metric 'std.code.complexity:cyclomatic' for region 'removeAt' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : removeAt
+	Metric value   : 6
+	Modified       : None
+	Change trend   : None
+	Limit          : 5.0
+	Suppressed     : False
+
+./ArrayUtils.java:120: warning: Metric 'std.code.complexity:cyclomatic' for region 'equalContents' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : equalContents
+	Metric value   : 6
+	Modified       : None
+	Change trend   : None
+	Limit          : 5.0
+	Suppressed     : False
+
+./ArrayUtils.java:140: warning: Metric 'std.code.complexity:cyclomatic' for region 'equals' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : equals
+	Metric value   : 6
+	Modified       : None
+	Change trend   : None
+	Limit          : 5.0
+	Suppressed     : False
+
+./ArrayUtils.java:177: warning: Metric 'std.code.complexity:cyclomatic' for region 'equals' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : equals
+	Metric value   : 6
+	Modified       : None
+	Change trend   : None
+	Limit          : 5.0
+	Suppressed     : False
+
+./BinaryHeapPriorityQueue.java:156: warning: Metric 'std.code.complexity:cyclomatic' for region 'heapifyDown' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : heapifyDown
+	Metric value   : 6
+	Modified       : None
+	Change trend   : None
+	Limit          : 5.0
+	Suppressed     : False
+

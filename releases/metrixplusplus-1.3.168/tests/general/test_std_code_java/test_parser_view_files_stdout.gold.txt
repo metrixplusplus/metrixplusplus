@@ -1,0 +1,1077 @@
+./ArrayUtils.java:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-11608
+	Line numbers   : 1-461
+	Modified       : None
+
+.   ./ArrayUtils.java:16: info: Metrics per 'ArrayUtils' region
+    	Region name    : ArrayUtils
+    	Region type    : class
+    	Offsets        : 189-11380
+    	Line numbers   : 10-454
+    	Modified       : None
+
+.   .   ./ArrayUtils.java:20: info: Metrics per 'ArrayUtils' region
+        	Region name    : ArrayUtils
+        	Region type    : function
+        	Offsets        : 376-448
+        	Line numbers   : 17-21
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:23: info: Metrics per 'flatten' region
+        	Region name    : flatten
+        	Region type    : function
+        	Offsets        : 452-762
+        	Line numbers   : 23-36
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 3
+
+.   .   ./ArrayUtils.java:38: info: Metrics per 'to2D' region
+        	Region name    : to2D
+        	Region type    : function
+        	Offsets        : 766-917
+        	Line numbers   : 38-41
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:43: info: Metrics per 'to2D' region
+        	Region name    : to2D
+        	Region type    : function
+        	Offsets        : 921-1246
+        	Line numbers   : 43-52
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:59: info: Metrics per 'removeAt' region
+        	Region name    : removeAt
+        	Region type    : function
+        	Offsets        : 1250-1894
+        	Line numbers   : 54-76
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 6
+
+.   .   ./ArrayUtils.java:84: info: Metrics per 'removeAt' region
+        	Region name    : removeAt
+        	Region type    : function
+        	Offsets        : 1898-2684
+        	Line numbers   : 78-101
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 6
+
+.   .   ./ArrayUtils.java:103: info: Metrics per 'toString' region
+        	Region name    : toString
+        	Region type    : function
+        	Offsets        : 2688-2985
+        	Line numbers   : 103-112
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:120: info: Metrics per 'equalContents' region
+        	Region name    : equalContents
+        	Region type    : function
+        	Offsets        : 2989-3506
+        	Line numbers   : 114-132
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 6
+
+.   .   ./ArrayUtils.java:140: info: Metrics per 'equals' region
+        	Region name    : equals
+        	Region type    : function
+        	Offsets        : 3510-4021
+        	Line numbers   : 134-152
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 6
+
+.   .   ./ArrayUtils.java:161: info: Metrics per 'equalContents' region
+        	Region name    : equalContents
+        	Region type    : function
+        	Offsets        : 4028-4443
+        	Line numbers   : 155-169
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 3
+
+.   .   ./ArrayUtils.java:177: info: Metrics per 'equals' region
+        	Region name    : equals
+        	Region type    : function
+        	Offsets        : 4447-4969
+        	Line numbers   : 171-189
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 6
+
+.   .   ./ArrayUtils.java:193: info: Metrics per 'contains' region
+        	Region name    : contains
+        	Region type    : function
+        	Offsets        : 4974-5188
+        	Line numbers   : 192-198
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:202: info: Metrics per 'asSet' region
+        	Region name    : asSet
+        	Region type    : function
+        	Offsets        : 5192-5358
+        	Line numbers   : 200-204
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:206: info: Metrics per 'fill' region
+        	Region name    : fill
+        	Region type    : function
+        	Offsets        : 5362-5494
+        	Line numbers   : 206-210
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:212: info: Metrics per 'fill' region
+        	Region name    : fill
+        	Region type    : function
+        	Offsets        : 5498-5625
+        	Line numbers   : 212-216
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:218: info: Metrics per 'fill' region
+        	Region name    : fill
+        	Region type    : function
+        	Offsets        : 5629-5758
+        	Line numbers   : 218-222
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:224: info: Metrics per 'fill' region
+        	Region name    : fill
+        	Region type    : function
+        	Offsets        : 5762-5896
+        	Line numbers   : 224-228
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:230: info: Metrics per 'fill' region
+        	Region name    : fill
+        	Region type    : function
+        	Offsets        : 5900-6029
+        	Line numbers   : 230-234
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:236: info: Metrics per 'fill' region
+        	Region name    : fill
+        	Region type    : function
+        	Offsets        : 6033-6164
+        	Line numbers   : 236-240
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:247: info: Metrics per 'toDouble' region
+        	Region name    : toDouble
+        	Region type    : function
+        	Offsets        : 6170-6376
+        	Line numbers   : 244-253
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:258: info: Metrics per 'toDouble' region
+        	Region name    : toDouble
+        	Region type    : function
+        	Offsets        : 6380-6606
+        	Line numbers   : 255-264
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:270: info: Metrics per 'asList' region
+        	Region name    : asList
+        	Region type    : function
+        	Offsets        : 6612-6951
+        	Line numbers   : 266-276
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:278: info: Metrics per 'asArray' region
+        	Region name    : asArray
+        	Region type    : function
+        	Offsets        : 6955-7133
+        	Line numbers   : 278-285
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:291: info: Metrics per 'main' region
+        	Region name    : main
+        	Region type    : function
+        	Offsets        : 7140-7496
+        	Line numbers   : 288-299
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:301: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 7500-7675
+        	Line numbers   : 301-306
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:308: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 7679-7893
+        	Line numbers   : 308-315
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:318: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 7900-8087
+        	Line numbers   : 318-323
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:325: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 8093-8319
+        	Line numbers   : 325-332
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:334: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 8323-8557
+        	Line numbers   : 334-341
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:343: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 8561-8744
+        	Line numbers   : 343-348
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:350: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 8750-8972
+        	Line numbers   : 350-357
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:359: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 8976-9206
+        	Line numbers   : 359-366
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:369: info: Metrics per 'toString' region
+        	Region name    : toString
+        	Region type    : function
+        	Offsets        : 9213-9462
+        	Line numbers   : 369-378
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:380: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 9466-9546
+        	Line numbers   : 380-382
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:384: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 9550-9631
+        	Line numbers   : 384-386
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:388: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 9635-9723
+        	Line numbers   : 388-390
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:392: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 9727-9817
+        	Line numbers   : 392-394
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:396: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 9821-9906
+        	Line numbers   : 396-398
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:400: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 9910-10194
+        	Line numbers   : 400-409
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 3
+
+.   .   ./ArrayUtils.java:411: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 10198-10484
+        	Line numbers   : 411-420
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 3
+
+.   .   ./ArrayUtils.java:422: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 10489-10779
+        	Line numbers   : 422-431
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 3
+
+.   .   ./ArrayUtils.java:433: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 10784-11078
+        	Line numbers   : 433-442
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 3
+
+.   .   ./ArrayUtils.java:444: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 11082-11378
+        	Line numbers   : 444-453
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 3
+
+.   ./ArrayUtils.java:458: info: Metrics per 'Interface' region
+    	Region name    : Interface
+    	Region type    : interface
+    	Offsets        : 11423-11608
+    	Line numbers   : 458-461
+    	Modified       : None
+
+./ArrayUtils.java:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 1.93023255814
+	Minimum        : 0
+	Maximum        : 6
+	Total          : 83.0
+	Distribution   : 43 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.186 : 0.186 :  8	|||||||||||||||||||
+	             1 : 0.326 : 0.512 : 14	|||||||||||||||||||||||||||||||||
+	             2 : 0.209 : 0.721 :  9	|||||||||||||||||||||
+	             3 : 0.163 : 0.884 :  7	||||||||||||||||
+	             6 : 0.116 : 1.000 :  5	||||||||||||
+
+./attrs.java:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-133
+	Line numbers   : 1-10
+	Modified       : None
+
+.   ./attrs.java:3: info: Metrics per 'A' region
+    	Region name    : A
+    	Region type    : class
+    	Offsets        : 1-133
+    	Line numbers   : 2-10
+    	Modified       : None
+
+.   .   ./attrs.java:6: info: Metrics per 'function' region
+        	Region name    : function
+        	Region type    : function
+        	Offsets        : 56-131
+        	Line numbers   : 5-9
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+./attrs.java:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 0.0
+	Minimum        : 0
+	Maximum        : 0
+	Total          : 0.0
+	Distribution   : 1 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+./BinaryHeapPriorityQueue.java:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-13739
+	Line numbers   : 1-519
+	Modified       : None
+
+.   ./BinaryHeapPriorityQueue.java:12: info: Metrics per 'BinaryHeapPriorityQueue' region
+    	Region name    : BinaryHeapPriorityQueue
+    	Region type    : class
+    	Offsets        : 53-13738
+    	Line numbers   : 5-518
+    	Modified       : None
+
+.   .   ./BinaryHeapPriorityQueue.java:19: info: Metrics per 'Entry' region
+        	Region name    : Entry
+        	Region type    : class
+        	Offsets        : 431-862
+        	Line numbers   : 14-28
+        	Modified       : None
+
+.   .   .   ./BinaryHeapPriorityQueue.java:25: info: Metrics per 'toString' region
+            	Region name    : toString
+            	Region type    : function
+            	Offsets        : 753-858
+            	Line numbers   : 24-27
+            	Modified       : None
+            	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:30: info: Metrics per 'hasNext' region
+        	Region name    : hasNext
+        	Region type    : function
+        	Offsets        : 866-919
+        	Line numbers   : 30-32
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:34: info: Metrics per 'next' region
+        	Region name    : next
+        	Region type    : function
+        	Offsets        : 923-970
+        	Line numbers   : 34-36
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:38: info: Metrics per 'remove' region
+        	Region name    : remove
+        	Region type    : function
+        	Offsets        : 974-1047
+        	Line numbers   : 38-40
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:54: info: Metrics per 'parent' region
+        	Region name    : parent
+        	Region type    : function
+        	Offsets        : 1332-1465
+        	Line numbers   : 54-57
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./BinaryHeapPriorityQueue.java:59: info: Metrics per 'leftChild' region
+        	Region name    : leftChild
+        	Region type    : function
+        	Offsets        : 1469-1620
+        	Line numbers   : 59-62
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./BinaryHeapPriorityQueue.java:64: info: Metrics per 'rightChild' region
+        	Region name    : rightChild
+        	Region type    : function
+        	Offsets        : 1624-1802
+        	Line numbers   : 64-68
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./BinaryHeapPriorityQueue.java:70: info: Metrics per 'compare' region
+        	Region name    : compare
+        	Region type    : function
+        	Offsets        : 1806-1919
+        	Line numbers   : 70-72
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:74: info: Metrics per 'compare' region
+        	Region name    : compare
+        	Region type    : function
+        	Offsets        : 1923-2103
+        	Line numbers   : 74-83
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./BinaryHeapPriorityQueue.java:91: info: Metrics per 'swap' region
+        	Region name    : swap
+        	Region type    : function
+        	Offsets        : 2107-2448
+        	Line numbers   : 85-98
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:103: info: Metrics per 'removeLastEntry' region
+        	Region name    : removeLastEntry
+        	Region type    : function
+        	Offsets        : 2452-2656
+        	Line numbers   : 100-106
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:111: info: Metrics per 'getEntry' region
+        	Region name    : getEntry
+        	Region type    : function
+        	Offsets        : 2660-2784
+        	Line numbers   : 108-113
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:118: info: Metrics per 'getEntry' region
+        	Region name    : getEntry
+        	Region type    : function
+        	Offsets        : 2788-2950
+        	Line numbers   : 115-121
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:123: info: Metrics per 'makeEntry' region
+        	Region name    : makeEntry
+        	Region type    : function
+        	Offsets        : 2954-3203
+        	Line numbers   : 123-131
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:136: info: Metrics per 'heapifyUp' region
+        	Region name    : heapifyUp
+        	Region type    : function
+        	Offsets        : 3207-3560
+        	Line numbers   : 133-147
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 3
+
+.   .   ./BinaryHeapPriorityQueue.java:156: info: Metrics per 'heapifyDown' region
+        	Region name    : heapifyDown
+        	Region type    : function
+        	Offsets        : 3564-4798
+        	Line numbers   : 149-186
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 6
+
+.   .   ./BinaryHeapPriorityQueue.java:188: info: Metrics per 'heapify' region
+        	Region name    : heapify
+        	Region type    : function
+        	Offsets        : 4802-4890
+        	Line numbers   : 188-191
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:200: info: Metrics per 'removeFirst' region
+        	Region name    : removeFirst
+        	Region type    : function
+        	Offsets        : 4895-5131
+        	Line numbers   : 194-204
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:212: info: Metrics per 'getFirst' region
+        	Region name    : getFirst
+        	Region type    : function
+        	Offsets        : 5135-5413
+        	Line numbers   : 206-217
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./BinaryHeapPriorityQueue.java:222: info: Metrics per 'getPriority' region
+        	Region name    : getPriority
+        	Region type    : function
+        	Offsets        : 5417-5633
+        	Line numbers   : 219-227
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./BinaryHeapPriorityQueue.java:237: info: Metrics per 'getObject' region
+        	Region name    : getObject
+        	Region type    : function
+        	Offsets        : 5637-6108
+        	Line numbers   : 229-241
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./BinaryHeapPriorityQueue.java:249: info: Metrics per 'getPriority' region
+        	Region name    : getPriority
+        	Region type    : function
+        	Offsets        : 6112-6433
+        	Line numbers   : 243-255
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./BinaryHeapPriorityQueue.java:268: info: Metrics per 'add' region
+        	Region name    : add
+        	Region type    : function
+        	Offsets        : 6437-6962
+        	Line numbers   : 257-274
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./BinaryHeapPriorityQueue.java:279: info: Metrics per 'add' region
+        	Region name    : add
+        	Region type    : function
+        	Offsets        : 6966-7326
+        	Line numbers   : 276-286
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./BinaryHeapPriorityQueue.java:290: info: Metrics per 'remove' region
+        	Region name    : remove
+        	Region type    : function
+        	Offsets        : 7331-7533
+        	Line numbers   : 289-298
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./BinaryHeapPriorityQueue.java:300: info: Metrics per 'removeEntry' region
+        	Region name    : removeEntry
+        	Region type    : function
+        	Offsets        : 7537-7779
+        	Line numbers   : 300-309
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./BinaryHeapPriorityQueue.java:311: info: Metrics per 'getLastEntry' region
+        	Region name    : getLastEntry
+        	Region type    : function
+        	Offsets        : 7783-7853
+        	Line numbers   : 311-313
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:321: info: Metrics per 'relaxPriority' region
+        	Region name    : relaxPriority
+        	Region type    : function
+        	Offsets        : 7857-8490
+        	Line numbers   : 315-332
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./BinaryHeapPriorityQueue.java:340: info: Metrics per 'decreasePriority' region
+        	Region name    : decreasePriority
+        	Region type    : function
+        	Offsets        : 8494-9201
+        	Line numbers   : 334-351
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./BinaryHeapPriorityQueue.java:359: info: Metrics per 'changePriority' region
+        	Region name    : changePriority
+        	Region type    : function
+        	Offsets        : 9205-9709
+        	Line numbers   : 353-370
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./BinaryHeapPriorityQueue.java:378: info: Metrics per 'isEmpty' region
+        	Region name    : isEmpty
+        	Region type    : function
+        	Offsets        : 9713-9884
+        	Line numbers   : 372-380
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:388: info: Metrics per 'size' region
+        	Region name    : size
+        	Region type    : function
+        	Offsets        : 9888-10042
+        	Line numbers   : 382-390
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:396: info: Metrics per 'contains' region
+        	Region name    : contains
+        	Region type    : function
+        	Offsets        : 10046-10206
+        	Line numbers   : 392-398
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:400: info: Metrics per 'toSortedList' region
+        	Region name    : toSortedList
+        	Region type    : function
+        	Offsets        : 10210-10455
+        	Line numbers   : 400-407
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./BinaryHeapPriorityQueue.java:409: info: Metrics per 'deepCopy' region
+        	Region name    : deepCopy
+        	Region type    : function
+        	Offsets        : 10459-10764
+        	Line numbers   : 409-416
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./BinaryHeapPriorityQueue.java:418: info: Metrics per 'deepCopy' region
+        	Region name    : deepCopy
+        	Region type    : function
+        	Offsets        : 10768-10868
+        	Line numbers   : 418-420
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:423: info: Metrics per 'iterator' region
+        	Region name    : iterator
+        	Region type    : function
+        	Offsets        : 10872-10993
+        	Line numbers   : 422-425
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:431: info: Metrics per 'clear' region
+        	Region name    : clear
+        	Region type    : function
+        	Offsets        : 10997-11119
+        	Line numbers   : 427-434
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:452: info: Metrics per 'toString' region
+        	Region name    : toString
+        	Region type    : function
+        	Offsets        : 11634-11700
+        	Line numbers   : 451-454
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:457: info: Metrics per 'toString' region
+        	Region name    : toString
+        	Region type    : function
+        	Offsets        : 11704-12242
+        	Line numbers   : 456-470
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 5
+
+.   .   ./BinaryHeapPriorityQueue.java:472: info: Metrics per 'toVerticalString' region
+        	Region name    : toVerticalString
+        	Region type    : function
+        	Offsets        : 12246-12639
+        	Line numbers   : 472-485
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./BinaryHeapPriorityQueue.java:488: info: Metrics per 'BinaryHeapPriorityQueue' region
+        	Region name    : BinaryHeapPriorityQueue
+        	Region type    : function
+        	Offsets        : 12644-12721
+        	Line numbers   : 488-490
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:492: info: Metrics per 'BinaryHeapPriorityQueue' region
+        	Region name    : BinaryHeapPriorityQueue
+        	Region type    : function
+        	Offsets        : 12725-12886
+        	Line numbers   : 492-495
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./BinaryHeapPriorityQueue.java:497: info: Metrics per 'main' region
+        	Region name    : main
+        	Region type    : function
+        	Offsets        : 12890-13735
+        	Line numbers   : 497-516
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+./BinaryHeapPriorityQueue.java:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 0.840909090909
+	Minimum        : 0
+	Maximum        : 6
+	Total          : 37.0
+	Distribution   : 44 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.523 : 0.523 : 23	||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.295 : 0.818 : 13	||||||||||||||||||||||||||||||
+	             2 : 0.114 : 0.932 :  5	|||||||||||
+	             3 : 0.023 : 0.955 :  1	||
+	             5 : 0.023 : 0.977 :  1	||
+	             6 : 0.023 : 1.000 :  1	||
+
+./Generics.java:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-7390
+	Line numbers   : 1-232
+	Modified       : None
+
+.   ./Generics.java:44: info: Metrics per 'Generics' region
+    	Region name    : Generics
+    	Region type    : class
+    	Offsets        : 502-4773
+    	Line numbers   : 20-164
+    	Modified       : None
+
+.   .   ./Generics.java:47: info: Metrics per 'newArrayList' region
+        	Region name    : newArrayList
+        	Region type    : function
+        	Offsets        : 1459-1561
+        	Line numbers   : 46-49
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:51: info: Metrics per 'newArrayList' region
+        	Region name    : newArrayList
+        	Region type    : function
+        	Offsets        : 1567-1661
+        	Line numbers   : 51-53
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:55: info: Metrics per 'newArrayList' region
+        	Region name    : newArrayList
+        	Region type    : function
+        	Offsets        : 1667-1775
+        	Line numbers   : 55-57
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./Generics.java:59: info: Metrics per 'newLinkedList' region
+        	Region name    : newLinkedList
+        	Region type    : function
+        	Offsets        : 1781-1866
+        	Line numbers   : 59-61
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:63: info: Metrics per 'newLinkedList' region
+        	Region name    : newLinkedList
+        	Region type    : function
+        	Offsets        : 1872-1983
+        	Line numbers   : 63-65
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./Generics.java:67: info: Metrics per 'newHashSet' region
+        	Region name    : newHashSet
+        	Region type    : function
+        	Offsets        : 1987-2063
+        	Line numbers   : 67-69
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:71: info: Metrics per 'newHashSet' region
+        	Region name    : newHashSet
+        	Region type    : function
+        	Offsets        : 2067-2177
+        	Line numbers   : 71-73
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:75: info: Metrics per 'newHashSet' region
+        	Region name    : newHashSet
+        	Region type    : function
+        	Offsets        : 2183-2285
+        	Line numbers   : 75-77
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./Generics.java:79: info: Metrics per 'newTreeSet' region
+        	Region name    : newTreeSet
+        	Region type    : function
+        	Offsets        : 2291-2367
+        	Line numbers   : 79-81
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:83: info: Metrics per 'newTreeSet' region
+        	Region name    : newTreeSet
+        	Region type    : function
+        	Offsets        : 2373-2491
+        	Line numbers   : 83-85
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./Generics.java:87: info: Metrics per 'newTreeSet' region
+        	Region name    : newTreeSet
+        	Region type    : function
+        	Offsets        : 2497-2588
+        	Line numbers   : 87-89
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:91: info: Metrics per 'newStack' region
+        	Region name    : newStack
+        	Region type    : function
+        	Offsets        : 2594-2664
+        	Line numbers   : 91-93
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:95: info: Metrics per 'newBinaryHeapPriorityQueue' region
+        	Region name    : newBinaryHeapPriorityQueue
+        	Region type    : function
+        	Offsets        : 2670-2794
+        	Line numbers   : 95-97
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:101: info: Metrics per 'newHashMap' region
+        	Region name    : newHashMap
+        	Region type    : function
+        	Offsets        : 2801-2896
+        	Line numbers   : 100-103
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:105: info: Metrics per 'newHashMap' region
+        	Region name    : newHashMap
+        	Region type    : function
+        	Offsets        : 2902-3018
+        	Line numbers   : 105-107
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:109: info: Metrics per 'newHashMap' region
+        	Region name    : newHashMap
+        	Region type    : function
+        	Offsets        : 3024-3137
+        	Line numbers   : 109-111
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./Generics.java:113: info: Metrics per 'newWeakHashMap' region
+        	Region name    : newWeakHashMap
+        	Region type    : function
+        	Offsets        : 3143-3237
+        	Line numbers   : 113-115
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:117: info: Metrics per 'newConcurrentHashMap' region
+        	Region name    : newConcurrentHashMap
+        	Region type    : function
+        	Offsets        : 3243-3355
+        	Line numbers   : 117-119
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:121: info: Metrics per 'newConcurrentHashMap' region
+        	Region name    : newConcurrentHashMap
+        	Region type    : function
+        	Offsets        : 3361-3507
+        	Line numbers   : 121-123
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:125: info: Metrics per 'newConcurrentHashMap' region
+        	Region name    : newConcurrentHashMap
+        	Region type    : function
+        	Offsets        : 3513-3735
+        	Line numbers   : 125-128
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:130: info: Metrics per 'newTreeMap' region
+        	Region name    : newTreeMap
+        	Region type    : function
+        	Offsets        : 3741-3823
+        	Line numbers   : 130-132
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:134: info: Metrics per 'newIndex' region
+        	Region name    : newIndex
+        	Region type    : function
+        	Offsets        : 3829-3899
+        	Line numbers   : 134-136
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:140: info: Metrics per 'newPair' region
+        	Region name    : newPair
+        	Region type    : function
+        	Offsets        : 3908-4033
+        	Line numbers   : 139-142
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:144: info: Metrics per 'newTriple' region
+        	Region name    : newTriple
+        	Region type    : function
+        	Offsets        : 4037-4183
+        	Line numbers   : 144-146
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:148: info: Metrics per 'newInterner' region
+        	Region name    : newInterner
+        	Region type    : function
+        	Offsets        : 4187-4266
+        	Line numbers   : 148-150
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:152: info: Metrics per 'newSynchronizedInterner' region
+        	Region name    : newSynchronizedInterner
+        	Region type    : function
+        	Offsets        : 4272-4415
+        	Line numbers   : 152-154
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:156: info: Metrics per 'newSynchronizedInterner' region
+        	Region name    : newSynchronizedInterner
+        	Region type    : function
+        	Offsets        : 4421-4653
+        	Line numbers   : 156-159
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:161: info: Metrics per 'newWeakReference' region
+        	Region name    : newWeakReference
+        	Region type    : function
+        	Offsets        : 4659-4771
+        	Line numbers   : 161-163
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   ./Generics.java:216: info: Metrics per 'Generics' region
+    	Region name    : Generics
+    	Region type    : class
+    	Offsets        : 6969-7389
+    	Line numbers   : 212-231
+    	Modified       : None
+
+.   .   ./Generics.java:220: info: Metrics per 'Generics' region
+        	Region name    : Generics
+        	Region type    : function
+        	Offsets        : 7142-7257
+        	Line numbers   : 219-222
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:224: info: Metrics per 'get' region
+        	Region name    : get
+        	Region type    : function
+        	Offsets        : 7263-7327
+        	Line numbers   : 224-226
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./Generics.java:228: info: Metrics per 'size' region
+        	Region name    : size
+        	Region type    : function
+        	Offsets        : 7333-7387
+        	Line numbers   : 228-230
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+./Generics.java:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 0.193548387097
+	Minimum        : 0
+	Maximum        : 2
+	Total          : 6.0
+	Distribution   : 31 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.839 : 0.839 : 26	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.129 : 0.968 :  4	|||||||||||||
+	             2 : 0.032 : 1.000 :  1	|||
+
+

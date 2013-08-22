@@ -1,0 +1,28 @@
+./test.c:0: warning: Duplicate suppression of the metric 'std.general:size'
+	Metric name    : std.general:size
+	Region name    : None
+
+./test.c:84: warning: Suppressed metric 'invalid:metric' is not being collected
+	Metric name    : invalid:metric
+	Region name    : suppresed_for_invalid_metric
+
+./test.c:90: warning: Suppressed metric 'std.code.length:invlaid_metric' is not being collected
+	Metric name    : std.code.length:invlaid_metric
+	Region name    : suppresed_for_invalid_metric
+
+./test.c:97: warning: Suppressed metric 'invalid:metric' is not being collected
+	Metric name    : invalid:metric
+	Region name    : suppressed_for_size_and_invalid_metric
+
+./test.c:105: warning: Suppressed metric 'invalid:metric' is not being collected
+	Metric name    : invalid:metric
+	Region name    : suppressed_for_size_and_complexity_and_invalid_metric
+
+./test.c:163: warning: Duplicate suppression of the metric 'std.code.length:total'
+	Metric name    : std.code.length:total
+	Region name    : duplicate_suppression_of_size
+
+./test.c:169: warning: Suppressed metric 'std.general:size' is attributed to a file, not a region. Remove it or move to the beginning of the file.
+	Metric name    : std.general:size
+	Region name    : bad_suppression_of_file_size
+

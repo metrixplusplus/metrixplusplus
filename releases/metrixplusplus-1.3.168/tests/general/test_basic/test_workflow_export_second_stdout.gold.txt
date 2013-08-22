@@ -1,0 +1,18 @@
+file,region,type,modified,line start,line end,std.code.complexity:cyclomatic,std.suppress.file:count,std.suppress.file:list,std.suppress:count,std.suppress:list,std.code.lines:code,std.code.lines:total,std.code.lines:preprocessor,std.code.lines:comments
+./simple.cpp,__global__,global,False,1,78,,,,,,0,0,0,0
+./simple.cpp,hmm,namespace,True,3,77,,,,,,4,7,2,1
+./simple.cpp,A,class,True,10,75,,,,,,4,4,0,0
+./simple.cpp,A,function,False,13,24,3,,,,,11,12,0,2
+./simple.cpp,func,function,False,26,42,1,,,,,5,5,0,0
+./simple.cpp,embeded,class,False,28,40,,,,,,3,3,0,0
+./simple.cpp,embeded,function,True,30,39,2,,,,,8,9,0,2
+./simple.cpp,never,function,True,44,51,1,,,,,7,7,0,1
+./simple.cpp,new_func,function,,53,56,0,,,,,3,4,0,1
+./simple.cpp,new_func_complex,function,,58,62,1,,,,,5,5,0,0
+./simple.cpp,new_func_complex_but_suppressed,function,,64,72,2,,,1,[std.code.complexity:cyclomatic],8,9,0,1
+./simple.cpp,,file,True,1,78,,,,,,,,,
+./simple2.cpp,__global__,global,,1,26,,,,,,0,0,0,0
+./simple2.cpp,hmm,namespace,,3,25,,,,,,4,5,0,1
+./simple2.cpp,New_A,class,,7,23,,,,,,3,3,0,0
+./simple2.cpp,New_A,function,,10,21,3,,,,,10,12,0,2
+./simple2.cpp,,file,,1,26,,,,,,,,,
