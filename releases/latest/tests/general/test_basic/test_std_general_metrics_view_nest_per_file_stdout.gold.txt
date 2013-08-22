@@ -1,0 +1,108 @@
+./simple.cpp:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-697
+	Line numbers   : 1-71
+	Modified       : None
+
+.   ./simple.cpp:4: info: Metrics per 'hmm' region
+    	Region name    : hmm
+    	Region type    : namespace
+    	Offsets        : 2-696
+    	Line numbers   : 3-70
+    	Modified       : None
+
+.   .   ./simple.cpp:9: info: Metrics per 'A' region
+        	Region name    : A
+        	Region type    : class
+        	Offsets        : 94-692
+        	Line numbers   : 9-68
+        	Modified       : None
+
+.   .   .   ./simple.cpp:12: info: Metrics per 'A' region
+            	Region name    : A
+            	Region type    : function
+            	Offsets        : 106-252
+            	Line numbers   : 12-23
+            	Modified       : None
+
+.   .   .   ./simple.cpp:26: info: Metrics per 'func' region
+            	Region name    : func
+            	Region type    : function
+            	Offsets        : 256-405
+            	Line numbers   : 26-40
+            	Modified       : None
+
+.   .   .   .   ./simple.cpp:28: info: Metrics per 'embeded' region
+                	Region name    : embeded
+                	Region type    : class
+                	Offsets        : 285-391
+                	Line numbers   : 28-38
+                	Modified       : None
+
+.   .   .   .   .   ./simple.cpp:30: info: Metrics per 'embeded' region
+                    	Region name    : embeded
+                    	Region type    : function
+                    	Offsets        : 306-387
+                    	Line numbers   : 30-37
+                    	Modified       : None
+
+.   .   .   ./simple.cpp:42: info: Metrics per 'func_to_be_removed_in_new_sources' region
+            	Region name    : func_to_be_removed_in_new_sources
+            	Region type    : function
+            	Offsets        : 408-596
+            	Line numbers   : 42-56
+            	Modified       : None
+
+.   .   .   .   ./simple.cpp:44: info: Metrics per 'embeded' region
+                	Region name    : embeded
+                	Region type    : class
+                	Offsets        : 466-577
+                	Line numbers   : 44-54
+                	Modified       : None
+
+.   .   .   .   .   ./simple.cpp:46: info: Metrics per 'embeded' region
+                    	Region name    : embeded
+                    	Region type    : function
+                    	Offsets        : 487-573
+                    	Line numbers   : 46-53
+                    	Modified       : None
+
+.   .   .   ./simple.cpp:58: info: Metrics per 'never' region
+            	Region name    : never
+            	Region type    : function
+            	Offsets        : 599-669
+            	Line numbers   : 58-65
+            	Modified       : None
+
+./simple.cpp:0: info: Metrics per file
+	std.general:proctime: 0.01
+	std.general:size: 697
+
+./simple.cpp:: info: Overall metrics for 'std.general:procerrors' metric
+	Average        : None
+	Minimum        : None
+	Maximum        : None
+	Total          : 0.0
+	Distribution   : 0 files in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of files
+
+./simple.cpp:: info: Overall metrics for 'std.general:proctime' metric
+	Average        : 0.01
+	Minimum        : 0.01
+	Maximum        : 0.01
+	Total          : 0.01
+	Distribution   : 1 files in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of files
+	        0.0100 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+./simple.cpp:: info: Overall metrics for 'std.general:size' metric
+	Average        : 697.0
+	Minimum        : 697
+	Maximum        : 697
+	Total          : 697.0
+	Distribution   : 1 files in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of files
+	           697 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+

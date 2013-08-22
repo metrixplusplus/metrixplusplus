@@ -1,0 +1,144 @@
+./File.cs:74: warning: Metric 'std.code.complexity:cyclomatic' for region 'get' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : get
+	Metric value   : 3
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./File.cs:95: warning: Metric 'std.code.complexity:cyclomatic' for region 'get' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : get
+	Metric value   : 2
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./File.cs:120: warning: Metric 'std.code.complexity:cyclomatic' for region 'get' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : get
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./File.cs:134: warning: Metric 'std.code.complexity:cyclomatic' for region 'get' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : get
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./File.cs:148: warning: Metric 'std.code.complexity:cyclomatic' for region 'get' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : get
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./File.cs:160: warning: Metric 'std.code.complexity:cyclomatic' for region 'Close' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : Close
+	Metric value   : 4
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./File.cs:190: warning: Metric 'std.code.complexity:cyclomatic' for region 'SetRecord' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : SetRecord
+	Metric value   : 6
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./File.cs:245: warning: Metric 'std.code.complexity:cyclomatic' for region 'GetFile' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : GetFile
+	Metric value   : 5
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./File.cs:277: warning: Metric 'std.code.complexity:cyclomatic' for region 'GetFile' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : GetFile
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./File.cs:288: warning: Metric 'std.code.complexity:cyclomatic' for region 'AllocateFile' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : AllocateFile
+	Metric value   : 5
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./File.cs:327: warning: Metric 'std.code.complexity:cyclomatic' for region 'FindFreeFile' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : FindFreeFile
+	Metric value   : 5
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./File.cs:361: warning: Metric 'std.code.complexity:cyclomatic' for region 'CloseAll' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : CloseAll
+	Metric value   : 4
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./File.cs:426: warning: Metric 'std.code.complexity:cyclomatic' for region 'Unlock' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : Unlock
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./Generics.cs:50: warning: Metric 'std.code.complexity:cyclomatic' for region 'Grow' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : Grow
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./interface.cs:135: warning: Metric 'std.code.complexity:cyclomatic' for region 'Equals' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : Equals
+	Metric value   : 1
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+
+./interface.cs:169: warning: Metric 'std.code.complexity:cyclomatic' for region 'ToTitleCase' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : ToTitleCase
+	Metric value   : 4
+	Modified       : None
+	Change trend   : None
+	Limit          : 0.0
+	Suppressed     : False
+

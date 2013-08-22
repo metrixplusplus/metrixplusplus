@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<!--
+
+    Metrix++, Copyright 2009-2013, Metrix++ Project
+    Link: http://metrixplusplus.sourceforge.net
+    
+    This file is part of Metrix++ Tool.
+    
+    Metrix++ is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, version 3 of the License.
+    
+    Metrix++ is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with Metrix++.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Metrix++ Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <!--
+    <link href="../../style.css" rel="stylesheet">
+    -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/css/docs.css" rel="stylesheet">
+    <link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+    
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="assets/ico/favicon.png">
+
+	<!--
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-146052-10']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+   -->
+  </head>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-link navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="./index.html">Metrix++</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="">
+                <a href="./index.html">Home</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subhead
+    ================================================== -->
+    <header class="jumbotron" id="overview">
+      <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="item active">
+            <img src="assets/img/slide-01.jpg" alt="">
+            <div class="container">
+              <div class="carousel-caption">
+                <h2>Multiple languages</h2>
+                <p class="lead">&middot; C/C++, C# and Java.</p>
+                <p class="lead">&middot; Recognises classes, interfaces, namespaces, functions, comments, preprocessor and much more.</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/img/slide-02.jpg" alt="">
+            <div class="container">
+              <div class="carousel-caption">
+                <h2>Multiple metrics</h2>
+                <p class="lead">&middot; Complexity, size and other.</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/img/slide-03.jpg" alt="">
+            <div class="container">
+              <div class="carousel-caption">
+                <h2>High performance and scalability</h2>
+                <p class="lead">&middot; Applicable to huge code bases: thousands of files per minute.</p>
+                <p class="lead">&middot; Ultra-fast feedback on iterative re-run.</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/img/slide-01.jpg" alt="">
+            <div class="container">
+              <div class="carousel-caption">
+                <h2>Effortless application to legacy code</h2>
+                <p class="lead">&middot; Recognises legacy, modified and new code.</p>
+                <p class="lead">&middot; Prevents from negative trends. Encourages positive.</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/img/slide-02.jpg" alt="">
+            <div class="container">
+              <div class="carousel-caption">
+                <h2>Configurable</h2>
+                <p class="lead">&middot; Define and apply your rules and policies.</p>
+                <p class="lead">&middot; Integrate with your workflow.</p>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="assets/img/slide-03.jpg" alt="">
+            <div class="container">
+              <div class="carousel-caption">
+                <h2>Extendable via plugins</h2>
+                <p class="lead">&middot; Define your custom metric.</p>
+                <p class="lead">&middot; Add new language parser.</p>
+                <p class="lead">&middot; Create advanced post-analysis tool.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+      </div>      
+      <div class="container">
+        <div class="row">
+          <div class="span3">
+          </div>
+          <div class="span9">
+            <h5 class="text-right">Management of source code quality is possible.</h5>
+            <p class="text-right">
+                <a href="https://sourceforge.net/projects/metrixplusplus/files/latest/download"
+                    ><button type="button"class="btn btn-danger">Download</button></a>
+                <!--
+                <button type="button"class="btn btn-warning">Donate</button>
+                -->
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container"><div class="row">
+      
+      <!-- Docs nav
+	  ================================================== -->
+      <div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav">
+          <!--<li><img src="../../logo_project.png"/><p>&nbsp;</p></li>-->
+          <li><a href="#overview_section"><i class="icon-chevron-right"></i> Overview</a></li>
+          <li><a href="#download_section"><i class="icon-chevron-right"></i> Download &amp; Install</a></li>
+          <li><a href="#workflow_collect_section"><i class="icon-chevron-right"></i> Workflow: Collect data</a></li>
+          <li><a href="#workflow_view_section"><i class="icon-chevron-right"></i> Workflow: View data</a></li>
+          <li><a href="#workflow_view_summary_section"><i class="icon-hand-right"></i> &middot; summary &amp; distributions</a></li>
+          <li><a href="#workflow_view_details_section"><i class="icon-hand-right"></i> &middot; details per file/region</a></li>
+          <li><a href="#workflow_limit_section"><i class="icon-chevron-right"></i> Workflow: Apply thresholds</a></li>
+          <li><a href="#workflow_limit_hotspots_section"><i class="icon-hand-right"></i> &middot; hotspots</a></li>
+          <li><a href="#workflow_limit_control_section"><i class="icon-hand-right"></i> &middot; controlling trends</a></li>
+          <li><a href="#workflow_other_section"><i class="icon-chevron-right"></i> Workflow: Other applications</a></li>
+          <li><a href="#extend_section"><i class="icon-chevron-right"></i> Create plugin</a></li>
+          <li><a href="#contribute_section"><i class="icon-chevron-right"></i> Feedback &amp; Contribute</a></li>
+        </ul>
+      </div>
+      
+      <!-- Sections
+	  ================================================== -->
+      <div class="span9">
+        <!-- Overview
+        ================================================== -->
+        <section id="overview_section">
+          <div class="page-header">
+            <h1>Overview</h1>
+          </div>
+
+          <h3>Highlights</h3>
+          <p>Metrix++ is a tool to collect and analyse code metrics. Any metric is useless if it is not used.
+             Metrix++ offers ease of introduction and integration with a variety of application use cases.</p>
+          <ul>
+            <li>Monitoring trends (eg. on <strong>daily</strong> basis. In order to take actions or make right decisions earlier.)</li>
+            <li>Enforcing trends (eg. on <strong>hourly</strong> basis, at every commit of code changes.)</li>
+            <li>Automated asistance to review agains standards (eg. on <strong>per minute</strong> basis during code refactoring and code development.)</li>
+          </ul>
+
+          <p>The workflow sections below demonstarate these basic application usecases.</p>
+
+          <h3>Languages supported</h3>
+          <p>The tool can parse C/C++, C# and Java source code files. The parser identifies certain regions in the code,
+             such as classes, functions, namespaces, interfaces, etc. It detects comments, strings and code for the preprocessor.
+             The identified regions form a tree of nested source code blocks, which are subsequently refered to and scanned by metrics plugins.
+             Thus the tool attributes metrics to regions, which provides fine grained data to analysis tools.
+             The following example demonstrates the regions concept.</p>
+             
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Source code</th>
+                <th>Regions tree [type: name: content type]</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+<pre class="prettyprint linenums">
+// simple C++ code
+
+#include &lt;myapi.h&gt;
+
+// I explain the following class
+class MyClass {
+public:
+    int m_var; // some member
+
+    // I explain the following function
+    MyClass(): m_var(0) {
+        char str[] = "unused string"
+        
+        // nested region for good measure
+        struct MyStruct {};
+    }
+    
+    // Do not judge ugly code below
+#define get_max(a,b) ((a)>(b)?(a):(b))
+    set_max(int b) {
+        m_var = get_max(m_var, b);
+    }
+};
+// this is the last line
+</pre>
+                </td>
+                <td>
+<pre class="prettyprint linenums">
+file: __global__: comment
+file: __global__: code
+file: __global__: preprocessor
+file: __global__: code
+    class: MyClass: comment
+    class: MyClass: code
+    class: MyClass: code
+    class: MyClass: code, comment
+    class: MyClass: code
+        function: MyClass: comment
+        function: MyClass: code
+        function: MyClass: code, string
+        function: MyClass: code
+            struct: MyStruct: comment
+            struct: MyStruct: code
+        function: MyClass: code
+    class: MyClass: code
+        function: set_max: comment
+        function: set_max: preprocessor
+        function: set_max: code
+        function: set_max: code
+        function: set_max: code
+    class: MyClass: code
+file: __global__: comment
+</pre>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Metrics</h3>
+          <p>The metrics highlighed in blue are <strong>per file</strong> metrics. The other metrics are <strong>per region</strong> metrics.</p>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Metric (enable option)</th>
+                <th>Brief description</th>
+                <th>Motivation / Potential use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="info">
+                <td>std.general.size</td>
+                <td>Size of a file in bytes.</td>
+                <td rowspan="4"><ul><li>Monitoring the growth of source code base.</li>
+                    <li>Normalizing other metrics.</li>
+                    <li>Preventing large files and regions (large things are difficult to maintain).</li>
+                    <li>Predicting delivery dates by comparing
+                        <a href="http://www.compaid.com/caiInternet/casestudies/kanarticle2.pdf">S-shaped code base growth / change curves</a>.</li></ul></td>
+              </tr>
+              <tr>
+                <td>std.code.length.total</td>
+                <td>The same as 'std.general.size' metric, but attributed to code regions.</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>std.code.lines.total</td>
+                <td>Number of non-blank lines of code of any content type (exectuable, comments, etc.)</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>std.code.lines.code</td>
+                <td>Number of non-blank lines of code excluding preprocessor and comments.</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>std.code.lines.preprocessor</td>
+                <td>Number of non-blank lines of preprocessor code.</td>
+                <td><ul><li>Enforcing localisation of preprocessor code in a single place.</li>
+                    <li>Encouraging usage of safer code structures instead of the preprocessor.</li></ul></td>
+              </tr>
+              <tr>
+                <td>std.code.lines.comments</td>
+                <td>Number of non-blank lines of comments.</td>
+                <td><ul><li>Low number of comments may indicate maintainability problems.</li></ul></td>
+              </tr>
+              <tr>
+                <td>std.code.complexity.cyclomatic</td>
+                <td>McCabe cyclomatic complexity metric.</td>
+                <td colspan="2"><ul><li>Identification of highly complex code for review and refactoring.</li>
+                    <li>Preventing complex functions (complexity is a reason of many defects and a reason of expensive maintaintenance).</li></ul></td>
+              </tr>
+              <tr>
+                <td>std.code.complexity.maxindent</td>
+                <td>Maximum level of indentation of blocks within a region. For example, the following class has got 
+                	the metric equal to 1 and the function has got it equal to 2:
+                	<pre class="prettyprint">
+class WeekClass {
+    int isWeekend(int day) {
+        if (day == SATURDAY ||
+            day == SUNDAY) {
+            return true;
+        }
+        return false;
+    }
+}
+</pre>
+                	</td>
+              </tr>
+              <tr>
+                <td>std.code.magic.numbers</td>
+                <td>Number of magic numbers. There is an option to exclude 0, -1 and 1 numbers from counting.</td>
+                <td>Magic numbers are dangerous.
+                	The <a href="http://stackoverflow.com/questions/47882/what-is-a-magic-number-and-why-is-it-bad" target="blank">
+                		discussion on stackoverflow</a> explains why.</td>
+              </tr>
+              <tr>
+                <td>std.code.todo.comments, std.code.todo.strings</td>
+                <td>Number of TODO/FIXME/etc markers in comments and strings accordingly.
+                	There is an option to configure a list of markers.</td>
+                <td>Manage potentially incomplete work. If project manager dispatches issues only in a tracker tool,
+                	todo markers are lost in the source code. The metric could make these 'lost' issues visible.</td>
+              </tr>
+              <tr>
+                <td>std.suppress</td>
+                <td>An option enables collection of Metrix++ suppressions and 2 metrics: 'std.suppress:count' and 
+                    'std.suppress.file:count'. The first is number of suppressions per region.
+                    The second is the same but applies for file-scope metrics.</td>
+                <td><ul><li>Suppressing false-positives.</li>
+                    <li>Managing the amount of suppressions. There should be no false-positives to suppress with the right metric,
+                        but there could be exceptions in specific cases. Managing suppressions is about managing exceptions.
+                        If there are many exceptional cases, maybe something is wrong with a metric or the application of a metric.</li></ul></td>
+              </tr>
+              <tr class="info">
+                <td>std.general.procerrors</td>
+                <td>Number of errors detected by Metrix++ code parser.</td>
+                <td><ul><li>Cleaning up errors to ensure reliable code scanning.</li>
+                	<li>Errors, like mismatched brackets, may result in bad identification of regions.</li>
+                </ul></td>
+              </tr>
+              <tr class="info">
+                <td>std.general.proctime</td>
+                <td>Seconds spent on processing a file.</td>
+                <td><ul><li>Monitor and profile Metrix++ tool's performance.</li></ul></td>
+              </tr>
+            </tbody>
+          </table>
+
+        </section>
+
+        <section id="download_section">
+          <div class="page-header">
+            <h1>Download &amp; Install</h1>
+          </div>
+
+          <p>In order to get the tool working, <a href="https://sourceforge.net/projects/metrixplusplus/files/latest/download">dowload the archive</a> with the latest stable version
+             and unpack it to some folder. The first run of the tool will trigger the installation within the folder,
+             where it was launched.</p>
+
+          <p>In order to checkout the latest released version from the <a href="https://sourceforge.net/p/metrixplusplus/code">version control system</a> use this command:</p>
+          <pre>svn checkout <a href="https://sourceforge.net/p/metrixplusplus/code">svn://svn.code.sf.net/p/metrixplusplus/code</a>/releases/latest Metrix++</pre>
+
+          <p>In order to checkout the latest version under development, use this command:</p>
+          <pre>svn checkout <a href="https://sourceforge.net/p/metrixplusplus/code">svn://svn.code.sf.net/p/metrixplusplus/code</a>/mainline Metrix++</pre>
+
+          <h4>Prerequisites</h4>
+          <p>Python Runtime Environment (version 2.7.* or later. Version 3.* has not been tested)</p>
+
+          <h4>License</h4>
+          <p>This program is free software; you can redistribute it and/or modify it
+             under the terms of the GNU General Public License as published by the
+             Free Software Foundation; version 3 of the License.</p>
+          <p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+             without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+             See the GNU General Public License for more details.</p>
+          <p>You should have received a copy of the GNU General Public License along with the Metrix++;
+             if not, contact <a href="mailto:avkonst@users.sourceforge.net?subject=Metrix%2B%2B License">Project Administrator</a></p>
+             
+        </section>
+
+        <div class="page-header">
+          <h1>Workflow</h1>
+        </div>
+        <p>The workflow and application usecases are demonstrated using source code from the 
+        	<a href="http://www.boost.org/doc/libs/1_54_0/doc/html/interprocess.html">boost/interprocess library</a>.
+        	Boost versions 1.52 and 1.54 are used and refered below as the 'previous' version and the 'current' version accordingly.</p>
+        <section id="workflow_collect_section">
+          <h2>Collect data</h2>
+          <p>The first step is to collect the data.
+             The 'collect' tool has got multiple options to enable various metrics plugins.
+             Let's collect the number of lines of code and cyclomatic complexity metrics
+             for the previous (1.52.0 version) boost interprocess library. Assuming that 2 versions of boost library
+             are unpacked in the current working directory:</p>
+          <pre>
+&gt; cd boost_1_52_0
+&gt; python "/path/to/metrix++.py" collect --std.code.lines.code --std.code.complexity.cyclomatic -- boost/interprocess
+&gt; cd ../ # return back to working directory
+</pre>
+          <p>The list of arguments after '--' enumerates the paths to read the source files.
+          	As a result of execution of this command, a file metrixpp.db will be written in the current working directory.
+          	It can be redefined using the --db-file option.</p>
+          <p>Metrix++ can compare code bases which reduces processing scope to the modified or new code.
+          	So, let's collect the same data for the current (1.54.0 version) boost interprocess library.</p>
+          <pre>
+&gt; cd boost_1_54_0
+&gt; python "/path/to/metrix++.py" collect --std.code.lines.code --std.code.complexity.cyclomatic -- boost/interprocess --db-file-prev=../boost_1_52_0/metrixpp.db
+&gt; cd ../ # return back to working directory
+</pre>
+          <p>The option --db-file-prev points to the file with the data collected in the previous step.
+          	So, eventually it executed iterative collection. It can speed up the exectuion significantly,
+          	depending on amount of changes between two version.</p>
+          <p>Check other options of the collect tool by executing:</p>
+          <pre>
+&gt; python "/path/to/metrix++.py" collect --help
+</pre>
+        </section>
+        <section id="workflow_view_section">
+          <h2>View data</h2>
+        </section>
+        <section id="workflow_view_summary_section">
+          <h3>Summary metrics and distribution tables/graphs</h3>
+          <p>It is time to look at the data files collected (step above). The command:</p>
+          <pre>
+&gt; python "/path/to/metrix++.py" view --db-file=boost_1_54_0/metrixpp.db
+</pre>
+          <p>prints summary metrics, like minimum/maximum, and distribution/frequency tables:</p>
+          <pre>
+:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 0.652902698283
+	Minimum        : 0
+	Maximum        : 37
+	Total          : 1597.0
+	Distribution   : 2446 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.771 : 0.771 : 1886	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.110 : 0.881 :  268	|||||||||||
+	             2 : 0.044 : 0.925 :  108	||||
+	             3 : 0.025 : 0.949 :   60	||
+	             4 : 0.016 : 0.966 :   40	||
+	             5 : 0.007 : 0.973 :   18	|
+	             6 : 0.006 : 0.979 :   14	|
+	             7 : 0.004 : 0.983 :   10	
+	             8 : 0.003 : 0.986 :    8	
+	             9 : 0.002 : 0.988 :    4	
+	            10 : 0.004 : 0.991 :    9	
+	            11 : 0.002 : 0.993 :    4	
+	            12 : 0.001 : 0.994 :    3	
+	            13 : 0.001 : 0.995 :    2	
+	            14 : 0.001 : 0.996 :    2	
+	         15-16 : 0.001 : 0.997 :    3	
+	         17-18 : 0.001 : 0.998 :    3	
+	            20 : 0.000 : 0.999 :    1	
+	         23-25 : 0.001 : 1.000 :    2	
+	            37 : 0.000 : 1.000 :    1	
+
+:: info: Overall metrics for 'std.code.lines:code' metric
+	Average        : 6.64356984479
+	Minimum        : 0
+	Maximum        : 201
+	Total          : 23970.0
+	Distribution   : 3608 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	           0-1 : 0.088 : 0.088 :  319	|||||||||
+	             2 : 0.320 : 0.409 : 1155	||||||||||||||||||||||||||||||||
+	             3 : 0.108 : 0.517 :  390	|||||||||||
+	             4 : 0.081 : 0.598 :  294	||||||||
+	             5 : 0.080 : 0.678 :  290	||||||||
+	             6 : 0.061 : 0.739 :  220	||||||
+	             7 : 0.049 : 0.788 :  176	|||||
+	             8 : 0.030 : 0.818 :  109	|||
+	             9 : 0.025 : 0.843 :   89	||
+	         10-11 : 0.032 : 0.876 :  117	|||
+	         12-13 : 0.020 : 0.895 :   71	||
+	            14 : 0.012 : 0.907 :   43	|
+	         15-16 : 0.017 : 0.924 :   61	||
+	         17-19 : 0.015 : 0.939 :   55	||
+	         20-22 : 0.013 : 0.952 :   46	|
+	         23-26 : 0.011 : 0.963 :   40	|
+	         27-30 : 0.009 : 0.972 :   33	|
+	         31-39 : 0.009 : 0.981 :   33	|
+	         40-65 : 0.009 : 0.991 :   34	|
+	        66-201 : 0.009 : 1.000 :   33	|
+
+:: info: Directory content:
+	Directory      : .
+</pre>
+          <p>The same command with --db-file-prev option enables comparision and change trends are shown in [] brackets:</p>
+          <pre>
+&gt; python "/path/to/metrix++.py" view --db-file=boost_1_54_0/metrixpp.db --db-file-prev=boost_1_52_0/metrixpp.db
+</pre>
+          <pre>
+:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 0.652902698283 [+0.00362138411453]
+	Minimum        : 0 [+0]
+	Maximum        : 37 [+1]
+	Total          : 1597.0 [+16.0]
+	Distribution   : 2446 [+11] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.771 : 0.771 : 1886 [+5   ]	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.110 : 0.881 :  268 [+4   ]	|||||||||||
+	             2 : 0.044 : 0.925 :  108 [+0   ]	||||
+	             3 : 0.025 : 0.949 :   60 [+2   ]	||
+	             4 : 0.016 : 0.966 :   40 [-1   ]	||
+	             5 : 0.007 : 0.973 :   18 [-1   ]	|
+	             6 : 0.006 : 0.979 :   14 [+1   ]	|
+	             7 : 0.004 : 0.983 :   10 [+1   ]	
+	             8 : 0.003 : 0.986 :    8 [+1   ]	
+	             9 : 0.002 : 0.988 :    4 [+0   ]	
+	            10 : 0.004 : 0.991 :    9 [-2   ]	
+	            11 : 0.002 : 0.993 :    4 [+1   ]	
+	            12 : 0.001 : 0.994 :    3 [+0   ]	
+	            13 : 0.001 : 0.995 :    2 [+0   ]	
+	            14 : 0.001 : 0.996 :    2 [+0   ]	
+	         15-16 : 0.001 : 0.997 :    3 [-1   ]	
+	         17-18 : 0.001 : 0.998 :    3 [+1   ]	
+	            20 : 0.000 : 0.999 :    1 [+0   ]	
+	         23-25 : 0.001 : 1.000 :    2 [+0   ]	
+	         36-37 : 0.000 : 1.000 :    1 [+0   ]	
+
+:: info: Overall metrics for 'std.code.lines:code' metric
+	Average        : 6.64356984479 [+0.012181964309]
+	Minimum        : 0 [+0]
+	Maximum        : 201 [+4]
+	Total          : 23970.0 [+223.0]
+	Distribution   : 3608 [+27] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	           0-1 : 0.088 : 0.088 :  319 [+3   ]	|||||||||
+	             2 : 0.320 : 0.409 : 1155 [+9   ]	||||||||||||||||||||||||||||||||
+	             3 : 0.108 : 0.517 :  390 [-3   ]	|||||||||||
+	             4 : 0.081 : 0.598 :  294 [+7   ]	||||||||
+	             5 : 0.080 : 0.678 :  290 [+7   ]	||||||||
+	             6 : 0.061 : 0.739 :  220 [-1   ]	||||||
+	             7 : 0.049 : 0.788 :  176 [-2   ]	|||||
+	             8 : 0.030 : 0.818 :  109 [-1   ]	|||
+	             9 : 0.025 : 0.843 :   89 [+4   ]	||
+	         10-11 : 0.032 : 0.876 :  117 [+9   ]	|||
+	         12-13 : 0.020 : 0.895 :   71 [-9   ]	||
+	            14 : 0.012 : 0.907 :   43 [+0   ]	|
+	         15-16 : 0.017 : 0.924 :   61 [+0   ]	||
+	         17-19 : 0.015 : 0.939 :   55 [+6   ]	||
+	         20-22 : 0.013 : 0.952 :   46 [-3   ]	|
+	         23-26 : 0.011 : 0.963 :   40 [+2   ]	|
+	         27-30 : 0.009 : 0.972 :   33 [-3   ]	|
+	         31-39 : 0.009 : 0.981 :   33 [+0   ]	|
+	         40-65 : 0.009 : 0.991 :   34 [+1   ]	|
+	        66-201 : 0.009 : 1.000 :   33 [+1   ]	|
+
+:: info: Directory content:
+	Directory      : .
+</pre>
+          <h4>Reducing analysis scope</h4>
+          <p>There are two ways to reduce the analysis scope for the view tool. The first is to enumerate paths of interest.
+          	For example, the following command reduces scope to the 'allocators' sub-directory within the processed code.</p>
+          <pre>
+&gt; python "/path/to/metrix++.py" view --db-file=boost_1_54_0/metrixpp.db -- ./boost/interprocess/allocators
+</pre>
+          <p>The second is to specify the --scope-mode option, which instructs the tool to process only modified and/or new files/regions.
+          	For example, to view the summary metrics for all modified and new regions:</p>
+          <pre>
+&gt; python "/path/to/metrix++.py" view --db-file=boost_1_54_0/metrixpp.db  --db-file-prev=boost_1_52_0/metrixpp.db --scope-mode=touched
+</pre>
+          <pre>
+:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 1.84924623116 [-0.0230941943761]
+	Minimum        : 0 [+0]
+	Maximum        : 37 [+1]
+	Total          : 368.0 [+16.0]
+	Distribution   : 199 [+11] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.608 : 0.608 : 121 [+5  ]	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.131 : 0.739 :  26 [+4  ]	|||||||||||||
+	             2 : 0.070 : 0.809 :  14 [+0  ]	|||||||
+	             3 : 0.060 : 0.869 :  12 [+2  ]	||||||
+	             4 : 0.015 : 0.884 :   3 [-1  ]	||
+	             5 : 0.015 : 0.899 :   3 [-1  ]	||
+	             6 : 0.005 : 0.905 :   1 [+1  ]	|
+	             7 : 0.015 : 0.920 :   3 [+1  ]	||
+	             8 : 0.015 : 0.935 :   3 [+1  ]	||
+	             9 : 0.010 : 0.945 :   2 [+0  ]	|
+	            10 : 0.010 : 0.955 :   2 [-2  ]	|
+	            11 : 0.005 : 0.960 :   1 [+1  ]	|
+	            12 : 0.005 : 0.965 :   1 [+0  ]	|
+	            13 : 0.005 : 0.970 :   1 [+0  ]	|
+	            16 : 0.005 : 0.975 :   1 [-1  ]	|
+	            17 : 0.005 : 0.980 :   1 [+0  ]	|
+	            18 : 0.010 : 0.990 :   2 [+1  ]	|
+	            20 : 0.005 : 0.995 :   1 [+0  ]	|
+	         36-37 : 0.005 : 1.000 :   1 [+0  ]	|
+
+:: info: Overall metrics for 'std.code.lines:code' metric
+	Average        : 15.9645390071 [-0.815853149771]
+	Minimum        : 0 [+0]
+	Maximum        : 201 [+6]
+	Total          : 4502.0 [+223.0]
+	Distribution   : 282 [+27] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	           0-1 : 0.053 : 0.053 :  15 [+3  ]	|||||
+	             2 : 0.124 : 0.177 :  35 [+9  ]	||||||||||||
+	             3 : 0.053 : 0.230 :  15 [-3  ]	|||||
+	             4 : 0.060 : 0.291 :  17 [+7  ]	||||||
+	             5 : 0.089 : 0.379 :  25 [+7  ]	|||||||||
+	             6 : 0.060 : 0.440 :  17 [-1  ]	||||||
+	             7 : 0.050 : 0.489 :  14 [-2  ]	|||||
+	           8-9 : 0.074 : 0.564 :  21 [+3  ]	|||||||
+	            10 : 0.035 : 0.599 :  10 [+5  ]	||||
+	            11 : 0.082 : 0.681 :  23 [+4  ]	||||||||
+	         12-13 : 0.043 : 0.723 :  12 [-9  ]	||||
+	         14-15 : 0.039 : 0.762 :  11 [-1  ]	||||
+	         16-18 : 0.028 : 0.791 :   8 [+4  ]	|||
+	         19-22 : 0.039 : 0.830 :  11 [+0  ]	||||
+	         23-26 : 0.039 : 0.869 :  11 [+2  ]	||||
+	         27-32 : 0.028 : 0.897 :   8 [-3  ]	|||
+	         38-50 : 0.025 : 0.922 :   7 [+0  ]	||
+	         51-69 : 0.025 : 0.947 :   7 [+1  ]	||
+	        71-100 : 0.032 : 0.979 :   9 [+2  ]	|||
+	       101-201 : 0.021 : 1.000 :   6 [-1  ]	||
+
+:: info: Directory content:
+	Directory      : .
+</pre>
+        </section>
+        <section id="workflow_view_details_section">
+          <h3>Detailed metrics per file/region</h3>
+          <p>The same view tool can print detailed metrics per file and per every region in the specified file.
+          	In order to get detailed metrics, enumerate files of interest after '--'. For example:</p>
+          <pre>
+&gt; python "/path/to/metrix++.py" view --db-file=boost_1_54_0/metrixpp.db --db-file-prev=boost_1_52_0/metrixpp.db -- ./boost/interprocess/detail/managed_open_or_create_impl.hpp
+</pre>
+          <p>produces output similar to this (truncated to make the page shorter):</p>
+          <pre>
+./interprocess/detail/managed_open_or_create_impl.hpp:302: info: Metrics per 'priv_open_or_create' region
+	Region name    : priv_open_or_create
+	Region type    : function
+	Offsets        : 8314-14526
+	Line numbers   : 301-467
+	Modified       : True
+	std.code.complexity:cyclomatic: 37 [+1]
+	std.code.lines:code: 148 [+4]
+</pre>
+        </section>
+        <section>
+          <h3>More about the viewer</h3>
+          <p>The 'view' command has got an option to alter the output format. It is possible to get the same data
+          	in xml or python dictionary formats. This can be particularly useful for integration of the tool with
+          	other applications. For example, an editor may re-collect and show context based metrics when a file is saved.</p>
+          <pre>
+&gt; python "/path/to/metrix++.py" view --db-file=boost_1_54_0/metrixpp.db --format=xml
+</pre>
+          <p>Check other options of the view tool by executing:</p>
+          <pre>
+&gt; python "/path/to/metrix++.py" view --help
+</pre>
+        </section>
+        <section id="workflow_limit_section">
+          <h2>Apply thresholds</h2>
+          <p>The viewer shows (above) that there are functions with quite large cyclomatic complexities.
+          	 Growth of this metric can be considered as negative trend. The Metrix++ 'limit' tool offers the capability
+          	 to manage control over trends by applying limits to metric values.
+          	 Exceeded limits could be raised as alarms by quality management and control.</p>
+        </section>
+        <section id="workflow_limit_hotspots_section">
+          <h3>Hotspots</h3>
+          <p>The hotspots mode of the limit tool helps to identify top files/regions exceeding a metric threshold.
+          	Let's identify the top 3 functions in the boost interprocess library, which exceed a limit of 15 points of
+          	cyclomatic complexity:</p>
+          <pre>
+&gt; python "/path/to/metrix++.py" limit --db-file=boost_1_54_0/metrixpp.db --max-limit=std.code.complexity:cyclomatic:15 --hotspots=3
+</pre>
+          <pre>
+./interprocess/detail/managed_open_or_create_impl.hpp:302: warning: Metric 'std.code.complexity:cyclomatic' for region 'priv_open_or_create' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : priv_open_or_create
+	Metric value   : 37
+	Modified       : None
+	Change trend   : None
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/streams/vectorstream.hpp:284: warning: Metric 'std.code.complexity:cyclomatic' for region 'seekoff' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : seekoff
+	Metric value   : 25
+	Modified       : None
+	Change trend   : None
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/streams/bufferstream.hpp:174: warning: Metric 'std.code.complexity:cyclomatic' for region 'seekoff' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : seekoff
+	Metric value   : 23
+	Modified       : None
+	Change trend   : None
+	Limit          : 15.0
+	Suppressed     : False
+</pre>
+        </section>
+        <section id="workflow_limit_control_section">
+          <h3>Controlling trends</h3>
+          <p>The exit code of the 'limit' tool is equal to the number of warnings printed. This supports use of the tool
+          	as a static analysis tool during the software build process. In this case, a non-zero exit code means
+          	that there are violations to the agreed standards and it may fail the build. The same command
+          	without --hotspots option will print all regions/files exceeding the specified limit:</p>
+          <pre>
+&gt; python "/path/to/metrix++.py" limit --db-file=boost_1_54_0/metrixpp.db --max-limit=std.code.complexity:cyclomatic:15
+</pre>
+          <h4>Modes to exclude old code from the considiration</h4>
+          <p>However, it is likely there are many warnings printed in this mode, especially if very old or legacy code is profiled 
+          	against new metrics and coding rules. Although all warnings can be removed 
+          	by re-factoring as a big task force activity, it is where many tools are rejected,
+          	because it is difficult to justify the initial cost of applying and integrating them.
+          	The Metrix++ 'limit' tool has got an option --warn-mode, which helps to overcome this problem.</p>
+          <p>--warn-mode=touched encourages re-factoring only for new and modified regions. It enables
+          	continuous refactoring. It does not matter how late the rule is applied or the
+          	coding standard is modified. It is possible to do it anytime with zero initial investment.
+          	For example, applying it to the boost interprocess library for a changes between 1.52 and 1.54 versions
+          	results in only 6 warnings:</p>
+          <pre>
+&gt; python "/path/to/metrix++.py" limit --db-file=boost_1_54_0/metrixpp.db --db-file-prev=boost_1_52_0/metrixpp.db --max-limit=std.code.complexity:cyclomatic:15 --warn-mode=touched
+</pre>
+          <pre>
+./interprocess/detail/managed_open_or_create_impl.hpp:302: warning: Metric 'std.code.complexity:cyclomatic' for region 'priv_open_or_create' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : priv_open_or_create
+	Metric value   : 37
+	Modified       : True
+	Change trend   : +1
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/ipc/message_queue.hpp:375: warning: Metric 'std.code.complexity:cyclomatic' for region 'insert_at' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : insert_at
+	Metric value   : 16
+	Modified       : True
+	Change trend   : 0
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/mapped_region.hpp:575: warning: Metric 'std.code.complexity:cyclomatic' for region 'mapped_region' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : mapped_region
+	Metric value   : 18
+	Modified       : True
+	Change trend   : +2
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/mem_algo/detail/mem_algo_common.hpp:452: warning: Metric 'std.code.complexity:cyclomatic' for region 'priv_allocate_many' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : priv_allocate_many
+	Metric value   : 20
+	Modified       : True
+	Change trend   : 0
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/mem_algo/rbtree_best_fit.hpp:787: warning: Metric 'std.code.complexity:cyclomatic' for region 'priv_expand_both_sides' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : priv_expand_both_sides
+	Metric value   : 17
+	Modified       : True
+	Change trend   : 0
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/sync/windows/named_sync.hpp:98: warning: Metric 'std.code.complexity:cyclomatic' for region 'open_or_create' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : open_or_create
+	Metric value   : 18
+	Modified       : True
+	Change trend   : 0
+	Limit          : 15.0
+	Suppressed     : False
+</pre>
+          <p>If it is challenging or of little benefit to refactor everything touched, 
+          	--warn-mode=trends simplifies the control over modified regions and only makes sure
+          	that there are no regressions in modified code. In other words, a warning is printed about a modified region/file
+          	only if a metric exceeds the specified limit and the value of the metric has got a negative trend due to the modification.
+          	It is possible to apply it anytime with zero initial investment and almost zero on-going investment around old code.
+          	For example, applying it to the boost interprocess library for a changes between 1.52 and 1.54 versions
+          	results in only 2 warnings:</p>
+          <pre>
+&gt; python "/path/to/metrix++.py" limit --db-file=boost_1_54_0/metrixpp.db --db-file-prev=boost_1_52_0/metrixpp.db --max-limit=std.code.complexity:cyclomatic:15 --warn-mode=trend
+</pre>
+          <pre>
+./interprocess/detail/managed_open_or_create_impl.hpp:302: warning: Metric 'std.code.complexity:cyclomatic' for region 'priv_open_or_create' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : priv_open_or_create
+	Metric value   : 37
+	Modified       : True
+	Change trend   : +1
+	Limit          : 15.0
+	Suppressed     : False
+
+./interprocess/mapped_region.hpp:575: warning: Metric 'std.code.complexity:cyclomatic' for region 'mapped_region' exceeds the limit.
+	Metric name    : std.code.complexity:cyclomatic
+	Region name    : mapped_region
+	Metric value   : 18
+	Modified       : True
+	Change trend   : +2
+	Limit          : 15.0
+	Suppressed     : False
+</pre>
+          <p>--warn-mode=new ignores existing code and ensures that warnings are only about new code.
+          	For example, applying it to the boost interprocess library for a changes between 1.52 and 1.54 versions
+          	results in 0 warnings, so it shows that the new code is totally compliant with the standard required in the example.</p>
+          <pre>
+&gt; python "/path/to/metrix++.py" limit --db-file=boost_1_54_0/metrixpp.db --db-file-prev=boost_1_52_0/metrixpp.db --max-limit=std.code.complexity:cyclomatic:15 --warn-mode=new
+</pre>
+          <h4>Suppressions</h4>
+          <p>It is possible to suppress warnings. Suppressions are collected from comments in code
+             and used by the 'limit' tool to filter out suppressed warnings.
+             It supports fine grained control over false-positive warnings, if there are any.</p>
+          <p>In order to suppress a warning:</p>
+          <ul>
+          	<li>per region metrics: put the metrix++ instruction in the comments before the region, for example:</li>
+          <pre class="prettyprint linenums">
+// This function returns string typed
+// representation of a name of a color,
+// requested by color's id
+// metrix++: suppress std.code.complexity:cyclomatic
+std::string getColorName(int color_id)
+{
+	switch (color_id)
+	{
+	case COLOR_RED:
+		return std::string("red")
+	case COLOR_GREEN:
+		return std::string("green")
+	case COLOR_BLUE:
+		return std::string("blue")
+	/* and so on */
+	}
+}
+</pre>
+          	<li>per file metrics: put the metrix++ instruction in the comments at the beginning of a file, for example:</li>
+          <pre class="prettyprint linenums">
+//
+// This file does processing of colors and brushes
+// Copyright is my company, 2013
+// 
+// However, it is too long and big file, and there is no time
+// to split it into multiple file, so shut up the metrix++ warnings:
+// metrix++: suppress std.general:size
+//
+
+std::string getColorName(int color_id)
+{
+	...
+...
+</pre>
+          	<li>activate collection of suppressions:</li>
+          <pre>
+&gt; python "/path/to/metrix++.py" collect --std.suppress
+</pre>
+          	<li>run the 'limit' tool WITHOUT --disable-suppressions option:</li>
+          <pre>
+&gt; python "/path/to/metrix++.py" limit ...
+</pre>
+             </ul>
+          <h5>Important notice:</h5>
+             <ul><li>The --std.suppress option enables collection of 2 metrics as well: 'std.suppress:count' and 
+                'std.suppress.file:count'. The first is number of suppressions per region.
+                The second is the same but applies to file-scope metrics.
+                It supports management of the number of suppressions.
+                Usually there are no false-positives to suppress with the <strong>right</strong> metric,
+                but there could be exceptions in specific cases. Managing suppressions is about managing exceptions.
+                If there are many exceptional cases, maybe something is wrong with a metric or the application of a metric.
+                Two code examples about colors above do not demonstrate the technically exceptional case,
+                they likely demonstrate a case of a process exception, like "there is no time to do it properly now", or
+                a case of the wrong application of a metric, like "shut up the useless tool". So, be careful.
+                The 'view' tool shows the number of suppressions and its change trends on a per metric basis.</li></ul>
+        </section>
+
+        <section id="workflow_other_section">
+          <h2>Other applications</h2>
+          <h3>Checking data file properties</h3>
+          <p>The Metrix++ 'info' tool is helpful to check the properties of a data file, like the settings used to write it,  
+          	collected metrics and files processed. For example:</p>
+          <pre>
+&gt; python "/path/to/metrix++.py" info --db-file=boost_1_54_0/metrixpp.db
+</pre>
+          <pre>
+boost_1_54_0/metrixpp.db:: info: Created using plugins and settings:
+	version        : 1.0
+	std.code.complexity:version: 1.1
+	std.code.cpp:version: 1.1
+	std.code.cpp:files: *.c,*.cc,*.cpp,*.cxx,*.h,*.hh,*.hpp,*.hxx
+	std.code.cs:version: 1.0
+	std.code.cs:files: *.cs
+	std.code.java:version: 1.1
+	std.code.java:files: *.java
+	std.code.lines:version: 1.1
+
+test_workflow.db:: info: Collected metrics:
+	std.code.complexity:cyclomatic: 
+	std.code.lines:code: 
+
+:: info: Processed files and checksums:
+	./interprocess/allocators/detail/node_pool.hpp: 0xb099a7c3
+	./interprocess/allocators/detail/node_tools.hpp: 0xaaf5044d
+	./interprocess/anonymous_shared_memory.hpp: 0x2bf06cb0
+	./interprocess/containers/allocation_type.hpp: 0x8e95cda0
+	./interprocess/containers/containers_fwd.hpp: 0xa4d0d9f7
+	./interprocess/containers/deque.hpp: 0x6dbb77af
+	./interprocess/containers/flat_map.hpp: 0x6750338c
+	...
+</pre>
+          <h3>Exporting results</h3>
+          <p>The Metrix++ 'export' tool exports data files to csv formated files. For example:</p>
+          <pre>
+&gt; python "/path/to/metrix++.py" export --db-file=boost_1_54_0/metrixpp.db > boost_1_54_0/metrixpp.csv
+</pre>
+          <pre>
+file,region,type,modified,line start,line end,std.code.complexity:cyclomatic,std.code.lines:code
+./interprocess/allocators/detail/node_pool.hpp,__global__,global,,1,110,,0
+./interprocess/allocators/detail/node_pool.hpp,boost,namespace,,33,105,,2
+./interprocess/allocators/detail/node_pool.hpp,interprocess,namespace,,34,104,,2
+./interprocess/allocators/detail/node_pool.hpp,ipcdetail,namespace,,35,103,,4
+./interprocess/allocators/detail/node_pool.hpp,SegmentManager,class,,39,72,,16
+...
+</pre>
+          <p>Files with csv format can be opened by applications, like Microsoft Office Excel, with advanced analysis capabilities.
+          	For example, to draw this distribution graph:</p>
+          <p align="center"><img src="assets/img/piechart.png"/></p>
+          <p>It is not recommended to use the export tool to implement custom post-analysis Metrix++ extensions.
+          	  The main reason is that granted backward compatibility support for csv columns is not granted.
+          	  Another main reason is that
+          	  exporting is relatively slow process. It is recommended to use Metrix++ extensions API instead.</p>
+        </section>
+        <section id="extend_section">
+          <div class="page-header">
+            <h1>Create plugin</h1>
+            <p>There are 3 types of plugins considered in this chapter:</p>
+            <ul>
+            	<li>Metric plugin</li>
+            	<li>Language parser</li>
+            	<li>Post-processing / Analysis tool</li>
+            </ul>
+            <p>Tutorial for metric plugin is generic at the beginning and large portion of this is applied to
+            	all other plugins. You need to know python and python regular expressions library to write Metrix++ extensions.</p>
+          </div>
+          <h2>Metric plugin</h2>
+          <p>The tutorial will explain how to create a plugin to count magic numbers in source code.
+             It will be relatively simple at first and will be extended with additional configuration
+             options and smarter counting logic.</p>
+          <h4>Create placeholder for new plugin</h4>
+          <ol>
+             <li>All plugins are loaded by Metrix++ from standard places within the tool installation directory and
+                 from custom places specified in the METRIXPLUSPLUS_PATH environment variable.
+                 METRIXPLUSPLUS_PATH has got the same format as system PATH environment variable.
+                 So, the first step in plugin development is to set the METRIXPLUSPLUS_PATH to point out to
+                 the directory (or directories) where plugin is located.</li>
+             <li>Create new python package 'myext', python lib 'magic.py' and 'magic.ini' file.</li>
+             <pre>
++ working_directory (set in METRIXPLUSPLUS_PATH variable)
+\--+ myext
+   \--- __init__.py
+   \--- magic.py
+   \--- magic.ini
+</pre>
+            <li>__init__.py is empty file to make myext considered by python as a package.</li>
+            <li>Edit magic.py to have the following content:
+             <pre class="prettyprint linenums">
+import mpp.api
+
+class Plugin(mpp.api.Plugin):
+    
+    def initialize(self):
+        print "Hello world"
+</pre>
+            mpp.api package include Metrix++ API classes. mpp.api.Plugin is the base class, which can be loaded
+            by Metrix++ engine and does nothing by default. In the code sample above it is extended to print
+            "Hello world" on initialization.</li>
+            <li>Edit magic.ini to have the following content:
+             <pre class="prettyprint linenums">
+[Plugin]
+version: 1.0
+package: myext
+module:  magic
+class:   Plugin
+depends: None
+actions: collect
+enabled: True
+</pre>
+            This file is a manifest for Metrix++ plugin loader. The fields in Plugin section are:
+            <dl class="dl-horizontal">
+            	<dt>version</dt>
+            	<dd>a string representing the version, step up it every time when behaviour of a plugin
+            		or backward compatibility in api or data scope is changed</dd>
+            	<dt>package</dt>
+            	<dd>python package name where to load from</dd>
+            	<dt>module</dt>
+            	<dd>python module name (filename of *.py file) to load</dd>
+            	<dt>class</dt>
+            	<dd>name of a plugin class to instanciate</dd>
+            	<dt>depends</dt>
+            	<dd>list of plugin names to load, if it this plugin is loaded</dd>
+            	<dt>actions</dt>
+            	<dd>list of Metrix++ actions affected by this plugin</dd>
+            	<dt>enabled</dt>
+            	<dd>True or False, working status of a plugin</dd>
+            </dl>
+            </li>
+            <li>Now run Metrix++ to see how this new plugin works:</li>
+          <pre>&gt; python "/path/to/metrix++.py" collect</pre>
+          <pre>Hello world</pre>
+          </ol>
+          <h4>Toogle option for the plugin</h4>
+          <ol>
+             <li>It is recommended to follow the convention for all plugins: 'run only if enabled'.
+             	So, let's extend the magic.py file to make it configurable
+             <pre class="prettyprint linenums">
+import mpp.api
+
+class Plugin(mpp.api.Plugin,
+             # make this instance configurable...
+             mpp.api.IConfigurable):
+    # ... and implement 2 interfaces
+    
+    def declare_configuration(self, parser):
+        parser.add_option("--myext.magic.numbers", "--mmn",
+            action="store_true", default=False,
+            help="Enables collection of magic numbers metric [default: %default]")
+        
+    def configure(self, options):
+        self.is_active_numbers = options.__dict__['myext.magic.numbers']
+    
+    def initialize(self):
+        # use configuration option here
+        if self.is_active_numbers == True:
+            print "Hello world"
+</pre>
+            parser argument is an instance of optparse.OptionParser class. It has got an extension to
+            accept multiple options of the same argument. Check std.tools.limit to see how to declare multiopt options, if you need.</li>
+            <li>Now run Metrix++ to see how this works:</li>
+          <pre>&gt; python "/path/to/metrix++.py" collect --myext.magic.numbers</pre>
+          <pre>Hello world</pre>
+          </ol>
+          <h4>Subscribe to notifications from parent plugins (or code parsers)</h4>
+          <ol>
+             <li>Every plugin works in a callback functions called by parent plugins.
+             	Callback receives a reference to parent plugin, data object where to store metrics data,
+             	and a flag indicating if there are changes in file or parent's settings since the previous collection.</li>
+             <pre class="prettyprint linenums">
+import mpp.api
+
+class Plugin(mpp.api.Plugin,
+             mpp.api.IConfigurable,
+             # declare that it can subscribe on notifications
+             mpp.api.Child):
+    
+    def declare_configuration(self, parser):
+        parser.add_option("--myext.magic.numbers", "--mmn",
+            action="store_true", default=False,
+            help="Enables collection of magic numbers metric [default: %default]")
+    
+    def configure(self, options):
+        self.is_active_numbers = options.__dict__['myext.magic.numbers']
+    
+    def initialize(self):
+        if self.is_active_numbers == True:
+            # subscribe to notifications from all code parsers
+            self.subscribe_by_parents_interface(mpp.api.ICode, 'callback')
+
+    # parents (code parsers) will call the callback declared
+    def callback(self, parent, data, is_updated):
+        print parent.get_name(), data.get_path(), is_updated
+</pre>
+            <li>Now run Metrix++ to see how this works. Try to do iterative scans (--db-file-prev option) to see how the
+            	state of arguments is changed</li>
+          <pre>&gt; python "/path/to/metrix++.py" collect --myext.magic.numbers</pre>
+          <pre>std.code.cpp ./test.cpp True</pre>
+          </ol>
+          <h4>Implement simple metric based on regular expression pattern</h4>
+          <ol>
+             <li>Callback may execute counting, searcing and additional parsing and store results, using data argument.
+             	'data' argument is an instance of mpp.api.FileData class.
+             	However, most metrics can be implemented
+             	simplier, if mpp.api.MetricPluginMixin routines are used. MetricPluginMixin implements
+             	declarative style for metrics based on searches by regular expression. It
+             	cares about initialisation of database fields and properties.
+             	It implements default callback which counts number of matches by regular expression for all
+             	active declared metrics. So, let's utilise that:
+             	</li>
+             <pre class="prettyprint linenums">
+import mpp.api
+import re
+
+class Plugin(mpp.api.Plugin,
+             mpp.api.IConfigurable,
+             mpp.api.Child,
+             # reuse by inheriting standard metric facilities
+             mpp.api.MetricPluginMixin):
+    
+    def declare_configuration(self, parser):
+        parser.add_option("--myext.magic.numbers", "--mmn",
+            action="store_true", default=False,
+            help="Enables collection of magic numbers metric [default: %default]")
+    
+    def configure(self, options):
+        self.is_active_numbers = options.__dict__['myext.magic.numbers']
+    
+    def initialize(self):
+        # declare metric rules
+        self.declare_metric(
+            self.is_active_numbers, # to count if active in callback
+            self.Field('numbers', int), # field name and type in the database
+            re.compile(r'''\b[0-9]+\b'''), # pattern to search
+            marker_type_mask=mpp.api.Marker.T.CODE, # search in code
+            region_type_mask=mpp.api.Region.T.ANY) # search in all types of regions
+        
+        # use superclass facilities to initialize everything from declared fields
+        super(Plugin, self).initialize(fields=self.get_fields())
+        
+        # subscribe to all code parsers if at least one metric is active
+        if self.is_active() == True:
+            self.subscribe_by_parents_interface(mpp.api.ICode)
+</pre>
+            <li>Now run Metrix++ to count numbers in code files.</li>
+          <pre>&gt; python "/path/to/metrix++.py" collect --myext.magic.numbers</pre>
+            <li>Now view the results. At this stage it is fully working simple metric.</li>
+          <pre>&gt; python "/path/to/metrix++.py" view</pre>
+          <pre>
+:: info: Overall metrics for 'myext.magic:numbers' metric
+	Average        : 2.75
+	Minimum        : 0
+	Maximum        : 7
+	Total          : 11.0
+	Distribution   : 4 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.250 : 0.250 : 1	|||||||||||||||||||||||||
+	             1 : 0.250 : 0.500 : 1	|||||||||||||||||||||||||
+	             3 : 0.250 : 0.750 : 1	|||||||||||||||||||||||||
+	             7 : 0.250 : 1.000 : 1	|||||||||||||||||||||||||
+
+:: info: Directory content:
+	Directory      : .
+</pre>
+          </ol>
+          <h4>Extend regular expression incremental counting by smarter logic</h4>
+          <ol>
+             <li>At this stage the metric counts every number in source code.
+                 However, we indent to spot only 'magic' numbers. Declared constant
+                 is not a magic number, so it is better to exclude constants from counting.
+                 It is easy to change default counter behaviour by implementing 
+                 a function with name '_&lt;metric_name&gt;_count'. </li>
+             <pre class="prettyprint linenums">
+import mpp.api
+import re
+
+class Plugin(mpp.api.Plugin,
+             mpp.api.IConfigurable,
+             mpp.api.Child,
+             mpp.api.MetricPluginMixin):
+    
+    def declare_configuration(self, parser):
+        parser.add_option("--myext.magic.numbers", "--mmn",
+            action="store_true", default=False,
+            help="Enables collection of magic numbers metric [default: %default]")
+    
+    def configure(self, options):
+        self.is_active_numbers = options.__dict__['myext.magic.numbers']
+    
+    def initialize(self):
+        # improve pattern to find declarations of constants
+        pattern_to_search = re.compile(
+            r'''((const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+        self.declare_metric(self.is_active_numbers,
+                            self.Field('numbers', int),
+                            # give a pair of pattern + custom counter logic class
+                            (pattern_to_search, self.NumbersCounter),
+                            marker_type_mask=mpp.api.Marker.T.CODE,
+                            region_type_mask=mpp.api.Region.T.ANY)
+        
+        super(Plugin, self).initialize(fields=self.get_fields())
+        
+        if self.is_active() == True:
+            self.subscribe_by_parents_interface(mpp.api.ICode)
+    
+    # implement custom counter behavior:
+    # increments counter by 1 only if single number spotted,
+    # but not declaration of a constant
+    class NumbersCounter(mpp.api.MetricPluginMixin.IterIncrementCounter):
+        def increment(self, match):
+            if match.group(0).startswith('const'):
+                return 0
+            return 1
+</pre>
+             <li>Initialy counter is initialized by zero, but it is possible to 
+             	change it as well by implementing a function with name '_&lt;metric_name&gt;_count_initialize'.
+             	Plugin we are implementing does not require this.</li>
+            <li>Now run Metrix++ to collect and view the results.</li>
+          <pre>&gt; python "/path/to/metrix++.py" collect --myext.magic.numbers</pre>
+          <pre>&gt; python "/path/to/metrix++.py" view</pre>
+          </ol>
+          <h4>Language specific regular expressions</h4>
+          <ol>
+             <li>In the previous step we added matching of constants assuming that identifiers
+             	may have symbols '_', 'a-z', 'A-Z' and '0-9'. It is true for C++ but it is not complete for Java.
+             	Java identifier may have '$' symbol in the identifier. So, let's add language specific pattern
+             	in the declaration of the metric:</li>
+             <pre class="prettyprint linenums">
+import mpp.api
+import re
+
+class Plugin(mpp.api.Plugin,
+             mpp.api.IConfigurable,
+             mpp.api.Child,
+             mpp.api.MetricPluginMixin):
+    
+    def declare_configuration(self, parser):
+        parser.add_option("--myext.magic.numbers", "--mmn",
+            action="store_true", default=False,
+            help="Enables collection of magic numbers metric [default: %default]")
+    
+    def configure(self, options):
+        self.is_active_numbers = options.__dict__['myext.magic.numbers']
+    
+    def initialize(self):
+        # specialized pattern for java
+        pattern_to_search_java = re.compile(
+            r'''((const\s+([_$a-zA-Z][_$a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+        # pattern for C++ and C# languages
+        pattern_to_search_cpp_cs = re.compile(
+            r'''((const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+        # pattern for all other languages
+        pattern_to_search = re.compile(
+            r'''\b[0-9]+\b''')
+        self.declare_metric(self.is_active_numbers,
+                            self.Field('numbers', int),
+                            # dictionary of pairs instead of a single pair
+                            {
+                             'std.code.java': (pattern_to_search_java, self.NumbersCounter),
+                             'std.code.cpp': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             'std.code.cs': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             '*': pattern_to_search
+                            },
+                            marker_type_mask=mpp.api.Marker.T.CODE,
+                            region_type_mask=mpp.api.Region.T.ANY)
+        
+        super(Plugin, self).initialize(fields=self.get_fields())
+        
+        if self.is_active() == True:
+            self.subscribe_by_parents_interface(mpp.api.ICode)
+
+    class NumbersCounter(mpp.api.MetricPluginMixin.IterIncrementCounter):
+        def increment(self, match):
+            if match.group(0).startswith('const'):
+                return 0
+            return 1
+</pre>
+             <li>Keys in the dictionary of patterns are names of parent plugins (references to code parsers).
+             	The key '*' refers to any parser.</li>
+            <li>Now run Metrix++ to collect and view the results.</li>
+          <pre>&gt; python "/path/to/metrix++.py" collect --myext.magic.numbers</pre>
+          <pre>&gt; python "/path/to/metrix++.py" view</pre>
+          </ol>
+          <h4>Store only non-zero metric values</h4>
+          <ol>
+             <li>Most functions have the metric, which we are implemneting, equal to zero.
+             	However, we are interested in finding code blocks having this metric greater than zero.
+             	Zeros consumes the space in the data file. So, we can optimise the size of a data file,
+             	if we exclude zero metric values. Let's declare this behavior for the metric.</li>
+             <pre class="prettyprint linenums">
+import mpp.api
+import re
+
+class Plugin(mpp.api.Plugin,
+             mpp.api.IConfigurable,
+             mpp.api.Child,
+             mpp.api.MetricPluginMixin):
+    
+    def declare_configuration(self, parser):
+        parser.add_option("--myext.magic.numbers", "--mmn",
+            action="store_true", default=False,
+            help="Enables collection of magic numbers metric [default: %default]")
+    
+    def configure(self, options):
+        self.is_active_numbers = options.__dict__['myext.magic.numbers']
+    
+    def initialize(self):
+        pattern_to_search_java = re.compile(
+            r'''((const\s+([_$a-zA-Z][_$a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+        pattern_to_search_cpp_cs = re.compile(
+            r'''((const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+        pattern_to_search = re.compile(
+            r'''\b[0-9]+\b''')
+        self.declare_metric(self.is_active_numbers,
+                            self.Field('numbers', int,
+                                # optimize the size of datafile:
+                                # store only non-zero results
+                                non_zero=True),
+                            {
+                             'std.code.java': (pattern_to_search_java, self.NumbersCounter),
+                             'std.code.cpp': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             'std.code.cs': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             '*': pattern_to_search
+                            },
+                            marker_type_mask=mpp.api.Marker.T.CODE,
+                            region_type_mask=mpp.api.Region.T.ANY)
+        
+        super(Plugin, self).initialize(fields=self.get_fields())
+        
+        if self.is_active() == True:
+            self.subscribe_by_parents_interface(mpp.api.ICode)
+
+    class NumbersCounter(mpp.api.MetricPluginMixin.IterIncrementCounter):
+        def increment(self, match):
+            if match.group(0).startswith('const'):
+                return 0
+            return 1
+</pre>
+            <li>Now run Metrix++ to collect and view the results.</li>
+          <pre>&gt; python "/path/to/metrix++.py" collect --myext.magic.numbers</pre>
+          <pre>&gt; python "/path/to/metrix++.py" view</pre>
+          </ol>
+          <h4>Additional per metric configuration options</h4>
+          <ol>
+             <li>It is typical that most numbers counted by the metric are equal to 0, -1 or 1.
+             	They are not necessary magic numbers. 0 or 1 are typical variable initializers.
+             	-1 is a typical negative return code. So, let's implement simplified version of the metric,
+             	which does not count 0, -1 and 1, if the specific new option is set.</li>
+             <pre class="prettyprint linenums">
+import mpp.api
+import re
+
+class Plugin(mpp.api.Plugin,
+             mpp.api.IConfigurable,
+             mpp.api.Child,
+             mpp.api.MetricPluginMixin):
+    
+    def declare_configuration(self, parser):
+        parser.add_option("--myext.magic.numbers", "--mmn",
+            action="store_true", default=False,
+            help="Enables collection of magic numbers metric [default: %default]")
+        # Add new option
+        parser.add_option("--myext.magic.numbers.simplier", "--mmns",
+            action="store_true", default=False,
+            help="Is set, 0, -1 and 1 numbers are not counted [default: %default]")
+    
+    def configure(self, options):
+        self.is_active_numbers = options.__dict__['myext.magic.numbers']
+        # remember the option here
+        self.is_active_numbers_simplier = options.__dict__['myext.magic.numbers.simplier']
+    
+    def initialize(self):
+        pattern_to_search_java = re.compile(
+            r'''((const\s+([_$a-zA-Z][_$a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+        pattern_to_search_cpp_cs = re.compile(
+            r'''((const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+        pattern_to_search = re.compile(
+            r'''\b[0-9]+\b''')
+        self.declare_metric(self.is_active_numbers,
+                            self.Field('numbers', int,
+                                non_zero=True),
+                            {
+                             'std.code.java': (pattern_to_search_java, self.NumbersCounter),
+                             'std.code.cpp': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             'std.code.cs': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             '*': pattern_to_search
+                            },
+                            marker_type_mask=mpp.api.Marker.T.CODE,
+                            region_type_mask=mpp.api.Region.T.ANY)
+        
+        super(Plugin, self).initialize(fields=self.get_fields(),
+            # remember option settings in data file properties
+            # in order to detect changes in settings on iterative re-run
+            properties=[self.Property('number.simplier', self.is_active_numbers_simplier)])
+        
+        if self.is_active() == True:
+            self.subscribe_by_parents_interface(mpp.api.ICode)
+
+    class NumbersCounter(mpp.api.MetricPluginMixin.IterIncrementCounter):
+        def increment(self, match):
+            if (match.group(0).startswith('const') or
+                (self.plugin.is_active_numbers_simplier == True and
+                 match.group(0) in ['0', '1', '-1', '+1'])):
+                return 0
+            return 1
+</pre>
+            <li>Now run Metrix++ to collect and view the results.</li>
+          <pre>&gt; python "/path/to/metrix++.py" collect --myext.magic.numbers</pre>
+          <pre>&gt; python "/path/to/metrix++.py" view</pre>
+          <pre>
+:: info: Overall metrics for 'myext.magic:numbers' metric
+	Average        : 2.5 (excluding zero metric values)
+	Minimum        : 2
+	Maximum        : 3
+	Total          : 5.0
+	Distribution   : 2 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             2 : 0.500 : 0.500 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
+	             3 : 0.500 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
+
+:: info: Directory content:
+	Directory      : .
+</pre>
+          </ol>
+          <h4>Summary</h4>
+          <p>We have finished with the tutorial. The tutorial explained how to implement simple and advanced metric plugins.
+          	We used built-in Metrix++ base classes. If you need to more advanced plugin capabilities,
+          	override in your plugin class functions inherited from mpp.api base classes. Check code of standard plugins
+          	to learn more techniques.</p>
+          <p></p>
+          <h2>Analysis tool plugin</h2>
+          <p>This tutorial will explain how to build custom Metrix++ command, which is bound to custom post-analysis tool.
+          	We will implement the tool, which identifies all new and changed regions and counts number of added lines.
+          	We skip calculating number of deleted lines, but it is easy to extend from what we get finally in the tutorial.</p>
+          <h4>New Metrix++ command / action</h4>
+          <ol>
+             <li>As in the tutorial for metric plugin, set the environment and 
+             	create new python package 'myext', python lib 'compare.py' and 'compare.ini' file.</li>
+             <pre>
++ working_directory (set in METRIXPLUSPLUS_PATH variable)
+\--+ myext
+   \--- __init__.py
+   \--- compare.py
+   \--- compare.ini
+</pre>
+            <li>__init__.py is empty file to make myext considered by python as a package.</li>
+            <li>Edit compare.py to have the following content:
+             <pre class="prettyprint linenums">
+import mpp.api
+
+class Plugin(mpp.api.Plugin, mpp.api.IRunable):
+    
+    def run(self, args):
+        print args
+        return 0
+</pre>
+            Inheritance from mpp.api.IRunable declares that the plugin is runable and requires implementation of 'run' interface.</li>
+            <li>Edit compare.ini to have the following content:
+             <pre class="prettyprint linenums">
+
+[Plugin]
+version: 1.0
+package: myext
+module:  compare
+class:   Plugin
+depends: None
+actions: compare
+enabled: True
+</pre>
+            This file is a manifest for Metrix++ plugin loader. Actions field has got new value 'compare'.
+            Metrix++ engine will automatically pick this action and will add it to the list of available commands.
+            This plugin will be loaded on 'compare' action.
+            </li>
+            <li>Now run Metrix++ to see how this new plugin works:</li>
+          <pre>&gt; python "/path/to/metrix++.py" compare -- path1 path2 path3</pre>
+          <pre>["path1", "path2", "path3"]</pre>
+          </ol>
+          <h4>Access data file loader and its' interfaces</h4>
+          <ol>
+             <li>By default, all post-analysis tools have got --db-file and --db-file-prev options. It is 
+             	because 'mpp.dbf' plugin is loaded for any action, including our new one 'compare'. In order to continue
+             	the tutorial, we need to have 2 data files with 'std.code.lines:total' metric collected.
+             	So, write to files by running:</li>
+             <pre>cd my_project_version_1
+&gt; python "/path/to/metrix++.py" collect --std.code.lines.total</pre>
+             <pre>cd my_project_version_2
+&gt; python "/path/to/metrix++.py" collect --std.code.lines.total</pre>
+            <li>Edit compare.py file to get the loader and iterate collected file paths:</li>
+             <pre class="prettyprint linenums">
+import mpp.api
+# load common utils for post processing tools
+import mpp.utils
+
+class Plugin(mpp.api.Plugin, mpp.api.IRunable):
+    
+    def run(self, args):
+        # get data file reader using standard metrix++ plugin
+        loader = self.get_plugin('mpp.dbf').get_loader()
+        
+        # iterate and print file length for every path in args
+        exit_code = 0
+        for path in (args if len(args) > 0 else [""]):
+            file_iterator = loader.iterate_file_data(path)
+            if file_iterator == None:
+                mpp.utils.report_bad_path(path)
+                exit_code += 1
+                continue
+            for file_data in file_iterator:
+                print file_data.get_path()
+        return exit_code
+</pre>
+            <li>Now run Metrix++ to see how it works:</li>
+          <pre>&gt; python "/path/to/metrix++.py" compare --db-file=my_project_version_2/metrixpp.db --db-file-prev=my_project_version_1/metrixpp.db</pre>
+          </ol>
+
+          <h4>Identify added, modified files/regions and read metric data</h4>
+          <ol>
+            <li>Let's extend the logic of the tool to compare files and regions, read 'std.code.lines:total' metric
+            	and calcuate the summary of number of added lines. mpp.utils.FileRegionsMatcher is helper class
+            	which does matching and comparison of regions for 2 given mpp.api.FileData objects.</li>
+             <pre class="prettyprint linenums">
+import mpp.api
+import mpp.utils
+import mpp.cout
+
+class Plugin(mpp.api.Plugin, mpp.api.IRunable):
+    
+    def run(self, args):
+        loader = self.get_plugin('mpp.dbf').get_loader()
+        # get previous db file loader
+        loader_prev = self.get_plugin('mpp.dbf').get_loader_prev()
+        
+        exit_code = 0
+        for path in (args if len(args) > 0 else [""]):
+            added_lines = 0
+            file_iterator = loader.iterate_file_data(path)
+            if file_iterator == None:
+                mpp.utils.report_bad_path(path)
+                exit_code += 1
+                continue
+            for file_data in file_iterator:
+                added_lines += self._compare_file(file_data, loader, loader_prev)
+            mpp.cout.notify(path, '', mpp.cout.SEVERITY_INFO,
+                            "Change trend report",
+                            [('Added lines', added_lines)])
+        return exit_code
+
+    def _compare_file(self, file_data, loader, loader_prev):
+        # compare file with previous and return number of new lines
+        file_data_prev = loader_prev.load_file_data(file_data.get_path())
+        if file_data_prev == None:
+            return self._sum_file_regions_lines(file_data)
+        elif file_data.get_checksum() != file_data_prev.get_checksum():
+            return self._compare_file_regions(file_data, file_data_prev)
+
+    def _sum_file_regions_lines(self, file_data):
+        # just sum up the metric for all regions
+        result = 0
+        for region in file_data.iterate_regions():
+            result += region.get_data('std.code.lines', 'total')
+    
+    def _compare_file_regions(self, file_data, file_data_prev):
+        # compare every region with previous and return number of new lines
+        matcher = mpp.utils.FileRegionsMatcher(file_data, file_data_prev)
+        result = 0
+        for region in file_data.iterate_regions():
+            if matcher.is_matched(region.get_id()) == False:
+                # if added region, just add the lines
+                result += region.get_data('std.code.lines', 'total')
+            elif matcher.is_modified(region.get_id()):
+                # if modified, add the difference in lines
+                region_prev = file_data_prev.get_region(
+                    matcher.get_prev_id(region.get_id()))
+                result += (region.get_data('std.code.lines', 'total') -
+                           region_prev.get_data('std.code.lines', 'total'))
+        return result
+</pre>
+            <li>Now run Metrix++ to see how it works:</li>
+          <pre>&gt; python "/path/to/metrix++.py" compare --db-file=my_project_version_2/metrixpp.db --db-file-prev=my_project_version_1/metrixpp.db</pre>
+          <pre>
+:: info: Change trend report
+	Added lines    : 7
+</pre>
+          </ol>
+
+          <h4>Summary</h4>
+          <p>We have finished with the tutorial. The tutorial explained how to read Metrix++ data files and 
+          	implement custom post-processing tools. Even if some existing Metrix++ code requires clean-up and refactoring,
+          	check code of standard tool plugins to learn more techniques.</p>
+          <h2>Language parser plugin</h2>
+
+                <p>Unfortunately, there is no good documentation at this stage for this part.
+                Briefly, if metric plugin counts and stores data into FileData object,
+                tool plugin reads this data, language plugin construct the original structure of
+                FileData object. The orginal structure includes regions (like functions, classes, etc.)
+                 and markers (like comments, strings, preprocessor, etc.). 
+                 Check code of existing parsers.</p>
+                <ul>
+                  <li>a language parser plugin is registered in the same way as a metric plugin</li>
+                  <li>it registers parser's callback in 'std.tools.collect' plugin</li>
+                  <li>parses a file in a callback, called by 'std.tools.collect'</li>
+                  <li>parser needs to identify markers  and regions 
+                    and tell about this to file data object passed as an
+                    argument for the callback.</li>
+                </ul>
+
+                <p>There are useful options and tools avaialble for
+                trobuleshooting purposes during development:</p>
+                <ul>
+                  <li>metrix++.py debug generates html code showing parsed code structures and their boundaries</li>
+                  <li>--nest-regions for view tool forces the viewer to indent subregions.</li>
+                  <li>--general.log-level option is available for any command and is helpful to trace execution.</li>
+                </ul>
+
+                <p>Finally, if there are any questions or enquires, please,
+                feel free to <a href="https://sourceforge.net/p/metrixplusplus/tickets/new/">submit new question</a>.</p>
+
+        </section>
+
+        <section id="contribute_section">
+          <div class="page-header">
+            <h1>Feeback and contribute</h1>
+          </div>
+          <p>Now it is your turn. There are multiple ways how you can contribute and help to improve and progress Metrix++ project:</p>
+          <ul>
+          	<li>Try Metrix++ and <a href="https://sourceforge.net/projects/metrixplusplus/reviews/new">post review</a></li>
+          	<li><a href="https://sourceforge.net/p/metrixplusplus/tickets/new/">Submit new feature request or bug report</a></li>
+          	<li><a href="https://sourceforge.net/p/metrixplusplus/tickets/new/">Ask a question</a></li>
+          	<li>Share your patch files and ideas, colloborate by email to 
+          		<a href="mailto:avkonst@users.sourceforge.net?subject=Metrix%2B%2B Project Request">project administrator</a></li>
+          	<li>Create and publish your plugin. 
+          		<a href="mailto:avkonst@users.sourceforge.net?subject=Metrix%2B%2B Plugin Reference">Request to refer</a>
+          			 to it from Metrix++ project space.</li>
+          	<li><a href="mailto:avkonst@users.sourceforge.net?subject=Metrix%2B%2B Plugin Submission">Submit your plugin</a>
+          		 to include to the standard set</li>
+          	<li>... and consider to
+          		<a href="mailto:avkonst@users.sourceforge.net?subject=Metrix%2B%2B Join Request">join the project</a>!</li>
+          </ul>
+        </section>
+
+      </div> <!-- end for sections -->
+    </div></div> <!-- end for row and container -->
+
+
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+      	<div class="row">
+      		<div class="span3">
+      			<p><a href="http://sourceforge.net/projects/metrixplusplus/"><img src="http://sflogo.sourceforge.net/sflogo.php?group_id=275605&amp;type=3"
+		        	alt="Get Metrix++ at SourceForge.net. Fast, secure and Free Open Source software downloads" border="0"></a></p>
+		        <p>&middot;</p>
+		        <p>&middot; &middot;<script type="text/javascript" src="http://www.ohloh.net/p/485947/widgets/project_users_logo.js"></script></p>
+		        <p><a href="http://freecode.com/projects/metrix"><img src="assets/img/fm_logo.png" width="130"></a></p>
+		        <p>&middot;</p>
+      		</div>
+      		<div class="span9">
+		        <p>Copyright <strong>&copy;</strong> 2009 - 2013, <a href="mailto:avkonst@users.sourceforge.net"><span class="normalImportance">Metrix++</span> Project</a></p>
+		        <p>Code licensed under <a href="http://www.gnu.org/licenses/gpl.txt" target="_blank">GPL 3.0</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+		        <ul class="footer-links">
+		          <li><a href="https://sourceforge.net/p/metrixplusplus/tickets/new/">Ask question</a></li>
+		          <li class="muted">&middot;</li>
+		          <li><a href="https://sourceforge.net/p/metrixplusplus/tickets/new/">Report defect</a></li>
+		          <li class="muted">&middot;</li>
+		          <li><a href="https://sourceforge.net/p/metrixplusplus/tickets/new/">Feature request</a></li>
+		          <li class="muted">&middot;</li>
+		          <li><a href="https://sourceforge.net/p/metrixplusplus/tickets/search/?q=%21status%3Awont-fix+%26%26+%21status%3Aclosed">Open issues</a></li>
+		          <li class="muted">&middot;</li>
+		          <li><a href="https://sourceforge.net/p/metrixplusplus/wiki/ChangeLog/">Changelog</a></li>
+		        </ul>
+            </div>
+        </div>
+      </div>
+    </footer>
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap-transition.js"></script>
+    <script src="assets/js/bootstrap-alert.js"></script>
+    <script src="assets/js/bootstrap-modal.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/js/bootstrap-tab.js"></script>
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script src="assets/js/bootstrap-popover.js"></script>
+    <script src="assets/js/bootstrap-button.js"></script>
+    <script src="assets/js/bootstrap-collapse.js"></script>
+    <script src="assets/js/bootstrap-carousel.js"></script>
+    <script src="assets/js/bootstrap-typeahead.js"></script>
+    <script src="assets/js/bootstrap-affix.js"></script>
+
+    <script>
+      !function ($) {
+        $(function(){
+          // carousel demo
+          $('#myCarousel').carousel()
+        })
+      }(window.jQuery)
+    </script>
+
+    <script src="assets/js/holder/holder.js"></script>
+    <script src="assets/js/google-code-prettify/prettify.js"></script>
+
+    <script src="assets/js/application.js"></script>
+
+    <script>
+    
+    </script>
+
+
+    <!-- Analytics
+    ================================================== -->
+    <!--
+    <script>
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '4f0dc9fef5a1f55508000013');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+	-->
+  </body>
+</html>

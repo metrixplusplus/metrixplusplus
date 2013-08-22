@@ -1,0 +1,21 @@
+Usage: python metrix++.py --help
+       python metrix++.py export --help
+       python metrix++.py export [options] -- [path 1] ... [path N]
+
+Options:
+  -h, --help            show this help message and exit
+  --db-file=DB_FILE, --dbf=DB_FILE
+                        Path to a database file to read and process [default:
+                        ./metrixpp.db].
+  --db-file-prev=DB_FILE_PREV, --dbfp=DB_FILE_PREV
+                        Path to database file with data collected for the
+                        past/previous code revision. It is used to identify
+                        and evaluate/analyze change trends. [default: none].
+  --log-level=LOG_LEVEL, --ll=LOG_LEVEL
+                        Defines log level. Possible values are
+                        'DEBUG','INFO','WARNING' or 'ERROR'. Default value is
+                        inherited from environment variable
+                        'METRIXPLUSPLUS_LOG_LEVEL' if set. [default: INFO]
+  --format=FORMAT, --ft=FORMAT
+                        Format of the output data. Possible values are 'xml'
+                        and 'csv' [default: csv]

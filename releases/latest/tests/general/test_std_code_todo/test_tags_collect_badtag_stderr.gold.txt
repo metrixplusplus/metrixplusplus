@@ -1,0 +1,6 @@
+[LOG]: WARNING:	Logging enabled with INFO level
+Usage: python metrix++.py --help
+       python metrix++.py collect --help
+       python metrix++.py collect [options] -- [path 1] ... [path N]
+
+metrix++.py: error: option --std.code.todo.tags: tag FIX-ME includes not allowed symbols
