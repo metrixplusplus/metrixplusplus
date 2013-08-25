@@ -56,6 +56,12 @@ Options:
   --std.code.magic.numbers.simplier, --scmns
                         Is set, 0, -1 and 1 numbers are not counted in
                         'std.code.magic.numbers' metric [default: False]
+  --std.code.mi.simple, --scms
+                        Enables collection of simple maintainability index
+                        metric. It uses std.code.line:code,
+                        std.code.complexity:cyclomatic metrics to rank level
+                        of maintainability. Lower value of this metric
+                        indicates better maintainability. [default: False]
   --std.code.todo.comments, --sctc
                         Enables collection of number of todo/fixme/etc markers
                         in comments [default: False]

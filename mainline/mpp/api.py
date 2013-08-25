@@ -23,6 +23,84 @@ import sys
 import mpp.internal.dbwrap
 import mpp.internal.api_impl
 
+class InterfaceNotImplemented(Exception):
+    def __init__(self, obj):
+        Exception.__init__(self, "Method '"
+                            + sys._getframe(1).f_code.co_name
+                            + "' has not been implemented for "
+                            + str(obj.__class__))
+
+class IConfigurable(object):
+    def configure(self, options):
+        raise InterfaceNotImplemented(self)
+    def declare_configuration(self, optparser):
+        raise InterfaceNotImplemented(self)
+
+class IRunable(object):
+    def run(self, args):
+        raise InterfaceNotImplemented(self)
+    
+class IParser(object):
+    def process(self, parent, data, is_updated):
+        raise InterfaceNotImplemented(self)
+
+class ICode(object):
+    pass
+
+class CallbackNotImplemented(Exception):
+    
+    def __init__(self, obj, callback_name):
+        Exception.__init__(self, "Callback '"
+                           + callback_name
+                           + "' has not been implemented for "
+                           + str(obj.__class__))
+
+class Child(object):
+    
+    def notify(self, parent, callback_name, *args):
+        if hasattr(self, callback_name) == False:
+            raise CallbackNotImplemented(self, callback_name)
+        self.__getattribute__(callback_name)(parent, *args)
+
+    def subscribe_by_parents_name(self, parent_name, callback_name='callback'):
+        self.get_plugin(parent_name).subscribe(self, callback_name)
+    
+    def subscribe_by_parents_names(self, parent_names, callback_name='callback'):
+        for parent_name in parent_names:
+            self.get_plugin(parent_name).subscribe(self, callback_name)
+
+    def subscribe_by_parents_interface(self, interface, callback_name='callback'):
+        for plugin in self._get_plugin_loader().iterate_plugins():
+            if isinstance(plugin, interface):
+                plugin.subscribe(self, callback_name)
+
+
+class Parent(object):
+    
+    def init_Parent(self):
+        if hasattr(self, 'children') == False:
+            self.children = []
+            
+    def subscribe(self, obj, callback_name):
+        self.init_Parent()
+        if (isinstance(obj, Child) == False):
+            raise TypeError()
+        self.children.append((obj,callback_name))
+
+    def unsubscribe(self, obj, callback_name):
+        self.init_Parent()
+        self.children.remove((obj, callback_name))
+
+    def notify_children(self, *args):
+        self.init_Parent()
+        for child in self.children:
+            child[0].notify(self, child[1], *args)
+
+    def iterate_children(self):
+        self.init_Parent()
+        for child in self.children:
+            yield child
+
 ##############################################################################
 #
 # 
@@ -927,6 +1005,9 @@ class BasePlugin(object):
             return None
         return self.name
 
+    def get_namespace(self):
+        return self.get_name()
+
     def set_version(self, version):
         self.version = version
 
@@ -995,7 +1076,7 @@ class Plugin(BasePlugin):
                 # mark the plug-in as updated in order to trigger full rescan
                 self.is_updated = self.is_updated or is_created
 
-class MetricPluginMixin(object):
+class MetricPluginMixin(Parent):
 
     class AliasError(Exception):
         def __init__(self, alias):
@@ -1003,7 +1084,9 @@ class MetricPluginMixin(object):
             
     class PlainCounter(object):
         
-        def __init__(self, plugin, alias, data, region):
+        def __init__(self, namespace, field, plugin, alias, data, region):
+            self.namespace = namespace
+            self.field = field
             self.plugin = plugin
             self.alias = alias
             self.data = data
@@ -1042,6 +1125,24 @@ class MetricPluginMixin(object):
                 self.result = self.assign(match)
         
         def assign(self, match):
+            return self.result
+
+    class RankedCounter(PlainCounter):
+        
+        def __init__(self, *args, **kwargs):
+            super(MetricPluginMixin.RankedCounter, self).__init__(*args, **kwargs)
+            self.result = self.region.get_data(self.namespace, self.field)
+            if self.result == None:
+                self.result = 1
+        
+        def get_result(self):
+            sourced_metric = self.region.get_data(self.rank_source[0], self.rank_source[1])
+            for (ind, range_pair) in enumerate(self.rank_ranges):
+                if ((range_pair[0] == None or sourced_metric >= range_pair[0])
+                    and
+                    (range_pair[1] == None or sourced_metric <= range_pair[1])):
+                        self.result = self.result * (ind + 1)
+                        break
             return self.result
 
     def declare_metric(self, is_active, field,
@@ -1090,19 +1191,18 @@ class MetricPluginMixin(object):
         is_updated = is_updated or self.is_updated
         if is_updated == True:
             for field in self.get_fields():
-                self.count_if_active(field.name, data, alias=parent.get_name())
-        # if parent, notify children
-        if isinstance(self, Parent):
-            self.notify_children(data, is_updated)
+                self.count_if_active(self.get_namespace(),
+                                     field.name,
+                                     data,
+                                     alias=parent.get_name())
+        # this mixin implements parent interface
+        self.notify_children(data, is_updated)
 
-    def count_if_active(self, metric_name, data, namespace=None, alias='*'):
-        if self.is_active(metric_name) == False:
+    def count_if_active(self, namespace, field, data, alias='*'):
+        if self.is_active(field) == False:
             return
         
-        if namespace == None:
-            namespace = self.get_name()
-            
-        field_data = self._fields[metric_name]
+        field_data = self._fields[field]
         if alias not in field_data[4].keys():
             if '*' not in field_data[4].keys():
                 raise self.AliasError(alias)
@@ -1111,93 +1211,17 @@ class MetricPluginMixin(object):
         (pattern_to_search, counter_class) = field_data[4][alias]
         
         for region in data.iterate_regions(filter_group=field_data[5]):
-            counter = counter_class(self, alias, data, region)
-            for marker in data.iterate_markers(
-                            filter_group = field_data[1],
-                            region_id = region.get_id(),
-                            exclude_children = field_data[2],
-                            merge=field_data[3]):
-                counter.count(marker, pattern_to_search)
+            counter = counter_class(namespace, field, self, alias, data, region)
+            if field_data[1] != Marker.T.NONE:
+                for marker in data.iterate_markers(
+                                filter_group = field_data[1],
+                                region_id = region.get_id(),
+                                exclude_children = field_data[2],
+                                merge=field_data[3]):
+                    counter.count(marker, pattern_to_search)
             count = counter.get_result()
             if count != 0 or field_data[0].non_zero == False:
-                region.set_data(namespace, metric_name, count)
+                region.set_data(namespace, field, count)
 
-class InterfaceNotImplemented(Exception):
-    def __init__(self, obj):
-        Exception.__init__(self, "Method '"
-                            + sys._getframe(1).f_code.co_name
-                            + "' has not been implemented for "
-                            + str(obj.__class__))
-
-class IConfigurable(object):
-    def configure(self, options):
-        raise InterfaceNotImplemented(self)
-    def declare_configuration(self, optparser):
-        raise InterfaceNotImplemented(self)
-
-class IRunable(object):
-    def run(self, args):
-        raise InterfaceNotImplemented(self)
-    
-class IParser(object):
-    def process(self, parent, data, is_updated):
-        raise InterfaceNotImplemented(self)
-
-class ICode(object):
-    pass
-
-class CallbackNotImplemented(Exception):
-    
-    def __init__(self, obj, callback_name):
-        Exception.__init__(self, "Callback '"
-                           + callback_name
-                           + "' has not been implemented for "
-                           + str(obj.__class__))
-
-class Child(object):
-    
-    def notify(self, parent, callback_name, *args):
-        if hasattr(self, callback_name) == False:
-            raise CallbackNotImplemented(self, callback_name)
-        self.__getattribute__(callback_name)(parent, *args)
-
-    def subscribe_by_parents_name(self, parent_name, callback_name='callback'):
-        self.get_plugin(parent_name).subscribe(self, callback_name)
-    
-    def subscribe_by_parents_names(self, parent_names, callback_name='callback'):
-        for parent_name in parent_names:
-            self.get_plugin(parent_name).subscribe(self, callback_name)
-
-    def subscribe_by_parents_interface(self, interface, callback_name='callback'):
-        for plugin in self._get_plugin_loader().iterate_plugins():
-            if isinstance(plugin, interface):
-                plugin.subscribe(self, callback_name)
-
-
-class Parent(object):
-    
-    def init_Parent(self):
-        if hasattr(self, 'children') == False:
-            self.children = []
-            
-    def subscribe(self, obj, callback_name):
-        self.init_Parent()
-        if (isinstance(obj, Child) == False):
-            raise TypeError()
-        self.children.append((obj,callback_name))
-
-    def unsubscribe(self, obj, callback_name):
-        self.init_Parent()
-        self.children.remove((obj, callback_name))
-
-    def notify_children(self, *args):
-        self.init_Parent()
-        for child in self.children:
-            child[0].notify(self, child[1], *args)
-
-    def iterate_children(self):
-        self.init_Parent()
-        for child in self.children:
-            yield child
 
 

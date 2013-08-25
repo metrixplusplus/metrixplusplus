@@ -75,8 +75,8 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
 
     class MaxIndentCounter(mpp.api.MetricPluginMixin.IterAssignCounter):
         
-        def __init__(self, plugin, alias, data, region):
-            super(Plugin.MaxIndentCounter, self).__init__(plugin, alias, data, region)
+        def __init__(self, *args, **kwargs):
+            super(Plugin.MaxIndentCounter, self).__init__(*args, **kwargs)
             self.current_level = 0
             
         def assign(self, match):
