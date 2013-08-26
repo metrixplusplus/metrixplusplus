@@ -1,3 +1,6 @@
+## 1.4 (September, 2013)
+- New metric: std.code.mi:simple - simple implemetation of maintainability index.
+
 ## 1.3 (August, 2013)
 - Deprecated and dropped support for callback based implementation of advanced counters
 (use MetricPluginMixin.*Counter classes instead)
