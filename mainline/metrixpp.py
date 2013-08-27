@@ -59,10 +59,6 @@ def start():
     ts = time.time()
     mpp.log.set_default_format()
 
-    # TODO remove, logging enabled at earlier stage to track down a problem with loader    
-    os.environ['METRIXPLUSPLUS_LOG_LEVEL'] = 'DEBUG'
-    logging.getLogger().setLevel(logging.DEBUG)
-    
     exit_code = main()
     time_spent = round((time.time() - ts), 2)
     if 'METRIXPLUSPLUS_TEST_GENERATE_GOLDS' in os.environ.keys() and \
