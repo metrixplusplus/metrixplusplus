@@ -710,6 +710,6 @@ class Database(object):
     def log(self, sql):
         if logging.getLogger().getEffectiveLevel() <= logging.DEBUG:
             pass
-            #logging.debug("[" + str(self.id) + "] Executing query: " + sql)
-            #traceback.print_stack()
+            logging.debug("[" + str(self.id) + "] Executing query: " + sql)
+            traceback.print_stack()
         
