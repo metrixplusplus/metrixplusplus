@@ -24,6 +24,7 @@ import sys
 import ConfigParser
 import re
 import optparse
+import logging
 
 class MultiOptionParser(optparse.OptionParser):
     
@@ -120,6 +121,8 @@ class Loader(object):
                 result.append(child)
             return result
 
+        logging.debug("Additional plugin loading locations: " + str(directories))
+
         # configure python path for loading
         std_ext_dir = os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'ext')
         std_ext_priority_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -143,6 +146,7 @@ class Loader(object):
         # load
         for plugin_name in required_and_dependant_plugins:
             item = inicontainer.hash[plugin_name]
+            logging.debug("Loading plugin: " + str(item['package']) + ' ' + str(item['module']))
             plugin = __import__(item['package'], globals(), locals(), [item['module']], -1)
             module_attr = plugin.__getattribute__(item['module'])
             class_attr = module_attr.__getattribute__(item['class'])
@@ -177,7 +181,9 @@ class Loader(object):
 
         for item in self.iterate_plugins():
             if (isinstance(item, mpp.api.IConfigurable)):
+                logging.debug("declaring options for " + item.get_name())
                 item.declare_configuration(optparser)
+                logging.debug("after has option std.code.lines.code " + str(optparser.has_option('--std.code.lines.code')))
 
         (options, args) = optparser.parse_args(args)
         for item in self.iterate_plugins():
