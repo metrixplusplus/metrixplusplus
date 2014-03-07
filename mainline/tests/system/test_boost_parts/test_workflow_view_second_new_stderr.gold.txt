@@ -1,5 +1,5 @@
 [LOG]: WARNING:	Logging enabled with INFO level
-[LOG]: INFO:	Processing: 
+[LOG]: INFO:	Processing: ./
 [LOG]: INFO:	Processing: ./interprocess/allocators/adaptive_pool.hpp [modified]
 [LOG]: INFO:	Processing: ./interprocess/allocators/allocator.hpp [modified]
 [LOG]: INFO:	Processing: ./interprocess/allocators/cached_adaptive_pool.hpp [modified]

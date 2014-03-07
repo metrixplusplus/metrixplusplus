@@ -1,4 +1,4 @@
-:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+./:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
 	Average        : 1.375
 	Minimum        : 1
 	Maximum        : 3
@@ -9,7 +9,8 @@
 	             2 : 0.125 : 0.875 : 1	|||||||||||||
 	             3 : 0.125 : 1.000 : 1	|||||||||||||
 
-:: info: Directory content:
-	Directory      : .
+./:: info: Directory content:
+	File           : file_deleted_in_new_sources.cpp
+	File           : simple.cpp
 
 

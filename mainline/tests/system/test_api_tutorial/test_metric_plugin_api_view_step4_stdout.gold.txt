@@ -1,4 +1,4 @@
-:: info: Overall metrics for 'myext.magic:numbers' metric
+./:: info: Overall metrics for 'myext.magic:numbers' metric
 	Average        : 2.75
 	Minimum        : 0
 	Maximum        : 7
@@ -10,7 +10,7 @@
 	             3 : 0.250 : 0.750 : 1	|||||||||||||||||||||||||
 	             7 : 0.250 : 1.000 : 1	|||||||||||||||||||||||||
 
-:: info: Directory content:
-	Directory      : .
+./:: info: Directory content:
+	File           : test.cpp
 
 

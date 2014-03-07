@@ -1,12 +1,13 @@
 <view>
 
     <data>
-        <info path="" id="1" />
+        <info path="./" id="1" />
         <file-data />
         <subfiles>
+            <subfile>file_deleted_in_new_sources.cpp</subfile>
+            <subfile>simple.cpp</subfile>
         </subfiles>
         <subdirs>
-            <subdir>.</subdir>
         </subdirs>
         <aggregated-data>
             <std.code.complexity>

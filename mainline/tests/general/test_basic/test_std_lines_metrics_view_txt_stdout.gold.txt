@@ -1,4 +1,4 @@
-:: info: Overall metrics for 'std.code.lines:total' metric
+./:: info: Overall metrics for 'std.code.lines:total' metric
 	Average        : 5.4375
 	Minimum        : 0
 	Maximum        : 12
@@ -15,7 +15,7 @@
 	             9 : 0.062 : 0.938 :  1	||||||
 	            12 : 0.062 : 1.000 :  1	||||||
 
-:: info: Overall metrics for 'std.code.lines:code' metric
+./:: info: Overall metrics for 'std.code.lines:code' metric
 	Average        : 4.875
 	Minimum        : 0
 	Maximum        : 11
@@ -30,7 +30,7 @@
 	             8 : 0.062 : 0.938 :  1	||||||
 	            11 : 0.062 : 1.000 :  1	||||||
 
-:: info: Overall metrics for 'std.code.lines:preprocessor' metric
+./:: info: Overall metrics for 'std.code.lines:preprocessor' metric
 	Average        : 0.0625
 	Minimum        : 0
 	Maximum        : 1
@@ -40,7 +40,7 @@
 	             0 : 0.938 : 0.938 : 15	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             1 : 0.062 : 1.000 :  1	||||||
 
-:: info: Overall metrics for 'std.code.lines:comments' metric
+./:: info: Overall metrics for 'std.code.lines:comments' metric
 	Average        : 0.625
 	Minimum        : 0
 	Maximum        : 3
@@ -52,7 +52,8 @@
 	             2 : 0.125 : 0.938 :  2	|||||||||||||
 	             3 : 0.062 : 1.000 :  1	||||||
 
-:: info: Directory content:
-	Directory      : .
+./:: info: Directory content:
+	File           : file_deleted_in_new_sources.cpp
+	File           : simple.cpp
 
 

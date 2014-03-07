@@ -1,4 +1,4 @@
-:: info: Overall metrics for 'std.code.complexity:maxindent' metric
+./:: info: Overall metrics for 'std.code.complexity:maxindent' metric
 	Average        : 1.875
 	Minimum        : 1
 	Maximum        : 3
@@ -9,7 +9,8 @@
 	             2 : 0.625 : 0.875 : 5	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             3 : 0.125 : 1.000 : 1	|||||||||||||
 
-:: info: Directory content:
-	Directory      : .
+./:: info: Directory content:
+	File           : file_deleted_in_new_sources.cpp
+	File           : simple.cpp
 
 

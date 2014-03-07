@@ -22,6 +22,7 @@ import mpp.internal.py2txt
 
 import logging
 import re
+import os
 
 class FileRegionsMatcher(object):
 
@@ -100,6 +101,8 @@ class FileRegionsMatcher(object):
 
 def preprocess_path(path):
     path = re.sub(r'''[\\]+''', "/", path)
+    if os.path.isabs(path) == False and path.startswith('./') == False:
+        path = './' + path
     logging.info("Processing: " + path)
     return path
 

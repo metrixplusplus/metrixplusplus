@@ -1,4 +1,4 @@
-:: info: Overall metrics for 'std.code.magic:numbers' metric
+./:: info: Overall metrics for 'std.code.magic:numbers' metric
 	Average        : 1.0 (excluding zero metric values)
 	Minimum        : 1
 	Maximum        : 1
@@ -7,7 +7,8 @@
 	  Metric value : Ratio : R-sum : Number of regions
 	             1 : 1.000 : 1.000 : 9	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-:: info: Directory content:
-	Directory      : .
+./:: info: Directory content:
+	File           : file_deleted_in_new_sources.cpp
+	File           : simple.cpp
 
 
