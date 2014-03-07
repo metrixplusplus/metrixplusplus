@@ -115,6 +115,8 @@ class DirectoryReader():
         def run_per_file(plugin, fname, full_path):
             exit_code = 0
             norm_path = re.sub(r'''[\\]''', "/", full_path)
+            if os.path.isabs(norm_path) == False and norm_path.startswith('./') == False:
+                norm_path = './' + norm_path
             if plugin.is_file_excluded(norm_path) == False:
                 if os.path.isdir(full_path):
                     if plugin.non_recursively == False:
