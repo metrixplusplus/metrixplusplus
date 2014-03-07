@@ -1,12 +1,15 @@
 <view>
 
     <data>
-        <info path="" id="1" />
+        <info path="./" id="1" />
         <file-data />
         <subfiles>
+            <subfile>BinaryHeapPriorityQueue.java</subfile>
+            <subfile>attrs.java</subfile>
+            <subfile>Generics.java</subfile>
+            <subfile>ArrayUtils.java</subfile>
         </subfiles>
         <subdirs>
-            <subdir>.</subdir>
         </subdirs>
         <aggregated-data>
             <std.code.complexity>

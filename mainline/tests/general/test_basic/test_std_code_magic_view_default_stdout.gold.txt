@@ -1,4 +1,4 @@
-:: info: Overall metrics for 'std.code.magic:numbers' metric
+./:: info: Overall metrics for 'std.code.magic:numbers' metric
 	Average        : 1.55555555556 (excluding zero metric values)
 	Minimum        : 1
 	Maximum        : 4
@@ -9,7 +9,8 @@
 	             2 : 0.222 : 0.889 : 2	||||||||||||||||||||||
 	             4 : 0.111 : 1.000 : 1	|||||||||||
 
-:: info: Directory content:
-	Directory      : .
+./:: info: Directory content:
+	File           : file_deleted_in_new_sources.cpp
+	File           : simple.cpp
 
 

@@ -25,7 +25,7 @@ test_workflow.db:: info: Collected metrics:
 	std.suppress.file:count: 
 	std.suppress.file:list: 
 
-:: info: Processed files and checksums:
+./:: info: Processed files and checksums:
 	./file_deleted_in_new_sources.cpp: 0xfd51c243
 	./simple.cpp   : 0xcf51202e
 

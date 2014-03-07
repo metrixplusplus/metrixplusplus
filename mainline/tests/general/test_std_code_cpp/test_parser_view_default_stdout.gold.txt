@@ -1,12 +1,16 @@
 <view>
 
     <data>
-        <info path="" id="1" />
+        <info path="./" id="1" />
         <file-data />
         <subfiles>
+            <subfile>operator_test.hpp</subfile>
+            <subfile>function_ends_on_class.cpp</subfile>
+            <subfile>test.c</subfile>
+            <subfile>test2.cpp</subfile>
+            <subfile>test3.cpp</subfile>
         </subfiles>
         <subdirs>
-            <subdir>.</subdir>
         </subdirs>
         <aggregated-data>
             <std.code.complexity>

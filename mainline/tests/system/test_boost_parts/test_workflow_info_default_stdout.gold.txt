@@ -17,7 +17,7 @@ test_workflow.db:: info: Collected metrics:
 	std.code.complexity:cyclomatic: 
 	std.code.lines:code: 
 
-:: info: Processed files and checksums:
+./:: info: Processed files and checksums:
 	./interprocess/allocators/detail/node_pool.hpp: 0xb099a7c3
 	./interprocess/allocators/detail/node_tools.hpp: 0xaaf5044d
 	./interprocess/anonymous_shared_memory.hpp: 0x2bf06cb0
