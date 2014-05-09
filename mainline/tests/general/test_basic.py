@@ -295,6 +295,25 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('view', ['--format=txt'], prefix='txt')
         self.assertExec(runner.run())
 
+    def test_std_filelines_metrics(self):
+
+        runner = tests.common.ToolRunner('collect',
+                                         ['--std.code.filelines.code',
+                                          '--std.code.filelines.preprocessor',
+                                          '--std.code.filelines.comments',
+                                          '--std.code.filelines.total'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view',
+                                         ['--nest-regions', '--format=txt'],
+                                         prefix='nest_per_file',
+                                         dirs_list=['./simple.cpp'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view', ['--format=txt'], prefix='txt')
+        self.assertExec(runner.run())
+
+
     def test_std_complexity_maxindent(self):
 
         runner = tests.common.ToolRunner('collect',
