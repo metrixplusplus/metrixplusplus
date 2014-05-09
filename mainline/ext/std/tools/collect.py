@@ -42,8 +42,10 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
                          help="If the option is set (True), the tool counts number of processing/parsing errors per file [default: %default]")
         parser.add_option("--std.general.size", "--sgs", action="store_true", default=False,
                          help="If the option is set (True), the tool collects file size metric (in bytes) [default: %default]")
+        parser.add_option("--include-files", "--if", default=r'.*',
+                         help="Defines the regular expression pattern to include files in processing [default: %default]")
         parser.add_option("--exclude-files", "--ef", default=r'^[.]',
-                         help="Defines the pattern to exclude files from processing [default: %default]")
+                         help="Defines the regular expression pattern to exclude files from processing [default: %default]")
         parser.add_option("--non-recursively", "--nr", action="store_true", default=False,
                          help="If the option is set (True), sub-directories are not processed [default: %default]")
         self.optparser = parser
@@ -128,7 +130,7 @@ class DirectoryReader():
                     else:
                         logging.info("Processing: " + norm_path)
                         ts = time.time()
-                        f = open(full_path, 'r');
+                        f = open(full_path, 'rU');
                         text = f.read();
                         f.close()
                         checksum = binascii.crc32(text) & 0xffffffff # to match python 3
@@ -152,7 +154,7 @@ class DirectoryReader():
         
         def run_recursively(plugin, directory):
             exit_code = 0
-            for fname in os.listdir(directory):
+            for fname in sorted(os.listdir(directory)):
                 full_path = os.path.join(directory, fname)
                 exit_code += run_per_file(plugin, fname, full_path)
             return exit_code

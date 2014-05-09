@@ -50,7 +50,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
         
     def initialize(self):
         
-        if self.get_action() == 'collect':
+        if self.get_action() in ['collect', 'test']:
             if os.path.exists(self.dbfile):
                 logging.warn("Removing existing file: " + self.dbfile)
                 try:

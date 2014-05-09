@@ -4,16 +4,16 @@
         <info path="./" id="1" />
         <file-data />
         <subfiles>
-            <subfile>BinaryHeapPriorityQueue.java</subfile>
-            <subfile>attrs.java</subfile>
             <subfile>Generics.java</subfile>
+            <subfile>attrs.java</subfile>
+            <subfile>BinaryHeapPriorityQueue.java</subfile>
             <subfile>ArrayUtils.java</subfile>
         </subfiles>
         <subdirs>
         </subdirs>
         <aggregated-data>
             <std.code.complexity>
-                <cyclomatic nonzero="False" count="119" total="126.0" min="0" max="6" avg="1.05882352941" sup="0">
+                <cyclomatic count="119" nonzero="False" total="126.0" min="0" max="6" avg="1.05882352941" sup="0">
                     <distribution-bars>
                         <distribution-bar count="58" metric="0" ratio="0.487394957983" />
                         <distribution-bar count="31" metric="1" ratio="0.260504201681" />

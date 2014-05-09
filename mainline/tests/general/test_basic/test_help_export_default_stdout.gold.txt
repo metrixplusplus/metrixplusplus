@@ -16,6 +16,3 @@ Options:
                         'DEBUG','INFO','WARNING' or 'ERROR'. Default value is
                         inherited from environment variable
                         'METRIXPLUSPLUS_LOG_LEVEL' if set. [default: INFO]
-  --format=FORMAT, --ft=FORMAT
-                        Format of the output data. Possible values are 'xml'
-                        and 'csv' [default: csv]
