@@ -129,7 +129,7 @@ class ToolRunner(object):
             self.message += "\nGold file does not exist: " + gold_file
             return False
         
-        f = open(gold_file, 'rb');
+        f = open(gold_file, 'rU');
         gold_text = f.read();
         f.close()
 

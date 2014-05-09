@@ -160,7 +160,7 @@ class Loader(object):
                     "       python %prog <action> --help\n" +
                     "       python %prog <action> [options] -- [path 1] ... [path N]\n" +
                     "\n" +
-                    "Actions: \n  " + "\n  ".join(inicontainer.actions))
+                    "Actions: \n  " + "\n  ".join(sorted(inicontainer.actions)))
         if command in ['--help', '--h', '-h']:
             optparser.print_help()
             exit(0)
