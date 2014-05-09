@@ -39,8 +39,9 @@ Options:
                         Enables collection of lines of comments metric -
                         number of non-empty lines of comments [default: False]
   --std.code.lines.total, --sclt
-                        Enables collection of lines of comments metric -
-                        number of non-empty lines of comments [default: False]
+                        Enables collection of total lines metric - number of
+                        any type of lines (blank, code, comments,
+                        etc.)[default: False]
   --std.code.mi.simple, --scms
                         Enables collection of simple maintainability index
                         metric. It uses std.code.line:code,
