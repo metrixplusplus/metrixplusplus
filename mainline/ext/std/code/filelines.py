@@ -23,28 +23,28 @@ import re
 class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.IConfigurable):
     
     def declare_configuration(self, parser):
-        parser.add_option("--std.code.lines.code", "--sclc", action="store_true", default=False,
-                         help="Enables collection of lines of code metric (per region detalization) - "
+        parser.add_option("--std.code.filelines.code", "--scflc", action="store_true", default=False,
+                         help="Enables collection of lines of code metric (per file detalization) - "
                          "number of non-empty lines of code, excluding comments "
                          "[default: %default]")
-        parser.add_option("--std.code.lines.preprocessor", "--sclp", action="store_true", default=False,
-                         help="Enables collection of lines of preprocessor code metric (per region detalization) - "
+        parser.add_option("--std.code.filelines.preprocessor", "--scflp", action="store_true", default=False,
+                         help="Enables collection of lines of preprocessor code metric (per file detalization) - "
                          "number of non-empty lines of preprocessor code "
                          "[default: %default]")
-        parser.add_option("--std.code.lines.comments", "--sclcom", action="store_true", default=False,
-                         help="Enables collection of lines of comments metric (per region detalization) - "
+        parser.add_option("--std.code.filelines.comments", "--scflcom", action="store_true", default=False,
+                         help="Enables collection of lines of comments metric (per file detalization) - "
                          "number of non-empty lines of comments "
                          "[default: %default]")
-        parser.add_option("--std.code.lines.total", "--sclt", action="store_true", default=False,
-                         help="Enables collection of total lines metric (per region detalization) - "
+        parser.add_option("--std.code.filelines.total", "--scflt", action="store_true", default=False,
+                         help="Enables collection of total lines metric (per file detalization) - "
                          "number of any type of lines (blank, code, comments, etc.)"
                          "[default: %default]")
     
     def configure(self, options):
-        self.is_active_code = options.__dict__['std.code.lines.code']
-        self.is_active_preprocessor = options.__dict__['std.code.lines.preprocessor']
-        self.is_active_comments = options.__dict__['std.code.lines.comments']
-        self.is_active_total = options.__dict__['std.code.lines.total']
+        self.is_active_code = options.__dict__['std.code.filelines.code']
+        self.is_active_preprocessor = options.__dict__['std.code.filelines.preprocessor']
+        self.is_active_comments = options.__dict__['std.code.filelines.comments']
+        self.is_active_total = options.__dict__['std.code.filelines.total']
         
     pattern_line = re.compile(r'''[^\s].*''')
 
@@ -68,7 +68,7 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
                        mpp.api.Marker.T.ANY,
                        merge_markers=True)
 
-        super(Plugin, self).initialize(fields=self.get_fields())
+        super(Plugin, self).initialize(fields=self.get_fields(), support_regions=False)
 
         if self.is_active() == True:
             self.subscribe_by_parents_interface(mpp.api.ICode)

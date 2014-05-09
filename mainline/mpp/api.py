@@ -1037,6 +1037,7 @@ class Plugin(BasePlugin):
             self.name = name
             self.type = ftype
             self.non_zero = non_zero
+            self._regions_supported = True
 
     class Property(object):
         def __init__(self, name, value):
@@ -1071,6 +1072,7 @@ class Plugin(BasePlugin):
                                                        version=self.get_version())
             for field in fields:
                 is_created = namespace_obj.add_field(field.name, field.type, non_zero=field.non_zero)
+                field._regions_supported = support_regions
                 assert(is_created != None)
                 # if field is created (not cloned from the previous db),
                 # mark the plug-in as updated in order to trigger full rescan
@@ -1210,18 +1212,32 @@ class MetricPluginMixin(Parent):
                 alias = '*'
         (pattern_to_search, counter_class) = field_data[4][alias]
         
-        for region in data.iterate_regions(filter_group=field_data[5]):
-            counter = counter_class(namespace, field, self, alias, data, region)
+        if field_data[0]._regions_supported == True:
+            for region in data.iterate_regions(filter_group=field_data[5]):
+                counter = counter_class(namespace, field, self, alias, data, region)
+                if field_data[1] != Marker.T.NONE:
+                    for marker in data.iterate_markers(
+                                    filter_group = field_data[1],
+                                    region_id = region.get_id(),
+                                    exclude_children = field_data[2],
+                                    merge=field_data[3]):
+                        counter.count(marker, pattern_to_search)
+                count = counter.get_result()
+                if count != 0 or field_data[0].non_zero == False:
+                    region.set_data(namespace, field, count)
+        else:
+            counter = counter_class(namespace, field, self, alias, data, None)
             if field_data[1] != Marker.T.NONE:
                 for marker in data.iterate_markers(
                                 filter_group = field_data[1],
-                                region_id = region.get_id(),
+                                region_id = None,
                                 exclude_children = field_data[2],
                                 merge=field_data[3]):
                     counter.count(marker, pattern_to_search)
             count = counter.get_result()
             if count != 0 or field_data[0].non_zero == False:
-                region.set_data(namespace, field, count)
+                data.set_data(namespace, field, count)
+            
 
 
 

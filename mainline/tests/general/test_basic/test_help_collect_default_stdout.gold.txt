@@ -28,26 +28,43 @@ Options:
                         Enables collection of maximum indent level metric
                         [default: False]
   --std.code.lines.code, --sclc
-                        Enables collection of lines of code metric - number of
-                        non-empty lines of code, excluding comments [default:
-                        False]
+                        Enables collection of lines of code metric (per region
+                        detalization) - number of non-empty lines of code,
+                        excluding comments [default: False]
   --std.code.lines.preprocessor, --sclp
                         Enables collection of lines of preprocessor code
-                        metric - number of non-empty lines of preprocessor
-                        code [default: False]
+                        metric (per region detalization) - number of non-empty
+                        lines of preprocessor code [default: False]
   --std.code.lines.comments, --sclcom
-                        Enables collection of lines of comments metric -
-                        number of non-empty lines of comments [default: False]
+                        Enables collection of lines of comments metric (per
+                        region detalization) - number of non-empty lines of
+                        comments [default: False]
   --std.code.lines.total, --sclt
-                        Enables collection of total lines metric - number of
-                        any type of lines (blank, code, comments,
-                        etc.)[default: False]
+                        Enables collection of total lines metric (per region
+                        detalization) - number of any type of lines (blank,
+                        code, comments, etc.)[default: False]
   --std.code.mi.simple, --scms
                         Enables collection of simple maintainability index
                         metric. It uses std.code.line:code,
                         std.code.complexity:cyclomatic metrics to rank level
                         of maintainability. Lower value of this metric
                         indicates better maintainability. [default: False]
+  --std.code.filelines.code, --scflc
+                        Enables collection of lines of code metric (per file
+                        detalization) - number of non-empty lines of code,
+                        excluding comments [default: False]
+  --std.code.filelines.preprocessor, --scflp
+                        Enables collection of lines of preprocessor code
+                        metric (per file detalization) - number of non-empty
+                        lines of preprocessor code [default: False]
+  --std.code.filelines.comments, --scflcom
+                        Enables collection of lines of comments metric (per
+                        file detalization) - number of non-empty lines of
+                        comments [default: False]
+  --std.code.filelines.total, --scflt
+                        Enables collection of total lines metric (per file
+                        detalization) - number of any type of lines (blank,
+                        code, comments, etc.)[default: False]
   --std.code.length.total, --sclent
                         Enables collection of size metric (in number of
                         symbols per region) [default: False]
