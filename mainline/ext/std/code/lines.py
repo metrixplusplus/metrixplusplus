@@ -36,8 +36,8 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
                          "number of non-empty lines of comments "
                          "[default: %default]")
         parser.add_option("--std.code.lines.total", "--sclt", action="store_true", default=False,
-                         help="Enables collection of lines of comments metric - "
-                         "number of non-empty lines of comments "
+                         help="Enables collection of total lines metric - "
+                         "number of any type of lines (blank, code, comments, etc.)"
                          "[default: %default]")
     
     def configure(self, options):
