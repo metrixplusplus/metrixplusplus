@@ -30,6 +30,7 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
     
     def __init__(self):
         self.reader = DirectoryReader()
+        self.include_rules = []
         self.exclude_rules = []
         self.exclude_files = []
         self.parsers       = []
@@ -54,6 +55,10 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
         self.is_proctime_enabled = options.__dict__['std.general.proctime']
         self.is_procerrors_enabled = options.__dict__['std.general.procerrors']
         self.is_size_enabled = options.__dict__['std.general.size']
+        try:
+            self.add_include_rule(re.compile(options.__dict__['include_files']))
+        except Exception as e:
+            self.optparser.error("option --include-files: " + str(e))
         try:
             self.add_exclude_rule(re.compile(options.__dict__['exclude_files']))
         except Exception as e:
@@ -88,6 +93,9 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
                     return parser[1]
         return None
 
+    def add_include_rule(self, re_compiled_pattern):
+        self.include_rules.append(re_compiled_pattern)
+
     def add_exclude_rule(self, re_compiled_pattern):
         self.exclude_rules.append(re_compiled_pattern)
 
@@ -97,6 +105,9 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
         self.exclude_files.append(file_path)
 
     def is_file_excluded(self, file_name):
+        for each in self.include_rules:
+            if re.match(each, os.path.basename(file_name)) == None:
+                return True
         for each in self.exclude_rules:
             if re.match(each, os.path.basename(file_name)) != None:
                 return True
