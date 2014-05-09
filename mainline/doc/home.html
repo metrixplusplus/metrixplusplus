@@ -309,7 +309,7 @@ file: __global__: comment
               <tr class="info">
                 <td>std.general.size</td>
                 <td>Size of a file in bytes.</td>
-                <td rowspan="4"><ul><li>Monitoring the growth of source code base.</li>
+                <td rowspan="6"><ul><li>Monitoring the growth of source code base.</li>
                     <li>Normalizing other metrics.</li>
                     <li>Preventing large files and regions (large things are difficult to maintain).</li>
                     <li>Predicting delivery dates by comparing
@@ -318,28 +318,41 @@ file: __global__: comment
               <tr>
                 <td>std.code.length.total</td>
                 <td>The same as 'std.general.size' metric, but attributed to code regions.</td>
-                <td></td>
+              </tr>
+              <tr class="info">
+                <td>std.code.filelines.total</td>
+                <td>Number of non-blank lines of code of any content type (exectuable, comments, etc.) per file</td>
               </tr>
               <tr>
                 <td>std.code.lines.total</td>
-                <td>Number of non-blank lines of code of any content type (exectuable, comments, etc.)</td>
-                <td></td>
+                <td>Number of non-blank lines of code of any content type (exectuable, comments, etc.) per region</td>
+              </tr>
+              <tr class="info">
+                <td>std.code.filelines.code</td>
+                <td>Number of non-blank lines of code excluding preprocessor and comments per file.</td>
               </tr>
               <tr>
                 <td>std.code.lines.code</td>
-                <td>Number of non-blank lines of code excluding preprocessor and comments.</td>
-                <td></td>
+                <td>Number of non-blank lines of code excluding preprocessor and comments per region.</td>
               </tr>
-              <tr>
-                <td>std.code.lines.preprocessor</td>
-                <td>Number of non-blank lines of preprocessor code.</td>
-                <td><ul><li>Enforcing localisation of preprocessor code in a single place.</li>
+              <tr class="info">
+                <td>std.code.filelines.preprocessor</td>
+                <td>Number of non-blank lines of preprocessor code per file.</td>
+                <td rowspan="2"><ul><li>Enforcing localisation of preprocessor code in a single place.</li>
                     <li>Encouraging usage of safer code structures instead of the preprocessor.</li></ul></td>
               </tr>
               <tr>
+                <td>std.code.lines.preprocessor</td>
+                <td>Number of non-blank lines of preprocessor code per region.</td>
+              </tr>
+              <tr class="info">
+                <td>std.code.fileslines.comments</td>
+                <td>Number of non-blank lines of comments per file.</td>
+                <td rowspan="2"><ul><li>Low number of comments may indicate maintainability problems.</li></ul></td>
+              </tr>
+              <tr>
                 <td>std.code.lines.comments</td>
-                <td>Number of non-blank lines of comments.</td>
-                <td><ul><li>Low number of comments may indicate maintainability problems.</li></ul></td>
+                <td>Number of non-blank lines of comments per region.</td>
               </tr>
               <tr>
                 <td>std.code.complexity.cyclomatic</td>
