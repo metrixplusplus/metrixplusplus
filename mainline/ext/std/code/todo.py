@@ -43,7 +43,7 @@ class Plugin(mpp.api.Plugin,
         self.tags_list = options.__dict__['std.code.todo.tags'].split(',')
         self.tags_list.sort()
         for tag in self.tags_list:
-            if re.match(r'''^[A-Za-z0-9]+$''', tag) == None:
+            if re.match(r'''^[A-Za-z0-9_]+$''', tag) == None:
                 self.parser.error('option --std.code.todo.tags: tag {0} includes not allowed symbols'.
                                   format(tag))
         self.pattern_to_search = re.compile(
