@@ -1,5 +1,7 @@
-## 1.4 (September, 2013)
+## 1.4 (May, 2014)
 - New metric: std.code.mi:simple - simple implemetation of maintainability index.
+- New configuration option for collect tool: --include-files (symetrical to --exclude-files)
+
 
 ## 1.3 (August, 2013)
 - Deprecated and dropped support for callback based implementation of advanced counters
