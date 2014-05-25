@@ -35,9 +35,9 @@ class Plugin(mpp.api.Plugin,
     
     def initialize(self):
         pattern_to_search_java = re.compile(
-            r'''((const\s+([_$a-zA-Z][_$a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+            r'''((const(\s+[_$a-zA-Z][_$a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
         pattern_to_search_cpp_cs = re.compile(
-            r'''((const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+            r'''((const(\s+[_a-zA-Z][_a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
         pattern_to_search = re.compile(
             r'''\b[0-9]+\b''')
         self.declare_metric(self.is_active_numbers,

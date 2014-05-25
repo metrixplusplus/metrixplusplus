@@ -36,7 +36,7 @@ class Plugin(mpp.api.Plugin,
     def initialize(self):
         # improve pattern to find declarations of constants
         pattern_to_search = re.compile(
-            r'''((const\s+([_a-zA-Z][_a-zA-Z0-9]*\s+)+[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+            r'''((const(\s+[_a-zA-Z][_a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
         self.declare_metric(self.is_active_numbers,
                             self.Field('numbers', int),
                             # give a pair of pattern + custom counter logic class
