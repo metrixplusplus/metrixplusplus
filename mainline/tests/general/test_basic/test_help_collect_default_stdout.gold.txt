@@ -43,7 +43,7 @@ Options:
                         Enables collection of total lines metric (per region
                         detalization) - number of any type of lines (blank,
                         code, comments, etc.)[default: False]
-  --std.code.mi.simple, --scms
+  --std.code.maintindex.simple, --scmis
                         Enables collection of simple maintainability index
                         metric. It uses std.code.line:code,
                         std.code.complexity:cyclomatic metrics to rank level
@@ -68,6 +68,25 @@ Options:
   --std.code.length.total, --sclent
                         Enables collection of size metric (in number of
                         symbols per region) [default: False]
+  --std.code.member.fields, --scmf
+                        Enables collection of number of data members / fields
+                        per classes, structs and interfaces [default: False]
+  --std.code.member.globals, --scmg
+                        Enables collection of number of global variables /
+                        fields per global regions and namespaces [default:
+                        False]
+  --std.code.member.classes, --scmc
+                        Enables collection of number of classes defined per
+                        any region [default: False]
+  --std.code.member.structs, --scms
+                        Enables collection of number of structs defined per
+                        any region [default: False]
+  --std.code.member.interfaces, --scmi
+                        Enables collection of number of interfaces defined per
+                        any region [default: False]
+  --std.code.member.methods, --scmm
+                        Enables collection of number of methods (functions)
+                        defined per any region [default: False]
   --std.code.cpp.files=STD.CODE.CPP.FILES
                         Enumerates filename extensions to match C/C++ files
                         [default: *.c,*.h,*.cpp,*.hpp,*.cc,*.hh,*.cxx,*.hxx]

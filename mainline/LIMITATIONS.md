@@ -53,6 +53,7 @@ These comments are considered to be parts of a define.
 				/* ... */
 			}
 
++ C# parser interprets properties with default getter/setter as data fields.
 
 + Java parser does not recognise anonymous inner classes.
 

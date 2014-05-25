@@ -26,7 +26,7 @@ class Plugin(mpp.api.Plugin,
     
     def declare_configuration(self, parser):
         self.parser = parser
-        parser.add_option("--std.code.mi.simple", "--scms",
+        parser.add_option("--std.code.maintindex.simple", "--scmis",
             action="store_true", default=False,
             help="Enables collection of simple maintainability index metric."
              " It uses std.code.line:code, std.code.complexity:cyclomatic"
@@ -35,12 +35,12 @@ class Plugin(mpp.api.Plugin,
              " [default: %default]")
 
     def configure(self, options):
-        self.is_active_simple = options.__dict__['std.code.mi.simple']
+        self.is_active_simple = options.__dict__['std.code.maintindex.simple']
         if self.is_active_simple == True:
             required_opts = ['std.code.complexity.cyclomatic', 'std.code.lines.code']
             for each in required_opts:
                 if options.__dict__[each] == False:
-                    self.parser.error('option --std.code.mi.simple: requires --{0} option'.
+                    self.parser.error('option --std.code.maintindex.simple: requires --{0} option'.
                                       format(each))
     
     def initialize(self):
