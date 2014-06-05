@@ -90,7 +90,7 @@ class Py2XML():
             return childStr
 
         # create XML string for attributes
-        for k, v in attributes.items():
+        for k, v in sorted(attributes.items()):
             attrStr += " %s=\"%s\"" % ( k, v )
 
         # let's assemble our tag string

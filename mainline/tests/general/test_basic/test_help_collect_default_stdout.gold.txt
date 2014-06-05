@@ -18,37 +18,18 @@ Options:
                         'DEBUG','INFO','WARNING' or 'ERROR'. Default value is
                         inherited from environment variable
                         'METRIXPLUSPLUS_LOG_LEVEL' if set. [default: INFO]
-  --std.code.cs.files=STD.CODE.CS.FILES
-                        Enumerates filename extensions to match C# files
-                        [default: *.cs]
   --std.code.complexity.cyclomatic, --sccc
                         Enables collection of cyclomatic complexity metric
                         (McCabe) [default: False]
   --std.code.complexity.maxindent, --sccmi
                         Enables collection of maximum indent level metric
                         [default: False]
-  --std.code.lines.code, --sclc
-                        Enables collection of lines of code metric (per region
-                        detalization) - number of non-empty lines of code,
-                        excluding comments [default: False]
-  --std.code.lines.preprocessor, --sclp
-                        Enables collection of lines of preprocessor code
-                        metric (per region detalization) - number of non-empty
-                        lines of preprocessor code [default: False]
-  --std.code.lines.comments, --sclcom
-                        Enables collection of lines of comments metric (per
-                        region detalization) - number of non-empty lines of
-                        comments [default: False]
-  --std.code.lines.total, --sclt
-                        Enables collection of total lines metric (per region
-                        detalization) - number of any type of lines (blank,
-                        code, comments, etc.)[default: False]
-  --std.code.maintindex.simple, --scmis
-                        Enables collection of simple maintainability index
-                        metric. It uses std.code.line:code,
-                        std.code.complexity:cyclomatic metrics to rank level
-                        of maintainability. Lower value of this metric
-                        indicates better maintainability. [default: False]
+  --std.code.cpp.files=STD.CODE.CPP.FILES
+                        Enumerates filename extensions to match C/C++ files
+                        [default: *.c,*.h,*.cpp,*.hpp,*.cc,*.hh,*.cxx,*.hxx]
+  --std.code.cs.files=STD.CODE.CS.FILES
+                        Enumerates filename extensions to match C# files
+                        [default: *.cs]
   --std.code.filelines.code, --scflc
                         Enables collection of lines of code metric (per file
                         detalization) - number of non-empty lines of code,
@@ -65,34 +46,40 @@ Options:
                         Enables collection of total lines metric (per file
                         detalization) - number of any type of lines (blank,
                         code, comments, etc.)[default: False]
-  --std.code.length.total, --sclent
-                        Enables collection of size metric (in number of
-                        symbols per region) [default: False]
-  --std.code.member.fields, --scmf
-                        Enables collection of number of data members / fields
-                        per classes, structs and interfaces [default: False]
-  --std.code.member.globals, --scmg
-                        Enables collection of number of global variables /
-                        fields per global regions and namespaces [default:
-                        False]
-  --std.code.member.classes, --scmc
-                        Enables collection of number of classes defined per
-                        any region [default: False]
-  --std.code.member.structs, --scms
-                        Enables collection of number of structs defined per
-                        any region [default: False]
-  --std.code.member.interfaces, --scmi
-                        Enables collection of number of interfaces defined per
-                        any region [default: False]
-  --std.code.member.methods, --scmm
-                        Enables collection of number of methods (functions)
-                        defined per any region [default: False]
-  --std.code.cpp.files=STD.CODE.CPP.FILES
-                        Enumerates filename extensions to match C/C++ files
-                        [default: *.c,*.h,*.cpp,*.hpp,*.cc,*.hh,*.cxx,*.hxx]
   --std.code.java.files=STD.CODE.JAVA.FILES
                         Enumerates filename extensions to match Java files
                         [default: *.java]
+  --std.code.length.total, --sclent
+                        Enables collection of size metric (in number of
+                        symbols per region) [default: False]
+  --std.code.lines.code, --sclc
+                        Enables collection of lines of code metric (per region
+                        detalization) - number of non-empty lines of code,
+                        excluding comments [default: False]
+  --std.code.lines.preprocessor, --sclp
+                        Enables collection of lines of preprocessor code
+                        metric (per region detalization) - number of non-empty
+                        lines of preprocessor code [default: False]
+  --std.code.lines.comments, --sclcom
+                        Enables collection of lines of comments metric (per
+                        region detalization) - number of non-empty lines of
+                        comments [default: False]
+  --std.code.lines.total, --sclt
+                        Enables collection of total lines metric (per region
+                        detalization) - number of any type of lines (blank,
+                        code, comments, etc.)[default: False]
+  --std.code.magic.numbers, --scmn
+                        Enables collection of magic numbers metric [default:
+                        False]
+  --std.code.magic.numbers.simplier, --scmns
+                        Is set, 0, -1 and 1 numbers are not counted in
+                        'std.code.magic.numbers' metric [default: False]
+  --std.code.maintindex.simple, --scmis
+                        Enables collection of simple maintainability index
+                        metric. It uses std.code.line:code,
+                        std.code.complexity:cyclomatic metrics to rank level
+                        of maintainability. Lower value of this metric
+                        indicates better maintainability. [default: False]
   --std.code.todo.comments, --sctc
                         Enables collection of number of todo/fixme/etc markers
                         in comments [default: False]
@@ -102,12 +89,6 @@ Options:
   --std.code.todo.tags=STD.CODE.TODO.TAGS, --sctt=STD.CODE.TODO.TAGS
                         A list of typical todo markers to search, separated by
                         comma [default: TODO,ToDo,FIXME,FixMe,TBD,HACK,XXX]
-  --std.code.magic.numbers, --scmn
-                        Enables collection of magic numbers metric [default:
-                        False]
-  --std.code.magic.numbers.simplier, --scmns
-                        Is set, 0, -1 and 1 numbers are not counted in
-                        'std.code.magic.numbers' metric [default: False]
   --std.suppress, --ss  If set (True), suppression markers are collected from
                         comments in code. Suppressions are used by post-
                         processing tools, like limit, to remove false-positive

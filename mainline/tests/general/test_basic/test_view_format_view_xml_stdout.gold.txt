@@ -1,7 +1,7 @@
 <view>
 
     <data>
-        <info path="./" id="1" />
+        <info id="1" path="./" />
         <file-data />
         <subfiles>
             <subfile>file_deleted_in_new_sources.cpp</subfile>
@@ -11,7 +11,7 @@
         </subdirs>
         <aggregated-data>
             <std.code.complexity>
-                <cyclomatic count="8" nonzero="False" total="11.0" min="1" max="3" avg="1.375" sup="0">
+                <cyclomatic avg="1.375" count="8" max="3" min="1" nonzero="False" sup="0" total="11.0">
                     <distribution-bars>
                         <distribution-bar count="6" metric="1" ratio="0.75" />
                         <distribution-bar count="1" metric="2" ratio="0.125" />

@@ -1,7 +1,7 @@
 <view>
 
     <data>
-        <info path="./" id="1" />
+        <info id="1" path="./" />
         <file-data />
         <subfiles>
             <subfile>interface.cs</subfile>
@@ -12,7 +12,7 @@
         </subdirs>
         <aggregated-data>
             <std.code.complexity>
-                <cyclomatic count="39" nonzero="False" total="45.0" min="0" max="6" avg="1.15384615385" sup="0">
+                <cyclomatic avg="1.15384615385" count="39" max="6" min="0" nonzero="False" sup="0" total="45.0">
                     <distribution-bars>
                         <distribution-bar count="23" metric="0" ratio="0.589743589744" />
                         <distribution-bar count="7" metric="1" ratio="0.179487179487" />

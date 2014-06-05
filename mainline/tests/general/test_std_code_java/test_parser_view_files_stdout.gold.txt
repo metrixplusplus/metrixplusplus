@@ -1,3 +1,381 @@
+./ArrayUtils.java:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-11608
+	Line numbers   : 1-461
+	Modified       : None
+
+.   ./ArrayUtils.java:16: info: Metrics per 'ArrayUtils' region
+    	Region name    : ArrayUtils
+    	Region type    : class
+    	Offsets        : 189-11380
+    	Line numbers   : 10-454
+    	Modified       : None
+
+.   .   ./ArrayUtils.java:20: info: Metrics per 'ArrayUtils' region
+        	Region name    : ArrayUtils
+        	Region type    : function
+        	Offsets        : 376-448
+        	Line numbers   : 17-21
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:23: info: Metrics per 'flatten' region
+        	Region name    : flatten
+        	Region type    : function
+        	Offsets        : 452-762
+        	Line numbers   : 23-36
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 3
+
+.   .   ./ArrayUtils.java:38: info: Metrics per 'to2D' region
+        	Region name    : to2D
+        	Region type    : function
+        	Offsets        : 766-917
+        	Line numbers   : 38-41
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:43: info: Metrics per 'to2D' region
+        	Region name    : to2D
+        	Region type    : function
+        	Offsets        : 921-1246
+        	Line numbers   : 43-52
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:59: info: Metrics per 'removeAt' region
+        	Region name    : removeAt
+        	Region type    : function
+        	Offsets        : 1250-1894
+        	Line numbers   : 54-76
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 6
+
+.   .   ./ArrayUtils.java:84: info: Metrics per 'removeAt' region
+        	Region name    : removeAt
+        	Region type    : function
+        	Offsets        : 1898-2684
+        	Line numbers   : 78-101
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 6
+
+.   .   ./ArrayUtils.java:103: info: Metrics per 'toString' region
+        	Region name    : toString
+        	Region type    : function
+        	Offsets        : 2688-2985
+        	Line numbers   : 103-112
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:120: info: Metrics per 'equalContents' region
+        	Region name    : equalContents
+        	Region type    : function
+        	Offsets        : 2989-3506
+        	Line numbers   : 114-132
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 6
+
+.   .   ./ArrayUtils.java:140: info: Metrics per 'equals' region
+        	Region name    : equals
+        	Region type    : function
+        	Offsets        : 3510-4021
+        	Line numbers   : 134-152
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 6
+
+.   .   ./ArrayUtils.java:161: info: Metrics per 'equalContents' region
+        	Region name    : equalContents
+        	Region type    : function
+        	Offsets        : 4028-4443
+        	Line numbers   : 155-169
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 3
+
+.   .   ./ArrayUtils.java:177: info: Metrics per 'equals' region
+        	Region name    : equals
+        	Region type    : function
+        	Offsets        : 4447-4969
+        	Line numbers   : 171-189
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 6
+
+.   .   ./ArrayUtils.java:193: info: Metrics per 'contains' region
+        	Region name    : contains
+        	Region type    : function
+        	Offsets        : 4974-5188
+        	Line numbers   : 192-198
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:202: info: Metrics per 'asSet' region
+        	Region name    : asSet
+        	Region type    : function
+        	Offsets        : 5192-5358
+        	Line numbers   : 200-204
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:206: info: Metrics per 'fill' region
+        	Region name    : fill
+        	Region type    : function
+        	Offsets        : 5362-5494
+        	Line numbers   : 206-210
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:212: info: Metrics per 'fill' region
+        	Region name    : fill
+        	Region type    : function
+        	Offsets        : 5498-5625
+        	Line numbers   : 212-216
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:218: info: Metrics per 'fill' region
+        	Region name    : fill
+        	Region type    : function
+        	Offsets        : 5629-5758
+        	Line numbers   : 218-222
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:224: info: Metrics per 'fill' region
+        	Region name    : fill
+        	Region type    : function
+        	Offsets        : 5762-5896
+        	Line numbers   : 224-228
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:230: info: Metrics per 'fill' region
+        	Region name    : fill
+        	Region type    : function
+        	Offsets        : 5900-6029
+        	Line numbers   : 230-234
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:236: info: Metrics per 'fill' region
+        	Region name    : fill
+        	Region type    : function
+        	Offsets        : 6033-6164
+        	Line numbers   : 236-240
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:247: info: Metrics per 'toDouble' region
+        	Region name    : toDouble
+        	Region type    : function
+        	Offsets        : 6170-6376
+        	Line numbers   : 244-253
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:258: info: Metrics per 'toDouble' region
+        	Region name    : toDouble
+        	Region type    : function
+        	Offsets        : 6380-6606
+        	Line numbers   : 255-264
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:270: info: Metrics per 'asList' region
+        	Region name    : asList
+        	Region type    : function
+        	Offsets        : 6612-6951
+        	Line numbers   : 266-276
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:278: info: Metrics per 'asArray' region
+        	Region name    : asArray
+        	Region type    : function
+        	Offsets        : 6955-7133
+        	Line numbers   : 278-285
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:291: info: Metrics per 'main' region
+        	Region name    : main
+        	Region type    : function
+        	Offsets        : 7140-7496
+        	Line numbers   : 288-299
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:301: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 7500-7675
+        	Line numbers   : 301-306
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:308: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 7679-7893
+        	Line numbers   : 308-315
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:318: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 7900-8087
+        	Line numbers   : 318-323
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:325: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 8093-8319
+        	Line numbers   : 325-332
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:334: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 8323-8557
+        	Line numbers   : 334-341
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:343: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 8561-8744
+        	Line numbers   : 343-348
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 1
+
+.   .   ./ArrayUtils.java:350: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 8750-8972
+        	Line numbers   : 350-357
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:359: info: Metrics per 'copy' region
+        	Region name    : copy
+        	Region type    : function
+        	Offsets        : 8976-9206
+        	Line numbers   : 359-366
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:369: info: Metrics per 'toString' region
+        	Region name    : toString
+        	Region type    : function
+        	Offsets        : 9213-9462
+        	Line numbers   : 369-378
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 2
+
+.   .   ./ArrayUtils.java:380: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 9466-9546
+        	Line numbers   : 380-382
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:384: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 9550-9631
+        	Line numbers   : 384-386
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:388: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 9635-9723
+        	Line numbers   : 388-390
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:392: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 9727-9817
+        	Line numbers   : 392-394
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:396: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 9821-9906
+        	Line numbers   : 396-398
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./ArrayUtils.java:400: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 9910-10194
+        	Line numbers   : 400-409
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 3
+
+.   .   ./ArrayUtils.java:411: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 10198-10484
+        	Line numbers   : 411-420
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 3
+
+.   .   ./ArrayUtils.java:422: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 10489-10779
+        	Line numbers   : 422-431
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 3
+
+.   .   ./ArrayUtils.java:433: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 10784-11078
+        	Line numbers   : 433-442
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 3
+
+.   .   ./ArrayUtils.java:444: info: Metrics per 'toPrimitive' region
+        	Region name    : toPrimitive
+        	Region type    : function
+        	Offsets        : 11082-11378
+        	Line numbers   : 444-453
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 3
+
+.   ./ArrayUtils.java:458: info: Metrics per 'Interface' region
+    	Region name    : Interface
+    	Region type    : interface
+    	Offsets        : 11423-11608
+    	Line numbers   : 458-461
+    	Modified       : None
+
+./ArrayUtils.java:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 1.93023255814
+	Minimum        : 0
+	Maximum        : 6
+	Total          : 83.0
+	Distribution   : 43 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.186 : 0.186 :  8	|||||||||||||||||||
+	             1 : 0.326 : 0.512 : 14	|||||||||||||||||||||||||||||||||
+	             2 : 0.209 : 0.721 :  9	|||||||||||||||||||||
+	             3 : 0.163 : 0.884 :  7	||||||||||||||||
+	             6 : 0.116 : 1.000 :  5	||||||||||||
+
 ./attrs.java:0: info: Metrics per '__global__' region
 	Region name    : __global__
 	Region type    : global
@@ -415,384 +793,6 @@
 	             3 : 0.023 : 0.955 :  1	||
 	             5 : 0.023 : 0.977 :  1	||
 	             6 : 0.023 : 1.000 :  1	||
-
-./ArrayUtils.java:0: info: Metrics per '__global__' region
-	Region name    : __global__
-	Region type    : global
-	Offsets        : 0-11608
-	Line numbers   : 1-461
-	Modified       : None
-
-.   ./ArrayUtils.java:16: info: Metrics per 'ArrayUtils' region
-    	Region name    : ArrayUtils
-    	Region type    : class
-    	Offsets        : 189-11380
-    	Line numbers   : 10-454
-    	Modified       : None
-
-.   .   ./ArrayUtils.java:20: info: Metrics per 'ArrayUtils' region
-        	Region name    : ArrayUtils
-        	Region type    : function
-        	Offsets        : 376-448
-        	Line numbers   : 17-21
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 0
-
-.   .   ./ArrayUtils.java:23: info: Metrics per 'flatten' region
-        	Region name    : flatten
-        	Region type    : function
-        	Offsets        : 452-762
-        	Line numbers   : 23-36
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 3
-
-.   .   ./ArrayUtils.java:38: info: Metrics per 'to2D' region
-        	Region name    : to2D
-        	Region type    : function
-        	Offsets        : 766-917
-        	Line numbers   : 38-41
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 0
-
-.   .   ./ArrayUtils.java:43: info: Metrics per 'to2D' region
-        	Region name    : to2D
-        	Region type    : function
-        	Offsets        : 921-1246
-        	Line numbers   : 43-52
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 2
-
-.   .   ./ArrayUtils.java:59: info: Metrics per 'removeAt' region
-        	Region name    : removeAt
-        	Region type    : function
-        	Offsets        : 1250-1894
-        	Line numbers   : 54-76
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 6
-
-.   .   ./ArrayUtils.java:84: info: Metrics per 'removeAt' region
-        	Region name    : removeAt
-        	Region type    : function
-        	Offsets        : 1898-2684
-        	Line numbers   : 78-101
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 6
-
-.   .   ./ArrayUtils.java:103: info: Metrics per 'toString' region
-        	Region name    : toString
-        	Region type    : function
-        	Offsets        : 2688-2985
-        	Line numbers   : 103-112
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 2
-
-.   .   ./ArrayUtils.java:120: info: Metrics per 'equalContents' region
-        	Region name    : equalContents
-        	Region type    : function
-        	Offsets        : 2989-3506
-        	Line numbers   : 114-132
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 6
-
-.   .   ./ArrayUtils.java:140: info: Metrics per 'equals' region
-        	Region name    : equals
-        	Region type    : function
-        	Offsets        : 3510-4021
-        	Line numbers   : 134-152
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 6
-
-.   .   ./ArrayUtils.java:161: info: Metrics per 'equalContents' region
-        	Region name    : equalContents
-        	Region type    : function
-        	Offsets        : 4028-4443
-        	Line numbers   : 155-169
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 3
-
-.   .   ./ArrayUtils.java:177: info: Metrics per 'equals' region
-        	Region name    : equals
-        	Region type    : function
-        	Offsets        : 4447-4969
-        	Line numbers   : 171-189
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 6
-
-.   .   ./ArrayUtils.java:193: info: Metrics per 'contains' region
-        	Region name    : contains
-        	Region type    : function
-        	Offsets        : 4974-5188
-        	Line numbers   : 192-198
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 2
-
-.   .   ./ArrayUtils.java:202: info: Metrics per 'asSet' region
-        	Region name    : asSet
-        	Region type    : function
-        	Offsets        : 5192-5358
-        	Line numbers   : 200-204
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 0
-
-.   .   ./ArrayUtils.java:206: info: Metrics per 'fill' region
-        	Region name    : fill
-        	Region type    : function
-        	Offsets        : 5362-5494
-        	Line numbers   : 206-210
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 1
-
-.   .   ./ArrayUtils.java:212: info: Metrics per 'fill' region
-        	Region name    : fill
-        	Region type    : function
-        	Offsets        : 5498-5625
-        	Line numbers   : 212-216
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 1
-
-.   .   ./ArrayUtils.java:218: info: Metrics per 'fill' region
-        	Region name    : fill
-        	Region type    : function
-        	Offsets        : 5629-5758
-        	Line numbers   : 218-222
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 1
-
-.   .   ./ArrayUtils.java:224: info: Metrics per 'fill' region
-        	Region name    : fill
-        	Region type    : function
-        	Offsets        : 5762-5896
-        	Line numbers   : 224-228
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 1
-
-.   .   ./ArrayUtils.java:230: info: Metrics per 'fill' region
-        	Region name    : fill
-        	Region type    : function
-        	Offsets        : 5900-6029
-        	Line numbers   : 230-234
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 1
-
-.   .   ./ArrayUtils.java:236: info: Metrics per 'fill' region
-        	Region name    : fill
-        	Region type    : function
-        	Offsets        : 6033-6164
-        	Line numbers   : 236-240
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 1
-
-.   .   ./ArrayUtils.java:247: info: Metrics per 'toDouble' region
-        	Region name    : toDouble
-        	Region type    : function
-        	Offsets        : 6170-6376
-        	Line numbers   : 244-253
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 1
-
-.   .   ./ArrayUtils.java:258: info: Metrics per 'toDouble' region
-        	Region name    : toDouble
-        	Region type    : function
-        	Offsets        : 6380-6606
-        	Line numbers   : 255-264
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 1
-
-.   .   ./ArrayUtils.java:270: info: Metrics per 'asList' region
-        	Region name    : asList
-        	Region type    : function
-        	Offsets        : 6612-6951
-        	Line numbers   : 266-276
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 1
-
-.   .   ./ArrayUtils.java:278: info: Metrics per 'asArray' region
-        	Region name    : asArray
-        	Region type    : function
-        	Offsets        : 6955-7133
-        	Line numbers   : 278-285
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 1
-
-.   .   ./ArrayUtils.java:291: info: Metrics per 'main' region
-        	Region name    : main
-        	Region type    : function
-        	Offsets        : 7140-7496
-        	Line numbers   : 288-299
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 1
-
-.   .   ./ArrayUtils.java:301: info: Metrics per 'copy' region
-        	Region name    : copy
-        	Region type    : function
-        	Offsets        : 7500-7675
-        	Line numbers   : 301-306
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 1
-
-.   .   ./ArrayUtils.java:308: info: Metrics per 'copy' region
-        	Region name    : copy
-        	Region type    : function
-        	Offsets        : 7679-7893
-        	Line numbers   : 308-315
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 2
-
-.   .   ./ArrayUtils.java:318: info: Metrics per 'copy' region
-        	Region name    : copy
-        	Region type    : function
-        	Offsets        : 7900-8087
-        	Line numbers   : 318-323
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 1
-
-.   .   ./ArrayUtils.java:325: info: Metrics per 'copy' region
-        	Region name    : copy
-        	Region type    : function
-        	Offsets        : 8093-8319
-        	Line numbers   : 325-332
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 2
-
-.   .   ./ArrayUtils.java:334: info: Metrics per 'copy' region
-        	Region name    : copy
-        	Region type    : function
-        	Offsets        : 8323-8557
-        	Line numbers   : 334-341
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 2
-
-.   .   ./ArrayUtils.java:343: info: Metrics per 'copy' region
-        	Region name    : copy
-        	Region type    : function
-        	Offsets        : 8561-8744
-        	Line numbers   : 343-348
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 1
-
-.   .   ./ArrayUtils.java:350: info: Metrics per 'copy' region
-        	Region name    : copy
-        	Region type    : function
-        	Offsets        : 8750-8972
-        	Line numbers   : 350-357
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 2
-
-.   .   ./ArrayUtils.java:359: info: Metrics per 'copy' region
-        	Region name    : copy
-        	Region type    : function
-        	Offsets        : 8976-9206
-        	Line numbers   : 359-366
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 2
-
-.   .   ./ArrayUtils.java:369: info: Metrics per 'toString' region
-        	Region name    : toString
-        	Region type    : function
-        	Offsets        : 9213-9462
-        	Line numbers   : 369-378
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 2
-
-.   .   ./ArrayUtils.java:380: info: Metrics per 'toPrimitive' region
-        	Region name    : toPrimitive
-        	Region type    : function
-        	Offsets        : 9466-9546
-        	Line numbers   : 380-382
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 0
-
-.   .   ./ArrayUtils.java:384: info: Metrics per 'toPrimitive' region
-        	Region name    : toPrimitive
-        	Region type    : function
-        	Offsets        : 9550-9631
-        	Line numbers   : 384-386
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 0
-
-.   .   ./ArrayUtils.java:388: info: Metrics per 'toPrimitive' region
-        	Region name    : toPrimitive
-        	Region type    : function
-        	Offsets        : 9635-9723
-        	Line numbers   : 388-390
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 0
-
-.   .   ./ArrayUtils.java:392: info: Metrics per 'toPrimitive' region
-        	Region name    : toPrimitive
-        	Region type    : function
-        	Offsets        : 9727-9817
-        	Line numbers   : 392-394
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 0
-
-.   .   ./ArrayUtils.java:396: info: Metrics per 'toPrimitive' region
-        	Region name    : toPrimitive
-        	Region type    : function
-        	Offsets        : 9821-9906
-        	Line numbers   : 396-398
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 0
-
-.   .   ./ArrayUtils.java:400: info: Metrics per 'toPrimitive' region
-        	Region name    : toPrimitive
-        	Region type    : function
-        	Offsets        : 9910-10194
-        	Line numbers   : 400-409
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 3
-
-.   .   ./ArrayUtils.java:411: info: Metrics per 'toPrimitive' region
-        	Region name    : toPrimitive
-        	Region type    : function
-        	Offsets        : 10198-10484
-        	Line numbers   : 411-420
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 3
-
-.   .   ./ArrayUtils.java:422: info: Metrics per 'toPrimitive' region
-        	Region name    : toPrimitive
-        	Region type    : function
-        	Offsets        : 10489-10779
-        	Line numbers   : 422-431
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 3
-
-.   .   ./ArrayUtils.java:433: info: Metrics per 'toPrimitive' region
-        	Region name    : toPrimitive
-        	Region type    : function
-        	Offsets        : 10784-11078
-        	Line numbers   : 433-442
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 3
-
-.   .   ./ArrayUtils.java:444: info: Metrics per 'toPrimitive' region
-        	Region name    : toPrimitive
-        	Region type    : function
-        	Offsets        : 11082-11378
-        	Line numbers   : 444-453
-        	Modified       : None
-        	std.code.complexity:cyclomatic: 3
-
-.   ./ArrayUtils.java:458: info: Metrics per 'Interface' region
-    	Region name    : Interface
-    	Region type    : interface
-    	Offsets        : 11423-11608
-    	Line numbers   : 458-461
-    	Modified       : None
-
-./ArrayUtils.java:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 1.93023255814
-	Minimum        : 0
-	Maximum        : 6
-	Total          : 83.0
-	Distribution   : 43 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             0 : 0.186 : 0.186 :  8	|||||||||||||||||||
-	             1 : 0.326 : 0.512 : 14	|||||||||||||||||||||||||||||||||
-	             2 : 0.209 : 0.721 :  9	|||||||||||||||||||||
-	             3 : 0.163 : 0.884 :  7	||||||||||||||||
-	             6 : 0.116 : 1.000 :  5	||||||||||||
 
 ./Generics.java:0: info: Metrics per '__global__' region
 	Region name    : __global__

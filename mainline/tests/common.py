@@ -143,6 +143,9 @@ class ToolRunner(object):
             for each in lines:
                 gold_to_compare += "".join(gold_lines[each[0] : each[1]])
                 text_to_compare += "".join(text_lines[each[0] : each[1]])
+        
+        gold_to_compare = gold_to_compare.replace('\r', '')
+        text_to_compare = text_to_compare.replace('\r', '')
             
         result = (gold_to_compare == text_to_compare)
         
