@@ -85,7 +85,7 @@ class CsCodeParser(object):
                                                                       # if may be not detected
                                                                       # LIMITATION: if there are comments after set|get keyword,
                                                                       # if may be not detected
-                | ((?P<block_type>class|struct|namespace|interface)   # Match class or struct or interface or namespace
+                | ((?P<block_type>\bclass|\bstruct|\bnamespace|\binterface)   # Match class or struct or interface or namespace
                     (?P<block_name>(\s+[a-zA-Z_][a-zA-Z0-9_]*)([.][a-zA-Z_][a-zA-Z0-9_]*)*))
                                                                       # NOTE: noname instances are impossible in C#
                                                                       # NOTE: names can have sub-names separated by dots

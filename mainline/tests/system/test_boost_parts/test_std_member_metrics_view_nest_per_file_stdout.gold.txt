@@ -1,0 +1,1137 @@
+./interprocess/detail/win32_api.hpp:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-67913
+	Line numbers   : 1-1853
+	Modified       : None
+	std.code.member:namespaces: 3
+
+.   ./interprocess/detail/win32_api.hpp:42: info: Metrics per 'boost' region
+    	Region name    : boost
+    	Region type    : namespace
+    	Offsets        : 1193-9869
+    	Line numbers   : 40-215
+    	Modified       : None
+    	std.code.member:namespaces: 1
+
+.   .   ./interprocess/detail/win32_api.hpp:43: info: Metrics per 'interprocess' region
+        	Region name    : interprocess
+        	Region type    : namespace
+        	Offsets        : 1298-9838
+        	Line numbers   : 43-214
+        	Modified       : None
+        	std.code.member:namespaces: 1
+
+.   .   .   ./interprocess/detail/win32_api.hpp:44: info: Metrics per 'winapi' region
+            	Region name    : winapi
+            	Region type    : namespace
+            	Offsets        : 1323-9814
+            	Line numbers   : 44-213
+            	Modified       : None
+
+.   ./interprocess/detail/win32_api.hpp:218: info: Metrics per 'boost' region
+    	Region name    : boost
+    	Region type    : namespace
+    	Offsets        : 9894-38207
+    	Line numbers   : 218-965
+    	Modified       : None
+    	std.code.member:namespaces: 1
+
+.   .   ./interprocess/detail/win32_api.hpp:219: info: Metrics per 'interprocess' region
+        	Region name    : interprocess
+        	Region type    : namespace
+        	Offsets        : 9913-38176
+        	Line numbers   : 219-964
+        	Modified       : None
+        	std.code.member:namespaces: 1
+
+.   .   .   ./interprocess/detail/win32_api.hpp:220: info: Metrics per 'winapi' region
+            	Region name    : winapi
+            	Region type    : namespace
+            	Offsets        : 9939-38152
+            	Line numbers   : 220-963
+            	Modified       : None
+            	std.code.member:structs: 26
+            	std.code.member:types: 26
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:222: info: Metrics per 'GUID_BIPC' region
+                	Region name    : GUID_BIPC
+                	Region type    : struct
+                	Offsets        : 9959-10082
+                	Line numbers   : 222-228
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:235: info: Metrics per 'wchar_variant' region
+                	Region name    : wchar_variant
+                	Region type    : struct
+                	Offsets        : 10333-10475
+                	Line numbers   : 235-242
+                	Modified       : None
+                	std.code.member:structs: 1
+                	std.code.member:types: 1
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:238: info: Metrics per 'value_t' region
+                    	Region name    : value_t
+                    	Region type    : struct
+                    	Offsets        : 10389-10466
+                    	Line numbers   : 238-241
+                    	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:244: info: Metrics per 'IUnknown_BIPC' region
+                	Region name    : IUnknown_BIPC
+                	Region type    : struct
+                	Offsets        : 10478-10749
+                	Line numbers   : 244-253
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:255: info: Metrics per 'IWbemClassObject_BIPC' region
+                	Region name    : IWbemClassObject_BIPC
+                	Region type    : struct
+                	Offsets        : 10752-14302
+                	Line numbers   : 255-359
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:361: info: Metrics per 'IWbemContext_BIPC' region
+                	Region name    : IWbemContext_BIPC
+                	Region type    : struct
+                	Offsets        : 14305-15339
+                	Line numbers   : 361-397
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:400: info: Metrics per 'IEnumWbemClassObject_BIPC' region
+                	Region name    : IEnumWbemClassObject_BIPC
+                	Region type    : struct
+                	Offsets        : 15343-15975
+                	Line numbers   : 400-422
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:424: info: Metrics per 'IWbemServices_BIPC' region
+                	Region name    : IWbemServices_BIPC
+                	Region type    : struct
+                	Offsets        : 15978-21010
+                	Line numbers   : 424-571
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:573: info: Metrics per 'IWbemLocator_BIPC' region
+                	Region name    : IWbemLocator_BIPC
+                	Region type    : struct
+                	Offsets        : 21013-21470
+                	Line numbers   : 573-586
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:588: info: Metrics per 'interprocess_overlapped' region
+                	Region name    : interprocess_overlapped
+                	Region type    : struct
+                	Offsets        : 21473-21721
+                	Line numbers   : 588-601
+                	Modified       : None
+                	std.code.member:structs: 1
+                	std.code.member:types: 1
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:592: info: Metrics per '__noname__' region
+                    	Region name    : __noname__
+                    	Region type    : struct
+                    	Offsets        : 21570-21699
+                    	Line numbers   : 592-598
+                    	Modified       : None
+                    	std.code.member:structs: 1
+                    	std.code.member:types: 1
+
+.   .   .   .   .   .   ./interprocess/detail/win32_api.hpp:593: info: Metrics per '__noname__' region
+                        	Region name    : __noname__
+                        	Region type    : struct
+                        	Offsets        : 21584-21667
+                        	Line numbers   : 593-596
+                        	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:603: info: Metrics per 'interprocess_semaphore_basic_information' region
+                	Region name    : interprocess_semaphore_basic_information
+                	Region type    : struct
+                	Offsets        : 21724-21869
+                	Line numbers   : 603-607
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:609: info: Metrics per 'interprocess_section_basic_information' region
+                	Region name    : interprocess_section_basic_information
+                	Region type    : struct
+                	Offsets        : 21872-22023
+                	Line numbers   : 609-614
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:616: info: Metrics per 'interprocess_filetime' region
+                	Region name    : interprocess_filetime
+                	Region type    : struct
+                	Offsets        : 22026-22125
+                	Line numbers   : 616-620
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:622: info: Metrics per 'win32_find_data_t' region
+                	Region name    : win32_find_data_t
+                	Region type    : struct
+                	Offsets        : 22128-22500
+                	Line numbers   : 622-634
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:636: info: Metrics per 'interprocess_security_attributes' region
+                	Region name    : interprocess_security_attributes
+                	Region type    : struct
+                	Offsets        : 22503-22626
+                	Line numbers   : 636-641
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:643: info: Metrics per 'system_info' region
+                	Region name    : system_info
+                	Region type    : struct
+                	Offsets        : 22629-23210
+                	Line numbers   : 643-660
+                	Modified       : None
+                	std.code.member:structs: 1
+                	std.code.member:types: 1
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:644: info: Metrics per '__noname__' region
+                    	Region name    : __noname__
+                    	Region type    : struct
+                    	Offsets        : 22654-22861
+                    	Line numbers   : 644-650
+                    	Modified       : None
+                    	std.code.member:structs: 1
+                    	std.code.member:types: 1
+
+.   .   .   .   .   .   ./interprocess/detail/win32_api.hpp:646: info: Metrics per '__noname__' region
+                        	Region name    : __noname__
+                        	Region type    : struct
+                        	Offsets        : 22702-22848
+                        	Line numbers   : 645-649
+                        	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:662: info: Metrics per 'interprocess_memory_basic_information' region
+                	Region name    : interprocess_memory_basic_information
+                	Region type    : struct
+                	Offsets        : 23213-23469
+                	Line numbers   : 662-671
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:673: info: Metrics per 'interprocess_acl' region
+                	Region name    : interprocess_acl
+                	Region type    : struct
+                	Offsets        : 23472-23633
+                	Line numbers   : 673-680
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:682: info: Metrics per '_interprocess_security_descriptor' region
+                	Region name    : _interprocess_security_descriptor
+                	Region type    : struct
+                	Offsets        : 23636-23851
+                	Line numbers   : 682-691
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:741: info: Metrics per 'file_name_information_t' region
+                	Region name    : file_name_information_t
+                	Region type    : struct
+                	Offsets        : 25271-25362
+                	Line numbers   : 741-744
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:746: info: Metrics per 'file_rename_information_t' region
+                	Region name    : file_rename_information_t
+                	Region type    : struct
+                	Offsets        : 25365-25492
+                	Line numbers   : 746-751
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:753: info: Metrics per 'unicode_string_t' region
+                	Region name    : unicode_string_t
+                	Region type    : struct
+                	Offsets        : 25495-25601
+                	Line numbers   : 753-757
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:759: info: Metrics per 'object_attributes_t' region
+                	Region name    : object_attributes_t
+                	Region type    : struct
+                	Offsets        : 25604-25810
+                	Line numbers   : 759-766
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:768: info: Metrics per 'io_status_block_t' region
+                	Region name    : io_status_block_t
+                	Region type    : struct
+                	Offsets        : 25813-25930
+                	Line numbers   : 768-775
+                	Modified       : None
+                	std.code.member:structs: 1
+                	std.code.member:types: 1
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:769: info: Metrics per '__noname__' region
+                    	Region name    : __noname__
+                    	Region type    : struct
+                    	Offsets        : 25843-25895
+                    	Line numbers   : 769-772
+                    	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:777: info: Metrics per 'system_timeofday_information' region
+                	Region name    : system_timeofday_information
+                	Region type    : struct
+                	Offsets        : 25933-26222
+                	Line numbers   : 777-788
+                	Modified       : None
+                	std.code.member:structs: 1
+                	std.code.member:types: 1
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:779: info: Metrics per 'data_t' region
+                    	Region name    : data_t
+                    	Region type    : struct
+                    	Offsets        : 25973-26159
+                    	Line numbers   : 779-786
+                    	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:790: info: Metrics per 'interprocess_by_handle_file_information' region
+                	Region name    : interprocess_by_handle_file_information
+                	Region type    : struct
+                	Offsets        : 26225-26646
+                	Line numbers   : 790-802
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:831: info: Metrics per 'object_name_information_t' region
+                	Region name    : object_name_information_t
+                	Region type    : struct
+                	Offsets        : 27307-27395
+                	Line numbers   : 831-835
+                	Modified       : None
+
+.   ./interprocess/detail/win32_api.hpp:967: info: Metrics per 'boost' region
+    	Region name    : boost
+    	Region type    : namespace
+    	Offsets        : 38231-67783
+    	Line numbers   : 967-1848
+    	Modified       : None
+    	std.code.member:namespaces: 1
+
+.   .   ./interprocess/detail/win32_api.hpp:968: info: Metrics per 'interprocess' region
+        	Region name    : interprocess
+        	Region type    : namespace
+        	Offsets        : 38249-67755
+        	Line numbers   : 968-1847
+        	Modified       : None
+        	std.code.member:namespaces: 1
+
+.   .   .   ./interprocess/detail/win32_api.hpp:969: info: Metrics per 'winapi' region
+            	Region name    : winapi
+            	Region type    : namespace
+            	Offsets        : 38274-67733
+            	Line numbers   : 969-1846
+            	Modified       : None
+            	std.code.member:classes: 2
+            	std.code.member:methods: 77
+            	std.code.member:types: 9
+            	std.code.member:structs: 7
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:971: info: Metrics per 'get_last_error' region
+                	Region name    : get_last_error
+                	Region type    : function
+                	Offsets        : 38294-38360
+                	Line numbers   : 971-972
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:974: info: Metrics per 'set_last_error' region
+                	Region name    : set_last_error
+                	Region type    : function
+                	Offsets        : 38362-38439
+                	Line numbers   : 974-975
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:977: info: Metrics per 'format_message' region
+                	Region name    : format_message
+                	Region type    : function
+                	Offsets        : 38441-38761
+                	Line numbers   : 977-984
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:987: info: Metrics per 'local_free' region
+                	Region name    : local_free
+                	Region type    : function
+                	Offsets        : 38763-38857
+                	Line numbers   : 986-988
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:990: info: Metrics per 'make_lang_id' region
+                	Region name    : make_lang_id
+                	Region type    : function
+                	Offsets        : 38859-38995
+                	Line numbers   : 990-991
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:993: info: Metrics per 'sched_yield' region
+                	Region name    : sched_yield
+                	Region type    : function
+                	Offsets        : 38997-39073
+                	Line numbers   : 993-998
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1000: info: Metrics per 'sleep' region
+                	Region name    : sleep
+                	Region type    : function
+                	Offsets        : 39075-39127
+                	Line numbers   : 1000-1001
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1003: info: Metrics per 'get_current_thread_id' region
+                	Region name    : get_current_thread_id
+                	Region type    : function
+                	Offsets        : 39129-39208
+                	Line numbers   : 1003-1004
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1006: info: Metrics per 'get_process_times' region
+                	Region name    : get_process_times
+                	Region type    : function
+                	Offsets        : 39210-39513
+                	Line numbers   : 1006-1010
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1012: info: Metrics per 'get_current_process_id' region
+                	Region name    : get_current_process_id
+                	Region type    : function
+                	Offsets        : 39515-39596
+                	Line numbers   : 1012-1013
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1015: info: Metrics per 'close_handle' region
+                	Region name    : close_handle
+                	Region type    : function
+                	Offsets        : 39598-39679
+                	Line numbers   : 1015-1016
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1018: info: Metrics per 'find_first_file' region
+                	Region name    : find_first_file
+                	Region type    : function
+                	Offsets        : 39681-39827
+                	Line numbers   : 1018-1019
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1021: info: Metrics per 'find_next_file' region
+                	Region name    : find_next_file
+                	Region type    : function
+                	Offsets        : 39829-39968
+                	Line numbers   : 1021-1022
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1024: info: Metrics per 'find_close' region
+                	Region name    : find_close
+                	Region type    : function
+                	Offsets        : 39970-40044
+                	Line numbers   : 1024-1025
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1027: info: Metrics per 'duplicate_current_process_handle' region
+                	Region name    : duplicate_current_process_handle
+                	Region type    : function
+                	Offsets        : 40046-40323
+                	Line numbers   : 1027-1034
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1036: info: Metrics per 'get_file_type' region
+                	Region name    : get_file_type
+                	Region type    : function
+                	Offsets        : 40325-40406
+                	Line numbers   : 1036-1039
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1049: info: Metrics per 'open_or_create_mutex' region
+                	Region name    : open_or_create_mutex
+                	Region type    : function
+                	Offsets        : 40408-40864
+                	Line numbers   : 1041-1050
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1052: info: Metrics per 'wait_for_single_object' region
+                	Region name    : wait_for_single_object
+                	Region type    : function
+                	Offsets        : 40866-40990
+                	Line numbers   : 1052-1053
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1055: info: Metrics per 'release_mutex' region
+                	Region name    : release_mutex
+                	Region type    : function
+                	Offsets        : 40992-41065
+                	Line numbers   : 1055-1056
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1058: info: Metrics per 'unmap_view_of_file' region
+                	Region name    : unmap_view_of_file
+                	Region type    : function
+                	Offsets        : 41067-41149
+                	Line numbers   : 1058-1059
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1061: info: Metrics per 'open_or_create_semaphore' region
+                	Region name    : open_or_create_semaphore
+                	Region type    : function
+                	Offsets        : 41151-41359
+                	Line numbers   : 1061-1062
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1064: info: Metrics per 'open_semaphore' region
+                	Region name    : open_semaphore
+                	Region type    : function
+                	Offsets        : 41361-41466
+                	Line numbers   : 1064-1065
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1067: info: Metrics per 'release_semaphore' region
+                	Region name    : release_semaphore
+                	Region type    : function
+                	Offsets        : 41468-41613
+                	Line numbers   : 1067-1068
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1070: info: Metrics per 'interprocess_all_access_security' region
+                	Region name    : interprocess_all_access_security
+                	Region type    : class
+                	Offsets        : 41615-42245
+                	Line numbers   : 1070-1092
+                	Modified       : None
+                	std.code.member:fields: 2
+                	std.code.member:methods: 2
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1077: info: Metrics per 'interprocess_all_access_security' region
+                    	Region name    : interprocess_all_access_security
+                    	Region type    : function
+                    	Offsets        : 41761-42168
+                    	Line numbers   : 1076-1088
+                    	Modified       : None
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1090: info: Metrics per 'get_attributes' region
+                    	Region name    : get_attributes
+                    	Region type    : function
+                    	Offsets        : 42173-42243
+                    	Line numbers   : 1090-1091
+                    	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1094: info: Metrics per 'create_file_mapping' region
+                	Region name    : create_file_mapping
+                	Region type    : function
+                	Offsets        : 42248-42585
+                	Line numbers   : 1094-1098
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1100: info: Metrics per 'open_file_mapping' region
+                	Region name    : open_file_mapping
+                	Region type    : function
+                	Offsets        : 42587-42709
+                	Line numbers   : 1100-1101
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1103: info: Metrics per 'map_view_of_file_ex' region
+                	Region name    : map_view_of_file_ex
+                	Region type    : function
+                	Offsets        : 42711-43092
+                	Line numbers   : 1103-1108
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1110: info: Metrics per 'create_file' region
+                	Region name    : create_file
+                	Region type    : function
+                	Offsets        : 43094-43855
+                	Line numbers   : 1110-1126
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1128: info: Metrics per 'delete_file' region
+                	Region name    : delete_file
+                	Region type    : function
+                	Offsets        : 43857-43935
+                	Line numbers   : 1128-1129
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1131: info: Metrics per 'move_file_ex' region
+                	Region name    : move_file_ex
+                	Region type    : function
+                	Offsets        : 43937-44122
+                	Line numbers   : 1131-1132
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1134: info: Metrics per 'get_system_info' region
+                	Region name    : get_system_info
+                	Region type    : function
+                	Offsets        : 44124-44196
+                	Line numbers   : 1134-1135
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1137: info: Metrics per 'flush_view_of_file' region
+                	Region name    : flush_view_of_file
+                	Region type    : function
+                	Offsets        : 44198-44322
+                	Line numbers   : 1137-1138
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1140: info: Metrics per 'virtual_unlock' region
+                	Region name    : virtual_unlock
+                	Region type    : function
+                	Offsets        : 44324-44442
+                	Line numbers   : 1140-1141
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1143: info: Metrics per 'virtual_protect' region
+                	Region name    : virtual_protect
+                	Region type    : function
+                	Offsets        : 44444-44654
+                	Line numbers   : 1143-1144
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1146: info: Metrics per 'flush_file_buffers' region
+                	Region name    : flush_file_buffers
+                	Region type    : function
+                	Offsets        : 44656-44743
+                	Line numbers   : 1146-1147
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1149: info: Metrics per 'get_file_size' region
+                	Region name    : get_file_size
+                	Region type    : function
+                	Offsets        : 44745-44847
+                	Line numbers   : 1149-1150
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1152: info: Metrics per 'create_directory' region
+                	Region name    : create_directory
+                	Region type    : function
+                	Offsets        : 44849-45001
+                	Line numbers   : 1152-1156
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1158: info: Metrics per 'remove_directory' region
+                	Region name    : remove_directory
+                	Region type    : function
+                	Offsets        : 45003-45104
+                	Line numbers   : 1158-1159
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1161: info: Metrics per 'get_temp_path' region
+                	Region name    : get_temp_path
+                	Region type    : function
+                	Offsets        : 45106-45220
+                	Line numbers   : 1161-1162
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1164: info: Metrics per 'set_end_of_file' region
+                	Region name    : set_end_of_file
+                	Region type    : function
+                	Offsets        : 45222-45303
+                	Line numbers   : 1164-1165
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1167: info: Metrics per 'set_file_pointer_ex' region
+                	Region name    : set_file_pointer_ex
+                	Region type    : function
+                	Offsets        : 45305-45508
+                	Line numbers   : 1167-1168
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1170: info: Metrics per 'lock_file_ex' region
+                	Region name    : lock_file_ex
+                	Region type    : function
+                	Offsets        : 45510-45760
+                	Line numbers   : 1170-1171
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1173: info: Metrics per 'unlock_file_ex' region
+                	Region name    : unlock_file_ex
+                	Region type    : function
+                	Offsets        : 45762-45989
+                	Line numbers   : 1173-1174
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1176: info: Metrics per 'write_file' region
+                	Region name    : write_file
+                	Region type    : function
+                	Offsets        : 45991-46226
+                	Line numbers   : 1176-1177
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1179: info: Metrics per 'read_file' region
+                	Region name    : read_file
+                	Region type    : function
+                	Offsets        : 46228-46447
+                	Line numbers   : 1179-1180
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1182: info: Metrics per 'get_file_information_by_handle' region
+                	Region name    : get_file_information_by_handle
+                	Region type    : function
+                	Offsets        : 46449-46606
+                	Line numbers   : 1182-1183
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1185: info: Metrics per 'interlocked_increment' region
+                	Region name    : interlocked_increment
+                	Region type    : function
+                	Offsets        : 46608-46710
+                	Line numbers   : 1185-1186
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1188: info: Metrics per 'interlocked_decrement' region
+                	Region name    : interlocked_decrement
+                	Region type    : function
+                	Offsets        : 46712-46814
+                	Line numbers   : 1188-1189
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1191: info: Metrics per 'interlocked_compare_exchange' region
+                	Region name    : interlocked_compare_exchange
+                	Region type    : function
+                	Offsets        : 46816-46966
+                	Line numbers   : 1191-1192
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1194: info: Metrics per 'interlocked_exchange_add' region
+                	Region name    : interlocked_exchange_add
+                	Region type    : function
+                	Offsets        : 46968-47118
+                	Line numbers   : 1194-1195
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1197: info: Metrics per 'interlocked_exchange' region
+                	Region name    : interlocked_exchange
+                	Region type    : function
+                	Offsets        : 47120-47262
+                	Line numbers   : 1197-1198
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1201: info: Metrics per 'load_library' region
+                	Region name    : load_library
+                	Region type    : function
+                	Offsets        : 47264-47359
+                	Line numbers   : 1200-1202
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1204: info: Metrics per 'free_library' region
+                	Region name    : free_library
+                	Region type    : function
+                	Offsets        : 47361-47437
+                	Line numbers   : 1204-1205
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1207: info: Metrics per 'get_proc_address' region
+                	Region name    : get_proc_address
+                	Region type    : function
+                	Offsets        : 47439-47542
+                	Line numbers   : 1207-1208
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1210: info: Metrics per 'get_current_process' region
+                	Region name    : get_current_process
+                	Region type    : function
+                	Offsets        : 47544-47612
+                	Line numbers   : 1210-1211
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1213: info: Metrics per 'get_module_handle' region
+                	Region name    : get_module_handle
+                	Region type    : function
+                	Offsets        : 47614-47698
+                	Line numbers   : 1213-1214
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1216: info: Metrics per 'get_mapped_file_name' region
+                	Region name    : get_mapped_file_name
+                	Region type    : function
+                	Offsets        : 47700-47874
+                	Line numbers   : 1216-1217
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1219: info: Metrics per 'reg_open_key_ex' region
+                	Region name    : reg_open_key_ex
+                	Region type    : function
+                	Offsets        : 47876-48083
+                	Line numbers   : 1219-1220
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1222: info: Metrics per 'reg_query_value_ex' region
+                	Region name    : reg_query_value_ex
+                	Region type    : function
+                	Offsets        : 48085-48334
+                	Line numbers   : 1222-1223
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1225: info: Metrics per 'reg_close_key' region
+                	Region name    : reg_close_key
+                	Region type    : function
+                	Offsets        : 48336-48404
+                	Line numbers   : 1225-1226
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1228: info: Metrics per 'query_performance_counter' region
+                	Region name    : query_performance_counter
+                	Region type    : function
+                	Offsets        : 48406-48536
+                	Line numbers   : 1228-1231
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1233: info: Metrics per 'initialize_object_attributes' region
+                	Region name    : initialize_object_attributes
+                	Region type    : function
+                	Offsets        : 48538-48973
+                	Line numbers   : 1233-1244
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1246: info: Metrics per 'rtl_init_empty_unicode_string' region
+                	Region name    : rtl_init_empty_unicode_string
+                	Region type    : function
+                	Offsets        : 48975-49164
+                	Line numbers   : 1246-1251
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1255: info: Metrics per 'function_address_holder' region
+                	Region name    : function_address_holder
+                	Region type    : struct
+                	Offsets        : 49166-51296
+                	Line numbers   : 1253-1316
+                	Modified       : None
+                	std.code.member:methods: 4
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1266: info: Metrics per 'get_module_from_id' region
+                    	Region name    : get_module_from_id
+                    	Region type    : function
+                    	Offsets        : 49651-49943
+                    	Line numbers   : 1266-1273
+                    	Modified       : None
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1275: info: Metrics per 'get_module' region
+                    	Region name    : get_module
+                    	Region type    : function
+                    	Offsets        : 49948-50393
+                    	Line numbers   : 1275-1289
+                    	Modified       : None
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1291: info: Metrics per 'get_address_from_dll' region
+                    	Region name    : get_address_from_dll
+                    	Region type    : function
+                    	Offsets        : 50398-50826
+                    	Line numbers   : 1291-1298
+                    	Modified       : None
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1301: info: Metrics per 'get' region
+                    	Region name    : get
+                    	Region type    : function
+                    	Offsets        : 50831-51294
+                    	Line numbers   : 1300-1315
+                    	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1331: info: Metrics per 'dll_func' region
+                	Region name    : dll_func
+                	Region type    : struct
+                	Offsets        : 51794-51851
+                	Line numbers   : 1331-1333
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1336: info: Metrics per 'library_unloader' region
+                	Region name    : library_unloader
+                	Region type    : struct
+                	Offsets        : 51854-52030
+                	Line numbers   : 1335-1341
+                	Modified       : None
+                	std.code.member:methods: 2
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1339: info: Metrics per 'library_unloader' region
+                    	Region name    : library_unloader
+                    	Region type    : function
+                    	Offsets        : 51934-51981
+                    	Line numbers   : 1339-1339
+                    	Modified       : None
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1340: info: Metrics per '~library_unloader' region
+                    	Region name    : ~library_unloader
+                    	Region type    : function
+                    	Offsets        : 51985-52028
+                    	Line numbers   : 1340-1340
+                    	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1344: info: Metrics per 'get_file_name_from_handle_function' region
+                	Region name    : get_file_name_from_handle_function
+                	Region type    : function
+                	Offsets        : 52033-53304
+                	Line numbers   : 1343-1383
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1385: info: Metrics per 'get_system_time_of_day_information' region
+                	Region name    : get_system_time_of_day_information
+                	Region type    : function
+                	Offsets        : 53306-53720
+                	Line numbers   : 1385-1395
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1397: info: Metrics per 'get_boot_time' region
+                	Region name    : get_boot_time
+                	Region type    : function
+                	Offsets        : 53722-54012
+                	Line numbers   : 1397-1406
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1408: info: Metrics per 'get_boot_and_system_time' region
+                	Region name    : get_boot_and_system_time
+                	Region type    : function
+                	Offsets        : 54014-54342
+                	Line numbers   : 1408-1417
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1419: info: Metrics per 'get_boot_time_str' region
+                	Region name    : get_boot_time_str
+                	Region type    : function
+                	Offsets        : 54344-55074
+                	Line numbers   : 1419-1438
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1440: info: Metrics per 'get_boot_and_system_time_wstr' region
+                	Region name    : get_boot_and_system_time_wstr
+                	Region type    : function
+                	Offsets        : 55076-55883
+                	Line numbers   : 1440-1459
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1461: info: Metrics per 'handle_closer' region
+                	Region name    : handle_closer
+                	Region type    : class
+                	Offsets        : 55885-56142
+                	Line numbers   : 1461-1470
+                	Modified       : None
+                	std.code.member:methods: 2
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1467: info: Metrics per 'handle_closer' region
+                    	Region name    : handle_closer
+                    	Region type    : function
+                    	Offsets        : 56021-56088
+                    	Line numbers   : 1466-1467
+                    	Modified       : None
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1468: info: Metrics per '~handle_closer' region
+                    	Region name    : ~handle_closer
+                    	Region type    : function
+                    	Offsets        : 56092-56140
+                    	Line numbers   : 1468-1469
+                    	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1472: info: Metrics per 'ntquery_mem_t' region
+                	Region name    : ntquery_mem_t
+                	Region type    : struct
+                	Offsets        : 56145-56298
+                	Line numbers   : 1472-1480
+                	Modified       : None
+                	std.code.member:structs: 1
+                	std.code.member:types: 1
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1475: info: Metrics per 'ren_t' region
+                    	Region name    : ren_t
+                    	Region type    : struct
+                    	Offsets        : 56205-56291
+                    	Line numbers   : 1475-1479
+                    	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1482: info: Metrics per 'unlink_file' region
+                	Region name    : unlink_file
+                	Region type    : function
+                	Offsets        : 56301-59549
+                	Line numbers   : 1482-1572
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1574: info: Metrics per 'reg_closer' region
+                	Region name    : reg_closer
+                	Region type    : struct
+                	Offsets        : 59551-59807
+                	Line numbers   : 1574-1582
+                	Modified       : None
+                	std.code.member:methods: 2
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1580: info: Metrics per 'reg_closer' region
+                    	Region name    : reg_closer
+                    	Region type    : function
+                    	Offsets        : 59728-59763
+                    	Line numbers   : 1580-1580
+                    	Modified       : None
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1581: info: Metrics per '~reg_closer' region
+                    	Region name    : ~reg_closer
+                    	Region type    : function
+                    	Offsets        : 59767-59805
+                    	Line numbers   : 1581-1581
+                    	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1584: info: Metrics per 'get_shared_documents_folder' region
+                	Region name    : get_shared_documents_folder
+                	Region type    : function
+                	Offsets        : 59810-60805
+                	Line numbers   : 1584-1611
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1613: info: Metrics per 'get_registry_value' region
+                	Region name    : get_registry_value
+                	Region type    : function
+                	Offsets        : 60807-61779
+                	Line numbers   : 1613-1640
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1642: info: Metrics per 'co_uninitializer' region
+                	Region name    : co_uninitializer
+                	Region type    : struct
+                	Offsets        : 61781-62038
+                	Line numbers   : 1642-1657
+                	Modified       : None
+                	std.code.member:methods: 2
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1644: info: Metrics per 'co_uninitializer' region
+                    	Region name    : co_uninitializer
+                    	Region type    : function
+                    	Offsets        : 61810-61894
+                    	Line numbers   : 1644-1646
+                    	Modified       : None
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1648: info: Metrics per '~co_uninitializer' region
+                    	Region name    : ~co_uninitializer
+                    	Region type    : function
+                    	Offsets        : 61899-61991
+                    	Line numbers   : 1648-1653
+                    	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1660: info: Metrics per 'com_releaser' region
+                	Region name    : com_releaser
+                	Region type    : struct
+                	Offsets        : 62041-62224
+                	Line numbers   : 1659-1665
+                	Modified       : None
+                	std.code.member:methods: 2
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1663: info: Metrics per 'com_releaser' region
+                    	Region name    : com_releaser
+                    	Region type    : function
+                    	Offsets        : 62110-62160
+                    	Line numbers   : 1663-1663
+                    	Modified       : None
+
+.   .   .   .   .   ./interprocess/detail/win32_api.hpp:1664: info: Metrics per '~com_releaser' region
+                    	Region name    : ~com_releaser
+                    	Region type    : function
+                    	Offsets        : 62164-62222
+                    	Line numbers   : 1664-1664
+                    	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1667: info: Metrics per 'get_wmi_class_attribute' region
+                	Region name    : get_wmi_class_attribute
+                	Region type    : function
+                	Offsets        : 62227-65894
+                	Line numbers   : 1667-1780
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1782: info: Metrics per 'get_last_bootup_time' region
+                	Region name    : get_last_bootup_time
+                	Region type    : function
+                	Offsets        : 65896-66301
+                	Line numbers   : 1782-1794
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1796: info: Metrics per 'get_last_bootup_time' region
+                	Region name    : get_last_bootup_time
+                	Region type    : function
+                	Offsets        : 66303-66568
+                	Line numbers   : 1796-1805
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1807: info: Metrics per 'is_directory' region
+                	Region name    : is_directory
+                	Region type    : function
+                	Offsets        : 66570-66760
+                	Line numbers   : 1807-1813
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1815: info: Metrics per 'get_file_mapping_size' region
+                	Region name    : get_file_mapping_size
+                	Region type    : function
+                	Offsets        : 66762-67218
+                	Line numbers   : 1815-1828
+                	Modified       : None
+
+.   .   .   .   ./interprocess/detail/win32_api.hpp:1830: info: Metrics per 'get_semaphore_info' region
+                	Region name    : get_semaphore_info
+                	Region type    : function
+                	Offsets        : 67220-67729
+                	Line numbers   : 1830-1843
+                	Modified       : None
+
+./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:methods' metric
+	Average        : 11.625 (excluding zero metric values)
+	Minimum        : 2
+	Maximum        : 77
+	Total          : 93.0
+	Distribution   : 8 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             2 : 0.750 : 0.750 : 6	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             4 : 0.125 : 0.875 : 1	|||||||||||||
+	            77 : 0.125 : 1.000 : 1	|||||||||||||
+
+./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:globals' metric
+	Average        : None (excluding zero metric values)
+	Minimum        : None
+	Maximum        : None
+	Total          : 0.0
+	Distribution   : 0 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+
+./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:fields' metric
+	Average        : 2.0 (excluding zero metric values)
+	Minimum        : 2
+	Maximum        : 2
+	Total          : 2.0
+	Distribution   : 1 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             2 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:interfaces' metric
+	Average        : None (excluding zero metric values)
+	Minimum        : None
+	Maximum        : None
+	Total          : 0.0
+	Distribution   : 0 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+
+./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:classes' metric
+	Average        : 2.0 (excluding zero metric values)
+	Minimum        : 2
+	Maximum        : 2
+	Total          : 2.0
+	Distribution   : 1 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             2 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:namespaces' metric
+	Average        : 1.28571428571 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 3
+	Total          : 9.0
+	Distribution   : 7 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.857 : 0.857 : 6	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             3 : 0.143 : 1.000 : 1	||||||||||||||
+
+./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:structs' metric
+	Average        : 4.1 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 26
+	Total          : 41.0
+	Distribution   : 10 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.800 : 0.800 :  8	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             7 : 0.100 : 0.900 :  1	||||||||||
+	            26 : 0.100 : 1.000 :  1	||||||||||
+
+./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:types' metric
+	Average        : 4.3 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 26
+	Total          : 43.0
+	Distribution   : 10 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.800 : 0.800 :  8	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             9 : 0.100 : 0.900 :  1	||||||||||
+	            26 : 0.100 : 1.000 :  1	||||||||||
+
+

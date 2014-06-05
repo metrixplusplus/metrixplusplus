@@ -74,6 +74,33 @@ Options:
   --std.code.magic.numbers.simplier, --scmns
                         Is set, 0, -1 and 1 numbers are not counted in
                         'std.code.magic.numbers' metric [default: False]
+  --std.code.member.fields, --scmf
+                        Enables collection of number of data members / fields
+                        per classes, structs and interfaces [default: False]
+  --std.code.member.globals, --scmg
+                        Enables collection of number of global variables /
+                        fields per global regions and namespaces [default:
+                        False]
+  --std.code.member.classes, --scmc
+                        Enables collection of number of classes defined per
+                        any region [default: False]
+  --std.code.member.structs, --scms
+                        Enables collection of number of structs defined per
+                        any region [default: False]
+  --std.code.member.interfaces, --scmi
+                        Enables collection of number of interfaces defined per
+                        any region [default: False]
+  --std.code.member.types, --scmt
+                        Enables collection of number of types (classes,
+                        structs or interface) defined per any region [default:
+                        False]
+  --std.code.member.methods, --scmm
+                        Enables collection of number of methods (functions)
+                        defined per any region [default: False]
+  --std.code.member.namespaces, --scmnss
+                        Enables collection of number of namespaces defined
+                        globally and enclosed (sub-namespaces) [default:
+                        False]
   --std.code.maintindex.simple, --scmis
                         Enables collection of simple maintainability index
                         metric. It uses std.code.line:code,

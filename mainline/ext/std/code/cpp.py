@@ -81,7 +81,7 @@ class CppCodeParser(object):
                                                                       # and before '(', it is not detected
                                                                       # LIMITATION: if there are comments within operator definition,
                                                                       # if may be not detected
-                | ((?P<block_type>class|struct|namespace)             # Match C++ class or struct
+                | ((?P<block_type>\bclass|\bstruct|\bunion|\bnamespace)             # Match C++ class or struct
                     (?P<block_name>((\s+[a-zA-Z_][a-zA-Z0-9_]*)|(?=\s*[{])))) # noname is supported, symbol '{' is not consumed
                                                                       # LIMITATION: if there are comments between keyword and name,
                                                                       # it is not detected
@@ -140,6 +140,8 @@ class CppCodeParser(object):
                 elif named_type == "class":
                     return mpp.api.Region.T.CLASS
                 elif named_type == "struct":
+                    return mpp.api.Region.T.STRUCT
+                elif named_type == "union":
                     return mpp.api.Region.T.STRUCT
                 elif named_type == "namespace":
                     return mpp.api.Region.T.NAMESPACE

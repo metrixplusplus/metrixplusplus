@@ -66,7 +66,7 @@ class JavaCodeParser(object):
                                                                       # NOTE: Java may include $ in the name
                                                                       # LIMITATION: if there are comments after function name
                                                                       # and before '(', it is not detected
-                | ((?P<block_type>class|interface)                    # Match class or namespace
+                | ((?P<block_type>\bclass|\binterface)                    # Match class or namespace
                     (?P<block_name>(\s+[_$a-zA-Z][_$a-zA-Z0-9]*)))
                                                                       # NOTE: noname instances are impossible in Java
                                                                       # LIMITATION: if there are comments between keyword and name,
