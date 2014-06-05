@@ -1,7 +1,7 @@
 <view>
 
     <data>
-        <info path="./" id="1" />
+        <info id="1" path="./" />
         <file-data />
         <subfiles>
             <subfile>Generics.java</subfile>
@@ -13,7 +13,7 @@
         </subdirs>
         <aggregated-data>
             <std.code.complexity>
-                <cyclomatic count="119" nonzero="False" total="126.0" min="0" max="6" avg="1.05882352941" sup="0">
+                <cyclomatic avg="1.05882352941" count="119" max="6" min="0" nonzero="False" sup="0" total="126.0">
                     <distribution-bars>
                         <distribution-bar count="58" metric="0" ratio="0.487394957983" />
                         <distribution-bar count="31" metric="1" ratio="0.260504201681" />

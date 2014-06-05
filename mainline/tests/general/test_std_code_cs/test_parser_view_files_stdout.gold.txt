@@ -1,145 +1,3 @@
-./interface.cs:0: info: Metrics per '__global__' region
-	Region name    : __global__
-	Region type    : global
-	Offsets        : 0-6584
-	Line numbers   : 1-219
-	Modified       : None
-
-.   ./interface.cs:22: info: Metrics per 'System.Runtime.Serialization' region
-    	Region name    : System.Runtime.Serialization
-    	Region type    : namespace
-    	Offsets        : 918-1139
-    	Line numbers   : 22-37
-    	Modified       : None
-
-.   .   ./interface.cs:30: info: Metrics per 'IDeserializationCallback' region
-        	Region name    : IDeserializationCallback
-        	Region type    : interface
-        	Offsets        : 960-1097
-        	Line numbers   : 25-35
-        	Modified       : None
-
-.   ./interface.cs:61: info: Metrics per 'System.Globalization' region
-    	Region name    : System.Globalization
-    	Region type    : namespace
-    	Offsets        : 2040-6548
-    	Line numbers   : 61-218
-    	Modified       : None
-
-.   .   ./interface.cs:69: info: Metrics per 'TextInfo' region
-        	Region name    : TextInfo
-        	Region type    : class
-        	Offsets        : 2183-6526
-        	Line numbers   : 69-216
-        	Modified       : None
-
-.   .   .   ./interface.cs:80: info: Metrics per 'TextInfo' region
-            	Region name    : TextInfo
-            	Region type    : function
-            	Offsets        : 2288-2687
-            	Line numbers   : 75-83
-            	Modified       : None
-            	std.code.complexity:cyclomatic: 0
-
-.   .   .   ./interface.cs:88: info: Metrics per 'get' region
-            	Region name    : get
-            	Region type    : function
-            	Offsets        : 2802-2940
-            	Line numbers   : 88-92
-            	Modified       : None
-            	std.code.complexity:cyclomatic: 0
-
-.   .   .   ./interface.cs:98: info: Metrics per 'get' region
-            	Region name    : get
-            	Region type    : function
-            	Offsets        : 3073-3209
-            	Line numbers   : 98-102
-            	Modified       : None
-            	std.code.complexity:cyclomatic: 0
-
-.   .   .   ./interface.cs:108: info: Metrics per 'get' region
-            	Region name    : get
-            	Region type    : function
-            	Offsets        : 3336-3475
-            	Line numbers   : 108-112
-            	Modified       : None
-            	std.code.complexity:cyclomatic: 0
-
-.   .   .   ./interface.cs:118: info: Metrics per 'get' region
-            	Region name    : get
-            	Region type    : function
-            	Offsets        : 3602-3739
-            	Line numbers   : 118-122
-            	Modified       : None
-            	std.code.complexity:cyclomatic: 0
-
-.   .   .   ./interface.cs:128: info: Metrics per 'get' region
-            	Region name    : get
-            	Region type    : function
-            	Offsets        : 3863-3934
-            	Line numbers   : 128-131
-            	Modified       : None
-            	std.code.complexity:cyclomatic: 0
-
-.   .   .   ./interface.cs:135: info: Metrics per 'Equals' region
-            	Region name    : Equals
-            	Region type    : function
-            	Offsets        : 3954-4348
-            	Line numbers   : 134-146
-            	Modified       : None
-            	std.code.complexity:cyclomatic: 1
-
-.   .   .   ./interface.cs:149: info: Metrics per 'GetHashCode' region
-            	Region name    : GetHashCode
-            	Region type    : function
-            	Offsets        : 4354-4489
-            	Line numbers   : 148-152
-            	Modified       : None
-            	std.code.complexity:cyclomatic: 0
-
-.   .   .   ./interface.cs:169: info: Metrics per 'ToTitleCase' region
-            	Region name    : ToTitleCase
-            	Region type    : function
-            	Offsets        : 5003-5940
-            	Line numbers   : 168-195
-            	Modified       : None
-            	std.code.complexity:cyclomatic: 4
-
-.   .   .   ./interface.cs:198: info: Metrics per 'I.Deserialization.Callback.OnDeserialization' region
-            	Region name    : I.Deserialization.Callback.OnDeserialization
-            	Region type    : function
-            	Offsets        : 5946-6128
-            	Line numbers   : 197-201
-            	Modified       : None
-            	std.code.complexity:cyclomatic: 0
-
-.   .   .   ./interface.cs:204: info: Metrics per 'ToString' region
-            	Region name    : ToString
-            	Region type    : function
-            	Offsets        : 6134-6296
-            	Line numbers   : 203-207
-            	Modified       : None
-            	std.code.complexity:cyclomatic: 0
-
-.   .   .   ./interface.cs:211: info: Metrics per 'IDeserializationCallback.OnDeserialization' region
-            	Region name    : IDeserializationCallback.OnDeserialization
-            	Region type    : function
-            	Offsets        : 6302-6523
-            	Line numbers   : 209-214
-            	Modified       : None
-            	std.code.complexity:cyclomatic: 0
-
-./interface.cs:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 0.416666666667
-	Minimum        : 0
-	Maximum        : 4
-	Total          : 5.0
-	Distribution   : 12 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             0 : 0.833 : 0.833 : 10	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             1 : 0.083 : 0.917 :  1	||||||||
-	             4 : 0.083 : 1.000 :  1	||||||||
-
 ./File.cs:0: info: Metrics per '__global__' region
 	Region name    : __global__
 	Region type    : global
@@ -457,5 +315,147 @@
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.875 : 0.875 : 7	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             1 : 0.125 : 1.000 : 1	|||||||||||||
+
+./interface.cs:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-6584
+	Line numbers   : 1-219
+	Modified       : None
+
+.   ./interface.cs:22: info: Metrics per 'System.Runtime.Serialization' region
+    	Region name    : System.Runtime.Serialization
+    	Region type    : namespace
+    	Offsets        : 918-1139
+    	Line numbers   : 22-37
+    	Modified       : None
+
+.   .   ./interface.cs:30: info: Metrics per 'IDeserializationCallback' region
+        	Region name    : IDeserializationCallback
+        	Region type    : interface
+        	Offsets        : 960-1097
+        	Line numbers   : 25-35
+        	Modified       : None
+
+.   ./interface.cs:61: info: Metrics per 'System.Globalization' region
+    	Region name    : System.Globalization
+    	Region type    : namespace
+    	Offsets        : 2040-6548
+    	Line numbers   : 61-218
+    	Modified       : None
+
+.   .   ./interface.cs:69: info: Metrics per 'TextInfo' region
+        	Region name    : TextInfo
+        	Region type    : class
+        	Offsets        : 2183-6526
+        	Line numbers   : 69-216
+        	Modified       : None
+
+.   .   .   ./interface.cs:80: info: Metrics per 'TextInfo' region
+            	Region name    : TextInfo
+            	Region type    : function
+            	Offsets        : 2288-2687
+            	Line numbers   : 75-83
+            	Modified       : None
+            	std.code.complexity:cyclomatic: 0
+
+.   .   .   ./interface.cs:88: info: Metrics per 'get' region
+            	Region name    : get
+            	Region type    : function
+            	Offsets        : 2802-2940
+            	Line numbers   : 88-92
+            	Modified       : None
+            	std.code.complexity:cyclomatic: 0
+
+.   .   .   ./interface.cs:98: info: Metrics per 'get' region
+            	Region name    : get
+            	Region type    : function
+            	Offsets        : 3073-3209
+            	Line numbers   : 98-102
+            	Modified       : None
+            	std.code.complexity:cyclomatic: 0
+
+.   .   .   ./interface.cs:108: info: Metrics per 'get' region
+            	Region name    : get
+            	Region type    : function
+            	Offsets        : 3336-3475
+            	Line numbers   : 108-112
+            	Modified       : None
+            	std.code.complexity:cyclomatic: 0
+
+.   .   .   ./interface.cs:118: info: Metrics per 'get' region
+            	Region name    : get
+            	Region type    : function
+            	Offsets        : 3602-3739
+            	Line numbers   : 118-122
+            	Modified       : None
+            	std.code.complexity:cyclomatic: 0
+
+.   .   .   ./interface.cs:128: info: Metrics per 'get' region
+            	Region name    : get
+            	Region type    : function
+            	Offsets        : 3863-3934
+            	Line numbers   : 128-131
+            	Modified       : None
+            	std.code.complexity:cyclomatic: 0
+
+.   .   .   ./interface.cs:135: info: Metrics per 'Equals' region
+            	Region name    : Equals
+            	Region type    : function
+            	Offsets        : 3954-4348
+            	Line numbers   : 134-146
+            	Modified       : None
+            	std.code.complexity:cyclomatic: 1
+
+.   .   .   ./interface.cs:149: info: Metrics per 'GetHashCode' region
+            	Region name    : GetHashCode
+            	Region type    : function
+            	Offsets        : 4354-4489
+            	Line numbers   : 148-152
+            	Modified       : None
+            	std.code.complexity:cyclomatic: 0
+
+.   .   .   ./interface.cs:169: info: Metrics per 'ToTitleCase' region
+            	Region name    : ToTitleCase
+            	Region type    : function
+            	Offsets        : 5003-5940
+            	Line numbers   : 168-195
+            	Modified       : None
+            	std.code.complexity:cyclomatic: 4
+
+.   .   .   ./interface.cs:198: info: Metrics per 'I.Deserialization.Callback.OnDeserialization' region
+            	Region name    : I.Deserialization.Callback.OnDeserialization
+            	Region type    : function
+            	Offsets        : 5946-6128
+            	Line numbers   : 197-201
+            	Modified       : None
+            	std.code.complexity:cyclomatic: 0
+
+.   .   .   ./interface.cs:204: info: Metrics per 'ToString' region
+            	Region name    : ToString
+            	Region type    : function
+            	Offsets        : 6134-6296
+            	Line numbers   : 203-207
+            	Modified       : None
+            	std.code.complexity:cyclomatic: 0
+
+.   .   .   ./interface.cs:211: info: Metrics per 'IDeserializationCallback.OnDeserialization' region
+            	Region name    : IDeserializationCallback.OnDeserialization
+            	Region type    : function
+            	Offsets        : 6302-6523
+            	Line numbers   : 209-214
+            	Modified       : None
+            	std.code.complexity:cyclomatic: 0
+
+./interface.cs:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 0.416666666667
+	Minimum        : 0
+	Maximum        : 4
+	Total          : 5.0
+	Distribution   : 12 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.833 : 0.833 : 10	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.083 : 0.917 :  1	||||||||
+	             4 : 0.083 : 1.000 :  1	||||||||
 
 

@@ -1,144 +1,56 @@
-./test3.cpp:0: info: Metrics per '__global__' region
+./function_ends_on_class.cpp:0: info: Metrics per '__global__' region
 	Region name    : __global__
 	Region type    : global
-	Offsets        : 0-2797
-	Line numbers   : 1-110
+	Offsets        : 0-163
+	Line numbers   : 1-20
 	Modified       : None
 
-./test3.cpp:37: info: Metrics per 'Tester' region
-	Region name    : Tester
-	Region type    : class
-	Offsets        : 1672-2192
-	Line numbers   : 37-68
-	Modified       : None
-
-./test3.cpp:39: info: Metrics per 'doColor' region
-	Region name    : doColor
-	Region type    : function
-	Offsets        : 1703-1871
-	Line numbers   : 38-48
-	Modified       : None
-	std.code.complexity:cyclomatic: 1
-
-./test3.cpp:53: info: Metrics per 'doFont' region
-	Region name    : doFont
-	Region type    : function
-	Offsets        : 1923-2189
-	Line numbers   : 53-66
-	Modified       : None
-	std.code.complexity:cyclomatic: 1
-
-./test3.cpp:72: info: Metrics per 'doFont222' region
-	Region name    : doFont222
-	Region type    : function
-	Offsets        : 2194-2561
-	Line numbers   : 68-87
-	Modified       : None
-	std.code.complexity:cyclomatic: 2
-
-./test3.cpp:90: info: Metrics per 'not_closed' region
-	Region name    : not_closed
+./function_ends_on_class.cpp:2: info: Metrics per 'my_namespace' region
+	Region name    : my_namespace
 	Region type    : namespace
-	Offsets        : 2566-2797
-	Line numbers   : 110-130
+	Offsets        : 1-162
+	Line numbers   : 2-19
 	Modified       : None
 
-./test3.cpp:91: info: Metrics per 'main' region
-	Region name    : main
+./function_ends_on_class.cpp:4: info: Metrics per 'my_class' region
+	Region name    : my_class
+	Region type    : class
+	Offsets        : 27-158
+	Line numbers   : 4-17
+	Modified       : None
+
+./function_ends_on_class.cpp:5: info: Metrics per 'function_end_on_class' region
+	Region name    : function_end_on_class
 	Region type    : function
-	Offsets        : 2589-2753
-	Line numbers   : 110-120
+	Offsets        : 45-79
+	Line numbers   : 5-8
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
 
-./test3.cpp:102: info: Metrics per '__noname__' region
-	Region name    : __noname__
-	Region type    : namespace
-	Offsets        : 2755-2793
-	Line numbers   : 122-126
-	Modified       : None
-
-./test3.cpp:103: info: Metrics per '__noname__' region
-	Region name    : __noname__
-	Region type    : struct
-	Offsets        : 2768-2787
-	Line numbers   : 123-125
-	Modified       : None
-
-./test3.cpp:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 1.0
-	Minimum        : 0
-	Maximum        : 2
-	Total          : 4.0
-	Distribution   : 4 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             0 : 0.250 : 0.250 : 1	|||||||||||||||||||||||||
-	             1 : 0.500 : 0.750 : 2	||||||||||||||||||||||||||||||||||||||||||||||||||
-	             2 : 0.250 : 1.000 : 1	|||||||||||||||||||||||||
-
-./test2.cpp:0: info: Metrics per '__global__' region
-	Region name    : __global__
-	Region type    : global
-	Offsets        : 0-628
-	Line numbers   : 1-53
-	Modified       : None
-
-./test2.cpp:5: info: Metrics per 'A' region
-	Region name    : A
-	Region type    : class
-	Offsets        : 39-170
-	Line numbers   : 5-19
-	Modified       : None
-
-./test2.cpp:7: info: Metrics per 'A' region
-	Region name    : A
+./function_ends_on_class.cpp:9: info: Metrics per 'function_end_on_struct' region
+	Region name    : function_end_on_struct
 	Region type    : function
-	Offsets        : 50-87
-	Line numbers   : 7-10
-	Modified       : None
-	std.code.complexity:cyclomatic: 1
-
-./test2.cpp:10: info: Metrics per 'method' region
-	Region name    : method
-	Region type    : function
-	Offsets        : 87-117
-	Line numbers   : 10-13
+	Offsets        : 81-116
+	Line numbers   : 9-12
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
 
-./test2.cpp:13: info: Metrics per 'operator ++' region
-	Region name    : operator ++
+./function_ends_on_class.cpp:13: info: Metrics per 'function_end_on_namespace' region
+	Region name    : function_end_on_namespace
 	Region type    : function
-	Offsets        : 117-153
+	Offsets        : 118-156
 	Line numbers   : 13-16
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
 
-./test2.cpp:22: info: Metrics per 'aaa' region
-	Region name    : aaa
-	Region type    : namespace
-	Offsets        : 173-350
-	Line numbers   : 21-39
-	Modified       : None
-
-./test2.cpp:23: info: Metrics per 'main' region
-	Region name    : main
-	Region type    : function
-	Offsets        : 192-348
-	Line numbers   : 23-38
-	Modified       : None
-	std.code.complexity:cyclomatic: 2
-
-./test2.cpp:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 0.75
+./function_ends_on_class.cpp:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 0.0
 	Minimum        : 0
-	Maximum        : 2
-	Total          : 3.0
-	Distribution   : 4 regions in total (including 0 suppressed)
+	Maximum        : 0
+	Total          : 0.0
+	Distribution   : 3 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             0 : 0.500 : 0.500 : 2	||||||||||||||||||||||||||||||||||||||||||||||||||
-	             1 : 0.250 : 0.750 : 1	|||||||||||||||||||||||||
-	             2 : 0.250 : 1.000 : 1	|||||||||||||||||||||||||
+	             0 : 1.000 : 1.000 : 3	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./operator_test.hpp:0: info: Metrics per '__global__' region
 	Region name    : __global__
@@ -580,60 +492,6 @@
 	             1 : 0.039 : 0.980 :  2	||||
 	             2 : 0.020 : 1.000 :  1	||
 
-./function_ends_on_class.cpp:0: info: Metrics per '__global__' region
-	Region name    : __global__
-	Region type    : global
-	Offsets        : 0-163
-	Line numbers   : 1-20
-	Modified       : None
-
-./function_ends_on_class.cpp:2: info: Metrics per 'my_namespace' region
-	Region name    : my_namespace
-	Region type    : namespace
-	Offsets        : 1-162
-	Line numbers   : 2-19
-	Modified       : None
-
-./function_ends_on_class.cpp:4: info: Metrics per 'my_class' region
-	Region name    : my_class
-	Region type    : class
-	Offsets        : 27-158
-	Line numbers   : 4-17
-	Modified       : None
-
-./function_ends_on_class.cpp:5: info: Metrics per 'function_end_on_class' region
-	Region name    : function_end_on_class
-	Region type    : function
-	Offsets        : 45-79
-	Line numbers   : 5-8
-	Modified       : None
-	std.code.complexity:cyclomatic: 0
-
-./function_ends_on_class.cpp:9: info: Metrics per 'function_end_on_struct' region
-	Region name    : function_end_on_struct
-	Region type    : function
-	Offsets        : 81-116
-	Line numbers   : 9-12
-	Modified       : None
-	std.code.complexity:cyclomatic: 0
-
-./function_ends_on_class.cpp:13: info: Metrics per 'function_end_on_namespace' region
-	Region name    : function_end_on_namespace
-	Region type    : function
-	Offsets        : 118-156
-	Line numbers   : 13-16
-	Modified       : None
-	std.code.complexity:cyclomatic: 0
-
-./function_ends_on_class.cpp:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 0.0
-	Minimum        : 0
-	Maximum        : 0
-	Total          : 0.0
-	Distribution   : 3 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             0 : 1.000 : 1.000 : 3	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-
 ./test.c:0: info: Metrics per '__global__' region
 	Region name    : __global__
 	Region type    : global
@@ -885,5 +743,147 @@
 	             0 : 0.833 : 0.833 : 20	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             1 : 0.083 : 0.917 :  2	||||||||
 	             2 : 0.083 : 1.000 :  2	||||||||
+
+./test2.cpp:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-628
+	Line numbers   : 1-53
+	Modified       : None
+
+./test2.cpp:5: info: Metrics per 'A' region
+	Region name    : A
+	Region type    : class
+	Offsets        : 39-170
+	Line numbers   : 5-19
+	Modified       : None
+
+./test2.cpp:7: info: Metrics per 'A' region
+	Region name    : A
+	Region type    : function
+	Offsets        : 50-87
+	Line numbers   : 7-10
+	Modified       : None
+	std.code.complexity:cyclomatic: 1
+
+./test2.cpp:10: info: Metrics per 'method' region
+	Region name    : method
+	Region type    : function
+	Offsets        : 87-117
+	Line numbers   : 10-13
+	Modified       : None
+	std.code.complexity:cyclomatic: 0
+
+./test2.cpp:13: info: Metrics per 'operator ++' region
+	Region name    : operator ++
+	Region type    : function
+	Offsets        : 117-153
+	Line numbers   : 13-16
+	Modified       : None
+	std.code.complexity:cyclomatic: 0
+
+./test2.cpp:22: info: Metrics per 'aaa' region
+	Region name    : aaa
+	Region type    : namespace
+	Offsets        : 173-350
+	Line numbers   : 21-39
+	Modified       : None
+
+./test2.cpp:23: info: Metrics per 'main' region
+	Region name    : main
+	Region type    : function
+	Offsets        : 192-348
+	Line numbers   : 23-38
+	Modified       : None
+	std.code.complexity:cyclomatic: 2
+
+./test2.cpp:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 0.75
+	Minimum        : 0
+	Maximum        : 2
+	Total          : 3.0
+	Distribution   : 4 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.500 : 0.500 : 2	||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.250 : 0.750 : 1	|||||||||||||||||||||||||
+	             2 : 0.250 : 1.000 : 1	|||||||||||||||||||||||||
+
+./test3.cpp:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-2797
+	Line numbers   : 1-110
+	Modified       : None
+
+./test3.cpp:37: info: Metrics per 'Tester' region
+	Region name    : Tester
+	Region type    : class
+	Offsets        : 1672-2192
+	Line numbers   : 37-68
+	Modified       : None
+
+./test3.cpp:39: info: Metrics per 'doColor' region
+	Region name    : doColor
+	Region type    : function
+	Offsets        : 1703-1871
+	Line numbers   : 38-48
+	Modified       : None
+	std.code.complexity:cyclomatic: 1
+
+./test3.cpp:53: info: Metrics per 'doFont' region
+	Region name    : doFont
+	Region type    : function
+	Offsets        : 1923-2189
+	Line numbers   : 53-66
+	Modified       : None
+	std.code.complexity:cyclomatic: 1
+
+./test3.cpp:72: info: Metrics per 'doFont222' region
+	Region name    : doFont222
+	Region type    : function
+	Offsets        : 2194-2561
+	Line numbers   : 68-87
+	Modified       : None
+	std.code.complexity:cyclomatic: 2
+
+./test3.cpp:90: info: Metrics per 'not_closed' region
+	Region name    : not_closed
+	Region type    : namespace
+	Offsets        : 2566-2797
+	Line numbers   : 110-130
+	Modified       : None
+
+./test3.cpp:91: info: Metrics per 'main' region
+	Region name    : main
+	Region type    : function
+	Offsets        : 2589-2753
+	Line numbers   : 110-120
+	Modified       : None
+	std.code.complexity:cyclomatic: 0
+
+./test3.cpp:102: info: Metrics per '__noname__' region
+	Region name    : __noname__
+	Region type    : namespace
+	Offsets        : 2755-2793
+	Line numbers   : 122-126
+	Modified       : None
+
+./test3.cpp:103: info: Metrics per '__noname__' region
+	Region name    : __noname__
+	Region type    : struct
+	Offsets        : 2768-2787
+	Line numbers   : 123-125
+	Modified       : None
+
+./test3.cpp:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 1.0
+	Minimum        : 0
+	Maximum        : 2
+	Total          : 4.0
+	Distribution   : 4 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.250 : 0.250 : 1	|||||||||||||||||||||||||
+	             1 : 0.500 : 0.750 : 2	||||||||||||||||||||||||||||||||||||||||||||||||||
+	             2 : 0.250 : 1.000 : 1	|||||||||||||||||||||||||
 
 
