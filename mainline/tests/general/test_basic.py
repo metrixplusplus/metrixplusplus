@@ -358,5 +358,27 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('view', prefix='nozeros')
         self.assertExec(runner.run())
 
+    def test_std_member_metrics(self):
+
+        runner = tests.common.ToolRunner('collect',
+                                         ['--std.code.member.fields',
+                                          '--std.code.member.globals',
+                                          '--std.code.member.classes',
+                                          '--std.code.member.structs',
+                                          '--std.code.member.interfaces',
+                                          '--std.code.member.types',
+                                          '--std.code.member.methods',
+                                          '--std.code.member.namespaces'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view',
+                                         ['--nest-regions', '--format=txt'],
+                                         prefix='nest_per_file',
+                                         dirs_list=['./simple.cpp'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view', ['--format=txt'], prefix='txt')
+        self.assertExec(runner.run())
+
 if __name__ == '__main__':
     unittest.main()

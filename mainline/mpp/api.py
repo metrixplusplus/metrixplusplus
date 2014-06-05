@@ -268,7 +268,7 @@ class Region(LoadableData):
 
     def _register_subregion_id(self, child_id):
         self.children.append(child_id)
-
+        
 class Marker(object):
     class T(object):
         NONE            = 0x00
@@ -380,11 +380,17 @@ class FileData(LoadableData):
         self.load_regions()
         return self.regions[region_id - 1]
     
-    def iterate_regions(self, filter_group = Region.T.ANY):
+    def iterate_regions(self, filter_group = Region.T.ANY, region_id = None):
         self.load_regions()
-        for each in self.regions:
-            if each.group & filter_group:
-                yield each
+        if region_id == None:
+            for each in self.regions:
+                if each.group & filter_group:
+                    yield each
+        else:
+            for sub_id in self.get_region(region_id).iterate_subregion_ids():
+                each = self.get_region(sub_id)
+                if each.group & filter_group:
+                    yield each
 
     def are_regions_loaded(self):
         return self.regions != None
