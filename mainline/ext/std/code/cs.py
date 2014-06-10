@@ -73,12 +73,14 @@ class CsCodeParser(object):
                        | (\s*[+-\\*/=<>!%&^|~,?.]{1,3})               # - other operators (from 1 to 3 symbols)
                                                                       #   NOTE: maybe dot and ? should not be in the list...
                       ))                                               
-                    | (([~]\s*)?[_a-zA-Z][_a-zA-Z0-9]*
-                       ([.][a-zA-Z_][a-zA-Z0-9_]*)*)                  # ... or function or constructor
+                    | (([~]\s*)?[_a-zA-Z][_a-zA-Z0-9]*                # ... or function or constructor
+                        (\s*[<]\s*[_a-zA-Z0-9]+\s*([,]\s*[_a-zA-Z0-9]+\s*)*[>])?       # NOTE: takes care of generics with multiple parameters
+                       (\s*[.]\s*[a-zA-Z_][a-zA-Z0-9_]*
+                        (\s*[<]\s*[_a-zA-Z0-9]+\s*([,]\s*[_a-zA-Z0-9]+\s*)*[>])?)*)    # NOTE: takes care of generics with multiple parameters
                                                                       # NOTE: C# destructor can have spaces in name after ~
                                                                       # NOTE: explicit interface implementation method has got a dot
                     | (?P<prop_setget>get|set)                        # ... or property setter/getter
-                  )\s*(?(prop_setget)(?=[{])|[(<])
+                  )\s*(?(prop_setget)(?=[{])|[(])
                                                                       # LIMITATION: if there are comments after function name
                                                                       # and before '(', it is not detected
                                                                       # LIMITATION: if there are comments within operator definition,
@@ -86,9 +88,10 @@ class CsCodeParser(object):
                                                                       # LIMITATION: if there are comments after set|get keyword,
                                                                       # if may be not detected
                 | ((?P<block_type>\bclass|\bstruct|\bnamespace|\binterface)   # Match class or struct or interface or namespace
-                    (?P<block_name>(\s+[a-zA-Z_][a-zA-Z0-9_]*)([.][a-zA-Z_][a-zA-Z0-9_]*)*))
+                    (?P<block_name>(\s+[a-zA-Z_][a-zA-Z0-9_]*
+                        (\s*[<]\s*[_a-zA-Z0-9]+\s*([,]\s*[_a-zA-Z0-9]+\s*)*[>])?       # NOTE: takes care of generics with multiple parameters
+                    )))
                                                                       # NOTE: noname instances are impossible in C#
-                                                                      # NOTE: names can have sub-names separated by dots
                                                                       # LIMITATION: if there are comments between keyword and name,
                                                                       # it is not detected
                 | [\[\]{};]                                               # Match block start/end and statement separator
@@ -272,7 +275,8 @@ class CsCodeParser(object):
             elif m.group('block_type') != None:
                 if next_block['name'] == "":
                     # - 'name'
-                    next_block['name'] = m.group('block_name').strip()
+                    clearance_pattern = re.compile(r'\s+')
+                    next_block['name'] = clearance_pattern.sub('',m.group('block_name'))
                     # - 'cursor'
                     cursor_current += len(self.regex_ln.findall(text, cursor_last_pos, m.start('block_name')))
                     cursor_last_pos = m.start('block_name')
@@ -289,7 +293,8 @@ class CsCodeParser(object):
                 if blocks[curblk]['type'] != 'function' and (next_block['name'] == "") \
                        and next_block['inside_attribute'] == False:
                     # - 'name'
-                    next_block['name'] = m.group('fn_name').strip()
+                    clearance_pattern = re.compile(r'\s+')
+                    next_block['name'] = clearance_pattern.sub('', m.group('fn_name'))
                     # - 'cursor'
                     cursor_current += len(self.regex_ln.findall(text, cursor_last_pos, m.start('fn_name')))
                     cursor_last_pos = m.start('fn_name')

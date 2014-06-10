@@ -5,8 +5,8 @@
 	Line numbers   : 1-448
 	Modified       : None
 
-.   ./File.cs:21: info: Metrics per 'Microsoft.VisualBasic' region
-    	Region name    : Microsoft.VisualBasic
+.   ./File.cs:21: info: Metrics per 'Microsoft' region
+    	Region name    : Microsoft
     	Region type    : namespace
     	Offsets        : 855-9104
     	Line numbers   : 21-447
@@ -207,15 +207,15 @@
     	Line numbers   : 22-105
     	Modified       : None
 
-.   .   ./Generics.cs:24: info: Metrics per 'MyArray' region
-        	Region name    : MyArray
+.   .   ./Generics.cs:24: info: Metrics per 'MyArray<T>' region
+        	Region name    : MyArray<T>
         	Region type    : class
         	Offsets        : 1214-1664
         	Line numbers   : 24-57
         	Modified       : None
 
-.   .   .   ./Generics.cs:26: info: Metrics per 'NestedClass' region
-            	Region name    : NestedClass
+.   .   .   ./Generics.cs:26: info: Metrics per 'NestedClass<Y>' region
+            	Region name    : NestedClass<Y>
             	Region type    : class
             	Offsets        : 1243-1316
             	Line numbers   : 26-30
@@ -259,8 +259,8 @@
         	Line numbers   : 65-74
         	Modified       : None
 
-.   .   .   ./Generics.cs:71: info: Metrics per 'Generics.IInterface.Method2' region
-            	Region name    : Generics.IInterface.Method2
+.   .   .   ./Generics.cs:71: info: Metrics per 'Generics.IInterface.Method2<T>' region
+            	Region name    : Generics.IInterface.Method2<T>
             	Region type    : function
             	Offsets        : 1960-2081
             	Line numbers   : 70-73
@@ -274,32 +274,32 @@
         	Line numbers   : 76-82
         	Modified       : None
 
-.   .   .   ./Generics.cs:79: info: Metrics per 'Method1' region
-            	Region name    : Method1
+.   .   .   ./Generics.cs:79: info: Metrics per 'Method1<T>' region
+            	Region name    : Method1<T>
             	Region type    : function
             	Offsets        : 2130-2242
             	Line numbers   : 78-81
             	Modified       : None
             	std.code.complexity:cyclomatic: 0
 
-.   .   ./Generics.cs:92: info: Metrics per 'MethodWithConstraint' region
-        	Region name    : MethodWithConstraint
+.   .   ./Generics.cs:92: info: Metrics per 'MethodWithConstraint<T,S>' region
+        	Region name    : MethodWithConstraint<T,S>
         	Region type    : function
         	Offsets        : 2698-2798
         	Line numbers   : 92-94
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
 
-.   .   ./Generics.cs:96: info: Metrics per 'MethodWithStructConstraint' region
-        	Region name    : MethodWithStructConstraint
+.   .   ./Generics.cs:96: info: Metrics per 'MethodWithStructConstraint<T>' region
+        	Region name    : MethodWithStructConstraint<T>
         	Region type    : function
         	Offsets        : 2802-2875
         	Line numbers   : 96-98
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
 
-.   .   ./Generics.cs:100: info: Metrics per 'Dictionary' region
-        	Region name    : Dictionary
+.   .   ./Generics.cs:100: info: Metrics per 'GetEnumerator' region
+        	Region name    : GetEnumerator
         	Region type    : function
         	Offsets        : 2879-3131
         	Line numbers   : 100-104
@@ -323,8 +323,8 @@
 	Line numbers   : 1-219
 	Modified       : None
 
-.   ./interface.cs:22: info: Metrics per 'System.Runtime.Serialization' region
-    	Region name    : System.Runtime.Serialization
+.   ./interface.cs:22: info: Metrics per 'System' region
+    	Region name    : System
     	Region type    : namespace
     	Offsets        : 918-1139
     	Line numbers   : 22-37
@@ -337,8 +337,8 @@
         	Line numbers   : 25-35
         	Modified       : None
 
-.   ./interface.cs:61: info: Metrics per 'System.Globalization' region
-    	Region name    : System.Globalization
+.   ./interface.cs:61: info: Metrics per 'System' region
+    	Region name    : System
     	Region type    : namespace
     	Offsets        : 2040-6548
     	Line numbers   : 61-218

@@ -1,0 +1,21 @@
+<view>
+
+    <data>
+        <info id="1" path="./" />
+        <file-data />
+        <subfiles>
+            <subfile>sample.cs</subfile>
+        </subfiles>
+        <subdirs>
+        </subdirs>
+        <aggregated-data>
+            <std.code.complexity>
+                <cyclomatic avg="0.0" count="17" max="0" min="0" nonzero="False" sup="0" total="0.0">
+                    <distribution-bars>
+                        <distribution-bar count="17" metric="0" ratio="1.0" />
+                    </distribution-bars>
+                </cyclomatic>
+            </std.code.complexity>
+        </aggregated-data>
+    </data>
+</view>
