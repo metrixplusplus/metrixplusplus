@@ -1,0 +1,209 @@
+./sample.cs:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-2860
+	Line numbers   : 1-141
+	Modified       : None
+
+.   ./sample.cs:3: info: Metrics per 'example' region
+    	Region name    : example
+    	Region type    : class
+    	Offsets        : 2-2859
+    	Line numbers   : 3-140
+    	Modified       : None
+
+.   .   ./sample.cs:5: info: Metrics per 'testfunction1' region
+        	Region name    : testfunction1
+        	Region type    : function
+        	Offsets        : 29-157
+        	Line numbers   : 5-9
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:11: info: Metrics per 'testfunction2<T>' region
+        	Region name    : testfunction2<T>
+        	Region type    : function
+        	Offsets        : 163-292
+        	Line numbers   : 11-15
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:17: info: Metrics per 'testfunction3<T>' region
+        	Region name    : testfunction3<T>
+        	Region type    : function
+        	Offsets        : 298-423
+        	Line numbers   : 17-21
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:23: info: Metrics per 'testfunction4' region
+        	Region name    : testfunction4
+        	Region type    : function
+        	Offsets        : 429-551
+        	Line numbers   : 23-27
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:29: info: Metrics per 'testfunction5<T,S>' region
+        	Region name    : testfunction5<T,S>
+        	Region type    : function
+        	Offsets        : 557-685
+        	Line numbers   : 29-33
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:35: info: Metrics per 'testfunction6<T,S>' region
+        	Region name    : testfunction6<T,S>
+        	Region type    : function
+        	Offsets        : 691-833
+        	Line numbers   : 35-39
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:41: info: Metrics per 'testfunction7<T,S>' region
+        	Region name    : testfunction7<T,S>
+        	Region type    : function
+        	Offsets        : 839-989
+        	Line numbers   : 41-46
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:48: info: Metrics per 'testfunction8<T,S>' region
+        	Region name    : testfunction8<T,S>
+        	Region type    : function
+        	Offsets        : 995-1152
+        	Line numbers   : 48-53
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:55: info: Metrics per 'testfunction9<T,S>' region
+        	Region name    : testfunction9<T,S>
+        	Region type    : function
+        	Offsets        : 1158-1294
+        	Line numbers   : 55-59
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:61: info: Metrics per 'Interface.testfunction10<T,S>' region
+        	Region name    : Interface.testfunction10<T,S>
+        	Region type    : function
+        	Offsets        : 1300-1444
+        	Line numbers   : 61-65
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:67: info: Metrics per 'Interface<T>.testfunction11<T,S>' region
+        	Region name    : Interface<T>.testfunction11<T,S>
+        	Region type    : function
+        	Offsets        : 1450-1597
+        	Line numbers   : 67-71
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:73: info: Metrics per 'Interface<T,S>.testfunction12' region
+        	Region name    : Interface<T,S>.testfunction12
+        	Region type    : function
+        	Offsets        : 1603-1747
+        	Line numbers   : 73-77
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:79: info: Metrics per 'Interface<T,S>.testfunction13<T>' region
+        	Region name    : Interface<T,S>.testfunction13<T>
+        	Region type    : function
+        	Offsets        : 1753-1900
+        	Line numbers   : 79-83
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:85: info: Metrics per 'Interface<T>.testfunction14<T,S>' region
+        	Region name    : Interface<T>.testfunction14<T,S>
+        	Region type    : function
+        	Offsets        : 1906-2053
+        	Line numbers   : 85-89
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:91: info: Metrics per 'Interface<T,S>.testfunction15<T,S>' region
+        	Region name    : Interface<T,S>.testfunction15<T,S>
+        	Region type    : function
+        	Offsets        : 2059-2208
+        	Line numbers   : 91-95
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:97: info: Metrics per 'Interface<T,S>.testfunction16<T>' region
+        	Region name    : Interface<T,S>.testfunction16<T>
+        	Region type    : function
+        	Offsets        : 2214-2362
+        	Line numbers   : 97-101
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:103: info: Metrics per 'Interface<T,S>.testfunction17<T>' region
+        	Region name    : Interface<T,S>.testfunction17<T>
+        	Region type    : function
+        	Offsets        : 2368-2517
+        	Line numbers   : 103-107
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
+.   .   ./sample.cs:109: info: Metrics per 'testClass1' region
+        	Region name    : testClass1
+        	Region type    : class
+        	Offsets        : 2523-2551
+        	Line numbers   : 109-111
+        	Modified       : None
+
+.   .   ./sample.cs:113: info: Metrics per 'testClass2' region
+        	Region name    : testClass2
+        	Region type    : class
+        	Offsets        : 2557-2585
+        	Line numbers   : 113-115
+        	Modified       : None
+
+.   .   ./sample.cs:117: info: Metrics per 'testClass3<T>' region
+        	Region name    : testClass3<T>
+        	Region type    : class
+        	Offsets        : 2591-2622
+        	Line numbers   : 117-119
+        	Modified       : None
+
+.   .   ./sample.cs:121: info: Metrics per 'testClass4<T>' region
+        	Region name    : testClass4<T>
+        	Region type    : class
+        	Offsets        : 2628-2660
+        	Line numbers   : 121-123
+        	Modified       : None
+
+.   .   ./sample.cs:125: info: Metrics per 'testClass5<T,S>' region
+        	Region name    : testClass5<T,S>
+        	Region type    : class
+        	Offsets        : 2666-2700
+        	Line numbers   : 125-127
+        	Modified       : None
+
+.   .   ./sample.cs:129: info: Metrics per 'testClass6<T,S>' region
+        	Region name    : testClass6<T,S>
+        	Region type    : class
+        	Offsets        : 2706-2794
+        	Line numbers   : 129-134
+        	Modified       : None
+
+.   .   ./sample.cs:136: info: Metrics per 'testClass7<T>' region
+        	Region name    : testClass7<T>
+        	Region type    : class
+        	Offsets        : 2800-2857
+        	Line numbers   : 136-139
+        	Modified       : None
+
+./sample.cs:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 0.0
+	Minimum        : 0
+	Maximum        : 0
+	Total          : 0.0
+	Distribution   : 17 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 1.000 : 1.000 : 17	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+
