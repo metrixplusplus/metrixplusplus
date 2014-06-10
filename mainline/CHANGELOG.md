@@ -1,10 +1,9 @@
-## 1.4 (May, 2014)
-- New metric: std.code.mi:simple - simple implemetation of maintainability index.
+## 1.4 (June, 2014)
+- Fixed match of names of generic functions and classes 
+- New metrics group: std.code.member.* - counting of classes, fields, globals, etc.
+- New metric: std.code.maintindex:simple - simple implemetation of maintainability index.
 - New configuration option for collect tool: --include-files (symetrical to --exclude-files)
 - New metrics: lines of code metrics per file
-- New metrics: std.code.member.* group
-- Fixed match of names of generic functions and classes 
-
 
 ## 1.3 (August, 2013)
 - Deprecated and dropped support for callback based implementation of advanced counters

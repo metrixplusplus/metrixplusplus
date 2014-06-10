@@ -210,7 +210,7 @@ class Database(object):
             logging.debug("Cloning database file: " + clone_from)
             shutil.copy2(clone_from, file_name)
             logging.debug("Connecting database file: " + file_name)
-            self.conn = sqlite3.connect(file_name)
+            self.conn = sqlite3.connect(file_name, check_same_thread=False)
             self.conn.row_factory = sqlite3.Row
             self.read_only = False
             
@@ -233,7 +233,7 @@ class Database(object):
         
     def connect(self, file_name, read_only = False):
         logging.debug("Connecting database file: " + file_name)
-        self.conn = sqlite3.connect(file_name)
+        self.conn = sqlite3.connect(file_name, check_same_thread=False)
         self.conn.row_factory = sqlite3.Row
         self.read_only = read_only
         if self.read_only == False:

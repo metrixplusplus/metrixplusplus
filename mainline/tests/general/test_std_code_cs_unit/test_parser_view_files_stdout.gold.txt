@@ -1,15 +1,15 @@
 ./sample.cs:0: info: Metrics per '__global__' region
 	Region name    : __global__
 	Region type    : global
-	Offsets        : 0-2860
-	Line numbers   : 1-141
+	Offsets        : 0-3040
+	Line numbers   : 1-148
 	Modified       : None
 
 .   ./sample.cs:3: info: Metrics per 'example' region
     	Region name    : example
     	Region type    : class
-    	Offsets        : 2-2859
-    	Line numbers   : 3-140
+    	Offsets        : 2-3039
+    	Line numbers   : 3-147
     	Modified       : None
 
 .   .   ./sample.cs:5: info: Metrics per 'testfunction1' region
@@ -197,13 +197,21 @@
         	Line numbers   : 136-139
         	Modified       : None
 
+.   .   ./sample.cs:141: info: Metrics per 'Interface<T,S,A,B,C>.testfunction18<T,S,A,V,F,G>' region
+        	Region name    : Interface<T,S,A,B,C>.testfunction18<T,S,A,V,F,G>
+        	Region type    : function
+        	Offsets        : 2863-3036
+        	Line numbers   : 141-145
+        	Modified       : None
+        	std.code.complexity:cyclomatic: 0
+
 ./sample.cs:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
 	Average        : 0.0
 	Minimum        : 0
 	Maximum        : 0
 	Total          : 0.0
-	Distribution   : 17 regions in total (including 0 suppressed)
+	Distribution   : 18 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             0 : 1.000 : 1.000 : 17	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             0 : 1.000 : 1.000 : 18	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 

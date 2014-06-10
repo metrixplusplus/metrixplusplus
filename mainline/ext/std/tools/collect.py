@@ -25,6 +25,7 @@ import logging
 import time
 import binascii
 import fnmatch
+import multiprocessing.pool
 
 class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRunable):
     
@@ -124,7 +125,7 @@ class DirectoryReader():
         IS_TEST_MODE = False
         if 'METRIXPLUSPLUS_TEST_MODE' in os.environ.keys():
             IS_TEST_MODE = True
-        
+
         def run_per_file(plugin, fname, full_path):
             exit_code = 0
             norm_path = re.sub(r'''[\\]''', "/", full_path)
@@ -157,17 +158,25 @@ class DirectoryReader():
                         if plugin.is_size_enabled == True:
                             data.set_data('std.general', 'size', len(text))
                         db_loader.save_file_data(data)
-                        logging.debug("-" * 60)
+                        #logging.debug("-" * 60)
                         exit_code += procerrors
             else:
                 logging.info("Excluding: " + norm_path)
             return exit_code
         
+
+        #thread_pool = multiprocessing.pool.ThreadPool()
+        #def mp_worker(args):
+        #    run_per_file(args[0], args[1], args[2])
         def run_recursively(plugin, directory):
             exit_code = 0
+            #thread_pool.map(mp_worker,
+            #    [(plugin, f, os.path.join(subdir, f))
+            #        for subdir, dirs, files in os.walk(directory) for f in files])
             for fname in sorted(os.listdir(directory)):
                 full_path = os.path.join(directory, fname)
                 exit_code += run_per_file(plugin, fname, full_path)
+            
             return exit_code
         
         if os.path.exists(directory) == False:
