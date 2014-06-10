@@ -137,4 +137,11 @@ public class example
         where T : class
     {
     }
+
+    protected IList<T> Interface<T, S, A, B,   C>.testfunction18<T, S, A, V, F, G>(string text1)
+    {
+        List<int> numbers = new List<int>();
+        return numbers;
+    }
+
 }
