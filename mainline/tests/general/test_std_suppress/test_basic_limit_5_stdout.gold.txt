@@ -7,7 +7,7 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./:: info: 1 regions exceeded the limit 'std.code.complexity:cyclomatic' > 0.0
+./:: info: 1 regions exceeded the limit 'std.code.complexity:cyclomatic' > 0.0 [applied to 'any' region type(s)]
 
 ./test.c:56: warning: Metric 'std.code.length:total' for region 'no_suppress_cl' exceeds the limit.
 	Metric name    : std.code.length:total
@@ -72,5 +72,5 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./:: info: 7 regions exceeded the limit 'std.code.length:total' > 0.0
+./:: info: 7 regions exceeded the limit 'std.code.length:total' > 0.0 [applied to 'any' region type(s)]
 

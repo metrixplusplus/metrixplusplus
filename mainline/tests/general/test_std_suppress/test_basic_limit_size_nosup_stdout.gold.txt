@@ -7,5 +7,5 @@
 	Limit          : 0.0
 	Suppressed     : True
 
-./:: info: 1 regions exceeded the limit 'std.general:size' > 0.0
+./:: info: 1 regions exceeded the limit 'std.general:size' > 0.0 [applied to 'any' region type(s)]
 

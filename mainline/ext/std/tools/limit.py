@@ -50,14 +50,16 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
                           help="A threshold per 'namespace:field' metric in order to select regions, "
                           "which have got metric value less than the specified limit. "
                           "This option can be specified multiple times, if it is necessary to apply several limits. "
-                          "Should be in the format: <namespace>:<field>:<limit-value>, for example: "
-                          "'std.code.lines:comments:1'.")
+                          "Should be in the format: <namespace>:<field>:<limit-value>[:region_type[,region_type]], for example: "
+                          "'std.code.lines:comments:1', or 'std.code.lines:comments:1:function,class'. "
+                          "Region types is optional specifier, and if not defined the limit is applied to regions of all types.")
         parser.add_option("--max-limit", "--max", action="multiopt",
                           help="A threshold per 'namespace:field' metric in order to select regions, "
                           "which have got metric value more than the specified limit. "
                           "This option can be specified multiple times, if it is necessary to apply several limits. "
-                          "Should be in the format: <namespace>:<field>:<limit-value>, for example: "
-                          "'std.code.complexity:cyclomatic:7'.")
+                          "Should be in the format: <namespace>:<field>:<limit-value>[:region_type[,region_type]], for example: "
+                          "'std.code.complexity:cyclomatic:7', or 'std.code.complexity:maxdepth:5:function'. "
+                          "Region types is optional specifier, and if not defined the limit is applied to regions of all types.")
     
     def configure(self, options):
         self.hotspots = options.__dict__['hotspots']
@@ -76,32 +78,59 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
             self.parser.error("option --warn-mode: The mode '" + options.__dict__['warn_mode'] + "' requires '--db-file-prev' option set")
 
         class Limit(object):
-            def __init__(self, limit_type, limit, namespace, field, db_filter, original):
+            def __init__(self, limit_type, limit, namespace, field, db_filter, region_types, original):
                 self.type = limit_type
                 self.limit = limit
                 self.namespace = namespace
                 self.field = field
                 self.filter = db_filter
+                self.region_types = region_types
                 self.original = original
                 
             def __repr__(self):
-                return "'{0}:{1}' {2} {3}".format(self.namespace, self.field, self.filter[1], self.limit)
+                return "'{0}:{1}' {2} {3} [applied to '{4}' region type(s)]".format(
+                        self.namespace, self.field, self.filter[1], self.limit,
+                        mpp.api.Region.T().to_str(self.region_types))
         
         self.limits = []
-        pattern = re.compile(r'''([^:]+)[:]([^:]+)[:]([-+]?[0-9]+(?:[.][0-9]+)?)''')
+        pattern = re.compile(r'''([^:]+)[:]([^:]+)[:]([-+]?[0-9]+(?:[.][0-9]+)?)(?:[:](.+))?''')
         if options.__dict__['max_limit'] != None:
             for each in options.__dict__['max_limit']:
                 match = re.match(pattern, each)
                 if match == None:
                     self.parser.error("option --max-limit: Invalid format: " + each)
-                limit = Limit("max", float(match.group(3)), match.group(1), match.group(2), (match.group(2), '>', float(match.group(3))), each)
+                region_types = 0x00
+                if match.group(4) != None:
+                    for region_type in match.group(4).split(','):
+                        region_type = region_type.strip()
+                        group_id = mpp.api.Region.T().from_str(region_type)
+                        if group_id == None:
+                            self.parser.error(
+                                    "option --max-limit: uknown region type (allowed: global, class, struct, namespace, function, interface, any): " + region_type)
+                        region_types |= group_id
+                else:
+                    region_types = mpp.api.Region.T().ANY
+                limit = Limit("max", float(match.group(3)), match.group(1), match.group(2),
+                        (match.group(2), '>', float(match.group(3))), region_types, each)
                 self.limits.append(limit)
         if options.__dict__['min_limit'] != None:
             for each in options.__dict__['min_limit']:  
                 match = re.match(pattern, each)
                 if match == None:
                     self.parser.error("option --min-limit: Invalid format: " + each)
-                limit = Limit("min", float(match.group(3)), match.group(1), match.group(2), (match.group(2), '<', float(match.group(3))), each)
+                region_types = 0x00
+                if match.group(4) != None:
+                    for region_type in match.group(4).split(','):
+                        region_type = region_type.strip()
+                        group_id = mpp.api.Region.T().from_str(region_type)
+                        if group_id == None:
+                            self.parser.error(
+                                    "option --max-limit: uknown region type (allowed: global, class, struct, namespace, function, interface, any): " + region_type)
+                        region_types |= group_id
+                else:
+                    region_types = mpp.api.Region.T().ANY
+                limit = Limit("min", float(match.group(3)), match.group(1), match.group(2),
+                        (match.group(2), '<', float(match.group(3))), region_types, each)
                 self.limits.append(limit)
 
     def initialize(self):
@@ -234,13 +263,15 @@ def main(plugin, args):
                 if is_sup == True and plugin.no_suppress == False:
                     continue    
                 
-                warns_count += 1
-                exit_code += 1
                 region_cursor = 0
                 region_name = None
                 if select_data.get_region() != None:
+                    if select_data.get_region().get_type() & limit.region_types == 0:
+                        continue
                     region_cursor = select_data.get_region().cursor
                     region_name = select_data.get_region().name
+                warns_count += 1
+                exit_code += 1
                 report_limit_exceeded(select_data.get_path(),
                                   region_cursor,
                                   limit.namespace,

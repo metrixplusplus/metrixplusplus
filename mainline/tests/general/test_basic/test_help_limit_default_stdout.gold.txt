@@ -36,13 +36,19 @@ Options:
                         the specified limit. This option can be specified
                         multiple times, if it is necessary to apply several
                         limits. Should be in the format: <namespace>:<field
-                        >:<limit-value>, for example:
-                        'std.code.lines:comments:1'.
+                        >:<limit-value>[:region_type[,region_type]], for
+                        example: 'std.code.lines:comments:1', or
+                        'std.code.lines:comments:1:function,class'. Region
+                        types is optional specifier, and if not defined the
+                        limit is applied to regions of all types.
   --max-limit=MAX_LIMIT, --max=MAX_LIMIT
                         A threshold per 'namespace:field' metric in order to
                         select regions, which have got metric value more than
                         the specified limit. This option can be specified
                         multiple times, if it is necessary to apply several
                         limits. Should be in the format: <namespace>:<field
-                        >:<limit-value>, for example:
-                        'std.code.complexity:cyclomatic:7'.
+                        >:<limit-value>[:region_type[,region_type]], for
+                        example: 'std.code.complexity:cyclomatic:7', or
+                        'std.code.complexity:maxdepth:5:function'. Region
+                        types is optional specifier, and if not defined the
+                        limit is applied to regions of all types.

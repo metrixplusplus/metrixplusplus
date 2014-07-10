@@ -1,2 +1,2 @@
-./:: info: 0 regions exceeded the limit 'std.code.complexity:cyclomatic' > 15.0
+./:: info: 0 regions exceeded the limit 'std.code.complexity:cyclomatic' > 15.0 [applied to 'any' region type(s)]
 

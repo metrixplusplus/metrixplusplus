@@ -208,20 +208,41 @@ class Region(LoadableData):
         def to_str(self, group):
             if group == self.NONE:
                 return "none"
-            elif group == self.GLOBAL:
-                return "global"
-            elif group == self.CLASS:
-                return "class"
-            elif group == self.STRUCT:
-                return "struct"
-            elif group == self.NAMESPACE:
-                return "namespace"
-            elif group == self.FUNCTION:
-                return "function"
-            elif group == self.INTERFACE:
-                return "interface"
+            if group == self.ANY:
+                return "any"
+            result = []
+            if group & self.GLOBAL != 0:
+                result.append("global")
+            if group & self.CLASS != 0:
+                result.append("class")
+            if group & self.STRUCT != 0:
+                result.append("struct")
+            if group & self.NAMESPACE != 0:
+                result.append("namespace")
+            if group & self.FUNCTION != 0:
+                result.append("function")
+            if group & self.INTERFACE != 0:
+                result.append("interface")
+            assert(len(result) != 0)
+            return ', '.join(result)
+
+        def from_str(self, group):
+            if group == "global":
+                return self.GLOBAL
+            elif group == "class":
+                return self.CLASS
+            elif group == "struct":
+                return self.STRUCT
+            elif group == "namespace":
+                return self.NAMESPACE
+            elif group == "function":
+                return self.FUNCTION
+            elif group == "interface":
+                return self.INTERFACE
+            elif group == "any":
+                return self.ANY
             else:
-                assert(False)
+                return None
 
     def __init__(self, loader, file_id, region_id, region_name, offset_begin, offset_end, line_begin, line_end, cursor_line, group, checksum):
         LoadableData.__init__(self, loader, file_id, region_id)
