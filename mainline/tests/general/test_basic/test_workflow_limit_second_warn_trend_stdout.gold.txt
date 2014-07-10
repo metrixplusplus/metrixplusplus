@@ -25,3 +25,5 @@
 	Limit          : 0.0
 	Suppressed     : False
 
+./:: info: 3 regions exceeded the limit 'std.code.complexity:cyclomatic' > 0.0
+

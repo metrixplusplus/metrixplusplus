@@ -61,3 +61,5 @@
 	Limit          : 0.0
 	Suppressed     : False
 
+./:: info: 7 regions exceeded the limit 'std.code.length:total' > 0.0
+

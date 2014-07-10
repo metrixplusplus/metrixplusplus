@@ -76,15 +76,16 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
             self.parser.error("option --warn-mode: The mode '" + options.__dict__['warn_mode'] + "' requires '--db-file-prev' option set")
 
         class Limit(object):
-            def __init__(self, limit_type, limit, namespace, field, db_filter):
+            def __init__(self, limit_type, limit, namespace, field, db_filter, original):
                 self.type = limit_type
                 self.limit = limit
                 self.namespace = namespace
                 self.field = field
                 self.filter = db_filter
+                self.original = original
                 
             def __repr__(self):
-                return "namespace '" + self.namespace + "', filter '" + str(self.filter) + "'"
+                return "'{0}:{1}' {2} {3}".format(self.namespace, self.field, self.filter[1], self.limit)
         
         self.limits = []
         pattern = re.compile(r'''([^:]+)[:]([^:]+)[:]([-+]?[0-9]+(?:[.][0-9]+)?)''')
@@ -93,14 +94,14 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
                 match = re.match(pattern, each)
                 if match == None:
                     self.parser.error("option --max-limit: Invalid format: " + each)
-                limit = Limit("max", float(match.group(3)), match.group(1), match.group(2), (match.group(2), '>', float(match.group(3))))
+                limit = Limit("max", float(match.group(3)), match.group(1), match.group(2), (match.group(2), '>', float(match.group(3))), each)
                 self.limits.append(limit)
         if options.__dict__['min_limit'] != None:
             for each in options.__dict__['min_limit']:  
                 match = re.match(pattern, each)
                 if match == None:
                     self.parser.error("option --min-limit: Invalid format: " + each)
-                limit = Limit("min", float(match.group(3)), match.group(1), match.group(2), (match.group(2), '<', float(match.group(3))))
+                limit = Limit("min", float(match.group(3)), match.group(1), match.group(2), (match.group(2), '<', float(match.group(3))), each)
                 self.limits.append(limit)
 
     def initialize(self):
@@ -173,6 +174,7 @@ def main(plugin, args):
         path = mpp.utils.preprocess_path(path)
         
         for limit in plugin.iterate_limits():
+            warns_count = 0
             logging.info("Applying limit: " + str(limit))
             filters = [limit.filter]
             if modified_file_ids != None:
@@ -232,6 +234,7 @@ def main(plugin, args):
                 if is_sup == True and plugin.no_suppress == False:
                     continue    
                 
+                warns_count += 1
                 exit_code += 1
                 region_cursor = 0
                 region_name = None
@@ -250,6 +253,9 @@ def main(plugin, args):
                                   is_sup)
                 if limit_warnings != None:
                     limit_warnings -= 1
+                    
+            mpp.cout.notify(path, None, mpp.cout.SEVERITY_INFO, "{0} regions exceeded the limit {1}".format(warns_count, str(limit)))
+
     return exit_code
 
 

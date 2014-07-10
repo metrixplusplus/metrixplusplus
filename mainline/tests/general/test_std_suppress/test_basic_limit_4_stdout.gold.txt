@@ -232,3 +232,5 @@
 	Limit          : 0.0
 	Suppressed     : True
 
+./:: info: 26 regions exceeded the limit 'std.code.length:total' > 0.0
+
