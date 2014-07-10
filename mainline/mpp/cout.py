@@ -23,7 +23,7 @@ SEVERITY_ERROR   = 0x03
 DETAILS_OFFSET   = 15
 
 def notify(path, cursor, level, message, details = [], indent = 0):
-    notification = (".   " * indent) + path + ":" + str(cursor) + ": "
+    notification = (".   " * indent) + path + ":" + (str(cursor) if cursor != None else "") + ": "
     if level == SEVERITY_INFO:
         notification += "info: "
     elif level == SEVERITY_WARNING:

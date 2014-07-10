@@ -117,7 +117,7 @@ def serialize_to_python(data, root_name = None):
     prefix = ""
     postfix = ""
     if root_name != None:
-        prefix = "{'" + root_name + ": " 
+        prefix = "{'" + root_name + "': " 
         postfix = "}"
     return prefix + data.__repr__() + postfix
 

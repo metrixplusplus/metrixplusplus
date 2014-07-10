@@ -52,3 +52,5 @@
 	Limit          : 15.0
 	Suppressed     : False
 
+./:: info: 6 regions exceeded the limit 'std.code.complexity:cyclomatic' > 15.0
+
