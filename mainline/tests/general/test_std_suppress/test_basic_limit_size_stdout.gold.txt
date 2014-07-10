@@ -1,2 +1,2 @@
-./:: info: 0 regions exceeded the limit 'std.general:size' > 0.0
+./:: info: 0 regions exceeded the limit 'std.general:size' > 0.0 [applied to 'any' region type(s)]
 

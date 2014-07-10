@@ -1,4 +1,4 @@
 [LOG]: WARNING:	Logging enabled with INFO level
 [LOG]: INFO:	Processing: ./
-[LOG]: INFO:	Applying limit: 'std.code.complexity:cyclomatic' > 0.0
+[LOG]: INFO:	Applying limit: 'std.code.complexity:cyclomatic' > 0.0 [applied to 'any' region type(s)]
 [LOG]: WARNING:	Done (1 seconds). Exit code: 8

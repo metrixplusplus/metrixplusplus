@@ -34,5 +34,5 @@
 	Limit          : 0.0
 	Suppressed     : False
 
-./:: info: 4 regions exceeded the limit 'std.code.complexity:cyclomatic' > 0.0
+./:: info: 4 regions exceeded the limit 'std.code.complexity:cyclomatic' > 0.0 [applied to 'any' region type(s)]
 
