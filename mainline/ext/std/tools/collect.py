@@ -81,8 +81,10 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
     def run(self, args):
         if len(args) == 0:
             return self.reader.run(self, "./")
+        retcode = 0
         for directory in args:
-            return self.reader.run(self, directory)
+            retcode += self.reader.run(self, directory)
+        return retcode
         
     def register_parser(self, fnmatch_exp_list, parser):
         self.parsers.append((fnmatch_exp_list, parser))
