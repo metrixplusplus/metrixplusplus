@@ -1,5 +1,0 @@
-[LOG]: WARNING:	Logging enabled with INFO level
-[LOG]: INFO:	Excluding: ./.unused.cpp
-[LOG]: INFO:	Skipping: ./dummy.txt
-[LOG]: INFO:	Processing: ./simple.cpp
-[LOG]: WARNING:	Exit code: 0. Time spent: 0.11 seconds. Done

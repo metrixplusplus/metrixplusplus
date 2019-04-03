@@ -1,1 +1,0 @@
-{'export': [{'data: {'info': {'path': '', 'id': 1}, 'file-data': {}, 'subfiles': [], 'subdirs': [u'.'], 'aggregated-data': {'std.code.complexity': {'cyclomatic': {'total': 6.0, 'max': 3, 'avg': 1.5, 'min': 1}}}}}]}
