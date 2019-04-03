@@ -9,7 +9,7 @@ Thank you for using the tool!
 Have got a bug or a feature request or any feedback?
 [Please submit a ticket](https://github.com/metrixplusplus/metrixplusplus/issues/new).
 
-Be aware of some [limitations](./LIMITATIONS.ms).
+Be aware of some [limitations](./LIMITATIONS.md).
 
 ## Copyright and license
 [MIT](./LICENSE)
