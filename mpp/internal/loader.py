@@ -9,7 +9,11 @@ import mpp.api
 
 import os
 import sys
-from configparser import ConfigParser
+try:
+    from configparser import ConfigParser
+except:
+    from ConfigParser import ConfigParser
+  
 import re
 import optparse
 
