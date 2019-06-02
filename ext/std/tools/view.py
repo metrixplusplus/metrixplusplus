@@ -12,6 +12,8 @@ import mpp.api
 import mpp.utils
 import mpp.cout
 
+DIGIT_COUNT = 8
+
 class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
     
     MODE_NEW     = 0x01
@@ -90,8 +92,8 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
         subfiles = []
         if aggregated_data != None:
             aggregated_data_tree = aggregated_data.get_data_tree()
-            subdirs = aggregated_data.get_subdirs()
-            subfiles = aggregated_data.get_subfiles()
+            subdirs = sorted(aggregated_data.get_subdirs())
+            subfiles = sorted(aggregated_data.get_subfiles())
         else:
             mpp.utils.report_bad_path(path)
             exit_code += 1
@@ -121,7 +123,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
         if out_format == 'txt':
             cout_txt(data, loader)
         elif out_format == 'xml':
-            result += mpp.utils.serialize_to_xml(data, root_name = "data") + "\n"
+            result += mpp.utils.serialize_to_xml(data, root_name = "data", digitCount = DIGIT_COUNT) + "\n"
         elif out_format == 'python':
             postfix = ""
             if ind < len(paths) - 1:
@@ -434,7 +436,7 @@ def compress_dist(data, columns):
                                 'metric_f': bar['metric']}
                     if '__diff__' in list(bar.keys()):
                         next_bar['__diff__'] = bar['__diff__']
-                    next_consume = int(round(remaining_count/ (columns - len(new_dist))))
+                    next_consume = int(remaining_count/ (columns - len(new_dist)))
                 else:
                     # merge to existing bar
                     next_bar['count'] += bar['count']
@@ -530,11 +532,11 @@ def cout_txt_regions(path, regions, indent = 0):
             ('Line numbers', str(region['info']['line_begin']) + "-" + str(region['info']['line_end'])),
             ('Modified', str(region['info']['modified']))
         ]
-        for namespace in list(region['data'].keys()):
+        for namespace in sorted(list(region['data'].keys())):
             diff_data = {}
             if '__diff__' in list(region['data'][namespace].keys()):
                 diff_data = region['data'][namespace]['__diff__']
-            for field in list(region['data'][namespace].keys()):
+            for field in sorted(list(region['data'][namespace].keys())):
                 diff_str = ""
                 if field == '__diff__':
                     continue
@@ -561,7 +563,7 @@ def cout_txt(data, loader):
             diff_data = {}
             if '__diff__' in list(data['file-data'][namespace].keys()):
                 diff_data = data['file-data'][namespace]['__diff__']
-            for field in list(data['file-data'][namespace].keys()):
+            for field in sorted(list(data['file-data'][namespace].keys())):
                 diff_str = ""
                 if field == '__diff__':
                     continue
@@ -580,8 +582,8 @@ def cout_txt(data, loader):
                 'min': 'Minimum',
                 'max': 'Maximum',
     }
-    for namespace in list(data['aggregated-data'].keys()):
-        for field in list(data['aggregated-data'][namespace].keys()):
+    for namespace in sorted(list(data['aggregated-data'].keys())):
+        for field in sorted(list(data['aggregated-data'][namespace].keys())):
             details = []
             diff_data = {}
             if '__diff__' in list(data['aggregated-data'][namespace][field].keys()):
@@ -590,14 +592,14 @@ def cout_txt(data, loader):
                 diff_str = ""
                 if attr in list(diff_data.keys()):
                     if isinstance(diff_data[attr], float):
-                        diff_str = " [" + ("+" if diff_data[attr] >= 0 else "") + str(round(diff_data[attr], 10)) + "]"
+                        diff_str = " [" + ("+" if diff_data[attr] >= 0 else "") + str(round(diff_data[attr], DIGIT_COUNT)) + "]"
                     else:
                         diff_str = " [" + ("+" if diff_data[attr] >= 0 else "") + str(diff_data[attr]) + "]"
                 if attr == 'avg' and data['aggregated-data'][namespace][field]['nonzero'] == True:
                     diff_str += " (excluding zero metric values)"
                 if isinstance(data['aggregated-data'][namespace][field][attr], float):
-                    # round the data to 10 digits to reach same results on platforms with different precision
-                    details.append((attr_map[attr], str(round(data['aggregated-data'][namespace][field][attr], 10)) + diff_str))
+                    # round the data to reach same results on platforms with different precision
+                    details.append((attr_map[attr], str(round(data['aggregated-data'][namespace][field][attr], DIGIT_COUNT)) + diff_str))
                 else:
                     details.append((attr_map[attr], str(data['aggregated-data'][namespace][field][attr]) + diff_str))
 
@@ -637,16 +639,16 @@ def cout_txt(data, loader):
                 count_str = ((" " * (count_str_len - len(count_str))) + count_str + diff_str + "\t")
                 details.append((metric_str,
                                 "{0:.3f}".format(bar['ratio']) + " : " + "{0:.3f}".format(sum_ratio) +  " : " +
-                                count_str + ('|' * int(round(bar['ratio']*100)))))
+                                count_str + ('|' * int(bar['ratio']*100))))
             mpp.cout.notify(data['info']['path'],
                     '', # no line number
                     mpp.cout.SEVERITY_INFO,
                     "Overall metrics for '" + namespace + ":" + field + "' metric",
                     details)
     details = []
-    for each in data['subdirs']:
+    for each in sorted(data['subdirs']):
         details.append(('Directory', each))
-    for each in data['subfiles']:
+    for each in sorted(data['subfiles']):
         details.append(('File', each))
     if len(details) > 0: 
         mpp.cout.notify(data['info']['path'],

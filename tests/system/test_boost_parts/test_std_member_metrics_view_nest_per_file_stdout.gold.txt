@@ -322,9 +322,9 @@
             	Line numbers   : 969-1846
             	Modified       : None
             	std.code.member:classes: 2
+            	std.code.member:methods: 77
             	std.code.member:structs: 7
             	std.code.member:types: 9
-            	std.code.member:methods: 77
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:971: info: Metrics per 'get_last_error' region
                 	Region name    : get_last_error
@@ -1057,6 +1057,15 @@
                 	Line numbers   : 1830-1843
                 	Modified       : None
 
+./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:classes' metric
+	Average        : 2.0 (excluding zero metric values)
+	Minimum        : 2
+	Maximum        : 2
+	Total          : 2.0
+	Distribution   : 1 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             2 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
 ./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:fields' metric
 	Average        : 2.0 (excluding zero metric values)
 	Minimum        : 2
@@ -1074,26 +1083,6 @@
 	Distribution   : 0 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 
-./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:classes' metric
-	Average        : 2.0 (excluding zero metric values)
-	Minimum        : 2
-	Maximum        : 2
-	Total          : 2.0
-	Distribution   : 1 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             2 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-
-./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:structs' metric
-	Average        : 4.1 (excluding zero metric values)
-	Minimum        : 1
-	Maximum        : 26
-	Total          : 41.0
-	Distribution   : 10 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 0.800 : 0.800 :  8	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             7 : 0.100 : 0.900 :  1	||||||||||
-	            26 : 0.100 : 1.000 :  1	||||||||||
-
 ./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:interfaces' metric
 	Average        : None (excluding zero metric values)
 	Minimum        : None
@@ -1101,17 +1090,6 @@
 	Total          : 0.0
 	Distribution   : 0 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-
-./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:types' metric
-	Average        : 4.3 (excluding zero metric values)
-	Minimum        : 1
-	Maximum        : 26
-	Total          : 43.0
-	Distribution   : 10 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 0.800 : 0.800 :  8	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             9 : 0.100 : 0.900 :  1	||||||||||
-	            26 : 0.100 : 1.000 :  1	||||||||||
 
 ./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:methods' metric
 	Average        : 11.625 (excluding zero metric values)
@@ -1125,13 +1103,35 @@
 	            77 : 0.125 : 1.000 : 1	||||||||||||
 
 ./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:namespaces' metric
-	Average        : 1.2857142857 (excluding zero metric values)
+	Average        : 1.28571429 (excluding zero metric values)
 	Minimum        : 1
 	Maximum        : 3
 	Total          : 9.0
 	Distribution   : 7 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 0.857 : 0.857 : 6	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.857 : 0.857 : 6	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             3 : 0.143 : 1.000 : 1	||||||||||||||
+
+./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:structs' metric
+	Average        : 4.1 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 26
+	Total          : 41.0
+	Distribution   : 10 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.800 : 0.800 :  8	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             7 : 0.100 : 0.900 :  1	||||||||||
+	            26 : 0.100 : 1.000 :  1	||||||||||
+
+./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:types' metric
+	Average        : 4.3 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 26
+	Total          : 43.0
+	Distribution   : 10 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.800 : 0.800 :  8	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             9 : 0.100 : 0.900 :  1	||||||||||
+	            26 : 0.100 : 1.000 :  1	||||||||||
 
 

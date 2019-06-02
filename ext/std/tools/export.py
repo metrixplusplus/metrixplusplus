@@ -33,9 +33,9 @@ class Plugin(mpp.api.Plugin, mpp.api.IRunable):
     
         columns = []
         columnNames = ["file", "region", "type", "modified", "line start", "line end"]
-        for name in self.loader.iterate_namespace_names():
+        for name in sorted(self.loader.iterate_namespace_names()):
             namespace = self.loader.get_namespace(name)
-            for field in namespace.iterate_field_names():
+            for field in sorted(namespace.iterate_field_names()):
                 columns.append((name, field))
                 columnNames.append(name + ":" + field)
     

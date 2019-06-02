@@ -83,7 +83,7 @@
             	std.code.magic:numbers: 2
 
 ./simple.cpp:: info: Overall metrics for 'std.code.magic:numbers' metric
-	Average        : 1.5714285714 (excluding zero metric values)
+	Average        : 1.57142857 (excluding zero metric values)
 	Minimum        : 1
 	Maximum        : 4
 	Total          : 11.0

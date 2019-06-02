@@ -5,8 +5,8 @@
 	Line numbers   : 1-78
 	Modified       : False
 	std.code.lines:code: 0 [+0]
-	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:comments: 0 [+0]
+	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:total: 0 [+0]
 
 ./simple.cpp:4: info: Metrics per 'hmm' region
@@ -16,8 +16,8 @@
 	Line numbers   : 3-77
 	Modified       : True
 	std.code.lines:code: 4 [+0]
-	std.code.lines:preprocessor: 2 [+1]
 	std.code.lines:comments: 1 [+0]
+	std.code.lines:preprocessor: 2 [+1]
 	std.code.lines:total: 7 [+1]
 
 ./simple.cpp:10: info: Metrics per 'A' region
@@ -27,8 +27,8 @@
 	Line numbers   : 10-75
 	Modified       : True
 	std.code.lines:code: 4 [+0]
-	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:comments: 0 [+0]
+	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:total: 4 [+0]
 
 ./simple.cpp:13: info: Metrics per 'A' region
@@ -39,8 +39,8 @@
 	Modified       : False
 	std.code.complexity:cyclomatic: 3 [+0]
 	std.code.lines:code: 11 [+0]
-	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:comments: 2 [+0]
+	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:total: 12 [+0]
 
 ./simple.cpp:26: info: Metrics per 'func' region
@@ -51,8 +51,8 @@
 	Modified       : False
 	std.code.complexity:cyclomatic: 1 [+0]
 	std.code.lines:code: 5 [+0]
-	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:comments: 0 [+0]
+	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:total: 5 [+0]
 
 ./simple.cpp:28: info: Metrics per 'embeded' region
@@ -62,8 +62,8 @@
 	Line numbers   : 28-40
 	Modified       : False
 	std.code.lines:code: 3 [+0]
-	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:comments: 0 [+0]
+	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:total: 3 [+0]
 
 ./simple.cpp:30: info: Metrics per 'embeded' region
@@ -74,8 +74,8 @@
 	Modified       : True
 	std.code.complexity:cyclomatic: 2 [+1]
 	std.code.lines:code: 8 [+1]
-	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:comments: 2 [+1]
+	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:total: 9 [+1]
 
 ./simple.cpp:44: info: Metrics per 'never' region
@@ -86,8 +86,8 @@
 	Modified       : True
 	std.code.complexity:cyclomatic: 1 [+0]
 	std.code.lines:code: 7 [+0]
-	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:comments: 1 [+1]
+	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:total: 7 [+0]
 
 ./simple.cpp:53: info: Metrics per 'new_func' region
@@ -98,8 +98,8 @@
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
 	std.code.lines:code: 3
-	std.code.lines:preprocessor: 0
 	std.code.lines:comments: 1
+	std.code.lines:preprocessor: 0
 	std.code.lines:total: 4
 
 ./simple.cpp:58: info: Metrics per 'new_func_complex' region
@@ -110,8 +110,8 @@
 	Modified       : None
 	std.code.complexity:cyclomatic: 1
 	std.code.lines:code: 5
-	std.code.lines:preprocessor: 0
 	std.code.lines:comments: 0
+	std.code.lines:preprocessor: 0
 	std.code.lines:total: 5
 
 ./simple.cpp:65: info: Metrics per 'new_func_complex_but_suppressed' region
@@ -122,8 +122,8 @@
 	Modified       : None
 	std.code.complexity:cyclomatic: 2
 	std.code.lines:code: 8
-	std.code.lines:preprocessor: 0
 	std.code.lines:comments: 1
+	std.code.lines:preprocessor: 0
 	std.code.lines:total: 9
 	std.suppress:count: 1
 	std.suppress:list: [std.code.complexity:cyclomatic]
@@ -140,54 +140,54 @@
 	             2 : 0.400 : 1.000 : 2 [+1]	||||||||||||||||||||||||||||||||||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.code.lines:code' metric
-	Average        : 5.5714285714 [+0.2857142857]
+	Average        : 5.57142857 [+0.28571429]
 	Minimum        : 3 [+0]
 	Maximum        : 8 [+1]
 	Total          : 39.0 [+2.0]
 	Distribution   : 7 [+0] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             3 : 0.143 : 0.143 : 1 [+0]	||||||||||||||
-	             4 : 0.286 : 0.429 : 2 [+0]	|||||||||||||||||||||||||||||
+	             4 : 0.286 : 0.429 : 2 [+0]	||||||||||||||||||||||||||||
 	             5 : 0.143 : 0.571 : 1 [+0]	||||||||||||||
 	             7 : 0.143 : 0.714 : 1 [-2]	||||||||||||||
-	             8 : 0.286 : 1.000 : 2 [+2]	|||||||||||||||||||||||||||||
-
-./simple.cpp:: info: Overall metrics for 'std.code.lines:preprocessor' metric
-	Average        : 0.2857142857 [+0.1428571429]
-	Minimum        : 0 [+0]
-	Maximum        : 2 [+1]
-	Total          : 2.0 [+1.0]
-	Distribution   : 7 [+0] regions in total (including 0 [+0] suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             0 : 0.857 : 0.857 : 6 [+0]	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             1 : 0.000 : 0.857 : 0 [-1]	
-	             2 : 0.143 : 1.000 : 1 [+1]	||||||||||||||
+	             8 : 0.286 : 1.000 : 2 [+2]	||||||||||||||||||||||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.code.lines:comments' metric
-	Average        : 0.8571428571 [+0.4285714286]
+	Average        : 0.85714286 [+0.42857143]
 	Minimum        : 0 [+0]
 	Maximum        : 2 [+1]
 	Total          : 6.0 [+3.0]
 	Distribution   : 7 [+0] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             0 : 0.286 : 0.286 : 2 [-2]	|||||||||||||||||||||||||||||
+	             0 : 0.286 : 0.286 : 2 [-2]	||||||||||||||||||||||||||||
 	             1 : 0.571 : 0.857 : 4 [+1]	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             2 : 0.143 : 1.000 : 1 [+1]	||||||||||||||
 
+./simple.cpp:: info: Overall metrics for 'std.code.lines:preprocessor' metric
+	Average        : 0.28571429 [+0.14285714]
+	Minimum        : 0 [+0]
+	Maximum        : 2 [+1]
+	Total          : 2.0 [+1.0]
+	Distribution   : 7 [+0] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.857 : 0.857 : 6 [+0]	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.000 : 0.857 : 0 [-1]	
+	             2 : 0.143 : 1.000 : 1 [+1]	||||||||||||||
+
 ./simple.cpp:: info: Overall metrics for 'std.code.lines:total' metric
-	Average        : 6.4285714286 [+0.5714285714]
+	Average        : 6.42857143 [+0.57142857]
 	Minimum        : 4 [+1]
 	Maximum        : 9 [+1]
 	Total          : 45.0 [+4.0]
 	Distribution   : 7 [+0] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             3 : 0.000 : 0.000 : 0 [-1]	
-	             4 : 0.286 : 0.286 : 2 [+1]	|||||||||||||||||||||||||||||
+	             4 : 0.286 : 0.286 : 2 [+1]	||||||||||||||||||||||||||||
 	             5 : 0.143 : 0.429 : 1 [+0]	||||||||||||||
 	             6 : 0.000 : 0.429 : 0 [-1]	
-	             7 : 0.286 : 0.714 : 2 [+1]	|||||||||||||||||||||||||||||
+	             7 : 0.286 : 0.714 : 2 [+1]	||||||||||||||||||||||||||||
 	             8 : 0.000 : 0.714 : 0 [-2]	
-	             9 : 0.286 : 1.000 : 2 [+2]	|||||||||||||||||||||||||||||
+	             9 : 0.286 : 1.000 : 2 [+2]	||||||||||||||||||||||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.suppress:count' metric
 	Average        : 1.0 [+1.0] (excluding zero metric values)

@@ -12,6 +12,7 @@ import logging
 import difflib
 import unittest
 import shutil
+import ast
 
 class ToolRunner(object):
 
@@ -120,22 +121,33 @@ class ToolRunner(object):
         f = open(gold_file, 'r');
         gold_text = f.read();
         f.close()
-
-        gold_to_compare = gold_text
-        text_to_compare = str(text.decode('ascii'))
-        if lines != None:
-            gold_to_compare = ""
-            text_to_compare = ""
-            gold_lines = gold_text.splitlines(True)
-            text_lines = str(text.decode('ascii')).splitlines(True)
-            for each in lines:
-                gold_to_compare += "".join(gold_lines[each[0] : each[1]])
-                text_to_compare += "".join(text_lines[each[0] : each[1]])
-
-        gold_to_compare = gold_to_compare.replace('\n', ' ').replace('\r', '').replace(" ", "")
-        text_to_compare = text_to_compare.replace('\n', ' ').replace('\r', '').replace(" ", "")
-
-        result = (gold_to_compare == text_to_compare)
+        
+        # don't compare dictionaries as string - they are not in order... (test case failes sometimes)
+        try:
+            textDict = ast.literal_eval(str(text.decode('ascii')))
+            goldDict = ast.literal_eval(str(gold_text))
+        except:
+            textDict = text
+            goldDict = gold_text
+        
+        if isinstance(textDict, dict) and isinstance(goldDict, dict):    
+            result = (textDict == goldDict)
+        else:
+            gold_to_compare = gold_text
+            text_to_compare = str(text.decode('ascii'))
+            if lines != None:
+                gold_to_compare = ""
+                text_to_compare = ""
+                gold_lines = gold_text.splitlines(True)
+                text_lines = str(text.decode('ascii')).splitlines(True)
+                for each in lines:
+                    gold_to_compare += "".join(gold_lines[each[0] : each[1]])
+                    text_to_compare += "".join(text_lines[each[0] : each[1]])
+    
+            gold_to_compare = gold_to_compare.replace('\n', ' ').replace('\r', '').replace(" ", "")
+            text_to_compare = text_to_compare.replace('\n', ' ').replace('\r', '').replace(" ", "")
+    
+            result = (gold_to_compare == text_to_compare)
         
         if result == False:
             f = open(real_file, 'wb')

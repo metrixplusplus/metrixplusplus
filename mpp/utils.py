@@ -97,8 +97,8 @@ def preprocess_path(path):
 def report_bad_path(path):
     logging.error("Specified path '" + path + "' is invalid: not found in the database records.")
 
-def serialize_to_xml(data, root_name = None):
-    serializer = mpp.internal.py2xml.Py2XML()
+def serialize_to_xml(data, root_name = None, digitCount = None):
+    serializer = mpp.internal.py2xml.Py2XML(digitCount)
     return serializer.parse(data, objName=root_name)
 
 def serialize_to_python(data, root_name = None):

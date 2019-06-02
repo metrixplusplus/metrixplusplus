@@ -482,15 +482,15 @@
 	std.code.complexity:cyclomatic: 0
 
 ./operator_test.hpp:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 0.0784313725
+	Average        : 0.07843137
 	Minimum        : 0
 	Maximum        : 2
 	Total          : 4.0
 	Distribution   : 51 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.941 : 0.941 : 48	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             1 : 0.039 : 0.980 :  2	||||
-	             2 : 0.020 : 1.000 :  1	||
+	             1 : 0.039 : 0.980 :  2	|||
+	             2 : 0.020 : 1.000 :  1	|
 
 ./test.c:0: info: Metrics per '__global__' region
 	Region name    : __global__

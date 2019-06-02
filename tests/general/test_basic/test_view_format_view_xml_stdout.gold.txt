@@ -1,7 +1,6 @@
 <view>
 
     <data>
-        <info id="1" path="./" />
         <aggregated-data>
             <std.code.complexity>
                 <cyclomatic avg="1.375" count="8" max="3" min="1" nonzero="False" sup="0" total="11.0">
@@ -14,6 +13,7 @@
             </std.code.complexity>
         </aggregated-data>
         <file-data />
+        <info id="1" path="./" />
         <subdirs>
         </subdirs>
         <subfiles>

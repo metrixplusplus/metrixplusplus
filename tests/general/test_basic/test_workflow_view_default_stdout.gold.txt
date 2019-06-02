@@ -1,7 +1,6 @@
 <view>
 
     <data>
-        <info id="1" path="./" />
         <aggregated-data>
             <std.code.complexity>
                 <cyclomatic avg="1.375" count="8" max="3" min="1" nonzero="False" sup="0" total="11.0">
@@ -24,12 +23,6 @@
                         <distribution-bar count="1" metric="11" ratio="0.0625" />
                     </distribution-bars>
                 </code>
-                <preprocessor avg="0.0625" count="16" max="1" min="0" nonzero="False" sup="0" total="1.0">
-                    <distribution-bars>
-                        <distribution-bar count="15" metric="0" ratio="0.9375" />
-                        <distribution-bar count="1" metric="1" ratio="0.0625" />
-                    </distribution-bars>
-                </preprocessor>
                 <comments avg="0.625" count="16" max="3" min="0" nonzero="False" sup="0" total="10.0">
                     <distribution-bars>
                         <distribution-bar count="10" metric="0" ratio="0.625" />
@@ -38,6 +31,12 @@
                         <distribution-bar count="1" metric="3" ratio="0.0625" />
                     </distribution-bars>
                 </comments>
+                <preprocessor avg="0.0625" count="16" max="1" min="0" nonzero="False" sup="0" total="1.0">
+                    <distribution-bars>
+                        <distribution-bar count="15" metric="0" ratio="0.9375" />
+                        <distribution-bar count="1" metric="1" ratio="0.0625" />
+                    </distribution-bars>
+                </preprocessor>
                 <total avg="5.4375" count="16" max="12" min="0" nonzero="False" sup="0" total="87.0">
                     <distribution-bars>
                         <distribution-bar count="2" metric="0" ratio="0.125" />
@@ -66,6 +65,7 @@
             </std.suppress.file>
         </aggregated-data>
         <file-data />
+        <info id="1" path="./" />
         <subdirs>
         </subdirs>
         <subfiles>

@@ -364,17 +364,17 @@
     	Modified       : None
 
 ./ArrayUtils.java:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 1.9302325581
+	Average        : 1.93023256
 	Minimum        : 0
 	Maximum        : 6
 	Total          : 83.0
 	Distribution   : 43 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             0 : 0.186 : 0.186 :  8	|||||||||||||||||||
-	             1 : 0.326 : 0.512 : 14	|||||||||||||||||||||||||||||||||
-	             2 : 0.209 : 0.721 :  9	|||||||||||||||||||||
+	             0 : 0.186 : 0.186 :  8	||||||||||||||||||
+	             1 : 0.326 : 0.512 : 14	||||||||||||||||||||||||||||||||
+	             2 : 0.209 : 0.721 :  9	||||||||||||||||||||
 	             3 : 0.163 : 0.884 :  7	||||||||||||||||
-	             6 : 0.116 : 1.000 :  5	||||||||||||
+	             6 : 0.116 : 1.000 :  5	|||||||||||
 
 ./BinaryHeapPriorityQueue.java:0: info: Metrics per '__global__' region
 	Region name    : __global__
@@ -750,14 +750,14 @@
         	std.code.complexity:cyclomatic: 0
 
 ./BinaryHeapPriorityQueue.java:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 0.8409090909
+	Average        : 0.84090909
 	Minimum        : 0
 	Maximum        : 6
 	Total          : 37.0
 	Distribution   : 44 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.523 : 0.523 : 23	||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             1 : 0.295 : 0.818 : 13	||||||||||||||||||||||||||||||
+	             1 : 0.295 : 0.818 : 13	|||||||||||||||||||||||||||||
 	             2 : 0.114 : 0.932 :  5	|||||||||||
 	             3 : 0.023 : 0.955 :  1	||
 	             5 : 0.023 : 0.977 :  1	||
@@ -1033,14 +1033,14 @@
         	std.code.complexity:cyclomatic: 0
 
 ./Generics.java:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 0.1935483871
+	Average        : 0.19354839
 	Minimum        : 0
 	Maximum        : 2
 	Total          : 6.0
 	Distribution   : 31 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             0 : 0.839 : 0.839 : 26	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             1 : 0.129 : 0.968 :  4	|||||||||||||
+	             0 : 0.839 : 0.839 : 26	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.129 : 0.968 :  4	||||||||||||
 	             2 : 0.032 : 1.000 :  1	|||
 
 ./attrs.java:0: info: Metrics per '__global__' region
