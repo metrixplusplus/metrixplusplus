@@ -27,7 +27,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IRunable):
     def _export_to_stdout(self, paths):
         class StdoutWriter(object):
             def write(self, *args, **kwargs):
-                print args[0].strip()
+                print(args[0].strip())
         
         exit_code = 0
     

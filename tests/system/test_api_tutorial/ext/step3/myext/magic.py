@@ -27,5 +27,5 @@ class Plugin(mpp.api.Plugin,
 
     # parents (code parsers) will call the callback declared
     def callback(self, parent, data, is_updated):
-        print parent.get_name(), data.get_path(), is_updated
+        print("{0} {1} {2}".format(parent.get_name(), data.get_path(), is_updated))
         

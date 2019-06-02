@@ -10,6 +10,6 @@ import mpp.api
 class Plugin(mpp.api.Plugin, mpp.api.IRunable):
     
     def run(self, args):
-        print args
+        print(args)
         return 0
 

@@ -103,6 +103,6 @@ def dumphtml(args, loader):
         result += proc_rec(1, data, styles, 0, 0)
         result += ('</pre></td></tr></table>')
     result += ('</body></html>')
-    print result
+    print(result)
     return exit_code
             

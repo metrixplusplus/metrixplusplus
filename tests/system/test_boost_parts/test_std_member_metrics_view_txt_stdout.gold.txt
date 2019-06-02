@@ -1,5 +1,84 @@
+./:: info: Overall metrics for 'std.code.member:fields' metric
+	Average        : 1.1428571429 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 2
+	Total          : 8.0
+	Distribution   : 7 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.857 : 0.857 : 6	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             2 : 0.143 : 1.000 : 1	||||||||||||||
+
+./:: info: Overall metrics for 'std.code.member:globals' metric
+	Average        : 1.0 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 1
+	Total          : 1.0
+	Distribution   : 1 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+./:: info: Overall metrics for 'std.code.member:classes' metric
+	Average        : 1.3397435897 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 5
+	Total          : 209.0
+	Distribution   : 156 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.776 : 0.776 : 121	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             2 : 0.160 : 0.936 :  25	||||||||||||||||
+	             3 : 0.026 : 0.962 :   4	|||
+	             4 : 0.026 : 0.987 :   4	|||
+	             5 : 0.013 : 1.000 :   2	|
+
+./:: info: Overall metrics for 'std.code.member:structs' metric
+	Average        : 2.407079646 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 26
+	Total          : 272.0
+	Distribution   : 113 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.504 : 0.504 :  57	||||||||||||||||||||||||||||||||||||||||||||||||||
+	             2 : 0.274 : 0.779 :  31	|||||||||||||||||||||||||||
+	             3 : 0.088 : 0.867 :  10	|||||||||
+	             4 : 0.053 : 0.920 :   6	|||||
+	             5 : 0.027 : 0.947 :   3	|||
+	             6 : 0.009 : 0.956 :   1	|
+	             7 : 0.009 : 0.965 :   1	|
+	            10 : 0.009 : 0.973 :   1	|
+	            15 : 0.009 : 0.982 :   1	|
+	            20 : 0.009 : 0.991 :   1	|
+	            26 : 0.009 : 1.000 :   1	|
+
+./:: info: Overall metrics for 'std.code.member:interfaces' metric
+	Average        : None (excluding zero metric values)
+	Minimum        : None
+	Maximum        : None
+	Total          : 0.0
+	Distribution   : 0 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+
+./:: info: Overall metrics for 'std.code.member:types' metric
+	Average        : 2.0210084034 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 26
+	Total          : 481.0
+	Distribution   : 238 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.592 : 0.592 : 141	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             2 : 0.235 : 0.828 :  56	||||||||||||||||||||||||
+	             3 : 0.076 : 0.903 :  18	||||||||
+	             4 : 0.042 : 0.945 :  10	||||
+	             5 : 0.017 : 0.962 :   4	||
+	             6 : 0.008 : 0.971 :   2	|
+	             7 : 0.004 : 0.975 :   1	
+	             9 : 0.008 : 0.983 :   2	|
+	            15 : 0.004 : 0.987 :   1	
+	            16 : 0.004 : 0.992 :   1	
+	            20 : 0.004 : 0.996 :   1	
+	            26 : 0.004 : 1.000 :   1	
+
 ./:: info: Overall metrics for 'std.code.member:methods' metric
-	Average        : 6.93732193732 (excluding zero metric values)
+	Average        : 6.9373219373 (excluding zero metric values)
 	Minimum        : 1
 	Maximum        : 77
 	Total          : 2435.0
@@ -26,48 +105,8 @@
 	         31-53 : 0.011 : 0.991 :   4	|
 	         55-77 : 0.009 : 1.000 :   3	|
 
-./:: info: Overall metrics for 'std.code.member:globals' metric
-	Average        : 1.0 (excluding zero metric values)
-	Minimum        : 1
-	Maximum        : 1
-	Total          : 1.0
-	Distribution   : 1 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-
-./:: info: Overall metrics for 'std.code.member:fields' metric
-	Average        : 1.14285714286 (excluding zero metric values)
-	Minimum        : 1
-	Maximum        : 2
-	Total          : 8.0
-	Distribution   : 7 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 0.857 : 0.857 : 6	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             2 : 0.143 : 1.000 : 1	||||||||||||||
-
-./:: info: Overall metrics for 'std.code.member:interfaces' metric
-	Average        : None (excluding zero metric values)
-	Minimum        : None
-	Maximum        : None
-	Total          : 0.0
-	Distribution   : 0 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-
-./:: info: Overall metrics for 'std.code.member:classes' metric
-	Average        : 1.33974358974 (excluding zero metric values)
-	Minimum        : 1
-	Maximum        : 5
-	Total          : 209.0
-	Distribution   : 156 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 0.776 : 0.776 : 121	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             2 : 0.160 : 0.936 :  25	||||||||||||||||
-	             3 : 0.026 : 0.962 :   4	|||
-	             4 : 0.026 : 0.987 :   4	|||
-	             5 : 0.013 : 1.000 :   2	|
-
 ./:: info: Overall metrics for 'std.code.member:namespaces' metric
-	Average        : 1.06157112527 (excluding zero metric values)
+	Average        : 1.0615711253 (excluding zero metric values)
 	Minimum        : 1
 	Maximum        : 9
 	Total          : 500.0
@@ -77,45 +116,6 @@
 	             2 : 0.028 : 0.989 :  13	|||
 	             3 : 0.008 : 0.998 :   4	|
 	             9 : 0.002 : 1.000 :   1	
-
-./:: info: Overall metrics for 'std.code.member:structs' metric
-	Average        : 2.40707964602 (excluding zero metric values)
-	Minimum        : 1
-	Maximum        : 26
-	Total          : 272.0
-	Distribution   : 113 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 0.504 : 0.504 :  57	||||||||||||||||||||||||||||||||||||||||||||||||||
-	             2 : 0.274 : 0.779 :  31	|||||||||||||||||||||||||||
-	             3 : 0.088 : 0.867 :  10	|||||||||
-	             4 : 0.053 : 0.920 :   6	|||||
-	             5 : 0.027 : 0.947 :   3	|||
-	             6 : 0.009 : 0.956 :   1	|
-	             7 : 0.009 : 0.965 :   1	|
-	            10 : 0.009 : 0.973 :   1	|
-	            15 : 0.009 : 0.982 :   1	|
-	            20 : 0.009 : 0.991 :   1	|
-	            26 : 0.009 : 1.000 :   1	|
-
-./:: info: Overall metrics for 'std.code.member:types' metric
-	Average        : 2.02100840336 (excluding zero metric values)
-	Minimum        : 1
-	Maximum        : 26
-	Total          : 481.0
-	Distribution   : 238 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 0.592 : 0.592 : 141	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             2 : 0.235 : 0.828 :  56	||||||||||||||||||||||||
-	             3 : 0.076 : 0.903 :  18	||||||||
-	             4 : 0.042 : 0.945 :  10	||||
-	             5 : 0.017 : 0.962 :   4	||
-	             6 : 0.008 : 0.971 :   2	|
-	             7 : 0.004 : 0.975 :   1	
-	             9 : 0.008 : 0.983 :   2	|
-	            15 : 0.004 : 0.987 :   1	
-	            16 : 0.004 : 0.992 :   1	
-	            20 : 0.004 : 0.996 :   1	
-	            26 : 0.004 : 1.000 :   1	
 
 ./:: info: Directory content:
 	Directory      : interprocess

@@ -1,5 +1,5 @@
 ./:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 0.470588235294
+	Average        : 0.4705882353
 	Minimum        : 0
 	Maximum        : 1
 	Total          : 8.0
@@ -8,36 +8,8 @@
 	             0 : 0.529 : 0.529 :  9	|||||||||||||||||||||||||||||||||||||||||||||||||||||
 	             1 : 0.471 : 1.000 :  8	|||||||||||||||||||||||||||||||||||||||||||||||
 
-./:: info: Overall metrics for 'std.general:size' metric
-	Average        : 3023.0
-	Minimum        : 3023
-	Maximum        : 3023
-	Total          : 3023.0
-	Distribution   : 1 files in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of files
-	          3023 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-
-./:: info: Overall metrics for 'std.suppress.file:count' metric
-	Average        : 1.0 (excluding zero metric values)
-	Minimum        : 1
-	Maximum        : 1
-	Total          : 1.0
-	Distribution   : 1 files in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of files
-	             1 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-
-./:: info: Overall metrics for 'std.suppress:count' metric
-	Average        : 1.2380952381 (excluding zero metric values)
-	Minimum        : 1
-	Maximum        : 2
-	Total          : 26.0
-	Distribution   : 21 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 0.762 : 0.762 : 16	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             2 : 0.238 : 1.000 :  5	||||||||||||||||||||||||
-
 ./:: info: Overall metrics for 'std.code.length:total' metric
-	Average        : 116.269230769
+	Average        : 116.2692307692
 	Minimum        : 43
 	Maximum        : 242
 	Total          : 3023.0
@@ -59,6 +31,34 @@
 	       173-183 : 0.038 : 0.923 :  1	||||
 	       183-193 : 0.038 : 0.962 :  1	||||
 	       193-242 : 0.038 : 1.000 :  1	||||
+
+./:: info: Overall metrics for 'std.suppress:count' metric
+	Average        : 1.2380952381 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 2
+	Total          : 26.0
+	Distribution   : 21 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.762 : 0.762 : 16	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             2 : 0.238 : 1.000 :  5	||||||||||||||||||||||||
+
+./:: info: Overall metrics for 'std.suppress.file:count' metric
+	Average        : 1.0 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 1
+	Total          : 1.0
+	Distribution   : 1 files in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of files
+	             1 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+./:: info: Overall metrics for 'std.general:size' metric
+	Average        : 3023.0
+	Minimum        : 3023
+	Maximum        : 3023
+	Total          : 3023.0
+	Distribution   : 1 files in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of files
+	          3023 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./:: info: Directory content:
 	File           : test.c

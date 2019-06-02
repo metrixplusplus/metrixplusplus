@@ -1,5 +1,5 @@
 ./:: info: Overall metrics for 'std.code.magic:numbers' metric
-	Average        : 1.55555555556 (excluding zero metric values)
+	Average        : 1.5555555556 (excluding zero metric values)
 	Minimum        : 1
 	Maximum        : 4
 	Total          : 14.0

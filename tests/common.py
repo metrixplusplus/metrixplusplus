@@ -117,34 +117,34 @@ class ToolRunner(object):
             self.message += "\nGold file does not exist: " + gold_file
             return False
         
-        f = open(gold_file, 'rU');
+        f = open(gold_file, 'r');
         gold_text = f.read();
         f.close()
 
         gold_to_compare = gold_text
-        text_to_compare = text
+        text_to_compare = str(text.decode('ascii'))
         if lines != None:
             gold_to_compare = ""
             text_to_compare = ""
             gold_lines = gold_text.splitlines(True)
-            text_lines = text.splitlines(True)
+            text_lines = str(text.decode('ascii')).splitlines(True)
             for each in lines:
                 gold_to_compare += "".join(gold_lines[each[0] : each[1]])
                 text_to_compare += "".join(text_lines[each[0] : each[1]])
-        
-        gold_to_compare = gold_to_compare.replace('\r', '')
-        text_to_compare = text_to_compare.replace('\r', '')
-            
+
+        gold_to_compare = gold_to_compare.replace('\n', ' ').replace('\r', '').replace(" ", "")
+        text_to_compare = text_to_compare.replace('\n', ' ').replace('\r', '').replace(" ", "")
+
         result = (gold_to_compare == text_to_compare)
         
         if result == False:
-            f = open(real_file, 'wb');
-            f.write(text);
+            f = open(real_file, 'wb')
+            f.write(text)
             f.close()
             
-            diff_text = difflib.HtmlDiff().make_file(gold_to_compare.splitlines(), text_to_compare.splitlines(), "Gold file", "Real output")
-            f = open(diff_file, 'w');
-            f.write(diff_text);
+            diff_text = difflib.HtmlDiff().make_file(gold_text.splitlines(), text.decode('ascii').splitlines(), "Gold file", "Real output")
+            f = open(diff_file, 'w')
+            f.write(diff_text)
             f.close()
         else:
             if os.path.exists(real_file):
@@ -191,12 +191,12 @@ class TestCase(unittest.TestCase):
     
     def __init__(self, methodName='runTest'):
         unittest.TestCase.__init__(self, methodName=methodName)
-        if 'METRIXPLUSPLUS_LOG_LEVEL' not in os.environ.keys():
+        if 'METRIXPLUSPLUS_LOG_LEVEL' not in list(os.environ.keys()):
             # launch of individual unit test
             os.environ['METRIXPLUSPLUS_LOG_LEVEL'] = 'ERROR'
             os.environ['METRIXPLUSPLUS_INSTALL_DIR'] = os.path.dirname(os.path.dirname(__file__))
             os.environ['METRIXPLUSPLUS_TEST_MODE'] = str("True")
-            if 'METRIXPLUSPLUS_TEST_GENERATE_GOLDS' not in os.environ.keys():
+            if 'METRIXPLUSPLUS_TEST_GENERATE_GOLDS' not in list(os.environ.keys()):
                 os.environ['METRIXPLUSPLUS_TEST_GENERATE_GOLDS'] = str("False")
             os.chdir(os.environ['METRIXPLUSPLUS_INSTALL_DIR'])
 

@@ -15,7 +15,7 @@ class Test(tests.common.TestCase):
     def setUp(self):
         tests.common.TestCase.setUp(self)
         self.METRIXPLUSPLUS_PATH = None
-        if 'METRIXPLUSPLUS_PATH' in os.environ.keys():
+        if 'METRIXPLUSPLUS_PATH' in list(os.environ.keys()):
             self.METRIXPLUSPLUS_PATH = os.environ['METRIXPLUSPLUS_PATH']
         
     def tearDown(self):

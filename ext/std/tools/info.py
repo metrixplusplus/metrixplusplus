@@ -30,7 +30,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IRunable):
                     prev_value_str = " [modified (was: " + loader_prev.get_property(each.name) + ")]"
             details.append((each.name, each.value + prev_value_str))
         path = self.get_plugin('mpp.dbf').get_dbfile_path()
-        if ('METRIXPLUSPLUS_TEST_MODE' in os.environ.keys() and
+        if ('METRIXPLUSPLUS_TEST_MODE' in list(os.environ.keys()) and
              os.environ['METRIXPLUSPLUS_TEST_MODE'] == "True"):
             # in tests, paths come as full paths, strip it for consistent gold files
             # TODO: if there are other path-like arguments, it is better to think about other solution

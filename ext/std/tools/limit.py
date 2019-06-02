@@ -291,7 +291,7 @@ def get_list_of_modified_files(loader, loader_prev):
     for each in loader.iterate_file_data():
         if len(modified_file_ids) > 1000: # If more than 1000 files changed, skip optimisation
             return None
-        if (each.get_path() not in old_files_map.keys()) or old_files_map[each.get_path()] != each.get_checksum():
+        if (each.get_path() not in list(old_files_map.keys())) or old_files_map[each.get_path()] != each.get_checksum():
             modified_file_ids.append(str(each.get_id()))
 
     old_files_map = None

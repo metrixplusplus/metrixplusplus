@@ -114,7 +114,7 @@ class DirectoryReader():
     def run(self, plugin, directory):
         
         IS_TEST_MODE = False
-        if 'METRIXPLUSPLUS_TEST_MODE' in os.environ.keys():
+        if 'METRIXPLUSPLUS_TEST_MODE' in list(os.environ.keys()):
             IS_TEST_MODE = True
 
         def run_per_file(plugin, fname, full_path):
@@ -136,10 +136,10 @@ class DirectoryReader():
                         f = open(full_path, 'rU');
                         text = f.read();
                         f.close()
-                        checksum = binascii.crc32(text) & 0xffffffff # to match python 3
+                        checksum = binascii.crc32(text.encode('utf8')) & 0xffffffff # to match python 3
                         
                         db_loader = plugin.get_plugin('mpp.dbf').get_loader()
-                        (data, is_updated) = db_loader.create_file_data(norm_path, checksum, text)
+                        (data, is_updated) = db_loader.create_file_data(norm_path, checksum, str(text))
                         procerrors = parser.process(plugin, data, is_updated)
                         if plugin.is_proctime_enabled == True:
                             data.set_data('std.general', 'proctime',

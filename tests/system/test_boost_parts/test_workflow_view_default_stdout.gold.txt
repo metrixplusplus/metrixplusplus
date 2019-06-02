@@ -1,5 +1,5 @@
 ./:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 0.652902698283
+	Average        : 0.6529026983
 	Minimum        : 0
 	Maximum        : 37
 	Total          : 1597.0
@@ -51,8 +51,8 @@
 	         23-26 : 0.011 : 0.963 :   40	|
 	         27-31 : 0.010 : 0.973 :   35	|
 	         32-40 : 0.009 : 0.982 :   32	|
-	         41-66 : 0.009 : 0.991 :   34	|
-	        67-220 : 0.009 : 1.000 :   31	|
+	         41-65 : 0.009 : 0.991 :   32	|
+	        66-220 : 0.009 : 1.000 :   33	|
 
 ./:: info: Directory content:
 	Directory      : interprocess

@@ -30,7 +30,7 @@ class FileRegionsMatcher(object):
                 self.names[each.get_name()].append((each.get_id(), each.get_checksum())) 
             
         def get_next_id_once_by_checksum(self, checksum):
-            if checksum not in self.checksums.keys():
+            if checksum not in list(self.checksums.keys()):
                 return None
     
             if len(self.checksums[checksum]) == 0:
@@ -44,7 +44,7 @@ class FileRegionsMatcher(object):
             return next_id
     
         def get_next_id_once_by_name(self, name):
-            if name not in self.names.keys():
+            if name not in list(self.names.keys()):
                 return None
             
             if len(self.names[name]) == 0:

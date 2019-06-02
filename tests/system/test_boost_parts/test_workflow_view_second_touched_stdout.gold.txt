@@ -1,5 +1,5 @@
 ./:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 1.84924623116 [-0.0230941943761]
+	Average        : 1.8492462312 [-0.0230941944]
 	Minimum        : 0 [+0]
 	Maximum        : 37 [+1]
 	Total          : 368.0 [+16.0]
@@ -23,10 +23,11 @@
 	            17 : 0.005 : 0.980 :   1 [+0  ]	|
 	            18 : 0.010 : 0.990 :   2 [+1  ]	|
 	            20 : 0.005 : 0.995 :   1 [+0  ]	|
-	         36-37 : 0.005 : 1.000 :   1 [+0  ]	|
+	            36 : 0.000 : 0.995 :   0 [-1  ]	
+	            37 : 0.005 : 1.000 :   1 [+1  ]	|
 
 ./:: info: Overall metrics for 'std.code.lines:code' metric
-	Average        : 16.0177304965 [-0.821485189821]
+	Average        : 16.0177304965 [-0.8214851898]
 	Minimum        : 0 [+0]
 	Maximum        : 220 [+6]
 	Total          : 4517.0 [+223.0]

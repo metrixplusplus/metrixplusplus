@@ -2,28 +2,28 @@
 
     <data>
         <info id="1" path="./" />
-        <file-data />
-        <subfiles>
-            <subfile>Generics.java</subfile>
-            <subfile>attrs.java</subfile>
-            <subfile>BinaryHeapPriorityQueue.java</subfile>
-            <subfile>ArrayUtils.java</subfile>
-        </subfiles>
-        <subdirs>
-        </subdirs>
         <aggregated-data>
             <std.code.complexity>
-                <cyclomatic avg="1.05882352941" count="119" max="6" min="0" nonzero="False" sup="0" total="126.0">
+                <cyclomatic avg="1.0588235294" count="119" max="6" min="0" nonzero="False" sup="0" total="126.0">
                     <distribution-bars>
-                        <distribution-bar count="58" metric="0" ratio="0.487394957983" />
-                        <distribution-bar count="31" metric="1" ratio="0.260504201681" />
-                        <distribution-bar count="15" metric="2" ratio="0.126050420168" />
-                        <distribution-bar count="8" metric="3" ratio="0.0672268907563" />
-                        <distribution-bar count="1" metric="5" ratio="0.00840336134454" />
-                        <distribution-bar count="6" metric="6" ratio="0.0504201680672" />
+                        <distribution-bar count="58" metric="0" ratio="0.487394958" />
+                        <distribution-bar count="31" metric="1" ratio="0.2605042017" />
+                        <distribution-bar count="15" metric="2" ratio="0.1260504202" />
+                        <distribution-bar count="8" metric="3" ratio="0.0672268908" />
+                        <distribution-bar count="1" metric="5" ratio="0.0084033613" />
+                        <distribution-bar count="6" metric="6" ratio="0.0504201681" />
                     </distribution-bars>
                 </cyclomatic>
             </std.code.complexity>
         </aggregated-data>
+        <file-data />
+        <subdirs>
+        </subdirs>
+        <subfiles>
+            <subfile>ArrayUtils.java</subfile>
+            <subfile>BinaryHeapPriorityQueue.java</subfile>
+            <subfile>Generics.java</subfile>
+            <subfile>attrs.java</subfile>
+        </subfiles>
     </data>
 </view>

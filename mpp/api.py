@@ -101,9 +101,9 @@ class Data(object):
         self.data = {}
         
     def get_data(self, namespace, field):
-        if namespace not in self.data.keys():
+        if namespace not in list(self.data.keys()):
             return None
-        if field not in self.data[namespace].keys():
+        if field not in list(self.data[namespace].keys()):
             return None
         return self.data[namespace][field]
 
@@ -113,11 +113,11 @@ class Data(object):
         self.data[namespace][field] = value
 
     def iterate_namespaces(self):
-        for namespace in self.data.keys():
+        for namespace in list(self.data.keys()):
             yield namespace
             
     def iterate_fields(self, namespace):
-        for field in self.data[namespace].keys():
+        for field in list(self.data[namespace].keys()):
             yield (field, self.data[namespace][field])
 
     def get_data_tree(self, namespaces=None):
@@ -148,7 +148,7 @@ class LoadableData(Data):
         row = self.loader.db.get_row(namespace, self.file_id, self.region_id)
         if row == None:
             return
-        for column_name in row.keys():
+        for column_name in list(row.keys()):
             try:
                 packager = namespace_obj._get_field_packager(column_name)
             except mpp.internal.api_impl.PackagerError:
@@ -699,7 +699,7 @@ class Namespace(object):
         if not isinstance(field_name, str):
             raise Namespace.FieldError(field_name, "field_name not a string")
         packager = mpp.internal.api_impl.PackagerFactory().create(python_type, non_zero)
-        if field_name in self.fields.keys():
+        if field_name in list(self.fields.keys()):
             raise Namespace.FieldError(field_name, "double used")
         self.fields[field_name] = packager
         
@@ -710,7 +710,7 @@ class Namespace(object):
         return None # if double request
     
     def iterate_field_names(self):
-        for name in self.fields.keys():
+        for name in list(self.fields.keys()):
             yield name
     
     def check_field(self, field_name):
@@ -740,7 +740,7 @@ class Namespace(object):
             raise Namespace.FieldError(field_name, 'does not exist')
 
     def _get_field_packager(self, field_name):
-        if field_name in self.fields.keys():
+        if field_name in list(self.fields.keys()):
             return self.fields[field_name]
         else:
             raise mpp.internal.api_impl.PackagerError("unknown field " + field_name + " requested")
@@ -793,18 +793,18 @@ class Loader(object):
         if self.db == None:
             return None
         
-        if name in self.namespaces.keys():
+        if name in list(self.namespaces.keys()):
             raise Namespace.NamespaceError(name, "double used")
-        new_namespace = Namespace(self.db, name, support_regions, version)
+        new_namespace = Namespace(self.db, str(name), support_regions, version)
         self.namespaces[name] = new_namespace
         return new_namespace
     
     def iterate_namespace_names(self):
-        for name in self.namespaces.keys():
+        for name in list(self.namespaces.keys()):
             yield name
 
     def get_namespace(self, name):
-        if name in self.namespaces.keys():
+        if name in list(self.namespaces.keys()):
             return self.namespaces[name]
         else:
             return None
@@ -939,13 +939,13 @@ class Loader(object):
             final_path_like = path + path_like_filter
         
         if namespaces == None:
-            namespaces = self.namespaces.keys()
+            namespaces = list(self.namespaces.keys())
         
         result = AggregatedData(self, path)
         for name in namespaces:
             namespace = self.get_namespace(name)
             data = self.db.aggregate_rows(name, path_like = final_path_like)
-            for field in data.keys():
+            for field in list(data.keys()):
                 if namespace.get_field_python_type(field) == str:
                     continue
                 data[field]['nonzero'] = namespace.is_field_non_zero(field)
@@ -1176,7 +1176,7 @@ class MetricPluginMixin(Parent):
         else:
             map_of_patterns = {'*': pattern_to_search_or_map_of_patterns}
         # client may suply with pattern or pair of pattern + counter class
-        for key in map_of_patterns.keys():
+        for key in list(map_of_patterns.keys()):
             if isinstance(map_of_patterns[key], tuple) == False:
                 # if it is not a pair, create a pair using default counter class
                 map_of_patterns[key] = (map_of_patterns[key],
@@ -1192,12 +1192,12 @@ class MetricPluginMixin(Parent):
             
     def is_active(self, metric_name = None):
         if metric_name == None:
-            return (len(self._fields.keys()) > 0)
-        return (metric_name in self._fields.keys())
+            return (len(list(self._fields.keys())) > 0)
+        return (metric_name in list(self._fields.keys()))
     
     def get_fields(self):
         result = []
-        for key in self._fields.keys():
+        for key in list(self._fields.keys()):
             result.append(self._fields[key][0])
         return result
     
@@ -1220,8 +1220,8 @@ class MetricPluginMixin(Parent):
             return
         
         field_data = self._fields[field]
-        if alias not in field_data[4].keys():
-            if '*' not in field_data[4].keys():
+        if alias not in list(field_data[4].keys()):
+            if '*' not in list(field_data[4].keys()):
                 raise self.AliasError(alias)
             else:
                 alias = '*'

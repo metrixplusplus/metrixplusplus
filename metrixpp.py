@@ -35,7 +35,7 @@ def main():
 
     loader = mpp.internal.loader.Loader()
     mpp_paths = []
-    if 'METRIXPLUSPLUS_PATH' in os.environ.keys():
+    if 'METRIXPLUSPLUS_PATH' in list(os.environ.keys()):
         mpp_paths = os.environ['METRIXPLUSPLUS_PATH'].split(os.pathsep)
     args = loader.load(command, mpp_paths, sys.argv[3:])
     exit_code = loader.run(args)
@@ -48,7 +48,7 @@ def start():
 
     exit_code = main()
     time_spent = round((time.time() - ts), 2)
-    if 'METRIXPLUSPLUS_TEST_GENERATE_GOLDS' in os.environ.keys() and \
+    if 'METRIXPLUSPLUS_TEST_GENERATE_GOLDS' in list(os.environ.keys()) and \
         os.environ['METRIXPLUSPLUS_TEST_GENERATE_GOLDS'] == "True":
         time_spent = 1 # Constant value if under tests
     logging.warning("Done (" + str(time_spent) +" seconds). Exit code: " + str(exit_code))

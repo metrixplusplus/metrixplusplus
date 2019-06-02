@@ -378,7 +378,7 @@
 	            37 : 0.031 : 1.000 :  1 [+1 ]	|||
 
 ./interprocess/detail/managed_open_or_create_impl.hpp:: info: Overall metrics for 'std.code.lines:code' metric
-	Average        : 9.07142857143 [+0.0952380952381]
+	Average        : 9.0714285714 [+0.0952380952]
 	Minimum        : 0 [+0]
 	Maximum        : 148 [+4]
 	Total          : 381.0 [+4.0]

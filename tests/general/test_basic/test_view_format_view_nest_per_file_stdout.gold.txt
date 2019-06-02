@@ -2,6 +2,19 @@
 
     <data>
         <info id="1" path="./simple.cpp" />
+        <aggregated-data>
+            <std.code.complexity>
+                <cyclomatic avg="1.4285714286" count="7" max="3" min="0" nonzero="False" sup="0" total="10.0">
+                    <distribution-bars>
+                        <distribution-bar __diff__="1" count="1" metric="0" ratio="0.1428571429" />
+                        <distribution-bar __diff__="-1" count="3" metric="1" ratio="0.4285714286" />
+                        <distribution-bar __diff__="1" count="2" metric="2" ratio="0.2857142857" />
+                        <distribution-bar __diff__="0" count="1" metric="3" ratio="0.1428571429" />
+                    </distribution-bars>
+                    <__diff__ avg="-0.0714285714" count="1" max="0" min="-1" nonzero="0" sup="0" total="1.0" />
+                </cyclomatic>
+            </std.code.complexity>
+        </aggregated-data>
         <file-data>
             <regions>
                 <region>
@@ -94,22 +107,9 @@
                 </region>
             </regions>
         </file-data>
-        <subfiles>
-        </subfiles>
         <subdirs>
         </subdirs>
-        <aggregated-data>
-            <std.code.complexity>
-                <cyclomatic avg="1.42857142857" count="7" max="3" min="0" nonzero="False" sup="0" total="10.0">
-                    <__diff__ avg="-0.0714285714286" count="1" max="0" min="-1" nonzero="0" sup="0" total="1.0" />
-                    <distribution-bars>
-                        <distribution-bar __diff__="1" count="1" metric="0" ratio="0.142857142857" />
-                        <distribution-bar __diff__="-1" count="3" metric="1" ratio="0.428571428571" />
-                        <distribution-bar __diff__="1" count="2" metric="2" ratio="0.285714285714" />
-                        <distribution-bar __diff__="0" count="1" metric="3" ratio="0.142857142857" />
-                    </distribution-bars>
-                </cyclomatic>
-            </std.code.complexity>
-        </aggregated-data>
+        <subfiles>
+        </subfiles>
     </data>
 </view>

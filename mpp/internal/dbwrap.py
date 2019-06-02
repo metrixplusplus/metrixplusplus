@@ -186,7 +186,7 @@ class Database(object):
             for row in rows:
                 cur_head = db_loader.dirs
                 for dir_name in self.iterate_heads(row["path"]):
-                    if dir_name not in cur_head.keys():
+                    if dir_name not in list(cur_head.keys()):
                         cur_head[dir_name] = {}
                     cur_head = cur_head[dir_name]
                 cur_head[os.path.basename(row["path"])] = None
@@ -343,7 +343,7 @@ class Database(object):
         
         sql = "SELECT id FROM __tables__ WHERE (name = '" + table_name + "')"
         self.log(sql)
-        table_id = self.conn.execute(sql).next()['id']
+        table_id = next(self.conn.execute(sql))['id']
 
         sql = "SELECT * FROM __columns__ WHERE (table_id = '" + str(table_id) + "' AND name = '" + column_name + "' AND confirmed == 0)"
         self.log(sql)
@@ -363,7 +363,7 @@ class Database(object):
         self.conn.execute(sql)
         sql = "SELECT id FROM __tables__ WHERE (name = '" + table_name + "')"
         self.log(sql)
-        table_id = self.conn.execute(sql).next()['id']
+        table_id = next(self.conn.execute(sql))['id']
         sql = "INSERT INTO __columns__ (name, type, table_id, non_zero, confirmed) VALUES ('" + column_name + "', '" + column_type + "', '" + str(table_id) + "', '" + str(int(non_zero)) + "', 1)"
         self.log(sql)
         self.conn.execute(sql)
@@ -372,7 +372,7 @@ class Database(object):
     def iterate_columns(self, table_name):
         sql = "SELECT id FROM __tables__ WHERE (name = '" + table_name + "')"
         self.log(sql)
-        table_id = self.conn.execute(sql).next()['id']
+        table_id = next(self.conn.execute(sql))['id']
         sql = "SELECT * FROM __columns__ WHERE (table_id = '" + str(table_id) + "' AND confirmed = 1)"
         self.log(sql)
         result = self.conn.execute(sql).fetchall()
@@ -382,7 +382,7 @@ class Database(object):
     def check_column(self, table_name, column_name):
         sql = "SELECT id FROM __tables__ WHERE (name = '" + table_name + "')"
         self.log(sql)
-        table_id = self.conn.execute(sql).next()['id']
+        table_id = next(self.conn.execute(sql))['id']
         sql = "SELECT * FROM __columns__ WHERE (table_id = '" + str(table_id) + "' AND name = '" + column_name + "' AND confirmed = 1)"
         self.log(sql)
         result = self.conn.execute(sql).fetchall()
@@ -455,19 +455,19 @@ class Database(object):
         valid = True
         if path != "":
             for head in self.InternalPathUtils().iterate_heads(path):
-                if head not in cur_head.keys():
+                if head not in list(cur_head.keys()):
                     # non existing directory
                     valid = False
                 else:
                     cur_head = cur_head[head]
             basename = os.path.basename(path)
-            if basename not in cur_head.keys() or cur_head[basename] == None:
+            if basename not in list(cur_head.keys()) or cur_head[basename] == None:
                 # do not exist or points to the file
                 valid = False
             else:
                 cur_head = cur_head[basename]
         if valid == True:
-            for elem in cur_head.keys():
+            for elem in list(cur_head.keys()):
                 if include_subdirs == True and cur_head[elem] != None:
                     yield elem
                 if include_subfiles == True and cur_head[elem] == None:

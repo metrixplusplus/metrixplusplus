@@ -24,6 +24,6 @@ class Plugin(mpp.api.Plugin, mpp.api.IRunable):
                 exit_code += 1
                 continue
             for file_data in file_iterator:
-                print file_data.get_path()
+                print(file_data.get_path())
         return exit_code
 

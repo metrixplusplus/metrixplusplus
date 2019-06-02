@@ -79,14 +79,6 @@
 	std.general:proctime: 0.01
 	std.general:size: 697
 
-./simple.cpp:: info: Overall metrics for 'std.general:procerrors' metric
-	Average        : None
-	Minimum        : None
-	Maximum        : None
-	Total          : 0.0
-	Distribution   : 0 files in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of files
-
 ./simple.cpp:: info: Overall metrics for 'std.general:proctime' metric
 	Average        : 0.01
 	Minimum        : 0.01
@@ -95,6 +87,14 @@
 	Distribution   : 1 files in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of files
 	        0.0100 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+./simple.cpp:: info: Overall metrics for 'std.general:procerrors' metric
+	Average        : None
+	Minimum        : None
+	Maximum        : None
+	Total          : 0.0
+	Distribution   : 0 files in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of files
 
 ./simple.cpp:: info: Overall metrics for 'std.general:size' metric
 	Average        : 697.0

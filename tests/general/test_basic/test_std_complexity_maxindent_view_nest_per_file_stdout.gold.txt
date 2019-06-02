@@ -82,7 +82,7 @@
             	std.code.complexity:maxindent: 2
 
 ./simple.cpp:: info: Overall metrics for 'std.code.complexity:maxindent' metric
-	Average        : 1.83333333333
+	Average        : 1.8333333333
 	Minimum        : 1
 	Maximum        : 3
 	Total          : 11.0

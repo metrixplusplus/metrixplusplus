@@ -482,7 +482,7 @@
 	std.code.complexity:cyclomatic: 0
 
 ./operator_test.hpp:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 0.078431372549
+	Average        : 0.0784313725
 	Minimum        : 0
 	Maximum        : 2
 	Total          : 4.0

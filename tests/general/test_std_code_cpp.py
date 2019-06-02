@@ -20,7 +20,7 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('view', opts_list=['--format=xml'])
         self.assertExec(runner.run())
         
-        dirs_list = [os.path.join('.', each) for each in os.listdir(self.get_content_paths().cwd)]
+        dirs_list = [os.path.join('.', each) for each in sorted(os.listdir(self.get_content_paths().cwd))]
         runner = tests.common.ToolRunner('view', dirs_list=dirs_list, prefix='files')
         self.assertExec(runner.run())
 

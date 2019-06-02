@@ -1,5 +1,5 @@
 ./:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 0.652902698283 [+0.00362138411453]
+	Average        : 0.6529026983 [+0.0036213841]
 	Minimum        : 0 [+0]
 	Maximum        : 37 [+1]
 	Total          : 1597.0 [+16.0]
@@ -27,7 +27,7 @@
 	         36-37 : 0.000 : 1.000 :    1 [+0   ]	
 
 ./:: info: Overall metrics for 'std.code.lines:code' metric
-	Average        : 6.6310840708 [+0.0122487406209]
+	Average        : 6.6310840708 [+0.0122487406]
 	Minimum        : 0 [+0]
 	Maximum        : 220 [+6]
 	Total          : 23978.0 [+223.0]
@@ -51,8 +51,8 @@
 	         23-26 : 0.011 : 0.963 :   40 [+3   ]	|
 	         27-31 : 0.010 : 0.973 :   35 [-3   ]	|
 	         32-40 : 0.009 : 0.982 :   32 [+0   ]	|
-	         41-66 : 0.009 : 0.991 :   34 [+1   ]	|
-	        67-220 : 0.009 : 1.000 :   31 [+1   ]	|
+	         41-65 : 0.009 : 0.991 :   32 [+1   ]	|
+	        66-220 : 0.009 : 1.000 :   33 [+1   ]	|
 
 ./:: info: Directory content:
 	Directory      : interprocess

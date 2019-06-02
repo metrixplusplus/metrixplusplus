@@ -85,24 +85,6 @@
             	Line numbers   : 58-65
             	Modified       : None
 
-./simple.cpp:: info: Overall metrics for 'std.code.member:methods' metric
-	Average        : 2.0 (excluding zero metric values)
-	Minimum        : 1
-	Maximum        : 4
-	Total          : 6.0
-	Distribution   : 3 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 0.667 : 0.667 : 2	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             4 : 0.333 : 1.000 : 1	|||||||||||||||||||||||||||||||||
-
-./simple.cpp:: info: Overall metrics for 'std.code.member:globals' metric
-	Average        : None (excluding zero metric values)
-	Minimum        : None
-	Maximum        : None
-	Total          : 0.0
-	Distribution   : 0 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-
 ./simple.cpp:: info: Overall metrics for 'std.code.member:fields' metric
 	Average        : None (excluding zero metric values)
 	Minimum        : None
@@ -111,7 +93,7 @@
 	Distribution   : 0 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 
-./simple.cpp:: info: Overall metrics for 'std.code.member:interfaces' metric
+./simple.cpp:: info: Overall metrics for 'std.code.member:globals' metric
 	Average        : None (excluding zero metric values)
 	Minimum        : None
 	Maximum        : None
@@ -128,16 +110,15 @@
 	  Metric value : Ratio : R-sum : Number of regions
 	             1 : 1.000 : 1.000 : 3	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-./simple.cpp:: info: Overall metrics for 'std.code.member:namespaces' metric
-	Average        : 1.0 (excluding zero metric values)
-	Minimum        : 1
-	Maximum        : 1
-	Total          : 1.0
-	Distribution   : 1 regions in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-
 ./simple.cpp:: info: Overall metrics for 'std.code.member:structs' metric
+	Average        : None (excluding zero metric values)
+	Minimum        : None
+	Maximum        : None
+	Total          : 0.0
+	Distribution   : 0 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+
+./simple.cpp:: info: Overall metrics for 'std.code.member:interfaces' metric
 	Average        : None (excluding zero metric values)
 	Minimum        : None
 	Maximum        : None
@@ -153,5 +134,24 @@
 	Distribution   : 3 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             1 : 1.000 : 1.000 : 3	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+./simple.cpp:: info: Overall metrics for 'std.code.member:methods' metric
+	Average        : 2.0 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 4
+	Total          : 6.0
+	Distribution   : 3 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.667 : 0.667 : 2	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             4 : 0.333 : 1.000 : 1	|||||||||||||||||||||||||||||||||
+
+./simple.cpp:: info: Overall metrics for 'std.code.member:namespaces' metric
+	Average        : 1.0 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 1
+	Total          : 1.0
+	Distribution   : 1 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 

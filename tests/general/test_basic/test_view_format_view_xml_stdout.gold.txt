@@ -2,13 +2,6 @@
 
     <data>
         <info id="1" path="./" />
-        <file-data />
-        <subfiles>
-            <subfile>file_deleted_in_new_sources.cpp</subfile>
-            <subfile>simple.cpp</subfile>
-        </subfiles>
-        <subdirs>
-        </subdirs>
         <aggregated-data>
             <std.code.complexity>
                 <cyclomatic avg="1.375" count="8" max="3" min="1" nonzero="False" sup="0" total="11.0">
@@ -20,5 +13,12 @@
                 </cyclomatic>
             </std.code.complexity>
         </aggregated-data>
+        <file-data />
+        <subdirs>
+        </subdirs>
+        <subfiles>
+            <subfile>file_deleted_in_new_sources.cpp</subfile>
+            <subfile>simple.cpp</subfile>
+        </subfiles>
     </data>
 </view>

@@ -179,7 +179,7 @@
             	std.code.complexity:cyclomatic: 1
 
 ./File.cs:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 2.05263157895
+	Average        : 2.0526315789
 	Minimum        : 0
 	Maximum        : 6
 	Total          : 39.0
@@ -314,7 +314,7 @@
 	Distribution   : 8 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.875 : 0.875 : 7	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             1 : 0.125 : 1.000 : 1	|||||||||||||
+	             1 : 0.125 : 1.000 : 1	||||||||||||
 
 ./interface.cs:0: info: Metrics per '__global__' region
 	Region name    : __global__
@@ -448,7 +448,7 @@
             	std.code.complexity:cyclomatic: 0
 
 ./interface.cs:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 0.416666666667
+	Average        : 0.4166666667
 	Minimum        : 0
 	Maximum        : 4
 	Total          : 5.0
