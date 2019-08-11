@@ -10,5 +10,5 @@ import mpp.api
 class Plugin(mpp.api.Plugin):
     
     def initialize(self):
-        print "Hello world"
+        print("Hello world")
 

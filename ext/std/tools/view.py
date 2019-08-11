@@ -12,6 +12,8 @@ import mpp.api
 import mpp.utils
 import mpp.cout
 
+DIGIT_COUNT = 8
+
 class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
     
     MODE_NEW     = 0x01
@@ -61,7 +63,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
             paths = [""]
         else:
             paths = args
-        
+
         (result, exit_code) = export_to_str(self.out_format,
                                             paths,
                                             loader,
@@ -69,7 +71,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
                                             self.nest_regions,
                                             self.dist_columns,
                                             self.mode)
-        print result
+        print(result)
         return exit_code
 
 def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_columns, mode):
@@ -90,8 +92,8 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
         subfiles = []
         if aggregated_data != None:
             aggregated_data_tree = aggregated_data.get_data_tree()
-            subdirs = aggregated_data.get_subdirs()
-            subfiles = aggregated_data.get_subfiles()
+            subdirs = sorted(aggregated_data.get_subdirs())
+            subfiles = sorted(aggregated_data.get_subfiles())
         else:
             mpp.utils.report_bad_path(path)
             exit_code += 1
@@ -121,7 +123,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
         if out_format == 'txt':
             cout_txt(data, loader)
         elif out_format == 'xml':
-            result += mpp.utils.serialize_to_xml(data, root_name = "data") + "\n"
+            result += mpp.utils.serialize_to_xml(data, root_name = "data", digitCount = DIGIT_COUNT) + "\n"
         elif out_format == 'python':
             postfix = ""
             if ind < len(paths) - 1:
@@ -192,8 +194,8 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                 assert(self.in_processing_mode == True)
                 sup_data = orig_data.get_data('std.suppress', 'list')
                 data = orig_data.get_data_tree()
-                for namespace in data.keys():
-                    for field in data[namespace].keys():
+                for namespace in list(data.keys()):
+                    for field in list(data[namespace].keys()):
                         aggr_data = self.get_data(namespace, field)
                         metric_value = data[namespace][field]
                         if isinstance(metric_value, str):
@@ -206,7 +208,7 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                         aggr_data['count'] += 1
                         aggr_data['total'] += metric_value
                         # average is calculated later on get_data_tree
-                        if metric_value not in aggr_data['distribution-bars'].keys():
+                        if metric_value not in list(aggr_data['distribution-bars'].keys()):
                             aggr_data['distribution-bars'][metric_value] = 0
                         aggr_data['distribution-bars'][metric_value] += 1
                         if sup_data != None:
@@ -340,16 +342,16 @@ def append_diff(main_tree, prev_tree):
     assert(main_tree != None)
     assert(prev_tree != None)
     
-    for name in main_tree.keys():
-        if name not in prev_tree.keys():
+    for name in list(main_tree.keys()):
+        if name not in list(prev_tree.keys()):
             continue
-        for field in main_tree[name].keys():
-            if field not in prev_tree[name].keys():
+        for field in list(main_tree[name].keys()):
+            if field not in list(prev_tree[name].keys()):
                 continue
             if isinstance(main_tree[name][field], dict) and isinstance(prev_tree[name][field], dict):
                 diff = {}
-                for key in main_tree[name][field].keys():
-                    if key not in prev_tree[name][field].keys():
+                for key in list(main_tree[name][field].keys()):
+                    if key not in list(prev_tree[name][field].keys()):
                         continue
                     main_val = main_tree[name][field][key]
                     prev_val = prev_tree[name][field][key]
@@ -373,7 +375,7 @@ def append_diff_list(main_list, prev_list):
     for bar in main_list:
         merged_list[bar['metric']] = {'count': bar['count'], '__diff__':bar['count'], 'ratio': bar['ratio']}
     for bar in prev_list:
-        if bar['metric'] in merged_list.keys():
+        if bar['metric'] in list(merged_list.keys()):
             merged_list[bar['metric']]['__diff__'] = \
                 merged_list[bar['metric']]['count'] - bar['count']
         else:
@@ -389,8 +391,8 @@ def append_diff_list(main_list, prev_list):
 def append_suppressions(path, data, loader, mode):
     if mode == Plugin.MODE_ALL:
         # in other modes, suppressions are appended during data loading
-        for namespace in data.keys():
-            for field in data[namespace].keys():
+        for namespace in list(data.keys()):
+            for field in list(data[namespace].keys()):
                 selected_data = loader.load_selected_data('std.suppress',
                                            fields = ['list'],
                                            path=path,
@@ -409,8 +411,8 @@ def compress_dist(data, columns):
     if columns == 0:
         return data
     
-    for namespace in data.keys():
-        for field in data[namespace].keys():
+    for namespace in list(data.keys()):
+        for field in list(data[namespace].keys()):
             metric_data = data[namespace][field]
             distr = metric_data['distribution-bars']
             columns = float(columns) # to trigger floating calculations
@@ -422,8 +424,8 @@ def compress_dist(data, columns):
             remaining_count = metric_data['count']
             next_consume = None
             next_bar = None
-            max_count = -sys.maxint - 1
-            min_count = sys.maxint
+            max_count = -sys.maxsize - 1
+            min_count = sys.maxsize
             sum_ratio = 0
             for (ind, bar) in enumerate(distr):
                 if next_bar == None:
@@ -432,15 +434,15 @@ def compress_dist(data, columns):
                                 'ratio': bar['ratio'],
                                 'metric_s': bar['metric'],
                                 'metric_f': bar['metric']}
-                    if '__diff__' in bar.keys():
+                    if '__diff__' in list(bar.keys()):
                         next_bar['__diff__'] = bar['__diff__']
-                    next_consume = int(round(remaining_count/ (columns - len(new_dist))))
+                    next_consume = int(remaining_count/ (columns - len(new_dist)))
                 else:
                     # merge to existing bar
                     next_bar['count'] += bar['count']
                     next_bar['ratio'] += bar['ratio']
                     next_bar['metric_f'] = bar['metric']
-                    if '__diff__' in bar.keys():
+                    if '__diff__' in list(bar.keys()):
                         next_bar['__diff__'] += bar['__diff__']
                 
                 next_consume -= bar['count']
@@ -490,7 +492,7 @@ def compress_dist(data, columns):
                                     'ratio': bar['ratio'],
                                     'metric_s': next_end_limit,
                                     'metric_f': bar['metric']}
-                        if '__diff__' in bar.keys():
+                        if '__diff__' in list(bar.keys()):
                             next_bar['__diff__'] = bar['__diff__']
                         next_end_limit += step
                     else:
@@ -498,7 +500,7 @@ def compress_dist(data, columns):
                         next_bar['count'] += bar['count']
                         next_bar['ratio'] += bar['ratio']
                         next_bar['metric_f'] = bar['metric']
-                        if '__diff__' in bar.keys():
+                        if '__diff__' in list(bar.keys()):
                             next_bar['__diff__'] += bar['__diff__']
                     
                     if (next_bar['metric_f'] >= next_end_limit # consumed enough
@@ -530,15 +532,15 @@ def cout_txt_regions(path, regions, indent = 0):
             ('Line numbers', str(region['info']['line_begin']) + "-" + str(region['info']['line_end'])),
             ('Modified', str(region['info']['modified']))
         ]
-        for namespace in region['data'].keys():
+        for namespace in sorted(list(region['data'].keys())):
             diff_data = {}
-            if '__diff__' in region['data'][namespace].keys():
+            if '__diff__' in list(region['data'][namespace].keys()):
                 diff_data = region['data'][namespace]['__diff__']
-            for field in region['data'][namespace].keys():
+            for field in sorted(list(region['data'][namespace].keys())):
                 diff_str = ""
                 if field == '__diff__':
                     continue
-                if field in diff_data.keys():
+                if field in list(diff_data.keys()):
                     diff_str = " [" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
                 details.append((namespace + ":" + field, str(region['data'][namespace][field]) + diff_str))
         mpp.cout.notify(path,
@@ -547,25 +549,25 @@ def cout_txt_regions(path, regions, indent = 0):
                         "Metrics per '" + region['info']['name']+ "' region",
                         details,
                         indent=indent)
-        if 'subregions' in region.keys():
+        if 'subregions' in list(region.keys()):
             cout_txt_regions(path, region['subregions'], indent=indent+1)
 
 def cout_txt(data, loader):
     
     details = []
-    for key in data['file-data'].keys():
+    for key in list(data['file-data'].keys()):
         if key == 'regions':
             cout_txt_regions(data['info']['path'], data['file-data'][key])
         else:
             namespace = key
             diff_data = {}
-            if '__diff__' in data['file-data'][namespace].keys():
+            if '__diff__' in list(data['file-data'][namespace].keys()):
                 diff_data = data['file-data'][namespace]['__diff__']
-            for field in data['file-data'][namespace].keys():
+            for field in sorted(list(data['file-data'][namespace].keys())):
                 diff_str = ""
                 if field == '__diff__':
                     continue
-                if field in diff_data.keys():
+                if field in list(diff_data.keys()):
                     diff_str = " [" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
                 details.append((namespace + ":" + field, str(data['file-data'][namespace][field]) + diff_str))
     if len(details) > 0:
@@ -580,25 +582,32 @@ def cout_txt(data, loader):
                 'min': 'Minimum',
                 'max': 'Maximum',
     }
-    for namespace in data['aggregated-data'].keys():
-        for field in data['aggregated-data'][namespace].keys():
+    for namespace in sorted(list(data['aggregated-data'].keys())):
+        for field in sorted(list(data['aggregated-data'][namespace].keys())):
             details = []
             diff_data = {}
-            if '__diff__' in data['aggregated-data'][namespace][field].keys():
+            if '__diff__' in list(data['aggregated-data'][namespace][field].keys()):
                 diff_data = data['aggregated-data'][namespace][field]['__diff__']
             for attr in ['avg', 'min', 'max', 'total']:
                 diff_str = ""
-                if attr in diff_data.keys():
-                    diff_str = " [" + ("+" if diff_data[attr] >= 0 else "") + str(diff_data[attr]) + "]"
+                if attr in list(diff_data.keys()):
+                    if isinstance(diff_data[attr], float):
+                        diff_str = " [" + ("+" if diff_data[attr] >= 0 else "") + str(round(diff_data[attr], DIGIT_COUNT)) + "]"
+                    else:
+                        diff_str = " [" + ("+" if diff_data[attr] >= 0 else "") + str(diff_data[attr]) + "]"
                 if attr == 'avg' and data['aggregated-data'][namespace][field]['nonzero'] == True:
                     diff_str += " (excluding zero metric values)"
-                details.append((attr_map[attr], str(data['aggregated-data'][namespace][field][attr]) + diff_str))
+                if isinstance(data['aggregated-data'][namespace][field][attr], float):
+                    # round the data to reach same results on platforms with different precision
+                    details.append((attr_map[attr], str(round(data['aggregated-data'][namespace][field][attr], DIGIT_COUNT)) + diff_str))
+                else:
+                    details.append((attr_map[attr], str(data['aggregated-data'][namespace][field][attr]) + diff_str))
 
             measured = data['aggregated-data'][namespace][field]['count']
-            if 'count' in diff_data.keys():
+            if 'count' in list(diff_data.keys()):
                 diff_str = ' [{0:{1}}]'.format(diff_data['count'], '+' if diff_data['count'] >= 0 else '')
             sup_diff_str = ""
-            if 'sup' in diff_data.keys():
+            if 'sup' in list(diff_data.keys()):
                 sup_diff_str = ' [{0:{1}}]'.format(diff_data['sup'], '+' if diff_data['sup'] >= 0 else '')
             elem_name = 'regions'
             if loader.get_namespace(namespace).are_regions_supported() == False:
@@ -615,7 +624,7 @@ def cout_txt(data, loader):
             for bar in data['aggregated-data'][namespace][field]['distribution-bars']:
                 sum_ratio += bar['ratio']
                 diff_str = ""
-                if '__diff__' in bar.keys():
+                if '__diff__' in list(bar.keys()):
                     if bar['__diff__'] >= 0:
                         diff_str = ' [+{0:<{1}}]'.format(bar['__diff__'], count_str_len)
                     else:
@@ -630,16 +639,16 @@ def cout_txt(data, loader):
                 count_str = ((" " * (count_str_len - len(count_str))) + count_str + diff_str + "\t")
                 details.append((metric_str,
                                 "{0:.3f}".format(bar['ratio']) + " : " + "{0:.3f}".format(sum_ratio) +  " : " +
-                                count_str + ('|' * int(round(bar['ratio']*100)))))
+                                count_str + ('|' * int(bar['ratio']*100))))
             mpp.cout.notify(data['info']['path'],
                     '', # no line number
                     mpp.cout.SEVERITY_INFO,
                     "Overall metrics for '" + namespace + ":" + field + "' metric",
                     details)
     details = []
-    for each in data['subdirs']:
+    for each in sorted(data['subdirs']):
         details.append(('Directory', each))
-    for each in data['subfiles']:
+    for each in sorted(data['subfiles']):
         details.append(('File', each))
     if len(details) > 0: 
         mpp.cout.notify(data['info']['path'],

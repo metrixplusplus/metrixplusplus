@@ -1,14 +1,13 @@
-./:: info: Overall metrics for 'std.code.member:methods' metric
-	Average        : 1.6 (excluding zero metric values)
+./:: info: Overall metrics for 'std.code.member:classes' metric
+	Average        : 1.0 (excluding zero metric values)
 	Minimum        : 1
-	Maximum        : 4
-	Total          : 8.0
-	Distribution   : 5 regions in total (including 0 suppressed)
+	Maximum        : 1
+	Total          : 4.0
+	Distribution   : 4 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 0.800 : 0.800 : 4	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             4 : 0.200 : 1.000 : 1	||||||||||||||||||||
+	             1 : 1.000 : 1.000 : 4	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-./:: info: Overall metrics for 'std.code.member:globals' metric
+./:: info: Overall metrics for 'std.code.member:fields' metric
 	Average        : None (excluding zero metric values)
 	Minimum        : None
 	Maximum        : None
@@ -16,7 +15,7 @@
 	Distribution   : 0 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 
-./:: info: Overall metrics for 'std.code.member:fields' metric
+./:: info: Overall metrics for 'std.code.member:globals' metric
 	Average        : None (excluding zero metric values)
 	Minimum        : None
 	Maximum        : None
@@ -32,14 +31,15 @@
 	Distribution   : 0 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 
-./:: info: Overall metrics for 'std.code.member:classes' metric
-	Average        : 1.0 (excluding zero metric values)
+./:: info: Overall metrics for 'std.code.member:methods' metric
+	Average        : 1.6 (excluding zero metric values)
 	Minimum        : 1
-	Maximum        : 1
-	Total          : 4.0
-	Distribution   : 4 regions in total (including 0 suppressed)
+	Maximum        : 4
+	Total          : 8.0
+	Distribution   : 5 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 1.000 : 1.000 : 4	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.800 : 0.800 : 4	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             4 : 0.200 : 1.000 : 1	||||||||||||||||||||
 
 ./:: info: Overall metrics for 'std.code.member:namespaces' metric
 	Average        : 1.0 (excluding zero metric values)

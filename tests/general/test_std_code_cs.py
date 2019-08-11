@@ -20,7 +20,7 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('view', ['--nest-regions', '--format=xml'])
         self.assertExec(runner.run())
 
-        dirs_list = [os.path.join('.', each) for each in os.listdir(self.get_content_paths().cwd)]
+        dirs_list = [os.path.join('.', each) for each in sorted(os.listdir(self.get_content_paths().cwd))]
         runner = tests.common.ToolRunner('view',
                                          opts_list=['--nest-regions', '--format=txt'],
                                          dirs_list=dirs_list,

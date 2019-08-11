@@ -29,7 +29,7 @@ class Plugin(mpp.api.Plugin, mpp.api.Child):
                              " " + str(marker.get_offset_begin()) + " " + str(marker.get_offset_end()) +
                              " >>>" + text[marker.get_offset_begin():marker.get_offset_end()] + "<<<")
                 text_comb += text[marker.get_offset_begin():marker.get_offset_end()]
-        print "LENGTH:", len(text), len(text_comb)
+        print("LENGTH:", len(text), len(text_comb))
 
         text_comb = ""
         for marker in data.iterate_markers(region_id=1,
@@ -39,7 +39,7 @@ class Plugin(mpp.api.Plugin, mpp.api.Child):
                          " " + str(marker.get_offset_begin()) + " " + str(marker.get_offset_end()) +
                          " >>>" + text[marker.get_offset_begin():marker.get_offset_end()] + "<<<")
             text_comb += text[marker.get_offset_begin():marker.get_offset_end()]
-        print "LENGTH:", len(text), len(text_comb)
+        print("LENGTH:", len(text), len(text_comb))
 
         text_comb = ""
         for region in data.iterate_regions():
@@ -52,4 +52,4 @@ class Plugin(mpp.api.Plugin, mpp.api.Child):
                              " " + str(marker.get_offset_begin()) + " " + str(marker.get_offset_end()) +
                              " >>>" + text[marker.get_offset_begin():marker.get_offset_end()] + "<<<")
                 text_comb += text[marker.get_offset_begin():marker.get_offset_end()]
-        print "LENGTH:", len(text), len(text_comb)
+        print("LENGTH:", len(text), len(text_comb))

@@ -25,10 +25,16 @@ Usage:
 '''
 
 class Py2XML():
+    
+    digitCount = 0
 
-    def __init__( self ):
+    def __init__( self, digitCount = None ):
 
         self.data = "" # where we store the processed XML string
+        if digitCount != None:
+            self.digitCount = digitCount
+        else:
+            self.digitCount = 8
 
     def parse( self, pythonObj, objName=None, indent = 0 ):
         '''
@@ -60,7 +66,7 @@ class Py2XML():
         attrStr = ""    # attribute string of this level
         childStr = ""   # XML string of this level's children
 
-        for k, v in pyDictObj.items():
+        for k, v in sorted(list(pyDictObj.items())):
 
             if isinstance( v, dict ):
                 # child tags, with attributes
@@ -79,7 +85,10 @@ class Py2XML():
 
         # create XML string for attributes
         for k, v in sorted(attributes.items()):
-            attrStr += " %s=\"%s\"" % ( k, v )
+            if isinstance(v, float):
+                attrStr += " %s=\"%s\"" % ( k, round(v, self.digitCount) )
+            else:
+                attrStr += " %s=\"%s\"" % ( k, v )
 
         # let's assemble our tag string
         if childStr == "":

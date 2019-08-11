@@ -1,29 +1,29 @@
 <view>
 
     <data>
-        <info id="1" path="./" />
-        <file-data />
-        <subfiles>
-            <subfile>interface.cs</subfile>
-            <subfile>File.cs</subfile>
-            <subfile>Generics.cs</subfile>
-        </subfiles>
-        <subdirs>
-        </subdirs>
         <aggregated-data>
             <std.code.complexity>
-                <cyclomatic avg="1.15384615385" count="39" max="6" min="0" nonzero="False" sup="0" total="45.0">
+                <cyclomatic avg="1.15384615" count="39" max="6" min="0" nonzero="False" sup="0" total="45.0">
                     <distribution-bars>
-                        <distribution-bar count="23" metric="0" ratio="0.589743589744" />
-                        <distribution-bar count="7" metric="1" ratio="0.179487179487" />
-                        <distribution-bar count="1" metric="2" ratio="0.025641025641" />
-                        <distribution-bar count="1" metric="3" ratio="0.025641025641" />
-                        <distribution-bar count="3" metric="4" ratio="0.0769230769231" />
-                        <distribution-bar count="3" metric="5" ratio="0.0769230769231" />
-                        <distribution-bar count="1" metric="6" ratio="0.025641025641" />
+                        <distribution-bar count="23" metric="0" ratio="0.58974359" />
+                        <distribution-bar count="7" metric="1" ratio="0.17948718" />
+                        <distribution-bar count="1" metric="2" ratio="0.02564103" />
+                        <distribution-bar count="1" metric="3" ratio="0.02564103" />
+                        <distribution-bar count="3" metric="4" ratio="0.07692308" />
+                        <distribution-bar count="3" metric="5" ratio="0.07692308" />
+                        <distribution-bar count="1" metric="6" ratio="0.02564103" />
                     </distribution-bars>
                 </cyclomatic>
             </std.code.complexity>
         </aggregated-data>
+        <file-data />
+        <info id="1" path="./" />
+        <subdirs>
+        </subdirs>
+        <subfiles>
+            <subfile>File.cs</subfile>
+            <subfile>Generics.cs</subfile>
+            <subfile>interface.cs</subfile>
+        </subfiles>
     </data>
 </view>

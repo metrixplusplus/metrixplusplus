@@ -77,18 +77,9 @@
 
 ./simple.cpp:0: info: Metrics per file
 	std.code.filelines:code: 53
-	std.code.filelines:total: 58
-	std.code.filelines:preprocessor: 1
 	std.code.filelines:comments: 5
-
-./simple.cpp:: info: Overall metrics for 'std.code.filelines:total' metric
-	Average        : 58.0
-	Minimum        : 58
-	Maximum        : 58
-	Total          : 58.0
-	Distribution   : 1 files in total (including 0 suppressed)
-	  Metric value : Ratio : R-sum : Number of files
-	            58 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	std.code.filelines:preprocessor: 1
+	std.code.filelines:total: 58
 
 ./simple.cpp:: info: Overall metrics for 'std.code.filelines:code' metric
 	Average        : 53.0
@@ -99,6 +90,15 @@
 	  Metric value : Ratio : R-sum : Number of files
 	            53 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
+./simple.cpp:: info: Overall metrics for 'std.code.filelines:comments' metric
+	Average        : 5.0
+	Minimum        : 5
+	Maximum        : 5
+	Total          : 5.0
+	Distribution   : 1 files in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of files
+	             5 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
 ./simple.cpp:: info: Overall metrics for 'std.code.filelines:preprocessor' metric
 	Average        : 1.0
 	Minimum        : 1
@@ -108,13 +108,13 @@
 	  Metric value : Ratio : R-sum : Number of files
 	             1 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-./simple.cpp:: info: Overall metrics for 'std.code.filelines:comments' metric
-	Average        : 5.0
-	Minimum        : 5
-	Maximum        : 5
-	Total          : 5.0
+./simple.cpp:: info: Overall metrics for 'std.code.filelines:total' metric
+	Average        : 58.0
+	Minimum        : 58
+	Maximum        : 58
+	Total          : 58.0
 	Distribution   : 1 files in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of files
-	             5 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	            58 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 

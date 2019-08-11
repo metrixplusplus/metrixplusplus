@@ -26,4 +26,4 @@ def notify(path, cursor, level, message, details = [], indent = 0):
         notification += (("    " * indent) + "\t" +
                          str(each[0]) + (" " * (DETAILS_OFFSET - len(each[0]))) + ": " + str(each[1]) + "\n")
         
-    print notification
+    print(notification)

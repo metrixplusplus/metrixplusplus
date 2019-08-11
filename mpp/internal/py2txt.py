@@ -58,7 +58,7 @@ class Py2TXT():
         attrStr = ""    # attribute string of this level
         childStr = ""   # TXT string of this level's children
 
-        for k, v in pyDictObj.items():
+        for k, v in list(pyDictObj.items()):
 
             if isinstance( v, dict ):
                 # child tags, with attributes
@@ -77,7 +77,7 @@ class Py2TXT():
 
         # create TXT string for attributes
         attrStr += ""
-        for k, v in attributes.items():
+        for k, v in list(attributes.items()):
             attrStr += "\n" + (INDENT_SPACE_SYMBOL * (indent + 1)) + "%s=\"%s\"" % ( k, v )
 
         # let's assemble our tag string

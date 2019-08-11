@@ -29,7 +29,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
         tests_dir = os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'tests')
         process_data= ["python", "-m", "unittest", "discover", "-v", "-s"]
         if len(args) == 0 or tests_dir == os.path.abspath(args[0]):
-            for fname in os.listdir(tests_dir):
+            for fname in sorted(os.listdir(tests_dir)):
                 full_path = os.path.join(tests_dir, fname)
                 if os.path.isdir(full_path) and fname != "sources":
                     exit_code += subprocess.call(itertools.chain(process_data, [full_path]),

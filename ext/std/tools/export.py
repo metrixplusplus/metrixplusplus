@@ -27,15 +27,15 @@ class Plugin(mpp.api.Plugin, mpp.api.IRunable):
     def _export_to_stdout(self, paths):
         class StdoutWriter(object):
             def write(self, *args, **kwargs):
-                print args[0].strip()
+                print(args[0].strip())
         
         exit_code = 0
     
         columns = []
         columnNames = ["file", "region", "type", "modified", "line start", "line end"]
-        for name in self.loader.iterate_namespace_names():
+        for name in sorted(self.loader.iterate_namespace_names()):
             namespace = self.loader.get_namespace(name)
-            for field in namespace.iterate_field_names():
+            for field in sorted(namespace.iterate_field_names()):
                 columns.append((name, field))
                 columnNames.append(name + ":" + field)
     

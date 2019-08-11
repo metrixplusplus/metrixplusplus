@@ -23,5 +23,5 @@ class Plugin(mpp.api.Plugin,
     def initialize(self):
         # use configuration option here
         if self.is_active_numbers == True:
-            print "Hello world"
+            print("Hello world")
 

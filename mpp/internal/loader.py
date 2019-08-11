@@ -9,7 +9,11 @@ import mpp.api
 
 import os
 import sys
-import ConfigParser
+try:
+    from configparser import ConfigParser
+except:
+    from ConfigParser import ConfigParser
+  
 import re
 import optparse
 
@@ -66,13 +70,13 @@ class Loader(object):
                 return active_plugins
 
             pattern = re.compile(r'.*[.]ini$', flags=re.IGNORECASE)
-            dirList = os.listdir(directory)
+            dirList = sorted(os.listdir(directory))
             for fname in dirList:
                 fname = os.path.join(directory, fname)
                 if os.path.isdir(fname):
                     active_plugins += load_recursively(inicontainer, fname)
                 elif re.match(pattern, fname):
-                    config = ConfigParser.ConfigParser()
+                    config = ConfigParser()
                     config.read(fname)
                     item = {'package': config.get('Plugin', 'package'),
                             'module': config.get('Plugin', 'module'),
@@ -96,7 +100,7 @@ class Loader(object):
             return active_plugins
                         
         def list_dependants_recursively(inicontainer, required_plugin_name):
-            assert required_plugin_name in inicontainer.hash.keys(), \
+            assert required_plugin_name in list(inicontainer.hash.keys()), \
                 "depends section requires unknown plugin: " + required_plugin_name
             item = inicontainer.hash[required_plugin_name]
             if item['depends'] in ('None', 'none', 'False', 'false'):
@@ -119,6 +123,8 @@ class Loader(object):
         required_plugins = []
         for each in ([std_ext_priority_dir, std_ext_dir] + directories):
             required_plugins += load_recursively(inicontainer, each)
+        
+        required_plugins.sort();    # sort the plugin list to get similar results independant of the os
             
         # upgrade the list of required plugins
         required_and_dependant_plugins = []
@@ -132,7 +138,7 @@ class Loader(object):
         # load
         for plugin_name in required_and_dependant_plugins:
             item = inicontainer.hash[plugin_name]
-            plugin = __import__(item['package'], globals(), locals(), [item['module']], -1)
+            plugin = __import__(item['package'], globals(), locals(), [str(item['module'])])
             module_attr = plugin.__getattribute__(item['module'])
             class_attr = module_attr.__getattribute__(item['class'])
             item['instance'] = class_attr.__new__(class_attr)

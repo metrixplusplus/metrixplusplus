@@ -14,7 +14,7 @@ class Plugin(mpp.api.BasePlugin, mpp.api.IConfigurable):
     def declare_configuration(self, parser, default_value='INFO'):
         allowed_values = ['DEBUG','INFO','WARNING','ERROR']
         default_value_cur = default_value
-        if os.environ.has_key('METRIXPLUSPLUS_LOG_LEVEL') and os.environ['METRIXPLUSPLUS_LOG_LEVEL'] in allowed_values:
+        if '__import__' in os.environ and os.environ['METRIXPLUSPLUS_LOG_LEVEL'] in allowed_values:
             default_value_cur = os.environ['METRIXPLUSPLUS_LOG_LEVEL']
         parser.add_option("--log-level", "--ll", default=default_value_cur, choices=allowed_values,
                          help="Defines log level. Possible values are 'DEBUG','INFO','WARNING' or 'ERROR'. "
