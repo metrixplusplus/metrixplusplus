@@ -7,6 +7,7 @@
 
 import logging
 import re
+import pytablewriter
 
 import mpp.api
 import mpp.utils
@@ -25,7 +26,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
         self.parser = parser
         parser.add_option("--output-dir", "--od", default='./metrixpp/',
                            help="Set the output folder. [default: %default].")
-        parser.add_option("--format", "--ft", default='txt', choices=['txt', 'md', 'html', 'rst'],
+        parser.add_option("--format", "--ft", default='txt', choices=['txt', 'md', 'html', 'rst', 'latex'],
                           help="Format of the output data. "
                           "Possible values are 'txt', 'md', 'html' or 'rst' [default: %default]")
         parser.add_option("--disable-suppressions", "--ds", action="store_true", default=False,
@@ -228,13 +229,11 @@ def main(plugin, args):
         file = {"path" : path,
                 "file_id" : file_data.file_id,
                 "regions" : [],
-                "data" : aggregated_data}
+                "data" : aggregated_data.data}
 
         data["files"].append(file)
 
-        dataBlubb = loader.load_file_data(path)
-
-        for reg in dataBlubb.iterate_regions():
+        for reg in file_data.iterate_regions():
             region = {"name" : reg.name,
                       "region_id" : reg.region_id,
                       "line_begin" : reg.line_begin,
@@ -310,19 +309,55 @@ def main(plugin, args):
                 warns_count += 1
                 exit_code += 1
 
+    writer = pytablewriter.SpaceAlignedTableWriter()
+    writer.headers = ["file"] + data["fileMetrixList"]
+
+    matrix = [];
+
     for file in data["files"]:
-        print(file["path"])
+        line = []
+        line.append(file["path"])
+        for metric in data["fileMetrixList"]:
+            if metric in file["data"]:
+                for value in file["data"][metric].values():
+                    values = []
+                    values.append(value["min"])
+                    values.append(value["max"])
+                    values.append(value["avg"])
+                    values.append(value["total"])
+                    values.append(value["count"])
+                    line.append(values)
+                    break
+            else:
+                line.append("---")
+        matrix.append(line)
+
+        writer.table_name = file["path"]
+        writer.value_matrix = matrix
+        writer.write_table()
+
+    writer = pytablewriter.SpaceAlignedTableWriter()
+    writer.headers = ["line", "name"] + data["regionMetrixList"]
+
+    matrix = [];
+
+    for file in data["files"]:
         for region in file["regions"]:
-            out = str(region["line_begin"]) + ":\t"
-            out += region["name"] + "\t"
+            line =  []
+            line.append(str(region["line_begin"]))
+            line.append(region["name"])
             for metric in data["regionMetrixList"]:
                 if metric in region["data"]:
                     for value in region["data"][metric].values():
-                        out += str(value)
+                        line.append(str(value))
                         break
+                else:
+                    line.append("---")
+            matrix.append(line)
 
-
-            print(out)
+        writer.table_name = file["path"]
+        writer.value_matrix = matrix
+        writer.write_table()
 
     return exit_code
 
