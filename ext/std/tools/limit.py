@@ -123,10 +123,17 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
 
     def initialize(self):
         super(Plugin, self).initialize()
-        db_loader = self.get_plugin('mpp.dbf').get_loader()
-        self._verify_namespaces(db_loader.iterate_namespace_names())
-        for each in db_loader.iterate_namespace_names():
-            self._verify_fields(each, db_loader.get_namespace(each).iterate_field_names())
+        loader_prev = self.get_plugin('mpp.dbf').get_loader_prev()
+        loader = self.get_plugin('mpp.dbf').get_loader()
+
+        self._verify_namespaces(loader.iterate_namespace_names())
+        for each in loader.iterate_namespace_names():
+            self._verify_fields(each, loader.get_namespace(each).iterate_field_names())
+
+        # Try to optimise iterative change scans
+        self.modified_file_ids = None
+        if self.mode != self.MODE_ALL:
+            self.modified_file_ids = self._get_list_of_modified_files(loader, loader_prev)
     
     def _verify_namespaces(self, valid_namespaces):
         valid = []
@@ -146,6 +153,43 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
                 if each.field not in valid:
                     self.parser.error("option --{0}-limit: metric '{1}:{2}' is not available in the database file.".
                                       format(each.type, each.namespace, each.field))
+                            
+    def _get_list_of_modified_files(self, loader, loader_prev):
+        logging.info("Identifying changed files...")
+        
+        old_files_map = {}
+        for each in loader_prev.iterate_file_data():
+            old_files_map[each.get_path()] = each.get_checksum()
+        if len(old_files_map) == 0:
+            return None
+        
+        modified_file_ids = []
+        for each in loader.iterate_file_data():
+            if len(modified_file_ids) > 1000: # If more than 1000 files changed, skip optimisation
+                return None
+            if (each.get_path() not in list(old_files_map.keys())) or old_files_map[each.get_path()] != each.get_checksum():
+                modified_file_ids.append(str(each.get_id()))
+
+        old_files_map = None
+                
+        if len(modified_file_ids) != 0:
+            modified_file_ids = " , ".join(modified_file_ids)
+            modified_file_ids = "(" + modified_file_ids + ")"
+            return modified_file_ids
+        
+        return None
+
+    def _is_metric_suppressed(self, metric_namespace, metric_field, loader, select_data):
+        data = loader.load_file_data(select_data.get_path())
+        if select_data.get_region() != None:
+            data = data.get_region(select_data.get_region().get_id())
+            sup_data = data.get_data('std.suppress', 'list')
+        else:
+            sup_data = data.get_data('std.suppress.file', 'list')
+        if sup_data != None and sup_data.find('[' + metric_namespace + ':' + metric_field + ']') != -1:
+            return True
+        return False
+
                     
     def iterate_limits(self):
         for each in self.limits:
@@ -166,153 +210,148 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
                 return True
         return False
 
-    def run(self, args):
-        return main(self, args)
+    def get_warnings(self, path, limit):
 
-def main(plugin, args):
-    
-    exit_code = 0
-
-    loader_prev = plugin.get_plugin('mpp.dbf').get_loader_prev()
-    loader = plugin.get_plugin('mpp.dbf').get_loader()
-    
-    paths = None
-    if len(args) == 0:
-        paths = [""]
-    else:
-        paths = args
-
-    # Try to optimise iterative change scans
-    modified_file_ids = None
-    if plugin.mode != plugin.MODE_ALL:
-        modified_file_ids = get_list_of_modified_files(loader, loader_prev)
+        class Warning (object):
         
-    for path in paths:
-        path = mpp.utils.preprocess_path(path)
+            def __init__(self, path, cursor, namespace, field, region_name,
+                            stat_level, trend_value, stat_limit,
+                            is_modified, is_suppressed):
+                self.path = path
+                self.cursor = cursor
+                self.namespace = namespace
+                self.field = field
+                self.region_name = region_name
+                self.stat_level = stat_level
+                self.trend_value = trend_value
+                self.stat_limit = stat_limit
+                self.is_modified = is_modified
+                self.is_suppressed = is_suppressed
+
+        loader_prev = self.get_plugin('mpp.dbf').get_loader_prev()
+        loader = self.get_plugin('mpp.dbf').get_loader()
+
+        warnings = []
+
+        filters = [limit.filter]
+        if self.modified_file_ids != None:
+            filters.append(('file_id', 'IN', self.modified_file_ids))
+        sort_by = None
+        limit_by = None
+        limit_warnings = None
+        if self.hotspots != None:
+            sort_by = limit.field
+            if limit.type == "max":
+                sort_by = "-" + sort_by
+            if self.mode == self.MODE_ALL:
+                # if it is not ALL mode, the tool counts number of printed warnings below
+                limit_by = self.hotspots
+            limit_warnings = self.hotspots
+        selected_data = loader.load_selected_data(limit.namespace,
+                                                fields = [limit.field],
+                                                path=path,
+                                                filters = filters,
+                                                sort_by=sort_by,
+                                                limit_by=limit_by)
+        if selected_data == None:
+            mpp.utils.report_bad_path(path)
+            return None
         
-        for limit in plugin.iterate_limits():
-            warns_count = 0
-            logging.info("Applying limit: " + str(limit))
-            filters = [limit.filter]
-            if modified_file_ids != None:
-                filters.append(('file_id', 'IN', modified_file_ids))
-            sort_by = None
-            limit_by = None
-            limit_warnings = None
-            if plugin.hotspots != None:
-                sort_by = limit.field
-                if limit.type == "max":
-                    sort_by = "-" + sort_by
-                if plugin.mode == plugin.MODE_ALL:
-                    # if it is not ALL mode, the tool counts number of printed warnings below
-                    limit_by = plugin.hotspots
-                limit_warnings = plugin.hotspots
-            selected_data = loader.load_selected_data(limit.namespace,
-                                                   fields = [limit.field],
-                                                   path=path,
-                                                   filters = filters,
-                                                   sort_by=sort_by,
-                                                   limit_by=limit_by)
-            if selected_data == None:
-                mpp.utils.report_bad_path(path)
-                exit_code += 1
+        for select_data in selected_data:
+            if limit_warnings != None and limit_warnings <= 0:
+                break
+            
+            is_modified = None
+            diff = None
+            file_data = loader.load_file_data(select_data.get_path())
+            file_data_prev = loader_prev.load_file_data(select_data.get_path())
+            if file_data_prev != None:
+                if file_data.get_checksum() == file_data_prev.get_checksum():
+                    diff = 0
+                    is_modified = False
+                else:
+                    matcher = mpp.utils.FileRegionsMatcher(file_data, file_data_prev)
+                    prev_id = matcher.get_prev_id(select_data.get_region().get_id())
+                    if matcher.is_matched(select_data.get_region().get_id()):
+                        if matcher.is_modified(select_data.get_region().get_id()):
+                            is_modified = True
+                        else:
+                            is_modified = False
+                        diff = mpp.api.DiffData(select_data,
+                                                        file_data_prev.get_region(prev_id)).get_data(limit.namespace, limit.field)
+
+            if (self.is_mode_matched(limit.limit,
+                                            select_data.get_data(limit.namespace, limit.field),
+                                            diff,
+                                            is_modified) == False):
                 continue
             
-            for select_data in selected_data:
-                if limit_warnings != None and limit_warnings <= 0:
-                    break
-                
-                is_modified = None
-                diff = None
-                file_data = loader.load_file_data(select_data.get_path())
-                file_data_prev = loader_prev.load_file_data(select_data.get_path())
-                if file_data_prev != None:
-                    if file_data.get_checksum() == file_data_prev.get_checksum():
-                        diff = 0
-                        is_modified = False
-                    else:
-                        matcher = mpp.utils.FileRegionsMatcher(file_data, file_data_prev)
-                        prev_id = matcher.get_prev_id(select_data.get_region().get_id())
-                        if matcher.is_matched(select_data.get_region().get_id()):
-                            if matcher.is_modified(select_data.get_region().get_id()):
-                                is_modified = True
-                            else:
-                                is_modified = False
-                            diff = mpp.api.DiffData(select_data,
-                                                           file_data_prev.get_region(prev_id)).get_data(limit.namespace, limit.field)
-
-                if (plugin.is_mode_matched(limit.limit,
-                                                select_data.get_data(limit.namespace, limit.field),
-                                                diff,
-                                                is_modified) == False):
-                    continue
-                
-                is_sup = is_metric_suppressed(limit.namespace, limit.field, loader, select_data)
-                if is_sup == True and plugin.no_suppress == False:
-                    continue    
-                
-                region_cursor = 0
-                region_name = None
-                if select_data.get_region() != None:
-                    if select_data.get_region().get_type() & limit.region_types == 0:
-                        continue
-                    region_cursor = select_data.get_region().cursor
-                    region_name = select_data.get_region().name
-                warns_count += 1
-                exit_code += 1
-                report_limit_exceeded(select_data.get_path(),
-                                  region_cursor,
-                                  limit.namespace,
-                                  limit.field,
-                                  region_name,
-                                  select_data.get_data(limit.namespace, limit.field),
-                                  diff,
-                                  limit.limit,
-                                  is_modified,
-                                  is_sup)
-                if limit_warnings != None:
-                    limit_warnings -= 1
-                    
-            mpp.cout.notify(path, None, mpp.cout.SEVERITY_INFO, "{0} regions exceeded the limit {1}".format(warns_count, str(limit)))
-
-    return exit_code
-
-
-def get_list_of_modified_files(loader, loader_prev):
-    logging.info("Identifying changed files...")
-    
-    old_files_map = {}
-    for each in loader_prev.iterate_file_data():
-        old_files_map[each.get_path()] = each.get_checksum()
-    if len(old_files_map) == 0:
-        return None
-    
-    modified_file_ids = []
-    for each in loader.iterate_file_data():
-        if len(modified_file_ids) > 1000: # If more than 1000 files changed, skip optimisation
-            return None
-        if (each.get_path() not in list(old_files_map.keys())) or old_files_map[each.get_path()] != each.get_checksum():
-            modified_file_ids.append(str(each.get_id()))
-
-    old_files_map = None
+            is_sup = self._is_metric_suppressed(limit.namespace, limit.field, loader, select_data)
+            if is_sup == True and self.no_suppress == False:
+                continue    
             
-    if len(modified_file_ids) != 0:
-        modified_file_ids = " , ".join(modified_file_ids)
-        modified_file_ids = "(" + modified_file_ids + ")"
-        return modified_file_ids
-    
-    return None
+            region_cursor = 0
+            region_name = None
+            if select_data.get_region() != None:
+                if select_data.get_region().get_type() & limit.region_types == 0:
+                    continue
+                region_cursor = select_data.get_region().cursor
+                region_name = select_data.get_region().name
+            warnings.append(Warning(select_data.get_path(),
+                                region_cursor,
+                                limit.namespace,
+                                limit.field,
+                                region_name,
+                                select_data.get_data(limit.namespace, limit.field),
+                                diff,
+                                limit.limit,
+                                is_modified,
+                                is_sup))
+            if limit_warnings != None:
+                    limit_warnings -= 1
+        
+        return warnings
 
-def is_metric_suppressed(metric_namespace, metric_field, loader, select_data):
-    data = loader.load_file_data(select_data.get_path())
-    if select_data.get_region() != None:
-        data = data.get_region(select_data.get_region().get_id())
-        sup_data = data.get_data('std.suppress', 'list')
-    else:
-        sup_data = data.get_data('std.suppress.file', 'list')
-    if sup_data != None and sup_data.find('[' + metric_namespace + ':' + metric_field + ']') != -1:
-        return True
-    return False
+    def print_warnings(self, args):
+        exit_code = 0
+        warnings = []
+
+        paths = None
+        if len(args) == 0:
+            paths = [""]
+        else:
+            paths = args
+            
+        for path in paths:
+            path = mpp.utils.preprocess_path(path)
+            
+            for limit in self.iterate_limits():
+                warns_count = 0
+                logging.info("Applying limit: " + str(limit))
+
+                warnings = self.get_warnings(path, limit)
+                if warnings == None:
+                    exit_code += 1
+                else:
+                    for warning in warnings:
+                        report_limit_exceeded(warning.path,
+                                            warning.cursor,
+                                            warning.namespace,
+                                            warning.field,
+                                            warning.region_name,
+                                            warning.stat_level,
+                                            warning.trend_value,
+                                            warning.stat_limit,
+                                            warning.is_modified,
+                                            warning.is_suppressed)
+                    exit_code += len(warnings)
+
+                mpp.cout.notify(path, None, mpp.cout.SEVERITY_INFO, "{0} regions exceeded the limit {1}".format(len(warnings), str(limit)))
+
+        return exit_code
+
+    def run(self, args):
+        return self.print_warnings(args)
 
 def report_limit_exceeded(path, cursor, namespace, field, region_name,
                           stat_level, trend_value, stat_limit,
@@ -330,6 +369,3 @@ def report_limit_exceeded(path, cursor, namespace, field, region_name,
                ("Suppressed", is_suppressed)]
     mpp.cout.notify(path, cursor, mpp.cout.SEVERITY_WARNING, message, details)
 
-    
-    
-  
