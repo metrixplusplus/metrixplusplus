@@ -97,12 +97,19 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
         self.exclude_files.append(file_path)
 
     def is_file_excluded(self, file_name):
-        for each in self.include_rules:
-            if re.match(each, os.path.basename(file_name)) == None:
+        # only apply the include rules to files - skip directories
+        if os.path.isfile(file_name):
+            for each in self.include_rules:
+                if re.match(each, os.path.basename(file_name)) != None:
+                    break;
+            # file is excluded if no include rule matches
+            else:
                 return True
+        # check exclude rules for both, files and directories
         for each in self.exclude_rules:
             if re.match(each, os.path.basename(file_name)) != None:
                 return True
+        # finally check if a file is excluded directly
         for each in self.exclude_files:
             if os.path.basename(each) == os.path.basename(file_name):
                 if os.stat(each) == os.stat(file_name):
@@ -180,7 +187,3 @@ class DirectoryReader():
             total_errors = run_per_file(plugin, os.path.basename(directory), directory)
         total_errors = total_errors # used, warnings are per file if not zero
         return 0 # ignore errors, collection is successful anyway
-    
-
-
-    
