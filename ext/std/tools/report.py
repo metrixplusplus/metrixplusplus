@@ -26,9 +26,9 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
         self.parser = parser
         parser.add_option("--output-dir", "--od", default='./metrixpp/',
                            help="Set the output folder. [default: %default].")
-        parser.add_option("--format", "--ft", default='txt', choices=['txt', 'md', 'html', 'rst', 'latex'],
+        parser.add_option("--format", "--ft", default='txt', choices=['txt', 'md', 'html', 'rst', 'latex', 'doxygen'],
                           help="Format of the output data. "
-                          "Possible values are 'txt', 'md', 'html' or 'rst' [default: %default]")
+                          "Possible values are 'txt', 'md', 'html', 'rst', 'latex' or 'doxygen' [default: %default]")
         parser.add_option("--disable-suppressions", "--ds", action="store_true", default=False,
                           help = "If not set (none), all suppressions are ignored"
                                  " and associated warnings are printed. [default: %default]")
@@ -267,37 +267,37 @@ def main(plugin, args):
 
                 is_modified = None
                 diff = None
-                file_data = loader.load_file_data(select_data.get_path())
-                file_data_prev = loader_prev.load_file_data(select_data.get_path())
+                file_data = loader.load_file_data(selected_data.get_path())
+                file_data_prev = loader_prev.load_file_data(selected_data.get_path())
                 if file_data_prev != None:
                     if file_data.get_checksum() == file_data_prev.get_checksum():
                         diff = 0
                         is_modified = False
                     else:
                         matcher = mpp.utils.FileRegionsMatcher(file_data, file_data_prev)
-                        prev_id = matcher.get_prev_id(select_data.get_region().get_id())
-                        if matcher.is_matched(select_data.get_region().get_id()):
-                            if matcher.is_modified(select_data.get_region().get_id()):
+                        prev_id = matcher.get_prev_id(selected_data.get_region().get_id())
+                        if matcher.is_matched(selected_data.get_region().get_id()):
+                            if matcher.is_modified(selected_data.get_region().get_id()):
                                 is_modified = True
                             else:
                                 is_modified = False
-                            diff = mpp.api.DiffData(select_data,
+                            diff = mpp.api.DiffData(selected_data,
                                                     file_data_prev.get_region(prev_id)).get_data(limit.namespace,
                                                                                                  limit.field)
 
                 if (plugin.is_mode_matched(limit.limit,
-                                           select_data.get_data(limit.namespace, limit.field),
+                                           selected_data.get_data(limit.namespace, limit.field),
                                            diff,
                                            is_modified) == False):
                     continue
 
-                is_sup = is_metric_suppressed(limit.namespace, limit.field, loader, select_data)
+                is_sup = is_metric_suppressed(limit.namespace, limit.field, loader, selected_data)
 
                 #  add a warning flag to the metric
                 for file in data["files"]:
-                    if file["path"] == select_data.get_path():
+                    if file["path"] == selected_data.get_path():
                         for region in file["regions"]:
-                            if region["region_id"] == select_data.region_id:
+                            if region["region_id"] == selected_data.region_id:
                                 for metric in region["data"]:
                                     if metric == limit.namespace:
                                         region["data"][metric]["warning"] = True
