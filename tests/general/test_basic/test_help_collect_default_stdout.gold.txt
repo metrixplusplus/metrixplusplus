@@ -134,11 +134,12 @@ Options:
                         If the option is set (True), the tool collects file
                         size metric (in bytes) [default: False]
   --include-files=INCLUDE_FILES, --if=INCLUDE_FILES
-                        Defines the regular expression pattern to include
-                        files in processing [default: .*]
+                        Adds a regular expression pattern to include files in
+                        processing (files have to match any rule to be
+                        included) [default: .*]
   --exclude-files=EXCLUDE_FILES, --ef=EXCLUDE_FILES
-                        Defines the regular expression pattern to exclude
-                        files from processing [default: ^[.]]
+                        Adds a regular expression pattern to exclude files or
+                        directories from processing [default: ^[.]]
   --non-recursively, --nr
                         If the option is set (True), sub-directories are not
                         processed [default: False]

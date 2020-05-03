@@ -34,9 +34,9 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
         parser.add_option("--std.general.size", "--sgs", action="store_true", default=False,
                          help="If the option is set (True), the tool collects file size metric (in bytes) [default: %default]")
         parser.add_option("--include-files", "--if", default=r'.*',
-                         help="Defines the regular expression pattern to include files in processing [default: %default]")
+                         help="Adds a regular expression pattern to include files in processing (files have to match any rule to be included) [default: %default]")
         parser.add_option("--exclude-files", "--ef", default=r'^[.]',
-                         help="Defines the regular expression pattern to exclude files from processing [default: %default]")
+                         help="Adds a regular expression pattern to exclude files or directories from processing [default: %default]")
         parser.add_option("--non-recursively", "--nr", action="store_true", default=False,
                          help="If the option is set (True), sub-directories are not processed [default: %default]")
         self.optparser = parser
@@ -97,12 +97,19 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
         self.exclude_files.append(file_path)
 
     def is_file_excluded(self, file_name):
-        for each in self.include_rules:
-            if re.match(each, os.path.basename(file_name)) == None:
+        # only apply the include rules to files - skip directories
+        if os.path.isfile(file_name):
+            for each in self.include_rules:
+                if re.match(each, os.path.basename(file_name)) != None:
+                    break;
+            # file is excluded if no include rule matches
+            else:
                 return True
+        # check exclude rules for both, files and directories
         for each in self.exclude_rules:
             if re.match(each, os.path.basename(file_name)) != None:
                 return True
+        # finally check if a file is excluded directly
         for each in self.exclude_files:
             if os.path.basename(each) == os.path.basename(file_name):
                 if os.stat(each) == os.stat(file_name):
@@ -180,7 +187,3 @@ class DirectoryReader():
             total_errors = run_per_file(plugin, os.path.basename(directory), directory)
         total_errors = total_errors # used, warnings are per file if not zero
         return 0 # ignore errors, collection is successful anyway
-    
-
-
-    
