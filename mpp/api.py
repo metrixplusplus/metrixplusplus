@@ -1154,13 +1154,15 @@ class MetricPluginMixin(Parent):
         
         def get_result(self):
             sourced_metric = self.region.get_data(self.rank_source[0], self.rank_source[1])
-            if sourced_metric != None:
-                for (ind, range_pair) in enumerate(self.rank_ranges):
-                    if ((range_pair[0] == None or sourced_metric >= range_pair[0])
-                        and
-                        (range_pair[1] == None or sourced_metric <= range_pair[1])):
-                        self.result = self.result * (ind + 1)
-                        break
+            if sourced_metric == None:
+                assert(self.region.get_type() == Region.T.GLOBAL);
+                return None;
+            for (ind, range_pair) in enumerate(self.rank_ranges):
+                if ((range_pair[0] == None or sourced_metric >= range_pair[0])
+                    and
+                    (range_pair[1] == None or sourced_metric <= range_pair[1])):
+                    self.result = self.result * (ind + 1)
+                    break
             return self.result
 
     def declare_metric(self, is_active, field,
