@@ -68,6 +68,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
                 writer.table_name = "metrics overview"
                 writer.headers = overview_data["fields"]
                 writer.value_matrix = overview_data["matrix"]
+                writer.margin = 1
                 writer.stream = file
                 writer.write_table()
 
@@ -81,6 +82,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
                     writer.table_name = "metrics"
                     writer.headers = data[path]["file_fields"]
                     writer.value_matrix = data[path]["file_matrix"]
+                    writer.margin = 1
                     writer.stream = file
                     writer.write_table()
 
@@ -88,12 +90,13 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
 
                     for region in data[path]["region_matrix"]:
                         if region[0] != "-" and region[0] != "__global__":
-                            region[0] = "#" + region[0]
+                            region[0] = "\\ref " + region[0]
 
                     writer = pytablewriter.MarkdownTableWriter()
                     writer.table_name = "region metrics"
                     writer.headers = data[path]["region_fields"]
                     writer.value_matrix = data[path]["region_matrix"]
+                    writer.margin = 1
                     writer.stream = file
                     writer.write_table()
 
@@ -123,7 +126,6 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
 
         for path in paths:
             path = mpp.utils.preprocess_path(path)
-            file_fields = ["region"]
             data[path] = {}
             data[path]["file_data"] = {}
             data[path]["file_fields"] = []
@@ -175,7 +177,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
                         overview_data["fields"].append(field)
             
             for key, value in data.items():
-                row = [key]
+                row = [os.path.relpath(key)]
                 for field in overview_data["fields"][1:]:
                     if field in value["file_data"]:
                         row.append(value["file_data"][field])
