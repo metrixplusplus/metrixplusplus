@@ -1154,8 +1154,10 @@ class MetricPluginMixin(Parent):
         
         def get_result(self):
             sourced_metric = self.region.get_data(self.rank_source[0], self.rank_source[1])
+            # necessary with python3
             if sourced_metric == None:
-                assert(self.region.get_type() == Region.T.GLOBAL);
+                assert(self.region.get_type() != Region.T.FUNCTION);
+                assert(self.rank_source == ('std.code.complexity', 'cyclomatic'));
                 return None;
             for (ind, range_pair) in enumerate(self.rank_ranges):
                 if ((range_pair[0] == None or sourced_metric >= range_pair[0])

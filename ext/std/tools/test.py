@@ -10,6 +10,7 @@ import mpp.api
 import subprocess
 import os.path
 import itertools
+import sys
 
 class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
     
@@ -27,7 +28,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
         os.environ['METRIXPLUSPLUS_TEST_MODE'] = str("True")
         
         tests_dir = os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'tests')
-        process_data= ["python", "-m", "unittest", "discover", "-v", "-s"]
+        process_data= [sys.executable, "-m", "unittest", "discover", "-v", "-s"]
         if len(args) == 0 or tests_dir == os.path.abspath(args[0]):
             for fname in sorted(os.listdir(tests_dir)):
                 full_path = os.path.join(tests_dir, fname)
