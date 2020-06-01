@@ -13,6 +13,7 @@ import difflib
 import unittest
 import shutil
 import ast
+import sys
 
 class ToolRunner(object):
 
@@ -62,8 +63,8 @@ class ToolRunner(object):
         if dirs_list != None:
             for each in dirs_list:
                 self.dirs_list.append(each)
-               
-        self.call_args = ['python', os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], "metrix++.py"), tool_name] \
+
+        self.call_args = [sys.executable, os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], "metrix++.py"), tool_name] \
                     + db_opts + opts_list + ['--'] + self.dirs_list
         self.cmd = " ".join(self.call_args)
         self.exit_code_expected = exit_code
