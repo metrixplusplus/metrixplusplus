@@ -84,9 +84,9 @@ class JavaCodeParser(object):
         crc32 = 0
         for child in block['children']:
             # exclude children
-            crc32 = binascii.crc32(text[start_pos:child['start']].encode('utf8'), crc32)
+            crc32 = binascii.crc32(text[start_pos:child['start']].decode('utf8').encode('utf8'), crc32)
             start_pos = child['end']
-        block['checksum'] = binascii.crc32(text[start_pos:block['end']].encode('utf8'), crc32) & 0xffffffff # to match python 3
+        block['checksum'] = binascii.crc32(text[start_pos:block['end']].decode('utf8').encode('utf8'), crc32) & 0xffffffff # to match python 3
         
     def add_lines_data(self, text, blocks):
         def add_lines_data_rec(self, text, blocks):

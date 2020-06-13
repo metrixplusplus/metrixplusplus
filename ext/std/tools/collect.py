@@ -143,7 +143,7 @@ class DirectoryReader():
                         f = open(full_path, 'rU');
                         text = f.read();
                         f.close()
-                        checksum = binascii.crc32(text.encode('utf8')) & 0xffffffff # to match python 3
+                        checksum = binascii.crc32(text.decode('utf8').encode('utf8')) & 0xffffffff # to match python 3
                         
                         db_loader = plugin.get_plugin('mpp.dbf').get_loader()
                         (data, is_updated) = db_loader.create_file_data(norm_path, checksum, str(text))
