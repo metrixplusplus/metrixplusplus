@@ -120,7 +120,14 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
                             warning_text = warning_text + " for the file \\ref " + warning.path
                         
                         warning_text = warning_text + " exceeds the limit."
-                        warning_text = warning_text + " (value: {} - limit: {})".format(warning.stat_level, warning.stat_limit)
+
+                        if warning.type == "max":
+                            warning_comp = ">"
+                        else:
+                            warning_comp = "<"
+                        warning_text = warning_text + " (value: {} {} limit: {})".format(warning.stat_level,
+                                                                                         warning_comp,
+                                                                                         warning.stat_limit)
                         
                         file.write("\\xrefitem metrix_warnings \"Metrix Warning\" \"Metrix Warnings\" {}\n".format(warning_text))
                         

@@ -214,13 +214,14 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
 
         class Warning (object):
         
-            def __init__(self, path, cursor, namespace, field, region_name,
-                            stat_level, trend_value, stat_limit,
+            def __init__(self, path, cursor, namespace, field, limit_type,
+                            region_name, stat_level, trend_value, stat_limit,
                             is_modified, is_suppressed):
                 self.path = path
                 self.cursor = cursor
                 self.namespace = namespace
                 self.field = field
+                self.type = limit_type
                 self.region_name = region_name
                 self.stat_level = stat_level
                 self.trend_value = trend_value
@@ -301,6 +302,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
                                 region_cursor,
                                 limit.namespace,
                                 limit.field,
+                                limit.type,
                                 region_name,
                                 select_data.get_data(limit.namespace, limit.field),
                                 diff,
