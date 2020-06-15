@@ -111,9 +111,10 @@ class PackagerFactory(object):
 
     class StringPackager(IPackager):
         def pack(self, unpacked_data):
-            if not isinstance(unpacked_data, str):
+            try:
+                return str(unpacked_data)
+            except ValueError:
                 raise PackagerError()
-            return str(unpacked_data)
             
         def unpack(self, packed_data): 
             try:
