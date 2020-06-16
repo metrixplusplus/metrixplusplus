@@ -6,5 +6,5 @@
 #    
 
 if __name__ == '__main__':
-    import metrixpp
+    from metrixpp import metrixpp
     metrixpp.start()
