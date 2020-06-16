@@ -5,12 +5,12 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-import mpp.api
-import mpp.cout
+from metrixpp.mpp import api
+from metrixpp.mpp import cout
 
 import re
 
-class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
+class Plugin(api.Plugin, api.Child, api.IConfigurable):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.suppress", "--ss", action="store_true", default=False,
@@ -30,15 +30,15 @@ class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
             fields.append(self.Field('count', int, non_zero=True))
             fields.append(self.Field('list', str))
         # - init per regions table
-        mpp.api.Plugin.initialize(self, fields=fields)
+        api.Plugin.initialize(self, fields=fields)
         # - init per file table
-        mpp.api.Plugin.initialize(self,
+        api.Plugin.initialize(self,
                                    namespace = self.get_name() + '.file',
                                    support_regions = False,
                                    fields=fields)
         
         if len(fields) != 0:
-            self.subscribe_by_parents_interface(mpp.api.ICode)
+            self.subscribe_by_parents_interface(api.ICode)
 
     # suppress pattern
     pattern = re.compile(r'''metrix[+][+][:][ \t]+suppress[ \t]+([^ \t\r\n\*]+)''')
@@ -54,7 +54,7 @@ class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
                 list_text = []
                 last_comment_end = None
                 for marker in data.iterate_markers(
-                                filter_group = mpp.api.Marker.T.COMMENT,
+                                filter_group = api.Marker.T.COMMENT,
                                 region_id = region.get_id(),
                                 exclude_children = True):
                     
@@ -67,11 +67,11 @@ class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
                     matches = self.pattern.findall(text, marker.get_offset_begin(), marker.get_offset_end())
                     for m in matches:
                         namespace_name, field = m.split(':')
-                        db_loader = self.get_plugin('mpp.dbf').get_loader()
+                        db_loader = self.get_plugin('metrixpp.mpp.dbf').get_loader()
                         namespace = db_loader.get_namespace(namespace_name)
                         if namespace == None or namespace.check_field(field) == False:
-                            mpp.cout.notify(data.get_path(), region.get_cursor(),
-                                                  mpp.cout.SEVERITY_WARNING,
+                            cout.notify(data.get_path(), region.get_cursor(),
+                                                  cout.SEVERITY_WARNING,
                                                   "Suppressed metric '" + namespace_name + ":" + field +
                                                     "' is not being collected",
                                                   [("Metric name", namespace_name + ":" + field),
@@ -79,8 +79,8 @@ class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
                             continue
                         if namespace.are_regions_supported() == False:
                             if region.get_id() != 1:
-                                mpp.cout.notify(data.get_path(), region.get_cursor(),
-                                                  mpp.cout.SEVERITY_WARNING,
+                                cout.notify(data.get_path(), region.get_cursor(),
+                                                  cout.SEVERITY_WARNING,
                                                   "Suppressed metric '" + namespace_name + ":" + field +
                                                     "' is attributed to a file, not a region. "
                                                     "Remove it or move to the beginning of the file.",
@@ -89,8 +89,8 @@ class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
                                 continue
                             
                             if m in file_list_text:
-                                mpp.cout.notify(data.get_path(), region.get_cursor(),
-                                              mpp.cout.SEVERITY_WARNING,
+                                cout.notify(data.get_path(), region.get_cursor(),
+                                              cout.SEVERITY_WARNING,
                                               "Duplicate suppression of the metric '" +
                                                namespace_name + ":" + field + "'",
                                               [("Metric name", namespace_name + ":" + field),
@@ -102,8 +102,8 @@ class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
                             continue
                         
                         if m in list_text:
-                            mpp.cout.notify(data.get_path(), region.get_cursor(),
-                                          mpp.cout.SEVERITY_WARNING,
+                            cout.notify(data.get_path(), region.get_cursor(),
+                                          cout.SEVERITY_WARNING,
                                           "Duplicate suppression of the metric '" +
                                            namespace_name + ":" + field + "'",
                                           [("Metric name", namespace_name + ":" + field),

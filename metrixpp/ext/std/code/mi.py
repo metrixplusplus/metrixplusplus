@@ -5,12 +5,12 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-import mpp.api
+from metrixpp.mpp import api
 
-class Plugin(mpp.api.Plugin,
-             mpp.api.IConfigurable,
-             mpp.api.Child,
-             mpp.api.MetricPluginMixin):
+class Plugin(api.Plugin,
+             api.IConfigurable,
+             api.Child,
+             api.MetricPluginMixin):
     
     def declare_configuration(self, parser):
         self.parser = parser
@@ -39,7 +39,7 @@ class Plugin(mpp.api.Plugin,
                              'std.code.lines':(None, self.RankedLinesCounter),
                             },
                             # set none, because this plugin is not interested in parsing the code
-                            marker_type_mask=mpp.api.Marker.T.NONE)
+                            marker_type_mask=api.Marker.T.NONE)
         
         super(Plugin, self).initialize(fields=self.get_fields())
 
@@ -47,10 +47,10 @@ class Plugin(mpp.api.Plugin,
             self.subscribe_by_parents_name('std.code.complexity')
             self.subscribe_by_parents_name('std.code.lines')
 
-    class RankedComplexityCounter(mpp.api.MetricPluginMixin.RankedCounter):
+    class RankedComplexityCounter(api.MetricPluginMixin.RankedCounter):
         rank_source = ('std.code.complexity', 'cyclomatic')
         rank_ranges = [(None, 7), (8, 11), (12, 19), (20, 49), (50, None)]
     
-    class RankedLinesCounter(mpp.api.MetricPluginMixin.RankedCounter):
+    class RankedLinesCounter(api.MetricPluginMixin.RankedCounter):
         rank_source = ('std.code.lines', 'code')
         rank_ranges = [(None, 124), (125, 249), (250, 499), (500, 999), (1000, None)]

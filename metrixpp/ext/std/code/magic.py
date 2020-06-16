@@ -5,13 +5,13 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-import mpp.api
+from metrixpp.mpp import api
 import re
 
-class Plugin(mpp.api.Plugin,
-             mpp.api.IConfigurable,
-             mpp.api.Child,
-             mpp.api.MetricPluginMixin):
+class Plugin(api.Plugin,
+             api.IConfigurable,
+             api.Child,
+             api.MetricPluginMixin):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.code.magic.numbers", "--scmn",
@@ -39,16 +39,16 @@ class Plugin(mpp.api.Plugin,
                              'std.code.cpp': (pattern_to_search_cpp_cs, self.NumbersCounter),
                              'std.code.cs': (pattern_to_search_cpp_cs, self.NumbersCounter),
                             },
-                            marker_type_mask=mpp.api.Marker.T.CODE,
-                            region_type_mask=mpp.api.Region.T.ANY)
+                            marker_type_mask=api.Marker.T.CODE,
+                            region_type_mask=api.Region.T.ANY)
         
         super(Plugin, self).initialize(fields=self.get_fields(),
             properties=[self.Property('number.simplier', self.is_active_numbers_simplier)])
         
         if self.is_active() == True:
-            self.subscribe_by_parents_interface(mpp.api.ICode)
+            self.subscribe_by_parents_interface(api.ICode)
 
-    class NumbersCounter(mpp.api.MetricPluginMixin.IterIncrementCounter):
+    class NumbersCounter(api.MetricPluginMixin.IterIncrementCounter):
         def increment(self, match):
             if (match.group(0).startswith('const') or
                 (self.plugin.is_active_numbers_simplier == True and

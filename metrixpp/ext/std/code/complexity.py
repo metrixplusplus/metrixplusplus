@@ -5,11 +5,11 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-import mpp.api
+from metrixpp.mpp import api
 
 import re
 
-class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.IConfigurable):
+class Plugin(api.Plugin, api.MetricPluginMixin, api.Child, api.IConfigurable):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.code.complexity.cyclomatic", "--sccc", action="store_true", default=False,
@@ -40,8 +40,8 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
                                 'std.code.cs': self.pattern_cs,
                                 'std.code.java': self.pattern_java
                             },
-                            marker_type_mask=mpp.api.Marker.T.CODE,
-                            region_type_mask=mpp.api.Region.T.FUNCTION)
+                            marker_type_mask=api.Marker.T.CODE,
+                            region_type_mask=api.Region.T.FUNCTION)
         self.declare_metric(self.is_active_maxindent,
                             self.Field('maxindent', int),
                             {
@@ -49,8 +49,8 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
                                 'std.code.cs': (self.pattern_indent, self.MaxIndentCounter),
                                 'std.code.java': (self.pattern_indent, self.MaxIndentCounter),
                             },
-                            marker_type_mask=mpp.api.Marker.T.CODE,
-                            region_type_mask=mpp.api.Region.T.FUNCTION)
+                            marker_type_mask=api.Marker.T.CODE,
+                            region_type_mask=api.Region.T.FUNCTION)
         
         super(Plugin, self).initialize(fields=self.get_fields())
         
@@ -61,7 +61,7 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
                 'std.code.java'
             ])
 
-    class MaxIndentCounter(mpp.api.MetricPluginMixin.IterAssignCounter):
+    class MaxIndentCounter(api.MetricPluginMixin.IterAssignCounter):
         
         def __init__(self, *args, **kwargs):
             super(Plugin.MaxIndentCounter, self).__init__(*args, **kwargs)

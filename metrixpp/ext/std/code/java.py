@@ -8,10 +8,10 @@
 import re
 import binascii
 
-import mpp.api
-import mpp.cout
+from metrixpp.mpp import api
+from metrixpp.mpp import cout
 
-class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IParser, mpp.api.IConfigurable, mpp.api.ICode):
+class Plugin(api.Plugin, api.Parent, api.IParser, api.IConfigurable, api.ICode):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.code.java.files", default="*.java",
@@ -22,7 +22,7 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IParser, mpp.api.IConfigura
         self.files.sort() # sorted list goes to properties
         
     def initialize(self):
-        mpp.api.Plugin.initialize(self, properties=[
+        api.Plugin.initialize(self, properties=[
             self.Property('files', ','.join(self.files))
         ])
         self.get_plugin('std.tools.collect').register_parser(self.files, self)
@@ -111,13 +111,13 @@ class JavaCodeParser(object):
         def add_regions_rec(self, data, blocks):
             def get_type_id(data, named_type):
                 if named_type == "function":
-                    return mpp.api.Region.T.FUNCTION
+                    return api.Region.T.FUNCTION
                 elif named_type == "class":
-                    return mpp.api.Region.T.CLASS
+                    return api.Region.T.CLASS
                 elif named_type == "interface":
-                    return mpp.api.Region.T.INTERFACE
+                    return api.Region.T.INTERFACE
                 elif named_type == "__global__":
-                    return mpp.api.Region.T.GLOBAL
+                    return api.Region.T.GLOBAL
                 else:
                     assert(False)
             for each in blocks:
@@ -148,11 +148,11 @@ class JavaCodeParser(object):
         for m in re.finditer(self.regex_cpp, text):
             # Comment
             if text[m.start()] == '/':
-                data.add_marker(m.start(), m.end(), mpp.api.Marker.T.COMMENT)
+                data.add_marker(m.start(), m.end(), api.Marker.T.COMMENT)
             
             # String
             elif text[m.start()] == '"' or text[m.start()] == '\'':
-                data.add_marker(m.start() + 1, m.end() - 1, mpp.api.Marker.T.STRING)
+                data.add_marker(m.start() + 1, m.end() - 1, api.Marker.T.STRING)
             
             # Statement end
             elif text[m.start()] == ';':
@@ -191,9 +191,9 @@ class JavaCodeParser(object):
                 if blocks[curblk]['indent_start'] == indent_current:
                     next_block = reset_next_block(m.end())
                     if curblk == 0:
-                        mpp.cout.notify(data.get_path(),
+                        cout.notify(data.get_path(),
                                          cursor_current + len(self.regex_ln.findall(text, cursor_last_pos, m.start())),
-                                         mpp.cout.SEVERITY_WARNING,
+                                         cout.SEVERITY_WARNING,
                                          "Non-matching closing bracket '}' detected.")
                         count_mismatched_brackets += 1
                         continue
@@ -208,9 +208,9 @@ class JavaCodeParser(object):
                 # shift indent left
                 indent_current -= 1
                 if indent_current < 0:
-                    mpp.cout.notify(data.get_path(),
+                    cout.notify(data.get_path(),
                                      cursor_current + len(self.regex_ln.findall(text, cursor_last_pos, m.start())),
-                                     mpp.cout.SEVERITY_WARNING,
+                                     cout.SEVERITY_WARNING,
                                      "Non-matching closing bracket '}' detected.")
                     count_mismatched_brackets += 1
                     indent_current = 0
@@ -250,9 +250,9 @@ class JavaCodeParser(object):
 
         while indent_current > 0:
             # log all
-            mpp.cout.notify(data.get_path(),
+            cout.notify(data.get_path(),
                              cursor_current + len(self.regex_ln.findall(text, cursor_last_pos, len(text))),
-                             mpp.cout.SEVERITY_WARNING,
+                             cout.SEVERITY_WARNING,
                              "Non-matching opening bracket '{' detected.")
             count_mismatched_brackets += 1
             indent_current -= 1

@@ -8,10 +8,10 @@
 import logging
 import cgi
 
-import mpp.api
-import mpp.utils
+from metrixpp.mpp import api
+from metrixpp.mpp import utils
 
-class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
+class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
     
     def declare_configuration(self, parser):
         parser.add_option("-m", "--mode", default='dumphtml', choices=['dumphtml'],
@@ -21,7 +21,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
         self.mode = options.__dict__['mode']
 
     def run(self, args):
-        loader = self.get_plugin('mpp.dbf').get_loader()
+        loader = self.get_plugin('metrixpp.mpp.dbf').get_loader()
     
         if self.mode == 'dumphtml':
             return dumphtml(args, loader)
@@ -32,11 +32,11 @@ def dumphtml(args, loader):
     result = ""
     result += '<html><body>'
     for path in args:
-        path = mpp.utils.preprocess_path(path)
+        path = utils.preprocess_path(path)
         
         data = loader.load_file_data(path)
         if data == None:
-            mpp.utils.report_bad_path(path)
+            utils.report_bad_path(path)
             exit_code += 1
             continue
         
@@ -52,15 +52,15 @@ def dumphtml(args, loader):
         # TODO fix highlightning of markers
 #        result += '<table><tr><td><pre>'
 #        last_pos = 0
-#        for marker in data.iterate_markers(filter_group= mpp.api.Marker.T.COMMENT |
-#                                           mpp.api.Marker.T.STRING |
-#                                           mpp.api.Marker.T.PREPROCESSOR):
+#        for marker in data.iterate_markers(filter_group= api.Marker.T.COMMENT |
+#                                           api.Marker.T.STRING |
+#                                           api.Marker.T.PREPROCESSOR):
 #            result += (cgi.escape(text[last_pos:marker.begin]))
-#            if marker.get_type() == mpp.api.Marker.T.STRING:
+#            if marker.get_type() == api.Marker.T.STRING:
 #                result += ('<span style="color:#0000FF">')
-#            elif marker.get_type() == mpp.api.Marker.T.COMMENT:
+#            elif marker.get_type() == api.Marker.T.COMMENT:
 #                result += ('<span style="color:#009900">')
-#            elif marker.get_type() == mpp.api.Marker.T.PREPROCESSOR:
+#            elif marker.get_type() == api.Marker.T.PREPROCESSOR:
 #                result += ('<span style="color:#990000">')
 #            else:
 #                assert False, "Uknown marker type"

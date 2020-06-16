@@ -6,7 +6,7 @@
 #    
 
 
-import mpp.api
+from metrixpp.mpp import api
 
 import re
 import os
@@ -17,7 +17,7 @@ import binascii
 import fnmatch
 import multiprocessing.pool
 
-class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRunable):
+class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
     
     def __init__(self):
         self.reader = DirectoryReader()
@@ -65,8 +65,8 @@ class Plugin(mpp.api.Plugin, mpp.api.Parent, mpp.api.IConfigurable, mpp.api.IRun
         if self.is_size_enabled == True:
             fields.append(self.Field('size', int))
         super(Plugin, self).initialize(namespace='std.general', support_regions=False, fields=fields)
-        self.add_exclude_file(self.get_plugin('mpp.dbf').get_dbfile_path())
-        self.add_exclude_file(self.get_plugin('mpp.dbf').get_dbfile_prev_path())
+        self.add_exclude_file(self.get_plugin('metrixpp.mpp.dbf').get_dbfile_path())
+        self.add_exclude_file(self.get_plugin('metrixpp.mpp.dbf').get_dbfile_prev_path())
         
     def run(self, args):
         if len(args) == 0:
@@ -149,7 +149,7 @@ class DirectoryReader():
                         f.close()
                         checksum = binascii.crc32(text.encode('utf8')) & 0xffffffff # to match python 3
                         
-                        db_loader = plugin.get_plugin('mpp.dbf').get_loader()
+                        db_loader = plugin.get_plugin('metrixpp.mpp.dbf').get_loader()
                         (data, is_updated) = db_loader.create_file_data(norm_path, checksum, text)
                         procerrors = parser.process(plugin, data, is_updated)
                         if plugin.is_proctime_enabled == True:

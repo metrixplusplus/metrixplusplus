@@ -5,14 +5,14 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="metrixpp-prozessorkern", # Replace with your own username
-    version="0.0.3",
+    version="0.0.5",
     author="Stefan Strobel",
     author_email="stefan.strobel@shimatta.net",
     description="Metrix++ is an extendable tool for code metrics collection and analysis.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/metrixplusplus/metrixplusplus",
-    packages=setuptools.find_packages(exclude=["tests"]),
+    packages=setuptools.find_packages(exclude=["metrixpp.tests"]),
     package_data={
         'metrixpp.mpp': ['*.ini'],
         'metrixpp.ext.std': ['*.ini'],
@@ -31,7 +31,7 @@ setuptools.setup(
     },
     entry_points={
         'console_scripts': [
-            'metrix++ = metrixpp:main'
+            'metrix++ = metrixpp.metrixpp:start'
         ]
     },
     python_requires='>=3.5',

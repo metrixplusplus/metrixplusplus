@@ -5,11 +5,11 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-import mpp.api
+from metrixpp.mpp import api
 import logging
 import os
 
-class Plugin(mpp.api.BasePlugin, mpp.api.IConfigurable):
+class Plugin(api.BasePlugin, api.IConfigurable):
     
     def declare_configuration(self, parser, default_value='INFO'):
         allowed_values = ['DEBUG','INFO','WARNING','ERROR']

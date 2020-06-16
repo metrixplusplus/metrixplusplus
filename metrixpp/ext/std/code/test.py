@@ -5,16 +5,16 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-import mpp.api
+from metrixpp.mpp import api
 import logging
 
 # used for testing and development purposes
-class Plugin(mpp.api.Plugin, mpp.api.Child):
+class Plugin(api.Plugin, api.Child):
     
     def initialize(self):
         return
         # do not trigger version property set, it is a module for testing purposes
-        self.subscribe_by_parents_interface(mpp.api.ICode)
+        self.subscribe_by_parents_interface(api.ICode)
 
     def callback(self, parent, data, is_updated):
 
@@ -23,9 +23,9 @@ class Plugin(mpp.api.Plugin, mpp.api.Child):
         for region in data.iterate_regions():
             logging.warn(region.get_name() + " " + str(region.get_cursor()))
             for marker in data.iterate_markers(region_id=region.get_id(),
-                                               filter_group = mpp.api.Marker.T.ANY,
+                                               filter_group = api.Marker.T.ANY,
                                                exclude_children = True):
-                logging.warn("\tMarker: " + mpp.api.Marker.T().to_str(marker.get_type()) +
+                logging.warn("\tMarker: " + api.Marker.T().to_str(marker.get_type()) +
                              " " + str(marker.get_offset_begin()) + " " + str(marker.get_offset_end()) +
                              " >>>" + text[marker.get_offset_begin():marker.get_offset_end()] + "<<<")
                 text_comb += text[marker.get_offset_begin():marker.get_offset_end()]
@@ -33,9 +33,9 @@ class Plugin(mpp.api.Plugin, mpp.api.Child):
 
         text_comb = ""
         for marker in data.iterate_markers(region_id=1,
-                                           filter_group = mpp.api.Marker.T.ANY,
+                                           filter_group = api.Marker.T.ANY,
                                            exclude_children = False):
-            logging.warn("\tMarker: " + mpp.api.Marker.T().to_str(marker.get_type()) +
+            logging.warn("\tMarker: " + api.Marker.T().to_str(marker.get_type()) +
                          " " + str(marker.get_offset_begin()) + " " + str(marker.get_offset_end()) +
                          " >>>" + text[marker.get_offset_begin():marker.get_offset_end()] + "<<<")
             text_comb += text[marker.get_offset_begin():marker.get_offset_end()]
@@ -45,7 +45,7 @@ class Plugin(mpp.api.Plugin, mpp.api.Child):
         for region in data.iterate_regions():
             logging.warn(region.get_name() + " " + str(region.get_cursor()))
             for marker in data.iterate_markers(region_id=region.get_id(),
-                                               filter_group = mpp.api.Marker.T.ANY,
+                                               filter_group = api.Marker.T.ANY,
                                                exclude_children = True,
                                                merge = True):
                 logging.warn("\tMarker: merged" + 

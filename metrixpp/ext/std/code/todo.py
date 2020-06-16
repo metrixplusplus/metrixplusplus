@@ -5,13 +5,13 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-import mpp.api
+from metrixpp.mpp import api
 import re
 
-class Plugin(mpp.api.Plugin,
-             mpp.api.IConfigurable,
-             mpp.api.Child,
-             mpp.api.MetricPluginMixin):
+class Plugin(api.Plugin,
+             api.IConfigurable,
+             api.Child,
+             api.MetricPluginMixin):
     
     def declare_configuration(self, parser):
         self.parser = parser
@@ -42,16 +42,16 @@ class Plugin(mpp.api.Plugin,
         self.declare_metric(self.is_active_comments,
                             self.Field('comments', int, non_zero=True),
                             self.pattern_to_search,
-                            marker_type_mask=mpp.api.Marker.T.COMMENT,
-                            region_type_mask=mpp.api.Region.T.ANY)
+                            marker_type_mask=api.Marker.T.COMMENT,
+                            region_type_mask=api.Region.T.ANY)
         self.declare_metric(self.is_active_strings,
                             self.Field('strings', int, non_zero=True),
                             self.pattern_to_search,
-                            marker_type_mask=mpp.api.Marker.T.STRING,
-                            region_type_mask=mpp.api.Region.T.ANY)
+                            marker_type_mask=api.Marker.T.STRING,
+                            region_type_mask=api.Region.T.ANY)
         
         super(Plugin, self).initialize(fields=self.get_fields(),
             properties=[self.Property('tags', ','.join(self.tags_list))])
         
         if self.is_active() == True:
-            self.subscribe_by_parents_interface(mpp.api.ICode)
+            self.subscribe_by_parents_interface(api.ICode)

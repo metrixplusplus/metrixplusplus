@@ -5,7 +5,7 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-import mpp.api
+from metrixpp.mpp import api
 
 import os
 import sys
@@ -63,7 +63,32 @@ class Loader(object):
                 self.plugins = []
                 self.actions = []
                 self.hash    = {}
-                
+
+        def load_plugin_config(inicontainer, fname):
+            active_plugins = []
+            config = ConfigParser()
+            config.read(fname)
+            item = {'package': config.get('Plugin', 'package'),
+                    'module': config.get('Plugin', 'module'),
+                    'class': config.get('Plugin', 'class'),
+                    'version': config.get('Plugin', 'version'),
+                    'depends': config.get('Plugin', 'depends'),
+                    'actions': config.get('Plugin', 'actions'),
+                    'enabled': config.getboolean('Plugin', 'enabled'),
+                    'instance': None}
+            if item['enabled']:
+                item['actions'] = item['actions'].split(',')
+                for (ind, action) in enumerate(item['actions']):
+                    action = action.strip()
+                    item['actions'][ind] = action
+                    if action not in inicontainer.actions + ['*', 'None', 'none', 'False', 'false']:
+                        inicontainer.actions.append(action)
+                    if action == '*' or action == command:
+                        active_plugins.append(item['package'] + '.' + item['module'])
+                inicontainer.plugins.append(item)
+                inicontainer.hash[item['package'] + '.' + item['module']] = item
+            return active_plugins
+
         def load_recursively(inicontainer, directory):
             active_plugins = []
             if os.path.exists(directory) == False or os.path.isdir(directory) == False:
@@ -76,27 +101,7 @@ class Loader(object):
                 if os.path.isdir(fname):
                     active_plugins += load_recursively(inicontainer, fname)
                 elif re.match(pattern, fname):
-                    config = ConfigParser()
-                    config.read(fname)
-                    item = {'package': config.get('Plugin', 'package'),
-                            'module': config.get('Plugin', 'module'),
-                            'class': config.get('Plugin', 'class'),
-                            'version': config.get('Plugin', 'version'),
-                            'depends': config.get('Plugin', 'depends'),
-                            'actions': config.get('Plugin', 'actions'),
-                            'enabled': config.getboolean('Plugin', 'enabled'),
-                            'instance': None}
-                    if item['enabled']:
-                        item['actions'] = item['actions'].split(',')
-                        for (ind, action) in enumerate(item['actions']):
-                            action = action.strip()
-                            item['actions'][ind] = action
-                            if action not in inicontainer.actions + ['*', 'None', 'none', 'False', 'false']:
-                                inicontainer.actions.append(action)
-                            if action == '*' or action == command:
-                                active_plugins.append(item['package'] + '.' + item['module'])
-                        inicontainer.plugins.append(item)
-                        inicontainer.hash[item['package'] + '.' + item['module']] = item
+                    active_plugins += load_plugin_config(inicontainer, fname)
             return active_plugins
                         
         def list_dependants_recursively(inicontainer, required_plugin_name):
@@ -123,6 +128,12 @@ class Loader(object):
         required_plugins = []
         for each in ([std_ext_priority_dir, std_ext_dir] + directories):
             required_plugins += load_recursively(inicontainer, each)
+
+        # append the tests dir if it exists - not on the pypi packet
+        tests_dir = os.path.join(os.environ['METRIXPLUSPLUS_INSTALL_DIR'], 'tests')
+        if os.path.exists(tests_dir):
+            sys.path.append(tests_dir)
+            required_plugins += load_plugin_config(inicontainer, os.path.join(tests_dir, "test.ini"))
         
         required_plugins.sort();    # sort the plugin list to get similar results independant of the os
             
@@ -171,12 +182,12 @@ class Loader(object):
                   "       python %prog {command} [options] -- [path 1] ... [path N]".format(command=command))
 
         for item in self.iterate_plugins():
-            if (isinstance(item, mpp.api.IConfigurable)):
+            if (isinstance(item, api.IConfigurable)):
                 item.declare_configuration(optparser)
 
         (options, args) = optparser.parse_args(args)
         for item in self.iterate_plugins():
-            if (isinstance(item, mpp.api.IConfigurable)):
+            if (isinstance(item, api.IConfigurable)):
                 item.configure(options)
 
         for item in self.iterate_plugins():
@@ -191,7 +202,7 @@ class Loader(object):
     def run(self, args):
         exit_code = 0
         for item in self.iterate_plugins():
-            if (isinstance(item, mpp.api.IRunable)):
+            if (isinstance(item, api.IRunable)):
                 exit_code += item.run(args)
         return exit_code
 
@@ -199,7 +210,7 @@ class Loader(object):
         result = object.__repr__(self) + ' with loaded:'
         for item in self.iterate_plugins():
             result += '\n\t' + item.__repr__()
-            if isinstance(item, mpp.api.Parent):
+            if isinstance(item, api.Parent):
                 result += ' with subscribed:'
                 for child in item.iterate_children():
                     result += '\n\t\t' + child.__repr__()

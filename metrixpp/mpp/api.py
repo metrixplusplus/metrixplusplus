@@ -8,8 +8,8 @@
 import os.path
 import sys
 
-import mpp.internal.dbwrap
-import mpp.internal.api_impl
+from metrixpp.mpp.internal import dbwrap
+from metrixpp.mpp.internal import api_impl
 
 class InterfaceNotImplemented(Exception):
     def __init__(self, obj):
@@ -151,7 +151,7 @@ class LoadableData(Data):
         for column_name in list(row.keys()):
             try:
                 packager = namespace_obj._get_field_packager(column_name)
-            except mpp.internal.api_impl.PackagerError:
+            except api_impl.PackagerError:
                 continue
             if row[column_name] == None:
                 continue
@@ -686,7 +686,7 @@ class Namespace(object):
         else:
             for column in self.db.iterate_columns(name):
                 self.add_field(column.name,
-                               mpp.internal.api_impl.PackagerFactory().get_python_type(column.sql_type),
+                               api_impl.PackagerFactory().get_python_type(column.sql_type),
                                non_zero=column.non_zero)
         
     def get_name(self):
@@ -698,7 +698,7 @@ class Namespace(object):
     def add_field(self, field_name, python_type, non_zero=False):
         if not isinstance(field_name, str):
             raise Namespace.FieldError(field_name, "field_name not a string")
-        packager = mpp.internal.api_impl.PackagerFactory().create(python_type, non_zero)
+        packager = api_impl.PackagerFactory().create(python_type, non_zero)
         if field_name in list(self.fields.keys()):
             raise Namespace.FieldError(field_name, "double used")
         self.fields[field_name] = packager
@@ -716,34 +716,34 @@ class Namespace(object):
     def check_field(self, field_name):
         try:
             self._get_field_packager(field_name)
-        except mpp.internal.api_impl.PackagerError:
+        except api_impl.PackagerError:
             return False
         return True
 
     def get_field_sql_type(self, field_name):
         try:
             return self._get_field_packager(field_name).get_sql_type()
-        except mpp.internal.api_impl.PackagerError:
+        except api_impl.PackagerError:
             raise Namespace.FieldError(field_name, 'does not exist')
 
     def get_field_python_type(self, field_name):
         try:
             return self._get_field_packager(field_name).get_python_type()
-        except mpp.internal.api_impl.PackagerError:
+        except api_impl.PackagerError:
             raise Namespace.FieldError(field_name, 'does not exist')
 
 
     def is_field_non_zero(self, field_name):
         try:
             return self._get_field_packager(field_name).is_non_zero()
-        except mpp.internal.api_impl.PackagerError:
+        except api_impl.PackagerError:
             raise Namespace.FieldError(field_name, 'does not exist')
 
     def _get_field_packager(self, field_name):
         if field_name in list(self.fields.keys()):
             return self.fields[field_name]
         else:
-            raise mpp.internal.api_impl.PackagerError("unknown field " + field_name + " requested")
+            raise api_impl.PackagerError("unknown field " + field_name + " requested")
     
 class Loader(object):
     
@@ -753,7 +753,7 @@ class Loader(object):
         self.last_file_data = None # for performance boost reasons
     
     def create_database(self, dbfile, previous_db = None):
-        self.db = mpp.internal.dbwrap.Database()
+        self.db = dbwrap.Database()
         try:
             self.db.create(dbfile, clone_from=previous_db)
         except:
@@ -761,7 +761,7 @@ class Loader(object):
         return True
         
     def open_database(self, dbfile, read_only = True):
-        self.db = mpp.internal.dbwrap.Database()
+        self.db = dbwrap.Database()
         if os.path.exists(dbfile) == False:
             return False
         try:
@@ -861,7 +861,7 @@ class Loader(object):
                     
                     try:
                         packager = space._get_field_packager(each[0])
-                    except mpp.internal.api_impl.PackagerError:
+                    except api_impl.PackagerError:
                         raise Loader.DataNotPackable(namespace, each[0], each[1], None, "The field has not been found")
         
                     if space.support_regions != support_regions:
@@ -871,7 +871,7 @@ class Loader(object):
                         packed_data = packager.pack(each[1])
                         if packed_data == None:
                             continue
-                    except mpp.internal.api_impl.PackagerError:
+                    except api_impl.PackagerError:
                         raise Loader.DataNotPackable(namespace, each[0], each[1], packager, "Packager raised exception")
                     
                     yield (each[0], packed_data)
@@ -1065,7 +1065,7 @@ class Plugin(BasePlugin):
         if hasattr(self, 'is_updated') == False:
             self.is_updated = False # original initialization
 
-        db_loader = self.get_plugin('mpp.dbf').get_loader()
+        db_loader = self.get_plugin('metrixpp.mpp.dbf').get_loader()
 
         if namespace == None:
             namespace = self.get_name()

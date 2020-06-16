@@ -8,13 +8,13 @@
 import logging
 import sys
 
-import mpp.api
-import mpp.utils
-import mpp.cout
+from metrixpp.mpp import api
+from metrixpp.mpp import utils
+from metrixpp.mpp import cout
 
 DIGIT_COUNT = 8
 
-class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
+class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
     
     MODE_NEW     = 0x01
     MODE_TOUCHED = 0x03
@@ -55,8 +55,8 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
             self.parser.error("option --scope-mode: The mode '" + options.__dict__['scope_mode'] + "' requires '--db-file-prev' option set")
 
     def run(self, args):
-        loader_prev = self.get_plugin('mpp.dbf').get_loader_prev()
-        loader = self.get_plugin('mpp.dbf').get_loader()
+        loader_prev = self.get_plugin('metrixpp.mpp.dbf').get_loader_prev()
+        loader = self.get_plugin('metrixpp.mpp.dbf').get_loader()
     
         paths = None
         if len(args) == 0:
@@ -83,7 +83,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
         result += "{'view': ["
 
     for (ind, path) in enumerate(paths):
-        path = mpp.utils.preprocess_path(path)
+        path = utils.preprocess_path(path)
         
         aggregated_data, aggregated_data_prev = load_aggregated_data_with_mode(loader, loader_prev, path , mode)
         
@@ -95,7 +95,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
             subdirs = sorted(aggregated_data.get_subdirs())
             subfiles = sorted(aggregated_data.get_subfiles())
         else:
-            mpp.utils.report_bad_path(path)
+            utils.report_bad_path(path)
             exit_code += 1
         aggregated_data_tree = append_suppressions(path, aggregated_data_tree, loader, mode)
 
@@ -123,12 +123,12 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
         if out_format == 'txt':
             cout_txt(data, loader)
         elif out_format == 'xml':
-            result += mpp.utils.serialize_to_xml(data, root_name = "data", digitCount = DIGIT_COUNT) + "\n"
+            result += utils.serialize_to_xml(data, root_name = "data", digitCount = DIGIT_COUNT) + "\n"
         elif out_format == 'python':
             postfix = ""
             if ind < len(paths) - 1:
                 postfix = ", "
-            result += mpp.utils.serialize_to_python(data, root_name = "data") + postfix
+            result += utils.serialize_to_python(data, root_name = "data") + postfix
 
     if out_format == 'xml':
         result += "</view>"
@@ -144,7 +144,7 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
     else:
         assert(mode == Plugin.MODE_NEW or mode == Plugin.MODE_TOUCHED)
         
-        class AggregatedFilteredData(mpp.api.AggregatedData):
+        class AggregatedFilteredData(api.AggregatedData):
             
             def __init__(self, loader, path):
                 super(AggregatedFilteredData, self).__init__(loader, path)
@@ -245,7 +245,7 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                         result._append_data(file_data)
                         result_prev._append_data(file_data_prev)
                     # process regions separately
-                    matcher = mpp.utils.FileRegionsMatcher(file_data, file_data_prev)
+                    matcher = utils.FileRegionsMatcher(file_data, file_data_prev)
                     prev_reg_ids = set()
                     for region in file_data.iterate_regions():
                         prev_id = matcher.get_prev_id(region.get_id())
@@ -290,7 +290,7 @@ def append_regions(file_data_tree, file_data, file_data_prev, nest_regions):
     if file_data_prev != None:
         file_data_tree = append_diff(file_data_tree,
                                      file_data_prev.get_data_tree())
-        regions_matcher = mpp.utils.FileRegionsMatcher(file_data, file_data_prev)
+        regions_matcher = utils.FileRegionsMatcher(file_data, file_data_prev)
     
     if nest_regions == False:
         regions = []
@@ -303,7 +303,7 @@ def append_regions(file_data_tree, file_data, file_data_prev, nest_regions):
                                                region_data_prev.get_data_tree())
                 is_modified = regions_matcher.is_modified(region.get_id())
             regions.append({"info": {"name" : region.name,
-                                     'type': mpp.api.Region.T().to_str(region.get_type()),
+                                     'type': api.Region.T().to_str(region.get_type()),
                                      'modified': is_modified,
                                      'cursor' : region.cursor,
                                      'line_begin': region.line_begin,
@@ -323,7 +323,7 @@ def append_regions(file_data_tree, file_data, file_data_prev, nest_regions):
                                                region_data_prev.get_data_tree())
                 is_modified = regions_matcher.is_modified(region.get_id())
             result = {"info": {"name" : region.name,
-                               'type' : mpp.api.Region.T().to_str(region.get_type()),
+                               'type' : api.Region.T().to_str(region.get_type()),
                                'modified': is_modified,
                                'cursor' : region.cursor,
                                'line_begin': region.line_begin,
@@ -543,9 +543,9 @@ def cout_txt_regions(path, regions, indent = 0):
                 if field in list(diff_data.keys()):
                     diff_str = " [" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
                 details.append((namespace + ":" + field, str(region['data'][namespace][field]) + diff_str))
-        mpp.cout.notify(path,
+        cout.notify(path,
                         region['info']['cursor'],
-                        mpp.cout.SEVERITY_INFO,
+                        cout.SEVERITY_INFO,
                         "Metrics per '" + region['info']['name']+ "' region",
                         details,
                         indent=indent)
@@ -571,9 +571,9 @@ def cout_txt(data, loader):
                     diff_str = " [" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
                 details.append((namespace + ":" + field, str(data['file-data'][namespace][field]) + diff_str))
     if len(details) > 0:
-        mpp.cout.notify(data['info']['path'],
+        cout.notify(data['info']['path'],
                     0,
-                    mpp.cout.SEVERITY_INFO,
+                    cout.SEVERITY_INFO,
                     "Metrics per file",
                     details)
 
@@ -634,15 +634,15 @@ def cout_txt(data, loader):
                 else:
                     metric_str = str(bar['metric'])
                 
-                metric_str = (" " * (mpp.cout.DETAILS_OFFSET - len(metric_str) - 1)) + metric_str
+                metric_str = (" " * (cout.DETAILS_OFFSET - len(metric_str) - 1)) + metric_str
                 count_str = str(bar['count'])
                 count_str = ((" " * (count_str_len - len(count_str))) + count_str + diff_str + "\t")
                 details.append((metric_str,
                                 "{0:.3f}".format(bar['ratio']) + " : " + "{0:.3f}".format(sum_ratio) +  " : " +
                                 count_str + ('|' * int(bar['ratio']*100))))
-            mpp.cout.notify(data['info']['path'],
+            cout.notify(data['info']['path'],
                     '', # no line number
-                    mpp.cout.SEVERITY_INFO,
+                    cout.SEVERITY_INFO,
                     "Overall metrics for '" + namespace + ":" + field + "' metric",
                     details)
     details = []
@@ -651,9 +651,9 @@ def cout_txt(data, loader):
     for each in sorted(data['subfiles']):
         details.append(('File', each))
     if len(details) > 0: 
-        mpp.cout.notify(data['info']['path'],
+        cout.notify(data['info']['path'],
                 '', # no line number
-                mpp.cout.SEVERITY_INFO,
+                cout.SEVERITY_INFO,
                 "Directory content:",
                 details)
     

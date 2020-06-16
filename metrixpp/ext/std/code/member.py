@@ -5,13 +5,13 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-import mpp.api
+from metrixpp.mpp import api
 import re
 
-class Plugin(mpp.api.Plugin,
-             mpp.api.IConfigurable,
-             mpp.api.Child,
-             mpp.api.MetricPluginMixin):
+class Plugin(api.Plugin,
+             api.IConfigurable,
+             api.Child,
+             api.MetricPluginMixin):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.code.member.fields", "--scmf",
@@ -73,9 +73,9 @@ class Plugin(mpp.api.Plugin,
                              'std.code.cpp': pattern_to_search_cpp,
                              'std.code.cs': pattern_to_search_cs,
                             },
-                            marker_type_mask=mpp.api.Marker.T.CODE,
-                            region_type_mask=mpp.api.Region.T.CLASS |
-                            mpp.api.Region.T.STRUCT | mpp.api.Region.T.INTERFACE)
+                            marker_type_mask=api.Marker.T.CODE,
+                            region_type_mask=api.Region.T.CLASS |
+                            api.Region.T.STRUCT | api.Region.T.INTERFACE)
         self.declare_metric(self.is_active_globals,
                             self.Field('globals', int, non_zero=True),
                             {
@@ -83,9 +83,9 @@ class Plugin(mpp.api.Plugin,
                              'std.code.cpp': pattern_to_search_cpp,
                              'std.code.cs': pattern_to_search_cs,
                             },
-                            marker_type_mask=mpp.api.Marker.T.CODE,
-                            region_type_mask=mpp.api.Region.T.GLOBAL |
-                            mpp.api.Region.T.NAMESPACE)
+                            marker_type_mask=api.Marker.T.CODE,
+                            region_type_mask=api.Region.T.GLOBAL |
+                            api.Region.T.NAMESPACE)
         self.declare_metric(self.is_active_classes,
                             self.Field('classes', int, non_zero=True),
                             (None, self.ClassesCounter),
@@ -120,35 +120,35 @@ class Plugin(mpp.api.Plugin,
         super(Plugin, self).initialize(fields=self.get_fields())
         
         if self.is_active() == True:
-            self.subscribe_by_parents_interface(mpp.api.ICode)
+            self.subscribe_by_parents_interface(api.ICode)
 
-    class ClassesCounter(mpp.api.MetricPluginMixin.PlainCounter):
+    class ClassesCounter(api.MetricPluginMixin.PlainCounter):
         def count(self, marker, pattern_to_search):
             self.result = sum(1 for unused in self.data.iterate_regions(
-                filter_group=mpp.api.Region.T.CLASS, region_id=self.region.get_id()))
+                filter_group=api.Region.T.CLASS, region_id=self.region.get_id()))
 
-    class StructCounter(mpp.api.MetricPluginMixin.PlainCounter):
+    class StructCounter(api.MetricPluginMixin.PlainCounter):
         def count(self, marker, pattern_to_search):
             self.result = sum(1 for unused in self.data.iterate_regions(
-                filter_group=mpp.api.Region.T.STRUCT, region_id=self.region.get_id()))
+                filter_group=api.Region.T.STRUCT, region_id=self.region.get_id()))
 
-    class InterfaceCounter(mpp.api.MetricPluginMixin.PlainCounter):
+    class InterfaceCounter(api.MetricPluginMixin.PlainCounter):
         def count(self, marker, pattern_to_search):
             self.result = sum(1 for unused in self.data.iterate_regions(
-                filter_group=mpp.api.Region.T.INTERFACE, region_id=self.region.get_id()))
+                filter_group=api.Region.T.INTERFACE, region_id=self.region.get_id()))
 
-    class TypeCounter(mpp.api.MetricPluginMixin.PlainCounter):
+    class TypeCounter(api.MetricPluginMixin.PlainCounter):
         def count(self, marker, pattern_to_search):
             self.result = sum(1 for unused in self.data.iterate_regions(
-                filter_group=mpp.api.Region.T.CLASS | mpp.api.Region.T.STRUCT |
-                 mpp.api.Region.T.INTERFACE, region_id=self.region.get_id()))
+                filter_group=api.Region.T.CLASS | api.Region.T.STRUCT |
+                 api.Region.T.INTERFACE, region_id=self.region.get_id()))
 
-    class MethodCounter(mpp.api.MetricPluginMixin.PlainCounter):
+    class MethodCounter(api.MetricPluginMixin.PlainCounter):
         def count(self, marker, pattern_to_search):
             self.result = sum(1 for unused in self.data.iterate_regions(
-                filter_group=mpp.api.Region.T.FUNCTION, region_id=self.region.get_id()))
+                filter_group=api.Region.T.FUNCTION, region_id=self.region.get_id()))
 
-    class NamespaceCounter(mpp.api.MetricPluginMixin.PlainCounter):
+    class NamespaceCounter(api.MetricPluginMixin.PlainCounter):
         def count(self, marker, pattern_to_search):
             self.result = sum(1 for unused in self.data.iterate_regions(
-                filter_group=mpp.api.Region.T.NAMESPACE, region_id=self.region.get_id()))
+                filter_group=api.Region.T.NAMESPACE, region_id=self.region.get_id()))

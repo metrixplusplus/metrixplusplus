@@ -5,10 +5,10 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-import mpp.api
+from metrixpp.mpp import api
 import re
 
-class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.IConfigurable):
+class Plugin(api.Plugin, api.MetricPluginMixin, api.Child, api.IConfigurable):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.code.filelines.code", "--scflc", action="store_true", default=False,
@@ -40,23 +40,23 @@ class Plugin(mpp.api.Plugin, mpp.api.MetricPluginMixin, mpp.api.Child, mpp.api.I
         self.declare_metric(self.is_active_code,
                        self.Field('code', int),
                        self.pattern_line,
-                       mpp.api.Marker.T.CODE | mpp.api.Marker.T.STRING,
+                       api.Marker.T.CODE | api.Marker.T.STRING,
                        merge_markers=True)
         self.declare_metric(self.is_active_preprocessor,
                        self.Field('preprocessor', int),
                        self.pattern_line,
-                       mpp.api.Marker.T.PREPROCESSOR)
+                       api.Marker.T.PREPROCESSOR)
         self.declare_metric(self.is_active_comments,
                        self.Field('comments', int),
                        self.pattern_line,
-                       mpp.api.Marker.T.COMMENT)
+                       api.Marker.T.COMMENT)
         self.declare_metric(self.is_active_total,
                        self.Field('total', int),
                        self.pattern_line,
-                       mpp.api.Marker.T.ANY,
+                       api.Marker.T.ANY,
                        merge_markers=True)
 
         super(Plugin, self).initialize(fields=self.get_fields(), support_regions=False)
 
         if self.is_active() == True:
-            self.subscribe_by_parents_interface(mpp.api.ICode)
+            self.subscribe_by_parents_interface(api.ICode)

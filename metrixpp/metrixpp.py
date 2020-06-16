@@ -12,8 +12,8 @@ import os
 import subprocess
 import itertools
 
-import mpp.log
-import mpp.internal.loader
+from metrixpp.mpp import log
+from metrixpp.mpp.internal import loader as plugin_loader
 
 def main():
     
@@ -33,7 +33,7 @@ def main():
     if len(sys.argv[1:]) > 1:
         command = sys.argv[2]
 
-    loader = mpp.internal.loader.Loader()
+    loader = plugin_loader.Loader()
     mpp_paths = []
     if 'METRIXPLUSPLUS_PATH' in list(os.environ.keys()):
         mpp_paths = os.environ['METRIXPLUSPLUS_PATH'].split(os.pathsep)
@@ -44,7 +44,7 @@ def main():
     
 def start():
     ts = time.time()
-    mpp.log.set_default_format()
+    log.set_default_format()
 
     exit_code = main()
     time_spent = round((time.time() - ts), 2)

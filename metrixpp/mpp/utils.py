@@ -5,8 +5,8 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-import mpp.internal.py2xml
-import mpp.internal.py2txt
+from metrixpp.mpp.internal import py2xml
+from metrixpp.mpp.internal import py2txt
 
 import logging
 import re
@@ -98,7 +98,7 @@ def report_bad_path(path):
     logging.error("Specified path '" + path + "' is invalid: not found in the database records.")
 
 def serialize_to_xml(data, root_name = None, digitCount = None):
-    serializer = mpp.internal.py2xml.Py2XML(digitCount)
+    serializer = py2xml.Py2XML(digitCount)
     return serializer.parse(data, objName=root_name)
 
 def serialize_to_python(data, root_name = None):
@@ -110,5 +110,5 @@ def serialize_to_python(data, root_name = None):
     return prefix + data.__repr__() + postfix
 
 def serialize_to_txt(data, root_name = None):
-    serializer = mpp.internal.py2txt.Py2TXT()
+    serializer = py2txt.Py2TXT()
     return serializer.parse(data, objName=root_name, indent = -1)

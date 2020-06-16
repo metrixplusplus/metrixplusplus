@@ -5,12 +5,12 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-import mpp.api
+from metrixpp.mpp import api
 
 import os.path
 import logging
 
-class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
+class Plugin(api.Plugin, api.IConfigurable):
     
     def declare_configuration(self, parser):
         if self.get_action() == 'collect':
@@ -46,16 +46,16 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable):
                 except:
                     logging.warn("Failure in removing file: " + self.dbfile)
     
-            self.loader = mpp.api.Loader()
+            self.loader = api.Loader()
             created = self.loader.create_database(self.dbfile, previous_db = self.dbfile_prev)
             if created == False:
                 self.parser.error("option --db-file: Can not create file '{0}'".format(self.dbfile))
             
         else:
-            self.loader = mpp.api.Loader()
+            self.loader = api.Loader()
             if self.loader.open_database(self.dbfile) == False:
                 self.parser.error("option --db-file: Can not open file '{0}'".format(self.dbfile))
-            self.loader_prev = mpp.api.Loader()
+            self.loader_prev = api.Loader()
             if self.dbfile_prev != None:
                 if self.loader_prev.open_database(self.dbfile_prev) == False:
                     self.parser.error("option --db-file-prev: Can not open file '{0}'".format(self.dbfile_prev))

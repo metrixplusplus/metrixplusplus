@@ -5,16 +5,16 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-import mpp.api
-import mpp.utils
+from metrixpp.mpp import api
+from metrixpp.mpp import utils
 
 import csv
 
-class Plugin(mpp.api.Plugin, mpp.api.IRunable):
+class Plugin(api.Plugin, api.IRunable):
 
     def run(self, args):
-        self.loader_prev = self.get_plugin('mpp.dbf').get_loader_prev()
-        self.loader = self.get_plugin('mpp.dbf').get_loader()
+        self.loader_prev = self.get_plugin('metrixpp.mpp.dbf').get_loader_prev()
+        self.loader = self.get_plugin('metrixpp.mpp.dbf').get_loader()
     
         paths = None
         if len(args) == 0:
@@ -44,11 +44,11 @@ class Plugin(mpp.api.Plugin, mpp.api.IRunable):
         csvWriter.writerow(columnNames)
         
         for path in paths:
-            path = mpp.utils.preprocess_path(path)
+            path = utils.preprocess_path(path)
             
             files = self.loader.iterate_file_data(path)
             if files == None:
-                mpp.utils.report_bad_path(path)
+                utils.report_bad_path(path)
                 exit_code += 1
                 continue
                 
@@ -56,10 +56,10 @@ class Plugin(mpp.api.Plugin, mpp.api.IRunable):
                 matcher = None
                 file_data_prev = self.loader_prev.load_file_data(file_data.get_path())
                 if file_data_prev != None:
-                    matcher = mpp.utils.FileRegionsMatcher(file_data, file_data_prev)
+                    matcher = utils.FileRegionsMatcher(file_data, file_data_prev)
                 for reg in file_data.iterate_regions():
                     per_reg_data = []
-                    per_reg_data.append(mpp.api.Region.T().to_str(reg.get_type()))
+                    per_reg_data.append(api.Region.T().to_str(reg.get_type()))
                     if matcher != None and matcher.is_matched(reg.get_id()):
                         per_reg_data.append(matcher.is_modified(reg.get_id()))
                     else:

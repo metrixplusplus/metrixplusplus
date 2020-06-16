@@ -5,9 +5,9 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-import mpp.api
+from metrixpp.mpp import api
 
-class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
+class Plugin(api.Plugin, api.Child, api.IConfigurable):
     
     def declare_configuration(self, parser):
         parser.add_option("--std.code.length.total", "--sclent", action="store_true", default=False,
@@ -20,10 +20,10 @@ class Plugin(mpp.api.Plugin, mpp.api.Child, mpp.api.IConfigurable):
         fields = []
         if self.is_active == True:
             fields.append(self.Field('total', int))
-        mpp.api.Plugin.initialize(self, fields=fields)
+        api.Plugin.initialize(self, fields=fields)
         
         if len(fields) != 0:
-            self.subscribe_by_parents_interface(mpp.api.ICode)
+            self.subscribe_by_parents_interface(api.ICode)
 
     def callback(self, parent, data, is_updated):
         is_updated = is_updated or self.is_updated

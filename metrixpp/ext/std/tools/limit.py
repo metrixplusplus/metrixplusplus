@@ -8,11 +8,11 @@
 import logging
 import re
 
-import mpp.api
-import mpp.utils
-import mpp.cout
+from metrixpp.mpp import api
+from metrixpp.mpp import utils
+from metrixpp.mpp import cout
 
-class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
+class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
     
     MODE_NEW     = 0x01
     MODE_TREND   = 0x03
@@ -78,7 +78,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
             def __repr__(self):
                 return "'{0}:{1}' {2} {3} [applied to '{4}' region type(s)]".format(
                         self.namespace, self.field, self.filter[1], self.limit,
-                        mpp.api.Region.T().to_str(self.region_types))
+                        api.Region.T().to_str(self.region_types))
         
         self.limits = []
         pattern = re.compile(r'''([^:]+)[:]([^:]+)[:]([-+]?[0-9]+(?:[.][0-9]+)?)(?:[:](.+))?''')
@@ -91,13 +91,13 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
                 if match.group(4) != None:
                     for region_type in match.group(4).split(','):
                         region_type = region_type.strip()
-                        group_id = mpp.api.Region.T().from_str(region_type)
+                        group_id = api.Region.T().from_str(region_type)
                         if group_id == None:
                             self.parser.error(
                                     "option --max-limit: uknown region type (allowed: global, class, struct, namespace, function, interface, any): " + region_type)
                         region_types |= group_id
                 else:
-                    region_types = mpp.api.Region.T().ANY
+                    region_types = api.Region.T().ANY
                 limit = Limit("max", float(match.group(3)), match.group(1), match.group(2),
                         (match.group(2), '>', float(match.group(3))), region_types, each)
                 self.limits.append(limit)
@@ -110,20 +110,20 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
                 if match.group(4) != None:
                     for region_type in match.group(4).split(','):
                         region_type = region_type.strip()
-                        group_id = mpp.api.Region.T().from_str(region_type)
+                        group_id = api.Region.T().from_str(region_type)
                         if group_id == None:
                             self.parser.error(
                                     "option --max-limit: uknown region type (allowed: global, class, struct, namespace, function, interface, any): " + region_type)
                         region_types |= group_id
                 else:
-                    region_types = mpp.api.Region.T().ANY
+                    region_types = api.Region.T().ANY
                 limit = Limit("min", float(match.group(3)), match.group(1), match.group(2),
                         (match.group(2), '<', float(match.group(3))), region_types, each)
                 self.limits.append(limit)
 
     def initialize(self):
         super(Plugin, self).initialize()
-        db_loader = self.get_plugin('mpp.dbf').get_loader()
+        db_loader = self.get_plugin('metrixpp.mpp.dbf').get_loader()
         self._verify_namespaces(db_loader.iterate_namespace_names())
         for each in db_loader.iterate_namespace_names():
             self._verify_fields(each, db_loader.get_namespace(each).iterate_field_names())
@@ -173,8 +173,8 @@ def main(plugin, args):
     
     exit_code = 0
 
-    loader_prev = plugin.get_plugin('mpp.dbf').get_loader_prev()
-    loader = plugin.get_plugin('mpp.dbf').get_loader()
+    loader_prev = plugin.get_plugin('metrixpp.mpp.dbf').get_loader_prev()
+    loader = plugin.get_plugin('metrixpp.mpp.dbf').get_loader()
     
     paths = None
     if len(args) == 0:
@@ -188,7 +188,7 @@ def main(plugin, args):
         modified_file_ids = get_list_of_modified_files(loader, loader_prev)
         
     for path in paths:
-        path = mpp.utils.preprocess_path(path)
+        path = utils.preprocess_path(path)
         
         for limit in plugin.iterate_limits():
             warns_count = 0
@@ -214,7 +214,7 @@ def main(plugin, args):
                                                    sort_by=sort_by,
                                                    limit_by=limit_by)
             if selected_data == None:
-                mpp.utils.report_bad_path(path)
+                utils.report_bad_path(path)
                 exit_code += 1
                 continue
             
@@ -231,14 +231,14 @@ def main(plugin, args):
                         diff = 0
                         is_modified = False
                     else:
-                        matcher = mpp.utils.FileRegionsMatcher(file_data, file_data_prev)
+                        matcher = utils.FileRegionsMatcher(file_data, file_data_prev)
                         prev_id = matcher.get_prev_id(select_data.get_region().get_id())
                         if matcher.is_matched(select_data.get_region().get_id()):
                             if matcher.is_modified(select_data.get_region().get_id()):
                                 is_modified = True
                             else:
                                 is_modified = False
-                            diff = mpp.api.DiffData(select_data,
+                            diff = api.DiffData(select_data,
                                                            file_data_prev.get_region(prev_id)).get_data(limit.namespace, limit.field)
 
                 if (plugin.is_mode_matched(limit.limit,
@@ -273,7 +273,7 @@ def main(plugin, args):
                 if limit_warnings != None:
                     limit_warnings -= 1
                     
-            mpp.cout.notify(path, None, mpp.cout.SEVERITY_INFO, "{0} regions exceeded the limit {1}".format(warns_count, str(limit)))
+            cout.notify(path, None, cout.SEVERITY_INFO, "{0} regions exceeded the limit {1}".format(warns_count, str(limit)))
 
     return exit_code
 
@@ -328,7 +328,7 @@ def report_limit_exceeded(path, cursor, namespace, field, region_name,
                ("Change trend", '{0:{1}}'.format(trend_value, '+' if trend_value else '')),
                ("Limit", stat_limit),
                ("Suppressed", is_suppressed)]
-    mpp.cout.notify(path, cursor, mpp.cout.SEVERITY_WARNING, message, details)
+    cout.notify(path, cursor, cout.SEVERITY_WARNING, message, details)
 
     
     
