@@ -9,8 +9,15 @@ Check projects documentation for additional information:
 
 Thank you for using the tool!
 
-## Download & Install
-In order to get the tool working, [download the archive](https://github.com/metrixplusplus/metrixplusplus/releases)
+## Installation
+
+Metrix++ is published on [PyPi](https://pypi.org/project/metrix/) as `metrixpp` and can be installed using pip:
+
+```
+pip install metrixpp
+```
+
+Alternatively you can [download the archive](https://github.com/metrixplusplus/metrixplusplus/releases)
 with the latest stable version and unpack it to some folder.
 The first run of the tool will trigger the installation within the folder, where it was launched.
 
