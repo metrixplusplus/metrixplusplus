@@ -12,8 +12,8 @@ import os
 import subprocess
 import itertools
 
-from metrixpp.mpp import log
-from metrixpp.mpp.internal import loader as plugin_loader
+from .mpp import log
+from .mpp.internal import loader as plugin_loader
 
 def main():
     
