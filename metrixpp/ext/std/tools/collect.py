@@ -144,9 +144,15 @@ class DirectoryReader():
                         f = open(full_path, 'rU');
                         text = f.read();
                         # getting along with the different string handling of python 2 and 3
+                        # trying to get along with different encodings to get the tests running
+                        # on windows and linux
+                        try:
+                            text = text.encode(f.encoding)
+                        except:
+                            pass
                         try:
                             text = text.decode('utf-8')
-                        except (UnicodeDecodeError, AttributeError):
+                        except:
                             pass
                         f.close()
                         checksum = binascii.crc32(text.encode('utf8')) & 0xffffffff # to match python 3

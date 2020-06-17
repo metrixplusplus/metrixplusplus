@@ -159,7 +159,6 @@ class ToolRunner(object):
             f = open(diff_file, 'w')
             f.write(diff_text)
             f.close()
-            print(diff_text)
         else:
             if os.path.exists(real_file):
                 os.unlink(real_file)
