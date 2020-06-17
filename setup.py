@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="metrixpp-prozessorkern", # Replace with your own username
+    name="metrixpp",
     version="0.0.1",
     author="Stefan Strobel",
     author_email="stefan.strobel@shimatta.net",
