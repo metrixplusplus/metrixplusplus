@@ -131,7 +131,7 @@ class ToolRunner(object):
             textDict = text
             goldDict = gold_text
         
-        if isinstance(textDict, dict) and isinstance(goldDict, dict):    
+        if isinstance(textDict, dict) and isinstance(goldDict, dict):
             result = (textDict == goldDict)
         else:
             gold_to_compare = gold_text
@@ -159,6 +159,7 @@ class ToolRunner(object):
             f = open(diff_file, 'w')
             f.write(diff_text)
             f.close()
+            print(diff_text)
         else:
             if os.path.exists(real_file):
                 os.unlink(real_file)
