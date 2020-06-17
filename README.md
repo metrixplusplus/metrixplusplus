@@ -11,7 +11,7 @@ Thank you for using the tool!
 
 ## Installation
 
-Metrix++ is published on [PyPi](https://pypi.org/project/metrix/) as `metrixpp` and can be installed using pip:
+Metrix++ is published on [PyPi](https://pypi.org/project/metrixpp/) as `metrixpp` and can be installed using pip:
 
 ```
 pip install metrixpp
