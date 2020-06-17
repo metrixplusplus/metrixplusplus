@@ -1,4 +1,7 @@
 # [Metrix++](https://github.com/metrixplusplus/metrixplusplus)
+
+![Python application](https://github.com/metrixplusplus/metrixplusplus/workflows/Python%20application/badge.svg)
+
 Metrix++ is an extendable tool for code metrics collection and analysis.
 Check projects documentation for additional information:
 * [https://metrixplusplus.github.io/](https://metrixplusplus.github.io/)
