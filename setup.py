@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="metrixpp",
-    version="0.0.1a",
+    version="1.6.0",
     author="Stefan Strobel",
     author_email="stefan.strobel@shimatta.net",
     description="Metrix++ is an extendable tool for code metrics collection and analysis.",
