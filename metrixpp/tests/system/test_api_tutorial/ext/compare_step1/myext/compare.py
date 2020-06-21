@@ -5,6 +5,11 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-if __name__ == '__main__':
-    from metrixpp import metrixpp
-    metrixpp.start()
+from metrixpp.mpp import api
+
+class Plugin(api.Plugin, api.IRunable):
+    
+    def run(self, args):
+        print(args)
+        return 0
+
