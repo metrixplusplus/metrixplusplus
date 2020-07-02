@@ -54,9 +54,6 @@ const features = [
       <>
         Applicable to huge code bases: thousands of files per minute.
         Ultra-fast feedback on iterative re-run.
-        Effortless application to legacy code.
-        Recognises legacy, modified and new code.
-        Prevents from negative trends. Encourages positive.
       </>
     ),
   },
