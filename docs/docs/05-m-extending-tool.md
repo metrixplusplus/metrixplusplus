@@ -5,7 +5,7 @@ sidebar_label: Extending the tool
 ---
 
 Want to enable a new metric or a language, need advanced post-analysis tool? Please, check the plugin development tutorial.
-# Create plugin
+## Create plugin
 There are 3 types of plugins considered in this chapter:
 
 * Metric plugin
@@ -69,9 +69,398 @@ list of Metrix++ actions affected by this plugin
 True or False, working status of a plugin
 
 6. Now run Metrix++ to see how this new plugin works:
-```
+```py
 > python "/path/to/metrix++.py" collect
 ```
 ```
 Hello world
 ```
+### Toogle option for the plugin
+1. It is recommended to follow the convention for all plugins: 'run only if enabled'. So, let's extend the magic.py file to make it configurable.
+```py
+import mpp.api
+ 
+class Plugin(mpp.api.Plugin,
+             # make this instance configurable...
+             mpp.api.IConfigurable):
+    # ... and implement 2 interfaces
+    
+    def declare_configuration(self, parser):
+        parser.add_option("--myext.magic.numbers", "--mmn",
+            action="store_true", default=False,
+            help="Enables collection of magic numbers metric [default: %default]")
+        
+    def configure(self, options):
+        self.is_active_numbers = options.__dict__['myext.magic.numbers']
+    
+    def initialize(self):
+        # use configuration option here
+        if self.is_active_numbers == True:
+            print "Hello world"
+```
+parser argument is an instance of optparse.OptionParser class. It has got an extension to accept multiple options of the same argument. Check std.tools.limit to see how to declare multiopt options, if you need.
+
+2. Now run Metrix++ to see how this works:
+```py
+> python "/path/to/metrix++.py" collect --myext.magic.numbers
+```
+```
+Hello world
+```
+### Subscribe to notifications from parent plugins (or code parsers)
+1. Every plugin works in a callback functions called by parent plugins. Callback receives a reference to parent plugin, data object where to store metrics data, and a flag indicating if there are changes in file or parent's settings since the previous collection.
+```py
+import mpp.api
+ 
+class Plugin(mpp.api.Plugin,
+             mpp.api.IConfigurable,
+             # declare that it can subscribe on notifications
+             mpp.api.Child):
+    
+    def declare_configuration(self, parser):
+        parser.add_option("--myext.magic.numbers", "--mmn",
+            action="store_true", default=False,
+            help="Enables collection of magic numbers metric [default: %default]")
+    
+    def configure(self, options):
+        self.is_active_numbers = options.__dict__['myext.magic.numbers']
+    
+    def initialize(self):
+        if self.is_active_numbers == True:
+            # subscribe to notifications from all code parsers
+            self.subscribe_by_parents_interface(mpp.api.ICode, 'callback')
+ 
+    # parents (code parsers) will call the callback declared
+    def callback(self, parent, data, is_updated):
+        print parent.get_name(), data.get_path(), is_updated
+```
+2. Now run Metrix++ to see how this works. Try to do iterative scans (--db-file-prev option) to see how the state of arguments is changed
+```py
+> python "/path/to/metrix++.py" collect --myext.magic.numbers
+```
+```py
+std.code.cpp ./test.cpp True
+```
+
+### Implement simple metric based on regular expression pattern
+
+1. Callback may execute counting, searcing and additional parsing and store results, using data argument. 'data' argument is an instance of mpp.api.FileData class. However, most metrics can be implemented simplier, if mpp.api.MetricPluginMixin routines are used. MetricPluginMixin implements declarative style for metrics based on searches by regular expression. It cares about initialisation of database fields and properties. It implements default callback which counts number of matches by regular expression for all active declared metrics. So, let's utilise that:
+```
+import mpp.api
+import re
+ 
+class Plugin(mpp.api.Plugin,
+             mpp.api.IConfigurable,
+             mpp.api.Child,
+             # reuse by inheriting standard metric facilities
+             mpp.api.MetricPluginMixin):
+    
+    def declare_configuration(self, parser):
+        parser.add_option("--myext.magic.numbers", "--mmn",
+            action="store_true", default=False,
+            help="Enables collection of magic numbers metric [default: %default]")
+    
+    def configure(self, options):
+        self.is_active_numbers = options.__dict__['myext.magic.numbers']
+    
+    def initialize(self):
+        # declare metric rules
+        self.declare_metric(
+            self.is_active_numbers, # to count if active in callback
+            self.Field('numbers', int), # field name and type in the database
+            re.compile(r'''\b[0-9]+\b'''), # pattern to search
+            marker_type_mask=mpp.api.Marker.T.CODE, # search in code
+            region_type_mask=mpp.api.Region.T.ANY) # search in all types of regions
+        
+        # use superclass facilities to initialize everything from declared fields
+        super(Plugin, self).initialize(fields=self.get_fields())
+        
+        # subscribe to all code parsers if at least one metric is active
+        if self.is_active() == True:
+            self.subscribe_by_parents_interface(mpp.api.ICode)
+```
+2. Now run Metrix++ to count numbers in code files.
+```py
+> python "/path/to/metrix++.py" collect --myext.magic.numbers
+```
+3. Now view the results. At this stage it is fully working simple metric.
+```py
+> python "/path/to/metrix++.py" view
+```
+```
+:: info: Overall metrics for 'myext.magic:numbers' metric
+	Average        : 2.75
+	Minimum        : 0
+	Maximum        : 7
+	Total          : 11.0
+	Distribution   : 4 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.250 : 0.250 : 1	|||||||||||||||||||||||||
+	             1 : 0.250 : 0.500 : 1	|||||||||||||||||||||||||
+	             3 : 0.250 : 0.750 : 1	|||||||||||||||||||||||||
+	             7 : 0.250 : 1.000 : 1	|||||||||||||||||||||||||
+
+:: info: Directory content:
+	Directory      : .
+```
+### Extend regular expression incremental counting by smarter logic
+1. At this stage the metric counts every number in source code. However, we indent to spot only 'magic' numbers. Declared constant is not a magic number, so it is better to exclude constants from counting. It is easy to change default counter behaviour by implementing a function with name '_<metric_name>_count'.
+```py
+import mpp.api
+import re
+ 
+class Plugin(mpp.api.Plugin,
+             mpp.api.IConfigurable,
+             mpp.api.Child,
+             mpp.api.MetricPluginMixin):
+    
+    def declare_configuration(self, parser):
+        parser.add_option("--myext.magic.numbers", "--mmn",
+            action="store_true", default=False,
+            help="Enables collection of magic numbers metric [default: %default]")
+    
+    def configure(self, options):
+        self.is_active_numbers = options.__dict__['myext.magic.numbers']
+    
+    def initialize(self):
+        # improve pattern to find declarations of constants
+        pattern_to_search = re.compile(
+            r'''((const(\s+[_a-zA-Z][_a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+        self.declare_metric(self.is_active_numbers,
+                            self.Field('numbers', int),
+                            # give a pair of pattern + custom counter logic class
+                            (pattern_to_search, self.NumbersCounter),
+                            marker_type_mask=mpp.api.Marker.T.CODE,
+                            region_type_mask=mpp.api.Region.T.ANY)
+        
+        super(Plugin, self).initialize(fields=self.get_fields())
+        
+        if self.is_active() == True:
+            self.subscribe_by_parents_interface(mpp.api.ICode)
+    
+    # implement custom counter behavior:
+    # increments counter by 1 only if single number spotted,
+    # but not declaration of a constant
+    class NumbersCounter(mpp.api.MetricPluginMixin.IterIncrementCounter):
+        def increment(self, match):
+            if match.group(0).startswith('const'):
+                return 0
+            return 1
+```
+2. Initialy counter is initialized by zero, but it is possible to change it as well by implementing a function with name '_<metric_name>_count_initialize'. 
+3. Plugin we are implementing does not require this.
+Now run Metrix++ to collect and view the results.
+```py
+> python "/path/to/metrix++.py" collect --myext.magic.numbers
+```
+```py
+> python "/path/to/metrix++.py" view
+```
+
+### Language specific regular expressions
+1. In the previous step we added matching of constants assuming that identifiers may have symbols '_', 'a-z', 'A-Z' and '0-9'. It is true for C++ but it is not complete for Java. Java identifier may have '$' symbol in the identifier. So, let's add language specific pattern in the declaration of the metric:
+```py
+import mpp.api
+import re
+ 
+class Plugin(mpp.api.Plugin,
+             mpp.api.IConfigurable,
+             mpp.api.Child,
+             mpp.api.MetricPluginMixin):
+    
+    def declare_configuration(self, parser):
+        parser.add_option("--myext.magic.numbers", "--mmn",
+            action="store_true", default=False,
+            help="Enables collection of magic numbers metric [default: %default]")
+    
+    def configure(self, options):
+        self.is_active_numbers = options.__dict__['myext.magic.numbers']
+    
+    def initialize(self):
+        # specialized pattern for java
+        pattern_to_search_java = re.compile(
+            r'''((const(\s+[_$a-zA-Z][_$a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+        # pattern for C++ and C# languages
+        pattern_to_search_cpp_cs = re.compile(
+            r'''((const(\s+[_a-zA-Z][_a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+        # pattern for all other languages
+        pattern_to_search = re.compile(
+            r'''\b[0-9]+\b''')
+        self.declare_metric(self.is_active_numbers,
+                            self.Field('numbers', int),
+                            # dictionary of pairs instead of a single pair
+                            {
+                             'std.code.java': (pattern_to_search_java, self.NumbersCounter),
+                             'std.code.cpp': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             'std.code.cs': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             '*': pattern_to_search
+                            },
+                            marker_type_mask=mpp.api.Marker.T.CODE,
+                            region_type_mask=mpp.api.Region.T.ANY)
+        
+        super(Plugin, self).initialize(fields=self.get_fields())
+        
+        if self.is_active() == True:
+            self.subscribe_by_parents_interface(mpp.api.ICode)
+ 
+    class NumbersCounter(mpp.api.MetricPluginMixin.IterIncrementCounter):
+        def increment(self, match):
+            if match.group(0).startswith('const'):
+                return 0
+            return 1
+```
+2. Keys in the dictionary of patterns are names of parent plugins (references to code parsers). The key '*' refers to any parser.
+3. Now run Metrix++ to collect and view the results.
+```py
+> python "/path/to/metrix++.py" collect --myext.magic.numbers
+```
+```py
+> python "/path/to/metrix++.py" view
+```
+### Store only non-zero metric values
+1. Most functions have the metric, which we are implemneting, equal to zero. However, we are interested in finding code blocks having this metric greater than zero. Zeros consumes the space in the data file. So, we can optimise the size of a data file, if we exclude zero metric values. Let's declare this behavior for the metric.
+```py
+import mpp.api
+import re
+ 
+class Plugin(mpp.api.Plugin,
+             mpp.api.IConfigurable,
+             mpp.api.Child,
+             mpp.api.MetricPluginMixin):
+    
+    def declare_configuration(self, parser):
+        parser.add_option("--myext.magic.numbers", "--mmn",
+            action="store_true", default=False,
+            help="Enables collection of magic numbers metric [default: %default]")
+    
+    def configure(self, options):
+        self.is_active_numbers = options.__dict__['myext.magic.numbers']
+    
+    def initialize(self):
+        pattern_to_search_java = re.compile(
+            r'''((const(\s+[_$a-zA-Z][_$a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+        pattern_to_search_cpp_cs = re.compile(
+            r'''((const(\s+[_a-zA-Z][_a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+        pattern_to_search = re.compile(
+            r'''\b[0-9]+\b''')
+        self.declare_metric(self.is_active_numbers,
+                            self.Field('numbers', int,
+                                # optimize the size of datafile:
+                                # store only non-zero results
+                                non_zero=True),
+                            {
+                             'std.code.java': (pattern_to_search_java, self.NumbersCounter),
+                             'std.code.cpp': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             'std.code.cs': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             '*': pattern_to_search
+                            },
+                            marker_type_mask=mpp.api.Marker.T.CODE,
+                            region_type_mask=mpp.api.Region.T.ANY)
+        
+        super(Plugin, self).initialize(fields=self.get_fields())
+        
+        if self.is_active() == True:
+            self.subscribe_by_parents_interface(mpp.api.ICode)
+ 
+    class NumbersCounter(mpp.api.MetricPluginMixin.IterIncrementCounter):
+        def increment(self, match):
+            if match.group(0).startswith('const'):
+                return 0
+            return 1
+```
+2. Now run Metrix++ to collect and view the results.
+```py
+> python "/path/to/metrix++.py" collect --myext.magic.numbers
+```
+```py
+> python "/path/to/metrix++.py" view
+```
+### Additional per metric configuration options
+1. It is typical that most numbers counted by the metric are equal to 0, -1 or 1. They are not necessary magic numbers. 0 or 1 are typical variable initializers. -1 is a typical negative return code. So, let's implement simplified version of the metric, which does not count 0, -1 and 1, if the specific new option is set.
+```py
+import mpp.api
+import re
+ 
+class Plugin(mpp.api.Plugin,
+             mpp.api.IConfigurable,
+             mpp.api.Child,
+             mpp.api.MetricPluginMixin):
+    
+    def declare_configuration(self, parser):
+        parser.add_option("--myext.magic.numbers", "--mmn",
+            action="store_true", default=False,
+            help="Enables collection of magic numbers metric [default: %default]")
+        # Add new option
+        parser.add_option("--myext.magic.numbers.simplier", "--mmns",
+            action="store_true", default=False,
+            help="Is set, 0, -1 and 1 numbers are not counted [default: %default]")
+    
+    def configure(self, options):
+        self.is_active_numbers = options.__dict__['myext.magic.numbers']
+        # remember the option here
+        self.is_active_numbers_simplier = options.__dict__['myext.magic.numbers.simplier']
+    
+    def initialize(self):
+        pattern_to_search_java = re.compile(
+            r'''((const(\s+[_$a-zA-Z][_$a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+        pattern_to_search_cpp_cs = re.compile(
+            r'''((const(\s+[_a-zA-Z][_a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+        pattern_to_search = re.compile(
+            r'''\b[0-9]+\b''')
+        self.declare_metric(self.is_active_numbers,
+                            self.Field('numbers', int,
+                                non_zero=True),
+                            {
+                             'std.code.java': (pattern_to_search_java, self.NumbersCounter),
+                             'std.code.cpp': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             'std.code.cs': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             '*': pattern_to_search
+                            },
+                            marker_type_mask=mpp.api.Marker.T.CODE,
+                            region_type_mask=mpp.api.Region.T.ANY)
+        
+        super(Plugin, self).initialize(fields=self.get_fields(),
+            # remember option settings in data file properties
+            # in order to detect changes in settings on iterative re-run
+            properties=[self.Property('number.simplier', self.is_active_numbers_simplier)])
+        
+        if self.is_active() == True:
+            self.subscribe_by_parents_interface(mpp.api.ICode)
+ 
+    class NumbersCounter(mpp.api.MetricPluginMixin.IterIncrementCounter):
+        def increment(self, match):
+            if (match.group(0).startswith('const') or
+                (self.plugin.is_active_numbers_simplier == True and
+                 match.group(0) in ['0', '1', '-1', '+1'])):
+                return 0
+            return 1
+```
+2. Now run Metrix++ to collect and view the results.
+```py
+python "/path/to/metrix++.py" collect --myext.magic.numbers
+```
+```py
+> python "/path/to/metrix++.py" view
+```
+```py
+:: info: Overall metrics for 'myext.magic:numbers' metric
+	Average        : 2.5 (excluding zero metric values)
+	Minimum        : 2
+	Maximum        : 3
+	Total          : 5.0
+	Distribution   : 2 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             2 : 0.500 : 0.500 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
+	             3 : 0.500 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
+
+:: info: Directory content:
+	Directory      : .
+```
+### Summary
+We have finished with the tutorial. The tutorial explained how to implement simple and advanced metric plugins. We used built-in Metrix++ base classes. If you need to more advanced plugin capabilities, override in your plugin class functions inherited from mpp.api base classes. Check code of standard plugins to learn more techniques.
+
+## Analysis tool plugin
+
+This tutorial will explain how to build custom Metrix++ command, which is bound to custom post-analysis tool. We will implement the tool, which identifies all new and changed regions and counts number of added lines. We skip calculating number of deleted lines, but it is easy to extend from what we get finally in the tutorial.
+
+### New Metrix++ command / action
