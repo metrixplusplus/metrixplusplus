@@ -15,7 +15,7 @@ module.exports = {
       },
       links: [
         {
-          to: 'docs/01-overview',
+          to: 'docs/01-m-overview',
           activeBasePath: 'docs',
           label: 'Docs',
           position: 'left',
@@ -36,7 +36,7 @@ module.exports = {
           items: [
             {
               label: 'Overview',
-              to: 'docs/01-overview',
+              to: 'docs/01-m-overview',
             },
             {
               label: 'Download and install',

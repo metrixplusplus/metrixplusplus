@@ -1,5 +1,5 @@
 ---
-id: 02-download-install
+id: 02-m-download-install
 title: Download and install
 sidebar_label: Download and install
 ---
