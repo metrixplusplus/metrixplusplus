@@ -30,3 +30,6 @@
 .td-regular{
   background-color: #FFFFFF !important;
 }
+.center-justified {
+  text-align: justify;
+}

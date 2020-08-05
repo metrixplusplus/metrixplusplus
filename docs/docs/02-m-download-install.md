@@ -11,11 +11,11 @@ In order to checkout the latest development version from the [version control sy
 > git clone https://github.com/metrixplusplus/metrixplusplus metrixplusplus
 ```
 
-### Change and Release Notes
+#### Change and Release Notes
 Change and release notes are available [here](https://github.com/metrixplusplus/metrixplusplus/blob/master/CHANGELOG.md).
 
-### Prerequisites
+#### Prerequisites
 Python Runtime Environment (version 2.8.x or 3.x)
 
-### License
+#### License
 [MIT license](https://github.com/metrixplusplus/metrixplusplus/blob/master/LICENSE)

@@ -1,16 +1,15 @@
 module.exports = {
   title: 'Metrix++',
   tagline: 'Management of source code quality is possible',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://metrixplusplus.github.io/',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  projectName: 'metrixplusplus', // Usually your repo name.
   themeConfig: {
     navbar: {
       title: 'Metrix++',
       logo: {
-        alt: 'Metrix++ Logo',
+        alt: 'Metrix++',
         src: 'img/logo.svg',
       },
       links: [
@@ -22,7 +21,7 @@ module.exports = {
         },
         {to: 'blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/metrixplusplus/metrixplusplus',
           label: 'GitHub',
           position: 'right',
         },
@@ -35,16 +34,12 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Overview',
+              label: 'Users Manual',
               to: 'docs/01-m-overview',
             },
             {
-              label: 'Download and install',
-              to: 'docs/02-download-install',
-            },
-            {
-              label: 'Metrics',
-              to: 'docs/03-metrics',
+              label: 'Developers Manual',
+              to: 'docs/01-d-file',
             },
           ],
         },
@@ -52,17 +47,30 @@ module.exports = {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'Ask question',
+              href: 'https://github.com/metrixplusplus/metrixplusplus/issues/new',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              label: 'Report defect',
+              href: 'https://github.com/metrixplusplus/metrixplusplus/issues/new',
             },
-           // {
-           //   label: 'Twitter',
-           //   href: 'https://twitter.com/docusaurus',
-           // },
+          ],
+        },
+        {
+          title: 'Extentions',
+          items: [
+            {
+              label: 'Feature request',
+              href: 'https://github.com/metrixplusplus/metrixplusplus/issues/new',
+            },
+            {
+              label: 'Open issues',
+              href: 'https://github.com/metrixplusplus/metrixplusplus/issues',
+            },
+            {
+              label: 'Changelog',
+              href: 'https://github.com/metrixplusplus/metrixplusplus/blob/master/CHANGELOG.md',
+            },
           ],
         },
         {
@@ -74,12 +82,14 @@ module.exports = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/metrixplusplus/',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Metrix++.`,
+      copyright: `Copyright © 2009 - ${new Date().getFullYear()}, Metrix++ Project.`,
+      license: `Code licensed under MIT license, documentation under CC BY 3.0.`,
+      
     },
   },
   presets: [
@@ -92,13 +102,13 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
+            'https://metrixplusplus.github.io/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
+            'https://metrixplusplus.github.io/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

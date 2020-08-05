@@ -55,7 +55,7 @@ The metrics highlighed in blue are **per file** metrics. The other metrics are *
     </tr>
 </thead>
 <tbody>
-    <tr class="info">
+    <tr class="info center-justified">
     <td>std.general.size</td>
     <td>Size of a file in bytes.</td>
     <td rowspan="6"><ul><li>Monitoring the growth of source code base.</li>
@@ -64,79 +64,79 @@ The metrics highlighed in blue are **per file** metrics. The other metrics are *
         <li>Predicting delivery dates by comparing S-shaped code base growth / change curves.</li></ul>
     </td>
     </tr>
-    <tr  class="td-regular">
+    <tr  class="td-regular center-justified">
     <td>std.code.length.total</td>
     <td>The same as 'std.general.size' metric, but attributed to code regions.</td>
     </tr>
-    <tr class="info">
+    <tr class="info center-justified">
     <td>std.code.filelines.total</td>
     <td>Number of non-blank lines of code of any content type (exectuable, comments, etc.) per file</td>
     </tr>
-    <tr  class="td-regular">
+    <tr  class="td-regular center-justified">
     <td>std.code.lines.total</td>
     <td>Number of non-blank lines of code of any content type (exectuable, comments, etc.) per region</td>
     </tr>
-    <tr class="info">
+    <tr class="info center-justified">
     <td>std.code.filelines.code</td>
     <td>Number of non-blank lines of code excluding preprocessor and comments per file.</td>
     </tr>
-    <tr  class="td-regular">
+    <tr  class="td-regular center-justified">
     <td>std.code.lines.code</td>
     <td>Number of non-blank lines of code excluding preprocessor and comments per region.</td>
     </tr>
-    <tr class="info">
+    <tr class="info center-justified">
     <td>std.code.filelines.preprocessor</td>
     <td>Number of non-blank lines of preprocessor code per file.</td>
     <td rowspan="2"><ul><li>Enforcing localisation of preprocessor code in a single place.</li>
         <li>Encouraging usage of safer code structures instead of the preprocessor.</li></ul></td>
     </tr>
-    <tr  class="td-regular">
+    <tr  class="td-regular center-justified">
     <td>std.code.lines.preprocessor</td>
     <td>Number of non-blank lines of preprocessor code per region.</td>
     </tr>
-    <tr class="info">
+    <tr class="info center-justified">
     <td>std.code.filelines.comments</td>
     <td>Number of non-blank lines of comments per file.</td>
     <td rowspan="2"><ul><li>Low number of comments may indicate maintainability problems.</li></ul></td>
     </tr>
-    <tr  class="td-regular">
+    <tr  class="td-regular center-justified">
     <td>std.code.lines.comments</td>
     <td>Number of non-blank lines of comments per region.</td>
     </tr>
-    <tr class="td-regular">
+    <tr class="td-regular center-justified">
     <td>std.code.complexity.cyclomatic</td>
     <td>McCabe cyclomatic complexity metric.</td>
     <td colspan="2"><ul><li>Identification of highly complex code for review and refactoring.</li>
         <li>Preventing complex functions (complexity is a reason of many defects and a reason of expensive maintaintenance).</li></ul></td>
     </tr>
-    <tr class="td-regular">
+    <tr class="td-regular center-justified">
     <td>std.code.complexity.maxindent</td>
     <td>Maximum level of indentation of blocks within a region.
         <pre class="prettyprint">
         </pre>
         </td>
     </tr>
-    <tr class="td-regular">
+    <tr class="td-regular center-justified">
     <td>std.code.magic.numbers</td>
     <td>Number of magic numbers. There is an option to exclude 0, -1 and 1 numbers from counting.</td>
     <td>Magic numbers are dangerous.
         The <a href="http://stackoverflow.com/questions/47882/what-is-a-magic-number-and-why-is-it-bad" target="blank">
             discussion on stackoverflow</a> explains why.</td>
     </tr>
-    <tr class="td-regular">
+    <tr class="td-regular center-justified">
     <td>std.code.todo.comments, std.code.todo.strings</td>
     <td>Number of TODO/FIXME/etc markers in comments and strings accordingly.
         There is an option to configure a list of markers.</td>
     <td>Manage potentially incomplete work. If project manager dispatches issues only in a tracker tool,
         todo markers are lost in the source code. The metric could make these 'lost' issues visible.</td>
     </tr>
-    <tr class="info">
+    <tr class="info center-justified">
     <td>std.general.proctime</td>
     <td>Seconds spent on processing a file.</td>
     <td><ul><li>Monitor and profile Metrix++ tool's performance.</li></ul>
     </td>
     </tr>
-    <tr class="td-regular">
+    <tr class="td-regular center-justified">
     <td>std.suppress</td>
     <td>An option enables collection of Metrix++ suppressions and 2 metrics: 'std.suppress:count' and
         'std.suppress.file:count'. The first is number of suppressions per region.
@@ -146,14 +146,14 @@ The metrics highlighed in blue are **per file** metrics. The other metrics are *
             but there could be exceptions in specific cases. Managing suppressions is about managing exceptions.
             If there are many exceptional cases, maybe something is wrong with a metric or the application of a metric.</li></ul></td>
     </tr>
-    <tr class="info">
+    <tr class="info center-justified">
     <td>std.general.procerrors</td>
     <td>Number of errors detected by Metrix++ code parser.</td>
     <td><ul><li>Cleaning up errors to ensure reliable code scanning.</li>
         <li>Errors, like mismatched brackets, may result in bad identification of regions.</li>
     </ul></td>
     </tr>
-    <tr class="td-regular">
+    <tr class="td-regular center-justified">
     <td>std.code.maintindex.simple</td>
     <td>Simple variant of maintainability index - a measure of maintainability.
         It uses std.code.lines:code and std.code.complexity:cyclomatic

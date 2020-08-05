@@ -7,7 +7,7 @@ The workflow and application usecases are demonstrated using source code from th
 
 ## Collect data
 The first step is to collect the data. The 'collect' tool has got multiple options to enable various metrics plugins. Let's collect the number of lines of code and cyclomatic complexity metrics for the previous (1.52.0 version) boost interprocess library. Assuming that 2 versions of boost library are unpacked in the current working directory:
-```
+```bash
 > cd boost_1_52_0
 > python "/path/to/metrix++.py" collect --std.code.lines.code --std.code.complexity.cyclomatic -- boost/interprocess
 > cd ../ # return back to working directory
@@ -16,7 +16,7 @@ The first step is to collect the data. The 'collect' tool has got multiple optio
 The list of arguments after '--' enumerates the paths to read the source files. As a result of execution of this command, a file **metrixpp.db** will be written in the current working directory. It can be redefined using the **--db-file** option.
 
 Metrix++ can compare code bases which reduces processing scope to the modified or new code. So, let's collect the same data for the current (1.54.0 version) boost interprocess library.
-```
+```bash
 > cd boost_1_54_0
 > python "/path/to/metrix++.py" collect --std.code.lines.code --std.code.complexity.cyclomatic -- boost/interprocess --db-file-prev=../boost_1_52_0/metrixpp.db
 > cd ../ # return back to working directory
@@ -24,7 +24,7 @@ Metrix++ can compare code bases which reduces processing scope to the modified o
 The option **--db-file-prev** points to the file with the data collected in the previous step. So, eventually it executed iterative collection. It can speed up the exectuion significantly, depending on amount of changes between two version.
 
 Check other options of the collect tool by executing:
-```
+```bash
 > python "/path/to/metrix++.py" collect --help
 ```
 
@@ -33,7 +33,7 @@ Check other options of the collect tool by executing:
 
 ### Summary metrics and distribution tables/graphs
 It is time to look at the data files collected (step above). The command:
-```
+```bash
 > python "/path/to/metrix++.py" view --db-file=boost_1_54_0/metrixpp.db
 ```
 prints summary metrics, like minimum/maximum, and distribution/frequency tables:
@@ -101,7 +101,7 @@ prints summary metrics, like minimum/maximum, and distribution/frequency tables:
 ```
 
 The same command with **--db-file-prev** option enables comparision and change trends are shown in [] brackets:
-```
+```bash
 > python "/path/to/metrix++.py" view --db-file=boost_1_54_0/metrixpp.db --db-file-prev=boost_1_52_0/metrixpp.db
 ```
 
@@ -168,11 +168,11 @@ The same command with **--db-file-prev** option enables comparision and change t
 
 ### Reducing analysis scope
 There are two ways to reduce the analysis scope for the view tool. The first is to enumerate paths of interest. For example, the following command reduces scope to the 'allocators' sub-directory within the processed code.
-```
+```bash
 > python "/path/to/metrix++.py" view --db-file=boost_1_54_0/metrixpp.db -- ./boost/interprocess/allocators
 ```
 The second is to specify the **--scope-mode option**, which instructs the tool to process only modified and/or new files/regions. For example, to view the summary metrics for all modified and new regions:
-```
+```bash
 > python "/path/to/metrix++.py" view --db-file=boost_1_54_0/metrixpp.db  --db-file-prev=boost_1_52_0/metrixpp.db --scope-mode=touched
 ```
 
@@ -238,7 +238,7 @@ The second is to specify the **--scope-mode option**, which instructs the tool t
 
 ### Detailed metrics per file/region
 The same view tool can print detailed metrics per file and per every region in the specified file. In order to get detailed metrics, enumerate files of interest after '--'. For example:
-```
+```bash
 > python "/path/to/metrix++.py" view --db-file=boost_1_54_0/metrixpp.db --db-file-prev=boost_1_52_0/metrixpp.db -- ./boost/interprocess/detail/managed_open_or_create_impl.hpp
 ```
 produces output similar to this (truncated to make the page shorter):
@@ -254,11 +254,11 @@ produces output similar to this (truncated to make the page shorter):
 ```
 ### More about the viewer
 The 'view' command has got an option to alter the output format. It is possible to get the same data in xml or python dictionary formats. This can be particularly useful for integration of the tool with other applications. For example, an editor may re-collect and show context based metrics when a file is saved.
-```
+```bash
 > python "/path/to/metrix++.py" view --db-file=boost_1_54_0/metrixpp.db --format=xml
 Check other options of the view tool by executing:
 ```
-```
+```bash
 > python "/path/to/metrix++.py" view --help
 ```
 
@@ -267,7 +267,7 @@ The viewer shows (above) that there are functions with quite large cyclomatic co
 
 ### Hotspots
 The hotspots mode of the limit tool helps to identify top files/regions exceeding a metric threshold. Let's identify the top 3 functions in the boost interprocess library, which exceed a limit of 15 points of cyclomatic complexity:
-```
+```bash
 > python "/path/to/metrix++.py" limit --db-file=boost_1_54_0/metrixpp.db --max-limit=std.code.complexity:cyclomatic:15 --hotspots=3
 ```
 
@@ -301,7 +301,7 @@ The hotspots mode of the limit tool helps to identify top files/regions exceedin
 ```
 ### Controlling trends
 The exit code of the 'limit' tool is equal to the number of warnings printed. This supports use of the tool as a static analysis tool during the software build process. In this case, a non-zero exit code means that there are violations to the agreed standards and it may fail the build. The same command without --hotspots option will print all regions/files exceeding the specified limit:
-```
+```bash
 > python "/path/to/metrix++.py" limit --db-file=boost_1_54_0/metrixpp.db --max-limit=std.code.complexity:cyclomatic:15
 ```
 
@@ -309,7 +309,7 @@ The exit code of the 'limit' tool is equal to the number of warnings printed. Th
 However, it is likely there are many warnings printed in this mode, especially if very old or legacy code is profiled against new metrics and coding rules. Although all warnings can be removed by re-factoring as a big task force activity, it is where many tools are rejected, because it is difficult to justify the initial cost of applying and integrating them. The Metrix++ 'limit' tool has got an option --warn-mode, which helps to overcome this problem.
 
 **--warn-mode=touched** encourages re-factoring only for new and modified regions. It enables continuous refactoring. It does not matter how late the rule is applied or the coding standard is modified. It is possible to do it anytime with zero initial investment. For example, applying it to the boost interprocess library for a changes between 1.52 and 1.54 versions results in only 6 warnings:
-```
+```bash
 > python "/path/to/metrix++.py" limit --db-file=boost_1_54_0/metrixpp.db --db-file-prev=boost_1_52_0/metrixpp.db --max-limit=std.code.complexity:cyclomatic:15 --warn-mode=touched
 ```
 
@@ -370,7 +370,7 @@ However, it is likely there are many warnings printed in this mode, especially i
 ```
 
 If it is challenging or of little benefit to refactor everything touched, --warn-mode=trends simplifies the control over modified regions and only makes sure that there are no regressions in modified code. In other words, a warning is printed about a modified region/file only if a metric exceeds the specified limit and the value of the metric has got a negative trend due to the modification. It is possible to apply it anytime with zero initial investment and almost zero on-going investment around old code. For example, applying it to the boost interprocess library for a changes between 1.52 and 1.54 versions results in only 2 warnings:
-```
+```bash
 > python "/path/to/metrix++.py" limit --db-file=boost_1_54_0/metrixpp.db --db-file-prev=boost_1_52_0/metrixpp.db --max-limit=std.code.complexity:cyclomatic:15 --warn-mode=trend
 ```
 
@@ -394,7 +394,7 @@ If it is challenging or of little benefit to refactor everything touched, --warn
 	Suppressed     : False
 ```
 **--warn-mode=new** ignores existing code and ensures that warnings are only about new code. For example, applying it to the boost interprocess library for a changes between 1.52 and 1.54 versions results in 0 warnings, so it shows that the new code is totally compliant with the standard required in the example.
-```
+```bash
 > python "/path/to/metrix++.py" limit --db-file=boost_1_54_0/metrixpp.db --db-file-prev=boost_1_52_0/metrixpp.db --max-limit=std.code.complexity:cyclomatic:15 --warn-mode=new
 ```
 
@@ -428,7 +428,6 @@ std::string getColorName(int color_id)
 ```cpp
 //
 // This file does processing of colors and brushes
-// Copyright is my company, 2013
 // 
 // However, it is too long and big file, and there is no time
 // to split it into multiple file, so shut up the metrix++ warnings:
@@ -442,11 +441,11 @@ std::string getColorName(int color_id)
 ```
 
 * activate collection of suppressions:
-```
+```bash
 > python "/path/to/metrix++.py" collect --std.suppress
 ```
 * run the 'limit' tool WITHOUT --disable-suppressions option:
-```
+```bash
 > python "/path/to/metrix++.py" limit ...
 ```
 
@@ -454,7 +453,7 @@ std::string getColorName(int color_id)
 
 ### Checking data file properties
 The Metrix++ 'info' tool is helpful to check the properties of a data file, like the settings used to write it, collected metrics and files processed. For example:
-```
+```bash
 > python "/path/to/metrix++.py" info --db-file=boost_1_54_0/metrixpp.db
 ```
 
