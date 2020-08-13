@@ -136,10 +136,10 @@ Options:
   --include-files=INCLUDE_FILES, --if=INCLUDE_FILES
                         Adds a regular expression pattern to include files in
                         processing (files have to match any rule to be
-                        included) [default: .*]
+                        included)
   --exclude-files=EXCLUDE_FILES, --ef=EXCLUDE_FILES
                         Adds a regular expression pattern to exclude files or
-                        directories from processing [default: ^[.]]
+                        directories from processing
   --non-recursively, --nr
                         If the option is set (True), sub-directories are not
                         processed [default: False]

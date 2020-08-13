@@ -35,9 +35,9 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
         parser.add_option("--std.general.size", "--sgs", action="store_true", default=False,
                          help="If the option is set (True), the tool collects file size metric (in bytes) [default: %default]")
         parser.add_option("--include-files", "--if", action='append',
-                         help="Adds a regular expression pattern to include files in processing (files have to match any rule to be included) [default: %default]")
+                         help="Adds a regular expression pattern to include files in processing (files have to match any rule to be included)")
         parser.add_option("--exclude-files", "--ef", action='append',
-                         help="Adds a regular expression pattern to exclude files or directories from processing [default: %default]")
+                         help="Adds a regular expression pattern to exclude files or directories from processing")
         parser.add_option("--non-recursively", "--nr", action="store_true", default=False,
                          help="If the option is set (True), sub-directories are not processed [default: %default]")
         self.optparser = parser
