@@ -51,7 +51,7 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
         except Exception as e:
             self.optparser.error("option --include-files: " + str(e))
         try:
-            self.add_exclude_rule(re.compile(options.__dict__['exclude_files']))
+            self.add_exclude_rule(re.compile('^' + options.__dict__['exclude_files'] + '$'))
         except Exception as e:
             self.optparser.error("option --exclude-files: " + str(e))
         self.non_recursively = options.__dict__['non_recursively']
