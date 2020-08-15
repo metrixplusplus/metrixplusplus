@@ -34,10 +34,10 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
                          help="If the option is set (True), the tool counts number of processing/parsing errors per file [default: %default]")
         parser.add_option("--std.general.size", "--sgs", action="store_true", default=False,
                          help="If the option is set (True), the tool collects file size metric (in bytes) [default: %default]")
-        parser.add_option("--include-files", "--if", default=r'.*',
-                         help="Adds a regular expression pattern to include files in processing (files have to match any rule to be included) [default: %default]")
-        parser.add_option("--exclude-files", "--ef", default=r'^[.]',
-                         help="Adds a regular expression pattern to exclude files or directories from processing [default: %default]")
+        parser.add_option("--include-files", "--if", action='append',
+                         help="Adds a regular expression pattern to include files in processing (files have to match any rule to be included)")
+        parser.add_option("--exclude-files", "--ef", action='append',
+                         help="Adds a regular expression pattern to exclude files or directories from processing")
         parser.add_option("--non-recursively", "--nr", action="store_true", default=False,
                          help="If the option is set (True), sub-directories are not processed [default: %default]")
         self.optparser = parser
@@ -46,14 +46,25 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
         self.is_proctime_enabled = options.__dict__['std.general.proctime']
         self.is_procerrors_enabled = options.__dict__['std.general.procerrors']
         self.is_size_enabled = options.__dict__['std.general.size']
-        try:
-            self.add_include_rule(re.compile(options.__dict__['include_files']))
-        except Exception as e:
-            self.optparser.error("option --include-files: " + str(e))
-        try:
-            self.add_exclude_rule(re.compile(options.__dict__['exclude_files']))
-        except Exception as e:
-            self.optparser.error("option --exclude-files: " + str(e))
+        # check if any include rule is given
+        if options.__dict__['include_files']:
+            try:
+                for include_rule in options.__dict__['include_files']:
+                    self.add_include_rule(re.compile(include_rule))
+            except Exception as e:
+                self.optparser.error("option --include-files: " + str(e))
+        else:
+            self.add_include_rule(re.compile(r'.*'))
+        
+        # check if any exclude rule is given
+        if options.__dict__['exclude_files']:
+            try:
+                for exclude_rule in options.__dict__['exclude_files']:
+                    self.add_exclude_rule(re.compile(exclude_rule))
+            except Exception as e:
+                self.optparser.error("option --exclude-files: " + str(e))
+        else:
+            self.add_exclude_rule(re.compile(r'^[.]'))
         self.non_recursively = options.__dict__['non_recursively']
 
     def initialize(self):
