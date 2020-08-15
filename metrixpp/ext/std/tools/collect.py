@@ -46,8 +46,8 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
         self.is_proctime_enabled = options.__dict__['std.general.proctime']
         self.is_procerrors_enabled = options.__dict__['std.general.procerrors']
         self.is_size_enabled = options.__dict__['std.general.size']
+        # check if any include rule is given
         if options.__dict__['include_files']:
-            print(options.__dict__['include_files'])
             try:
                 for include_rule in options.__dict__['include_files']:
                     self.add_include_rule(re.compile(include_rule))
@@ -55,6 +55,8 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
                 self.optparser.error("option --include-files: " + str(e))
         else:
             self.add_include_rule(re.compile(r'.*'))
+        
+        # check if any exclude rule is given
         if options.__dict__['exclude_files']:
             try:
                 for exclude_rule in options.__dict__['exclude_files']:
