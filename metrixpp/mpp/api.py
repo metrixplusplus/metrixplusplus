@@ -1167,6 +1167,30 @@ class MetricPluginMixin(Parent):
                     break
             return self.result
 
+    class RatioCalculator(PlainCounter):
+        
+        def __init__(self, *args, **kwargs):
+            super(MetricPluginMixin.RatioCalculator, self).__init__(*args, **kwargs)
+            self.result = self.region.get_data(self.namespace, self.field)
+            if self.result == None:
+                self.result = 0.0
+        
+        def get_result(self):
+            sourced_dividend = self.region.get_data(self.ratio_dividend[0], self.ratio_dividend[1])
+            sourced_divisor = self.region.get_data(self.ratio_divisor[0], self.ratio_divisor[1])
+            if ((sourced_dividend != None) 
+                and
+                (sourced_dividend != 0)
+                and
+                (sourced_divisor != None)
+                and
+                (sourced_divisor != 0)):
+                    self.result = sourced_dividend / sourced_divisor
+            else:
+              self.result = 0.0
+
+            return self.result
+
     def declare_metric(self, is_active, field,
                        pattern_to_search_or_map_of_patterns,
                        marker_type_mask=Marker.T.ANY,
