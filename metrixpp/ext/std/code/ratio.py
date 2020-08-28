@@ -5,12 +5,12 @@
 #    This file is a part of Metrix++ Tool.
 #    
 
-import mpp.api
+from metrixpp.mpp import api
 
-class Plugin(mpp.api.Plugin,
-             mpp.api.IConfigurable,
-             mpp.api.Child,
-             mpp.api.MetricPluginMixin):
+class Plugin(api.Plugin,
+             api.IConfigurable,
+             api.Child,
+             api.MetricPluginMixin):
     
     def declare_configuration(self, parser):
         self.parser = parser
@@ -37,14 +37,14 @@ class Plugin(mpp.api.Plugin,
                              'std.code.lines':(None, self.RatioCalculatorCounter)
                             },
                             # set none, because this plugin is not interested in parsing the code
-                            marker_type_mask=mpp.api.Marker.T.NONE)
+                            marker_type_mask=api.Marker.T.NONE)
         
         super(Plugin, self).initialize(fields=self.get_fields())
 
         if self.is_active() == True:
             self.subscribe_by_parents_name('std.code.lines')
 
-    class RatioCalculatorCounter(mpp.api.MetricPluginMixin.RatioCalculator):
+    class RatioCalculatorCounter(api.MetricPluginMixin.RatioCalculator):
         ratio_dividend = ('std.code.lines', 'comments')
         ratio_divisor = ('std.code.lines', 'code')
 
