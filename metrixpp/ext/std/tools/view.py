@@ -11,6 +11,7 @@ import sys
 from metrixpp.mpp import api
 from metrixpp.mpp import utils
 from metrixpp.mpp import cout
+from metrixpp.mpp import promout
 
 DIGIT_COUNT = 8
 
@@ -22,9 +23,9 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
 
     def declare_configuration(self, parser):
         self.parser = parser
-        parser.add_option("--format", "--ft", default='txt', choices=['txt', 'xml', 'python'],
+        parser.add_option("--format", "--ft", default='txt', choices=['txt', 'xml', 'python', 'prometheus'],
                           help="Format of the output data. "
-                          "Possible values are 'xml', 'txt' or 'python' [default: %default]")
+                          "Possible values are 'xml', 'txt', 'python' or 'prometheus' [default: %default]")
         parser.add_option("--nest-regions", "--nr", action="store_true", default=False,
                           help="If the option is set (True), data for regions is exported in the form of a tree. "
                           "Otherwise, all regions are exported in plain list. [default: %default]")
@@ -122,6 +123,8 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
 
         if out_format == 'txt':
             cout_txt(data, loader)
+        elif out_format == 'prometheus':
+            cout_prom(data, loader)
         elif out_format == 'xml':
             result += utils.serialize_to_xml(data, root_name = "data", digitCount = DIGIT_COUNT) + "\n"
         elif out_format == 'python':
@@ -656,4 +659,135 @@ def cout_txt(data, loader):
                 cout.SEVERITY_INFO,
                 "Directory content:",
                 details)
+    
+def cout_prom_regions(path, regions, indent = 0):
+    for region in regions:
+#         details = [
+#             ('Region name', region['info']['name']),
+#             ('Region type', region['info']['type']),
+#             ('Offsets', str(region['info']['offset_begin']) + "-" + str(region['info']['offset_end'])),
+#             ('Line numbers', str(region['info']['line_begin']) + "-" + str(region['info']['line_end'])),
+#             ('Modified', str(region['info']['modified']))
+#         ]
+        details = []
+        for namespace in sorted(list(region['data'].keys())):
+            diff_data = {}
+            if '__diff__' in list(region['data'][namespace].keys()):
+                diff_data = region['data'][namespace]['__diff__']
+            for field in sorted(list(region['data'][namespace].keys())):
+                diff_str = ""
+                if field == '__diff__':
+                    continue
+                if field in list(diff_data.keys()):
+                    diff_str = " [" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
+                details.append((namespace + ":" + field, str(region['data'][namespace][field]) + diff_str))
+        promout.notify(path = path,
+                        region = region['info']['name'],
+                        metric = "",
+                        details = details)
+        if 'subregions' in list(region.keys()):
+            cout_txt_regions(path, region['subregions'], indent=indent+1)
+            
+def cout_prom(data, loader):
+    
+    details = []
+    for key in list(data['file-data'].keys()):
+        if key == 'regions':
+            cout_prom_regions(data['info']['path'], data['file-data'][key])
+        else:
+            namespace = key
+            diff_data = {}
+            if '__diff__' in list(data['file-data'][namespace].keys()):
+                diff_data = data['file-data'][namespace]['__diff__']
+            for field in sorted(list(data['file-data'][namespace].keys())):
+                diff_str = ""
+                if field == '__diff__':
+                    continue
+                if field in list(diff_data.keys()):
+                    diff_str = " [" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
+                details.append((namespace + ":" + field, str(data['file-data'][namespace][field]) + diff_str))
+    if len(details) > 0:
+        promout.notify(data['info']['path'],
+                    0,
+                    promout.SEVERITY_INFO,
+                    "Metrics per file",
+                    details)
+
+    attr_map = {'total': 'total',
+                'avg': 'avg',
+                'min': 'min',
+                'max': 'max',
+    }
+    for namespace in sorted(list(data['aggregated-data'].keys())):
+        for field in sorted(list(data['aggregated-data'][namespace].keys())):
+            details = []
+            diff_data = {}
+            if '__diff__' in list(data['aggregated-data'][namespace][field].keys()):
+                diff_data = data['aggregated-data'][namespace][field]['__diff__']
+            for attr in ['avg', 'min', 'max', 'total']:
+                diff_str = ""
+                if attr in list(diff_data.keys()):
+                    if isinstance(diff_data[attr], float):
+                        diff_str = " [" + ("+" if diff_data[attr] >= 0 else "") + str(round(diff_data[attr], DIGIT_COUNT)) + "]"
+                    else:
+                        diff_str = " [" + ("+" if diff_data[attr] >= 0 else "") + str(diff_data[attr]) + "]"
+                if attr == 'avg' and data['aggregated-data'][namespace][field]['nonzero'] == True:
+                    diff_str += " (excluding zero metric values)"
+                if isinstance(data['aggregated-data'][namespace][field][attr], float):
+                    # round the data to reach same results on platforms with different precision
+                    details.append((attr_map[attr], str(round(data['aggregated-data'][namespace][field][attr], DIGIT_COUNT)) + diff_str))
+                else:
+                    details.append((attr_map[attr], str(data['aggregated-data'][namespace][field][attr]) + diff_str))
+
+            measured = data['aggregated-data'][namespace][field]['count']
+            if 'count' in list(diff_data.keys()):
+                diff_str = ' [{0:{1}}]'.format(diff_data['count'], '+' if diff_data['count'] >= 0 else '')
+            sup_diff_str = ""
+            if 'sup' in list(diff_data.keys()):
+                sup_diff_str = ' [{0:{1}}]'.format(diff_data['sup'], '+' if diff_data['sup'] >= 0 else '')
+            elem_name = 'regions'
+            if loader.get_namespace(namespace).are_regions_supported() == False:
+                elem_name = 'files'
+#             details.append(('Distribution',
+#                             '{0}{1} {2} in total (including {3}{4} suppressed)'.format(measured,
+#                                                                                    diff_str,
+#                                                                                    elem_name,
+#                                                                                    data['aggregated-data'][namespace][field]['sup'],
+#                                                                                    sup_diff_str)))
+#             details.append(('  Metric value', 'Ratio : R-sum : Number of ' + elem_name))
+#             count_str_len  = len(str(measured))
+#             sum_ratio = 0
+#             for bar in data['aggregated-data'][namespace][field]['distribution-bars']:
+#                 sum_ratio += bar['ratio']
+#                 diff_str = ""
+#                 if '__diff__' in list(bar.keys()):
+#                     if bar['__diff__'] >= 0:
+#                         diff_str = ' [+{0:<{1}}]'.format(bar['__diff__'], count_str_len)
+#                     else:
+#                         diff_str = ' [{0:<{1}}]'.format(bar['__diff__'], count_str_len+1)
+#                 if isinstance(bar['metric'], float):
+#                     metric_str = "{0:.4f}".format(bar['metric'])
+#                 else:
+#                     metric_str = str(bar['metric'])
+#                 
+#                 metric_str = (" " * (promout.DETAILS_OFFSET - len(metric_str) - 1)) + metric_str
+#                 count_str = str(bar['count'])
+#                 count_str = ((" " * (count_str_len - len(count_str))) + count_str + diff_str + "\t")
+#                 details.append((metric_str,
+#                                 "{0:.3f}".format(bar['ratio']) + " : " + "{0:.3f}".format(sum_ratio) +  " : " +
+#                                 count_str + ('|' * int(bar['ratio']*100))))
+            promout.notify(path = data['info']['path'],
+                    metric = namespace + "." + field,
+                    details = details)
+#     details = []
+#     for each in sorted(data['subdirs']):
+#         details.append(('Directory', each))
+#     for each in sorted(data['subfiles']):
+#         details.append(('File', each))
+#     if len(details) > 0: 
+#         promout.notify(data['info']['path'],
+#                 '', # no line number
+#                 promout.SEVERITY_INFO,
+#                 "Directory content:",
+#                 details)
     
