@@ -662,13 +662,6 @@ def cout_txt(data, loader):
     
 def cout_prom_regions(path, regions, indent = 0):
     for region in regions:
-#         details = [
-#             ('Region name', region['info']['name']),
-#             ('Region type', region['info']['type']),
-#             ('Offsets', str(region['info']['offset_begin']) + "-" + str(region['info']['offset_end'])),
-#             ('Line numbers', str(region['info']['line_begin']) + "-" + str(region['info']['line_end'])),
-#             ('Modified', str(region['info']['modified']))
-#         ]
         details = []
         for namespace in sorted(list(region['data'].keys())):
             diff_data = {}
@@ -748,46 +741,6 @@ def cout_prom(data, loader):
             elem_name = 'regions'
             if loader.get_namespace(namespace).are_regions_supported() == False:
                 elem_name = 'files'
-#             details.append(('Distribution',
-#                             '{0}{1} {2} in total (including {3}{4} suppressed)'.format(measured,
-#                                                                                    diff_str,
-#                                                                                    elem_name,
-#                                                                                    data['aggregated-data'][namespace][field]['sup'],
-#                                                                                    sup_diff_str)))
-#             details.append(('  Metric value', 'Ratio : R-sum : Number of ' + elem_name))
-#             count_str_len  = len(str(measured))
-#             sum_ratio = 0
-#             for bar in data['aggregated-data'][namespace][field]['distribution-bars']:
-#                 sum_ratio += bar['ratio']
-#                 diff_str = ""
-#                 if '__diff__' in list(bar.keys()):
-#                     if bar['__diff__'] >= 0:
-#                         diff_str = ' [+{0:<{1}}]'.format(bar['__diff__'], count_str_len)
-#                     else:
-#                         diff_str = ' [{0:<{1}}]'.format(bar['__diff__'], count_str_len+1)
-#                 if isinstance(bar['metric'], float):
-#                     metric_str = "{0:.4f}".format(bar['metric'])
-#                 else:
-#                     metric_str = str(bar['metric'])
-#                 
-#                 metric_str = (" " * (promout.DETAILS_OFFSET - len(metric_str) - 1)) + metric_str
-#                 count_str = str(bar['count'])
-#                 count_str = ((" " * (count_str_len - len(count_str))) + count_str + diff_str + "\t")
-#                 details.append((metric_str,
-#                                 "{0:.3f}".format(bar['ratio']) + " : " + "{0:.3f}".format(sum_ratio) +  " : " +
-#                                 count_str + ('|' * int(bar['ratio']*100))))
             promout.notify(path = data['info']['path'],
                     metric = namespace + "." + field,
                     details = details)
-#     details = []
-#     for each in sorted(data['subdirs']):
-#         details.append(('Directory', each))
-#     for each in sorted(data['subfiles']):
-#         details.append(('File', each))
-#     if len(details) > 0: 
-#         promout.notify(data['info']['path'],
-#                 '', # no line number
-#                 promout.SEVERITY_INFO,
-#                 "Directory content:",
-#                 details)
-    
