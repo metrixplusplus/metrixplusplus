@@ -7,12 +7,6 @@
 
 import re
 
-SEVERITY_INFO = 0x01
-SEVERITY_WARNING = 0x02
-SEVERITY_ERROR = 0x03
-DETAILS_OFFSET = 15
-
-
 def notify(path, metric, details, region=""):
     notification = ""
 

@@ -660,87 +660,18 @@ def cout_txt(data, loader):
                 "Directory content:",
                 details)
     
-def cout_prom_regions(path, regions, indent = 0):
-    for region in regions:
-        details = []
-        for namespace in sorted(list(region['data'].keys())):
-            diff_data = {}
-            if '__diff__' in list(region['data'][namespace].keys()):
-                diff_data = region['data'][namespace]['__diff__']
-            for field in sorted(list(region['data'][namespace].keys())):
-                diff_str = ""
-                if field == '__diff__':
-                    continue
-                if field in list(diff_data.keys()):
-                    diff_str = " [" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
-                details.append((namespace + ":" + field, str(region['data'][namespace][field]) + diff_str))
-        promout.notify(path = path,
-                        region = region['info']['name'],
-                        metric = "",
-                        details = details)
-        if 'subregions' in list(region.keys()):
-            cout_txt_regions(path, region['subregions'], indent=indent+1)
-            
 def cout_prom(data, loader):
     
-    details = []
-    for key in list(data['file-data'].keys()):
-        if key == 'regions':
-            cout_prom_regions(data['info']['path'], data['file-data'][key])
-        else:
-            namespace = key
-            diff_data = {}
-            if '__diff__' in list(data['file-data'][namespace].keys()):
-                diff_data = data['file-data'][namespace]['__diff__']
-            for field in sorted(list(data['file-data'][namespace].keys())):
-                diff_str = ""
-                if field == '__diff__':
-                    continue
-                if field in list(diff_data.keys()):
-                    diff_str = " [" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
-                details.append((namespace + ":" + field, str(data['file-data'][namespace][field]) + diff_str))
-    if len(details) > 0:
-        promout.notify(data['info']['path'],
-                    0,
-                    promout.SEVERITY_INFO,
-                    "Metrics per file",
-                    details)
-
-    attr_map = {'total': 'total',
-                'avg': 'avg',
-                'min': 'min',
-                'max': 'max',
-    }
     for namespace in sorted(list(data['aggregated-data'].keys())):
         for field in sorted(list(data['aggregated-data'][namespace].keys())):
             details = []
-            diff_data = {}
-            if '__diff__' in list(data['aggregated-data'][namespace][field].keys()):
-                diff_data = data['aggregated-data'][namespace][field]['__diff__']
             for attr in ['avg', 'min', 'max', 'total']:
-                diff_str = ""
-                if attr in list(diff_data.keys()):
-                    if isinstance(diff_data[attr], float):
-                        diff_str = " [" + ("+" if diff_data[attr] >= 0 else "") + str(round(diff_data[attr], DIGIT_COUNT)) + "]"
-                    else:
-                        diff_str = " [" + ("+" if diff_data[attr] >= 0 else "") + str(diff_data[attr]) + "]"
-                if attr == 'avg' and data['aggregated-data'][namespace][field]['nonzero'] == True:
-                    diff_str += " (excluding zero metric values)"
                 if isinstance(data['aggregated-data'][namespace][field][attr], float):
                     # round the data to reach same results on platforms with different precision
-                    details.append((attr_map[attr], str(round(data['aggregated-data'][namespace][field][attr], DIGIT_COUNT)) + diff_str))
+                    details.append((attr, str(round(data['aggregated-data'][namespace][field][attr], DIGIT_COUNT))))
                 else:
-                    details.append((attr_map[attr], str(data['aggregated-data'][namespace][field][attr]) + diff_str))
+                    details.append((attr, str(data['aggregated-data'][namespace][field][attr])))
 
-            measured = data['aggregated-data'][namespace][field]['count']
-            if 'count' in list(diff_data.keys()):
-                diff_str = ' [{0:{1}}]'.format(diff_data['count'], '+' if diff_data['count'] >= 0 else '')
-            sup_diff_str = ""
-            if 'sup' in list(diff_data.keys()):
-                sup_diff_str = ' [{0:{1}}]'.format(diff_data['sup'], '+' if diff_data['sup'] >= 0 else '')
-            elem_name = 'regions'
-            if loader.get_namespace(namespace).are_regions_supported() == False:
-                elem_name = 'files'
             promout.notify(path = data['info']['path'],
                     metric = namespace + "." + field,
                     details = details)
