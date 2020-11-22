@@ -16,7 +16,7 @@ class Plugin(api.Plugin,
     def declare_configuration(self, parser):
         parser.add_option("--std.code.linelength", "--scll",
             action="store_true", default=False,
-            help="Enables collection maximum line-length transgressions [default: %default]")
+            help="Enables collection of maximum line-length overruns [default: %default]")
         parser.add_option("--std.code.linelength.limit", "--sclll",
             default=80,
             help="Modifies the limit for maximum line-length [default: %default]")

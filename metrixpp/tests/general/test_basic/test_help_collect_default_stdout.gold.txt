@@ -53,7 +53,7 @@ Options:
                         Enables collection of size metric (in number of
                         symbols per region) [default: False]
   --std.code.linelength, --scll
-                        Enables collection maximum line-length transgressions
+                        Enables collection of maximum line-length overruns
                         [default: False]
   --std.code.linelength.limit=STD.CODE.LINELENGTH.LIMIT, --sclll=STD.CODE.LINELENGTH.LIMIT
                         Modifies the limit for maximum line-length [default:
