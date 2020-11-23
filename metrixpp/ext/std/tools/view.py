@@ -11,6 +11,7 @@ import sys
 from metrixpp.mpp import api
 from metrixpp.mpp import utils
 from metrixpp.mpp import cout
+from metrixpp.mpp import promout
 
 DIGIT_COUNT = 8
 
@@ -22,9 +23,9 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
 
     def declare_configuration(self, parser):
         self.parser = parser
-        parser.add_option("--format", "--ft", default='txt', choices=['txt', 'xml', 'python'],
+        parser.add_option("--format", "--ft", default='txt', choices=['txt', 'xml', 'python', 'prometheus'],
                           help="Format of the output data. "
-                          "Possible values are 'xml', 'txt' or 'python' [default: %default]")
+                          "Possible values are 'xml', 'txt', 'python' or 'prometheus' [default: %default]")
         parser.add_option("--nest-regions", "--nr", action="store_true", default=False,
                           help="If the option is set (True), data for regions is exported in the form of a tree. "
                           "Otherwise, all regions are exported in plain list. [default: %default]")
@@ -122,6 +123,8 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
 
         if out_format == 'txt':
             cout_txt(data, loader)
+        elif out_format == 'prometheus':
+            cout_prom(data, loader)
         elif out_format == 'xml':
             result += utils.serialize_to_xml(data, root_name = "data", digitCount = DIGIT_COUNT) + "\n"
         elif out_format == 'python':
@@ -657,3 +660,18 @@ def cout_txt(data, loader):
                 "Directory content:",
                 details)
     
+def cout_prom(data, loader):
+    
+    for namespace in sorted(list(data['aggregated-data'].keys())):
+        for field in sorted(list(data['aggregated-data'][namespace].keys())):
+            details = []
+            for attr in ['avg', 'min', 'max', 'total']:
+                if isinstance(data['aggregated-data'][namespace][field][attr], float):
+                    # round the data to reach same results on platforms with different precision
+                    details.append((attr, str(round(data['aggregated-data'][namespace][field][attr], DIGIT_COUNT))))
+                else:
+                    details.append((attr, str(data['aggregated-data'][namespace][field][attr])))
+
+            promout.notify(path = data['info']['path'],
+                    metric = namespace + "." + field,
+                    details = details)

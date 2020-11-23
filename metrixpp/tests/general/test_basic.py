@@ -227,6 +227,9 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('view', ['--format=xml'], prefix='xml')
         self.assertExec(runner.run())
         
+        runner = tests.common.ToolRunner('view', ['--format=prometheus'], prefix='prometheus')
+        self.assertExec(runner.run())
+        
         runner = tests.common.ToolRunner('collect',
                                          ['--std.code.complexity.cyclomatic'],
                                          prefix='nest',
