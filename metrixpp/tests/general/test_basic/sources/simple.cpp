@@ -64,6 +64,9 @@ class A
 		return 1;
 	}
 
+    virtual int pure_virtual_method() = 0;
+    int pure_virtual_overrider() override = 0;
+
 	int m_me88er = 10;
 };
 
