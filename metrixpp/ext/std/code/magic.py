@@ -28,16 +28,23 @@ class Plugin(api.Plugin,
     
     def initialize(self):
         pattern_to_search_java = re.compile(
-            r'''((const(\s+[_$a-zA-Z][_$a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
-        pattern_to_search_cpp_cs = re.compile(
-            r'''((const(\s+[_a-zA-Z][_a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)|(\b[0-9]+\b)''')
+            r'''((const(\s+[_$a-zA-Z][_$a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)'''
+            r'''|(\b[0-9]+\b)''')
+        pattern_to_search_cpp = re.compile(
+            r'''((const(\s+[_a-zA-Z][_a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)'''
+            r'''|(virtual\s+.*\s*[=]\s*[0]\s*[,;])'''
+            r'''|(override\s+[=]\s*[0]\s*[,;])'''
+            r'''|(\b[0-9]+\b)''')
+        pattern_to_search_cs = re.compile(
+            r'''((const(\s+[_a-zA-Z][_a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)'''
+            r'''|(\b[0-9]+\b)''')
         self.declare_metric(self.is_active_numbers,
                             self.Field('numbers', int,
                                 non_zero=True),
                             {
                              'std.code.java': (pattern_to_search_java, self.NumbersCounter),
-                             'std.code.cpp': (pattern_to_search_cpp_cs, self.NumbersCounter),
-                             'std.code.cs': (pattern_to_search_cpp_cs, self.NumbersCounter),
+                             'std.code.cpp': (pattern_to_search_cpp, self.NumbersCounter),
+                             'std.code.cs': (pattern_to_search_cs, self.NumbersCounter),
                             },
                             marker_type_mask=api.Marker.T.CODE,
                             region_type_mask=api.Region.T.ANY)
@@ -51,6 +58,8 @@ class Plugin(api.Plugin,
     class NumbersCounter(api.MetricPluginMixin.IterIncrementCounter):
         def increment(self, match):
             if (match.group(0).startswith('const') or
+                match.group(0).startswith('virtual') or
+                match.group(0).startswith('override') or
                 (self.plugin.is_active_numbers_simplier == True and
                  match.group(0) in ['0', '1', '-1', '+1'])):
                 return 0

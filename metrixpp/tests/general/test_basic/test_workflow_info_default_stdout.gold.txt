@@ -8,7 +8,7 @@ test_workflow.db:: info: Created using plugins and settings:
 	std.code.java:version: 1.1
 	std.code.java:files: *.java
 	std.code.lines:version: 1.1
-	std.code.magic:version: 1.2
+	std.code.magic:version: 1.3
 	std.code.magic:number.simplier: False
 	std.code.todo:version: 1.0
 	std.code.todo:tags: FIXME,FixMe,HACK,TBD,TODO,ToDo,XXX
