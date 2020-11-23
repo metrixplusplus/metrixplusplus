@@ -300,6 +300,21 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('view', ['--format=txt'], prefix='txt')
         self.assertExec(runner.run())
 
+    def test_std_longlines_metrics(self):
+
+        runner = tests.common.ToolRunner('collect',
+                                         ['--std.code.longlines',
+                                          '--std.code.longlines.limit=50'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view',
+                                         ['--nest-regions', '--format=txt'],
+                                         prefix='nest_per_file',
+                                         dirs_list=['./simple.cpp'])
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view', ['--format=txt'], prefix='txt')
+        self.assertExec(runner.run())
 
     def test_std_complexity_maxindent(self):
 

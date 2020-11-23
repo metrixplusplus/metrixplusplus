@@ -1,0 +1,15 @@
+./:: info: Overall metrics for 'std.code.longlines:numbers' metric
+	Average        : 0.0625
+	Minimum        : 0
+	Maximum        : 1
+	Total          : 1.0
+	Distribution   : 16 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.938 : 0.938 : 15	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.062 : 1.000 :  1	||||||
+
+./:: info: Directory content:
+	File           : file_deleted_in_new_sources.cpp
+	File           : simple.cpp
+
+

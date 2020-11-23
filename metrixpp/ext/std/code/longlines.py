@@ -14,16 +14,16 @@ class Plugin(api.Plugin,
              api.MetricPluginMixin):
 
     def declare_configuration(self, parser):
-        parser.add_option("--std.code.linelength", "--scll",
+        parser.add_option("--std.code.longlines", "--scll",
             action="store_true", default=False,
-            help="Enables collection of maximum line-length overruns [default: %default]")
-        parser.add_option("--std.code.linelength.limit", "--sclll",
+            help="Enables collection of long lines metric [default: %default]")
+        parser.add_option("--std.code.longlines.limit", "--sclll",
             default=80,
             help="Modifies the limit for maximum line-length [default: %default]")
 
     def configure(self, options):
-        self.is_active_ll = options.__dict__['std.code.linelength']
-        self.threshold = int(options.__dict__['std.code.linelength.limit'])
+        self.is_active_ll = options.__dict__['std.code.longlines']
+        self.threshold = int(options.__dict__['std.code.longlines.limit'])
 
     def initialize(self):
         pattern_to_search = r'''.{%s,}''' % (self.threshold + 1)

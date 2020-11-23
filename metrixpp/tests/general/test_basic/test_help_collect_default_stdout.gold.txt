@@ -52,12 +52,6 @@ Options:
   --std.code.length.total, --sclent
                         Enables collection of size metric (in number of
                         symbols per region) [default: False]
-  --std.code.linelength, --scll
-                        Enables collection of maximum line-length overruns
-                        [default: False]
-  --std.code.linelength.limit=STD.CODE.LINELENGTH.LIMIT, --sclll=STD.CODE.LINELENGTH.LIMIT
-                        Modifies the limit for maximum line-length [default:
-                        80]
   --std.code.lines.code, --sclc
                         Enables collection of lines of code metric (per region
                         detalization) - number of non-empty lines of code,
@@ -74,6 +68,12 @@ Options:
                         Enables collection of total lines metric (per region
                         detalization) - number of any type of lines (blank,
                         code, comments, etc.)[default: False]
+  --std.code.longlines, --scll
+                        Enables collection of long lines metric [default:
+                        False]
+  --std.code.longlines.limit=STD.CODE.LONGLINES.LIMIT, --sclll=STD.CODE.LONGLINES.LIMIT
+                        Modifies the limit for maximum line-length [default:
+                        80]
   --std.code.magic.numbers, --scmn
                         Enables collection of magic numbers metric [default:
                         False]
