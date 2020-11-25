@@ -28,6 +28,7 @@
             	Offsets        : 1323-9814
             	Line numbers   : 44-213
             	Modified       : None
+            	std.code.member:globals: 113
 
 .   ./interprocess/detail/win32_api.hpp:218: info: Metrics per 'boost' region
     	Region name    : boost
@@ -51,6 +52,7 @@
             	Offsets        : 9939-38152
             	Line numbers   : 220-963
             	Modified       : None
+            	std.code.member:globals: 2
             	std.code.member:structs: 26
             	std.code.member:types: 26
 
@@ -60,6 +62,7 @@
                 	Offsets        : 9959-10082
                 	Line numbers   : 222-228
                 	Modified       : None
+                	std.code.member:fields: 4
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:235: info: Metrics per 'wchar_variant' region
                 	Region name    : wchar_variant
@@ -67,6 +70,7 @@
                 	Offsets        : 10333-10475
                 	Line numbers   : 235-242
                 	Modified       : None
+                	std.code.member:fields: 1
                 	std.code.member:structs: 1
                 	std.code.member:types: 1
 
@@ -76,6 +80,7 @@
                     	Offsets        : 10389-10466
                     	Line numbers   : 238-241
                     	Modified       : None
+                    	std.code.member:fields: 1
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:244: info: Metrics per 'IUnknown_BIPC' region
                 	Region name    : IUnknown_BIPC
@@ -90,6 +95,7 @@
                 	Offsets        : 10752-14302
                 	Line numbers   : 255-359
                 	Modified       : None
+                	std.code.member:fields: 1
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:361: info: Metrics per 'IWbemContext_BIPC' region
                 	Region name    : IWbemContext_BIPC
@@ -97,6 +103,7 @@
                 	Offsets        : 14305-15339
                 	Line numbers   : 361-397
                 	Modified       : None
+                	std.code.member:fields: 1
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:400: info: Metrics per 'IEnumWbemClassObject_BIPC' region
                 	Region name    : IEnumWbemClassObject_BIPC
@@ -104,6 +111,7 @@
                 	Offsets        : 15343-15975
                 	Line numbers   : 400-422
                 	Modified       : None
+                	std.code.member:fields: 1
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:424: info: Metrics per 'IWbemServices_BIPC' region
                 	Region name    : IWbemServices_BIPC
@@ -111,6 +119,7 @@
                 	Offsets        : 15978-21010
                 	Line numbers   : 424-571
                 	Modified       : None
+                	std.code.member:fields: 1
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:573: info: Metrics per 'IWbemLocator_BIPC' region
                 	Region name    : IWbemLocator_BIPC
@@ -118,6 +127,7 @@
                 	Offsets        : 21013-21470
                 	Line numbers   : 573-586
                 	Modified       : None
+                	std.code.member:fields: 1
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:588: info: Metrics per 'interprocess_overlapped' region
                 	Region name    : interprocess_overlapped
@@ -143,6 +153,7 @@
                         	Offsets        : 21584-21667
                         	Line numbers   : 593-596
                         	Modified       : None
+                        	std.code.member:fields: 2
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:603: info: Metrics per 'interprocess_semaphore_basic_information' region
                 	Region name    : interprocess_semaphore_basic_information
@@ -150,6 +161,7 @@
                 	Offsets        : 21724-21869
                 	Line numbers   : 603-607
                 	Modified       : None
+                	std.code.member:fields: 2
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:609: info: Metrics per 'interprocess_section_basic_information' region
                 	Region name    : interprocess_section_basic_information
@@ -157,6 +169,7 @@
                 	Offsets        : 21872-22023
                 	Line numbers   : 609-614
                 	Modified       : None
+                	std.code.member:fields: 2
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:616: info: Metrics per 'interprocess_filetime' region
                 	Region name    : interprocess_filetime
@@ -164,6 +177,7 @@
                 	Offsets        : 22026-22125
                 	Line numbers   : 616-620
                 	Modified       : None
+                	std.code.member:fields: 2
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:622: info: Metrics per 'win32_find_data_t' region
                 	Region name    : win32_find_data_t
@@ -171,6 +185,7 @@
                 	Offsets        : 22128-22500
                 	Line numbers   : 622-634
                 	Modified       : None
+                	std.code.member:fields: 10
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:636: info: Metrics per 'interprocess_security_attributes' region
                 	Region name    : interprocess_security_attributes
@@ -178,6 +193,7 @@
                 	Offsets        : 22503-22626
                 	Line numbers   : 636-641
                 	Modified       : None
+                	std.code.member:fields: 2
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:643: info: Metrics per 'system_info' region
                 	Region name    : system_info
@@ -185,6 +201,7 @@
                 	Offsets        : 22629-23210
                 	Line numbers   : 643-660
                 	Modified       : None
+                	std.code.member:fields: 6
                 	std.code.member:structs: 1
                 	std.code.member:types: 1
 
@@ -194,6 +211,7 @@
                     	Offsets        : 22654-22861
                     	Line numbers   : 644-650
                     	Modified       : None
+                    	std.code.member:fields: 1
                     	std.code.member:structs: 1
                     	std.code.member:types: 1
 
@@ -203,6 +221,7 @@
                         	Offsets        : 22702-22848
                         	Line numbers   : 645-649
                         	Modified       : None
+                        	std.code.member:fields: 2
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:662: info: Metrics per 'interprocess_memory_basic_information' region
                 	Region name    : interprocess_memory_basic_information
@@ -210,6 +229,7 @@
                 	Offsets        : 23213-23469
                 	Line numbers   : 662-671
                 	Modified       : None
+                	std.code.member:fields: 5
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:673: info: Metrics per 'interprocess_acl' region
                 	Region name    : interprocess_acl
@@ -217,6 +237,7 @@
                 	Offsets        : 23472-23633
                 	Line numbers   : 673-680
                 	Modified       : None
+                	std.code.member:fields: 5
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:682: info: Metrics per '_interprocess_security_descriptor' region
                 	Region name    : _interprocess_security_descriptor
@@ -224,6 +245,7 @@
                 	Offsets        : 23636-23851
                 	Line numbers   : 682-691
                 	Modified       : None
+                	std.code.member:fields: 3
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:741: info: Metrics per 'file_name_information_t' region
                 	Region name    : file_name_information_t
@@ -231,6 +253,7 @@
                 	Offsets        : 25271-25362
                 	Line numbers   : 741-744
                 	Modified       : None
+                	std.code.member:fields: 2
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:746: info: Metrics per 'file_rename_information_t' region
                 	Region name    : file_rename_information_t
@@ -238,6 +261,7 @@
                 	Offsets        : 25365-25492
                 	Line numbers   : 746-751
                 	Modified       : None
+                	std.code.member:fields: 3
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:753: info: Metrics per 'unicode_string_t' region
                 	Region name    : unicode_string_t
@@ -245,6 +269,7 @@
                 	Offsets        : 25495-25601
                 	Line numbers   : 753-757
                 	Modified       : None
+                	std.code.member:fields: 2
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:759: info: Metrics per 'object_attributes_t' region
                 	Region name    : object_attributes_t
@@ -252,6 +277,7 @@
                 	Offsets        : 25604-25810
                 	Line numbers   : 759-766
                 	Modified       : None
+                	std.code.member:fields: 2
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:768: info: Metrics per 'io_status_block_t' region
                 	Region name    : io_status_block_t
@@ -268,6 +294,7 @@
                     	Offsets        : 25843-25895
                     	Line numbers   : 769-772
                     	Modified       : None
+                    	std.code.member:fields: 1
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:777: info: Metrics per 'system_timeofday_information' region
                 	Region name    : system_timeofday_information
@@ -275,6 +302,7 @@
                 	Offsets        : 25933-26222
                 	Line numbers   : 777-788
                 	Modified       : None
+                	std.code.member:fields: 1
                 	std.code.member:structs: 1
                 	std.code.member:types: 1
 
@@ -284,6 +312,7 @@
                     	Offsets        : 25973-26159
                     	Line numbers   : 779-786
                     	Modified       : None
+                    	std.code.member:fields: 5
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:790: info: Metrics per 'interprocess_by_handle_file_information' region
                 	Region name    : interprocess_by_handle_file_information
@@ -291,6 +320,7 @@
                 	Offsets        : 26225-26646
                 	Line numbers   : 790-802
                 	Modified       : None
+                	std.code.member:fields: 10
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:831: info: Metrics per 'object_name_information_t' region
                 	Region name    : object_name_information_t
@@ -298,6 +328,7 @@
                 	Offsets        : 27307-27395
                 	Line numbers   : 831-835
                 	Modified       : None
+                	std.code.member:fields: 2
 
 .   ./interprocess/detail/win32_api.hpp:967: info: Metrics per 'boost' region
     	Region name    : boost
@@ -493,7 +524,7 @@
                 	Offsets        : 41615-42245
                 	Line numbers   : 1070-1092
                 	Modified       : None
-                	std.code.member:fields: 2
+                	std.code.member:fields: 3
                 	std.code.member:methods: 2
 
 .   .   .   .   .   ./interprocess/detail/win32_api.hpp:1077: info: Metrics per 'interprocess_all_access_security' region
@@ -789,6 +820,7 @@
                 	Offsets        : 49166-51296
                 	Line numbers   : 1253-1316
                 	Modified       : None
+                	std.code.member:fields: 2
                 	std.code.member:methods: 4
 
 .   .   .   .   .   ./interprocess/detail/win32_api.hpp:1266: info: Metrics per 'get_module_from_id' region
@@ -825,6 +857,7 @@
                 	Offsets        : 51794-51851
                 	Line numbers   : 1331-1333
                 	Modified       : None
+                	std.code.member:fields: 1
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:1336: info: Metrics per 'library_unloader' region
                 	Region name    : library_unloader
@@ -896,6 +929,7 @@
                 	Offsets        : 55885-56142
                 	Line numbers   : 1461-1470
                 	Modified       : None
+                	std.code.member:fields: 1
                 	std.code.member:methods: 2
 
 .   .   .   .   .   ./interprocess/detail/win32_api.hpp:1467: info: Metrics per 'handle_closer' region
@@ -918,6 +952,7 @@
                 	Offsets        : 56145-56298
                 	Line numbers   : 1472-1480
                 	Modified       : None
+                	std.code.member:fields: 1
                 	std.code.member:structs: 1
                 	std.code.member:types: 1
 
@@ -927,6 +962,7 @@
                     	Offsets        : 56205-56291
                     	Line numbers   : 1475-1479
                     	Modified       : None
+                    	std.code.member:fields: 2
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:1482: info: Metrics per 'unlink_file' region
                 	Region name    : unlink_file
@@ -977,6 +1013,7 @@
                 	Offsets        : 61781-62038
                 	Line numbers   : 1642-1657
                 	Modified       : None
+                	std.code.member:fields: 1
                 	std.code.member:methods: 2
 
 .   .   .   .   .   ./interprocess/detail/win32_api.hpp:1644: info: Metrics per 'co_uninitializer' region
@@ -1067,21 +1104,29 @@
 	             2 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:fields' metric
-	Average        : 2.0 (excluding zero metric values)
-	Minimum        : 2
-	Maximum        : 2
-	Total          : 2.0
-	Distribution   : 1 regions in total (including 0 suppressed)
+	Average        : 2.55555556 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 10
+	Total          : 92.0
+	Distribution   : 36 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             2 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.389 : 0.389 : 14	||||||||||||||||||||||||||||||||||||||
+	             2 : 0.333 : 0.722 : 12	|||||||||||||||||||||||||||||||||
+	             3 : 0.083 : 0.806 :  3	||||||||
+	             4 : 0.028 : 0.833 :  1	||
+	             5 : 0.083 : 0.917 :  3	||||||||
+	             6 : 0.028 : 0.944 :  1	||
+	            10 : 0.056 : 1.000 :  2	|||||
 
 ./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:globals' metric
-	Average        : None (excluding zero metric values)
-	Minimum        : None
-	Maximum        : None
-	Total          : 0.0
-	Distribution   : 0 regions in total (including 0 suppressed)
+	Average        : 57.5 (excluding zero metric values)
+	Minimum        : 2
+	Maximum        : 113
+	Total          : 115.0
+	Distribution   : 2 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
+	             2 : 0.500 : 0.500 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
+	           113 : 0.500 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:interfaces' metric
 	Average        : None (excluding zero metric values)

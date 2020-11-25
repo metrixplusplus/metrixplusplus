@@ -21,6 +21,7 @@
         	Offsets        : 94-783
         	Line numbers   : 9-71
         	Modified       : None
+        	std.code.member:fields: 1
         	std.code.member:methods: 4
 
 .   .   .   ./simple.cpp:12: info: Metrics per 'A' region
@@ -95,12 +96,13 @@
 	             1 : 1.000 : 1.000 : 3	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.code.member:fields' metric
-	Average        : None (excluding zero metric values)
-	Minimum        : None
-	Maximum        : None
-	Total          : 0.0
-	Distribution   : 0 regions in total (including 0 suppressed)
+	Average        : 1.0 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 1
+	Total          : 1.0
+	Distribution   : 1 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.code.member:globals' metric
 	Average        : None (excluding zero metric values)

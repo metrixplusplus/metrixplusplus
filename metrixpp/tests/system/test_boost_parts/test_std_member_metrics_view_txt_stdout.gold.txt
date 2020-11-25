@@ -12,23 +12,50 @@
 	             5 : 0.013 : 1.000 :   2	|
 
 ./:: info: Overall metrics for 'std.code.member:fields' metric
-	Average        : 1.14285714 (excluding zero metric values)
+	Average        : 4.38636364 (excluding zero metric values)
 	Minimum        : 1
-	Maximum        : 2
-	Total          : 8.0
-	Distribution   : 7 regions in total (including 0 suppressed)
+	Maximum        : 34
+	Total          : 1737.0
+	Distribution   : 396 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 0.857 : 0.857 : 6	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             2 : 0.143 : 1.000 : 1	||||||||||||||
+	             1 : 0.369 : 0.369 : 146	||||||||||||||||||||||||||||||||||||
+	             2 : 0.184 : 0.553 :  73	||||||||||||||||||
+	             3 : 0.071 : 0.624 :  28	|||||||
+	             4 : 0.096 : 0.720 :  38	|||||||||
+	             5 : 0.051 : 0.770 :  20	|||||
+	             6 : 0.035 : 0.806 :  14	|||
+	             7 : 0.015 : 0.821 :   6	|
+	             8 : 0.023 : 0.843 :   9	||
+	             9 : 0.038 : 0.881 :  15	|||
+	            10 : 0.015 : 0.896 :   6	|
+	         11-13 : 0.013 : 0.909 :   5	|
+	            14 : 0.013 : 0.922 :   5	|
+	            15 : 0.015 : 0.937 :   6	|
+	            16 : 0.013 : 0.949 :   5	|
+	            17 : 0.015 : 0.965 :   6	|
+	            18 : 0.005 : 0.970 :   2	
+	            19 : 0.008 : 0.977 :   3	
+	         20-21 : 0.010 : 0.987 :   4	|
+	         23-25 : 0.005 : 0.992 :   2	
+	         28-34 : 0.008 : 1.000 :   3	
 
 ./:: info: Overall metrics for 'std.code.member:globals' metric
-	Average        : 1.0 (excluding zero metric values)
+	Average        : 3.95454545 (excluding zero metric values)
 	Minimum        : 1
-	Maximum        : 1
-	Total          : 1.0
-	Distribution   : 1 regions in total (including 0 suppressed)
+	Maximum        : 113
+	Total          : 348.0
+	Distribution   : 88 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.648 : 0.648 : 57	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             2 : 0.205 : 0.852 : 18	||||||||||||||||||||
+	             3 : 0.034 : 0.886 :  3	|||
+	             4 : 0.011 : 0.898 :  1	|
+	             5 : 0.023 : 0.920 :  2	||
+	             6 : 0.011 : 0.932 :  1	|
+	             7 : 0.011 : 0.943 :  1	|
+	             8 : 0.034 : 0.977 :  3	|||
+	            82 : 0.011 : 0.989 :  1	|
+	           113 : 0.011 : 1.000 :  1	|
 
 ./:: info: Overall metrics for 'std.code.member:interfaces' metric
 	Average        : None (excluding zero metric values)

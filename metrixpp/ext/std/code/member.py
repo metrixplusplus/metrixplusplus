@@ -63,7 +63,15 @@ class Plugin(api.Plugin,
             r'''([_a-zA-Z][_a-zA-Z0-9]*\s+[_a-zA-Z][_a-zA-Z0-9])\s*([=;]|'''
             r'''[{]\s*(public\s+|private\s+|protected\s+|internal\s+)?(get|set)\s*[;]\s*[a-z \t\r\n]*[}])''')
         pattern_to_search_cpp = re.compile(
-            r'''([_a-zA-Z][_a-zA-Z0-9]*\s+[_a-zA-Z][_a-zA-Z0-9])\s*[=;]''')
+            r'''([a-z]+\s+)*''' # const, static, extern, ...
+            r'''(((::)?[_a-zA-Z][_a-zA-Z0-9]*::)*''' # nested cpp namespaces for typename
+            r'''[_a-zA-Z][_a-zA-Z0-9]*(<.*>)?)''' # the actual typename including template args
+            r'''(\s+[a-z]+)*''' # const, static, extern, ...
+            r'''[*&]?''' # pointer or reference
+            r'''\s+'''
+            r'''([_a-zA-Z][_a-zA-Z0-9]*)''' # the actual variable name
+            r'''(\[.*\])?''' # if it is an array
+            r'''\s*[=:;]''') # colon is for bit fields
         pattern_to_search_java = re.compile(
             r'''([_$a-zA-Z][_$a-zA-Z0-9]*\s+[_$a-zA-Z][_$a-zA-Z0-9])\s*[=;]''')
         self.declare_metric(self.is_active_fields,
