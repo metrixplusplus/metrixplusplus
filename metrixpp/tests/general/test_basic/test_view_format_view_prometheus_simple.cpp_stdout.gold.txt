@@ -36,4 +36,4 @@ std_code_lines_code_min {file="./simple.cpp"} 0
 std_code_lines_code_max {file="./simple.cpp"} 11
 std_code_lines_code_total {file="./simple.cpp"} 56.0
 
- 
+
