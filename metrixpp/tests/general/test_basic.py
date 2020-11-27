@@ -226,8 +226,14 @@ class Test(tests.common.TestCase):
 
         runner = tests.common.ToolRunner('view', ['--format=xml'], prefix='xml')
         self.assertExec(runner.run())
-        
-        runner = tests.common.ToolRunner('view', ['--format=prometheus'], prefix='prometheus')
+
+        runner = tests.common.ToolRunner('view', ['--format=prometheus', '--log-level=ERROR'], prefix='prometheus')
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('view',
+                                         ['--format=prometheus', '--log-level=ERROR'],
+                                         prefix='prometheus_simple.cpp',
+                                         dirs_list=['./simple.cpp'])
         self.assertExec(runner.run())
         
         runner = tests.common.ToolRunner('collect',
