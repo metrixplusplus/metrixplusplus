@@ -227,6 +227,9 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('view', ['--format=xml'], prefix='xml')
         self.assertExec(runner.run())
         
+        runner = tests.common.ToolRunner('view', ['--format=prometheus'], prefix='prometheus')
+        self.assertExec(runner.run())
+        
         runner = tests.common.ToolRunner('collect',
                                          ['--std.code.complexity.cyclomatic'],
                                          prefix='nest',
@@ -245,18 +248,6 @@ class Test(tests.common.TestCase):
                                          prefix='nest_per_file',
                                          dirs_list=['./simple.cpp'],
                                          use_prev=True)
-        self.assertExec(runner.run())
-
-        runner = tests.common.ToolRunner('collect', ['--std.code.complexity.cyclomatic', '--std.code.lines.code'], save_prev=False)
-        self.assertExec(runner.run())
-
-        runner = tests.common.ToolRunner('view', ['--format=prometheus'], prefix='prometheus')
-        self.assertExec(runner.run())
-
-        runner = tests.common.ToolRunner('view',
-                                         ['--format=prometheus', '--ll=ERROR'],
-                                         prefix='prometheus_simple.cpp',
-                                         dirs_list=['./simple.cpp'])
         self.assertExec(runner.run())
 
     def test_std_general_metrics(self):
