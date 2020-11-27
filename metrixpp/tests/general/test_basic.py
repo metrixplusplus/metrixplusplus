@@ -247,7 +247,7 @@ class Test(tests.common.TestCase):
                                          use_prev=True)
         self.assertExec(runner.run())
 
-        runner = tests.common.ToolRunner('collect', ['--std.code.complexity.cyclomatic', '--std.code.lines.code'], save_prev=False)
+        runner = tests.common.ToolRunner('collect', ['--std.code.complexity.cyclomatic', '--std.code.lines.code'], save_prev=True)
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('view', ['--format=prometheus'], prefix='prometheus')
