@@ -95,7 +95,6 @@
                 	Offsets        : 10752-14302
                 	Line numbers   : 255-359
                 	Modified       : None
-                	std.code.member:fields: 1
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:361: info: Metrics per 'IWbemContext_BIPC' region
                 	Region name    : IWbemContext_BIPC
@@ -103,7 +102,6 @@
                 	Offsets        : 14305-15339
                 	Line numbers   : 361-397
                 	Modified       : None
-                	std.code.member:fields: 1
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:400: info: Metrics per 'IEnumWbemClassObject_BIPC' region
                 	Region name    : IEnumWbemClassObject_BIPC
@@ -111,7 +109,6 @@
                 	Offsets        : 15343-15975
                 	Line numbers   : 400-422
                 	Modified       : None
-                	std.code.member:fields: 1
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:424: info: Metrics per 'IWbemServices_BIPC' region
                 	Region name    : IWbemServices_BIPC
@@ -119,7 +116,6 @@
                 	Offsets        : 15978-21010
                 	Line numbers   : 424-571
                 	Modified       : None
-                	std.code.member:fields: 1
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:573: info: Metrics per 'IWbemLocator_BIPC' region
                 	Region name    : IWbemLocator_BIPC
@@ -127,7 +123,6 @@
                 	Offsets        : 21013-21470
                 	Line numbers   : 573-586
                 	Modified       : None
-                	std.code.member:fields: 1
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:588: info: Metrics per 'interprocess_overlapped' region
                 	Region name    : interprocess_overlapped
@@ -857,7 +852,6 @@
                 	Offsets        : 51794-51851
                 	Line numbers   : 1331-1333
                 	Modified       : None
-                	std.code.member:fields: 1
 
 .   .   .   .   ./interprocess/detail/win32_api.hpp:1336: info: Metrics per 'library_unloader' region
                 	Region name    : library_unloader
@@ -1104,19 +1098,19 @@
 	             2 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:fields' metric
-	Average        : 2.55555556 (excluding zero metric values)
+	Average        : 2.86666667 (excluding zero metric values)
 	Minimum        : 1
 	Maximum        : 10
-	Total          : 92.0
-	Distribution   : 36 regions in total (including 0 suppressed)
+	Total          : 86.0
+	Distribution   : 30 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 0.389 : 0.389 : 14	||||||||||||||||||||||||||||||||||||||
-	             2 : 0.333 : 0.722 : 12	|||||||||||||||||||||||||||||||||
-	             3 : 0.083 : 0.806 :  3	||||||||
-	             4 : 0.028 : 0.833 :  1	||
-	             5 : 0.083 : 0.917 :  3	||||||||
-	             6 : 0.028 : 0.944 :  1	||
-	            10 : 0.056 : 1.000 :  2	|||||
+	             1 : 0.267 : 0.267 :  8	||||||||||||||||||||||||||
+	             2 : 0.400 : 0.667 : 12	||||||||||||||||||||||||||||||||||||||||
+	             3 : 0.100 : 0.767 :  3	||||||||||
+	             4 : 0.033 : 0.800 :  1	|||
+	             5 : 0.100 : 0.900 :  3	||||||||||
+	             6 : 0.033 : 0.933 :  1	|||
+	            10 : 0.067 : 1.000 :  2	||||||
 
 ./interprocess/detail/win32_api.hpp:: info: Overall metrics for 'std.code.member:globals' metric
 	Average        : 57.5 (excluding zero metric values)

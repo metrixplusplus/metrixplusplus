@@ -63,22 +63,22 @@ class Plugin(api.Plugin,
             r'''([_a-zA-Z][_a-zA-Z0-9]*\s+[_a-zA-Z][_a-zA-Z0-9])\s*([=;]|'''
             r'''[{]\s*(public\s+|private\s+|protected\s+|internal\s+)?(get|set)\s*[;]\s*[a-z \t\r\n]*[}])''')
         pattern_to_search_cpp = re.compile(
-            r'''([a-z]+\s+)*''' # const, static, extern, ...
-            r'''(((::)?[_a-zA-Z][_a-zA-Z0-9]*::)*''' # nested cpp namespaces for typename
-            r'''[_a-zA-Z][_a-zA-Z0-9]*(<.*>)?)''' # the actual typename including template args
-            r'''(\s+[a-z]+)*''' # const, static, extern, ...
-            r'''[*&]?''' # pointer or reference
+            r'''([a-z]+\s+)*''' # multiple const, static, extern, ...
+            r'''((::)?[_a-zA-Z][_a-zA-Z0-9]*::)*''' # nested cpp namespaces for typename
+            r'''[_a-zA-Z][_a-zA-Z0-9]*(<.*>)?''' # actual typename including template args
+            r'''(\s+[a-z]+)*''' # multiple const, static, extern, ...
+            r'''[*&]?''' # optional pointer or reference
             r'''\s+'''
-            r'''([_a-zA-Z][_a-zA-Z0-9]*)''' # the actual variable name
-            r'''(\[.*\])?''' # if it is an array
-            r'''\s*[=:;]''') # colon is for bit fields
+            r'''[_a-zA-Z][_a-zA-Z0-9]*''' # actual variable name
+            r'''(\[.*\])?''' # optional rect braces if it is an array
+            r'''\s*(=|(:\s*[0-9]+)|;)''') # single colon if it is a bit field
         pattern_to_search_java = re.compile(
             r'''([_$a-zA-Z][_$a-zA-Z0-9]*\s+[_$a-zA-Z][_$a-zA-Z0-9])\s*[=;]''')
         self.declare_metric(self.is_active_fields,
                             self.Field('fields', int, non_zero=True),
                             {
                              'std.code.java': pattern_to_search_java,
-                             'std.code.cpp': pattern_to_search_cpp,
+                             'std.code.cpp': (pattern_to_search_cpp, self.FieldsGlobalsCounter),
                              'std.code.cs': pattern_to_search_cs,
                             },
                             marker_type_mask=api.Marker.T.CODE,
@@ -88,7 +88,7 @@ class Plugin(api.Plugin,
                             self.Field('globals', int, non_zero=True),
                             {
                              'std.code.java': pattern_to_search_java,
-                             'std.code.cpp': pattern_to_search_cpp,
+                             'std.code.cpp': (pattern_to_search_cpp, self.FieldsGlobalsCounter),
                              'std.code.cs': pattern_to_search_cs,
                             },
                             marker_type_mask=api.Marker.T.CODE,
@@ -129,6 +129,20 @@ class Plugin(api.Plugin,
         
         if self.is_active() == True:
             self.subscribe_by_parents_interface(api.ICode)
+
+    class FieldsGlobalsCounter(api.MetricPluginMixin.IterIncrementCounter):
+        def increment(self, match):
+            if (match.group(0).startswith('using') or
+                match.group(0).startswith('typedef') or
+                match.group(0).startswith('template') or
+                match.group(0).startswith('typename') or
+                match.group(0).startswith('class') or
+                match.group(0).startswith('public') or
+                match.group(0).startswith('private') or
+                match.group(0).startswith('protected') or
+                match.group(0).startswith('friend')):
+                return 0
+            return 1
 
     class ClassesCounter(api.MetricPluginMixin.PlainCounter):
         def count(self, marker, pattern_to_search):

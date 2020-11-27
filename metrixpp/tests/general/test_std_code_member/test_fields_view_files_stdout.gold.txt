@@ -1,0 +1,105 @@
+./test.cpp:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-778
+	Line numbers   : 1-60
+	Modified       : None
+
+.   ./test.cpp:20: info: Metrics per 'Foo' region
+    	Region name    : Foo
+    	Region type    : function
+    	Offsets        : 441-485
+    	Line numbers   : 20-24
+    	Modified       : None
+
+.   ./test.cpp:26: info: Metrics per 'Bar' region
+    	Region name    : Bar
+    	Region type    : function
+    	Offsets        : 487-507
+    	Line numbers   : 26-29
+    	Modified       : None
+
+.   ./test.cpp:31: info: Metrics per 'TestClass' region
+    	Region name    : TestClass
+    	Region type    : function
+    	Offsets        : 509-536
+    	Line numbers   : 31-34
+    	Modified       : None
+
+.   ./test.cpp:36: info: Metrics per 'virtual_override' region
+    	Region name    : virtual_override
+    	Region type    : function
+    	Offsets        : 538-582
+    	Line numbers   : 36-39
+    	Modified       : None
+
+.   ./test.cpp:42: info: Metrics per 'function_declaration' region
+    	Region name    : function_declaration
+    	Region type    : function
+    	Offsets        : 584-673
+    	Line numbers   : 41-45
+    	Modified       : None
+
+.   ./test.cpp:47: info: Metrics per 'main' region
+    	Region name    : main
+    	Region type    : function
+    	Offsets        : 675-741
+    	Line numbers   : 47-54
+    	Modified       : None
+
+.   ./test.cpp:56: info: Metrics per 'FuncWithPrototype' region
+    	Region name    : FuncWithPrototype
+    	Region type    : function
+    	Offsets        : 743-777
+    	Line numbers   : 56-59
+    	Modified       : None
+
+./test.cpp:: info: Overall metrics for 'std.code.member:fields' metric
+	Average        : None (excluding zero metric values)
+	Minimum        : None
+	Maximum        : None
+	Total          : 0.0
+	Distribution   : 0 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+
+./test.hpp:0: info: Metrics per '__global__' region
+	Region name    : __global__
+	Region type    : global
+	Offsets        : 0-1053
+	Line numbers   : 1-64
+	Modified       : None
+
+.   ./test.hpp:9: info: Metrics per 'TestClass' region
+    	Region name    : TestClass
+    	Region type    : class
+    	Offsets        : 86-888
+    	Line numbers   : 8-49
+    	Modified       : None
+    	std.code.member:fields: 16
+
+.   .   ./test.hpp:22: info: Metrics per 'function_definition' region
+        	Region name    : function_definition
+        	Region type    : function
+        	Offsets        : 437-477
+        	Line numbers   : 22-26
+        	Modified       : None
+
+.   ./test.hpp:52: info: Metrics per 'sTest' region
+    	Region name    : sTest
+    	Region type    : struct
+    	Offsets        : 891-1049
+    	Line numbers   : 51-61
+    	Modified       : None
+    	std.code.member:fields: 6
+
+./test.hpp:: info: Overall metrics for 'std.code.member:fields' metric
+	Average        : 11.0 (excluding zero metric values)
+	Minimum        : 6
+	Maximum        : 16
+	Total          : 22.0
+	Distribution   : 2 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             6 : 0.500 : 0.500 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
+	            16 : 0.500 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
+
+
