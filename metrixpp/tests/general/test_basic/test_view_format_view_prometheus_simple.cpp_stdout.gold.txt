@@ -1,0 +1,39 @@
+std_code_lines_code {file="./simple.cpp", region="__global__"} 0
+
+std_code_lines_code {file="./simple.cpp", region="hmm"} 4
+
+std_code_lines_code {file="./simple.cpp", region="A"} 4
+
+std_code_complexity_cyclomatic {file="./simple.cpp", region="A"} 3
+std_code_lines_code {file="./simple.cpp", region="A"} 11
+
+std_code_complexity_cyclomatic {file="./simple.cpp", region="func"} 1
+std_code_lines_code {file="./simple.cpp", region="func"} 5
+
+std_code_lines_code {file="./simple.cpp", region="embeded"} 3
+
+std_code_complexity_cyclomatic {file="./simple.cpp", region="embeded"} 1
+std_code_lines_code {file="./simple.cpp", region="embeded"} 7
+
+std_code_complexity_cyclomatic {file="./simple.cpp", region="func_to_be_removed_in_new_sources"} 2
+std_code_lines_code {file="./simple.cpp", region="func_to_be_removed_in_new_sources"} 5
+
+std_code_lines_code {file="./simple.cpp", region="embeded"} 3
+
+std_code_complexity_cyclomatic {file="./simple.cpp", region="embeded"} 1
+std_code_lines_code {file="./simple.cpp", region="embeded"} 7
+
+std_code_complexity_cyclomatic {file="./simple.cpp", region="never"} 1
+std_code_lines_code {file="./simple.cpp", region="never"} 7
+
+std_code_complexity_cyclomatic_avg {file="./simple.cpp"} 1.5
+std_code_complexity_cyclomatic_min {file="./simple.cpp"} 1
+std_code_complexity_cyclomatic_max {file="./simple.cpp"} 3
+std_code_complexity_cyclomatic_total {file="./simple.cpp"} 9.0
+
+std_code_lines_code_avg {file="./simple.cpp"} 5.09090909
+std_code_lines_code_min {file="./simple.cpp"} 0
+std_code_lines_code_max {file="./simple.cpp"} 11
+std_code_lines_code_total {file="./simple.cpp"} 56.0
+
+ 
