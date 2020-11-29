@@ -29,7 +29,7 @@ class Plugin(api.Plugin,
         pattern_to_search = r'''.{%s,}''' % (self.threshold + 1)
         self.declare_metric(
                 self.is_active_ll,
-                self.Field('numbers', int),
+                self.Field('numbers', int, non_zero=True),
                 re.compile(pattern_to_search),
                 marker_type_mask=api.Marker.T.CODE,
                 region_type_mask=api.Region.T.ANY,
