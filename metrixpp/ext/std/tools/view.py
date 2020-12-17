@@ -660,8 +660,33 @@ def cout_txt(data, loader):
                 "Directory content:",
                 details)
     
+def cout_prom_regions(path, regions, indent = 0):
+    for region in regions:
+        details = []
+        for namespace in sorted(list(region['data'].keys())):
+            diff_data = {}
+            if '__diff__' in list(region['data'][namespace].keys()):
+                diff_data = region['data'][namespace]['__diff__']
+            for field in sorted(list(region['data'][namespace].keys())):
+                diff_str = ""
+                if field == '__diff__':
+                    continue
+                if field in list(diff_data.keys()):
+                    diff_str = " [" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
+                details.append((namespace + ":" + field, str(region['data'][namespace][field]) + diff_str))
+        promout.notify(path = path,
+                        region = region['info']['name'],
+                        metric = "",
+                        details = details)
+        if 'subregions' in list(region.keys()):
+            cout_txt_regions(path, region['subregions'], indent=indent+1)
+            
 def cout_prom(data, loader):
     
+    for key in list(data['file-data'].keys()):
+        if key == 'regions':
+            cout_prom_regions(data['info']['path'], data['file-data'][key])
+
     for namespace in sorted(list(data['aggregated-data'].keys())):
         for field in sorted(list(data['aggregated-data'][namespace].keys())):
             details = []
