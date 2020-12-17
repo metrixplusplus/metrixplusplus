@@ -1,3 +1,7 @@
+## 1.7 (December, 2020)
+- added Promehteous format for exporting/view
+- added std.code.longlines plugin
+
 ## 1.6 (June, 2020)
 - added python3 support
 - added pypi package (metrixpp)
