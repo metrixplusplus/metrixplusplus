@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 const features = [
   {
     title: <>Configurable</>,
-    imageUrl: 'img/undraw_docusaurus_mountain.svg',
+    imageUrl: 'img/perm_data_setting-24px.svg',
     description: (
       <>
         Define and apply your rules and policies.
@@ -19,7 +19,7 @@ const features = [
   },
   {
     title: <>Extendable via plugins</>,
-    imageUrl: 'img/undraw_docusaurus_mountain.svg',
+    imageUrl: 'img/extension-24px.svg',
     description: (
       <>
         Define your custom metric.
@@ -30,7 +30,7 @@ const features = [
   },
   {
     title: <>Multiple metrics</>,
-    imageUrl: 'img/undraw_docusaurus_react.svg',
+    imageUrl: 'img/analytics-24px.svg',
     description: (
       <>
         Complexity, size and other.
@@ -39,7 +39,7 @@ const features = [
   },
   {
     title: <>Multiple languages</>,
-    imageUrl: 'img/undraw_docusaurus_tree.svg',
+    imageUrl: 'img/done_all-24px.svg',
     description: (
       <>
         C/C++, C# and Java.
@@ -49,7 +49,7 @@ const features = [
   },
   {
     title: <>High performance and scalability</>,
-    imageUrl: 'img/undraw_docusaurus_react.svg',
+    imageUrl: 'img/speed-24px.svg',
     description: (
       <>
         Applicable to huge code bases: thousands of files per minute.
@@ -59,7 +59,7 @@ const features = [
   },
   {
     title: <>Effortless application to legacy code</>,
-    imageUrl: 'img/undraw_docusaurus_react.svg',
+    imageUrl: 'img/bolt-24px.svg',
     description: (
       <>
         Recognises legacy, modified and new code.
@@ -74,8 +74,8 @@ function Feature({imageUrl, title, description}) {
   return (
     <div className={clsx('col col--4', styles.feature)}>
       {imgUrl && (
-        <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} />
+        <div className="text--center" style={{color:'green', fill: 'green'}}>
+          <img className={styles.featureImage} style={{fill:'green'}} src={imgUrl} alt={title} />
         </div>
       )}
       <h3>{title}</h3>
