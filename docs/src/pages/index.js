@@ -43,7 +43,7 @@ const features = [
     description: (
       <>
         C/C++, C# and Java.
-        Recognises classes, interfaces, namespaces, functions, comments, preprocessor and much more.
+        Recognizes classes, interfaces, namespaces, functions, comments, preprocessor and much more.
       </>
     ),
   },
