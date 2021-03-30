@@ -12,7 +12,7 @@ module.exports = {
         alt: 'Metrix++',
         src: 'img/favicon.png',
       },
-      links: [
+      items: [
         {
           to: 'docs/01-u-overview',
           activeBasePath: 'docs',
