@@ -3,14 +3,14 @@ module.exports = {
   tagline: 'Management of source code quality is possible',
   url: 'https://metrixplusplus.github.io/',
   baseUrl: '/',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
   projectName: 'metrixplusplus', // Usually your repo name.
   themeConfig: {
     navbar: {
       title: 'Metrix++',
       logo: {
         alt: 'Metrix++',
-        src: 'img/logo.svg',
+        src: 'img/favicon.png',
       },
       links: [
         {
@@ -19,7 +19,6 @@ module.exports = {
           label: 'Docs',
           position: 'left',
         },
-        {to: 'blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/metrixplusplus/metrixplusplus',
           label: 'GitHub',
@@ -47,21 +46,8 @@ module.exports = {
           title: 'Community',
           items: [
             {
-              label: 'Ask question',
-              href: 'https://github.com/metrixplusplus/metrixplusplus/issues/new',
-            },
-            {
-              label: 'Report defect',
-              href: 'https://github.com/metrixplusplus/metrixplusplus/issues/new',
-            },
-          ],
-        },
-        {
-          title: 'Extentions',
-          items: [
-            {
-              label: 'Feature request',
-              href: 'https://github.com/metrixplusplus/metrixplusplus/issues/new',
+              label: 'GitHub',
+              href: 'https://github.com/metrixplusplus/',
             },
             {
               label: 'Open issues',
@@ -74,15 +60,19 @@ module.exports = {
           ],
         },
         {
-          title: 'More',
+          title: 'Feedback',
           items: [
             {
-              label: 'Blog',
-              to: 'blog',
+              label: 'Ask question',
+              href: 'https://github.com/metrixplusplus/metrixplusplus/issues/new',
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/metrixplusplus/',
+              label: 'Report defect',
+              href: 'https://github.com/metrixplusplus/metrixplusplus/issues/new',
+            },
+            {
+              label: 'Feature request',
+              href: 'https://github.com/metrixplusplus/metrixplusplus/issues/new',
             },
           ],
         },
