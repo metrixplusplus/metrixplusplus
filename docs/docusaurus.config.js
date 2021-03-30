@@ -78,8 +78,6 @@ module.exports = {
         },
       ],
       copyright: `Copyright © 2009 - ${new Date().getFullYear()}, Metrix++ Project.`,
-      license: `Code licensed under MIT license, documentation under CC BY 3.0.`,
-      
     },
   },
   presets: [
