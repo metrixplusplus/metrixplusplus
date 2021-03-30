@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Metrix++',
   tagline: 'Management of source code quality is possible',
-  url: 'https://metrixplusplus.github.io/',
+  url: 'https://metrixplusplus.github.io/metrixplusplus/',
   baseUrl: '/',
   favicon: 'img/favicon.png',
   projectName: 'metrixplusplus', // Usually your repo name.
