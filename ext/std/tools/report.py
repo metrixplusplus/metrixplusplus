@@ -68,7 +68,7 @@ class Plugin(mpp.api.Plugin, mpp.api.IConfigurable, mpp.api.IRunable):
                     file.write("Warning list: \\ref metrix_warnings\n\n")
 
                 for file_data in overview_data["matrix"]:
-                    file_data[0] = "\\ref " + str(file_data[0]).replace("\\", "/")
+                    file_data[0] = str(file_data[0]).replace("\\", "/")
 
                 writer = pytablewriter.MarkdownTableWriter()
                 writer.table_name = "metrix overview"
