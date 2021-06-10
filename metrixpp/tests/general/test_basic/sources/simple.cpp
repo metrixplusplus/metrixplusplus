@@ -68,6 +68,18 @@ class A
     int pure_virtual_overrider() override = 0;
 
 	int m_me88er = 10;
+
+    int hex_number = 0xaBc78;
+    unsigned int binary_number = 0b00110u;
+    unsigned long long int octal_number = 074uLL;
+    unsigned long long int different_order = 123llU;
+    long int just_l = 42l;
+
+    const int const_hex_number = 0xaBc78;
+    const unsigned int const_binary_number = 0b00110u;
+    const unsigned long long int const_octal_number = 074uLL;
+    const unsigned long long int const_different_order = 123llU;
+    const long int const_just_l = 42l;
 };
 
 }
