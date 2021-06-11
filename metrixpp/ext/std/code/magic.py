@@ -45,7 +45,7 @@ class Plugin(api.Plugin,
             r'''((const(\s+[_$a-zA-Z][_$a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)'''
             r'''|(\b[0-9]+\b)''')
         pattern_to_search_cpp = re.compile(
-            r'''((const(\s+[_a-zA-Z][_a-zA-Z0-9]*)+\s*[=]\s*)[-+]?''' +
+            r'''((const(expr)?(\s+[_a-zA-Z][_a-zA-Z0-9]*)+\s*[=]\s*)[-+]?''' +
             cpp_number_pattern + r'''\b)'''
             r'''|(virtual\s+.*\s*[=]\s*[0]\s*[,;])'''
             r'''|(override\s+[=]\s*[0]\s*[,;])'''

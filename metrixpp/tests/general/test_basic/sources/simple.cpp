@@ -77,12 +77,12 @@ class A
     int one_separator = 123'456;
     int two_separators = 123'456'789;
 
-    const int const_hex_number = 0xaBc78;
+    constexpr int const_hex_number = 0xaBc78;
     const unsigned int const_binary_number = 0b00110u;
     const unsigned long long int const_octal_number = 074uLL;
     const unsigned long long int const_different_order = 123llU;
     const long int const_just_l = 42l;
-    const int one_separator = 123'456;
+    constexpr int one_separator = 123'456;
     const int two_separators = 123'456'789;
 };
 
