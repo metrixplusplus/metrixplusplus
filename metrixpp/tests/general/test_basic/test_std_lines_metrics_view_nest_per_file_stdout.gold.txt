@@ -1,8 +1,8 @@
 ./simple.cpp:0: info: Metrics per '__global__' region
 	Region name    : __global__
 	Region type    : global
-	Offsets        : 0-1256
-	Line numbers   : 1-86
+	Offsets        : 0-1410
+	Line numbers   : 1-90
 	Modified       : None
 	std.code.lines:code: 0
 	std.code.lines:comments: 0
@@ -12,8 +12,8 @@
 .   ./simple.cpp:4: info: Metrics per 'hmm' region
     	Region name    : hmm
     	Region type    : namespace
-    	Offsets        : 2-1255
-    	Line numbers   : 3-85
+    	Offsets        : 2-1409
+    	Line numbers   : 3-89
     	Modified       : None
     	std.code.lines:code: 4
     	std.code.lines:comments: 1
@@ -23,13 +23,13 @@
 .   .   ./simple.cpp:9: info: Metrics per 'A' region
         	Region name    : A
         	Region type    : class
-        	Offsets        : 94-1251
-        	Line numbers   : 9-83
+        	Offsets        : 94-1405
+        	Line numbers   : 9-87
         	Modified       : None
-        	std.code.lines:code: 16
+        	std.code.lines:code: 20
         	std.code.lines:comments: 0
         	std.code.lines:preprocessor: 0
-        	std.code.lines:total: 16
+        	std.code.lines:total: 20
 
 .   .   .   ./simple.cpp:12: info: Metrics per 'A' region
             	Region name    : A
@@ -120,10 +120,10 @@
             	std.code.lines:total: 7
 
 ./simple.cpp:: info: Overall metrics for 'std.code.lines:code' metric
-	Average        : 6.18181818
+	Average        : 6.54545455
 	Minimum        : 0
-	Maximum        : 16
-	Total          : 68.0
+	Maximum        : 20
+	Total          : 72.0
 	Distribution   : 11 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.091 : 0.091 :  1	|||||||||
@@ -132,7 +132,7 @@
 	             5 : 0.182 : 0.545 :  2	||||||||||||||||||
 	             7 : 0.273 : 0.818 :  3	|||||||||||||||||||||||||||
 	            11 : 0.091 : 0.909 :  1	|||||||||
-	            16 : 0.091 : 1.000 :  1	|||||||||
+	            20 : 0.091 : 1.000 :  1	|||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.code.lines:comments' metric
 	Average        : 0.45454545
@@ -156,10 +156,10 @@
 	             1 : 0.091 : 1.000 :  1	|||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.code.lines:total' metric
-	Average        : 6.63636364
+	Average        : 7.0
 	Minimum        : 0
-	Maximum        : 16
-	Total          : 73.0
+	Maximum        : 20
+	Total          : 77.0
 	Distribution   : 11 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.091 : 0.091 :  1	|||||||||
@@ -169,6 +169,6 @@
 	             7 : 0.091 : 0.636 :  1	|||||||||
 	             8 : 0.182 : 0.818 :  2	||||||||||||||||||
 	            12 : 0.091 : 0.909 :  1	|||||||||
-	            16 : 0.091 : 1.000 :  1	|||||||||
+	            20 : 0.091 : 1.000 :  1	|||||||||
 
 

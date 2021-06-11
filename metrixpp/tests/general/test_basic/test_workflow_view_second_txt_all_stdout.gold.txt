@@ -11,10 +11,10 @@
 	             3 : 0.250 : 1.000 : 2 [+1]	|||||||||||||||||||||||||
 
 ./:: info: Overall metrics for 'std.code.lines:code' metric
-	Average        : 5.0 [-0.625]
+	Average        : 5.0 [-0.875]
 	Minimum        : 0 [+0]
-	Maximum        : 11 [-5]
-	Total          : 75.0 [-15.0]
+	Maximum        : 11 [-9]
+	Total          : 75.0 [-19.0]
 	Distribution   : 15 [-1] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.133 : 0.133 :  2 [+0 ]	|||||||||||||
@@ -49,10 +49,10 @@
 	             2 : 0.067 : 1.000 :  1 [+1 ]	||||||
 
 ./:: info: Overall metrics for 'std.code.lines:total' metric
-	Average        : 5.66666667 [-0.52083333]
+	Average        : 5.66666667 [-0.77083333]
 	Minimum        : 0 [+0]
-	Maximum        : 12 [-4]
-	Total          : 85.0 [-14.0]
+	Maximum        : 12 [-8]
+	Total          : 85.0 [-18.0]
 	Distribution   : 15 [-1] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.133 : 0.133 :  2 [+0 ]	|||||||||||||

@@ -51,7 +51,7 @@ class CppCodeParser(object):
                                                                       # Need to support new line separators in expense of efficiency?
                 | /\*\*/                                              # Match C style comments (empty comment line)
                 | /([\\](?:\n|\r\n|\r))*\*.*?\*([\\](?:\n|\r\n|\r))*/ # Match C style comments
-                | \'(?:\\.|[^\\\'])*\'                                # Match quoted strings
+                | (?<![0-9a-fA-F])\'(?:\\.|[^\\\'])*\'                                # Match quoted strings
                 | "(?:\\.|[^\\"])*"                                   # Match double quoted strings
                 | (((?<=\n|\r)|^)[ \t]*[#].*?[^\\](?=\n|\r\n|\r))     # Match preprocessor
                                                                       # NOTE: end of line is NOT consumed

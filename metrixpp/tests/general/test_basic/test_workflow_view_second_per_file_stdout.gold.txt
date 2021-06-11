@@ -15,7 +15,7 @@
             </std.code.complexity>
             <std.code.lines>
                 <code avg="5.27272727" count="11" max="11" min="0" nonzero="False" sup="0" total="58.0">
-                    <__diff__ avg="-0.90909091" count="0" max="-5" min="0" nonzero="0" sup="0" total="-10.0" />
+                    <__diff__ avg="-1.27272727" count="0" max="-9" min="0" nonzero="0" sup="0" total="-14.0" />
                     <distribution-bars>
                         <distribution-bar __diff__="0" count="1" metric="0" ratio="0.09090909" />
                         <distribution-bar __diff__="0" count="2" metric="3" ratio="0.18181818" />
@@ -43,7 +43,7 @@
                     </distribution-bars>
                 </preprocessor>
                 <total avg="5.90909091" count="11" max="12" min="0" nonzero="False" sup="0" total="65.0">
-                    <__diff__ avg="-0.72727273" count="0" max="-4" min="0" nonzero="0" sup="0" total="-8.0" />
+                    <__diff__ avg="-1.09090909" count="0" max="-8" min="0" nonzero="0" sup="0" total="-12.0" />
                     <distribution-bars>
                         <distribution-bar __diff__="0" count="1" metric="0" ratio="0.09090909" />
                         <distribution-bar __diff__="-1" count="1" metric="3" ratio="0.09090909" />
@@ -94,7 +94,7 @@
                 <region>
                     <data>
                         <std.code.lines code="4" comments="0" preprocessor="0" total="4">
-                            <__diff__ code="-12" comments="0" preprocessor="0" total="-12" />
+                            <__diff__ code="-16" comments="0" preprocessor="0" total="-16" />
                         </std.code.lines>
                     </data>
                     <info cursor="10" line_begin="10" line_end="75" modified="True" name="A" offset_begin="111" offset_end="831" type="class" />

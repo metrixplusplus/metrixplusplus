@@ -12,7 +12,7 @@
                 </cyclomatic>
             </std.code.complexity>
             <std.code.lines>
-                <code avg="5.625" count="16" max="16" min="0" nonzero="False" sup="0" total="90.0">
+                <code avg="5.875" count="16" max="20" min="0" nonzero="False" sup="0" total="94.0">
                     <distribution-bars>
                         <distribution-bar count="2" metric="0" ratio="0.125" />
                         <distribution-bar count="3" metric="3" ratio="0.1875" />
@@ -21,7 +21,7 @@
                         <distribution-bar count="4" metric="7" ratio="0.25" />
                         <distribution-bar count="1" metric="8" ratio="0.0625" />
                         <distribution-bar count="1" metric="11" ratio="0.0625" />
-                        <distribution-bar count="1" metric="16" ratio="0.0625" />
+                        <distribution-bar count="1" metric="20" ratio="0.0625" />
                     </distribution-bars>
                 </code>
                 <comments avg="0.625" count="16" max="3" min="0" nonzero="False" sup="0" total="10.0">
@@ -38,7 +38,7 @@
                         <distribution-bar count="1" metric="1" ratio="0.0625" />
                     </distribution-bars>
                 </preprocessor>
-                <total avg="6.1875" count="16" max="16" min="0" nonzero="False" sup="0" total="99.0">
+                <total avg="6.4375" count="16" max="20" min="0" nonzero="False" sup="0" total="103.0">
                     <distribution-bars>
                         <distribution-bar count="2" metric="0" ratio="0.125" />
                         <distribution-bar count="3" metric="3" ratio="0.1875" />
@@ -48,7 +48,7 @@
                         <distribution-bar count="2" metric="8" ratio="0.125" />
                         <distribution-bar count="1" metric="9" ratio="0.0625" />
                         <distribution-bar count="1" metric="12" ratio="0.0625" />
-                        <distribution-bar count="1" metric="16" ratio="0.0625" />
+                        <distribution-bar count="1" metric="20" ratio="0.0625" />
                     </distribution-bars>
                 </total>
             </std.code.lines>

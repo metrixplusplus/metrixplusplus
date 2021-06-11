@@ -27,5 +27,5 @@ test_workflow.db:: info: Collected metrics:
 
 ./:: info: Processed files and checksums:
 	./file_deleted_in_new_sources.cpp: 0xfd51c243
-	./simple.cpp   : 0x63c123b9
+	./simple.cpp   : 0xecc4bf6c
 

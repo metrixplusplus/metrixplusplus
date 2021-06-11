@@ -1,22 +1,22 @@
 ./simple.cpp:0: info: Metrics per '__global__' region
 	Region name    : __global__
 	Region type    : global
-	Offsets        : 0-1256
-	Line numbers   : 1-86
+	Offsets        : 0-1410
+	Line numbers   : 1-90
 	Modified       : None
 
 .   ./simple.cpp:4: info: Metrics per 'hmm' region
     	Region name    : hmm
     	Region type    : namespace
-    	Offsets        : 2-1255
-    	Line numbers   : 3-85
+    	Offsets        : 2-1409
+    	Line numbers   : 3-89
     	Modified       : None
 
 .   .   ./simple.cpp:9: info: Metrics per 'A' region
         	Region name    : A
         	Region type    : class
-        	Offsets        : 94-1251
-        	Line numbers   : 9-83
+        	Offsets        : 94-1405
+        	Line numbers   : 9-87
         	Modified       : None
 
 .   .   .   ./simple.cpp:12: info: Metrics per 'A' region
@@ -76,19 +76,19 @@
             	Modified       : None
 
 ./simple.cpp:0: info: Metrics per file
-	std.code.filelines:code: 65
+	std.code.filelines:code: 69
 	std.code.filelines:comments: 5
 	std.code.filelines:preprocessor: 1
-	std.code.filelines:total: 70
+	std.code.filelines:total: 74
 
 ./simple.cpp:: info: Overall metrics for 'std.code.filelines:code' metric
-	Average        : 65.0
-	Minimum        : 65
-	Maximum        : 65
-	Total          : 65.0
+	Average        : 69.0
+	Minimum        : 69
+	Maximum        : 69
+	Total          : 69.0
 	Distribution   : 1 files in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of files
-	            65 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	            69 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.code.filelines:comments' metric
 	Average        : 5.0
@@ -109,12 +109,12 @@
 	             1 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.code.filelines:total' metric
-	Average        : 70.0
-	Minimum        : 70
-	Maximum        : 70
-	Total          : 70.0
+	Average        : 74.0
+	Minimum        : 74
+	Maximum        : 74
+	Total          : 74.0
 	Distribution   : 1 files in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of files
-	            70 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	            74 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
