@@ -1,3 +1,6 @@
+## 1.7.1 (June, 2021)
+- improve C++ numbers parsing
+
 ## 1.7 (December, 2020)
 - added Promehteous format for exporting/view
 - added std.code.longlines plugin
