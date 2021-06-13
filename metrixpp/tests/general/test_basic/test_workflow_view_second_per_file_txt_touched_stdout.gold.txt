@@ -26,10 +26,10 @@
 	Offsets        : 111-831
 	Line numbers   : 10-75
 	Modified       : True
-	std.code.lines:code: 4 [-2]
+	std.code.lines:code: 4 [-16]
 	std.code.lines:comments: 0 [+0]
 	std.code.lines:preprocessor: 0 [+0]
-	std.code.lines:total: 4 [-2]
+	std.code.lines:total: 4 [-16]
 
 ./simple.cpp:13: info: Metrics per 'A' region
 	Region name    : A
@@ -140,16 +140,15 @@
 	             2 : 0.400 : 1.000 : 2 [+1]	||||||||||||||||||||||||||||||||||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.code.lines:code' metric
-	Average        : 5.57142857 [+0.0]
+	Average        : 5.57142857 [-2.0]
 	Minimum        : 3 [+0]
-	Maximum        : 8 [+1]
-	Total          : 39.0 [+0.0]
+	Maximum        : 8 [-12]
+	Total          : 39.0 [-14.0]
 	Distribution   : 7 [+0] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             3 : 0.143 : 0.143 : 1 [+0]	||||||||||||||
 	             4 : 0.286 : 0.429 : 2 [+1]	||||||||||||||||||||||||||||
 	             5 : 0.143 : 0.571 : 1 [+0]	||||||||||||||
-	             6 : 0.000 : 0.571 : 0 [-1]	
 	             7 : 0.143 : 0.714 : 1 [-2]	||||||||||||||
 	             8 : 0.286 : 1.000 : 2 [+2]	||||||||||||||||||||||||||||
 
@@ -176,16 +175,16 @@
 	             2 : 0.143 : 1.000 : 1 [+1]	||||||||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.code.lines:total' metric
-	Average        : 6.42857143 [+0.28571429]
+	Average        : 6.42857143 [-1.71428571]
 	Minimum        : 4 [+1]
-	Maximum        : 9 [+1]
-	Total          : 45.0 [+2.0]
+	Maximum        : 9 [-11]
+	Total          : 45.0 [-12.0]
 	Distribution   : 7 [+0] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             3 : 0.000 : 0.000 : 0 [-1]	
 	             4 : 0.286 : 0.286 : 2 [+2]	||||||||||||||||||||||||||||
 	             5 : 0.143 : 0.429 : 1 [+0]	||||||||||||||
-	             6 : 0.000 : 0.429 : 0 [-2]	
+	             6 : 0.000 : 0.429 : 0 [-1]	
 	             7 : 0.286 : 0.714 : 2 [+1]	||||||||||||||||||||||||||||
 	             8 : 0.000 : 0.714 : 0 [-2]	
 	             9 : 0.286 : 1.000 : 2 [+2]	||||||||||||||||||||||||||||

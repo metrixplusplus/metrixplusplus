@@ -15,13 +15,12 @@
             </std.code.complexity>
             <std.code.lines>
                 <code avg="5.0" count="15" max="11" min="0" nonzero="False" sup="0" total="75.0">
-                    <__diff__ avg="0.0" count="-1" max="0" min="0" nonzero="0" sup="0" total="-5.0" />
+                    <__diff__ avg="-0.875" count="-1" max="-9" min="0" nonzero="0" sup="0" total="-19.0" />
                     <distribution-bars>
                         <distribution-bar __diff__="0" count="2" metric="0" ratio="0.13333333" />
                         <distribution-bar __diff__="0" count="3" metric="3" ratio="0.2" />
                         <distribution-bar __diff__="1" count="3" metric="4" ratio="0.2" />
                         <distribution-bar __diff__="0" count="2" metric="5" ratio="0.13333333" />
-                        <distribution-bar __diff__="-1" count="0" metric="6" ratio="0" />
                         <distribution-bar __diff__="-3" count="1" metric="7" ratio="0.06666667" />
                         <distribution-bar __diff__="1" count="2" metric="8" ratio="0.13333333" />
                         <distribution-bar __diff__="1" count="1" metric="10" ratio="0.06666667" />
@@ -45,13 +44,13 @@
                     </distribution-bars>
                 </preprocessor>
                 <total avg="5.66666667" count="15" max="12" min="0" nonzero="False" sup="0" total="85.0">
-                    <__diff__ avg="0.10416667" count="-1" max="0" min="0" nonzero="0" sup="0" total="-4.0" />
+                    <__diff__ avg="-0.77083333" count="-1" max="-8" min="0" nonzero="0" sup="0" total="-18.0" />
                     <distribution-bars>
                         <distribution-bar __diff__="0" count="2" metric="0" ratio="0.13333333" />
                         <distribution-bar __diff__="-1" count="2" metric="3" ratio="0.13333333" />
                         <distribution-bar __diff__="2" count="2" metric="4" ratio="0.13333333" />
                         <distribution-bar __diff__="1" count="3" metric="5" ratio="0.2" />
-                        <distribution-bar __diff__="-2" count="0" metric="6" ratio="0" />
+                        <distribution-bar __diff__="-1" count="0" metric="6" ratio="0" />
                         <distribution-bar __diff__="-1" count="2" metric="7" ratio="0.13333333" />
                         <distribution-bar __diff__="-2" count="0" metric="8" ratio="0" />
                         <distribution-bar __diff__="1" count="2" metric="9" ratio="0.13333333" />

@@ -27,14 +27,29 @@ class Plugin(api.Plugin,
         self.is_active_numbers_simplier = options.__dict__['std.code.magic.numbers.simplier']
     
     def initialize(self):
+        # C++ Source: https://en.cppreference.com/w/cpp/language/integer_literal
+        # C Source: https://en.cppreference.com/w/c/language/integer_constant
+        cpp_number_patterns = []
+        cpp_number_patterns.append(r'''[1-9]('?[0-9])*''')
+        cpp_number_patterns.append(r'''0('?[0-7])*''')  # 0 is here
+        cpp_number_patterns.append(r'''0[xX][0-9a-fA-F]('?[0-9a-fA-F])*''')
+        cpp_number_patterns.append(r'''0[bB][01]('?[01])*''')
+
+        cpp_number_suffix = r'(ll|LL|[lLzZ])'
+        cpp_number_suffix = r'([uU]?{s}?|{s}[uU])'.format(s=cpp_number_suffix)
+
+        cpp_number_pattern = r'({}){}'.format(r'|'.join(cpp_number_patterns),
+                                              cpp_number_suffix)
+
         pattern_to_search_java = re.compile(
             r'''((const(\s+[_$a-zA-Z][_$a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)'''
             r'''|(\b[0-9]+\b)''')
         pattern_to_search_cpp = re.compile(
-            r'''((const(\s+[_a-zA-Z][_a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)'''
+            r'''((const(expr)?(\s+[_a-zA-Z][_a-zA-Z0-9]*)+\s*[=]\s*)[-+]?''' +
+            cpp_number_pattern + r'''\b)'''
             r'''|(virtual\s+.*\s*[=]\s*[0]\s*[,;])'''
             r'''|(override\s+[=]\s*[0]\s*[,;])'''
-            r'''|(\b[0-9]+\b)''')
+            r'''|(\b''' + cpp_number_pattern + r'''\b)''')
         pattern_to_search_cs = re.compile(
             r'''((const(\s+[_a-zA-Z][_a-zA-Z0-9]*)+\s*[=]\s*)[-+]?[0-9]+\b)'''
             r'''|(\b[0-9]+\b)''')

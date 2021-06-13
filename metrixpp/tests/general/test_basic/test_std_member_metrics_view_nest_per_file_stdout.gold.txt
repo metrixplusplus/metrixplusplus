@@ -1,16 +1,16 @@
 ./simple.cpp:0: info: Metrics per '__global__' region
 	Region name    : __global__
 	Region type    : global
-	Offsets        : 0-788
-	Line numbers   : 1-74
+	Offsets        : 0-1418
+	Line numbers   : 1-90
 	Modified       : None
 	std.code.member:namespaces: 1
 
 .   ./simple.cpp:4: info: Metrics per 'hmm' region
     	Region name    : hmm
     	Region type    : namespace
-    	Offsets        : 2-787
-    	Line numbers   : 3-73
+    	Offsets        : 2-1417
+    	Line numbers   : 3-89
     	Modified       : None
     	std.code.member:classes: 1
     	std.code.member:types: 1
@@ -18,8 +18,8 @@
 .   .   ./simple.cpp:9: info: Metrics per 'A' region
         	Region name    : A
         	Region type    : class
-        	Offsets        : 94-783
-        	Line numbers   : 9-71
+        	Offsets        : 94-1413
+        	Line numbers   : 9-87
         	Modified       : None
         	std.code.member:methods: 4
 

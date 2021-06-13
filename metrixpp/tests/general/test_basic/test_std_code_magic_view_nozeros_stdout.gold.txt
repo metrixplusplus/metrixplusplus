@@ -1,11 +1,12 @@
 ./:: info: Overall metrics for 'std.code.magic:numbers' metric
-	Average        : 1.0 (excluding zero metric values)
+	Average        : 1.77777778 (excluding zero metric values)
 	Minimum        : 1
-	Maximum        : 1
-	Total          : 9.0
+	Maximum        : 8
+	Total          : 16.0
 	Distribution   : 9 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 1.000 : 1.000 : 9	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.889 : 0.889 : 8	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             8 : 0.111 : 1.000 : 1	|||||||||||
 
 ./:: info: Directory content:
 	File           : file_deleted_in_new_sources.cpp

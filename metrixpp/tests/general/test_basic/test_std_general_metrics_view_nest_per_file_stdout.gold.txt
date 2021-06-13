@@ -1,22 +1,22 @@
 ./simple.cpp:0: info: Metrics per '__global__' region
 	Region name    : __global__
 	Region type    : global
-	Offsets        : 0-788
-	Line numbers   : 1-74
+	Offsets        : 0-1418
+	Line numbers   : 1-90
 	Modified       : None
 
 .   ./simple.cpp:4: info: Metrics per 'hmm' region
     	Region name    : hmm
     	Region type    : namespace
-    	Offsets        : 2-787
-    	Line numbers   : 3-73
+    	Offsets        : 2-1417
+    	Line numbers   : 3-89
     	Modified       : None
 
 .   .   ./simple.cpp:9: info: Metrics per 'A' region
         	Region name    : A
         	Region type    : class
-        	Offsets        : 94-783
-        	Line numbers   : 9-71
+        	Offsets        : 94-1413
+        	Line numbers   : 9-87
         	Modified       : None
 
 .   .   .   ./simple.cpp:12: info: Metrics per 'A' region
@@ -77,7 +77,7 @@
 
 ./simple.cpp:0: info: Metrics per file
 	std.general:proctime: 0.01
-	std.general:size: 788
+	std.general:size: 1418
 
 ./simple.cpp:: info: Overall metrics for 'std.general:procerrors' metric
 	Average        : None
@@ -97,12 +97,12 @@
 	        0.0100 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.general:size' metric
-	Average        : 788.0
-	Minimum        : 788
-	Maximum        : 788
-	Total          : 788.0
+	Average        : 1418.0
+	Minimum        : 1418
+	Maximum        : 1418
+	Total          : 1418.0
 	Distribution   : 1 files in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of files
-	           788 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	          1418 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 

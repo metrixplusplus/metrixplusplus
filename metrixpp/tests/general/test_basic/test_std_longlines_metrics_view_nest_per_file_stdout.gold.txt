@@ -1,23 +1,24 @@
 ./simple.cpp:0: info: Metrics per '__global__' region
 	Region name    : __global__
 	Region type    : global
-	Offsets        : 0-788
-	Line numbers   : 1-74
+	Offsets        : 0-1418
+	Line numbers   : 1-90
 	Modified       : None
 
 .   ./simple.cpp:4: info: Metrics per 'hmm' region
     	Region name    : hmm
     	Region type    : namespace
-    	Offsets        : 2-787
-    	Line numbers   : 3-73
+    	Offsets        : 2-1417
+    	Line numbers   : 3-89
     	Modified       : None
 
 .   .   ./simple.cpp:9: info: Metrics per 'A' region
         	Region name    : A
         	Region type    : class
-        	Offsets        : 94-783
-        	Line numbers   : 9-71
+        	Offsets        : 94-1413
+        	Line numbers   : 9-87
         	Modified       : None
+        	std.code.longlines:numbers: 4
 
 .   .   .   ./simple.cpp:12: info: Metrics per 'A' region
             	Region name    : A
@@ -77,12 +78,13 @@
             	Modified       : None
 
 ./simple.cpp:: info: Overall metrics for 'std.code.longlines:numbers' metric
-	Average        : 1.0 (excluding zero metric values)
+	Average        : 2.5 (excluding zero metric values)
 	Minimum        : 1
-	Maximum        : 1
-	Total          : 1.0
-	Distribution   : 1 regions in total (including 0 suppressed)
+	Maximum        : 4
+	Total          : 5.0
+	Distribution   : 2 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.500 : 0.500 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
+	             4 : 0.500 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
 
 

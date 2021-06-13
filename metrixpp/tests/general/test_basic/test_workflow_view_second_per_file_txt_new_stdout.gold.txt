@@ -26,10 +26,10 @@
 	Offsets        : 111-831
 	Line numbers   : 10-75
 	Modified       : True
-	std.code.lines:code: 4 [-2]
+	std.code.lines:code: 4 [-16]
 	std.code.lines:comments: 0 [+0]
 	std.code.lines:preprocessor: 0 [+0]
-	std.code.lines:total: 4 [-2]
+	std.code.lines:total: 4 [-16]
 
 ./simple.cpp:13: info: Metrics per 'A' region
 	Region name    : A

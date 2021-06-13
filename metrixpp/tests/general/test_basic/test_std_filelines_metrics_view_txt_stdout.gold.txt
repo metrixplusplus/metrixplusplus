@@ -1,12 +1,12 @@
 ./:: info: Overall metrics for 'std.code.filelines:code' metric
-	Average        : 38.0
+	Average        : 45.0
 	Minimum        : 21
-	Maximum        : 55
-	Total          : 76.0
+	Maximum        : 69
+	Total          : 90.0
 	Distribution   : 2 files in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of files
 	            21 : 0.500 : 0.500 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
-	            55 : 0.500 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
+	            69 : 0.500 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./:: info: Overall metrics for 'std.code.filelines:comments' metric
 	Average        : 5.0
@@ -28,14 +28,14 @@
 	             1 : 0.500 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./:: info: Overall metrics for 'std.code.filelines:total' metric
-	Average        : 42.5
+	Average        : 49.5
 	Minimum        : 25
-	Maximum        : 60
-	Total          : 85.0
+	Maximum        : 74
+	Total          : 99.0
 	Distribution   : 2 files in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of files
 	            25 : 0.500 : 0.500 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
-	            60 : 0.500 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
+	            74 : 0.500 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||
 
 ./:: info: Directory content:
 	File           : file_deleted_in_new_sources.cpp

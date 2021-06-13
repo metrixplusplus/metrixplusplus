@@ -26,10 +26,10 @@
 	Offsets        : 111-831
 	Line numbers   : 10-75
 	Modified       : True
-	std.code.lines:code: 4 [-2]
+	std.code.lines:code: 4 [-16]
 	std.code.lines:comments: 0 [+0]
 	std.code.lines:preprocessor: 0 [+0]
-	std.code.lines:total: 4 [-2]
+	std.code.lines:total: 4 [-16]
 
 ./simple.cpp:13: info: Metrics per 'A' region
 	Region name    : A
@@ -141,17 +141,16 @@
 	             3 : 0.143 : 1.000 : 1 [+0]	||||||||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.code.lines:code' metric
-	Average        : 5.27272727 [+0.0]
+	Average        : 5.27272727 [-1.27272727]
 	Minimum        : 0 [+0]
-	Maximum        : 11 [+0]
-	Total          : 58.0 [+0.0]
+	Maximum        : 11 [-9]
+	Total          : 58.0 [-14.0]
 	Distribution   : 11 [+0] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.091 : 0.091 :  1 [+0 ]	|||||||||
 	             3 : 0.182 : 0.273 :  2 [+0 ]	||||||||||||||||||
 	             4 : 0.182 : 0.455 :  2 [+1 ]	||||||||||||||||||
 	             5 : 0.182 : 0.636 :  2 [+0 ]	||||||||||||||||||
-	             6 : 0.000 : 0.636 :  0 [-1 ]	
 	             7 : 0.091 : 0.727 :  1 [-2 ]	|||||||||
 	             8 : 0.182 : 0.909 :  2 [+2 ]	||||||||||||||||||
 	            11 : 0.091 : 1.000 :  1 [+0 ]	|||||||||
@@ -179,17 +178,17 @@
 	             2 : 0.091 : 1.000 :  1 [+1 ]	|||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.code.lines:total' metric
-	Average        : 5.90909091 [+0.18181818]
+	Average        : 5.90909091 [-1.09090909]
 	Minimum        : 0 [+0]
-	Maximum        : 12 [+0]
-	Total          : 65.0 [+2.0]
+	Maximum        : 12 [-8]
+	Total          : 65.0 [-12.0]
 	Distribution   : 11 [+0] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.091 : 0.091 :  1 [+0 ]	|||||||||
 	             3 : 0.091 : 0.182 :  1 [-1 ]	|||||||||
 	             4 : 0.182 : 0.364 :  2 [+2 ]	||||||||||||||||||
 	             5 : 0.182 : 0.545 :  2 [+0 ]	||||||||||||||||||
-	             6 : 0.000 : 0.545 :  0 [-2 ]	
+	             6 : 0.000 : 0.545 :  0 [-1 ]	
 	             7 : 0.182 : 0.727 :  2 [+1 ]	||||||||||||||||||
 	             8 : 0.000 : 0.727 :  0 [-2 ]	
 	             9 : 0.182 : 0.909 :  2 [+2 ]	||||||||||||||||||
