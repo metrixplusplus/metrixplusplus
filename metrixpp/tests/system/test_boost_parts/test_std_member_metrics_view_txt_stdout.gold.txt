@@ -12,23 +12,40 @@
 	             5 : 0.013 : 1.000 :   2	|
 
 ./:: info: Overall metrics for 'std.code.member:fields' metric
-	Average        : 1.14285714 (excluding zero metric values)
+	Average        : 2.50166113 (excluding zero metric values)
 	Minimum        : 1
-	Maximum        : 2
-	Total          : 8.0
-	Distribution   : 7 regions in total (including 0 suppressed)
+	Maximum        : 20
+	Total          : 753.0
+	Distribution   : 301 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 0.857 : 0.857 : 6	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	             2 : 0.143 : 1.000 : 1	||||||||||||||
+	             1 : 0.475 : 0.475 : 143	|||||||||||||||||||||||||||||||||||||||||||||||
+	             2 : 0.199 : 0.674 :  60	|||||||||||||||||||
+	             3 : 0.123 : 0.797 :  37	||||||||||||
+	             4 : 0.050 : 0.847 :  15	||||
+	             5 : 0.070 : 0.917 :  21	||||||
+	             6 : 0.040 : 0.957 :  12	|||
+	             7 : 0.010 : 0.967 :   3	
+	             8 : 0.007 : 0.973 :   2	
+	            10 : 0.010 : 0.983 :   3	
+	            12 : 0.007 : 0.990 :   2	
+	            15 : 0.003 : 0.993 :   1	
+	            16 : 0.003 : 0.997 :   1	
+	            20 : 0.003 : 1.000 :   1	
 
 ./:: info: Overall metrics for 'std.code.member:globals' metric
-	Average        : 1.0 (excluding zero metric values)
+	Average        : 13.25 (excluding zero metric values)
 	Minimum        : 1
-	Maximum        : 1
-	Total          : 1.0
-	Distribution   : 1 regions in total (including 0 suppressed)
+	Maximum        : 113
+	Total          : 159.0
+	Distribution   : 12 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
-	             1 : 1.000 : 1.000 : 1	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.333 : 0.333 :  4	|||||||||||||||||||||||||||||||||
+	             2 : 0.250 : 0.583 :  3	|||||||||||||||||||||||||
+	             3 : 0.083 : 0.667 :  1	||||||||
+	             5 : 0.083 : 0.750 :  1	||||||||
+	             7 : 0.083 : 0.833 :  1	||||||||
+	            21 : 0.083 : 0.917 :  1	||||||||
+	           113 : 0.083 : 1.000 :  1	||||||||
 
 ./:: info: Overall metrics for 'std.code.member:interfaces' metric
 	Average        : None (excluding zero metric values)
