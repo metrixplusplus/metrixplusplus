@@ -20,6 +20,7 @@ class Test(tests.common.TestCase):
                                           '--std.code.lines.code',
                                           '--std.code.lines.preprocessor',
                                           '--std.code.lines.comments',
+                                          '--std.code.ratio.comments',
                                           '--std.suppress',
                                           '--log-level=INFO'],
                                          check_stderr=[(0, -1)],
@@ -56,6 +57,7 @@ class Test(tests.common.TestCase):
                                           '--std.code.lines.code',
                                           '--std.code.lines.preprocessor',
                                           '--std.code.lines.comments',
+                                          '--std.code.ratio.comments',
                                           '--std.suppress',
                                           '--log-level=INFO'],
                                          check_stderr=[(0, -1)],
@@ -279,6 +281,7 @@ class Test(tests.common.TestCase):
                                          ['--std.code.lines.code',
                                           '--std.code.lines.preprocessor',
                                           '--std.code.lines.comments',
+                                          '--std.code.ratio.comments',
                                           '--std.code.lines.total'])
         self.assertExec(runner.run())
 

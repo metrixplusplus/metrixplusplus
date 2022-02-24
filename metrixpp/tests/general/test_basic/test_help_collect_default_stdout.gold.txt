@@ -113,6 +113,12 @@ Options:
                         std.code.complexity:cyclomatic metrics to rank level
                         of maintainability. Lower value of this metric
                         indicates better maintainability. [default: False]
+  --std.code.ratio.comments, --scrc
+                        Enables collection of comment ratio metric (per region
+                        detalization) - ratio of non-empty lines of comments
+                        to non-empty lines of code It uses
+                        std.code.lines.code, std.code.lines.comments metrics
+                        to calculate the ratio. [default: False]
   --std.code.todo.comments, --sctc
                         Enables collection of number of todo/fixme/etc markers
                         in comments [default: False]

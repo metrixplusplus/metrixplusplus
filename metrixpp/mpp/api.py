@@ -1178,14 +1178,13 @@ class MetricPluginMixin(Parent):
         def get_result(self):
             sourced_dividend = self.region.get_data(self.ratio_dividend[0], self.ratio_dividend[1])
             sourced_divisor = self.region.get_data(self.ratio_divisor[0], self.ratio_divisor[1])
-            if ((sourced_dividend != None) 
-                and
-                (sourced_dividend != 0)
+            if ((sourced_dividend != None)
                 and
                 (sourced_divisor != None)
                 and
-                (sourced_divisor != 0)):
-                    self.result = sourced_dividend / sourced_divisor
+                (sourced_dividend + sourced_divisor != 0)
+               ):
+                self.result = sourced_dividend / (sourced_divisor + sourced_dividend)
             else:
               self.result = 0.0
 

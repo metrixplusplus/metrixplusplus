@@ -14,7 +14,7 @@ class Plugin(api.Plugin,
     
     def declare_configuration(self, parser):
         self.parser = parser
-        parser.add_option("--std.code.ratio.commentcode", "--scrcc", action="store_true", default=False,
+        parser.add_option("--std.code.ratio.comments", "--scrc", action="store_true", default=False,
                          help="Enables collection of comment ratio metric (per region detalization) - "
                          "ratio of non-empty lines of comments to non-empty lines of code"
                          " It uses std.code.lines.code, std.code.lines.comments"
@@ -22,17 +22,17 @@ class Plugin(api.Plugin,
                          " [default: %default]")
 
     def configure(self, options):
-        self.is_active_ratiocommentcode = options.__dict__['std.code.ratio.commentcode']
-        if self.is_active_ratiocommentcode == True:
+        self.is_active_ratiocomments = options.__dict__['std.code.ratio.comments']
+        if self.is_active_ratiocomments == True:
             required_opts = ['std.code.lines.comments', 'std.code.lines.code']
             for each in required_opts:
                 if options.__dict__[each] == False:
-                    self.parser.error('option --std.code.ratio.commentcode: requires --{0} option'.
+                    self.parser.error('option --std.code.ratio.comments: requires --{0} option'.
                                       format(each)) 
     
     def initialize(self):
-        self.declare_metric(self.is_active_ratiocommentcode,
-                            self.Field('commentcode', float),
+        self.declare_metric(self.is_active_ratiocomments,
+                            self.Field('comments', float),
                             {
                              'std.code.lines':(None, self.RatioCalculatorCounter)
                             },
@@ -47,4 +47,3 @@ class Plugin(api.Plugin,
     class RatioCalculatorCounter(api.MetricPluginMixin.RatioCalculator):
         ratio_dividend = ('std.code.lines', 'comments')
         ratio_divisor = ('std.code.lines', 'code')
-

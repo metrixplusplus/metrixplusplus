@@ -53,6 +53,19 @@
 	            12 : 0.062 : 0.938 :  1	||||||
 	            20 : 0.062 : 1.000 :  1	||||||
 
+./:: info: Overall metrics for 'std.code.ratio:comments' metric
+	Average        : 0.0770261
+	Minimum        : 0.0
+	Maximum        : 0.42857143
+	Total          : 1.23241758
+	Distribution   : 16 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	        0.0000 : 0.625 : 0.625 : 10	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	        0.1250 : 0.125 : 0.750 :  2	||||||||||||
+	        0.1538 : 0.062 : 0.812 :  1	||||||
+	        0.2000 : 0.125 : 0.938 :  2	||||||||||||
+	        0.4286 : 0.062 : 1.000 :  1	||||||
+
 ./:: info: Directory content:
 	File           : file_deleted_in_new_sources.cpp
 	File           : simple.cpp
