@@ -58,15 +58,15 @@
                 </total>
             </std.code.lines>
             <std.code.ratio>
-                <comments avg="0.09454157" count="11" max="0.25" min="0.0" nonzero="False" sup="0" total="1.03995726">
-                    <__diff__ avg="0.03964646" count="0" max="0.05" min="0.0" nonzero="0" sup="0" total="0.43611111" />
+                <comments avg="0.11663715" count="11" max="0.33333333" min="0.0" nonzero="False" sup="0" total="1.28300866">
+                    <__diff__ avg="0.05140693" count="0" max="0.08333333" min="0.0" nonzero="0" sup="0" total="0.56547619" />
                     <distribution-bars>
                         <distribution-bar __diff__="-2" count="5" metric="0.0000" ratio="0.45454545" />
-                        <distribution-bar __diff__="1" count="1" metric="0.1111" ratio="0.09090909" />
-                        <distribution-bar __diff__="-1" count="1" metric="0.1250" ratio="0.09090909" />
-                        <distribution-bar __diff__="0" count="1" metric="0.1538" ratio="0.09090909" />
-                        <distribution-bar __diff__="1" count="2" metric="0.2000" ratio="0.18181818" />
-                        <distribution-bar __diff__="1" count="1" metric="0.2500" ratio="0.09090909" />
+                        <distribution-bar __diff__="1" count="1" metric="0.1250" ratio="0.09090909" />
+                        <distribution-bar __diff__="-1" count="1" metric="0.1429" ratio="0.09090909" />
+                        <distribution-bar __diff__="0" count="1" metric="0.1818" ratio="0.09090909" />
+                        <distribution-bar __diff__="1" count="2" metric="0.2500" ratio="0.18181818" />
+                        <distribution-bar __diff__="1" count="1" metric="0.3333" ratio="0.09090909" />
                     </distribution-bars>
                 </comments>
             </std.code.ratio>
@@ -104,7 +104,7 @@
                         <std.code.lines code="4" comments="1" preprocessor="2" total="7">
                             <__diff__ code="0" comments="0" preprocessor="1" total="1" />
                         </std.code.lines>
-                        <std.code.ratio comments="0.2">
+                        <std.code.ratio comments="0.25">
                             <__diff__ comments="0.0" />
                         </std.code.ratio>
                     </data>
@@ -129,7 +129,7 @@
                         <std.code.lines code="11" comments="2" preprocessor="0" total="12">
                             <__diff__ code="0" comments="0" preprocessor="0" total="0" />
                         </std.code.lines>
-                        <std.code.ratio comments="0.15384615">
+                        <std.code.ratio comments="0.18181818">
                             <__diff__ comments="0.0" />
                         </std.code.ratio>
                     </data>
@@ -168,8 +168,8 @@
                         <std.code.lines code="8" comments="2" preprocessor="0" total="9">
                             <__diff__ code="1" comments="1" preprocessor="0" total="1" />
                         </std.code.lines>
-                        <std.code.ratio comments="0.2">
-                            <__diff__ comments="0.075" />
+                        <std.code.ratio comments="0.25">
+                            <__diff__ comments="0.10714286" />
                         </std.code.ratio>
                     </data>
                     <info cursor="30" line_begin="30" line_end="39" modified="True" name="embeded" offset_begin="322" offset_end="437" type="function" />
@@ -182,8 +182,8 @@
                         <std.code.lines code="7" comments="1" preprocessor="0" total="7">
                             <__diff__ code="0" comments="1" preprocessor="0" total="0" />
                         </std.code.lines>
-                        <std.code.ratio comments="0.125">
-                            <__diff__ comments="0.125" />
+                        <std.code.ratio comments="0.14285714">
+                            <__diff__ comments="0.14285714" />
                         </std.code.ratio>
                     </data>
                     <info cursor="44" line_begin="44" line_end="51" modified="True" name="never" offset_begin="458" offset_end="549" type="function" />
@@ -192,7 +192,7 @@
                     <data>
                         <std.code.complexity cyclomatic="0" />
                         <std.code.lines code="3" comments="1" preprocessor="0" total="4" />
-                        <std.code.ratio comments="0.25" />
+                        <std.code.ratio comments="0.33333333" />
                     </data>
                     <info cursor="53" line_begin="53" line_end="56" modified="None" name="new_func" offset_begin="552" offset_end="585" type="function" />
                 </region>
@@ -208,7 +208,7 @@
                     <data>
                         <std.code.complexity cyclomatic="2" />
                         <std.code.lines code="8" comments="1" preprocessor="0" total="9" />
-                        <std.code.ratio comments="0.11111111" />
+                        <std.code.ratio comments="0.125" />
                         <std.suppress count="1" list="[std.code.complexity:cyclomatic]" />
                     </data>
                     <info cursor="65" line_begin="64" line_end="72" modified="None" name="new_func_complex_but_suppressed" offset_begin="649" offset_end="808" type="function" />

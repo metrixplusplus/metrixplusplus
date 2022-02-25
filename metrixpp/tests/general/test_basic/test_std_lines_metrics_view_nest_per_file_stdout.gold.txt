@@ -20,7 +20,7 @@
     	std.code.lines:comments: 1
     	std.code.lines:preprocessor: 1
     	std.code.lines:total: 6
-    	std.code.ratio:comments: 0.2
+    	std.code.ratio:comments: 0.25
 
 .   .   ./simple.cpp:9: info: Metrics per 'A' region
         	Region name    : A
@@ -44,7 +44,7 @@
             	std.code.lines:comments: 2
             	std.code.lines:preprocessor: 0
             	std.code.lines:total: 12
-            	std.code.ratio:comments: 0.15384615384615385
+            	std.code.ratio:comments: 0.181818181818
 
 .   .   .   ./simple.cpp:26: info: Metrics per 'func' region
             	Region name    : func
@@ -80,7 +80,7 @@
                     	std.code.lines:comments: 1
                     	std.code.lines:preprocessor: 0
                     	std.code.lines:total: 8
-                    	std.code.ratio:comments: 0.125
+                    	std.code.ratio:comments: 0.142857142857
 
 .   .   .   ./simple.cpp:42: info: Metrics per 'func_to_be_removed_in_new_sources' region
             	Region name    : func_to_be_removed_in_new_sources
@@ -116,7 +116,7 @@
                     	std.code.lines:comments: 1
                     	std.code.lines:preprocessor: 0
                     	std.code.lines:total: 8
-                    	std.code.ratio:comments: 0.125
+                    	std.code.ratio:comments: 0.142857142857
 
 .   .   .   ./simple.cpp:58: info: Metrics per 'never' region
             	Region name    : never
@@ -183,15 +183,15 @@
 	            20 : 0.091 : 1.000 :  1	|||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.code.ratio:comments' metric
-	Average        : 0.0548951
+	Average        : 0.06523022
 	Minimum        : 0.0
-	Maximum        : 0.2
-	Total          : 0.60384615
+	Maximum        : 0.25
+	Total          : 0.71753247
 	Distribution   : 11 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	        0.0000 : 0.636 : 0.636 :  7	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-	        0.1250 : 0.182 : 0.818 :  2	||||||||||||||||||
-	        0.1538 : 0.091 : 0.909 :  1	|||||||||
-	        0.2000 : 0.091 : 1.000 :  1	|||||||||
+	        0.1429 : 0.182 : 0.818 :  2	||||||||||||||||||
+	        0.1818 : 0.091 : 0.909 :  1	|||||||||
+	        0.2500 : 0.091 : 1.000 :  1	|||||||||
 
 
