@@ -1182,9 +1182,10 @@ class MetricPluginMixin(Parent):
                 and
                 (sourced_divisor != None)
                 and
-                (sourced_dividend + sourced_divisor != 0)
+                (sourced_divisor != 0)
                ):
-                self.result = sourced_dividend / (sourced_divisor + sourced_dividend)
+                # define as the number of lines of comments by the number of lines of code
+                self.result = float(sourced_dividend) / sourced_divisor
             else:
               self.result = 0.0
 
