@@ -53,13 +53,13 @@
                 </total>
             </std.code.lines>
             <std.code.ratio>
-                <comments avg="0.0770261" count="16" max="0.42857143" min="0.0" nonzero="False" sup="0" total="1.23241758">
+                <comments avg="0.0769375" count="16" max="0.428" min="0.0" nonzero="False" sup="0" total="1.231">
                     <distribution-bars>
                         <distribution-bar count="10" metric="0.0000" ratio="0.625" />
                         <distribution-bar count="2" metric="0.1250" ratio="0.125" />
-                        <distribution-bar count="1" metric="0.1538" ratio="0.0625" />
+                        <distribution-bar count="1" metric="0.1530" ratio="0.0625" />
                         <distribution-bar count="2" metric="0.2000" ratio="0.125" />
-                        <distribution-bar count="1" metric="0.4286" ratio="0.0625" />
+                        <distribution-bar count="1" metric="0.4280" ratio="0.0625" />
                     </distribution-bars>
                 </comments>
             </std.code.ratio>

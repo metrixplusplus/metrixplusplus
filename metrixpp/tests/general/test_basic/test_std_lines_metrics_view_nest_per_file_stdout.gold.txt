@@ -44,7 +44,7 @@
             	std.code.lines:comments: 2
             	std.code.lines:preprocessor: 0
             	std.code.lines:total: 12
-            	std.code.ratio:comments: 0.153846153846
+            	std.code.ratio:comments: 0.153
 
 .   .   .   ./simple.cpp:26: info: Metrics per 'func' region
             	Region name    : func
@@ -183,15 +183,15 @@
 	            20 : 0.091 : 1.000 :  1	|||||||||
 
 ./simple.cpp:: info: Overall metrics for 'std.code.ratio:comments' metric
-	Average        : 0.0548951
+	Average        : 0.05481818
 	Minimum        : 0.0
 	Maximum        : 0.2
-	Total          : 0.60384615
+	Total          : 0.603
 	Distribution   : 11 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	        0.0000 : 0.636 : 0.636 :  7	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 	        0.1250 : 0.182 : 0.818 :  2	||||||||||||||||||
-	        0.1538 : 0.091 : 0.909 :  1	|||||||||
+	        0.1530 : 0.091 : 0.909 :  1	|||||||||
 	        0.2000 : 0.091 : 1.000 :  1	|||||||||
 
 

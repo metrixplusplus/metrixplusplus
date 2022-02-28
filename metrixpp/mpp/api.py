@@ -1183,8 +1183,8 @@ class MetricPluginMixin(Parent):
                 (sourced_code != None)
                 and
                 (sourced_comments + sourced_code != 0)
-               ):
-                self.result = float(sourced_comments) / (sourced_code + sourced_comments)
+               ): # 3-digit precision
+                self.result = float((1000 * sourced_comments) // (sourced_code + sourced_comments)) / 1000.
             else:
               self.result = 0.0
 
