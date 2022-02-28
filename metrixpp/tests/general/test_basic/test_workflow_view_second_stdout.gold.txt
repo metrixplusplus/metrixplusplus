@@ -59,16 +59,16 @@
                 </total>
             </std.code.lines>
             <std.code.ratio>
-                <comments avg="0.11553391" count="15" max="0.33333333" min="0.0" nonzero="False" sup="0" total="1.73300866">
-                    <__diff__ avg="0.00818813" count="-1" max="-0.41666667" min="0.0" nonzero="0" sup="0" total="0.01547619" />
+                <comments avg="0.09377493" count="15" max="0.25" min="0.0" nonzero="False" sup="0" total="1.40662393">
+                    <__diff__ avg="0.01674883" count="-1" max="-0.17857143" min="0.0" nonzero="0" sup="0" total="0.17420635" />
                     <distribution-bars>
                         <distribution-bar __diff__="-3" count="7" metric="0.0000" ratio="0.46666667" />
-                        <distribution-bar __diff__="1" count="1" metric="0.1250" ratio="0.06666667" />
-                        <distribution-bar __diff__="-1" count="1" metric="0.1429" ratio="0.06666667" />
-                        <distribution-bar __diff__="0" count="1" metric="0.1818" ratio="0.06666667" />
-                        <distribution-bar __diff__="1" count="1" metric="0.2000" ratio="0.06666667" />
-                        <distribution-bar __diff__="1" count="3" metric="0.2500" ratio="0.2" />
-                        <distribution-bar __diff__="1" count="1" metric="0.3333" ratio="0.06666667" />
+                        <distribution-bar __diff__="1" count="1" metric="0.1111" ratio="0.06666667" />
+                        <distribution-bar __diff__="-1" count="1" metric="0.1250" ratio="0.06666667" />
+                        <distribution-bar __diff__="0" count="1" metric="0.1538" ratio="0.06666667" />
+                        <distribution-bar __diff__="1" count="1" metric="0.1667" ratio="0.06666667" />
+                        <distribution-bar __diff__="1" count="3" metric="0.2000" ratio="0.2" />
+                        <distribution-bar __diff__="1" count="1" metric="0.2500" ratio="0.06666667" />
                     </distribution-bars>
                 </comments>
             </std.code.ratio>

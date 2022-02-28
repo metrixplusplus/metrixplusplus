@@ -1176,16 +1176,15 @@ class MetricPluginMixin(Parent):
                 self.result = 0.0
         
         def get_result(self):
-            sourced_dividend = self.region.get_data(self.ratio_dividend[0], self.ratio_dividend[1])
-            sourced_divisor = self.region.get_data(self.ratio_divisor[0], self.ratio_divisor[1])
-            if ((sourced_dividend != None)
+            sourced_comments = self.region.get_data(self.ratio_comments[0], self.ratio_comments[1])
+            sourced_code = self.region.get_data(self.ratio_code[0], self.ratio_code[1])
+            if ((sourced_comments != None)
                 and
-                (sourced_divisor != None)
+                (sourced_code != None)
                 and
-                (sourced_divisor != 0)
+                (sourced_comments + sourced_code != 0)
                ):
-                # define as the number of lines of comments by the number of lines of code
-                self.result = float(sourced_dividend) / sourced_divisor
+                self.result = float(sourced_comments) / (sourced_code + sourced_comments)
             else:
               self.result = 0.0
 
