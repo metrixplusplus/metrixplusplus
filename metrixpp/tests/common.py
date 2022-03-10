@@ -96,9 +96,9 @@ class ToolRunner(object):
                 f.close()
 
         # Match with gold        
-        self.is_stdout_matched = self.inetrnal_compare_with_gold(child_stdout, gold_file_stdout, real_file_stdout, diff_file_stdout)
+        self.is_stdout_matched = self.internal_compare_with_gold(child_stdout, gold_file_stdout, real_file_stdout, diff_file_stdout)
         if self.stderr_lines != None:
-            self.is_stderr_matched = self.inetrnal_compare_with_gold(child_stderr, gold_file_stderr, real_file_stderr, diff_file_stderr, self.stderr_lines)
+            self.is_stderr_matched = self.internal_compare_with_gold(child_stderr, gold_file_stderr, real_file_stderr, diff_file_stderr, self.stderr_lines)
         else:
             self.is_stderr_matched = None
             if self.is_stdout_matched == False:
@@ -114,7 +114,7 @@ class ToolRunner(object):
             shutil.copy2(self.dbfile, self.dbfile_prev)                
         return self
 
-    def inetrnal_compare_with_gold(self, text, gold_file, real_file, diff_file, lines = None):
+    def internal_compare_with_gold(self, text, gold_file, real_file, diff_file, lines = None):
         if os.path.exists(gold_file) == False:
             self.message += "\nGold file does not exist: " + gold_file
             return False
@@ -123,7 +123,7 @@ class ToolRunner(object):
         gold_text = f.read();
         f.close()
         
-        # don't compare dictionaries as string - they are not in order... (test case failes sometimes)
+        # don't compare dictionaries as string - they are not in order... (test case fails sometimes)
         try:
             textDict = ast.literal_eval(str(text.decode('ascii')))
             goldDict = ast.literal_eval(str(gold_text))

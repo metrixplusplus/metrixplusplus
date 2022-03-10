@@ -8,7 +8,7 @@
 	std.code.lines:comments: 0 [+0]
 	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:total: 0 [+0]
-	std.code.ratio:comments: 0.0 [+0.0]
+	std.code.ratio:comments: 0.0 [+0]
 
 ./simple.cpp:4: info: Metrics per 'hmm' region
 	Region name    : hmm
@@ -20,7 +20,7 @@
 	std.code.lines:comments: 1 [+0]
 	std.code.lines:preprocessor: 2 [+1]
 	std.code.lines:total: 7 [+1]
-	std.code.ratio:comments: 0.2 [+0.0]
+	std.code.ratio:comments: 0.2 [+0]
 
 ./simple.cpp:10: info: Metrics per 'A' region
 	Region name    : A
@@ -32,7 +32,7 @@
 	std.code.lines:comments: 0 [+0]
 	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:total: 4 [-16]
-	std.code.ratio:comments: 0.0 [+0.0]
+	std.code.ratio:comments: 0.0 [+0]
 
 ./simple.cpp:13: info: Metrics per 'A' region
 	Region name    : A
@@ -45,7 +45,7 @@
 	std.code.lines:comments: 2 [+0]
 	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:total: 12 [+0]
-	std.code.ratio:comments: 0.153 [+0.0]
+	std.code.ratio:comments: 0.153 [+0]
 
 ./simple.cpp:26: info: Metrics per 'func' region
 	Region name    : func
@@ -58,7 +58,7 @@
 	std.code.lines:comments: 0 [+0]
 	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:total: 5 [+0]
-	std.code.ratio:comments: 0.0 [+0.0]
+	std.code.ratio:comments: 0.0 [+0]
 
 ./simple.cpp:28: info: Metrics per 'embeded' region
 	Region name    : embeded
@@ -70,7 +70,7 @@
 	std.code.lines:comments: 0 [+0]
 	std.code.lines:preprocessor: 0 [+0]
 	std.code.lines:total: 3 [+0]
-	std.code.ratio:comments: 0.0 [+0.0]
+	std.code.ratio:comments: 0.0 [+0]
 
 ./simple.cpp:30: info: Metrics per 'embeded' region
 	Region name    : embeded

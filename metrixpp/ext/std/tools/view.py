@@ -544,7 +544,7 @@ def cout_txt_regions(path, regions, indent = 0):
                 if field == '__diff__':
                     continue
                 if field in list(diff_data.keys()):
-                    diff_str = " [" + ("+" if diff_data[field] >= 0 else "") + str(diff_data[field]) + "]"
+                    diff_str = " [" + ("+" if diff_data[field] >= 0 else "") + "{0:.3g}".format(diff_data[field]) + "]"
                 details.append((namespace + ":" + field, str(region['data'][namespace][field]) + diff_str))
         cout.notify(path,
                         region['info']['cursor'],
