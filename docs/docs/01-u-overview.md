@@ -97,11 +97,15 @@ The metrics highlighed in blue are **per file** metrics. The other metrics are *
     <tr class="info center-justified">
     <td>std.code.filelines.comments</td>
     <td>Number of non-blank lines of comments per file.</td>
-    <td rowspan="2"><ul><li>Low number of comments may indicate maintainability problems.</li></ul></td>
+    <td rowspan="3"><ul><li>Low number of comments may indicate maintainability problems.</li></ul></td>
     </tr>
     <tr  class="td-regular center-justified">
     <td>std.code.lines.comments</td>
     <td>Number of non-blank lines of comments per region.</td>
+    </tr>
+    <tr  class="td-regular center-justified">
+    <td>std.code.ratio.comments</td>
+    <td>Ratio of non-empty lines of comments to non-empty lines of (code + comments) per region.</td>
     </tr>
     <tr class="td-regular center-justified">
     <td>std.code.complexity.cyclomatic</td>

@@ -116,7 +116,7 @@ Options:
   --std.code.ratio.comments, --scrc
                         Enables collection of comment ratio metric (per region
                         detalization) - ratio of non-empty lines of comments
-                        to non-empty lines of (code + comments) It uses
+                        to non-empty lines of (code + comments). It uses
                         std.code.lines.code, std.code.lines.comments metrics
                         to calculate the ratio. [default: False]
   --std.code.todo.comments, --sctc

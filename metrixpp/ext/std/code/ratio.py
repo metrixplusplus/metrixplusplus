@@ -16,7 +16,7 @@ class Plugin(api.Plugin,
         self.parser = parser
         parser.add_option("--std.code.ratio.comments", "--scrc", action="store_true", default=False,
                          help="Enables collection of comment ratio metric (per region detalization) - "
-                         "ratio of non-empty lines of comments to non-empty lines of (code + comments)"
+                         "ratio of non-empty lines of comments to non-empty lines of (code + comments)."
                          " It uses std.code.lines.code, std.code.lines.comments"
                          " metrics to calculate the ratio."
                          " [default: %default]")
