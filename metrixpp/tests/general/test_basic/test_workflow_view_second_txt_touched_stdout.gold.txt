@@ -64,6 +64,20 @@
 	             9 : 0.182 : 0.909 :  2 [+1 ]	||||||||||||||||||
 	            12 : 0.091 : 1.000 :  1 [+1 ]	|||||||||
 
+./:: info: Overall metrics for 'std.code.ratio:comments' metric
+	Average        : 0.11381818 [+0.02398485]
+	Minimum        : 0.0 [+0.0]
+	Maximum        : 0.25 [-0.178]
+	Total          : 1.252 [+0.174]
+	Distribution   : 11 [-1] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	        0.0000 : 0.364 : 0.364 :  4 [-3 ]	||||||||||||||||||||||||||||||||||||
+	        0.1110 : 0.091 : 0.455 :  1 [+1 ]	|||||||||
+	        0.1250 : 0.091 : 0.545 :  1 [-1 ]	|||||||||
+	        0.1660 : 0.091 : 0.636 :  1 [+1 ]	|||||||||
+	        0.2000 : 0.273 : 0.909 :  3 [+1 ]	|||||||||||||||||||||||||||
+	        0.2500 : 0.091 : 1.000 :  1 [+1 ]	|||||||||
+
 ./:: info: Overall metrics for 'std.suppress:count' metric
 	Average        : 1.0 [+1.0] (excluding zero metric values)
 	Minimum        : 1 [+1]

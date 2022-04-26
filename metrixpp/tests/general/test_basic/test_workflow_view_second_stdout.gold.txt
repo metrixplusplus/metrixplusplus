@@ -58,6 +58,20 @@
                     </distribution-bars>
                 </total>
             </std.code.lines>
+            <std.code.ratio>
+                <comments avg="0.09366667" count="15" max="0.25" min="0.0" nonzero="False" sup="0" total="1.405">
+                    <__diff__ avg="0.01672917" count="-1" max="-0.178" min="0.0" nonzero="0" sup="0" total="0.174" />
+                    <distribution-bars>
+                        <distribution-bar __diff__="-3" count="7" metric="0.0000" ratio="0.46666667" />
+                        <distribution-bar __diff__="1" count="1" metric="0.1110" ratio="0.06666667" />
+                        <distribution-bar __diff__="-1" count="1" metric="0.1250" ratio="0.06666667" />
+                        <distribution-bar __diff__="0" count="1" metric="0.1530" ratio="0.06666667" />
+                        <distribution-bar __diff__="1" count="1" metric="0.1660" ratio="0.06666667" />
+                        <distribution-bar __diff__="1" count="3" metric="0.2000" ratio="0.2" />
+                        <distribution-bar __diff__="1" count="1" metric="0.2500" ratio="0.06666667" />
+                    </distribution-bars>
+                </comments>
+            </std.code.ratio>
             <std.suppress>
                 <count avg="1.0" count="1" max="1" min="1" nonzero="True" sup="0" total="1.0">
                     <__diff__ avg="1.0" count="1" max="1" min="1" nonzero="0" sup="0" total="1.0" />
