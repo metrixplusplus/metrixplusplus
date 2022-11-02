@@ -1,15 +1,15 @@
 #
 #    Metrix++, Copyright 2009-2019, Metrix++ Project
 #    Link: https://github.com/metrixplusplus/metrixplusplus
-#    
+#
 #    This file is a part of Metrix++ Tool.
-#    
+#
 
 from metrixpp.mpp import api
 import re
 
 class Plugin(api.Plugin, api.MetricPluginMixin, api.Child, api.IConfigurable):
-    
+
     def declare_configuration(self, parser):
         parser.add_option("--std.code.filelines.code", "--scflc", action="store_true", default=False,
                          help="Enables collection of lines of code metric (per file detalization) - "
@@ -27,13 +27,13 @@ class Plugin(api.Plugin, api.MetricPluginMixin, api.Child, api.IConfigurable):
                          help="Enables collection of total lines metric (per file detalization) - "
                          "number of any type of lines (blank, code, comments, etc.)"
                          "[default: %default]")
-    
+
     def configure(self, options):
         self.is_active_code = options.__dict__['std.code.filelines.code']
         self.is_active_preprocessor = options.__dict__['std.code.filelines.preprocessor']
         self.is_active_comments = options.__dict__['std.code.filelines.comments']
         self.is_active_total = options.__dict__['std.code.filelines.total']
-        
+
     pattern_line = re.compile(r'''[^\s].*''')
 
     def initialize(self):

@@ -27,25 +27,41 @@ import re
 # regex strings for C/C++:
 # from https://www.verifysoft.com/en_halstead_metrics.html
 # ------------------------------------------------------------------------------
-# operators: inc n1
-OPERATORS = r"""#|!=|!|~|\+\+|\+=|\+|--|-=|->|-|\*|\*=|\*|/=|/|%=|%|==|=|>>=|>>|>=|>|<<=|<<|<=|<|\|\||\|=|\||\^\^|\^=|\^|&&|&=|&|::|:|\?|\.\.\.|\.|\,|;"""
 # parentheses: inc n1 for each pair of "()","[]", "{}"
 PARENS    = r"""\(|\)|\[|\]|\{|\}"""
+# operators: inc n1
+OPERATORS_CPP  = r"""#|!=|!|~|\+\+|\+=|\+|--|-=|->|-|\*|\*=|\*|/=|/|%=|%|==|=|>>=|>>|>=|>|<<=|<<|<=|<|\|\||\|=|\||\^\^|\^=|\^|&&|&=|&|::|:|\?|\.\.\.|\.|\,|;"""
 # storage class specifiers: inc n1
 SCSPEC    = r"""auto|extern|inline|register|static|typedef|virtual|mutable"""
 # type qualifiers: inc n1
 TYPE_QUAL = r"""const|friend|volatile"""
 # reserved words: inc n1, note that an other inc n1 occurs by subsequent "()" or "{}" pair!
-RESERVED  = r"""asm|class|delete|do|else|enum|goto|new|operator|sizeof|struct|this|union|namespace|using|try|throw|const_cast|static_cast|dynamic_cast|reinterpret_cast|typeid|template|explicit|true|false|typename|break|continue|return|private|protected|public"""
-# reserved words: inc n1, but ignore following "()" pairs, i.e. don't inc n1!
+RESERVED  = r"""asm|class|delete|do|else|enum|goto|new|operator|sizeof|struct|this|union|namespace|using|try|throw|const_cast|static_cast|dynamic_cast|reinterpret_cast|typeid|template|explicit|true|false|typename|break|continue|return|private|protected|public|transient"""
+# reserved words: inc n1, but ignore subsequent "()" pair, i.e. don't inc n1!
 RESPAREN  = r"""for|if|switch|while|catch"""
-# reserved words: inc n1, but ignore following ":"
+# reserved words: inc n1, but ignore subsequent ":"
 RESCOLN   = r"""case|default"""
 
 # reserved operators requiring special handling in the OperatorCounter_XX classes:
 RES_ALL   = SCSPEC+"|"+TYPE_QUAL+"|"+RESERVED+"|"+RESPAREN+"|"+RESCOLN
 
+# regex strings for JAVA, empirically derived from C++ strings above
+# inc n1:
+OPERATORS_JAVA = r"""#|!=|!|~|\+\+|\+=|\+|--|-=|->|-|\*|\*=|\*|/=|/|%=|%|==|=|>>>=|>>>|>>=|>>|>=|>|<<=|<<|<=|<|\|\||\|=|\||\^\^|\^=|\^|&&|&=|&|::|:|\?|\.\.\.|\.|\,|;"""
+SCSPEC_JAVA    = r"""static|abstract|native|import|final|implements|extends|throws"""
+TYPE_QUAL_JAVA = r"""const|volatile"""
+# reserved words: inc n1, note that an other inc n1 occurs by subsequent "()" or "{}" pair!
+RESERVED_JAVA  = r"""assert|class|do|else|enum|goto|new|this|try|throw|break|continue|return|private|protected|public|true|false|package|instanceof|interface|synchronized"""
+# reserved words: inc n1, but ignore subsequent "()" pair, i.e. don't inc n1!
+RESPAREN_JAVA  = r"""for|if|switch|while|catch|finally|super"""
+# reserved words: inc n1, but ignore subsequent ":"
+RESCOLN_JAVA   = r"""case|default"""
+
+RES_ALL_JAVA   = SCSPEC_JAVA+"|"+TYPE_QUAL_JAVA+"|"+RESERVED_JAVA+"|"+RESPAREN_JAVA+"|"+RESCOLN_JAVA
+
+# inc N1 for each match:
 OPERANDS  = r"""\b\w+\b|\".*\"|\'.+\'"""
+
 # ------------------------------------------------------------------------------
 # todo: regex strings for C# and Java
 # ------------------------------------------------------------------------------
@@ -62,8 +78,7 @@ class Plugin(api.Plugin,
             help="Halstead metrics plugin: base metrics n1,n2,N1,N2 [default: %default]")
 
     def configure(self, options):
-        self.is_active_eha = options.__dict__['ext.halstead.all']
-        self.is_active_ehb = options.__dict__['ext.halstead.base'] or self.is_active_eha
+        self.is_active_ehb = options.__dict__['ext.halstead.base'] or options.__dict__['ext.halstead.all']
 
     def initialize(self):
         # ----------------------------------------------------------------------
@@ -72,17 +87,16 @@ class Plugin(api.Plugin,
         operator_pattern_cpp = re.compile(
             r"(\b("+SCSPEC+"|"+TYPE_QUAL+"|"+RESERVED+
 #               "|"+RESPAREN+"|"+RESCOLN+       for convenience: don't count the identifiers itself but subsequent "()" or ":"
-            r")\b|"+OPERATORS+"|"+PARENS+")")
+            r")\b|"+OPERATORS_CPP+"|"+PARENS+")")
         operator_pattern_cs   = operator_pattern_cpp
         operator_pattern_java = operator_pattern_cpp
         operator_pattern_search = re.compile(r'''[\+\-\*\/\=]''')    # common operators
         self.declare_metric(self.is_active_ehb,
-                            self.Field('N1', int,
-                                non_zero=True),
+                            self.Field('N1', int, non_zero=True),
                             {
                              'std.code.java': (operator_pattern_java, self.OperatorCounter_N1),
-                             'std.code.cpp':  (operator_pattern_cpp, self.OperatorCounter_N1),
-                             'std.code.cs':   (operator_pattern_cs, self.OperatorCounter_N1),
+                             'std.code.cpp':  (operator_pattern_cpp,  self.OperatorCounter_N1),
+                             'std.code.cs':   (operator_pattern_cs,   self.OperatorCounter_N1),
                              '*': operator_pattern_search
                             },
                             marker_type_mask=api.Marker.T.CODE,
@@ -91,12 +105,11 @@ class Plugin(api.Plugin,
         operator_pattern_cpp = re.compile(
             r"(\b("+SCSPEC+"|"+TYPE_QUAL+"|"+RESERVED+
                 "|"+RESPAREN+"|"+RESCOLN+
-            r")\b|"+OPERATORS+"|"+PARENS+")")
+            r")\b|"+OPERATORS_CPP+"|"+PARENS+")")
         operator_pattern_cs   = operator_pattern_cpp
         operator_pattern_java = operator_pattern_cpp
         self.declare_metric(self.is_active_ehb,
-                            self.Field('_n1', int,
-                                non_zero=True),
+                            self.Field('_n1', int, non_zero=True),
                             {
                              'std.code.java': (operator_pattern_java, self.OperatorCounter_n1),
                              'std.code.cpp':  (operator_pattern_cpp,  self.OperatorCounter_n1),
@@ -111,8 +124,7 @@ class Plugin(api.Plugin,
         operand_pattern_cpp    = operand_pattern_search
         operand_pattern_cs     = operand_pattern_search
         self.declare_metric(self.is_active_ehb,
-                            self.Field('N2', int,
-                                non_zero=True),
+                            self.Field('N2', int, non_zero=True),
                             {
                              'std.code.java': (operand_pattern_java, self.OperandCounter_N2),
                              'std.code.cpp':  (operand_pattern_cpp,  self.OperandCounter_N2),
@@ -123,8 +135,7 @@ class Plugin(api.Plugin,
                             region_type_mask=api.Region.T.ANY)
 
         self.declare_metric(self.is_active_ehb,
-                            self.Field('_n2', int,
-                                non_zero=True),
+                            self.Field('_n2', int, non_zero=True),
                             {
                              'std.code.java': (operand_pattern_java, self.OperandCounter_n2),
                              'std.code.cpp':  (operand_pattern_cpp,  self.OperandCounter_n2),
@@ -134,9 +145,9 @@ class Plugin(api.Plugin,
                             marker_type_mask=api.Marker.T.CODE+api.Marker.T.STRING,
                             region_type_mask=api.Region.T.ANY)
 
-        super(Plugin, self).initialize(fields=self.get_fields())
+        super(Plugin, self).initialize(fields=self.get_fields())#, support_regions=False)
 
-        if self.is_active() == True:
+        if self.is_active():
             self.subscribe_by_parents_interface(api.ICode)
             #print("Hello world")
 

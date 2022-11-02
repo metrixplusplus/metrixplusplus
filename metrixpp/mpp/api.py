@@ -1,9 +1,9 @@
 #
 #    Metrix++, Copyright 2009-2019, Metrix++ Project
 #    Link: https://github.com/metrixplusplus/metrixplusplus
-#    
+#
 #    This file is a part of Metrix++ Tool.
-#    
+#
 
 import os.path
 import sys
@@ -27,7 +27,7 @@ class IConfigurable(object):
 class IRunable(object):
     def run(self, args):
         raise InterfaceNotImplemented(self)
-    
+
 class IParser(object):
     def process(self, parent, data, is_updated):
         raise InterfaceNotImplemented(self)
@@ -36,7 +36,7 @@ class ICode(object):
     pass
 
 class CallbackNotImplemented(Exception):
-    
+
     def __init__(self, obj, callback_name):
         Exception.__init__(self, "Callback '"
                            + callback_name
@@ -44,7 +44,7 @@ class CallbackNotImplemented(Exception):
                            + str(obj.__class__))
 
 class Child(object):
-    
+
     def notify(self, parent, callback_name, *args):
         if hasattr(self, callback_name) == False:
             raise CallbackNotImplemented(self, callback_name)
@@ -52,7 +52,7 @@ class Child(object):
 
     def subscribe_by_parents_name(self, parent_name, callback_name='callback'):
         self.get_plugin(parent_name).subscribe(self, callback_name)
-    
+
     def subscribe_by_parents_names(self, parent_names, callback_name='callback'):
         for parent_name in parent_names:
             self.get_plugin(parent_name).subscribe(self, callback_name)
@@ -64,11 +64,11 @@ class Child(object):
 
 
 class Parent(object):
-    
+
     def init_Parent(self):
         if hasattr(self, 'children') == False:
             self.children = []
-            
+
     def subscribe(self, obj, callback_name):
         self.init_Parent()
         if (isinstance(obj, Child) == False):
@@ -91,7 +91,7 @@ class Parent(object):
 
 ##############################################################################
 #
-# 
+#
 #
 ##############################################################################
 
@@ -99,7 +99,7 @@ class Data(object):
 
     def __init__(self):
         self.data = {}
-        
+
     def get_data(self, namespace, field):
         if namespace not in list(self.data.keys()):
             return None
@@ -115,7 +115,7 @@ class Data(object):
     def iterate_namespaces(self):
         for namespace in list(self.data.keys()):
             yield namespace
-            
+
     def iterate_fields(self, namespace):
         for field in list(self.data[namespace].keys()):
             yield (field, self.data[namespace][field])
@@ -128,7 +128,7 @@ class Data(object):
 
 
 class LoadableData(Data):
-    
+
     def __init__(self, loader, file_id, region_id):
         Data.__init__(self)
         self.loader = loader
@@ -142,7 +142,7 @@ class LoadableData(Data):
         if namespace_obj == None:
             return
         regions_supported = namespace_obj.are_regions_supported()
-        if ((self.region_id == None and regions_supported == True) or 
+        if ((self.region_id == None and regions_supported == True) or
             (self.region_id != None and regions_supported == False)):
             return
         row = self.loader.db.get_row(namespace, self.file_id, self.region_id)
@@ -156,7 +156,7 @@ class LoadableData(Data):
             if row[column_name] == None:
                 continue
             Data.set_data(self, namespace, column_name, packager.unpack(row[column_name]))
-        
+
     def set_data(self, namespace, field, value):
         if namespace not in self.changed_namespaces:
             self.changed_namespaces.append(namespace)
@@ -167,7 +167,7 @@ class LoadableData(Data):
             self.loaded_namespaces.append(namespace)
             self.load_namespace(namespace)
         return Data.get_data(self, namespace, field)
-    
+
     def is_namespace_updated(self, namespace):
         return namespace in self.changed_namespaces
 
@@ -180,9 +180,9 @@ class LoadableData(Data):
         for each in namespaces:
             self.load_namespace(each)
         return Data.get_data_tree(self)
-    
+
 class Region(LoadableData):
-    
+
     class T(object):
         NONE      = 0x00
         GLOBAL    = 0x01
@@ -192,7 +192,7 @@ class Region(LoadableData):
         FUNCTION  = 0x10
         INTERFACE = 0x20
         ANY       = 0xFF
-        
+
         def to_str(self, group):
             if group == self.NONE:
                 return "none"
@@ -242,9 +242,9 @@ class Region(LoadableData):
         self.cursor = cursor_line
         self.group = group
         self.checksum = checksum
-        
+
         self.children = []
-    
+
     def get_id(self):
         return self.region_id
 
@@ -271,13 +271,13 @@ class Region(LoadableData):
 
     def get_checksum(self):
         return self.checksum
-    
+
     def iterate_subregion_ids(self):
         return self.children
 
     def _register_subregion_id(self, child_id):
         self.children.append(child_id)
-        
+
 class Marker(object):
     class T(object):
         NONE            = 0x00
@@ -300,12 +300,12 @@ class Marker(object):
                 return "code"
             else:
                 assert(False)
-        
+
     def __init__(self, offset_begin, offset_end, group):
         self.begin = offset_begin
         self.end = offset_end
         self.group = group
-        
+
     def get_offset_begin(self):
         return self.begin
 
@@ -316,7 +316,7 @@ class Marker(object):
         return self.group
 
 class FileData(LoadableData):
-    
+
     def __init__(self, loader, path, file_id, checksum, content):
         LoadableData.__init__(self, loader, file_id, None)
         self.path = path
@@ -326,7 +326,7 @@ class FileData(LoadableData):
         self.markers = None
         self.loader = loader
         self.loading_tmp = []
-        
+
     def get_id(self):
         return self.file_id
 
@@ -335,7 +335,7 @@ class FileData(LoadableData):
 
     def get_checksum(self):
         return self.checksum
-    
+
     def get_content(self):
         return self.content
 
@@ -371,7 +371,7 @@ class FileData(LoadableData):
                                                    each.group,
                                                    each.checksum))
                 assert(len(self.regions) == each.region_id)
-        
+
     def add_region(self, region_name, offset_begin, offset_end, line_begin, line_end, cursor_line, group, checksum):
         if self.regions == None:
             # # do not load regions and markers in time of collection
@@ -384,11 +384,11 @@ class FileData(LoadableData):
         self._internal_append_region(Region(self.loader, self.get_id(), new_id, region_name, offset_begin, offset_end, line_begin, line_end, cursor_line, group, checksum))
         self.loader.db.create_region(self.file_id, new_id, region_name, offset_begin, offset_end, line_begin, line_end, cursor_line, group, checksum)
         return new_id
-        
+
     def get_region(self, region_id):
         self.load_regions()
         return self.regions[region_id - 1]
-    
+
     def iterate_regions(self, filter_group = Region.T.ANY, region_id = None):
         self.load_regions()
         if region_id == None:
@@ -411,7 +411,7 @@ class FileData(LoadableData):
             self.markers = []
             for each in self.loader.db.iterate_markers(self.get_id()):
                 self.markers.append(Marker(each.begin, each.end, each.group))
-        
+
     def add_marker(self, offset_begin, offset_end, group):
         if self.markers == None:
             # # do not load regions and markers in time of collection
@@ -425,11 +425,11 @@ class FileData(LoadableData):
         # it is not the same with regions, it is faster to load regions
         # on iterative re-run
         #self.loader.db.create_marker(self.file_id, offset_begin, offset_end, group)
-        
+
     def iterate_markers(self, filter_group = Marker.T.ANY,
                          region_id = None, exclude_children = True, merge = False):
         self.load_markers()
-        
+
         # merged markers
         if merge == True:
             next_marker = None
@@ -449,7 +449,7 @@ class FileData(LoadableData):
                                          marker.get_type())
             if next_marker != None:
                 yield next_marker
-        
+
         # all markers per file
         elif region_id == None:
             next_code_marker_start = 0
@@ -466,13 +466,13 @@ class FileData(LoadableData):
         else:
             region = self.get_region(region_id)
             if region != None:
-                
+
                 # code parsers and database know about non-code markers
                 # clients want to iterate code as markers as well
                 # so, we embed code markers in run-time
                 class CodeMarker(Marker):
                     pass
-                
+
                 # cache markers for all regions if it does not exist
                 if hasattr(region, '_markers_list') == False:
                     # subroutine to populate _markers_list attribute
@@ -482,7 +482,7 @@ class FileData(LoadableData):
                         region._markers_list = []
                         region._first_marker_ind = marker_start_ind
                         #next_code_marker_start = region.get_offset_begin()
-                        
+
                         for sub_id in region.iterate_subregion_ids():
                             subregion = data.get_region(sub_id)
                             # cache all markers before the subregion
@@ -496,20 +496,20 @@ class FileData(LoadableData):
                                     next_code_marker_start = data.markers[marker_start_ind].get_offset_end()
                                     region._markers_list.append(marker_start_ind)
                                     marker_start_ind += 1
-                                    
+
                             # cache all code markers before the subregion but after the last marker
                             if next_code_marker_start < subregion.get_offset_begin():
                                 region._markers_list.append(CodeMarker(next_code_marker_start,
                                                                        subregion.get_offset_begin(),
                                                                        Marker.T.CODE))
                             next_code_marker_start = subregion.get_offset_begin()
-                                
+
                             # here is the recursive call for all sub-regions
                             (marker_start_ind, next_code_marker_start) = cache_markers_list_rec(data,
                                                                       sub_id,
                                                                       marker_start_ind,
                                                                       next_code_marker_start)
-                            
+
                         # cache all markers after the last subregion
                         while len(data.markers) > marker_start_ind and \
                             region.get_offset_end() > data.markers[marker_start_ind].get_offset_begin():
@@ -521,21 +521,21 @@ class FileData(LoadableData):
                                 next_code_marker_start = data.markers[marker_start_ind].get_offset_end()
                                 region._markers_list.append(marker_start_ind)
                                 marker_start_ind += 1
-                        
+
                         # cache the last code segment after the last marker
                         if next_code_marker_start < region.get_offset_end():
                             region._markers_list.append(CodeMarker(next_code_marker_start,
                                                                    region.get_offset_end(),
                                                                    Marker.T.CODE))
                         next_code_marker_start = region.get_offset_end()
-                        
+
                         # return the starting point for the next call of this function
                         return (marker_start_ind, next_code_marker_start)
-                    
+
                     # append markers list to all regions recursively
                     (next_marker_pos, next_code_marker_start) = cache_markers_list_rec(self, 1, 0, 0)
                     assert(next_marker_pos == len(self.markers))
-                
+
                 # excluding subregions
                 if exclude_children == True:
                     for marker_ind in region._markers_list:
@@ -545,8 +545,8 @@ class FileData(LoadableData):
                             marker = marker_ind # CodeMarker
                         if marker.group & filter_group:
                             yield marker
-                            
-                            
+
+
                 # including subregions
                 else:
                     next_code_marker_start = region.get_offset_begin()
@@ -570,14 +570,14 @@ class FileData(LoadableData):
         return Data.__repr__(self) + " and regions " + self.regions.__repr__()
 
 class AggregatedData(Data):
-    
+
     def __init__(self, loader, path):
         Data.__init__(self)
         self.path = path
         self.loader = loader
         self.subdirs = None
         self.subfiles = None
-        
+
     def get_subdirs(self):
         if self.subdirs != None:
             return self.subdirs
@@ -586,7 +586,7 @@ class AggregatedData(Data):
             for subdir in self.loader.db.iterate_dircontent(self.path, include_subdirs = True, include_subfiles = False):
                 self.subdirs.append(subdir)
         return self.subdirs
-    
+
     def get_subfiles(self):
         if self.subfiles != None:
             return self.subfiles
@@ -606,10 +606,10 @@ class SelectData(Data):
         self.file_id = file_id
         self.region_id = region_id
         self.region = None
-    
+
     def get_path(self):
         return self.path
-    
+
     def get_region(self):
         if self.region == None and self.region_id != None:
             row = self.loader.db.get_region(self.file_id, self.region_id)
@@ -629,12 +629,12 @@ class SelectData(Data):
 
 
 class DiffData(Data):
-    
+
     def __init__(self, new_data, old_data):
         Data.__init__(self)
         self.new_data = new_data
         self.old_data = old_data
-    
+
     def get_data(self, namespace, field):
         new_data = self.new_data.get_data(namespace, field)
         old_data = self.old_data.get_data(namespace, field)
@@ -650,25 +650,25 @@ class DiffData(Data):
         return new_data - old_data
 
 
-            
+
 ####################################
 # Loader
 ####################################
 
 class Namespace(object):
-    
+
     class NamespaceError(Exception):
         def __init__(self, namespace, reason):
             Exception.__init__(self, "Namespace '"
-                            + namespace 
+                            + namespace
                             + "': '"
                             + reason
                             + "'")
-    
+
     class FieldError(Exception):
         def __init__(self, field, reason):
             Exception.__init__(self, "Field '"
-                        + field 
+                        + field
                         + "': '"
                         + reason
                         + "'")
@@ -680,21 +680,21 @@ class Namespace(object):
         self.support_regions = support_regions
         self.fields = {}
         self.db = db_handle
-        
-        if self.db.check_table(name) == False:        
+
+        if self.db.check_table(name) == False:
             self.db.create_table(name, support_regions, version)
         else:
             for column in self.db.iterate_columns(name):
                 self.add_field(column.name,
                                api_impl.PackagerFactory().get_python_type(column.sql_type),
                                non_zero=column.non_zero)
-        
+
     def get_name(self):
         return self.name
 
     def are_regions_supported(self):
         return self.support_regions
-    
+
     def add_field(self, field_name, python_type, non_zero=False):
         if not isinstance(field_name, str):
             raise Namespace.FieldError(field_name, "field_name not a string")
@@ -702,17 +702,17 @@ class Namespace(object):
         if field_name in list(self.fields.keys()):
             raise Namespace.FieldError(field_name, "double used")
         self.fields[field_name] = packager
-        
-        if self.db.check_column(self.get_name(), field_name) == False:        
+
+        if self.db.check_column(self.get_name(), field_name) == False:
             # - False if cloned
             # - True if created
             return self.db.create_column(self.name, field_name, packager.get_sql_type(), non_zero=non_zero)
         return None # if double request
-    
+
     def iterate_field_names(self):
         for name in list(self.fields.keys()):
             yield name
-    
+
     def check_field(self, field_name):
         try:
             self._get_field_packager(field_name)
@@ -744,14 +744,14 @@ class Namespace(object):
             return self.fields[field_name]
         else:
             raise api_impl.PackagerError("unknown field " + field_name + " requested")
-    
+
 class Loader(object):
-    
+
     def __init__(self):
         self.namespaces = {}
         self.db = None
         self.last_file_data = None # for performance boost reasons
-    
+
     def create_database(self, dbfile, previous_db = None):
         self.db = dbwrap.Database()
         try:
@@ -759,7 +759,7 @@ class Loader(object):
         except:
             return False
         return True
-        
+
     def open_database(self, dbfile, read_only = True):
         self.db = dbwrap.Database()
         if os.path.exists(dbfile) == False:
@@ -768,7 +768,7 @@ class Loader(object):
             self.db.connect(dbfile, read_only=read_only)
         except:
             return False
-        
+
         for table in self.db.iterate_tables():
             self.create_namespace(table.name, table.support_regions)
 
@@ -778,7 +778,7 @@ class Loader(object):
         if self.db == None:
             return None
         return self.db.set_property(property_name, str(value))
-    
+
     def get_property(self, property_name):
         if self.db == None:
             return None
@@ -788,17 +788,17 @@ class Loader(object):
         if self.db == None:
             return None
         return self.db.iterate_properties()
-            
+
     def create_namespace(self, name, support_regions = False, version='1.0'):
         if self.db == None:
             return None
-        
+
         if name in list(self.namespaces.keys()):
             raise Namespace.NamespaceError(name, "double used")
         new_namespace = Namespace(self.db, str(name), support_regions, version)
         self.namespaces[name] = new_namespace
         return new_namespace
-    
+
     def iterate_namespace_names(self):
         for name in list(self.namespaces.keys()):
             yield name
@@ -814,7 +814,7 @@ class Loader(object):
             return None
 
         (new_id, is_updated) = self.db.create_file(path, checksum)
-        result = FileData(self, path, new_id, checksum, content) 
+        result = FileData(self, path, new_id, checksum, content)
         self.last_file_data = result
         return (result, is_updated)
 
@@ -824,11 +824,11 @@ class Loader(object):
 
         if self.last_file_data != None and self.last_file_data.get_path() == path:
             return self.last_file_data
-        
+
         data = self.db.get_file(path)
         if data == None:
             return None
-        
+
         result = FileData(self, data.path, data.id, data.checksum, None)
         self.last_file_data = result
         return result
@@ -838,7 +838,7 @@ class Loader(object):
             Exception.__init__(self, "Data '"
                                + str(value)
                                + "' of type "
-                               + str(value.__class__) 
+                               + str(value.__class__)
                                + " referred by '"
                                + namespace
                                + "=>"
@@ -858,31 +858,31 @@ class Loader(object):
                     space = self.loader.get_namespace(namespace)
                     if space == None:
                         raise Loader.DataNotPackable(namespace, each[0], each[1], None, "The namespace has not been found")
-                    
+
                     try:
                         packager = space._get_field_packager(each[0])
                     except api_impl.PackagerError:
                         raise Loader.DataNotPackable(namespace, each[0], each[1], None, "The field has not been found")
-        
+
                     if space.support_regions != support_regions:
                         raise Loader.DataNotPackable(namespace, each[0], each[1], packager, "Incompatible support for regions")
-                    
+
                     try:
                         packed_data = packager.pack(each[1])
                         if packed_data == None:
                             continue
                     except api_impl.PackagerError:
                         raise Loader.DataNotPackable(namespace, each[0], each[1], packager, "Packager raised exception")
-                    
+
                     yield (each[0], packed_data)
-            
+
             def __init__(self, loader, data, namespace, support_regions = False):
                 self.loader = loader
                 self.iterator = self.iterate_packed_values(data, namespace, support_regions)
-    
+
             def __iter__(self):
                 return self.iterator
-        
+
         # TODO can construct to add multiple rows at one sql query
         # to improve the performance
         for namespace in file_data.iterate_namespaces():
@@ -892,7 +892,7 @@ class Loader(object):
                             file_data.get_id(),
                             None,
                             DataIterator(self, file_data, namespace))
-        
+
         if file_data.are_regions_loaded():
             for region in file_data.iterate_regions():
                 for namespace in region.iterate_namespaces():
@@ -906,7 +906,7 @@ class Loader(object):
     def iterate_file_data(self, path = None, path_like_filter = "%"):
         if self.db == None:
             return None
-        
+
         final_path_like = path_like_filter
         if path != None:
             if self.db.check_dir(path) == False and self.db.check_file(path) == False:
@@ -917,10 +917,10 @@ class Loader(object):
             def iterate_file_data(self, loader, final_path_like):
                 for data in loader.db.iterate_files(path_like=final_path_like):
                     yield FileData(loader, data.path, data.id, data.checksum, None)
-            
+
             def __init__(self, loader, final_path_like):
                 self.iterator = self.iterate_file_data(loader, final_path_like)
-    
+
             def __iter__(self):
                 return self.iterator
 
@@ -937,10 +937,10 @@ class Loader(object):
             if self.db.check_dir(path) == False and self.db.check_file(path) == False:
                 return None
             final_path_like = path + path_like_filter
-        
+
         if namespaces == None:
             namespaces = list(self.namespaces.keys())
-        
+
         result = AggregatedData(self, path)
         for name in namespaces:
             namespace = self.get_namespace(name)
@@ -960,24 +960,24 @@ class Loader(object):
                                                              'ratio': (float(each[1]) / float(data[field]['count']))})
                 result.set_data(name, field, data[field])
         return result
-    
+
     def load_selected_data(self, namespace, fields = None, path = None, path_like_filter = "%", filters = [],
                            sort_by = None, limit_by = None):
         if self.db == None:
             return None
-        
+
         final_path_like = path_like_filter
         if path != None:
             if self.db.check_dir(path) == False and self.db.check_file(path) == False:
                 return None
             final_path_like = path + path_like_filter
-        
+
         namespace_obj = self.get_namespace(namespace)
         if namespace_obj == None:
             return None
-        
+
         class SelectDataIterator(object):
-        
+
             def iterate_selected_values(self, loader, namespace_obj, final_path_like, fields, filters, sort_by, limit_by):
                 for row in loader.db.select_rows(namespace_obj.get_name(), path_like=final_path_like, filters=filters,
                                                  order_by=sort_by, limit_by=limit_by):
@@ -991,10 +991,10 @@ class Loader(object):
                     for field in field_names:
                         data.set_data(namespace, field, row[field])
                     yield data
-            
+
             def __init__(self, loader, namespace_obj, final_path_like, fields, filters, sort_by, limit_by):
                 self.iterator = self.iterate_selected_values(loader, namespace_obj, final_path_like, fields, filters, sort_by, limit_by)
-    
+
             def __iter__(self):
                 return self.iterator
 
@@ -1005,13 +1005,13 @@ class Loader(object):
 
 
 class BasePlugin(object):
-    
+
     def initialize(self):
         pass
 
     def terminate(self):
         pass
-    
+
     def set_name(self, name):
         self.name = name
 
@@ -1038,7 +1038,7 @@ class BasePlugin(object):
         if hasattr(self, 'plugin_loader') == False:
             return None
         return self.plugin_loader
-    
+
     def get_plugin(self, plugin_name):
         return self._get_plugin_loader().get_plugin(plugin_name)
 
@@ -1058,10 +1058,10 @@ class Plugin(BasePlugin):
         def __init__(self, name, value):
             self.name = name
             self.value = value
-    
+
     def initialize(self, namespace=None, support_regions=True, fields=[], properties=[]):
         super(Plugin, self).initialize()
-        
+
         if hasattr(self, 'is_updated') == False:
             self.is_updated = False # original initialization
 
@@ -1098,9 +1098,9 @@ class MetricPluginMixin(Parent):
     class AliasError(Exception):
         def __init__(self, alias):
             Exception.__init__(self, "Unknown pattern alias: " + str(alias))
-            
+
     class PlainCounter(object):
-        
+
         def __init__(self, namespace, field, plugin, alias, data, region):
             self.namespace = namespace
             self.field = field
@@ -1109,17 +1109,17 @@ class MetricPluginMixin(Parent):
             self.data = data
             self.region = region
             self.result = 0
-            
+
         def count(self, marker, pattern_to_search):
             self.result += len(pattern_to_search.findall(self.data.get_content(),
                                                        marker.get_offset_begin(),
                                                        marker.get_offset_end()))
-        
+
         def get_result(self):
             return self.result
 
     class IterIncrementCounter(PlainCounter):
-        
+
         def count(self, marker, pattern_to_search):
             self.marker = marker
             self.pattern_to_search = pattern_to_search
@@ -1127,12 +1127,12 @@ class MetricPluginMixin(Parent):
                                                     marker.get_offset_begin(),
                                                     marker.get_offset_end()):
                 self.result += self.increment(match)
-        
+
         def increment(self, match):
             return 1
 
     class IterAssignCounter(PlainCounter):
-        
+
         def count(self, marker, pattern_to_search):
             self.marker = marker
             self.pattern_to_search = pattern_to_search
@@ -1140,18 +1140,18 @@ class MetricPluginMixin(Parent):
                                                     marker.get_offset_begin(),
                                                     marker.get_offset_end()):
                 self.result = self.assign(match)
-        
+
         def assign(self, match):
             return self.result
 
     class RankedCounter(PlainCounter):
-        
+
         def __init__(self, *args, **kwargs):
             super(MetricPluginMixin.RankedCounter, self).__init__(*args, **kwargs)
             self.result = self.region.get_data(self.namespace, self.field)
             if self.result == None:
                 self.result = 1
-        
+
         def get_result(self):
             sourced_metric = self.region.get_data(self.rank_source[0], self.rank_source[1])
             # necessary with python3
@@ -1168,13 +1168,13 @@ class MetricPluginMixin(Parent):
             return self.result
 
     class RatioCalculator(PlainCounter):
-        
+
         def __init__(self, *args, **kwargs):
             super(MetricPluginMixin.RatioCalculator, self).__init__(*args, **kwargs)
             self.result = self.region.get_data(self.namespace, self.field)
             if self.result == None:
                 self.result = 0.0
-        
+
         def get_result(self):
             sourced_comments = self.region.get_data(self.ratio_comments[0], self.ratio_comments[1])
             sourced_code = self.region.get_data(self.ratio_code[0], self.ratio_code[1])
@@ -1198,7 +1198,7 @@ class MetricPluginMixin(Parent):
                        merge_markers=False):
         if hasattr(self, '_fields') == False:
             self._fields = {}
-        
+
         if isinstance(pattern_to_search_or_map_of_patterns, dict):
             map_of_patterns = pattern_to_search_or_map_of_patterns
         else:
@@ -1217,20 +1217,20 @@ class MetricPluginMixin(Parent):
                                         merge_markers,
                                         map_of_patterns,
                                         region_type_mask)
-            
+
     def is_active(self, metric_name = None):
         if metric_name == None:
             return (len(list(self._fields.keys())) > 0)
         return (metric_name in list(self._fields.keys()))
-    
+
     def get_fields(self):
         result = []
         for key in list(self._fields.keys()):
             result.append(self._fields[key][0])
         return result
-    
+
     def callback(self, parent, data, is_updated):
-        # count if metric is enabled, 
+        # count if metric is enabled,
         # and (optimization for the case of iterative rescan:)
         # if file is updated or this plugin's settings are updated
         is_updated = is_updated or self.is_updated
@@ -1246,7 +1246,7 @@ class MetricPluginMixin(Parent):
     def count_if_active(self, namespace, field, data, alias='*'):
         if self.is_active(field) == False:
             return
-        
+
         field_data = self._fields[field]
         if alias not in list(field_data[4].keys()):
             if '*' not in list(field_data[4].keys()):
@@ -1254,7 +1254,7 @@ class MetricPluginMixin(Parent):
             else:
                 alias = '*'
         (pattern_to_search, counter_class) = field_data[4][alias]
-        
+
         if field_data[0]._regions_supported == True:
             for region in data.iterate_regions(filter_group=field_data[5]):
                 counter = counter_class(namespace, field, self, alias, data, region)
@@ -1280,7 +1280,5 @@ class MetricPluginMixin(Parent):
             count = counter.get_result()
             if count != 0 or field_data[0].non_zero == False:
                 data.set_data(namespace, field, count)
-            
-
-
+                #data.get_region(1).set_data(namespace, field, count)
 
