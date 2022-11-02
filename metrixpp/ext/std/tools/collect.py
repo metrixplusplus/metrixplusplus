@@ -1,9 +1,9 @@
 #
 #    Metrix++, Copyright 2009-2019, Metrix++ Project
 #    Link: https://github.com/metrixplusplus/metrixplusplus
-#    
+#
 #    This file is a part of Metrix++ Tool.
-#    
+#
 
 
 from metrixpp.mpp import api
@@ -18,7 +18,7 @@ import fnmatch
 import multiprocessing.pool
 
 class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
-    
+
     def __init__(self):
         self.reader = DirectoryReader()
         self.include_rules = []
@@ -41,7 +41,7 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
         parser.add_option("--non-recursively", "--nr", action="store_true", default=False,
                          help="If the option is set (True), sub-directories are not processed [default: %default]")
         self.optparser = parser
-    
+
     def configure(self, options):
         self.is_proctime_enabled = options.__dict__['std.general.proctime']
         self.is_procerrors_enabled = options.__dict__['std.general.procerrors']
@@ -55,7 +55,7 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
                 self.optparser.error("option --include-files: " + str(e))
         else:
             self.add_include_rule(re.compile(r'.*'))
-        
+
         # check if any exclude rule is given
         if options.__dict__['exclude_files']:
             try:
@@ -78,7 +78,7 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
         super(Plugin, self).initialize(namespace='std.general', support_regions=False, fields=fields)
         self.add_exclude_file(self.get_plugin('metrixpp.mpp.dbf').get_dbfile_path())
         self.add_exclude_file(self.get_plugin('metrixpp.mpp.dbf').get_dbfile_prev_path())
-        
+
     def run(self, args):
         if len(args) == 0:
             return self.reader.run(self, "./")
@@ -86,7 +86,7 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
         for directory in args:
             retcode += self.reader.run(self, directory)
         return retcode
-        
+
     def register_parser(self, fnmatch_exp_list, parser):
         self.parsers.append((fnmatch_exp_list, parser))
 
@@ -126,12 +126,132 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
             if os.path.basename(each) == os.path.basename(file_name):
                 if os.stat(each) == os.stat(file_name):
                     return True
-        return False 
-        
+        return False
+
 class DirectoryReader():
-    
+
+    def readtextfile(self,filename):
+        """ Read a text file and try to detect the coding
+        """
+
+        # Subroutine - Check for UTF8:
+        # "a" is the textfile represented as a simple byte array!
+        # Find first char with code > 127:
+        # 1 nothing found: all bytes in range(0..127); in this case "a" only consists
+        #   of ASCII chars but this may also be treated as valid UTF8 coding
+        # 2 Code is a valid UTF8 leading byte: range(176,271)
+        #   then check subsequent bytes to be UTF8 extension bytes: range(128,175)
+        #   Does also do some plausibility checks: If a valid UTF8 byte sequence is found
+        #   - the subsequent byte (after the UTF8 sequence) must be an ASCII or
+        #     another UTF8 leading byte (in the latter case we assume that there
+        #     are following the appropriate number of UTF8 extension bytes..)
+        #   Note that this checks don't guarantee the text is really UTF8 encoded:
+        #   If a valid UTF8 sequence is found but in fact the text is some sort
+        #   of 8 bit OEM coding this may be coincidentally a sequence of 8 bit
+        #   OEM chars. This indeed seems very unlikely but may happen...
+        #   Otherwise the whole text has to be examined for UTF8 sequences.
+        # 3 Code is not a valid UTF8 leading byte: range(128,175) or range(272,255)
+        #   In this case coding is some sort of 8 bit OEM coding. Since we don't
+        #   know the OEM code page the file was written with, we assume "latin_1"
+        #   (is mostly the same as ANSI but "ansi" isn't available on Python 2)
+        #
+        # return  suggested text coding: "ascii","utf_8" or "latin_1"
+        def checkforUTF8(a,default="latin_1"):
+            L = len(a)
+            n = 0
+            while ( (n < L) and (a[n] < 128) ):
+                n = n+1
+            if ( n >= L ):                          # all chars < 128: ASCII coding
+                return "ascii"                      # but may also be treated as UTF8!
+
+            w = a[n]
+
+            if w in range(176,207):                 # UTF8 two byte sequence: leading byte + 1 extension byte
+                if ( (n+1 < L)
+                 and (a[n+1] in range(128,175))     # valid UTF8 extension byte
+                ):
+                    if ((n+2 == L)                  # w is last UTF8 character
+                     or (a[n+2] < 128)              # or next byte is an ASCII char
+                     or (a[n+2] in range(176,271))  # or next byte is an UTF8 leading byte
+                    ):
+                        return "utf_8"
+                return default
+
+            if w in range(208,239):                 # UTF8 three byte sequence: leading byte + 2 extension bytes
+                if ( (n+2 < L)
+                 and (a[n+1] in range(128,175))     # 2 valid UTF8 extension bytes
+                 and (a[n+2] in range(128,175))
+                ):
+                    if ((n+3 == L)                  # w is last UTF8 character
+                     or (a[n+3] < 128)              # or next byte is ASCII char
+                     or (a[n+3] in range(176,271))  # or next byte is UTF8 leading byte
+                    ):
+                        return "utf_8"
+                return default
+
+            if w in range(240,271):                 # UTF8 four byte sequence: leading byte + 3 extension bytes
+                if ( (n+3 < L)
+                 and (a[n+1] in range(128,175))     # 3 valid UTF8 extension bytes
+                 and (a[n+2] in range(128,175))
+                 and (a[n+3] in range(128,175))
+                ):
+                    if ((n+4 == L)                  # w is last UTF8 character
+                     or (a[n+4] < 128)              # or next byte is ASCII char
+                     or (a[n+4] in range(176,271))  # or next byte is UTF8 leading byte
+                    ):
+                        return "utf_8"
+                return default
+          # end of checkforUTF8 ------------------------------------------------
+
+        # Subroutine readtextfile
+        # open as binary and try to guess the encoding:
+        f = open(filename, 'rb');
+        a = f.read();
+        f.close()
+
+        # check for codings with BOM:
+        if a.startswith(b'\xff\xfe'):
+            coding = "utf_16_le"
+        elif a.startswith(b'\xfe\xff'):
+            coding = "utf_16_be"
+        elif a.startswith(b'\xff\xfe\x00\x00'):
+            coding = "utf_32_le"
+        elif a.startswith(b'\x00\x00\xfe\xff'):
+            coding = "utf_32_be"
+        elif a.startswith(b'\xef\xbb\xbf'):
+            coding = "utf_8_sig"
+        # elif: there are some other codings with BOM - feel free to add them here
+
+        # elif: check UTF variants without BOM:
+        # at this point one may try to determine UTF16 or UTF32 codings without BOM
+        # but this should not happen since these codings strictly require a BOM.
+        # So finally we only have to look for UTF8 without BOM:
+        else:
+            coding = checkforUTF8(a)
+
+        # decode to text with found coding; since our guess may be wrong
+        # we replace unknown chars to avoid errors. Cause we examine program code
+        # files (i.e. true program code should only consist of ASCII chars) these
+        # replacements only should affect string literals and comments and should
+        # have no effect to metric analysis.
+        text = a.decode(coding,'replace')
+
+        # Finally replace possible line break variants with \n:
+        # todo: replace with a regex
+        text = text.replace("\r\n","\n")
+        text = text.replace("\r","\n")
+
+        # debug:
+        #print(filename+" - Coding found = "+coding+" len: "+str(len(text)))
+        #f = open(filename+"."+asCoding,'wb')
+        #f.write(text.encode(coding))
+        #f.close
+
+        return text
+        # end of readtextfile --------------------------------------------------
+
     def run(self, plugin, directory):
-        
+
         IS_TEST_MODE = False
         if 'METRIXPLUSPLUS_TEST_MODE' in list(os.environ.keys()):
             IS_TEST_MODE = True
@@ -152,22 +272,9 @@ class DirectoryReader():
                     else:
                         logging.info("Processing: " + norm_path)
                         ts = time.time()
-                        f = open(full_path, 'rU');
-                        text = f.read();
-                        # getting along with the different string handling of python 2 and 3
-                        # trying to get along with different encodings to get the tests running
-                        # on windows and linux
-                        try:
-                            text = text.encode(f.encoding)
-                        except:
-                            pass
-                        try:
-                            text = text.decode('utf-8')
-                        except:
-                            pass
-                        f.close()
+                        text = self.readtextfile(full_path)
                         checksum = binascii.crc32(text.encode('utf8')) & 0xffffffff # to match python 3
-                        
+
                         db_loader = plugin.get_plugin('metrixpp.mpp.dbf').get_loader()
                         (data, is_updated) = db_loader.create_file_data(norm_path, checksum, text)
                         procerrors = parser.process(plugin, data, is_updated)
@@ -184,7 +291,7 @@ class DirectoryReader():
             else:
                 logging.info("Excluding: " + norm_path)
             return exit_code
-        
+
 
         #thread_pool = multiprocessing.pool.ThreadPool()
         #def mp_worker(args):
@@ -197,13 +304,13 @@ class DirectoryReader():
             for fname in sorted(os.listdir(directory)):
                 full_path = os.path.join(directory, fname)
                 exit_code += run_per_file(plugin, fname, full_path)
-            
+
             return exit_code
-        
+
         if os.path.exists(directory) == False:
             logging.error("Skipping (does not exist): " + directory)
             return 1
-        
+
         if os.path.isdir(directory):
             total_errors = run_recursively(plugin, directory)
         else:
