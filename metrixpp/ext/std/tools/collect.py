@@ -137,25 +137,29 @@ class DirectoryReader():
         # Subroutine - Check for UTF8:
         # "a" is the textfile represented as a simple byte array!
         # Find first char with code > 127:
+        #
         # 1 nothing found: all bytes in range(0..127); in this case "a" only consists
         #   of ASCII chars but this may also be treated as valid UTF8 coding
+        #
         # 2 Code is a valid UTF8 leading byte: range(176,271)
         #   then check subsequent bytes to be UTF8 extension bytes: range(128,175)
-        #   Does also do some plausibility checks: If a valid UTF8 byte sequence is found
-        #   - the subsequent byte (after the UTF8 sequence) must be an ASCII or
-        #     another UTF8 leading byte (in the latter case we assume that there
+        #   Does also do some additional plausibility checks:
+        #   If a valid UTF8 byte sequence is found
+        #   - the subsequent byte (after the UTF8 sequence) must be an ASCII
+        #   - or another UTF8 leading byte (in the latter case we assume that there
         #     are following the appropriate number of UTF8 extension bytes..)
-        #   Note that this checks don't guarantee the text is really UTF8 encoded:
+        #   Note that these checks don't guarantee the text is really UTF8 encoded:
         #   If a valid UTF8 sequence is found but in fact the text is some sort
         #   of 8 bit OEM coding this may be coincidentally a sequence of 8 bit
         #   OEM chars. This indeed seems very unlikely but may happen...
         #   Otherwise the whole text has to be examined for UTF8 sequences.
+        #
         # 3 Code is not a valid UTF8 leading byte: range(128,175) or range(272,255)
         #   In this case coding is some sort of 8 bit OEM coding. Since we don't
         #   know the OEM code page the file was written with, we assume "latin_1"
         #   (is mostly the same as ANSI but "ansi" isn't available on Python 2)
         #
-        # return  suggested text coding: "ascii","utf_8" or "latin_1"
+        # return  suggested text coding: "ascii","utf_8" or "latin_1" (resp. default)
         def checkforUTF8(a,default="latin_1"):
             L = len(a)
             n = 0
@@ -166,42 +170,46 @@ class DirectoryReader():
 
             w = a[n]
 
-            if w in range(176,207):                 # UTF8 two byte sequence: leading byte + 1 extension byte
+            # UTF8 two byte sequence: leading byte + 1 extension byte
+            if w in range(176,207):
                 if ( (n+1 < L)
                  and (a[n+1] in range(128,175))     # valid UTF8 extension byte
                 ):
-                    if ((n+2 == L)                  # w is last UTF8 character
+                    if ((n+2 == L)                  # w is last character
                      or (a[n+2] < 128)              # or next byte is an ASCII char
                      or (a[n+2] in range(176,271))  # or next byte is an UTF8 leading byte
                     ):
                         return "utf_8"
                 return default
 
-            if w in range(208,239):                 # UTF8 three byte sequence: leading byte + 2 extension bytes
+            # UTF8 three byte sequence: leading byte + 2 extension bytes
+            if w in range(208,239):
                 if ( (n+2 < L)
                  and (a[n+1] in range(128,175))     # 2 valid UTF8 extension bytes
                  and (a[n+2] in range(128,175))
                 ):
-                    if ((n+3 == L)                  # w is last UTF8 character
+                    if ((n+3 == L)                  # w is last character
                      or (a[n+3] < 128)              # or next byte is ASCII char
                      or (a[n+3] in range(176,271))  # or next byte is UTF8 leading byte
                     ):
                         return "utf_8"
                 return default
 
-            if w in range(240,271):                 # UTF8 four byte sequence: leading byte + 3 extension bytes
+            # UTF8 four byte sequence: leading byte + 3 extension bytes
+            if w in range(240,271):
                 if ( (n+3 < L)
                  and (a[n+1] in range(128,175))     # 3 valid UTF8 extension bytes
                  and (a[n+2] in range(128,175))
                  and (a[n+3] in range(128,175))
                 ):
-                    if ((n+4 == L)                  # w is last UTF8 character
+                    if ((n+4 == L)                  # w is last character
                      or (a[n+4] < 128)              # or next byte is ASCII char
                      or (a[n+4] in range(176,271))  # or next byte is UTF8 leading byte
                     ):
                         return "utf_8"
                 return default
 
+            # no valid UTF8 byte sequence:
             return default;
           # end of checkforUTF8 ------------------------------------------------
 
@@ -222,11 +230,14 @@ class DirectoryReader():
             coding = "utf_32_be"
         elif a.startswith(b'\xef\xbb\xbf'):
             coding = "utf_8_sig"
+
         # elif: there are some other codings with BOM - feel free to add them here
 
-        # elif: check UTF variants without BOM:
-        # at this point one may try to determine UTF16 or UTF32 codings without BOM
-        # but this should not happen since these codings strictly require a BOM.
+        # elif: check for UTF variants without BOM:
+        #       at this point one may try to determine UTF16 or UTF32 codings
+        #       without a BOM but this should not happen since for these codings
+        #       a BOM is recommended.
+
         # So finally we only have to look for UTF8 without BOM:
         else:
             coding = checkforUTF8(a)
@@ -235,7 +246,7 @@ class DirectoryReader():
         # we replace unknown chars to avoid errors. Cause we examine program code
         # files (i.e. true program code should only consist of ASCII chars) these
         # replacements only should affect string literals and comments and should
-        # have no effect to metric analysis.
+        # have no effect on metric analysis.
         text = a.decode(coding,'replace')
 
         # Finally replace possible line break variants with \n:
@@ -245,7 +256,7 @@ class DirectoryReader():
 
         # debug:
         #print(filename+" - Coding found = "+coding+" len: "+str(len(text)))
-        #f = open(filename+"."+asCoding,'wb')
+        #f = open(filename+"."+coding,'wb')
         #f.write(text.encode(coding))
         #f.close
 
