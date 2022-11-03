@@ -201,6 +201,8 @@ class DirectoryReader():
                     ):
                         return "utf_8"
                 return default
+
+            return default;
           # end of checkforUTF8 ------------------------------------------------
 
         # Subroutine readtextfile
