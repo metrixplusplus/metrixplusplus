@@ -132,9 +132,58 @@ class DirectoryReader():
 
     def readtextfile(self,filename):
         """ Read a text file and try to detect the coding
-        """
 
-        # Subroutine - Check for UTF8:
+            Since we examine program code text files we can assume the following:
+            - There are no NUL characters, i.e. no 0x00 sequences of 1, 2 or 4
+              byte, starting on 1, 2 or 4 byte boundaries (depending on
+              1, 2 or 4 byte coding)
+            - There should at least 1 line terminated with an end of line
+              character, i.e. \n or \r of the respective length (1,2 or 4 byte)
+            - Program code consists of only ASCII chars, i.e. code < 128
+            - Non ASCII chars should only appear in string literals and comments
+
+            Though especially in the case of an 8 bit coding it does not matter
+            which code page to use: Metric analysis is done on program code
+            which is pure ASCII; string literals and comments are only recognized
+            as such but not interpreted, though it doesn't matter if they contain
+            non-ASCII chars whichever code page is used.
+
+            Note the decoder's different behavior for the "utf-nn" identifiers:
+            - .decode("utf-32") / .decode("utf-16"):       preceding BOM is skipped
+            - with suffix "..-be" or "..-le" respectively: preceding BOM is preserved
+            but
+            - .decode("utf-8"):     preceding BOM is preserved
+            - .decode("utf-8-sig"): preceding BOM is skipped
+        """
+        # Methods to check for various UTF variants without BOM:
+        # Since UTF16/32 codings are recommended to use a BOM these methods
+        # shouldn't be necessary but may be useful in certain cases.
+        def checkforUTF32_BE(a):
+            if ( (len(a) % 4) != 0 ): return False
+            n = a.find(b'\x00\x00\x00\n')
+            if n < 0:
+                n = a.find(b'\x00\x00\x00\r')
+            return (n >= 0) and ((n % 4) == 0)
+        def checkforUTF32_LE(a):
+            if ( (len(a) % 4) != 0 ): return False
+            n = a.find(b'\n\x00\x00\x00')
+            if n < 0:
+                n = a.find(b'\r\x00\x00\x00')
+            return (n >= 0) and ((n % 4) == 0)
+        def checkforUTF16_BE(a):
+            if ( (len(a) % 2) != 0 ): return False
+            n = a.find(b'\x00\n')
+            if n < 0:
+                n = a.find(b'\x00\r')
+            return (n >= 0) and ((n % 2) == 0)
+        def checkforUTF16_LE(a):
+            if ( (len(a) % 2) != 0 ): return False
+            n = a.find(b'\n\x00')
+            if n < 0:
+                n = a.find(b'\r\x00')
+            return (n >= 0) and ((n % 2) == 0)
+
+        # Method to check for UTF8 without BOM:
         # "a" is the textfile represented as a simple byte array!
         # Find first char with code > 127:
         #
@@ -152,7 +201,8 @@ class DirectoryReader():
         #   If a valid UTF8 sequence is found but in fact the text is some sort
         #   of 8 bit OEM coding this may be coincidentally a sequence of 8 bit
         #   OEM chars. This indeed seems very unlikely but may happen...
-        #   Otherwise the whole text has to be examined for UTF8 sequences.
+        #   Even though the whole text was examined for UTF8 sequences: every
+        #   valid UTF8 sequence found may also be a sequence of OEM chars!
         #
         # 3 Code is not a valid UTF8 leading byte: range(128,175) or range(272,255)
         #   In this case coding is some sort of 8 bit OEM coding. Since we don't
@@ -213,30 +263,37 @@ class DirectoryReader():
             return default;
           # end of checkforUTF8 ------------------------------------------------
 
+        # ----------------------------------------------------------------------
         # Subroutine readtextfile
         # open as binary and try to guess the encoding:
+        # ----------------------------------------------------------------------
         f = open(filename, 'rb');
         a = f.read();
         f.close()
 
         # check for codings with BOM:
-        if a.startswith(b'\xff\xfe'):
-            coding = "utf_16_le"
-        elif a.startswith(b'\xfe\xff'):
-            coding = "utf_16_be"
-        elif a.startswith(b'\xff\xfe\x00\x00'):
-            coding = "utf_32_le"
-        elif a.startswith(b'\x00\x00\xfe\xff'):
-            coding = "utf_32_be"
+        # Consider the order: Check for UTF32 first!
+        if  (a.startswith(b'\xff\xfe\x00\x00')
+          or a.startswith(b'\x00\x00\xfe\xff')):
+            coding = "utf_32"       # no suffix _be/_le --> decoder skips the BOM
+        elif (a.startswith(b'\xff\xfe')
+           or a.startswith(b'\xfe\xff')):
+            coding = "utf_16"       # no suffix _be/_le --> decoder skips the BOM
         elif a.startswith(b'\xef\xbb\xbf'):
             coding = "utf_8_sig"
 
         # elif: there are some other codings with BOM - feel free to add them here
 
-        # elif: check for UTF variants without BOM:
-        #       at this point one may try to determine UTF16 or UTF32 codings
-        #       without a BOM but this should not happen since for these codings
-        #       a BOM is recommended.
+        # check for UTF variants without BOM:
+        # Consider the order: Check for UTF32 first!
+        elif checkforUTF32_BE(a):
+            coding = "utf_32_be"
+        elif checkforUTF32_LE(a):
+            coding = "utf_32_le"
+        elif checkforUTF16_BE(a):
+            coding = "utf_16_be"
+        elif checkforUTF16_LE(a):
+            coding = "utf_16_le"
 
         # So finally we only have to look for UTF8 without BOM:
         else:
@@ -257,7 +314,9 @@ class DirectoryReader():
         # debug:
         #print(filename+" - Coding found = "+coding+" len: "+str(len(text)))
         #f = open(filename+"."+coding,'wb')
-        #f.write(text.encode(coding))
+        #f.write(text.encode(coding))   write in original coding
+        # or:
+        #f.write(text.encode("utf-8"))  write as UTF-8: same files in different encodings should result in identical files
         #f.close
 
         return text
@@ -285,6 +344,7 @@ class DirectoryReader():
                     else:
                         logging.info("Processing: " + norm_path)
                         ts = time.time()
+
                         text = self.readtextfile(full_path)
                         checksum = binascii.crc32(text.encode('utf8')) & 0xffffffff # to match python 3
 
