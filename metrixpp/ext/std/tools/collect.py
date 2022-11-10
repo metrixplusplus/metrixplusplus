@@ -130,23 +130,6 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
 
 class DirectoryReader():
 
-    def debugout(self,filename,text,coding):
-        # Open as Text-File - explicit "utf-8" since default depends on machine's OS
-        #f = open(filename+".utf-8",'w',encoding="utf-8")
-        #f.write(text)
-
-        # Open as Binary-File
-        #coding = coding    # write in original coding: If our guess was true written file should have the same size as the original file
-        # or:
-        #coding = "utf-8"   # write as UTF-8:
-                            # If our guess is true same files in different encodings should result in identical files
-                            # If our guess was false (esp. if real coding is an 8-bit coding != latin_1) file length may be different!
-        #f = open(filename+"."+coding,'wb')
-        #f.write(text.encode(coding))
-
-        #f.close
-        return
-
     def readtextfile(self,filename):
         """ Read a text file and try to detect the coding
 
@@ -328,34 +311,9 @@ class DirectoryReader():
         text = text.replace("\r\n","\n")
         text = text.replace("\r","\n")
 
-        # debug:
-        #print(filename+" - Coding found = "+coding+" len: "+str(len(text))+" / "+str(len(a)));
-        #self.debugout(filename,text,coding)
-
         return text
 
         # end of readtextfile --------------------------------------------------
-
-    def readfile_org(self,filename):
-        f = open(filename, 'rU');
-        coding = f.encoding
-        text = f.read();
-        # getting along with the different string handling of python 2 and 3
-        # trying to get along with different encodings to get the tests running
-        # on windows and linux
-        try:
-            text = text.encode(f.encoding)
-        except:
-            pass
-        try:
-            text = text.decode('utf-8')
-        except:
-            pass
-        f.close()
-
-        #self.debugout(filename,text,coding)
-
-        return text
 
     def run(self, plugin, directory):
 
