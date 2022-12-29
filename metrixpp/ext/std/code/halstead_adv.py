@@ -5,9 +5,11 @@
 #
 #    This file is a part of Metrix++ Tool.
 #
-"""
-Implements Halstead metrics:
-- uses basic n1,n2,N1,N2 values from halstead_base
+""" @file
+Implements Halstead advanced metrics
+@package HalsteadAdvancedMetrics
+Halstead advanced metrics:
+- uses basic N1,n1,N2,n2 values from halstead_base
 - calculates advanced metrics:
   - program length N
   - vocabulary n
@@ -31,182 +33,178 @@ A detailed explanation with example is found on http://www.verifysoft.com/de_cmt
 from metrixpp.mpp import api
 import math
 
-# Work around for Python 2.7: log2 not available
-def log2(x):
-    try:
-        return math.log2(x)
-    except:
-        return math.log(x,2)
+## @brief Work around for Python 2.7: math.log2 not available
+def log2(x): return math.log2(x) if hasattr(math,"log2") else math.log(x,2)
 
 class Plugin(api.Plugin,
              api.IConfigurable,
              api.Child,
              api.MetricPluginMixin):
 
+    opt_prefix = 'std.code.halstead.'   # same as defined in halstead_base.py!
+
     def declare_configuration(self, parser):
-        parser.add_option("--ext.halstead.vocabulary", "--ehvoc", action="store_true", default=False,
+        def add_option(opt1,opt2,action,default,help):
+            parser.add_option("--"+self.opt_prefix+opt1, "--sch"+opt2, action=action, default=default,
+                help=help)
+
+        add_option("vocabulary", "voc", action="store_true", default=False,
             help="Halstead metrics plugin: vocabulary 'n' [default: %default]")
-        parser.add_option("--ext.halstead.length", "--ehlen", action="store_true", default=False,
+        add_option("length", "len", action="store_true", default=False,
             help="Halstead metrics plugin: program length 'N' [default: %default]")
-        parser.add_option("--ext.halstead.estimatedlength", "--ehelen", action="store_true", default=False,
+        add_option("estimatedlength", "elen", action="store_true", default=False,
             help="Halstead metrics plugin: estimated program length [default: %default]")
-        parser.add_option("--ext.halstead.purityration", "--ehpr", action="store_true", default=False,
+        add_option("purityratio", "pr", action="store_true", default=False,
             help="Halstead metrics plugin: purity ratio [default: %default]")
-        parser.add_option("--ext.halstead.volume", "--ehv", action="store_true", default=False,
+        add_option("volume", "v", action="store_true", default=False,
             help="Halstead metrics plugin: program volume [default: %default]")
-        parser.add_option("--ext.halstead.difficulty", "--ehd", action="store_true", default=False,
+        add_option("difficulty", "d", action="store_true", default=False,
             help="Halstead metrics plugin: program difficulty [default: %default]")
-        parser.add_option("--ext.halstead.level", "--ehl", action="store_true", default=False,
+        add_option("level", "l", action="store_true", default=False,
             help="Halstead metrics plugin: program level [default: %default]")
-        parser.add_option("--ext.halstead.effort", "--ehe", action="store_true", default=False,
+        add_option("effort", "e", action="store_true", default=False,
             help="Halstead metrics plugin: program effort [default: %default]")
-        parser.add_option("--ext.halstead.time", "--eht", action="store_true", default=False,
+        add_option("time", "t", action="store_true", default=False,
             help="Halstead metrics plugin: estimated time [default: %default]")
-        parser.add_option("--ext.halstead.bugs", "--ehb", action="store_true", default=False,
+        add_option("bugs", "b", action="store_true", default=False,
             help="Halstead metrics plugin: delivered bugs [default: %default]")
 
     def configure(self, options):
-        self.is_active_eha = options.__dict__['ext.halstead.all']
-        self.is_active_ehn = options.__dict__['ext.halstead.vocabulary']    \
-            or self.is_active_eha
-        self.is_active_ehN = options.__dict__['ext.halstead.length']        \
-            or self.is_active_eha
-        self.is_active_eh_N = options.__dict__['ext.halstead.estimatedlength']   \
-            or self.is_active_eha
-        self.is_active_ehpr = options.__dict__['ext.halstead.purityration']   \
-            or self.is_active_eha
-        self.is_active_ehV = options.__dict__['ext.halstead.volume']        \
-            or self.is_active_eha
-        self.is_active_ehD = options.__dict__['ext.halstead.difficulty']    \
-            or self.is_active_eha
-        self.is_active_ehL = options.__dict__['ext.halstead.level']         \
-            or self.is_active_eha
-        self.is_active_ehE = options.__dict__['ext.halstead.effort']        \
-            or self.is_active_eha
-        self.is_active_ehT = options.__dict__['ext.halstead.time']          \
-            or self.is_active_eha
-        self.is_active_ehB = options.__dict__['ext.halstead.bugs']          \
-            or self.is_active_eha
-        self.is_active_ehb = options.__dict__['ext.halstead.base']          \
-            or self.is_active_ehn   \
-            or self.is_active_ehN   \
-            or self.is_active_eh_N  \
-            or self.is_active_ehpr  \
-            or self.is_active_ehV   \
-            or self.is_active_ehD   \
-            or self.is_active_ehL   \
-            or self.is_active_ehE   \
-            or self.is_active_ehT   \
-            or self.is_active_ehB   \
+        self.is_active_aha = options.__dict__[self.opt_prefix+'all']
+        self.is_active_ahn = options.__dict__[self.opt_prefix+'vocabulary']    \
+            or self.is_active_aha
+        self.is_active_ahN = options.__dict__[self.opt_prefix+'length']        \
+            or self.is_active_aha
+        self.is_active_ah_N = options.__dict__[self.opt_prefix+'estimatedlength']   \
+            or self.is_active_aha
+        self.is_active_ahpr = options.__dict__[self.opt_prefix+'purityratio']   \
+            or self.is_active_aha
+        self.is_active_ahV = options.__dict__[self.opt_prefix+'volume']        \
+            or self.is_active_aha
+        self.is_active_ahD = options.__dict__[self.opt_prefix+'difficulty']    \
+            or self.is_active_aha
+        self.is_active_ahL = options.__dict__[self.opt_prefix+'level']         \
+            or self.is_active_aha
+        self.is_active_ahE = options.__dict__[self.opt_prefix+'effort']        \
+            or self.is_active_aha
+        self.is_active_ahT = options.__dict__[self.opt_prefix+'time']          \
+            or self.is_active_aha
+        self.is_active_ahB = options.__dict__[self.opt_prefix+'bugs']          \
+            or self.is_active_aha
+        self.is_active_ahb = options.__dict__[self.opt_prefix+'base']          \
+            or self.is_active_ahn   \
+            or self.is_active_ahN   \
+            or self.is_active_ah_N  \
+            or self.is_active_ahpr  \
+            or self.is_active_ahV   \
+            or self.is_active_ahD   \
+            or self.is_active_ahL   \
+            or self.is_active_ahE   \
+            or self.is_active_ahT   \
+            or self.is_active_ahB   \
 
-        if self.is_active_ehb:
+        if self.is_active_ahb:
             req_or = False
-            required_opts = ['ext.halstead.all',
-                             'ext.halstead.base']
+            required_opts = [self.opt_prefix+'all',
+                             self.opt_prefix+'base']
             for each in required_opts:
                 if options.__dict__[each] == True:
                     req_or = True
                     break
             if ( req_or == False ):
-                self.parser.error('option --ext.halstead.*: requires --ext.halstead.all or --ext.halstead.base option')
+                self.parser.error('option --'+self.opt_prefix+'*: requires --'+self.opt_prefix+'all or --'+self.opt_prefix+'base option')
 
     def initialize(self):
         # ----------------------------------------------------------------------
         # Advanced halstead metrics:
         # ----------------------------------------------------------------------
-        self.declare_metric(self.is_active_ehN,
+        self.declare_metric(self.is_active_ahN,
                             self.Field('H_Length', int),
                             {
                              '*':(None, self.HalsteadProgramLength)
                             },
                             marker_type_mask=api.Marker.T.NONE)
-        self.declare_metric(self.is_active_eh_N,
+        self.declare_metric(self.is_active_ah_N,
                             self.Field('H_EstLength', float),
                             {
                              '*':(None, self.HalsteadEstimatedLength)
                             },
                             marker_type_mask=api.Marker.T.NONE)
-        self.declare_metric(self.is_active_ehpr,
+        self.declare_metric(self.is_active_ahpr,
                             self.Field('H_PurityRatio', float),
                             {
                              '*':(None, self.HalsteadPurityRatio)
                             },
                             marker_type_mask=api.Marker.T.NONE)
-        self.declare_metric(self.is_active_ehn,
+        self.declare_metric(self.is_active_ahn,
                             self.Field('H_Vocabulary', int),
                             {
                              '*':(None, self.HalsteadVocabulary)
                             },
                             marker_type_mask=api.Marker.T.NONE)
-        self.declare_metric(self.is_active_ehV,
+        self.declare_metric(self.is_active_ahV,
                             self.Field('H_Volume', float),
                             {
                              '*':(None, self.HalsteadVolume)
                             },
                             marker_type_mask=api.Marker.T.NONE)
-        self.declare_metric(self.is_active_ehD,
+        self.declare_metric(self.is_active_ahD,
                             self.Field('H_Difficulty', float),
                             {
                              '*':(None, self.HalsteadDifficulty)
                             },
                             marker_type_mask=api.Marker.T.NONE)
-        self.declare_metric(self.is_active_ehL,
+        self.declare_metric(self.is_active_ahL,
                             self.Field('H_Level', float),
                             {
                              '*':(None, self.HalsteadProgramLevel)
                             },
                             marker_type_mask=api.Marker.T.NONE)
-        self.declare_metric(self.is_active_ehE,
+        self.declare_metric(self.is_active_ahE,
                             self.Field('H_Effort', float),
                             {
                              '*':(None, self.HalsteadImplementationEffort)
                             },
                             marker_type_mask=api.Marker.T.NONE)
-        self.declare_metric(self.is_active_ehT,
+        self.declare_metric(self.is_active_ahT,
                             self.Field('H_Time', float),
                             {
                              '*':(None, self.HalsteadImplementationTime)
                             },
                             marker_type_mask=api.Marker.T.NONE)
-        self.declare_metric(self.is_active_ehB,
+        self.declare_metric(self.is_active_ahB,
                             self.Field('H_Bugs', float),
                             {
                              '*':(None, self.HalsteadDeliveredBugs)
                             },
                             marker_type_mask=api.Marker.T.NONE)
 
-        super(Plugin, self).initialize(fields=self.get_fields())#, support_regions=False)
+        super(Plugin, self).initialize(fields=self.get_fields(), support_regions=True)
 
         if self.is_active():
             self.subscribe_by_parents_interface(api.ICode)
-#            print("Hello world")
 
     # --------------------------------------------------------------------------
     # classes to calculate advanced halstead metrics:
     # --------------------------------------------------------------------------
     class HalsteadCalculator(api.MetricPluginMixin.PlainCounter):
-        """ Helper class to obtain basic metrics n1,N1,n2,N2.
+        """ Base class to obtain basic metrics N1,n1,N2,n2.
             Additionally provides calculation for all Hallstead values
         """
         def __init__(self, *args, **kwargs):
             super(Plugin.HalsteadCalculator, self).__init__(*args, **kwargs)
-#            self.result = self.data.get_data(self.namespace, self.field)
             self.result = self.region.get_data(self.namespace, self.field)
             if self.result == None:
                 self.result = 0
 
         def get_HalsteadFields(self):
-            """ Helper function to obtain basic metrics n1,N1,n2,N2.
-                Additionally obtains n = n1+n2 and N = N1+N2.
+            """ Helper function to obtain basic metrics N1,n1,N2,n2.
+                Additionally obtains N = N1+N2 and n = n1+n2.
             """
-#            self.n1 = self.data.get_data('miext.halstead_base', '_n1')
-#            self.n2 = self.data.get_data('miext.halstead_base', '_n2')
-#            self.N1 = self.data.get_data('miext.halstead_base', 'N1')
-#            self.N2 = self.data.get_data('miext.halstead_base', 'N2')
-            self.n1 = self.region.get_data('miext.halstead_base', '_n1')
-            self.n2 = self.region.get_data('miext.halstead_base', '_n2')
-            self.N1 = self.region.get_data('miext.halstead_base', 'N1')
-            self.N2 = self.region.get_data('miext.halstead_base', 'N2')
+            self.N1 = self.region.get_data('std.code.halstead_base', 'N1')
+            self.n1 = self.region.get_data('std.code.halstead_base', '_n1')
+            self.N2 = self.region.get_data('std.code.halstead_base', 'N2')
+            self.n2 = self.region.get_data('std.code.halstead_base', '_n2')
             if ( (self.n1 == None) or (self.n2 == None) or (self.N1 == None) or (self.N2 == None) ):
                 self.N = 0
                 self.n = 0
@@ -215,13 +213,13 @@ class Plugin(api.Plugin,
             else:
                 self.N = self.N1+self.N2
                 self.n = self.n1+self.n2
-                #print("HalsteadFields: "+str(self.N1)+" / "+str(self.N2)+" / "+str(self.n1)+" / "+str(self.n2))
+                #print("HalsteadFields: "+str(self.N1)+" / "+str(self.n1)+" / "+str(self.N2)+" / "+str(self.n2))
                 return True
 
-        # Helper functions:
-        # It's up to the caller to first call get_HalsteadFields() to obtain
-        # valid n1,n2,N1,N2,n and N values!
-
+        ## @name Helper functions:
+        # It's up to the caller to first call @ref self.get_HalsteadFields() to obtain
+        # valid N1,n1,N2,n2, N and n values!
+        # @{
         def get_EstimatedProgramLength(self):
             """ Estimated program length eLen = n1*log2(n1) + n2*log2(n2) """
             if (self.n1 > 0) and (self.n2 > 0):
@@ -269,14 +267,16 @@ class Plugin(api.Plugin,
                 information content in bit which may be interpreted as elementary
                 YES/NO-decisions. "18" is the so called "Stroud number" which
                 determines the number of elementary decisions / sec a human brain
-                can make and Stroud has figured out that this is between 5 and 25.
-                Halstead chooses 18 as a good value for software engineers...
+                can make. The psychologist John M. Stroud has figured out that
+                this is between 5 and 25. Halstead chooses 18 as a good value
+                for software engineers...
             """
             return self.get_ImplementationEffort() / 18.0
 
         def get_EstimatedDeliveredBugs(self):
             """ Estimated delivered bugs B = E^(2/3) / 3000 """
             return self.get_ImplementationEffort()**(2.0/3.0) / 3000.0
+        # @}
 
     # --------------------------------------------------------------------------
     class HalsteadProgramLength(HalsteadCalculator):
@@ -290,7 +290,7 @@ class Plugin(api.Plugin,
             return self.result
 
     class HalsteadEstimatedLength(HalsteadCalculator):
-        """ Program length N = N1+N2 """
+        """ Estimated program length eLen = n1*log2(n1) + n2*log2(n2) """
         def get_result(self):
             if self.get_HalsteadFields():
                 self.result = self.get_EstimatedProgramLength()
@@ -300,7 +300,7 @@ class Plugin(api.Plugin,
             return self.result
 
     class HalsteadPurityRatio(HalsteadCalculator):
-        """ Program length N = N1+N2 """
+        """ Purity ratio PR = eLen/N """
         def get_result(self):
             if self.get_HalsteadFields():
                 self.result = self.get_PurityRatio()
