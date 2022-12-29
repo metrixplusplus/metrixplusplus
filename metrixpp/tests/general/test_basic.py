@@ -1,9 +1,9 @@
 #
 #    Metrix++, Copyright 2009-2019, Metrix++ Project
 #    Link: https://github.com/metrixplusplus/metrixplusplus
-#    
+#
 #    This file is a part of Metrix++ Tool.
-#    
+#
 
 import unittest
 
@@ -12,7 +12,7 @@ import tests.common
 class Test(tests.common.TestCase):
 
     def test_workflow(self):
-        
+
         # first collection
         runner = tests.common.ToolRunner('collect',
                                          ['--std.code.complexity.cyclomatic',
@@ -191,7 +191,7 @@ class Test(tests.common.TestCase):
         self.assertExec(runner.run())
 
     def test_help(self):
-        
+
         runner = tests.common.ToolRunner('--help')
         self.assertExec(runner.run())
 
@@ -214,7 +214,7 @@ class Test(tests.common.TestCase):
         self.assertExec(runner.run())
 
     def test_view_format(self):
-        
+
         # note: --scope-mode is tested in workflow test above
 
         runner = tests.common.ToolRunner('collect', ['--std.code.complexity.cyclomatic'], save_prev=True)
@@ -237,7 +237,7 @@ class Test(tests.common.TestCase):
                                          prefix='prometheus_simple.cpp',
                                          dirs_list=['./simple.cpp'])
         self.assertExec(runner.run())
-        
+
         runner = tests.common.ToolRunner('collect',
                                          ['--std.code.complexity.cyclomatic'],
                                          prefix='nest',
@@ -399,6 +399,16 @@ class Test(tests.common.TestCase):
                                          ['--std.code.complexity.cyclomatic',
                                           '--std.code.lines.code',
                                           '--std.code.maintindex.simple',
+                                          '--log-level=INFO'],
+                                         check_stderr=[(0, -1)],
+                                         save_prev=True)
+        self.assertExec(runner.run())
+        runner = tests.common.ToolRunner('view', ['--format=txt'], prefix='txt')
+        self.assertExec(runner.run())
+
+    def test_std_halstead(self):
+        runner = tests.common.ToolRunner('collect',
+                                         ['--std.code.halstead.base',
                                           '--log-level=INFO'],
                                          check_stderr=[(0, -1)],
                                          save_prev=True)

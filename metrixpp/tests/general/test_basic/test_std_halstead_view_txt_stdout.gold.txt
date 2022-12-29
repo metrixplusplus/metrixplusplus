@@ -1,0 +1,66 @@
+./:: info: Overall metrics for 'std.code.halstead_base:N1' metric
+	Average        : 9.14285714 (excluding zero metric values)
+	Minimum        : 2
+	Maximum        : 44
+	Total          : 128.0
+	Distribution   : 14 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             2 : 0.214 : 0.214 :  3	|||||||||||||||||||||
+	             3 : 0.071 : 0.286 :  1	|||||||
+	             4 : 0.071 : 0.357 :  1	|||||||
+	             6 : 0.143 : 0.500 :  2	||||||||||||||
+	             7 : 0.143 : 0.643 :  2	||||||||||||||
+	             8 : 0.143 : 0.786 :  2	||||||||||||||
+	            10 : 0.071 : 0.857 :  1	|||||||
+	            19 : 0.071 : 0.929 :  1	|||||||
+	            44 : 0.071 : 1.000 :  1	|||||||
+
+./:: info: Overall metrics for 'std.code.halstead_base:N2' metric
+	Average        : 9.92857143 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 77
+	Total          : 139.0
+	Distribution   : 14 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.286 : 0.286 :  4	||||||||||||||||||||||||||||
+	             2 : 0.071 : 0.357 :  1	|||||||
+	             4 : 0.071 : 0.429 :  1	|||||||
+	             5 : 0.071 : 0.500 :  1	|||||||
+	             6 : 0.214 : 0.714 :  3	|||||||||||||||||||||
+	             7 : 0.143 : 0.857 :  2	||||||||||||||
+	            15 : 0.071 : 0.929 :  1	|||||||
+	            77 : 0.071 : 1.000 :  1	|||||||
+
+./:: info: Overall metrics for 'std.code.halstead_base:_n1' metric
+	Average        : 6.71428571 (excluding zero metric values)
+	Minimum        : 3
+	Maximum        : 13
+	Total          : 94.0
+	Distribution   : 14 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             3 : 0.071 : 0.071 :  1	|||||||
+	             4 : 0.071 : 0.143 :  1	|||||||
+	             5 : 0.357 : 0.500 :  5	|||||||||||||||||||||||||||||||||||
+	             6 : 0.071 : 0.571 :  1	|||||||
+	             7 : 0.143 : 0.714 :  2	||||||||||||||
+	             8 : 0.143 : 0.857 :  2	||||||||||||||
+	            13 : 0.143 : 1.000 :  2	||||||||||||||
+
+./:: info: Overall metrics for 'std.code.halstead_base:_n2' metric
+	Average        : 5.14285714 (excluding zero metric values)
+	Minimum        : 1
+	Maximum        : 8
+	Total          : 72.0
+	Distribution   : 14 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             1 : 0.071 : 0.071 :  1	|||||||
+	             2 : 0.071 : 0.143 :  1	|||||||
+	             5 : 0.500 : 0.643 :  7	||||||||||||||||||||||||||||||||||||||||||||||||||
+	             6 : 0.214 : 0.857 :  3	|||||||||||||||||||||
+	             8 : 0.143 : 1.000 :  2	||||||||||||||
+
+./:: info: Directory content:
+	File           : file_deleted_in_new_sources.cpp
+	File           : simple.cpp
+
+

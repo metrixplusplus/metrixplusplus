@@ -46,6 +46,41 @@ Options:
                         Enables collection of total lines metric (per file
                         detalization) - number of any type of lines (blank,
                         code, comments, etc.)[default: False]
+  --std.code.halstead.all, --schall
+                        Halstead metrics plugin: all metrics are calculated
+                        [default: False]
+  --std.code.halstead.base, --schbase
+                        Halstead metrics plugin: base metrics n1,n2,N1,N2
+                        [default: False]
+  --std.code.halstead.vocabulary, --schvoc
+                        Halstead metrics plugin: vocabulary 'n' [default:
+                        False]
+  --std.code.halstead.length, --schlen
+                        Halstead metrics plugin: program length 'N' [default:
+                        False]
+  --std.code.halstead.estimatedlength, --schelen
+                        Halstead metrics plugin: estimated program length
+                        [default: False]
+  --std.code.halstead.purityratio, --schpr
+                        Halstead metrics plugin: purity ratio [default: False]
+  --std.code.halstead.volume, --schv
+                        Halstead metrics plugin: program volume [default:
+                        False]
+  --std.code.halstead.difficulty, --schd
+                        Halstead metrics plugin: program difficulty [default:
+                        False]
+  --std.code.halstead.level, --schl
+                        Halstead metrics plugin: program level [default:
+                        False]
+  --std.code.halstead.effort, --sche
+                        Halstead metrics plugin: program effort [default:
+                        False]
+  --std.code.halstead.time, --scht
+                        Halstead metrics plugin: estimated time [default:
+                        False]
+  --std.code.halstead.bugs, --schb
+                        Halstead metrics plugin: delivered bugs [default:
+                        False]
   --std.code.java.files=STD.CODE.JAVA.FILES
                         Enumerates filename extensions to match Java files
                         [default: *.java]
@@ -80,6 +115,13 @@ Options:
   --std.code.magic.numbers.simplier, --scmns
                         Is set, 0, -1 and 1 numbers are not counted in
                         'std.code.magic.numbers' metric [default: False]
+  --ext.mi_oman.all, --emoa
+                        Maintainability metrics plugin; the following modules
+                        are required: --std.code.lines.comments,
+                        --std.code.lines.total,
+                        --std.code.complexity.cyclomatic, and either
+                        --ext.halstead.all or --ext.halstead.volume [default:
+                        False]
   --std.code.member.fields, --scmf
                         Enables collection of number of data members / fields
                         per classes, structs and interfaces [default: False]
