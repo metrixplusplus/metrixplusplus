@@ -115,13 +115,13 @@ Options:
   --std.code.magic.numbers.simplier, --scmns
                         Is set, 0, -1 and 1 numbers are not counted in
                         'std.code.magic.numbers' metric [default: False]
-  --ext.mi_oman.all, --emoa
+  --std.code.oman.all, --scoa
                         Maintainability metrics plugin; the following modules
                         are required: --std.code.lines.comments,
                         --std.code.lines.total,
                         --std.code.complexity.cyclomatic, and either
-                        --ext.halstead.all or --ext.halstead.volume [default:
-                        False]
+                        --std.code.halstead.all or --std.code.halstead.base
+                        and --std.code.halstead.volume [default: False]
   --std.code.member.fields, --scmf
                         Enables collection of number of data members / fields
                         per classes, structs and interfaces [default: False]

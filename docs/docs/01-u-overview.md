@@ -165,5 +165,102 @@ The metrics highlighed in blue are **per file** metrics. The other metrics are *
         better level maintainability</td>
     <td>Identify code, which may benefit the most from refactoring.</td>
     </tr>
+    <tr class="td-regular center-justified">
+    <td>std.code.halstead.base</td>
+    <td>Halstead basic metrics:
+        <ul>
+          <li>N1: Total number of operators</li>
+          <li>n1: distinct number of operators</li>
+          <li>N2: Total number of operands</li>
+          <li>n2: Total number of operands</li>
+        </ul>
+    </td>
+    <td rowspan="12"></td>
+    </tr>
+    <tr class="td-regular center-justified">
+    <td>std.code.halstead.vocabulary</td>
+    <td>Program vocabulary n = n1+n2</td>
+    </tr>
+    </tr>
+    <tr class="td-regular center-justified">
+    <td>std.code.halstead.length</td>
+    <td>Program length N = N1+N2 </td>
+    </tr>
+    </tr>
+    <tr class="td-regular center-justified">
+    <td>std.code.halstead.estimatedlength</td>
+    <td>Estimated program length eLen = n1*log2(n1) + n2*log2(n2)</td>
+    </tr>
+    </tr>
+    <tr class="td-regular center-justified">
+    <td>std.code.halstead.purityratio</td>
+    <td>Purity ratio PR = eLen/N</td>
+    </tr>
+    </tr>
+    <tr class="td-regular center-justified">
+    <td>std.code.halstead.volume</td>
+    <td>Program volume V = N * log2(n)</td>
+    </tr>
+    </tr>
+    <tr class="td-regular center-justified">
+    <td>std.code.halstead.difficulty</td>
+    <td>Program difficulty D = n1*N2 / (2*n2)</td>
+    </tr>
+    </tr>
+    <tr class="td-regular center-justified">
+    <td>std.code.halstead.level</td>
+    <td>Program level L = 1/D = 2*n2 / (n1*N2)</td>
+    </tr>
+    </tr>
+    <tr class="td-regular center-justified">
+    <td>std.code.halstead.effort</td>
+    <td>Implementation effort E = V*D = N*log2(n) * n1*N2 / (2*n2)</td>
+    </tr>
+    </tr>
+    <tr class="td-regular center-justified">
+    <td>std.code.halstead.time</td>
+    <td>Implementation time T[sec] = E / 18</td>
+    </tr>
+    </tr>
+    <tr class="td-regular center-justified">
+    <td>std.code.halstead.bugs</td>
+    <td>Delivered bugs B = E^(2/3) / 3000</td>
+    </tr>
+    </tr>
+    <tr class="td-regular center-justified">
+    <td>std.code.halstead.all</td>
+    <td>Calculates all halstead metrics described above.</td>
+    </tr>
+    <tr class="td-regular center-justified">
+    <td>std.code.oman.all</td>
+    <td>Measures maintainability as described by Oman. Uses std.code.lines.comments, std.code.lines.total, std.code.complexity.cyclomatic, std.code.halstead.volume.<br/>
+    where
+    <ul>
+      <li>LOCcom = number of comment lines</li>
+      <li>aveLOC = total physical number of lines</li>
+      <li>aveG = average cyclomatic complexity</li>
+      <li>aveV = average halstead program volume</li>
+    </ul>Calculates
+    <ul>
+      <li>
+        average percent of lines of comments per Module:<br/>
+        perCM = LOCcom/aveLOC,
+      </li>
+      <li>
+        Maintainability Index without comments:<br/>
+        MIwoc = 171 - 5.2 * ln(aveV) - 0.23 * aveG -16.2 * ln(aveLOC)
+      </li>
+      <li>
+        Maintainability Index comment weight:<br/>
+        MIcw = 50 * sin(Pi/2*sqrt(perCM))
+      </li>
+      <li>
+         Maintainability Index:<br/>
+         MI  = MIwoc + MIcw
+      </li>
+    </ul>
+    </td>
+    <td></td>
+    </tr>
 </tbody>
 </table>

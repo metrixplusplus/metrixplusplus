@@ -416,5 +416,20 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('view', ['--format=txt'], prefix='txt')
         self.assertExec(runner.run())
 
+    def test_std_oman(self):
+        runner = tests.common.ToolRunner('collect',
+                                         ['--std.code.oman.all',
+                                          '--std.code.complexity.cyclomatic',
+                                          '--std.code.lines.comments',
+                                          '--std.code.lines.total',
+                                          '--std.code.halstead.base',
+                                          '--std.code.halstead.volume',
+                                          '--log-level=INFO'],
+                                         check_stderr=[(0, -1)],
+                                         save_prev=True)
+        self.assertExec(runner.run())
+        runner = tests.common.ToolRunner('view', ['--format=txt'], prefix='txt')
+        self.assertExec(runner.run())
+
 if __name__ == '__main__':
     unittest.main()

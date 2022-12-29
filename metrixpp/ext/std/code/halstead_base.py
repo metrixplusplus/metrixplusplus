@@ -120,6 +120,7 @@ class Plugin(api.Plugin,
             parser.add_option("--"+self.opt_prefix+opt, "--sch"+opt, action=action, default=default,
                 help=help)
 
+        self.parser = parser
         add_option("all", action="store_true", default=False,
             help="Halstead metrics plugin: all metrics are calculated [default: %default]")
         add_option("base", action="store_true", default=False,
@@ -214,7 +215,8 @@ class Plugin(api.Plugin,
         - count every occurrence of this match: inc(dictcounter[match])
         - count the summary of distinct occurrences of each match: len(dictcounter)
 
-        @note This class may be moved to api.MetricPluginMixin class for common use
+        @note
+        This class may be moved to api.MetricPluginMixin class for common use
         """
         def __init__(self, *args, **kwargs):
             super(Plugin.DictCounter, self).__init__(*args, **kwargs)
@@ -337,7 +339,7 @@ class Plugin(api.Plugin,
                 self.result += self.increment(match)
 
 
-        def set_ignore(self,match,key):
+        def set_ignore(self,key):
             self.ignore = ''
 
         ## @brief increment
@@ -354,12 +356,12 @@ class Plugin(api.Plugin,
                 result = 1
                 #print(key)
 
-            self.set_ignore(match,key)
+            self.set_ignore(key)
 
             return result
 
     class HalsteadCounter_N1_cpp(HalsteadCounter_N1):
-        def set_ignore(self,match,key):
+        def set_ignore(self,key):
             if re.match("("+RESPAREN_CPP+")",key):
                 self.ignore = "("   # ignore subsequent "("
             elif re.match("("+RESCOLN_CPP+")",key):
@@ -368,7 +370,7 @@ class Plugin(api.Plugin,
                 self.ignore = ""
 
     class HalsteadCounter_N1_java(HalsteadCounter_N1):
-        def set_ignore(self,match,key):
+        def set_ignore(self,key):
             if re.match("("+RESPAREN_JAVA+")",key):
                 self.ignore = "("   # ignore subsequent "("
             elif re.match("("+RESCOLN_JAVA+")",key):
@@ -422,7 +424,7 @@ class Plugin(api.Plugin,
             for match in pattern_to_search.finditer(text):
                 self.result += self.increment(match)
 
-        def is_resword(self,match,key):
+        def is_resword(self,key):
             return False
 
         def increment(self, match):
@@ -433,7 +435,7 @@ class Plugin(api.Plugin,
                 key = key.replace("\t", "")                     # remove all tabs
 
             if ( (self.marker.group != api.Marker.T.CODE)   # "key" is not code
-             or not self.is_resword(match,key)              # or not a reserved word
+             or not self.is_resword(key)              # or not a reserved word
             ):
                 self.inc_DictCounter(key)
                 result = 1
@@ -441,10 +443,11 @@ class Plugin(api.Plugin,
             return result
 
     class HalsteadCounter_N2_cpp(HalsteadCounter_N2):
-        def is_resword(self,match,key):
+        def is_resword(self,key):
             return re.match(RESWORDALL_CPP,key)            # key is a reserved word
+
     class HalsteadCounter_N2_java(HalsteadCounter_N2):
-        def is_resword(self,match,key):
+        def is_resword(self,key):
             return re.match(RESWORDALL_JAVA,key)           # key is a reserved word
 
     class HalsteadCounter_n2(HalsteadCounter_n):

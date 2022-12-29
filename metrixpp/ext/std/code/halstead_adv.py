@@ -48,6 +48,7 @@ class Plugin(api.Plugin,
             parser.add_option("--"+self.opt_prefix+opt1, "--sch"+opt2, action=action, default=default,
                 help=help)
 
+        self.parser = parser
         add_option("vocabulary", "voc", action="store_true", default=False,
             help="Halstead metrics plugin: vocabulary 'n' [default: %default]")
         add_option("length", "len", action="store_true", default=False,
