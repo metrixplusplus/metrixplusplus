@@ -108,7 +108,12 @@ class Plugin(api.Plugin,
 
     @attention
     - It is assumed that metrics fields are calculated in the order they are
-      declared i.e. declare_metric() is called - s. @ref self.initialize()
+      declared i.e. @ref declare_metric() is called - s. @ref self.initialize().
+      Fields are managed as a dictionary (s. @ref _fields protected attribute of
+      Plugin class). From Python 3.7 its guaranteed that ordering if dictionary
+      elements is as they are inserted. For Python 2 and Python upto 3.6 this
+      is not the case, so the implementation of some Plugin methods has been
+      changed - s. below.
     - If iteration sequence is changed (s. above) this plugin probably may be
       updated accordingly.
     """
@@ -205,7 +210,129 @@ class Plugin(api.Plugin,
     #    print('halstead_base');
     #    super(Plugin, self).callback(parent,data,is_updated)
 
-    # --------------------------------------------------------------------------
+    def set_halstead_dict(self, key, entry):
+        self.halstead_dict[key] = entry
+        #print("set "+key+":\n"+str(self.halstead_dict[key]))
+
+    def get_halstead_dict(self, key):
+        if not key in self.halstead_dict:
+            self.halstead_dict[key] = {}
+        #print("get "+key+":\n"+str(self.halstead_dict[key]))
+        return self.halstead_dict[key]
+
+    # ==========================================================================
+    # Changed implementations for some methods to guarantee iteration over
+    # _fields-dictionary is same as the elements were inserted.
+    # ==========================================================================
+    def declare_metric(self, is_active, field,
+                       pattern_to_search_or_map_of_patterns,
+                       marker_type_mask=api.Marker.T.ANY,
+                       region_type_mask=api.Region.T.ANY,
+                       exclude_subregions=True,
+                       merge_markers=False):
+        """
+        _fields is managed as list instead of dictionary, since list iteration
+        is guaranteed to be done in same order as elements were inserted.
+        """
+        if hasattr(self, '_fields') == False:
+            self._fields = []   # list instead of dictionary
+
+        if isinstance(pattern_to_search_or_map_of_patterns, dict):
+            map_of_patterns = pattern_to_search_or_map_of_patterns
+        else:
+            map_of_patterns = {'*': pattern_to_search_or_map_of_patterns}
+        # client may suply with pattern or pair of pattern + counter class
+        for key in list(map_of_patterns.keys()):
+            if isinstance(map_of_patterns[key], tuple) == False:
+                # if it is not a pair, create a pair using default counter class
+                map_of_patterns[key] = (map_of_patterns[key],
+                                        api.MetricPluginMixin.PlainCounter)
+
+        if is_active == True:
+            self._fields.append((field,
+                                 marker_type_mask,
+                                 exclude_subregions,
+                                 merge_markers,
+                                 map_of_patterns,
+                                 region_type_mask))
+
+    def is_active(self):
+        """
+        Improvement: Only check len(_fields); previous checking for (additional
+        parameter) field_name was not needed.
+        Previously called from within method call_if_active(...field...), which
+        itself was called with field (=field.name) was valid.
+        """
+        return (len(self._fields) > 0)
+
+    def get_fields(self):
+        """
+        Adapted to handle _fields as list instead of dictionary
+        """
+        result = []
+        for field in self._fields:
+            result.append(field[0])
+        return result
+
+    def callback(self, parent, data, is_updated):
+        """ Adapted to handle _fields as a list instead of a dictionary
+        """
+        # count if metric is enabled,
+        # and (optimization for the case of iterative rescan:)
+        # if file is updated or this plugin's settings are updated
+        is_updated = is_updated or self.is_updated
+        if is_updated == True:
+            for field_idx in range(len(self._fields)):
+                self.count(self.get_namespace(),
+                           self._fields[field_idx],
+                           data,
+                           alias=parent.get_name())
+        # this mixin implements parent interface
+        self.notify_children(data, is_updated)
+
+    def count(self, namespace, field_data, data, alias='*'):
+        """ Improved from count_if_active():
+
+        - Parameter field_data instead of field (= field.name)
+        - Checking if_active(field) is obsolete, since method is only called
+          from callback-method with valid field_data
+        """
+        field_name = field_data[0].name
+
+        if alias not in list(field_data[4].keys()):
+            if '*' not in list(field_data[4].keys()):
+                raise self.AliasError(alias)
+            else:
+                alias = '*'
+        (pattern_to_search, counter_class) = field_data[4][alias]
+
+        if field_data[0]._regions_supported == True:
+            for region in data.iterate_regions(filter_group=field_data[5]):
+                counter = counter_class(namespace, field_name, self, alias, data, region)
+                if field_data[1] != api.Marker.T.NONE:
+                    for marker in data.iterate_markers(
+                                    filter_group = field_data[1],
+                                    region_id = region.get_id(),
+                                    exclude_children = field_data[2],
+                                    merge=field_data[3]):
+                        counter.count(marker, pattern_to_search)
+                count = counter.get_result()
+                if count != 0 or field_data[0].non_zero == False:
+                    region.set_data(namespace, field_name, count)
+        else:
+            counter = counter_class(namespace, field_name, self, alias, data, None)
+            if field_data[1] != api.Marker.T.NONE:
+                for marker in data.iterate_markers(
+                                filter_group = field_data[1],
+                                region_id = None,
+                                exclude_children = field_data[2],
+                                merge=field_data[3]):
+                    counter.count(marker, pattern_to_search)
+            count = counter.get_result()
+            if count != 0 or field_data[0].non_zero == False:
+                data.set_data(namespace, field_name, count)
+
+    # ==========================================================================
 
     class DictCounter(api.MetricPluginMixin.IterIncrementCounter):
         """ Common dictionary counter class
@@ -216,19 +343,21 @@ class Plugin(api.Plugin,
         - count the summary of distinct occurrences of each match: len(dictcounter)
 
         @note
-        This class may be moved to api.MetricPluginMixin class for common use
+        - This class may be moved to api.MetricPluginMixin class for common use
+        - For calculation Halstead's N and n values dictcounter may be a list
+          rather than a dictionary; but a dictionary is more flexible.
         """
         def __init__(self, *args, **kwargs):
             super(Plugin.DictCounter, self).__init__(*args, **kwargs)
             self.dictcounter = {}
 
-        def inc_DictCounter(self, key):
+        def inc_dictcounter(self, key):
             # ensure key is present:
             if key not in self.dictcounter: self.dictcounter[key] = 0
             self.dictcounter[key] += 1
 
         def increment(self, match):
-            self.inc_DictCounter(match.group(0))
+            self.inc_dictcounter(match.group(0))
             return 1
 
         """ Debug
@@ -242,67 +371,51 @@ class Plugin(api.Plugin,
         #"""
 
     # --------------------------------------------------------------------------
-    # classes to calculate basic halstead metrics N1,n1,N2,n2:
+    # classes to calculate basic Halstead metrics N1,n1,N2,n2:
     # --------------------------------------------------------------------------
 
     class HalsteadCounter(DictCounter):
 
-        def get_DictKey(self):
+        def get_dictkey(self):
             if ( self.region.name == None ):
                 return "__file__"
             else:
                 return self.region.name
 
-        def init_DictCounter(self):
-            """ @brief Initializes the dictcounter
-            """
-            dictkey = self.get_DictKey()
-            self.plugin.halstead_dict[dictkey] = {}
-            self.dictcounter = self.plugin.halstead_dict[dictkey]
-            #print(dictkey)
-
-        def get_DictCounter(self):
-            """ @brief Gets an existing dictcounter
-            """
-            dictkey = self.get_DictKey()
-            self.dictcounter = self.plugin.halstead_dict[dictkey]
-            #print(dictkey)
-
     class HalsteadCounter_N(HalsteadCounter):
-        """ Number of Operators or Operands """
-        def __init__(self, *args, **kwargs):
-            super(Plugin.HalsteadCounter_N, self).__init__(*args, **kwargs)
-            self.init_DictCounter()
+        """ Generic counter: Number of Operators or Operands """
 
         def get_result(self):
             """ Retrieves the totally counted matches
-            @note
-            Not really necessary since it does the same as the base class
-            IterIncrementCounter - for clarity / debugging purposes only
+
+            Additionally preserves dictcounter for further use by class
+            @ref HalsteadCounter_n
             """
             #print("N = "+str(self.result)+" n = "+str(len(self.dictcounter))))
+            self.plugin.set_halstead_dict(self.get_dictkey(),self.dictcounter)
             return self.result  # = N
 
     class HalsteadCounter_n(HalsteadCounter):
-        """ Number of unique Operators or Operands
+        """ Generic counter: Number of unique Operators or Operands
         @note
         Must be called after HalsteadCounter_N and before any call of another
         HalsteadCounter_N!
         """
-        def __init__(self, *args, **kwargs):
-            super(Plugin.HalsteadCounter_n, self).__init__(*args, **kwargs)
-            self.get_DictCounter()
 
         def get_result(self):
             """ Retrieves the distinct matches
+
+            First retrieve previously preserved dictionary from @ref HalsteadCounter_N
             """
             #print(str(len(self.dictcounter)))
+            self.dictcounter = self.plugin.get_halstead_dict(self.get_dictkey())
             return len(self.dictcounter)
 
     # --------------------------------------------------------------------------
 
     class HalsteadCounter_N1(HalsteadCounter_N):
-        """ Number of Operators """
+        """ Generic counter: Number of Operators
+        """
         def __init__(self, *args, **kwargs):
             super(Plugin.HalsteadCounter_N1, self).__init__(*args, **kwargs)
             self.ignore = ""
@@ -338,11 +451,9 @@ class Plugin(api.Plugin,
             for match in pattern_to_search.finditer(text):
                 self.result += self.increment(match)
 
-
         def set_ignore(self,key):
             self.ignore = ''
 
-        ## @brief increment
         def increment(self, match):
             result = 0
             key = match.group(0)
@@ -352,7 +463,7 @@ class Plugin(api.Plugin,
                 key = key.replace("\t", "")                     # remove all tabs
 
             if key != self.ignore:
-                self.inc_DictCounter(key)
+                self.inc_dictcounter(key)
                 result = 1
                 #print(key)
 
@@ -361,6 +472,8 @@ class Plugin(api.Plugin,
             return result
 
     class HalsteadCounter_N1_cpp(HalsteadCounter_N1):
+        """ Special counter: Number of C++ Operators
+        """
         def set_ignore(self,key):
             if re.match("("+RESPAREN_CPP+")",key):
                 self.ignore = "("   # ignore subsequent "("
@@ -370,6 +483,8 @@ class Plugin(api.Plugin,
                 self.ignore = ""
 
     class HalsteadCounter_N1_java(HalsteadCounter_N1):
+        """ Special counter: Number of JAVA Operators
+        """
         def set_ignore(self,key):
             if re.match("("+RESPAREN_JAVA+")",key):
                 self.ignore = "("   # ignore subsequent "("
@@ -378,18 +493,10 @@ class Plugin(api.Plugin,
             elif key == self.ignore:
                 self.ignore = ""
 
-    class HalsteadCounter_n1(HalsteadCounter_n):
-        """ Distinct number of Operators """
-        pass
-        #def __init__(self, *args, **kwargs):
-        #    super(Plugin.HalsteadCounter_n1, self).__init__(*args, **kwargs)
-
     # --------------------------------------------------------------------------
 
     class HalsteadCounter_N2(HalsteadCounter_N):
-        """ Number of Operands """
-        #def __init__(self, *args, **kwargs):
-        #    super(Plugin.HalsteadCounter_N2, self).__init__(*args, **kwargs)
+        """ Generic counter: Number of Operands """
 
         def count(self, marker, pattern_to_search):
             """ Count operands
@@ -435,20 +542,36 @@ class Plugin(api.Plugin,
                 key = key.replace("\t", "")                     # remove all tabs
 
             if ( (self.marker.group != api.Marker.T.CODE)   # "key" is not code
-             or not self.is_resword(key)              # or not a reserved word
+             or not self.is_resword(key)                    # or not a reserved word
             ):
-                self.inc_DictCounter(key)
+                self.inc_dictcounter(key)
                 result = 1
 
             return result
 
     class HalsteadCounter_N2_cpp(HalsteadCounter_N2):
+        """ Special counter: Number of C++ Operands
+        """
         def is_resword(self,key):
-            return re.match(RESWORDALL_CPP,key)            # key is a reserved word
+            return re.match(RESWORDALL_CPP,key)     # key is a reserved word
 
     class HalsteadCounter_N2_java(HalsteadCounter_N2):
+        """ Special counter: Number of JAVA Operands
+        """
         def is_resword(self,key):
-            return re.match(RESWORDALL_JAVA,key)           # key is a reserved word
+            return re.match(RESWORDALL_JAVA,key)    # key is a reserved word
+
+    # --------------------------------------------------------------------------
+    # Specialized classes not really necessary neither for n1/n2 nor for languages
+    # since get_result() only retrieves the number of previously counted distinct
+    # operands or operators (= len(dictcounter)).
+    #
+    # For clarity only
+    class HalsteadCounter_n1(HalsteadCounter_n):
+        """ Distinct number of Operators """
+        pass
+        #def __init__(self, *args, **kwargs):
+        #    super(Plugin.HalsteadCounter_n1, self).__init__(*args, **kwargs)
 
     class HalsteadCounter_n2(HalsteadCounter_n):
         """ Distinct number of Operands """

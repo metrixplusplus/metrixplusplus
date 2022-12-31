@@ -1,9 +1,9 @@
 #
 #    Metrix++, Copyright 2009-2019, Metrix++ Project
 #    Link: https://github.com/metrixplusplus/metrixplusplus
-#    
+#
 #    This file is a part of Metrix++ Tool.
-#    
+#
 
 import logging
 import sys
@@ -16,7 +16,7 @@ from metrixpp.mpp import promout
 DIGIT_COUNT = 8
 
 class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
-    
+
     MODE_NEW     = 0x01
     MODE_TOUCHED = 0x03
     MODE_ALL     = 0x07
@@ -39,7 +39,7 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
                          "'touched' - only new and modified regions and files are taken into account. "
                          "Modes 'new' and 'touched' may require more time for processing than mode 'all' "
                          "[default: %default]")
-    
+
     def configure(self, options):
         self.out_format = options.__dict__['format']
         self.nest_regions = options.__dict__['nest_regions']
@@ -58,7 +58,7 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
     def run(self, args):
         loader_prev = self.get_plugin('metrixpp.mpp.dbf').get_loader_prev()
         loader = self.get_plugin('metrixpp.mpp.dbf').get_loader()
-    
+
         paths = None
         if len(args) == 0:
             paths = [""]
@@ -85,9 +85,9 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
 
     for (ind, path) in enumerate(paths):
         path = utils.preprocess_path(path)
-        
+
         aggregated_data, aggregated_data_prev = load_aggregated_data_with_mode(loader, loader_prev, path , mode)
-        
+
         aggregated_data_tree = {}
         subdirs = []
         subfiles = []
@@ -105,16 +105,16 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
             aggregated_data_prev_tree = append_suppressions(path, aggregated_data_prev_tree, loader_prev, mode)
             aggregated_data_tree = append_diff(aggregated_data_tree,
                                                aggregated_data_prev_tree)
-            
+
         aggregated_data_tree = compress_dist(aggregated_data_tree, dist_columns)
-        
+
         file_data = loader.load_file_data(path)
         file_data_tree = {}
         if file_data != None:
-            file_data_tree = file_data.get_data_tree() 
+            file_data_tree = file_data.get_data_tree()
             file_data_prev = loader_prev.load_file_data(path)
             append_regions(file_data_tree, file_data, file_data_prev, nest_regions)
-        
+
         data = {"info": {"path": path, "id": ind + 1},
                 "aggregated-data": aggregated_data_tree,
                 "file-data": file_data_tree,
@@ -137,7 +137,7 @@ def export_to_str(out_format, paths, loader, loader_prev, nest_regions, dist_col
         result += "</view>"
     elif out_format == 'python':
         result += "]}"
-        
+
     return (result, exit_code)
 
 def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
@@ -146,9 +146,9 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
         aggregated_data_prev = loader_prev.load_aggregated_data(path)
     else:
         assert(mode == Plugin.MODE_NEW or mode == Plugin.MODE_TOUCHED)
-        
+
         class AggregatedFilteredData(api.AggregatedData):
-            
+
             def __init__(self, loader, path):
                 super(AggregatedFilteredData, self).__init__(loader, path)
                 self.in_processing_mode = True
@@ -168,7 +168,7 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                             'distribution-bars': {},
                             'sup': 0
                         })
-                        
+
             def get_data_tree(self, namespaces=None):
                 self.in_processing_mode = False
                 # need to convert distribution map to a list and calculate average
@@ -190,7 +190,7 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                             data['avg'] = float(data['total']) / float(data['count'])
                         self.set_data(name, field, data)
                 return super(AggregatedFilteredData, self).get_data_tree(namespaces=namespaces)
-            
+
             def _append_data(self, orig_data):
                 # flag to protect ourselves from getting incomplete data
                 # the workflow in this tool: append data first and after get it using get_data_tree()
@@ -218,15 +218,15 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                             if sup_data.find('[{0}:{1}]'.format(namespace, field)) != -1:
                                 aggr_data['sup'] += 1
                         self.set_data(namespace, field, aggr_data)
-            
+
             def _append_file_data(self, file_data):
                 self._append_data(file_data)
                 for region in file_data.iterate_regions():
                     self._append_data(region)
-                
+
         result = AggregatedFilteredData(loader, path)
         result_prev = AggregatedFilteredData(loader_prev, path)
-        
+
         prev_file_ids = set()
         file_data_iterator = loader.iterate_file_data(path)
         if file_data_iterator != None:
@@ -234,7 +234,7 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                 file_data_prev = loader_prev.load_file_data(file_data.get_path())
                 if file_data_prev != None:
                     prev_file_ids.add(file_data_prev.get_id())
-                    
+
                 if (file_data_prev == None and (mode == Plugin.MODE_NEW or mode == Plugin.MODE_TOUCHED)):
                     # new file and required mode matched
                     logging.info("Processing: " + file_data.get_path() + " [new]")
@@ -264,14 +264,14 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                             logging.debug("Processing region: " + region.get_name() + " [modified]")
                             result._append_data(region)
                             result_prev._append_data(file_data_prev.get_region(prev_id))
-                            
+
                     if mode == Plugin.MODE_TOUCHED:
                         for region_prev in file_data_prev.iterate_regions():
                             if region_prev.get_id() not in prev_reg_ids:
                                 # deleted region
                                 logging.debug("Processing region: " + region_prev.get_name() + " [deleted]")
                                 result_prev._append_data(region_prev)
-                
+
         if mode == Plugin.MODE_TOUCHED:
             file_data_prev_iterator = loader_prev.iterate_file_data(path)
             if file_data_prev_iterator != None:
@@ -282,7 +282,7 @@ def load_aggregated_data_with_mode(loader, loader_prev, path, mode):
                         result_prev._append_file_data(file_data_prev)
 
         return (result, result_prev)
-            
+
     return (aggregated_data, aggregated_data_prev)
 
 
@@ -294,7 +294,7 @@ def append_regions(file_data_tree, file_data, file_data_prev, nest_regions):
         file_data_tree = append_diff(file_data_tree,
                                      file_data_prev.get_data_tree())
         regions_matcher = utils.FileRegionsMatcher(file_data, file_data_prev)
-    
+
     if nest_regions == False:
         regions = []
         for region in file_data.iterate_regions():
@@ -344,7 +344,7 @@ def append_regions(file_data_tree, file_data, file_data_prev, nest_regions):
 def append_diff(main_tree, prev_tree):
     assert(main_tree != None)
     assert(prev_tree != None)
-    
+
     for name in list(main_tree.keys()):
         if name not in list(prev_tree.keys()):
             continue
@@ -413,16 +413,16 @@ def append_suppressions(path, data, loader, mode):
 def compress_dist(data, columns):
     if columns == 0:
         return data
-    
+
     for namespace in list(data.keys()):
         for field in list(data[namespace].keys()):
             metric_data = data[namespace][field]
             distr = metric_data['distribution-bars']
             columns = float(columns) # to trigger floating calculations
-            
+
             if metric_data['count'] == 0:
                 continue
-            
+
             new_dist = []
             remaining_count = metric_data['count']
             next_consume = None
@@ -447,7 +447,7 @@ def compress_dist(data, columns):
                     next_bar['metric_f'] = bar['metric']
                     if '__diff__' in list(bar.keys()):
                         next_bar['__diff__'] += bar['__diff__']
-                
+
                 next_consume -= bar['count']
                 if (next_consume <= 0 # consumed enough
                     or (ind + 1) == len(distr)): # or the last bar
@@ -505,7 +505,7 @@ def compress_dist(data, columns):
                         next_bar['metric_f'] = bar['metric']
                         if '__diff__' in list(bar.keys()):
                             next_bar['__diff__'] += bar['__diff__']
-                    
+
                     if (next_bar['metric_f'] >= next_end_limit # consumed enough
                         or (ind + 1) == len(distr)): # or the last bar
                         if (ind + 1) != len(distr):
@@ -556,7 +556,7 @@ def cout_txt_regions(path, regions, indent = 0):
             cout_txt_regions(path, region['subregions'], indent=indent+1)
 
 def cout_txt(data, loader):
-    
+
     details = []
     for key in list(data['file-data'].keys()):
         if key == 'regions':
@@ -636,7 +636,7 @@ def cout_txt(data, loader):
                     metric_str = "{0:.4f}".format(bar['metric'])
                 else:
                     metric_str = str(bar['metric'])
-                
+
                 metric_str = (" " * (cout.DETAILS_OFFSET - len(metric_str) - 1)) + metric_str
                 count_str = str(bar['count'])
                 count_str = ((" " * (count_str_len - len(count_str))) + count_str + diff_str + "\t")
@@ -653,13 +653,13 @@ def cout_txt(data, loader):
         details.append(('Directory', each))
     for each in sorted(data['subfiles']):
         details.append(('File', each))
-    if len(details) > 0: 
+    if len(details) > 0:
         cout.notify(data['info']['path'],
                 '', # no line number
                 cout.SEVERITY_INFO,
                 "Directory content:",
                 details)
-    
+
 def cout_prom_regions(path, regions, indent = 0):
     for region in regions:
         details = []
@@ -680,9 +680,9 @@ def cout_prom_regions(path, regions, indent = 0):
                         details = details)
         if 'subregions' in list(region.keys()):
             cout_txt_regions(path, region['subregions'], indent=indent+1)
-            
+
 def cout_prom(data, loader):
-    
+
     for key in list(data['file-data'].keys()):
         if key == 'regions':
             cout_prom_regions(data['info']['path'], data['file-data'][key])

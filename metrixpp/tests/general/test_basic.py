@@ -408,7 +408,7 @@ class Test(tests.common.TestCase):
 
     def test_std_halstead(self):
         runner = tests.common.ToolRunner('collect',
-                                         ['--std.code.halstead.base',
+                                         ['--std.code.halstead.all',
                                           '--log-level=INFO'],
                                          check_stderr=[(0, -1)],
                                          save_prev=True)

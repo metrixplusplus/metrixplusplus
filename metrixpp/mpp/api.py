@@ -1280,5 +1280,7 @@ class MetricPluginMixin(Parent):
             count = counter.get_result()
             if count != 0 or field_data[0].non_zero == False:
                 data.set_data(namespace, field, count)
-                #data.get_region(1).set_data(namespace, field, count)
+
+
+
 

@@ -176,6 +176,7 @@ The metrics highlighed in blue are **per file** metrics. The other metrics are *
         </ul>
     </td>
     <td rowspan="12"></td>
+        Halstead metrics to measure code complexity and quality during development.
     </tr>
     <tr class="td-regular center-justified">
     <td>std.code.halstead.vocabulary</td>
@@ -219,7 +220,8 @@ The metrics highlighed in blue are **per file** metrics. The other metrics are *
     </tr>
     <tr class="td-regular center-justified">
     <td>std.code.halstead.time</td>
-    <td>Implementation time T[sec] = E / 18</td>
+    <td>(originally: Implementation time T[sec] = E / 18)<br/>
+        Here implemented as Implementation time T[h] = E / (18*3600)</td>
     </tr>
     </tr>
     <tr class="td-regular center-justified">
@@ -260,7 +262,7 @@ The metrics highlighed in blue are **per file** metrics. The other metrics are *
       </li>
     </ul>
     </td>
-    <td></td>
+    <td>Identify code, which should be refactored to increase maintainability.</td>
     </tr>
 </tbody>
 </table>
