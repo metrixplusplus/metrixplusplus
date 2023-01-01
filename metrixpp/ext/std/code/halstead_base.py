@@ -146,10 +146,11 @@ class Plugin(api.Plugin,
           s. api.MetricPluginMixin.callback()/count_if_active() )
           recognized operators and operands have to be preserved using dictionaries,
           s. operators_dict and operands_dict
-          @note Another possibility would be to implement independent classes
-                for N1,n1,N2,n2 but this seems very ineffective since matching
-                for N1 and n1 resp. N2 and n2 would beeing exactly the same
-                i.e. matching would be done twice decreasing performance
+          @note
+          Another possibility would be to implement independent classes for
+          N1,n1,N2,n2 but this seems very ineffective since matching for N1
+          and n1 resp. N2 and n2 would beeing exactly the same, i.e. matching
+          would be done twice decreasing performance.
         """
         # Operator metrics N1,n1
         operator_pattern_search = re.compile(r"[\+\-\*\/\=]")    # common operators
@@ -206,10 +207,6 @@ class Plugin(api.Plugin,
         if self.is_active():
             self.subscribe_by_parents_interface(api.ICode)
 
-    #def callback(self, parent, data, is_updated):
-    #    print('halstead_base');
-    #    super(Plugin, self).callback(parent,data,is_updated)
-
     def set_halstead_dict(self, key, entry):
         self.halstead_dict[key] = entry
         #print("set "+key+":\n"+str(self.halstead_dict[key]))
@@ -221,7 +218,7 @@ class Plugin(api.Plugin,
         return self.halstead_dict[key]
 
     # ==========================================================================
-    # Changed implementations for some methods to guarantee iteration over
+    # Re-Implementation of some methods to guarantee iteration oder over
     # _fields-dictionary is same as the elements were inserted.
     # ==========================================================================
     def declare_metric(self, is_active, field,
@@ -231,7 +228,7 @@ class Plugin(api.Plugin,
                        exclude_subregions=True,
                        merge_markers=False):
         """
-        _fields is managed as list instead of dictionary, since list iteration
+        _fields is managed as list instead of a dictionary, since list iteration
         is guaranteed to be done in same order as elements were inserted.
         """
         if hasattr(self, '_fields') == False:
@@ -243,7 +240,7 @@ class Plugin(api.Plugin,
             map_of_patterns = {'*': pattern_to_search_or_map_of_patterns}
         # client may suply with pattern or pair of pattern + counter class
         for key in list(map_of_patterns.keys()):
-            if isinstance(map_of_patterns[key], tuple) == False:
+            if not isinstance(map_of_patterns[key], tuple):
                 # if it is not a pair, create a pair using default counter class
                 map_of_patterns[key] = (map_of_patterns[key],
                                         api.MetricPluginMixin.PlainCounter)
@@ -261,13 +258,13 @@ class Plugin(api.Plugin,
         Improvement: Only check len(_fields); previous checking for (additional
         parameter) field_name was not needed.
         Previously called from within method call_if_active(...field...), which
-        itself was called with field (=field.name) was valid.
+        itself was called with field (=field.name) is present.
         """
         return (len(self._fields) > 0)
 
     def get_fields(self):
         """
-        Adapted to handle _fields as list instead of dictionary
+        Adapted to handle _fields as a list instead of dictionary
         """
         result = []
         for field in self._fields:
@@ -275,13 +272,14 @@ class Plugin(api.Plugin,
         return result
 
     def callback(self, parent, data, is_updated):
-        """ Adapted to handle _fields as a list instead of a dictionary
+        """
+        Adapted to handle _fields as a list instead of a dictionary
         """
         # count if metric is enabled,
         # and (optimization for the case of iterative rescan:)
         # if file is updated or this plugin's settings are updated
         is_updated = is_updated or self.is_updated
-        if is_updated == True:
+        if is_updated:
             for field_idx in range(len(self._fields)):
                 self.count(self.get_namespace(),
                            self._fields[field_idx],
@@ -295,7 +293,8 @@ class Plugin(api.Plugin,
 
         - Parameter field_data instead of field (= field.name)
         - Checking if_active(field) is obsolete, since method is only called
-          from callback-method with valid field_data
+          from callback-method with valid field_data.
+          If needed calling method has to ensure that field is active.
         """
         field_name = field_data[0].name
 
@@ -306,7 +305,7 @@ class Plugin(api.Plugin,
                 alias = '*'
         (pattern_to_search, counter_class) = field_data[4][alias]
 
-        if field_data[0]._regions_supported == True:
+        if field_data[0]._regions_supported:
             for region in data.iterate_regions(filter_group=field_data[5]):
                 counter = counter_class(namespace, field_name, self, alias, data, region)
                 if field_data[1] != api.Marker.T.NONE:
@@ -317,7 +316,7 @@ class Plugin(api.Plugin,
                                     merge=field_data[3]):
                         counter.count(marker, pattern_to_search)
                 count = counter.get_result()
-                if count != 0 or field_data[0].non_zero == False:
+                if (count != 0) or not field_data[0].non_zero:
                     region.set_data(namespace, field_name, count)
         else:
             counter = counter_class(namespace, field_name, self, alias, data, None)
@@ -343,20 +342,25 @@ class Plugin(api.Plugin,
         - count the summary of distinct occurrences of each match: len(dictcounter)
 
         @note
-        - This class may be moved to api.MetricPluginMixin class for common use
+        - This class may be moved to api.MetricPluginMixin for common use
         - For calculation Halstead's N and n values dictcounter may be a list
-          rather than a dictionary; but a dictionary is more flexible.
+          rather than a dictionary; but a dictionary is more flexible and useful
+          for debugging.
         """
         def __init__(self, *args, **kwargs):
             super(Plugin.DictCounter, self).__init__(*args, **kwargs)
             self.dictcounter = {}
 
         def inc_dictcounter(self, key):
+            """
+            Ensures entry "key" is present and increments associated value
+            """
             # ensure key is present:
             if key not in self.dictcounter: self.dictcounter[key] = 0
             self.dictcounter[key] += 1
 
         def increment(self, match):
+            """ calling methode count() increments self.result  """
             self.inc_dictcounter(match.group(0))
             return 1
 
@@ -367,7 +371,9 @@ class Plugin(api.Plugin,
                 N += self.dictcounter[op]
             #    print(op+" : "+str(self.dictcounter[op]));
             print("N = "+str(N)+" n = "+str(len(self.dictcounter))+"\n")
-            return self.result  # = N
+            return self.result            # = N
+            # or
+            return len(self.dictcounter)  # = n
         #"""
 
     # --------------------------------------------------------------------------
@@ -375,7 +381,7 @@ class Plugin(api.Plugin,
     # --------------------------------------------------------------------------
 
     class HalsteadCounter(DictCounter):
-
+        """ Base class """
         def get_dictkey(self):
             if ( self.region.name == None ):
                 return "__file__"
