@@ -1,29 +1,29 @@
 #
 #    Metrix++, Copyright 2009-2019, Metrix++ Project
 #    Link: https://github.com/metrixplusplus/metrixplusplus
-#    
+#
 #    This file is a part of Metrix++ Tool.
-#    
+#
 
 import sqlite3
 import re
 import os.path
 import logging
-import itertools 
+import itertools
 import shutil
 import traceback
 
 class Database(object):
-    
+
     last_used_id = 0
     version = "1.0"
-    
+
     class TableData(object):
         def __init__(self, table_id, name, support_regions):
             self.id = table_id
             self.name = name
             self.support_regions = support_regions
-    
+
     class ColumnData(object):
         def __init__(self, column_id, name, sql_type, non_zero):
             self.id = column_id
@@ -73,11 +73,11 @@ class Database(object):
         self.conn = None
         self.dirs = None
         self.is_cloned = False
-        
+
         self.last_used_id += 1
         self.id = self.last_used_id
         self._tables_cache = None
-    
+
     def __del__(self):
         if self.conn != None:
             if self.is_cloned == True:
@@ -85,9 +85,9 @@ class Database(object):
                 self.InternalCleanUpUtils().clean_up_not_confirmed(self)
             logging.debug("Committing database file")
             self.conn.commit()
-    
+
     class InternalCleanUpUtils(object):
-        
+
         def clean_up_not_confirmed(self, db_loader):
             sql = "DELETE FROM __info__ WHERE (confirmed = 0)"
             db_loader.log(sql)
@@ -122,7 +122,7 @@ class Database(object):
                 # it will be impossible to create the column in the table
                 db_loader.log(sql)
                 db_loader.conn.execute(sql)
-            
+
             self.clean_up_file(db_loader)
 
         def clean_up_file(self, db_loader, file_id = None):
@@ -142,10 +142,10 @@ class Database(object):
                     sql = "DELETE FROM '" + table_name + "' WHERE (file_id = " + str(file_id) + ")"
                 db_loader.log(sql)
                 db_loader.conn.execute(sql)
-            
-            
+
+
     class InternalPathUtils(object):
-        
+
         def iterate_heads(self, path):
             dirs = []
             head = os.path.dirname(path)
@@ -157,24 +157,24 @@ class Database(object):
             dirs.reverse()
             for each in dirs:
                 yield each
-                
+
         def normalize_path(self, path):
             if path == None:
                 return None
             path =re.sub(r'''[\\]''', "/", path)
             if len(path) > 0 and path[len(path) - 1] == '/':
                 return path[:-1]
-            return path 
-        
+            return path
+
         def update_dirs(self, db_loader, path = None):
             if db_loader.dirs == None:
                 if path == None:
                     db_loader.dirs = {} # initial construction
                 else:
-                    return # avoid useless cache updates 
+                    return # avoid useless cache updates
             elif path == None:
                 return # avoid multiple initial constructions
-            
+
             path = self.normalize_path(path)
             rows = None
             if path == None:
@@ -201,7 +201,7 @@ class Database(object):
             self.conn = sqlite3.connect(file_name, check_same_thread=False)
             self.conn.row_factory = sqlite3.Row
             self.read_only = False
-            
+
             sql = "UPDATE __tables__ SET confirmed = 0"
             self.log(sql)
             self.conn.execute(sql)
@@ -215,10 +215,10 @@ class Database(object):
             sql = "UPDATE __files__ SET confirmed = 0"
             self.log(sql)
             self.conn.execute(sql)
-                
+
         else:
             self.connect(file_name)
-        
+
     def connect(self, file_name, read_only = False):
         logging.debug("Connecting database file: " + file_name)
         self.conn = sqlite3.connect(file_name, check_same_thread=False)
@@ -253,7 +253,7 @@ class Database(object):
                 self.conn.execute(sql)
             except sqlite3.OperationalError as e:
                 logging.debug("sqlite3.OperationalError: " + str(e))
-                
+
     def set_property(self, property_name, value):
         ret_val = None
         sql = "SELECT * FROM __info__ WHERE (property = '" + property_name + "')"
@@ -266,7 +266,7 @@ class Database(object):
         self.log(sql)
         self.conn.execute(sql)
         return ret_val
-        
+
     def get_property(self, property_name):
         ret_val = None
         sql = "SELECT * FROM __info__ WHERE (property = '" + property_name + "' AND confirmed = 1)"
@@ -286,8 +286,8 @@ class Database(object):
         assert(self.read_only == False)
 
         self._tables_cache = None # reset cache when a list of tables is modified
-        
-        sql = "SELECT * FROM __tables__ WHERE (name = '" + table_name + "'AND confirmed == 0)"
+
+        sql = "SELECT * FROM __tables__ WHERE (name = '" + table_name + "' AND confirmed = 0)"
         self.log(sql)
         result = self.conn.execute(sql).fetchall()
         if len(result) != 0:
@@ -302,17 +302,17 @@ class Database(object):
                 sql = "DROP TABLE '" + result[0]['name'] + "'"
                 self.log(sql)
                 self.conn.execute(sql)
-            else:                
+            else:
                 sql = "UPDATE __tables__ SET confirmed = 1 WHERE (name = '" + table_name + "')"
                 self.log(sql)
                 self.conn.execute(sql)
-                return False      
-        
+                return False
+
         sql = "CREATE TABLE '" + table_name + "' (file_id integer NOT NULL PRIMARY KEY)"
         if support_regions == True:
             sql = str("CREATE TABLE '" + table_name + "' (file_id integer NOT NULL, region_id integer NOT NULL, "
                       + "PRIMARY KEY (file_id, region_id))")
-            
+
         self.log(sql)
         self.conn.execute(sql)
         sql = "INSERT INTO __tables__ (name, version, support_regions, confirmed) VALUES ('" + table_name + "', '" + version + "', '" + str(int(support_regions)) + "', 1)"
@@ -326,7 +326,7 @@ class Database(object):
         result = self.conn.execute(sql).fetchall()
         for row in result:
             yield self.TableData(int(row["id"]), str(row["name"]), bool(row["support_regions"]))
-            
+
     def check_table(self, table_name):
         sql = "SELECT * FROM __tables__ WHERE (name = '" + table_name + "' AND confirmed = 1)"
         self.log(sql)
@@ -340,12 +340,12 @@ class Database(object):
         if column_type == None:
             logging.debug("Skipping column '" + column_name + "' creation for table '" + table_name + "'")
             return
-        
+
         sql = "SELECT id FROM __tables__ WHERE (name = '" + table_name + "')"
         self.log(sql)
         table_id = next(self.conn.execute(sql))['id']
 
-        sql = "SELECT * FROM __columns__ WHERE (table_id = '" + str(table_id) + "' AND name = '" + column_name + "' AND confirmed == 0)"
+        sql = "SELECT * FROM __columns__ WHERE (table_id = '" + str(table_id) + "' AND name = '" + column_name + "' AND confirmed = 0)"
         self.log(sql)
         result = self.conn.execute(sql).fetchall()
         if len(result) != 0:
@@ -356,8 +356,8 @@ class Database(object):
             sql = "UPDATE __columns__ SET confirmed = 1 WHERE (table_id = '" + str(table_id) + "' AND name = '" + column_name + "')"
             self.log(sql)
             self.conn.execute(sql)
-            return False       
-        
+            return False
+
         sql = "ALTER TABLE '" + table_name + "' ADD COLUMN '" + column_name + "' " + column_type
         self.log(sql)
         self.conn.execute(sql)
@@ -367,7 +367,7 @@ class Database(object):
         sql = "INSERT INTO __columns__ (name, type, table_id, non_zero, confirmed) VALUES ('" + column_name + "', '" + column_type + "', '" + str(table_id) + "', '" + str(int(non_zero)) + "', 1)"
         self.log(sql)
         self.conn.execute(sql)
-        return True        
+        return True
 
     def iterate_columns(self, table_name):
         sql = "SELECT id FROM __tables__ WHERE (name = '" + table_name + "')"
@@ -389,22 +389,22 @@ class Database(object):
         if len(result) == 0:
             return False
         return True
-    
+
     def create_tag(self, tag_name):
         assert(self.read_only == False)
-        
-        sql = "SELECT * FROM __tags__ WHERE (name = '" + tag_name + "' AND confirmed == 0)"
+
+        sql = "SELECT * FROM __tags__ WHERE (name = '" + tag_name + "' AND confirmed = 0)"
         self.log(sql)
         result = self.conn.execute(sql).fetchall()
         if len(result) != 0:
             sql = "UPDATE __tags__ SET confirmed = 1 WHERE (name = '" + tag_name + "')"
             self.log(sql)
             self.conn.execute(sql)
-            return        
-        
+            return
+
         sql = "INSERT INTO __tags__ (name, confirmed) VALUES ('" + tag_name + "', 1)"
         self.log(sql)
-        self.conn.execute(sql)        
+        self.conn.execute(sql)
 
     def iterate_tags(self):
         sql = "SELECT * FROM __tags__ WHERE (confirmed = 1)"
@@ -439,7 +439,7 @@ class Database(object):
                     return (old_id, False)
                 else:
                     self.InternalCleanUpUtils().clean_up_file(self, result[0]['id'])
-        
+
         sql = "INSERT OR REPLACE INTO __files__ (path, checksum, confirmed) VALUES (?, ?, 1)"
         column_data = [path, checksum]
         self.log(sql + " /with arguments: " + str(column_data))
@@ -447,7 +447,7 @@ class Database(object):
         cur.execute(sql, column_data)
         self.InternalPathUtils().update_dirs(self, path=path)
         return (cur.lastrowid, True)
-    
+
     def iterate_dircontent(self, path, include_subdirs = True, include_subfiles = True):
         self.InternalPathUtils().update_dirs(self)
         path = self.InternalPathUtils().normalize_path(path)
@@ -491,7 +491,7 @@ class Database(object):
         return self.FileData(result[0]['id'], result[0]['path'], result[0]['checksum'])
 
     def iterate_files(self, path_like = None):
-        for row in self.select_rows('__files__', path_like=path_like, filters=[('confirmed','=','1')]): 
+        for row in self.select_rows('__files__', path_like=path_like, filters=[('confirmed','=','1')]):
             yield self.FileData(row['id'], row['path'], row['checksum'])
 
     def create_region(self, file_id, region_id, name, begin, end, line_begin, line_end, cursor, group, checksum):
@@ -502,7 +502,7 @@ class Database(object):
         cur = self.conn.cursor()
         cur.execute(sql, column_data)
         return cur.lastrowid
-    
+
     def get_region(self, file_id, region_id):
         result = self.select_rows("__regions__", filters = [("file_id", "=", file_id), ("region_id", "=", region_id)])
         if len(result) == 0:
@@ -530,7 +530,7 @@ class Database(object):
                                   each['cursor'],
                                   each['group_id'],
                                   each['checksum'])
-    
+
     def create_marker(self, file_id, begin, end, group):
         assert(self.read_only == False)
         sql = "INSERT OR REPLACE INTO __markers__ (file_id, begin, end, group_id) VALUES (?, ?, ?, ?)"
@@ -539,7 +539,7 @@ class Database(object):
         cur = self.conn.cursor()
         cur.execute(sql, column_data)
         return cur.lastrowid
-    
+
     def iterate_markers(self, file_id):
         for each in self.select_rows("__markers__", filters = [("file_id", "=", file_id)]):
             yield self.MarkerData(each['file_id'],
@@ -578,7 +578,7 @@ class Database(object):
                                        column_names = safe_column_names, filters = filters,
                                        order_by = order_by, limit_by = limit_by)
 
-    def select_rows_unsafe(self, table_name, path_like = None, column_names = [], filters = [], 
+    def select_rows_unsafe(self, table_name, path_like = None, column_names = [], filters = [],
                            group_by = None, order_by = None, limit_by = None):
         path_like = self.InternalPathUtils().normalize_path(path_like)
         if self.conn == None:
@@ -600,7 +600,7 @@ class Database(object):
         if len(filters) != 0:
             if filters[0][1] == 'IN':
                 where_stmt = " WHERE (`" + filters[0][0] + "` " + filters[0][1] + " " + filters[0][2]
-            else:    
+            else:
                 where_stmt = " WHERE (`" + filters[0][0] + "` " + filters[0][1] + " ?"
                 values = (filters[0][2],)
             for each in filters[1:]:
@@ -616,7 +616,7 @@ class Database(object):
         elif path_like != None:
             where_stmt = " WHERE '__files__'.'path' LIKE ?"
             values += (path_like, )
-        
+
         group_stmt = ""
         if group_by != None:
             group_stmt = " GROUP BY (`" + group_by + "`)"
@@ -639,7 +639,7 @@ class Database(object):
     def get_row(self, table_name, file_id, region_id):
         selected = self.get_rows(table_name, file_id, region_id)
         # assures that only one row in database
-        # if assertion happens, caller's intention is not right, use get_rows instead    
+        # if assertion happens, caller's intention is not right, use get_rows instead
         assert(len(selected) == 0 or len(selected) == 1)
         if len(selected) == 0:
             return None
@@ -650,23 +650,23 @@ class Database(object):
         if region_id != None:
             filters.append(("region_id", '=', region_id))
         return self.select_rows(table_name, filters=filters)
-    
+
     def aggregate_rows(self, table_name, path_like = None, column_names = None, filters = []):
-        
+
         if column_names == None:
             column_names = []
             for column in self.iterate_columns(table_name):
                 column_names.append(column.name)
-                
+
         if len(column_names) == 0:
             # it is possible that a table does not have meanfull columns
-            return {} 
-        
+            return {}
+
         total_column_names = []
         for column_name in column_names:
             for func in ['max', 'min', 'avg', 'total', 'count']:
                 total_column_names.append(func + "('" + table_name + "'.'" + column_name + "') AS " + "'" + column_name + "_" + func + "'")
-             
+
         data = self.select_rows_unsafe(table_name, path_like = path_like, column_names = total_column_names, filters = filters)
         assert(len(data) == 1)
         result = {}
@@ -675,11 +675,11 @@ class Database(object):
             for func in ['max', 'min', 'avg', 'total', 'count']:
                 result[column_name][func] = data[0][column_name + "_" + func]
         return result
-    
+
     def count_rows(self, table_name, path_like = None, group_by_column = None, filters = []):
-        
+
         count_column_names = None
-        
+
         if group_by_column != None:
             for column in self.iterate_columns(table_name):
                 if group_by_column == column.name:
@@ -687,10 +687,10 @@ class Database(object):
                     break
         else:
             count_column_names = ["COUNT(*)"]
-            
+
         if count_column_names == None:
             return []
-             
+
         data = self.select_rows_unsafe(table_name, path_like = path_like, column_names = count_column_names,
                                        filters = filters, group_by = group_by_column)
         return data
@@ -700,4 +700,4 @@ class Database(object):
             pass
             logging.debug("[" + str(self.id) + "] Executing query: " + sql)
             traceback.print_stack()
-        
+

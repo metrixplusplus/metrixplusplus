@@ -113,7 +113,7 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
         if os.path.isfile(file_name):
             for each in self.include_rules:
                 if re.match(each, os.path.basename(file_name)) != None:
-                    break;
+                    break
             # file is excluded if no include rule matches
             else:
                 return True
@@ -130,32 +130,76 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
 
 class DirectoryReader():
 
+    def debugout(self,filename,text,coding):
+        # note: to match the intended results \n should be used as end of line char
+        #       in the original files or in "readtextfile" ommit replacement for \r\n or \r
+
+        # Open as Text-File - explicit "utf-8" since default depends on machine's OS
+        #f = open(filename+".utf_8",'w',encoding="utf_8")
+        #f.write(text)
+
+        # or open as Binary-File and write with explicitely encoded "text":
+        #coding = coding    # write as original coding:
+                            # If our guess was true written file should have the same size as the original file
+        # or:
+        #coding = "utf_8"   # write as UTF-8:
+                            # If our guess is true same files in different encodings should result in identical files
+                            # If our guess was false (esp. if real coding is an 8-bit coding != latin_1) file length may be different!
+        f = open(filename+"."+coding,'wb')
+        f.write(text.encode(coding))
+
+        f.close
+        return
+
+    def readfile_org(self,filename):
+        f = open(filename, 'rU')
+        coding = f.encoding
+        text = f.read()
+        # getting along with the different string handling of python 2 and 3
+        # trying to get along with different encodings to get the tests running
+        # on windows and linux
+        try:
+            text = text.encode(f.encoding)
+        except:
+            pass
+        try:
+            text = text.decode('utf-8')
+        except:
+            pass
+        f.close()
+
+        #self.debugout(filename,text,coding)
+
+        return text
+
     def readtextfile(self,filename):
-        """ Read a text file and try to detect the coding
-
-            Since we examine program code text files we can assume the following:
-            - There are no NUL characters, i.e. no 0x00 sequences of 1, 2 or 4
-              byte, starting on 1, 2 or 4 byte boundaries (depending on
-              1, 2 or 4 byte coding)
-            - There should at least one space (ASCII 0x20) char
-              of the respective length (1,2 or 4 byte))
-            - Program code consists of only ASCII chars, i.e. code < 128
-            - Non ASCII chars should appear in string literals and comments only
-
-            Though especially in the case of an 8 bit coding it does not matter
-            which code page to use: Metric analysis is done on program code
-            which is pure ASCII; string literals and comments are only recognized
-            as such but not interpreted, though it doesn't matter if they contain
-            non-ASCII chars whichever code page is used.
-
-            Note the decoder's different behavior for the "utf_nn" identifiers:
-            - .decode("utf_32") / .decode("utf_16"):       preceding BOM is skipped
-            - with suffix ".._be" or ".._le" respectively: preceding BOM is preserved
-            but
-            - .decode("utf_8"):     preceding BOM is preserved
-            - .decode("utf_8_sig"): preceding BOM is skipped
         """
-        # Methods to check for various UTF variants without BOM:
+        Read a text file and try to detect the coding
+
+        Since we examine program code text files we can assume the following:
+        - There are no NUL characters, i.e. no 0x00 sequences of 1, 2 or 4
+          byte, starting on 1, 2 or 4 byte boundaries (depending on
+          1, 2 or 4 byte coding) respectively
+        - There should at least one space (ASCII 0x20) char
+          of the respective length (1,2 or 4 byte))
+        - Program code consists of only ASCII chars, i.e. code < 128
+        - Non ASCII chars should appear in string literals and comments only
+
+        Though especially in the case of an 8 bit coding it does not matter
+        which code page to use: Metric analysis is done on program code
+        which is pure ASCII; string literals and comments are only recognized
+        as such but not interpreted, though it doesn't matter if they contain
+        non-ASCII chars whichever code page is used.
+
+        Note the decoder's different behavior for the "utf_nn" identifiers:
+        - .decode("utf_32") / .decode("utf_16"):       preceding BOM is skipped
+        - with suffix ".._be" or ".._le" respectively: preceding BOM is preserved
+
+        but
+        - .decode("utf_8"):     preceding BOM is preserved
+        - .decode("utf_8_sig"): preceding BOM is skipped
+        """
+        ## Methods to check for various UTF variants without BOM:
         # Since UTF16/32 codings are recommended to use a BOM these methods
         # shouldn't be necessary but may be useful in certain cases.
         def checkforUTF32_BE(a):
@@ -176,19 +220,22 @@ class DirectoryReader():
             return (n >= 0) and ((n % 2) == 0)
 
         # Method to check for UTF8 without BOM:
-        # "a" is the textfile represented as a simple byte array!
+        # "a" is the textfile represented as a byte array (Python 3)
+        # or a string array (Python 2)!
+        #
         # Find first char with code > 127:
         #
         # 1 nothing found: all bytes 0..127; in this case "a" only consists
         #   of ASCII chars but this may also be treated as valid UTF8 coding
         #
-        # 2 Code is a valid UTF8 leading byte: 176..271
-        #   then check subsequent bytes to be UTF8 extension bytes: 128..175
+        # 2 Code is a valid UTF8 leading byte: 192..242
+        #   then check subsequent bytes to be UTF8 extension bytes: 128..191
         #   Does also do some additional plausibility checks:
         #   If a valid UTF8 byte sequence is found
         #   - the subsequent byte (after the UTF8 sequence) must be an ASCII
         #   - or another UTF8 leading byte (in the latter case we assume that there
         #     are following the appropriate number of UTF8 extension bytes..)
+        #
         #   Note that these checks don't guarantee the text is really UTF8 encoded:
         #   If a valid UTF8 sequence is found but in fact the text is some sort
         #   of 8 bit OEM coding this may be coincidentally a sequence of 8 bit
@@ -196,79 +243,96 @@ class DirectoryReader():
         #   Even though the whole text would examined for UTF8 sequences: every
         #   valid UTF8 sequence found may also be a sequence of OEM chars!
         #
-        # 3 Code is not a valid UTF8 leading byte: 128..175 or 272..255
+        # 3 Code is not a valid UTF8 leading byte: 128..191 or 242..255
         #   In this case coding is some sort of 8 bit OEM coding. Since we don't
         #   know the OEM code page the file was written with, we assume "latin_1"
         #   (is mostly the same as ANSI but "ansi" isn't available on Python 2)
         #
         # return  suggested text coding: "ascii","utf_8" or "latin_1" (resp. default)
+        #
+        # notes
+        # - UTF8 leading byte for 3-byte sequence may be in the range 240..243
+        #   but 242..243 are explicitely invalid
+        # - UTF8 n-byte sequences are able to code chars which may be coded as
+        #   byte sequences with less than n extension byte or as pure ASCII, too;
+        #   those sequences are explicitely invalid (a char has to be coded
+        #   with as less bytes as possible) but aren't detected here!
+        #
+        # For more information see https://en.wikipedia.org/wiki/UTF-8 (english) or
+        # the respective locale page i.e. https://de.wikipedia.org/wiki/UTF-8 (german)
         def checkforUTF8(a,default="latin_1"):
 
             # Since "a" is a string array on Python 2 we use a special ORD function:
             # Convert c to its byte representation if it is a character
             # Works for Python 2+3
-            def ORD(c): return ord(c) if (type(c) == str) else c
+            def ORD(c):         return ord(c) if (type(c) == str) else c
+            # some frequently used checks:
+            def IsASCII(c):     return ORD(c) < 128
+            def IsUTF8Lead(c):  return ORD(c) in range(192,242)
+            def IsUTF8Ext(c):   return ORD(c) in range(128,192)
 
+            # Search for first non ASCII byte (>= 128):
             L = len(a)
             n = 0
-            while ( (n < L) and (ORD(a[n]) < 128) ): # (a[n] < ExtASCII) ):
-                n = n+1
-            if ( n >= L ):                          # all chars < 128: ASCII coding
-                return "ascii"                      # but may also be treated as UTF8!
-            w = a[n]
+            while ( (n < L) and IsASCII(a[n]) ): n = n+1
+
+            if ( n >= L ):  return "ascii"  # all chars < 128: ASCII coding
+                                            # alternatively may also be treated as UTF8!
+            w = ORD(a[n])                   # w >= 128 / 0x80
+            if ( w < 192 ): return default  # w = 128..191: not an UTF8 leading byte
 
             # UTF8 two byte sequence: leading byte + 1 extension byte
-            if ORD(w) in range(192,224):
+            if w < 224:                     # w = 192..223
                 if ( (n+1 < L)
-                 and (ORD(a[n+1]) in range(128,192))     # valid UTF8 extension byte
+                 and IsUTF8Ext(a[n+1])      # valid UTF8 extension byte
                 ):
-                    if ((n+2 == L)                  # w is last character
-                     or (ORD(a[n+2]) < 128)              # or next byte is an ASCII char
-                     or (ORD(a[n+2]) in range(192,244))  # or next byte is an UTF8 leading byte
+                    if ((n+2 == L)          # w is last character
+                     or IsASCII(a[n+2])     # or next byte is an ASCII char
+                     or IsUTF8Lead(a[n+2])  # or next byte is an UTF8 leading byte
                     ):
                         return "utf_8"
                 return default
 
             # UTF8 three byte sequence: leading byte + 2 extension bytes
-            if ORD(w) in range(224,240):
+            if w < 240:                     # w = 224..239
                 if ( (n+2 < L)
-                 and (ORD(a[n+1]) in range(128,192))     # 2 valid UTF8 extension bytes
-                 and (ORD(a[n+2]) in range(128,192))
+                 and IsUTF8Ext(a[n+1])      # 2 valid UTF8 extension bytes
+                 and IsUTF8Ext(a[n+2])
                 ):
-                    if ((n+3 == L)                  # w is last character
-                     or (ORD(a[n+3]) < 128)              # or next byte is ASCII char
-                     or (ORD(a[n+3]) in range(192,244))  # or next byte is UTF8 leading byte
+                    if ((n+3 == L)          # w is last character
+                     or IsASCII(a[n+3])     # or next byte is an ASCII char
+                     or IsUTF8Lead(a[n+3])  # or next byte is UTF8 leading byte
                     ):
                         return "utf_8"
                 return default
 
             # UTF8 four byte sequence: leading byte + 3 extension bytes
-            if ORD(w) in range(240,244):
+            if w < 242:                     # w = 240..241
                 if ( (n+3 < L)
-                 and (ORD(a[n+1]) in range(128,192))     # 3 valid UTF8 extension bytes
-                 and (ORD(a[n+2]) in range(128,192))
-                 and (ORD(a[n+3]) in range(128,192))
+                 and IsUTF8Ext(a[n+1])      # 3 valid UTF8 extension bytes
+                 and IsUTF8Ext(a[n+2])
+                 and IsUTF8Ext(a[n+3])
                 ):
-                    if ((n+4 == L)                  # w is last character
-                     or (ORD(a[n+4]) < 128)              # or next byte is ASCII char
-                     or (ORD(a[n+4]) in range(192,244))  # or next byte is UTF8 leading byte
+                    if ((n+4 == L)          # w is last character
+                     or IsASCII(a[n+4])     # or next byte is an ASCII char
+                     or IsUTF8Lead(a[n+4])  # or next byte is UTF8 leading byte
                     ):
                         return "utf_8"
                 return default
 
             # no valid UTF8 byte sequence:
-            return default;
-          # end of checkforUTF8 ------------------------------------------------
+            return default
+        # end of checkforUTF8 --------------------------------------------------
 
         # ----------------------------------------------------------------------
         # Subroutine readtextfile
         # open as binary and try to guess the encoding
         # attention:
         # - Phyton 3: "a" is a binary array
-        # - Python 2: "a" is string array!
+        # - Python 2: "a" is a string array!
         # ----------------------------------------------------------------------
-        f = open(filename, 'rb');
-        a = f.read();
+        f = open(filename, 'rb')
+        a = f.read()
         f.close()
 
         # check for codings with BOM:
@@ -295,7 +359,7 @@ class DirectoryReader():
         elif checkforUTF16_LE(a):
             coding = "utf_16_le"
 
-        # So finally we only have to look for UTF8 without BOM:
+        # At last we only have to look for UTF8 without BOM:
         else:
             coding = checkforUTF8(a)
 
@@ -311,8 +375,11 @@ class DirectoryReader():
         text = text.replace("\r\n","\n")
         text = text.replace("\r","\n")
 
-        return text
+        # debug:
+        #print(filename+" - Coding found = "+coding+" len: "+str(len(text))+" / "+str(len(a)));
+        #self.debugout(filename,text,coding)
 
+        return text
         # end of readtextfile --------------------------------------------------
 
     def run(self, plugin, directory):
@@ -339,7 +406,7 @@ class DirectoryReader():
                         ts = time.time()
 
                         text = self.readtextfile(full_path)
-                        #text = self.readfile_org(full_path)
+                        #text = self.readfile_org(full_path)    # original version
                         checksum = binascii.crc32(text.encode('utf8')) & 0xffffffff # to match python 3
 
                         db_loader = plugin.get_plugin('metrixpp.mpp.dbf').get_loader()
