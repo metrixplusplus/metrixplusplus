@@ -1,9 +1,9 @@
 #
 #    Metrix++, Copyright 2009-2019, Metrix++ Project
 #    Link: https://github.com/metrixplusplus/metrixplusplus
-#    
+#
 #    This file is a part of Metrix++ Tool.
-#    
+#
 
 import logging
 import re
@@ -13,7 +13,7 @@ from metrixpp.mpp import utils
 from metrixpp.mpp import cout
 
 class Plugin(api.Plugin, api.IConfigurable):
-    
+
     MODE_NEW     = 0x01
     MODE_TREND   = 0x03
     MODE_TOUCHED = 0x07
@@ -48,7 +48,7 @@ class Plugin(api.Plugin, api.IConfigurable):
                           "Should be in the format: <namespace>:<field>:<limit-value>[:region_type[,region_type]], for example: "
                           "'std.code.complexity:cyclomatic:7', or 'std.code.complexity:maxdepth:5:function'. "
                           "Region types is optional specifier, and if not defined the limit is applied to regions of all types.")
-    
+
     def configure(self, options):
         self.hotspots = options.__dict__['hotspots']
         self.no_suppress = options.__dict__['disable_suppressions']
@@ -61,7 +61,7 @@ class Plugin(api.Plugin, api.IConfigurable):
             self.mode = self.MODE_TOUCHED
         elif options.__dict__['warn_mode'] == 'all':
             self.mode = self.MODE_ALL
-            
+
         if self.mode != self.MODE_ALL and options.__dict__['db_file_prev'] == None:
             self.parser.error("option --warn-mode: The mode '" + options.__dict__['warn_mode'] + "' requires '--db-file-prev' option set")
 
@@ -74,12 +74,12 @@ class Plugin(api.Plugin, api.IConfigurable):
                 self.filter = db_filter
                 self.region_types = region_types
                 self.original = original
-                
+
             def __repr__(self):
                 return "'{0}:{1}' {2} {3} [applied to '{4}' region type(s)]".format(
                         self.namespace, self.field, self.filter[1], self.limit,
                         api.Region.T().to_str(self.region_types))
-        
+
         self.limits = []
         pattern = re.compile(r'''([^:]+)[:]([^:]+)[:]([-+]?[0-9]+(?:[.][0-9]+)?)(?:[:](.+))?''')
         if options.__dict__['max_limit'] != None:
@@ -102,7 +102,7 @@ class Plugin(api.Plugin, api.IConfigurable):
                         (match.group(2), '>', float(match.group(3))), region_types, each)
                 self.limits.append(limit)
         if options.__dict__['min_limit'] != None:
-            for each in options.__dict__['min_limit']:  
+            for each in options.__dict__['min_limit']:
                 match = re.match(pattern, each)
                 if match == None:
                     self.parser.error("option --min-limit: Invalid format: " + each)
@@ -134,7 +134,7 @@ class Plugin(api.Plugin, api.IConfigurable):
         self.modified_file_ids = None
         if self.mode != self.MODE_ALL:
             self.modified_file_ids = self._get_list_of_modified_files(loader, loader_prev)
-    
+
     def _verify_namespaces(self, valid_namespaces):
         valid = []
         for each in valid_namespaces:
@@ -153,16 +153,16 @@ class Plugin(api.Plugin, api.IConfigurable):
                 if each.field not in valid:
                     self.parser.error("option --{0}-limit: metric '{1}:{2}' is not available in the database file.".
                                       format(each.type, each.namespace, each.field))
-                            
+
     def _get_list_of_modified_files(self, loader, loader_prev):
         logging.info("Identifying changed files...")
-        
+
         old_files_map = {}
         for each in loader_prev.iterate_file_data():
             old_files_map[each.get_path()] = each.get_checksum()
         if len(old_files_map) == 0:
             return None
-        
+
         modified_file_ids = []
         for each in loader.iterate_file_data():
             if len(modified_file_ids) > 1000: # If more than 1000 files changed, skip optimisation
@@ -171,12 +171,12 @@ class Plugin(api.Plugin, api.IConfigurable):
                 modified_file_ids.append(str(each.get_id()))
 
         old_files_map = None
-                
+
         if len(modified_file_ids) != 0:
             modified_file_ids = " , ".join(modified_file_ids)
             modified_file_ids = "(" + modified_file_ids + ")"
             return modified_file_ids
-        
+
         return None
 
     def _is_metric_suppressed(self, metric_namespace, metric_field, loader, select_data):
@@ -190,19 +190,19 @@ class Plugin(api.Plugin, api.IConfigurable):
             return True
         return False
 
-                    
+
     def iterate_limits(self):
         for each in self.limits:
-            yield each   
+            yield each
 
     def is_mode_matched(self, limit, value, diff, is_modified):
         if is_modified == None:
             # means new region, True in all modes
             return True
         if self.mode == self.MODE_ALL:
-            return True 
+            return True
         if self.mode == self.MODE_TOUCHED and is_modified == True:
-            return True 
+            return True
         if self.mode == self.MODE_TREND and is_modified == True:
             if limit < value and diff > 0:
                 return True
@@ -213,7 +213,7 @@ class Plugin(api.Plugin, api.IConfigurable):
     def get_warnings(self, path, limit):
 
         class Warning (object):
-        
+
             def __init__(self, path, cursor, namespace, field, limit_type,
                             region_name, stat_level, trend_value, stat_limit,
                             is_modified, is_suppressed):
@@ -257,11 +257,11 @@ class Plugin(api.Plugin, api.IConfigurable):
         if selected_data == None:
             utils.report_bad_path(path)
             return None
-        
+
         for select_data in selected_data:
             if limit_warnings != None and limit_warnings <= 0:
                 break
-            
+
             is_modified = None
             diff = None
             file_data = loader.load_file_data(select_data.get_path())
@@ -286,11 +286,11 @@ class Plugin(api.Plugin, api.IConfigurable):
                                             diff,
                                             is_modified) == False):
                 continue
-            
+
             is_sup = self._is_metric_suppressed(limit.namespace, limit.field, loader, select_data)
             if is_sup == True and self.no_suppress == False:
-                continue    
-            
+                continue
+
             region_cursor = 0
             region_name = None
             if select_data.get_region() != None:
@@ -311,15 +311,15 @@ class Plugin(api.Plugin, api.IConfigurable):
                                 is_sup))
             if limit_warnings != None:
                     limit_warnings -= 1
-        
+
         return warnings
 
     def get_all_warnings(self, path):
         """ returns all warnings from a specified path """
 
         warnings = []
-            
+
         for limit in self.iterate_limits():
             warnings = warnings + self.get_warnings(path, limit)
-        
+
         return warnings

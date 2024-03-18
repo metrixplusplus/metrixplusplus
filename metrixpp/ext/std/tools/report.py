@@ -1,5 +1,5 @@
 #
-#    Metrix++, Copyright 2009-2019, Metrix++ Project
+#    Metrix++, Copyright 2009-2024, Metrix++ Project
 #    Link: https://github.com/metrixplusplus/metrixplusplus
 #
 #    This file is a part of Metrix++ Tool.
@@ -20,9 +20,9 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
         self.parser = parser
         parser.add_option("--output-dir", "--od", default='./metrixpp/',
                            help="Set the output folder. [default: %default].")
-        parser.add_option("--format", "--ft", default='txt', choices=['txt', 'md', 'html', 'rst', 'latex', 'xlsx', 'doxygen'],
+        parser.add_option("--format", "--ft", default='txt', choices=['txt', 'doxygen'],
                           help="Format of the output data. "
-                          "Possible values are 'txt', 'md', 'html', 'rst', 'latex', 'xlsx' or 'doxygen' [default: %default]")
+                          "Possible values are 'txt' or 'doxygen' [default: %default]")
 
     def configure(self, options):
         self.out_dir = options.__dict__['output_dir']
@@ -32,7 +32,6 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
         super(Plugin, self).initialize()
 
     def loadSubdirs(self, loader, path, subdirs, subfiles):
-
         aggregated_data = loader.load_aggregated_data(path)
 
         if not aggregated_data:
@@ -44,11 +43,11 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
         for subdir in aggregated_data.get_subdirs():
             subdir = aggregated_data.path + "/" + subdir
             subdirs.append(subdir)
+            # recurse for all subdirs and subfiles
             subdirs, subfiles = self.loadSubdirs(loader, subdir, subdirs, subfiles)
         return subdirs, subfiles
 
-    def create_doxygen_report(self, paths, output_dir, overview_data, data, loader, loader_prev):
-
+    def create_doxygen_report(self, paths, output_dir, overview_data, data):
         exit_code = 1
 
         if output_dir:
@@ -144,9 +143,7 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
 
         data = {}
         overview_data = {}
-        warnings = []
 
-        loader_prev = self.get_plugin('metrixpp.mpp.dbf').get_loader_prev()
         loader = self.get_plugin('metrixpp.mpp.dbf').get_loader()
         limit_backend = self.get_plugin('std.tools.limit_backend')
 
@@ -240,9 +237,7 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
             exit_code = self.create_doxygen_report(paths,
                                                    self.out_dir,
                                                    overview_data,
-                                                   data,
-                                                   loader,
-                                                   loader_prev)
+                                                   data)
         else:
             logging.error("unknown or no output format set")
             exit_code = 1
