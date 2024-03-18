@@ -1,3 +1,21 @@
+## 1.7.1 (June, 2021)
+- improve C++ numbers parsing
+
+## 1.7 (December, 2020)
+- added Promehteous format for exporting/view
+- added std.code.longlines plugin
+
+## 1.6 (June, 2020)
+- added python3 support
+- added pypi package (metrixpp)
+- changed implementation of collect --include-files to include all files matching any rule
+- fix implementation of std.code.maintindex.simple
+
+## 1.5 (April, 2019)
+- project moved to github
+- fixed processing of more than one directory #73
+- improved limit tool to be able to apply different limits on different region types
+
 ## 1.4 (June, 2014)
 - Fixed match of names of generic functions and classes 
 - New metrics group: std.code.member.* - counting of classes, fields, globals, etc.

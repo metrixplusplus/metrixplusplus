@@ -1,0 +1,224 @@
+<view>
+
+    <data>
+        <aggregated-data>
+            <std.code.complexity>
+                <cyclomatic avg="1.42857143" count="7" max="3" min="0" nonzero="False" sup="1" total="10.0">
+                    <__diff__ avg="-0.07142857" count="1" max="0" min="-1" nonzero="0" sup="1" total="1.0" />
+                    <distribution-bars>
+                        <distribution-bar __diff__="1" count="1" metric="0" ratio="0.14285714" />
+                        <distribution-bar __diff__="-1" count="3" metric="1" ratio="0.42857143" />
+                        <distribution-bar __diff__="1" count="2" metric="2" ratio="0.28571429" />
+                        <distribution-bar __diff__="0" count="1" metric="3" ratio="0.14285714" />
+                    </distribution-bars>
+                </cyclomatic>
+            </std.code.complexity>
+            <std.code.lines>
+                <code avg="5.27272727" count="11" max="11" min="0" nonzero="False" sup="0" total="58.0">
+                    <__diff__ avg="-1.27272727" count="0" max="-9" min="0" nonzero="0" sup="0" total="-14.0" />
+                    <distribution-bars>
+                        <distribution-bar __diff__="0" count="1" metric="0" ratio="0.09090909" />
+                        <distribution-bar __diff__="0" count="2" metric="3" ratio="0.18181818" />
+                        <distribution-bar __diff__="1" count="2" metric="4" ratio="0.18181818" />
+                        <distribution-bar __diff__="0" count="2" metric="5" ratio="0.18181818" />
+                        <distribution-bar __diff__="-2" count="1" metric="7" ratio="0.09090909" />
+                        <distribution-bar __diff__="2" count="2" metric="8" ratio="0.18181818" />
+                        <distribution-bar __diff__="0" count="1" metric="11" ratio="0.09090909" />
+                    </distribution-bars>
+                </code>
+                <comments avg="0.72727273" count="11" max="2" min="0" nonzero="False" sup="0" total="8.0">
+                    <__diff__ avg="0.27272727" count="0" max="0" min="0" nonzero="0" sup="0" total="3.0" />
+                    <distribution-bars>
+                        <distribution-bar __diff__="-2" count="5" metric="0" ratio="0.45454545" />
+                        <distribution-bar __diff__="1" count="4" metric="1" ratio="0.36363636" />
+                        <distribution-bar __diff__="1" count="2" metric="2" ratio="0.18181818" />
+                    </distribution-bars>
+                </comments>
+                <preprocessor avg="0.18181818" count="11" max="2" min="0" nonzero="False" sup="0" total="2.0">
+                    <__diff__ avg="0.09090909" count="0" max="1" min="0" nonzero="0" sup="0" total="1.0" />
+                    <distribution-bars>
+                        <distribution-bar __diff__="0" count="10" metric="0" ratio="0.90909091" />
+                        <distribution-bar __diff__="-1" count="0" metric="1" ratio="0" />
+                        <distribution-bar __diff__="1" count="1" metric="2" ratio="0.09090909" />
+                    </distribution-bars>
+                </preprocessor>
+                <total avg="5.90909091" count="11" max="12" min="0" nonzero="False" sup="0" total="65.0">
+                    <__diff__ avg="-1.09090909" count="0" max="-8" min="0" nonzero="0" sup="0" total="-12.0" />
+                    <distribution-bars>
+                        <distribution-bar __diff__="0" count="1" metric="0" ratio="0.09090909" />
+                        <distribution-bar __diff__="-1" count="1" metric="3" ratio="0.09090909" />
+                        <distribution-bar __diff__="2" count="2" metric="4" ratio="0.18181818" />
+                        <distribution-bar __diff__="0" count="2" metric="5" ratio="0.18181818" />
+                        <distribution-bar __diff__="-1" count="0" metric="6" ratio="0" />
+                        <distribution-bar __diff__="1" count="2" metric="7" ratio="0.18181818" />
+                        <distribution-bar __diff__="-2" count="0" metric="8" ratio="0" />
+                        <distribution-bar __diff__="2" count="2" metric="9" ratio="0.18181818" />
+                        <distribution-bar __diff__="0" count="1" metric="12" ratio="0.09090909" />
+                    </distribution-bars>
+                </total>
+            </std.code.lines>
+            <std.code.ratio>
+                <comments avg="0.09445455" count="11" max="0.25" min="0.0" nonzero="False" sup="0" total="1.039">
+                    <__diff__ avg="0.03963636" count="0" max="0.05" min="0.0" nonzero="0" sup="0" total="0.436" />
+                    <distribution-bars>
+                        <distribution-bar __diff__="-2" count="5" metric="0.0000" ratio="0.45454545" />
+                        <distribution-bar __diff__="1" count="1" metric="0.1110" ratio="0.09090909" />
+                        <distribution-bar __diff__="-1" count="1" metric="0.1250" ratio="0.09090909" />
+                        <distribution-bar __diff__="0" count="1" metric="0.1530" ratio="0.09090909" />
+                        <distribution-bar __diff__="1" count="2" metric="0.2000" ratio="0.18181818" />
+                        <distribution-bar __diff__="1" count="1" metric="0.2500" ratio="0.09090909" />
+                    </distribution-bars>
+                </comments>
+            </std.code.ratio>
+            <std.suppress>
+                <count avg="1.0" count="1" max="1" min="1" nonzero="True" sup="0" total="1.0">
+                    <__diff__ avg="1.0" count="1" max="1" min="1" nonzero="0" sup="0" total="1.0" />
+                    <distribution-bars>
+                        <distribution-bar __diff__="1" count="1" metric="1" ratio="1.0" />
+                    </distribution-bars>
+                </count>
+            </std.suppress>
+            <std.suppress.file>
+                <count avg="None" count="0" max="None" min="None" nonzero="True" sup="0" total="0.0">
+                    <__diff__ avg="0" count="0" max="0" min="0" nonzero="0" sup="0" total="0.0" />
+                    <distribution-bars>
+                    </distribution-bars>
+                </count>
+            </std.suppress.file>
+        </aggregated-data>
+        <file-data>
+            <regions>
+                <region>
+                    <data>
+                        <std.code.lines code="0" comments="0" preprocessor="0" total="0">
+                            <__diff__ code="0" comments="0" preprocessor="0" total="0" />
+                        </std.code.lines>
+                        <std.code.ratio comments="0.0">
+                            <__diff__ comments="0.0" />
+                        </std.code.ratio>
+                    </data>
+                    <info cursor="0" line_begin="1" line_end="78" modified="False" name="__global__" offset_begin="0" offset_end="836" type="global" />
+                </region>
+                <region>
+                    <data>
+                        <std.code.lines code="4" comments="1" preprocessor="2" total="7">
+                            <__diff__ code="0" comments="0" preprocessor="1" total="1" />
+                        </std.code.lines>
+                        <std.code.ratio comments="0.2">
+                            <__diff__ comments="0.0" />
+                        </std.code.ratio>
+                    </data>
+                    <info cursor="4" line_begin="3" line_end="77" modified="True" name="hmm" offset_begin="2" offset_end="835" type="namespace" />
+                </region>
+                <region>
+                    <data>
+                        <std.code.lines code="4" comments="0" preprocessor="0" total="4">
+                            <__diff__ code="-16" comments="0" preprocessor="0" total="-16" />
+                        </std.code.lines>
+                        <std.code.ratio comments="0.0">
+                            <__diff__ comments="0.0" />
+                        </std.code.ratio>
+                    </data>
+                    <info cursor="10" line_begin="10" line_end="75" modified="True" name="A" offset_begin="111" offset_end="831" type="class" />
+                </region>
+                <region>
+                    <data>
+                        <std.code.complexity cyclomatic="3">
+                            <__diff__ cyclomatic="0" />
+                        </std.code.complexity>
+                        <std.code.lines code="11" comments="2" preprocessor="0" total="12">
+                            <__diff__ code="0" comments="0" preprocessor="0" total="0" />
+                        </std.code.lines>
+                        <std.code.ratio comments="0.153">
+                            <__diff__ comments="0.0" />
+                        </std.code.ratio>
+                    </data>
+                    <info cursor="13" line_begin="13" line_end="24" modified="False" name="A" offset_begin="123" offset_end="269" type="function" />
+                </region>
+                <region>
+                    <data>
+                        <std.code.complexity cyclomatic="1">
+                            <__diff__ cyclomatic="0" />
+                        </std.code.complexity>
+                        <std.code.lines code="5" comments="0" preprocessor="0" total="5">
+                            <__diff__ code="0" comments="0" preprocessor="0" total="0" />
+                        </std.code.lines>
+                        <std.code.ratio comments="0.0">
+                            <__diff__ comments="0.0" />
+                        </std.code.ratio>
+                    </data>
+                    <info cursor="26" line_begin="26" line_end="42" modified="False" name="func" offset_begin="272" offset_end="455" type="function" />
+                </region>
+                <region>
+                    <data>
+                        <std.code.lines code="3" comments="0" preprocessor="0" total="3">
+                            <__diff__ code="0" comments="0" preprocessor="0" total="0" />
+                        </std.code.lines>
+                        <std.code.ratio comments="0.0">
+                            <__diff__ comments="0.0" />
+                        </std.code.ratio>
+                    </data>
+                    <info cursor="28" line_begin="28" line_end="40" modified="False" name="embeded" offset_begin="301" offset_end="441" type="class" />
+                </region>
+                <region>
+                    <data>
+                        <std.code.complexity cyclomatic="2">
+                            <__diff__ cyclomatic="1" />
+                        </std.code.complexity>
+                        <std.code.lines code="8" comments="2" preprocessor="0" total="9">
+                            <__diff__ code="1" comments="1" preprocessor="0" total="1" />
+                        </std.code.lines>
+                        <std.code.ratio comments="0.2">
+                            <__diff__ comments="0.075" />
+                        </std.code.ratio>
+                    </data>
+                    <info cursor="30" line_begin="30" line_end="39" modified="True" name="embeded" offset_begin="322" offset_end="437" type="function" />
+                </region>
+                <region>
+                    <data>
+                        <std.code.complexity cyclomatic="1">
+                            <__diff__ cyclomatic="0" />
+                        </std.code.complexity>
+                        <std.code.lines code="7" comments="1" preprocessor="0" total="7">
+                            <__diff__ code="0" comments="1" preprocessor="0" total="0" />
+                        </std.code.lines>
+                        <std.code.ratio comments="0.125">
+                            <__diff__ comments="0.125" />
+                        </std.code.ratio>
+                    </data>
+                    <info cursor="44" line_begin="44" line_end="51" modified="True" name="never" offset_begin="458" offset_end="549" type="function" />
+                </region>
+                <region>
+                    <data>
+                        <std.code.complexity cyclomatic="0" />
+                        <std.code.lines code="3" comments="1" preprocessor="0" total="4" />
+                        <std.code.ratio comments="0.25" />
+                    </data>
+                    <info cursor="53" line_begin="53" line_end="56" modified="None" name="new_func" offset_begin="552" offset_end="585" type="function" />
+                </region>
+                <region>
+                    <data>
+                        <std.code.complexity cyclomatic="1" />
+                        <std.code.lines code="5" comments="0" preprocessor="0" total="5" />
+                        <std.code.ratio comments="0.0" />
+                    </data>
+                    <info cursor="58" line_begin="58" line_end="62" modified="None" name="new_func_complex" offset_begin="588" offset_end="646" type="function" />
+                </region>
+                <region>
+                    <data>
+                        <std.code.complexity cyclomatic="2" />
+                        <std.code.lines code="8" comments="1" preprocessor="0" total="9" />
+                        <std.code.ratio comments="0.111" />
+                        <std.suppress count="1" list="[std.code.complexity:cyclomatic]" />
+                    </data>
+                    <info cursor="65" line_begin="64" line_end="72" modified="None" name="new_func_complex_but_suppressed" offset_begin="649" offset_end="808" type="function" />
+                </region>
+            </regions>
+        </file-data>
+        <info id="1" path="./simple.cpp" />
+        <subdirs>
+        </subdirs>
+        <subfiles>
+        </subfiles>
+    </data>
+</view>

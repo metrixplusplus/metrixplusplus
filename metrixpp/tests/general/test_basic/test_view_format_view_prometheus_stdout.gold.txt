@@ -1,0 +1,6 @@
+std_code_complexity_cyclomatic_avg {file="./"} 1.375
+std_code_complexity_cyclomatic_min {file="./"} 1
+std_code_complexity_cyclomatic_max {file="./"} 3
+std_code_complexity_cyclomatic_total {file="./"} 11.0
+
+

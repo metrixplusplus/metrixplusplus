@@ -6,3 +6,4 @@ tests/**/*.real.txt
 tests/**/*.diff.html
 .idea
 .vscode
+metrixpp/tests/**/*.db
