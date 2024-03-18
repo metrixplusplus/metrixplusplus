@@ -47,6 +47,65 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
             subdirs, subfiles = self.loadSubdirs(loader, subdir, subdirs, subfiles)
         return subdirs, subfiles
 
+    @staticmethod
+    def _get_warning_text(warning):
+        warning_text = "Metric '" + warning.namespace + ":" + warning.field + "'"
+
+        if warning.region_name and warning.region_name != "__global__":
+            warning_text = warning_text + " for region \\ref " + warning.region_name
+        elif warning.region_name == "__global__":
+            warning_text = warning_text + " for region " + warning.region_name
+        else:
+            warning_text = warning_text + " for the file \\ref " + warning.path
+
+        warning_text = warning_text + " exceeds the limit."
+
+        if warning.type == "max":
+            warning_comp = ">"
+        else:
+            warning_comp = "<"
+        warning_text = warning_text + " (value: {} {} limit: {})".format(warning.stat_level,
+                                                                            warning_comp,
+                                                                            warning.stat_limit)
+        return warning_text
+
+    def _get_txt_warnings(self, warnings):
+        warning_text = ""
+        for warning in warnings:
+            warning_text += self._get_warning_text(warning) + "\n"
+        return warning_text
+
+    def create_txt_report(self, paths, overview_data, data):
+        report_text = "Overview:\n"
+
+        # start with overview data
+        for row in overview_data["matrix"]:
+            report_text += "\n"
+            for idx, field in enumerate(overview_data["fields"]):
+                report_text += field + ": " + str(row[idx]) + "\n"
+
+        if len(overview_data["warnings"]) > 0:
+            report_text += "\nWarnings:\n"
+            report_text += self._get_txt_warnings(overview_data["warnings"])
+
+        # add file based data
+        report_text += "\nFiles:\n"
+        for path in paths:
+            report_text += "\n" + path + "\n"
+            for row in data[path]["file_matrix"]:
+                for idx, field in enumerate(data[path]["file_fields"]):
+                    report_text += field + ": " + str(row[idx]) + "\n"
+            for row in data[path]["region_matrix"]:
+                report_text += "\n" + path + " "
+                for idx, field in enumerate(data[path]["region_fields"]):
+                    report_text += field + ": " + str(row[idx]) + "\n"
+
+            if data[path]["warnings"]:
+                report_text += "\nWarnings for " + path + ":\n"
+                report_text += self._get_txt_warnings(data[path]["warnings"])
+
+        return report_text
+
     def create_doxygen_report(self, paths, output_dir, overview_data, data):
         exit_code = 1
 
@@ -107,25 +166,7 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
 
                     # add warnings as list items
                     for warning in data[path]["warnings"]:
-                        warning_text = "Metric '" + warning.namespace + ":" + warning.field + "'"
-
-                        if warning.region_name and warning.region_name != "__global__":
-                            warning_text = warning_text + " for region \\ref " + warning.region_name
-                        elif warning.region_name == "__global__":
-                            warning_text = warning_text + " for region " + warning.region_name
-                        else:
-                            warning_text = warning_text + " for the file \\ref " + warning.path
-
-                        warning_text = warning_text + " exceeds the limit."
-
-                        if warning.type == "max":
-                            warning_comp = ">"
-                        else:
-                            warning_comp = "<"
-                        warning_text = warning_text + " (value: {} {} limit: {})".format(warning.stat_level,
-                                                                                         warning_comp,
-                                                                                         warning.stat_limit)
-
+                        warning_text = self._get_warning_text(warning)
                         file.write("\\xrefitem metrix_warnings \"Metrix Warning\" \"Metrix Warnings\" {}\n".format(warning_text))
 
 
@@ -232,8 +273,12 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
 
                 overview_data["matrix"].append(row)
 
-
-        if self.out_format == "doxygen":
+        if self.out_format == "txt":
+            result_text = self.create_txt_report(paths,
+                                                 overview_data,
+                                                 data)
+            filename = "metrixpp.txt"
+        elif self.out_format == "doxygen":
             exit_code = self.create_doxygen_report(paths,
                                                    self.out_dir,
                                                    overview_data,
@@ -241,6 +286,5 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
         else:
             logging.error("unknown or no output format set")
             exit_code = 1
-            # should default to simple text i guess
 
         return exit_code
