@@ -8,6 +8,7 @@
 import logging
 import io
 import os
+import json
 import pytablewriter
 
 from metrixpp.mpp import api
@@ -20,9 +21,9 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
     def declare_configuration(self, parser):
         self.parser = parser
         parser.add_option("--output-dir", "--od", help="Set the output folder.")
-        parser.add_option("--format", "--ft", default='txt', choices=['txt', 'doxygen'],
+        parser.add_option("--format", "--ft", default='txt', choices=['txt', 'doxygen', 'json'],
                           help="Format of the output data. "
-                          "Possible values are 'txt' or 'doxygen' [default: %default]")
+                          "Possible values are 'txt', 'doxygen' or 'json' [default: %default]")
 
     def configure(self, options):
         self.out_dir = options.__dict__['output_dir']
@@ -48,15 +49,17 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
         return subdirs, subfiles
 
     @staticmethod
-    def _get_warning_text(warning):
+    def _get_warning_text(warning, doxygen=False):
         warning_text = "Metric '" + warning.namespace + ":" + warning.field + "'"
 
+        ref = "\\ref " if doxygen else ""
+
         if warning.region_name and warning.region_name != "__global__":
-            warning_text = warning_text + " for region \\ref " + warning.region_name
+            warning_text = warning_text + " for region " + ref + warning.region_name
         elif warning.region_name == "__global__":
             warning_text = warning_text + " for region " + warning.region_name
         else:
-            warning_text = warning_text + " for the file \\ref " + warning.path
+            warning_text = warning_text + " for the file " + ref + warning.path
 
         warning_text = warning_text + " exceeds the limit."
 
@@ -65,9 +68,21 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
         else:
             warning_comp = "<"
         warning_text = warning_text + " (value: {} {} limit: {})".format(warning.stat_level,
-                                                                            warning_comp,
-                                                                            warning.stat_limit)
+                                                                         warning_comp,
+                                                                         warning.stat_limit)
         return warning_text
+
+    @staticmethod
+    def _get_warning_dict(warning):
+        warning_dict = {}
+
+        warning_dict["metric"] = warning.namespace + ":" + warning.field
+        warning_dict["region"] = warning.region_name
+        warning_dict["type"] = warning.type
+        warning_dict["level"] = warning.stat_level
+        warning_dict["limit"] = warning.stat_limit
+
+        return warning_dict
 
     def _get_txt_warnings(self, warnings):
         warning_text = ""
@@ -162,7 +177,7 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
 
             # add warnings as list items
             for warning in data[path]["warnings"]:
-                warning_text = self._get_warning_text(warning)
+                warning_text = self._get_warning_text(warning, doxygen=True)
                 result_text += "\\xrefitem metrix_warnings \"Metrix Warning\" \"Metrix Warnings\" {}\n".format(warning_text)
 
             result_text += "\n\n"
@@ -170,6 +185,52 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
         result_text += "*/\n"
 
         return result_text
+
+    def create_json_report(self, paths, overview_data, data):
+        report_dict = {}
+
+        # start with overview data
+        overview_list = []
+        for row in overview_data["matrix"]:
+            overview_dict = {}
+            for idx, field in enumerate(overview_data["fields"]):
+                overview_dict[field] = str(row[idx])
+            overview_list.append(overview_dict)
+        report_dict["overview"] = overview_list
+        report_dict["warnings"] = []
+        for warning in overview_data["warnings"]:
+            report_dict["warnings"].append(self._get_warning_dict(warning))
+
+        # add file based data
+        files_dict = {}
+        for path in paths:
+            file_dict = {}
+            regions_dict = {}
+            warning_list = []
+
+            for row in data[path]["file_matrix"]:
+                for idx, field in enumerate(data[path]["file_fields"]):
+                    file_dict[field] = str(row[idx])
+
+            for row in data[path]["region_matrix"]:
+                region_dict = {}
+                for idx, field in enumerate(data[path]["region_fields"]):
+                    region_dict[field] = str(row[idx])
+                if row[0]:
+                    regions_dict[row[0]] = region_dict
+                else:
+                    regions_dict["__no_region__"] = region_dict
+
+            for warning in data[path]["warnings"]:
+                warning_list.append(self._get_warning_dict(warning))
+
+            file_dict["regions"] = regions_dict
+            file_dict["warnings"] = warning_list
+            files_dict[path] = file_dict
+
+        report_dict["files"] = files_dict
+
+        return json.dumps(report_dict, indent=4)
 
     def run(self, args):
         exit_code = 0
@@ -275,6 +336,11 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
                                                      overview_data,
                                                      data)
             filename = "metrixpp.dox"
+        elif self.out_format == "json":
+            result_text = self.create_json_report(paths,
+                                                  overview_data,
+                                                  data)
+            filename = "metrixpp.json"
         else:
             logging.error("unknown or no output format set")
             return 1
