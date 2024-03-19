@@ -37,5 +37,5 @@ setuptools.setup(
             'metrix++ = metrixpp.metrixpp:start'
         ]
     },
-    python_requires='>=3.5',
+    python_requires='>=3.7',
 )
