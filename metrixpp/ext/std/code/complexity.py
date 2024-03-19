@@ -14,21 +14,25 @@ class Plugin(api.Plugin, api.MetricPluginMixin, api.Child, api.IConfigurable):
     def declare_configuration(self, parser):
         parser.add_option("--std.code.complexity.cyclomatic", "--sccc", action="store_true", default=False,
                          help="Enables collection of cyclomatic complexity metric (McCabe) [default: %default]")
+        parser.add_option("--std.code.complexity.cyclomatic_switch_case_once", "--scccnsc", action="store_true", default=False,
+                         help="Enables collection of cyclomatic complexity metric (McCabe) switch case is only counted once [default: %default]")
         parser.add_option("--std.code.complexity.maxindent", "--sccmi", action="store_true", default=False,
                          help="Enables collection of maximum indent level metric [default: %default]")
     
     def configure(self, options):
         self.is_active_cyclomatic = options.__dict__['std.code.complexity.cyclomatic']
+        self.is_active_cyclomatic_switch_case_once = options.__dict__['std.code.complexity.cyclomatic_switch_case_once']
         self.is_active_maxindent = options.__dict__['std.code.complexity.maxindent']
         
     # cyclomatic complexity pattern
     # - C/C++
-    pattern_cpp = re.compile(r'''([^0-9A-Za-z_]((if)|(case)|(for)|(while)|(catch))[^0-9A-Za-z_])|[&][&]|[|][|]|[?]''')
+    regex_cpp = r'''([^0-9A-Za-z_]((if)|(case)|(for)|(while)|(catch))[^0-9A-Za-z_])|[&][&]|[|][|]|[?]'''
     # - C#
     #   supports Null-coalescing '??' and conditional '?:'
-    pattern_cs = re.compile(r'''([^0-9A-Za-z_]((if)|(case)|(for)|(foreach)|(while)|(catch))[^0-9A-Za-z_])|[&][&]|[|][|]|[?][?]?''')
+    regex_cs = r'''([^0-9A-Za-z_]((if)|(case)|(for)|(foreach)|(while)|(catch))[^0-9A-Za-z_])|[&][&]|[|][|]|[?][?]?'''
     # - Java
-    pattern_java = re.compile(r'''([^0-9A-Za-z_]((if)|(case)|(for)|(while)|(catch))[^0-9A-Za-z_])|[&][&]|[|][|]|[?]''')
+    regex_java = r'''([^0-9A-Za-z_]((if)|(case)|(for)|(while)|(catch))[^0-9A-Za-z_])|[&][&]|[|][|]|[?]'''
+
 
     pattern_indent = re.compile(r'''[}{]''')
 
@@ -36,9 +40,19 @@ class Plugin(api.Plugin, api.MetricPluginMixin, api.Child, api.IConfigurable):
         self.declare_metric(self.is_active_cyclomatic,
                             self.Field('cyclomatic', int),
                             {
-                                'std.code.cpp': self.pattern_cpp,
-                                'std.code.cs': self.pattern_cs,
-                                'std.code.java': self.pattern_java
+                                'std.code.cpp': re.compile(self.regex_cpp),
+                                'std.code.cs': re.compile(self.regex_cs),
+                                'std.code.java': re.compile(self.regex_java)
+                            },
+                            marker_type_mask=api.Marker.T.CODE,
+                            region_type_mask=api.Region.T.FUNCTION)
+        # add the identical regex again but replace case with switch to count switch cases only once
+        self.declare_metric(self.is_active_cyclomatic_switch_case_once,
+                            self.Field('cyclomatic_switch_case_once', int),
+                            {
+                                'std.code.cpp': re.compile(self.regex_cpp.replace("(case)", "(switch)")),
+                                'std.code.cs': re.compile(self.regex_cs.replace("(case)", "(switch)")),
+                                'std.code.java': re.compile(self.regex_java.replace("(case)", "(switch)"))
                             },
                             marker_type_mask=api.Marker.T.CODE,
                             region_type_mask=api.Region.T.FUNCTION)
