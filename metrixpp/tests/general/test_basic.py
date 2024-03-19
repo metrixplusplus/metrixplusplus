@@ -16,6 +16,7 @@ class Test(tests.common.TestCase):
         # first collection
         runner = tests.common.ToolRunner('collect',
                                          ['--std.code.complexity.cyclomatic',
+                                          '--std.code.complexity.cyclomatic_switch_case_once',
                                           '--std.code.lines.total',
                                           '--std.code.lines.code',
                                           '--std.code.lines.preprocessor',
@@ -53,6 +54,7 @@ class Test(tests.common.TestCase):
         # second collection
         runner = tests.common.ToolRunner('collect',
                                          ['--std.code.complexity.cyclomatic',
+                                          '--std.code.complexity.cyclomatic_switch_case_once',
                                           '--std.code.lines.total',
                                           '--std.code.lines.code',
                                           '--std.code.lines.preprocessor',

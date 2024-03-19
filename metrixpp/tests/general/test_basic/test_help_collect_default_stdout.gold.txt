@@ -21,6 +21,10 @@ Options:
   --std.code.complexity.cyclomatic, --sccc
                         Enables collection of cyclomatic complexity metric
                         (McCabe) [default: False]
+  --std.code.complexity.cyclomatic_switch_case_once, --scccnsc
+                        Enables collection of cyclomatic complexity metric
+                        (McCabe) switch case is only counted once [default:
+                        False]
   --std.code.complexity.maxindent, --sccmi
                         Enables collection of maximum indent level metric
                         [default: False]
