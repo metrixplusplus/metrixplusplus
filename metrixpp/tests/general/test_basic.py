@@ -260,7 +260,12 @@ class Test(tests.common.TestCase):
 
     def test_report_format(self):
 
-        runner = tests.common.ToolRunner('collect', ['--std.code.complexity.cyclomatic'], save_prev=True)
+        runner = tests.common.ToolRunner('collect',
+                                         ['--std.code.complexity.cyclomatic',
+                                          '--std.code.lines.total',
+                                          '--std.code.lines.code',
+                                          '--std.code.filelines.total'],
+                                         save_prev=True)
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('report',

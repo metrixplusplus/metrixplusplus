@@ -517,6 +517,18 @@ This can be used to integrate metrics in automatically generated reports.
 Currently the 'report' tool can generate data to be integrated in doxygen
 documentation. The tool creates a 'metrixpp.dox' file in the output directory.
 
+This will create an overview Table as seperate page:
+
+![Doxygen report overview](./../src/img/doxygenOverview.png)
+
+Create a new global list with metrix warnings (analog to the todo list):
+
+![Doxygen warning list](./../src/img/doxygenWarnings.png)
+
+And add a metrix section on top of every files documentation page:
+
+![Doxygen file documentation](./../src/img/doxygenFile.png)
+
 
 The doxygen format requires pytablewriter to be installed.
 ```
