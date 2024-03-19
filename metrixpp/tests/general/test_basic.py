@@ -258,6 +258,26 @@ class Test(tests.common.TestCase):
                                          use_prev=True)
         self.assertExec(runner.run())
 
+    def test_report_format(self):
+
+        runner = tests.common.ToolRunner('collect', ['--std.code.complexity.cyclomatic'], save_prev=True)
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('report',
+                                         ['--format=txt', '--max-limit=std.code.complexity:cyclomatic:0'],
+                                         prefix='txt')
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('report',
+                                         ['--format=json', '--max-limit=std.code.complexity:cyclomatic:0'],
+                                         prefix='json')
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('report',
+                                         ['--format=doxygen', '--max-limit=std.code.complexity:cyclomatic:0'],
+                                         prefix='dox')
+        self.assertExec(runner.run())
+
     def test_std_general_metrics(self):
 
         runner = tests.common.ToolRunner('collect',

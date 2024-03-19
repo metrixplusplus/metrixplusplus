@@ -1,0 +1,195 @@
+{
+    "overview": [
+        {
+            "file": "file_deleted_in_new_sources.cpp",
+            "warnings": "2"
+        },
+        {
+            "file": "simple.cpp",
+            "warnings": "6"
+        }
+    ],
+    "warnings": [
+        {
+            "metric": "std.code.complexity:cyclomatic",
+            "region": "B",
+            "type": "max",
+            "level": 1,
+            "limit": 0.0
+        },
+        {
+            "metric": "std.code.complexity:cyclomatic",
+            "region": "never_old",
+            "type": "max",
+            "level": 1,
+            "limit": 0.0
+        },
+        {
+            "metric": "std.code.complexity:cyclomatic",
+            "region": "A",
+            "type": "max",
+            "level": 3,
+            "limit": 0.0
+        },
+        {
+            "metric": "std.code.complexity:cyclomatic",
+            "region": "func",
+            "type": "max",
+            "level": 1,
+            "limit": 0.0
+        },
+        {
+            "metric": "std.code.complexity:cyclomatic",
+            "region": "embeded",
+            "type": "max",
+            "level": 1,
+            "limit": 0.0
+        },
+        {
+            "metric": "std.code.complexity:cyclomatic",
+            "region": "func_to_be_removed_in_new_sources",
+            "type": "max",
+            "level": 2,
+            "limit": 0.0
+        },
+        {
+            "metric": "std.code.complexity:cyclomatic",
+            "region": "embeded",
+            "type": "max",
+            "level": 1,
+            "limit": 0.0
+        },
+        {
+            "metric": "std.code.complexity:cyclomatic",
+            "region": "never",
+            "type": "max",
+            "level": 1,
+            "limit": 0.0
+        }
+    ],
+    "files": {
+        "./file_deleted_in_new_sources.cpp": {
+            "warnings": [
+                {
+                    "metric": "std.code.complexity:cyclomatic",
+                    "region": "B",
+                    "type": "max",
+                    "level": 1,
+                    "limit": 0.0
+                },
+                {
+                    "metric": "std.code.complexity:cyclomatic",
+                    "region": "never_old",
+                    "type": "max",
+                    "level": 1,
+                    "limit": 0.0
+                }
+            ],
+            "regions": {
+                "__global__": {
+                    "region": "__global__",
+                    "warnings": "0",
+                    "std.code.complexity.cyclomatic": "-"
+                },
+                "hmm": {
+                    "region": "hmm",
+                    "warnings": "0",
+                    "std.code.complexity.cyclomatic": "-"
+                },
+                "B": {
+                    "region": "B",
+                    "warnings": "1",
+                    "std.code.complexity.cyclomatic": "1"
+                },
+                "never_old": {
+                    "region": "never_old",
+                    "warnings": "1",
+                    "std.code.complexity.cyclomatic": "1"
+                }
+            }
+        },
+        "./simple.cpp": {
+            "warnings": [
+                {
+                    "metric": "std.code.complexity:cyclomatic",
+                    "region": "A",
+                    "type": "max",
+                    "level": 3,
+                    "limit": 0.0
+                },
+                {
+                    "metric": "std.code.complexity:cyclomatic",
+                    "region": "func",
+                    "type": "max",
+                    "level": 1,
+                    "limit": 0.0
+                },
+                {
+                    "metric": "std.code.complexity:cyclomatic",
+                    "region": "embeded",
+                    "type": "max",
+                    "level": 1,
+                    "limit": 0.0
+                },
+                {
+                    "metric": "std.code.complexity:cyclomatic",
+                    "region": "func_to_be_removed_in_new_sources",
+                    "type": "max",
+                    "level": 2,
+                    "limit": 0.0
+                },
+                {
+                    "metric": "std.code.complexity:cyclomatic",
+                    "region": "embeded",
+                    "type": "max",
+                    "level": 1,
+                    "limit": 0.0
+                },
+                {
+                    "metric": "std.code.complexity:cyclomatic",
+                    "region": "never",
+                    "type": "max",
+                    "level": 1,
+                    "limit": 0.0
+                }
+            ],
+            "regions": {
+                "__global__": {
+                    "region": "__global__",
+                    "warnings": "0",
+                    "std.code.complexity.cyclomatic": "-"
+                },
+                "hmm": {
+                    "region": "hmm",
+                    "warnings": "0",
+                    "std.code.complexity.cyclomatic": "-"
+                },
+                "A": {
+                    "region": "A",
+                    "warnings": "1",
+                    "std.code.complexity.cyclomatic": "3"
+                },
+                "func": {
+                    "region": "func",
+                    "warnings": "1",
+                    "std.code.complexity.cyclomatic": "1"
+                },
+                "embeded": {
+                    "region": "embeded",
+                    "warnings": "2",
+                    "std.code.complexity.cyclomatic": "1"
+                },
+                "func_to_be_removed_in_new_sources": {
+                    "region": "func_to_be_removed_in_new_sources",
+                    "warnings": "1",
+                    "std.code.complexity.cyclomatic": "2"
+                },
+                "never": {
+                    "region": "never",
+                    "warnings": "1",
+                    "std.code.complexity.cyclomatic": "1"
+                }
+            }
+        }
+    }
+}

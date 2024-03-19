@@ -1,0 +1,82 @@
+Overview:
+
+file: file_deleted_in_new_sources.cpp
+warnings: 2
+
+file: simple.cpp
+warnings: 6
+
+Warnings:
+Metric 'std.code.complexity:cyclomatic' for region B exceeds the limit. (value: 1 > limit: 0.0)
+Metric 'std.code.complexity:cyclomatic' for region never_old exceeds the limit. (value: 1 > limit: 0.0)
+Metric 'std.code.complexity:cyclomatic' for region A exceeds the limit. (value: 3 > limit: 0.0)
+Metric 'std.code.complexity:cyclomatic' for region func exceeds the limit. (value: 1 > limit: 0.0)
+Metric 'std.code.complexity:cyclomatic' for region embeded exceeds the limit. (value: 1 > limit: 0.0)
+Metric 'std.code.complexity:cyclomatic' for region func_to_be_removed_in_new_sources exceeds the limit. (value: 2 > limit: 0.0)
+Metric 'std.code.complexity:cyclomatic' for region embeded exceeds the limit. (value: 1 > limit: 0.0)
+Metric 'std.code.complexity:cyclomatic' for region never exceeds the limit. (value: 1 > limit: 0.0)
+
+Files:
+
+./file_deleted_in_new_sources.cpp
+warnings: 2
+
+./file_deleted_in_new_sources.cpp region: __global__
+warnings: 0
+std.code.complexity.cyclomatic: -
+
+./file_deleted_in_new_sources.cpp region: hmm
+warnings: 0
+std.code.complexity.cyclomatic: -
+
+./file_deleted_in_new_sources.cpp region: B
+warnings: 1
+std.code.complexity.cyclomatic: 1
+
+./file_deleted_in_new_sources.cpp region: never_old
+warnings: 1
+std.code.complexity.cyclomatic: 1
+
+Warnings for ./file_deleted_in_new_sources.cpp:
+Metric 'std.code.complexity:cyclomatic' for region B exceeds the limit. (value: 1 > limit: 0.0)
+Metric 'std.code.complexity:cyclomatic' for region never_old exceeds the limit. (value: 1 > limit: 0.0)
+
+./simple.cpp
+warnings: 6
+
+./simple.cpp region: __global__
+warnings: 0
+std.code.complexity.cyclomatic: -
+
+./simple.cpp region: hmm
+warnings: 0
+std.code.complexity.cyclomatic: -
+
+./simple.cpp region: A
+warnings: 1
+std.code.complexity.cyclomatic: 3
+
+./simple.cpp region: func
+warnings: 1
+std.code.complexity.cyclomatic: 1
+
+./simple.cpp region: embeded
+warnings: 2
+std.code.complexity.cyclomatic: 1
+
+./simple.cpp region: func_to_be_removed_in_new_sources
+warnings: 1
+std.code.complexity.cyclomatic: 2
+
+./simple.cpp region: never
+warnings: 1
+std.code.complexity.cyclomatic: 1
+
+Warnings for ./simple.cpp:
+Metric 'std.code.complexity:cyclomatic' for region A exceeds the limit. (value: 3 > limit: 0.0)
+Metric 'std.code.complexity:cyclomatic' for region func exceeds the limit. (value: 1 > limit: 0.0)
+Metric 'std.code.complexity:cyclomatic' for region embeded exceeds the limit. (value: 1 > limit: 0.0)
+Metric 'std.code.complexity:cyclomatic' for region func_to_be_removed_in_new_sources exceeds the limit. (value: 2 > limit: 0.0)
+Metric 'std.code.complexity:cyclomatic' for region embeded exceeds the limit. (value: 1 > limit: 0.0)
+Metric 'std.code.complexity:cyclomatic' for region never exceeds the limit. (value: 1 > limit: 0.0)
+
