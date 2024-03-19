@@ -8,6 +8,11 @@
                         <distribution-bar count="18" metric="0" ratio="1.0" />
                     </distribution-bars>
                 </cyclomatic>
+                <cyclomatic_switch_case_once avg="0.0" count="18" max="0" min="0" nonzero="False" sup="0" total="0.0">
+                    <distribution-bars>
+                        <distribution-bar count="18" metric="0" ratio="1.0" />
+                    </distribution-bars>
+                </cyclomatic_switch_case_once>
             </std.code.complexity>
         </aggregated-data>
         <file-data />

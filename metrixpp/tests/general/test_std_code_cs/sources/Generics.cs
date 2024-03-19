@@ -53,6 +53,20 @@ public static class Generics
 			{
 				this.Size(capacity);
 			}
+
+			switch(capacity)
+			{
+				case 1:
+					break;
+				case 2:
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
+				default:
+					break;
+			}
 		}
 	}
 	

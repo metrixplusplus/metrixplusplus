@@ -118,7 +118,7 @@
 ./Generics.cs:50: warning: Metric 'std.code.complexity:cyclomatic' for region 'Grow' exceeds the limit.
 	Metric name    : std.code.complexity:cyclomatic
 	Region name    : Grow
-	Metric value   : 1
+	Metric value   : 5
 	Modified       : None
 	Change trend   : None
 	Limit          : 0.0
