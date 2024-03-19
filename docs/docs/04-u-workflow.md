@@ -504,3 +504,31 @@ Files with csv format can be opened by applications, like Microsoft Office Excel
 ![Distribution graph](./../src/img/piechart.png)
 
 It is not recommended to use the export tool to implement custom post-analysis Metrix++ extensions. The main reason is that granted backward compatibility support for csv columns is not granted. Another main reason is that exporting is relatively slow process. It is recommended to use Metrix++ extensions API instead.
+
+### Exporting reports
+The Metrix++ 'report' tool can be used to report the current data of all files
+and metrics which have been collected so far.
+
+```
+> python "/path/to/metrix++.py" report --db-file=boost_1_54_0/metrixpp.db --format=doxygen --output-dir=/path/to/generated/output
+```
+
+This can be used to integrate metrics in automatically generated reports.
+Currently the 'report' tool can generate data to be integrated in doxygen
+documentation. The tool creates a 'metrixpp.dox' file in the output directory.
+
+
+The doxygen format requires pytablewriter to be installed.
+```
+> pip install pytablewriter
+```
+
+Besides the doxygen format the report can be used to create simple text 'txt' or
+json 'json' reports to be integrated in logs or other tools.
+
+
+If no output directory is given the result is printed to stdout.
+
+The 'report' tool accepts the same options as the [limit](#apply-thresholds)
+tool. The violated thresholds are added to the report as warnings.
+

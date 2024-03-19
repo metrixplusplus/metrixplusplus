@@ -13,6 +13,9 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/metrixplusplus/metrixplusplus",
     packages=setuptools.find_packages(exclude=["metrixpp.tests"]),
+    install_requires=[
+        'pytablewriter'
+    ],
     package_data={
         'metrixpp.mpp': ['*.ini'],
         'metrixpp.ext.std': ['*.ini'],
