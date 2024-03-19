@@ -213,6 +213,24 @@ class Test(tests.common.TestCase):
         runner = tests.common.ToolRunner('export', ['--help'])
         self.assertExec(runner.run())
 
+    def test_exclusion(self):
+
+        runner = tests.common.ToolRunner('collect',
+                                         ['--std.code.complexity.cyclomatic',
+                                          '--exclude-files=simple_excluded'],
+                                         prefix='excluding-unused',
+                                         check_stderr=[(0, -1)],
+                                         cwd="sources_exclude")
+        self.assertExec(runner.run())
+
+        runner = tests.common.ToolRunner('collect',
+                                         ['--std.code.complexity.cyclomatic',
+                                          '--exclude-directories=.*\/excluded'],
+                                         prefix='excluding-directories',
+                                         check_stderr=[(0, -1)],
+                                         cwd="sources_exclude")
+        self.assertExec(runner.run())
+
     def test_view_format(self):
         
         # note: --scope-mode is tested in workflow test above
