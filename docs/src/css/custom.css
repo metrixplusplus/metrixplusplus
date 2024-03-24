@@ -24,12 +24,6 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
-.info{
-  background-color: #d9edf7;
-}
-.td-regular{
-  background-color: #FFFFFF !important;
-}
 .center-justified {
   text-align: justify;
 }

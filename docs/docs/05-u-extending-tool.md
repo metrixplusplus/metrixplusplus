@@ -204,7 +204,7 @@ class Plugin(mpp.api.Plugin,
 	Directory      : .
 ```
 ### Extend regular expression incremental counting by smarter logic
-1. At this stage the metric counts every number in source code. However, we indent to spot only 'magic' numbers. Declared constant is not a magic number, so it is better to exclude constants from counting. It is easy to change default counter behaviour by implementing a function with name '_<metric_name>_count'.
+1. At this stage the metric counts every number in source code. However, we indent to spot only 'magic' numbers. Declared constant is not a magic number, so it is better to exclude constants from counting. It is easy to change default counter behaviour by implementing a function with name '_\<metric_name\>_count'.
 ```py
 import mpp.api
 import re
@@ -247,7 +247,7 @@ class Plugin(mpp.api.Plugin,
                 return 0
             return 1
 ```
-2. Initialy counter is initialized by zero, but it is possible to change it as well by implementing a function with name '_<metric_name>_count_initialize'. 
+2. Initialy counter is initialized by zero, but it is possible to change it as well by implementing a function with name '_\<metric_name\>_count_initialize'. 
 3. Plugin we are implementing does not require this.
 Now run Metrix++ to collect and view the results.
 ```bash
