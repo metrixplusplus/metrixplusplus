@@ -1,3 +1,6 @@
+## 1.8.1 (March, 2024)
+- re-release to fix pypi publishing
+
 ## 1.8.0 (March, 2024)
 - Improve C/C++ number parsing
 - Added new metric, ratio of comment lines to code lines 2
