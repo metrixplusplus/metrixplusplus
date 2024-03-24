@@ -23,6 +23,7 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
         self.reader = DirectoryReader()
         self.include_rules = []
         self.exclude_rules = []
+        self.exclude_dir_rules = []
         self.exclude_files = []
         self.parsers       = []
         super(Plugin, self).__init__()
@@ -37,7 +38,9 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
         parser.add_option("--include-files", "--if", action='append',
                          help="Adds a regular expression pattern to include files in processing (files have to match any rule to be included)")
         parser.add_option("--exclude-files", "--ef", action='append',
-                         help="Adds a regular expression pattern to exclude files or directories from processing")
+                         help="Adds a regular expression pattern to exclude files or directories by name from processing")
+        parser.add_option("--exclude-directories", "--ed", action='append',
+                         help="Adds a regular expression pattern to exclude directories by path from processing")
         parser.add_option("--non-recursively", "--nr", action="store_true", default=False,
                          help="If the option is set (True), sub-directories are not processed [default: %default]")
         self.optparser = parser
@@ -65,6 +68,14 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
                 self.optparser.error("option --exclude-files: " + str(e))
         else:
             self.add_exclude_rule(re.compile(r'^[.]'))
+
+        # check if any exclude dir rule is given
+        if options.__dict__['exclude_directories']:
+            try:
+                for exclude_dir_rule in options.__dict__['exclude_directories']:
+                    self.add_exclude_dir_rule(re.compile(exclude_dir_rule))
+            except Exception as e:
+                self.optparser.error("option --exclude-directories: " + str(e))
         self.non_recursively = options.__dict__['non_recursively']
 
     def initialize(self):
@@ -103,6 +114,9 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
     def add_exclude_rule(self, re_compiled_pattern):
         self.exclude_rules.append(re_compiled_pattern)
 
+    def add_exclude_dir_rule(self, re_compiled_pattern):
+        self.exclude_dir_rules.append(re_compiled_pattern)
+
     def add_exclude_file(self, file_path):
         if file_path == None:
             return
@@ -113,13 +127,21 @@ class Plugin(api.Plugin, api.Parent, api.IConfigurable, api.IRunable):
         if os.path.isfile(file_name):
             for each in self.include_rules:
                 if re.match(each, os.path.basename(file_name)) != None:
-                    break;
+                    break
             # file is excluded if no include rule matches
             else:
+                logging.info("Excluding: " + file_name + " - not included by any rule")
                 return True
+        # check exclude dir rules for directories
+        if os.path.isdir(file_name):
+            for each in self.exclude_dir_rules:
+                if re.match(each, file_name) != None:
+                    logging.info("Excluding: " + file_name + " - excluded by rule '" + each.pattern + "'")
+                    return True
         # check exclude rules for both, files and directories
         for each in self.exclude_rules:
             if re.match(each, os.path.basename(file_name)) != None:
+                logging.info("Excluding: " + file_name + " - excluded by rule '" + each.pattern + "'")
                 return True
         # finally check if a file is excluded directly
         for each in self.exclude_files:
@@ -257,7 +279,7 @@ class DirectoryReader():
                 return default
 
             # no valid UTF8 byte sequence:
-            return default;
+            return default
           # end of checkforUTF8 ------------------------------------------------
 
         # ----------------------------------------------------------------------
@@ -267,8 +289,8 @@ class DirectoryReader():
         # - Phyton 3: "a" is a binary array
         # - Python 2: "a" is string array!
         # ----------------------------------------------------------------------
-        f = open(filename, 'rb');
-        a = f.read();
+        f = open(filename, 'rb')
+        a = f.read()
         f.close()
 
         # check for codings with BOM:
@@ -355,8 +377,6 @@ class DirectoryReader():
                         db_loader.save_file_data(data)
                         #logging.debug("-" * 60)
                         exit_code += procerrors
-            else:
-                logging.info("Excluding: " + norm_path)
             return exit_code
 
 

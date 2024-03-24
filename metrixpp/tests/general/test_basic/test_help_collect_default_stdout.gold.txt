@@ -151,7 +151,10 @@ Options:
                         included)
   --exclude-files=EXCLUDE_FILES, --ef=EXCLUDE_FILES
                         Adds a regular expression pattern to exclude files or
-                        directories from processing
+                        directories by name from processing
+  --exclude-directories=EXCLUDE_DIRECTORIES, --ed=EXCLUDE_DIRECTORIES
+                        Adds a regular expression pattern to exclude
+                        directories by path from processing
   --non-recursively, --nr
                         If the option is set (True), sub-directories are not
                         processed [default: False]
