@@ -114,6 +114,13 @@ The metrics highlighed in blue are **per file** metrics. The other metrics are *
         <li>Preventing complex functions (complexity is a reason of many defects and a reason of expensive maintaintenance).</li></ul></td>
     </tr>
     <tr class="td-regular center-justified">
+    <td>std.code.complexity.cyclomatic_switch_case_once</td>
+    <td>Modified McCabe cyclomatic complexity metric which counts switch case constructs only once.</td>
+    <td colspan="2"><ul><li>Identification of highly complex code for review and refactoring.</li>
+        <li>Preventing complex functions (complexity is a reason of many defects and a reason of expensive maintaintenance).</li>
+        <li>Switch case statements might be considered to be easier to read than other constructs. This metric encourages developers to use switch case where applicable.</li></ul></td>
+    </tr>
+    <tr class="td-regular center-justified">
     <td>std.code.complexity.maxindent</td>
     <td>Maximum level of indentation of blocks within a region.
         <pre class="prettyprint">

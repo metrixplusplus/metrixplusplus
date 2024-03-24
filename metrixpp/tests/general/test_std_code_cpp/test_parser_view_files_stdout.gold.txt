@@ -26,6 +26,7 @@
 	Line numbers   : 5-8
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./function_ends_on_class.cpp:9: info: Metrics per 'function_end_on_struct' region
 	Region name    : function_end_on_struct
@@ -34,6 +35,7 @@
 	Line numbers   : 9-12
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./function_ends_on_class.cpp:13: info: Metrics per 'function_end_on_namespace' region
 	Region name    : function_end_on_namespace
@@ -42,8 +44,18 @@
 	Line numbers   : 13-16
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./function_ends_on_class.cpp:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 0.0
+	Minimum        : 0
+	Maximum        : 0
+	Total          : 0.0
+	Distribution   : 3 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 1.000 : 1.000 : 3	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+./function_ends_on_class.cpp:: info: Overall metrics for 'std.code.complexity:cyclomatic_switch_case_once' metric
 	Average        : 0.0
 	Minimum        : 0
 	Maximum        : 0
@@ -73,6 +85,7 @@
 	Line numbers   : 3-29
 	Modified       : None
 	std.code.complexity:cyclomatic: 2
+	std.code.complexity:cyclomatic_switch_case_once: 2
 
 ./operator_test.hpp:31: info: Metrics per 'function_after' region
 	Region name    : function_after
@@ -81,6 +94,7 @@
 	Line numbers   : 31-31
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:35: info: Metrics per 'ALL_operators' region
 	Region name    : ALL_operators
@@ -96,6 +110,7 @@
 	Line numbers   : 36-36
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:37: info: Metrics per 'operator new' region
 	Region name    : operator new
@@ -104,6 +119,7 @@
 	Line numbers   : 37-37
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:38: info: Metrics per 'operator delete' region
 	Region name    : operator delete
@@ -112,6 +128,7 @@
 	Line numbers   : 38-38
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:39: info: Metrics per 'operator new[ ]' region
 	Region name    : operator new[ ]
@@ -120,6 +137,7 @@
 	Line numbers   : 39-39
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:40: info: Metrics per 'operator delete []' region
 	Region name    : operator delete []
@@ -128,6 +146,7 @@
 	Line numbers   : 40-40
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:41: info: Metrics per 'operator+' region
 	Region name    : operator+
@@ -136,6 +155,7 @@
 	Line numbers   : 41-41
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:42: info: Metrics per 'operator -' region
 	Region name    : operator -
@@ -144,6 +164,7 @@
 	Line numbers   : 42-42
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:43: info: Metrics per 'operator *' region
 	Region name    : operator *
@@ -152,6 +173,7 @@
 	Line numbers   : 43-43
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:44: info: Metrics per 'operator /' region
 	Region name    : operator /
@@ -160,6 +182,7 @@
 	Line numbers   : 44-44
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:45: info: Metrics per 'operator=' region
 	Region name    : operator=
@@ -168,6 +191,7 @@
 	Line numbers   : 45-45
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:46: info: Metrics per 'operator<' region
 	Region name    : operator<
@@ -176,6 +200,7 @@
 	Line numbers   : 46-46
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:47: info: Metrics per 'operator >' region
 	Region name    : operator >
@@ -184,6 +209,7 @@
 	Line numbers   : 47-47
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:48: info: Metrics per 'operator+=' region
 	Region name    : operator+=
@@ -192,6 +218,7 @@
 	Line numbers   : 48-48
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:49: info: Metrics per 'operator -=' region
 	Region name    : operator -=
@@ -200,6 +227,7 @@
 	Line numbers   : 49-49
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:50: info: Metrics per 'operator*=' region
 	Region name    : operator*=
@@ -208,6 +236,7 @@
 	Line numbers   : 50-50
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:51: info: Metrics per 'operator/=' region
 	Region name    : operator/=
@@ -216,6 +245,7 @@
 	Line numbers   : 51-51
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:52: info: Metrics per 'operator<<' region
 	Region name    : operator<<
@@ -224,6 +254,7 @@
 	Line numbers   : 52-52
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:53: info: Metrics per 'operator >>' region
 	Region name    : operator >>
@@ -232,6 +263,7 @@
 	Line numbers   : 53-53
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:54: info: Metrics per 'operator <<=' region
 	Region name    : operator <<=
@@ -240,6 +272,7 @@
 	Line numbers   : 54-54
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:55: info: Metrics per 'operator>>=' region
 	Region name    : operator>>=
@@ -248,6 +281,7 @@
 	Line numbers   : 55-55
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:56: info: Metrics per 'operator==' region
 	Region name    : operator==
@@ -256,6 +290,7 @@
 	Line numbers   : 56-56
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:57: info: Metrics per 'operator!=' region
 	Region name    : operator!=
@@ -264,6 +299,7 @@
 	Line numbers   : 57-57
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:58: info: Metrics per 'operator<=' region
 	Region name    : operator<=
@@ -272,6 +308,7 @@
 	Line numbers   : 58-58
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:59: info: Metrics per 'operator >=' region
 	Region name    : operator >=
@@ -280,6 +317,7 @@
 	Line numbers   : 59-59
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:60: info: Metrics per 'operator ++' region
 	Region name    : operator ++
@@ -288,6 +326,7 @@
 	Line numbers   : 60-60
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:61: info: Metrics per 'operator--' region
 	Region name    : operator--
@@ -296,6 +335,7 @@
 	Line numbers   : 61-61
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:62: info: Metrics per 'operator%' region
 	Region name    : operator%
@@ -304,6 +344,7 @@
 	Line numbers   : 62-62
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:63: info: Metrics per 'operator &' region
 	Region name    : operator &
@@ -312,6 +353,7 @@
 	Line numbers   : 63-63
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:64: info: Metrics per 'operator ^' region
 	Region name    : operator ^
@@ -320,6 +362,7 @@
 	Line numbers   : 64-64
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:65: info: Metrics per 'operator !' region
 	Region name    : operator !
@@ -328,6 +371,7 @@
 	Line numbers   : 65-65
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:66: info: Metrics per 'operator|' region
 	Region name    : operator|
@@ -336,6 +380,7 @@
 	Line numbers   : 66-66
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:67: info: Metrics per 'operator~' region
 	Region name    : operator~
@@ -344,6 +389,7 @@
 	Line numbers   : 67-67
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:68: info: Metrics per 'operator &=' region
 	Region name    : operator &=
@@ -352,6 +398,7 @@
 	Line numbers   : 68-68
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:69: info: Metrics per 'operator ^=' region
 	Region name    : operator ^=
@@ -360,6 +407,7 @@
 	Line numbers   : 69-69
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:70: info: Metrics per 'operator |=' region
 	Region name    : operator |=
@@ -368,6 +416,7 @@
 	Line numbers   : 70-70
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:71: info: Metrics per 'operator &&' region
 	Region name    : operator &&
@@ -376,6 +425,7 @@
 	Line numbers   : 71-71
 	Modified       : None
 	std.code.complexity:cyclomatic: 1
+	std.code.complexity:cyclomatic_switch_case_once: 1
 
 ./operator_test.hpp:72: info: Metrics per 'operator ||' region
 	Region name    : operator ||
@@ -384,6 +434,7 @@
 	Line numbers   : 72-72
 	Modified       : None
 	std.code.complexity:cyclomatic: 1
+	std.code.complexity:cyclomatic_switch_case_once: 1
 
 ./operator_test.hpp:73: info: Metrics per 'operator %=' region
 	Region name    : operator %=
@@ -392,6 +443,7 @@
 	Line numbers   : 73-73
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:74: info: Metrics per 'operator []' region
 	Region name    : operator []
@@ -400,6 +452,7 @@
 	Line numbers   : 74-74
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:75: info: Metrics per 'operator  ()' region
 	Region name    : operator  ()
@@ -408,6 +461,7 @@
 	Line numbers   : 75-75
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:76: info: Metrics per 'operator()' region
 	Region name    : operator()
@@ -416,6 +470,7 @@
 	Line numbers   : 76-76
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:77: info: Metrics per 'operator()' region
 	Region name    : operator()
@@ -424,6 +479,7 @@
 	Line numbers   : 77-77
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:78: info: Metrics per 'operator()' region
 	Region name    : operator()
@@ -432,6 +488,7 @@
 	Line numbers   : 78-78
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:79: info: Metrics per 'operator ()' region
 	Region name    : operator ()
@@ -440,6 +497,7 @@
 	Line numbers   : 79-79
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:80: info: Metrics per 'operator ()' region
 	Region name    : operator ()
@@ -448,6 +506,7 @@
 	Line numbers   : 80-80
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:81: info: Metrics per 'operator ,' region
 	Region name    : operator ,
@@ -456,6 +515,7 @@
 	Line numbers   : 81-81
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:82: info: Metrics per 'operator ->*' region
 	Region name    : operator ->*
@@ -464,6 +524,7 @@
 	Line numbers   : 82-82
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:83: info: Metrics per 'operator->' region
 	Region name    : operator->
@@ -472,6 +533,7 @@
 	Line numbers   : 83-83
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:84: info: Metrics per 'operator.' region
 	Region name    : operator.
@@ -480,8 +542,20 @@
 	Line numbers   : 84-84
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./operator_test.hpp:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 0.07843137
+	Minimum        : 0
+	Maximum        : 2
+	Total          : 4.0
+	Distribution   : 51 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.941 : 0.941 : 48	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.039 : 0.980 :  2	|||
+	             2 : 0.020 : 1.000 :  1	|
+
+./operator_test.hpp:: info: Overall metrics for 'std.code.complexity:cyclomatic_switch_case_once' metric
 	Average        : 0.07843137
 	Minimum        : 0
 	Maximum        : 2
@@ -506,6 +580,7 @@
 	Line numbers   : 12-14
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:108: info: Metrics per 'boost' region
 	Region name    : boost
@@ -528,6 +603,7 @@
 	Line numbers   : 125-125
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:134: info: Metrics per 'mycontainer' region
 	Region name    : mycontainer
@@ -543,6 +619,7 @@
 	Line numbers   : 136-137
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:138: info: Metrics per 'increase' region
 	Region name    : increase
@@ -551,6 +628,7 @@
 	Line numbers   : 138-138
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:143: info: Metrics per 'mycontainer' region
 	Region name    : mycontainer
@@ -566,6 +644,7 @@
 	Line numbers   : 145-146
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:147: info: Metrics per 'uppercase' region
 	Region name    : uppercase
@@ -574,6 +653,7 @@
 	Line numbers   : 147-152
 	Modified       : None
 	std.code.complexity:cyclomatic: 2
+	std.code.complexity:cyclomatic_switch_case_once: 2
 
 ./test.c:156: info: Metrics per 'main' region
 	Region name    : main
@@ -582,6 +662,7 @@
 	Line numbers   : 155-162
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:164: info: Metrics per 'scoped_ptr' region
 	Region name    : scoped_ptr
@@ -597,6 +678,7 @@
 	Line numbers   : 185-190
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:192: info: Metrics per 'scoped_ptr' region
 	Region name    : scoped_ptr
@@ -605,6 +687,7 @@
 	Line numbers   : 192-198
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:202: info: Metrics per 'scoped_ptr' region
 	Region name    : scoped_ptr
@@ -613,6 +696,7 @@
 	Line numbers   : 202-207
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:210: info: Metrics per '~scoped_ptr' region
 	Region name    : ~scoped_ptr
@@ -621,6 +705,7 @@
 	Line numbers   : 209-216
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:216: info: Metrics per 'reset' region
 	Region name    : reset
@@ -629,6 +714,7 @@
 	Line numbers   : 216-220
 	Modified       : None
 	std.code.complexity:cyclomatic: 1
+	std.code.complexity:cyclomatic_switch_case_once: 1
 
 ./test.c:220: info: Metrics per 'operator*' region
 	Region name    : operator*
@@ -637,6 +723,7 @@
 	Line numbers   : 220-224
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:226: info: Metrics per 'operator->' region
 	Region name    : operator->
@@ -645,6 +732,7 @@
 	Line numbers   : 226-230
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:232: info: Metrics per 'operator  float' region
 	Region name    : operator  float
@@ -653,6 +741,7 @@
 	Line numbers   : 232-236
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:238: info: Metrics per 'get' region
 	Region name    : get
@@ -661,6 +750,7 @@
 	Line numbers   : 238-241
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:246: info: Metrics per 'swap' region
 	Region name    : swap
@@ -669,6 +759,7 @@
 	Line numbers   : 246-251
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:254: info: Metrics per 'swap' region
 	Region name    : swap
@@ -677,6 +768,7 @@
 	Line numbers   : 254-257
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:261: info: Metrics per 'get_pointer' region
 	Region name    : get_pointer
@@ -685,6 +777,7 @@
 	Line numbers   : 261-264
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:276: info: Metrics per 'Central' region
 	Region name    : Central
@@ -700,6 +793,7 @@
 	Line numbers   : 277-294
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:296: info: Metrics per 'save' region
 	Region name    : save
@@ -708,6 +802,7 @@
 	Line numbers   : 296-321
 	Modified       : None
 	std.code.complexity:cyclomatic: 1
+	std.code.complexity:cyclomatic_switch_case_once: 1
 
 ./test.c:323: info: Metrics per 'show' region
 	Region name    : show
@@ -716,6 +811,7 @@
 	Line numbers   : 323-330
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:332: info: Metrics per 'main' region
 	Region name    : main
@@ -724,6 +820,7 @@
 	Line numbers   : 332-344
 	Modified       : None
 	std.code.complexity:cyclomatic: 2
+	std.code.complexity:cyclomatic_switch_case_once: 2
 
 ./test.c:349: info: Metrics per 'f1' region
 	Region name    : f1
@@ -732,8 +829,20 @@
 	Line numbers   : 349-349
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test.c:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 0.25
+	Minimum        : 0
+	Maximum        : 2
+	Total          : 6.0
+	Distribution   : 24 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.833 : 0.833 : 20	|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.083 : 0.917 :  2	||||||||
+	             2 : 0.083 : 1.000 :  2	||||||||
+
+./test.c:: info: Overall metrics for 'std.code.complexity:cyclomatic_switch_case_once' metric
 	Average        : 0.25
 	Minimum        : 0
 	Maximum        : 2
@@ -747,8 +856,8 @@
 ./test2.cpp:0: info: Metrics per '__global__' region
 	Region name    : __global__
 	Region type    : global
-	Offsets        : 0-628
-	Line numbers   : 1-53
+	Offsets        : 0-736
+	Line numbers   : 1-66
 	Modified       : None
 
 ./test2.cpp:5: info: Metrics per 'A' region
@@ -765,6 +874,7 @@
 	Line numbers   : 7-10
 	Modified       : None
 	std.code.complexity:cyclomatic: 1
+	std.code.complexity:cyclomatic_switch_case_once: 1
 
 ./test2.cpp:10: info: Metrics per 'method' region
 	Region name    : method
@@ -773,6 +883,7 @@
 	Line numbers   : 10-13
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test2.cpp:13: info: Metrics per 'operator ++' region
 	Region name    : operator ++
@@ -781,32 +892,45 @@
 	Line numbers   : 13-16
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test2.cpp:22: info: Metrics per 'aaa' region
 	Region name    : aaa
 	Region type    : namespace
-	Offsets        : 173-350
-	Line numbers   : 21-39
+	Offsets        : 173-458
+	Line numbers   : 21-52
 	Modified       : None
 
 ./test2.cpp:23: info: Metrics per 'main' region
 	Region name    : main
 	Region type    : function
-	Offsets        : 192-348
-	Line numbers   : 23-38
+	Offsets        : 192-456
+	Line numbers   : 23-51
 	Modified       : None
-	std.code.complexity:cyclomatic: 2
+	std.code.complexity:cyclomatic: 6
+	std.code.complexity:cyclomatic_switch_case_once: 3
 
 ./test2.cpp:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
-	Average        : 0.75
+	Average        : 1.75
 	Minimum        : 0
-	Maximum        : 2
-	Total          : 3.0
+	Maximum        : 6
+	Total          : 7.0
 	Distribution   : 4 regions in total (including 0 suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.500 : 0.500 : 2	||||||||||||||||||||||||||||||||||||||||||||||||||
 	             1 : 0.250 : 0.750 : 1	|||||||||||||||||||||||||
-	             2 : 0.250 : 1.000 : 1	|||||||||||||||||||||||||
+	             6 : 0.250 : 1.000 : 1	|||||||||||||||||||||||||
+
+./test2.cpp:: info: Overall metrics for 'std.code.complexity:cyclomatic_switch_case_once' metric
+	Average        : 1.0
+	Minimum        : 0
+	Maximum        : 3
+	Total          : 4.0
+	Distribution   : 4 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.500 : 0.500 : 2	||||||||||||||||||||||||||||||||||||||||||||||||||
+	             1 : 0.250 : 0.750 : 1	|||||||||||||||||||||||||
+	             3 : 0.250 : 1.000 : 1	|||||||||||||||||||||||||
 
 ./test3.cpp:0: info: Metrics per '__global__' region
 	Region name    : __global__
@@ -829,6 +953,7 @@
 	Line numbers   : 38-48
 	Modified       : None
 	std.code.complexity:cyclomatic: 1
+	std.code.complexity:cyclomatic_switch_case_once: 1
 
 ./test3.cpp:53: info: Metrics per 'doFont' region
 	Region name    : doFont
@@ -837,6 +962,7 @@
 	Line numbers   : 53-66
 	Modified       : None
 	std.code.complexity:cyclomatic: 1
+	std.code.complexity:cyclomatic_switch_case_once: 1
 
 ./test3.cpp:72: info: Metrics per 'doFont222' region
 	Region name    : doFont222
@@ -845,6 +971,7 @@
 	Line numbers   : 68-87
 	Modified       : None
 	std.code.complexity:cyclomatic: 2
+	std.code.complexity:cyclomatic_switch_case_once: 2
 
 ./test3.cpp:90: info: Metrics per 'not_closed' region
 	Region name    : not_closed
@@ -860,6 +987,7 @@
 	Line numbers   : 110-120
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./test3.cpp:102: info: Metrics per '__noname__' region
 	Region name    : __noname__
@@ -876,6 +1004,17 @@
 	Modified       : None
 
 ./test3.cpp:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 1.0
+	Minimum        : 0
+	Maximum        : 2
+	Total          : 4.0
+	Distribution   : 4 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.250 : 0.250 : 1	|||||||||||||||||||||||||
+	             1 : 0.500 : 0.750 : 2	||||||||||||||||||||||||||||||||||||||||||||||||||
+	             2 : 0.250 : 1.000 : 1	|||||||||||||||||||||||||
+
+./test3.cpp:: info: Overall metrics for 'std.code.complexity:cyclomatic_switch_case_once' metric
 	Average        : 1.0
 	Minimum        : 0
 	Maximum        : 2

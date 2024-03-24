@@ -10,6 +10,18 @@
 	             2 : 0.250 : 0.750 : 1 [+1]	|||||||||||||||||||||||||
 	             3 : 0.250 : 1.000 : 1 [+1]	|||||||||||||||||||||||||
 
+./:: info: Overall metrics for 'std.code.complexity:cyclomatic_switch_case_once' metric
+	Average        : 1.5 [+1.5]
+	Minimum        : 0 [+0]
+	Maximum        : 3 [+3]
+	Total          : 6.0 [+6.0]
+	Distribution   : 4 [+4] regions in total (including 0 [+0] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.250 : 0.250 : 1 [+1]	|||||||||||||||||||||||||
+	             1 : 0.250 : 0.500 : 1 [+1]	|||||||||||||||||||||||||
+	             2 : 0.250 : 0.750 : 1 [+1]	|||||||||||||||||||||||||
+	             3 : 0.250 : 1.000 : 1 [+1]	|||||||||||||||||||||||||
+
 ./:: info: Overall metrics for 'std.code.lines:code' metric
 	Average        : 4.71428571 [+4.71428571]
 	Minimum        : 0 [+0]

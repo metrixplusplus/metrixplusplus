@@ -41,6 +41,7 @@
 	Line numbers   : 13-24
 	Modified       : False
 	std.code.complexity:cyclomatic: 3 [+0]
+	std.code.complexity:cyclomatic_switch_case_once: 3 [+0]
 	std.code.lines:code: 11 [+0]
 	std.code.lines:comments: 2 [+0]
 	std.code.lines:preprocessor: 0 [+0]
@@ -54,6 +55,7 @@
 	Line numbers   : 26-42
 	Modified       : False
 	std.code.complexity:cyclomatic: 1 [+0]
+	std.code.complexity:cyclomatic_switch_case_once: 1 [+0]
 	std.code.lines:code: 5 [+0]
 	std.code.lines:comments: 0 [+0]
 	std.code.lines:preprocessor: 0 [+0]
@@ -79,6 +81,7 @@
 	Line numbers   : 30-39
 	Modified       : True
 	std.code.complexity:cyclomatic: 2 [+1]
+	std.code.complexity:cyclomatic_switch_case_once: 2 [+1]
 	std.code.lines:code: 8 [+1]
 	std.code.lines:comments: 2 [+1]
 	std.code.lines:preprocessor: 0 [+0]
@@ -92,6 +95,7 @@
 	Line numbers   : 44-51
 	Modified       : True
 	std.code.complexity:cyclomatic: 1 [+0]
+	std.code.complexity:cyclomatic_switch_case_once: 1 [+0]
 	std.code.lines:code: 7 [+0]
 	std.code.lines:comments: 1 [+1]
 	std.code.lines:preprocessor: 0 [+0]
@@ -105,6 +109,7 @@
 	Line numbers   : 53-56
 	Modified       : None
 	std.code.complexity:cyclomatic: 0
+	std.code.complexity:cyclomatic_switch_case_once: 0
 	std.code.lines:code: 3
 	std.code.lines:comments: 1
 	std.code.lines:preprocessor: 0
@@ -118,6 +123,7 @@
 	Line numbers   : 58-62
 	Modified       : None
 	std.code.complexity:cyclomatic: 1
+	std.code.complexity:cyclomatic_switch_case_once: 1
 	std.code.lines:code: 5
 	std.code.lines:comments: 0
 	std.code.lines:preprocessor: 0
@@ -131,6 +137,7 @@
 	Line numbers   : 64-72
 	Modified       : None
 	std.code.complexity:cyclomatic: 2
+	std.code.complexity:cyclomatic_switch_case_once: 2
 	std.code.lines:code: 8
 	std.code.lines:comments: 1
 	std.code.lines:preprocessor: 0
@@ -145,6 +152,17 @@
 	Maximum        : 2 [+0]
 	Total          : 6.0 [+1.0]
 	Distribution   : 5 [+1] regions in total (including 1 [+1] suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 0.200 : 0.200 : 1 [+1]	||||||||||||||||||||
+	             1 : 0.400 : 0.600 : 2 [-1]	||||||||||||||||||||||||||||||||||||||||
+	             2 : 0.400 : 1.000 : 2 [+1]	||||||||||||||||||||||||||||||||||||||||
+
+./simple.cpp:: info: Overall metrics for 'std.code.complexity:cyclomatic_switch_case_once' metric
+	Average        : 1.2 [-0.05]
+	Minimum        : 0 [-1]
+	Maximum        : 2 [+0]
+	Total          : 6.0 [+1.0]
+	Distribution   : 5 [+1] regions in total (including 0 [+0] suppressed)
 	  Metric value : Ratio : R-sum : Number of regions
 	             0 : 0.200 : 0.200 : 1 [+1]	||||||||||||||||||||
 	             1 : 0.400 : 0.600 : 2 [-1]	||||||||||||||||||||||||||||||||||||||||

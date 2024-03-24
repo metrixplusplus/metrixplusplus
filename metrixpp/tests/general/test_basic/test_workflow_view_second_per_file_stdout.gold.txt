@@ -12,6 +12,15 @@
                         <distribution-bar __diff__="0" count="1" metric="3" ratio="0.14285714" />
                     </distribution-bars>
                 </cyclomatic>
+                <cyclomatic_switch_case_once avg="1.42857143" count="7" max="3" min="0" nonzero="False" sup="0" total="10.0">
+                    <__diff__ avg="-0.07142857" count="1" max="0" min="-1" nonzero="0" sup="0" total="1.0" />
+                    <distribution-bars>
+                        <distribution-bar __diff__="1" count="1" metric="0" ratio="0.14285714" />
+                        <distribution-bar __diff__="-1" count="3" metric="1" ratio="0.42857143" />
+                        <distribution-bar __diff__="1" count="2" metric="2" ratio="0.28571429" />
+                        <distribution-bar __diff__="0" count="1" metric="3" ratio="0.14285714" />
+                    </distribution-bars>
+                </cyclomatic_switch_case_once>
             </std.code.complexity>
             <std.code.lines>
                 <code avg="5.27272727" count="11" max="11" min="0" nonzero="False" sup="0" total="58.0">
@@ -123,8 +132,8 @@
                 </region>
                 <region>
                     <data>
-                        <std.code.complexity cyclomatic="3">
-                            <__diff__ cyclomatic="0" />
+                        <std.code.complexity cyclomatic="3" cyclomatic_switch_case_once="3">
+                            <__diff__ cyclomatic="0" cyclomatic_switch_case_once="0" />
                         </std.code.complexity>
                         <std.code.lines code="11" comments="2" preprocessor="0" total="12">
                             <__diff__ code="0" comments="0" preprocessor="0" total="0" />
@@ -137,8 +146,8 @@
                 </region>
                 <region>
                     <data>
-                        <std.code.complexity cyclomatic="1">
-                            <__diff__ cyclomatic="0" />
+                        <std.code.complexity cyclomatic="1" cyclomatic_switch_case_once="1">
+                            <__diff__ cyclomatic="0" cyclomatic_switch_case_once="0" />
                         </std.code.complexity>
                         <std.code.lines code="5" comments="0" preprocessor="0" total="5">
                             <__diff__ code="0" comments="0" preprocessor="0" total="0" />
@@ -162,8 +171,8 @@
                 </region>
                 <region>
                     <data>
-                        <std.code.complexity cyclomatic="2">
-                            <__diff__ cyclomatic="1" />
+                        <std.code.complexity cyclomatic="2" cyclomatic_switch_case_once="2">
+                            <__diff__ cyclomatic="1" cyclomatic_switch_case_once="1" />
                         </std.code.complexity>
                         <std.code.lines code="8" comments="2" preprocessor="0" total="9">
                             <__diff__ code="1" comments="1" preprocessor="0" total="1" />
@@ -176,8 +185,8 @@
                 </region>
                 <region>
                     <data>
-                        <std.code.complexity cyclomatic="1">
-                            <__diff__ cyclomatic="0" />
+                        <std.code.complexity cyclomatic="1" cyclomatic_switch_case_once="1">
+                            <__diff__ cyclomatic="0" cyclomatic_switch_case_once="0" />
                         </std.code.complexity>
                         <std.code.lines code="7" comments="1" preprocessor="0" total="7">
                             <__diff__ code="0" comments="1" preprocessor="0" total="0" />
@@ -190,7 +199,7 @@
                 </region>
                 <region>
                     <data>
-                        <std.code.complexity cyclomatic="0" />
+                        <std.code.complexity cyclomatic="0" cyclomatic_switch_case_once="0" />
                         <std.code.lines code="3" comments="1" preprocessor="0" total="4" />
                         <std.code.ratio comments="0.25" />
                     </data>
@@ -198,7 +207,7 @@
                 </region>
                 <region>
                     <data>
-                        <std.code.complexity cyclomatic="1" />
+                        <std.code.complexity cyclomatic="1" cyclomatic_switch_case_once="1" />
                         <std.code.lines code="5" comments="0" preprocessor="0" total="5" />
                         <std.code.ratio comments="0.0" />
                     </data>
@@ -206,7 +215,7 @@
                 </region>
                 <region>
                     <data>
-                        <std.code.complexity cyclomatic="2" />
+                        <std.code.complexity cyclomatic="2" cyclomatic_switch_case_once="2" />
                         <std.code.lines code="8" comments="1" preprocessor="0" total="9" />
                         <std.code.ratio comments="0.111" />
                         <std.suppress count="1" list="[std.code.complexity:cyclomatic]" />

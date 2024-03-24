@@ -3,13 +3,22 @@
     <data>
         <aggregated-data>
             <std.code.complexity>
-                <cyclomatic avg="0.19767442" count="86" max="2" min="0" nonzero="False" sup="0" total="17.0">
+                <cyclomatic avg="0.24418605" count="86" max="6" min="0" nonzero="False" sup="0" total="21.0">
                     <distribution-bars>
                         <distribution-bar count="74" metric="0" ratio="0.86046512" />
                         <distribution-bar count="7" metric="1" ratio="0.08139535" />
-                        <distribution-bar count="5" metric="2" ratio="0.05813953" />
+                        <distribution-bar count="4" metric="2" ratio="0.04651163" />
+                        <distribution-bar count="1" metric="6" ratio="0.01162791" />
                     </distribution-bars>
                 </cyclomatic>
+                <cyclomatic_switch_case_once avg="0.20930233" count="86" max="3" min="0" nonzero="False" sup="0" total="18.0">
+                    <distribution-bars>
+                        <distribution-bar count="74" metric="0" ratio="0.86046512" />
+                        <distribution-bar count="7" metric="1" ratio="0.08139535" />
+                        <distribution-bar count="4" metric="2" ratio="0.04651163" />
+                        <distribution-bar count="1" metric="3" ratio="0.01162791" />
+                    </distribution-bars>
+                </cyclomatic_switch_case_once>
             </std.code.complexity>
         </aggregated-data>
         <file-data />

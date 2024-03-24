@@ -19,6 +19,7 @@
         	Line numbers   : 5-9
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:11: info: Metrics per 'testfunction2<T>' region
         	Region name    : testfunction2<T>
@@ -27,6 +28,7 @@
         	Line numbers   : 11-15
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:17: info: Metrics per 'testfunction3<T>' region
         	Region name    : testfunction3<T>
@@ -35,6 +37,7 @@
         	Line numbers   : 17-21
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:23: info: Metrics per 'testfunction4' region
         	Region name    : testfunction4
@@ -43,6 +46,7 @@
         	Line numbers   : 23-27
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:29: info: Metrics per 'testfunction5<T,S>' region
         	Region name    : testfunction5<T,S>
@@ -51,6 +55,7 @@
         	Line numbers   : 29-33
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:35: info: Metrics per 'testfunction6<T,S>' region
         	Region name    : testfunction6<T,S>
@@ -59,6 +64,7 @@
         	Line numbers   : 35-39
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:41: info: Metrics per 'testfunction7<T,S>' region
         	Region name    : testfunction7<T,S>
@@ -67,6 +73,7 @@
         	Line numbers   : 41-46
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:48: info: Metrics per 'testfunction8<T,S>' region
         	Region name    : testfunction8<T,S>
@@ -75,6 +82,7 @@
         	Line numbers   : 48-53
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:55: info: Metrics per 'testfunction9<T,S>' region
         	Region name    : testfunction9<T,S>
@@ -83,6 +91,7 @@
         	Line numbers   : 55-59
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:61: info: Metrics per 'Interface.testfunction10<T,S>' region
         	Region name    : Interface.testfunction10<T,S>
@@ -91,6 +100,7 @@
         	Line numbers   : 61-65
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:67: info: Metrics per 'Interface<T>.testfunction11<T,S>' region
         	Region name    : Interface<T>.testfunction11<T,S>
@@ -99,6 +109,7 @@
         	Line numbers   : 67-71
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:73: info: Metrics per 'Interface<T,S>.testfunction12' region
         	Region name    : Interface<T,S>.testfunction12
@@ -107,6 +118,7 @@
         	Line numbers   : 73-77
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:79: info: Metrics per 'Interface<T,S>.testfunction13<T>' region
         	Region name    : Interface<T,S>.testfunction13<T>
@@ -115,6 +127,7 @@
         	Line numbers   : 79-83
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:85: info: Metrics per 'Interface<T>.testfunction14<T,S>' region
         	Region name    : Interface<T>.testfunction14<T,S>
@@ -123,6 +136,7 @@
         	Line numbers   : 85-89
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:91: info: Metrics per 'Interface<T,S>.testfunction15<T,S>' region
         	Region name    : Interface<T,S>.testfunction15<T,S>
@@ -131,6 +145,7 @@
         	Line numbers   : 91-95
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:97: info: Metrics per 'Interface<T,S>.testfunction16<T>' region
         	Region name    : Interface<T,S>.testfunction16<T>
@@ -139,6 +154,7 @@
         	Line numbers   : 97-101
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:103: info: Metrics per 'Interface<T,S>.testfunction17<T>' region
         	Region name    : Interface<T,S>.testfunction17<T>
@@ -147,6 +163,7 @@
         	Line numbers   : 103-107
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 .   .   ./sample.cs:109: info: Metrics per 'testClass1' region
         	Region name    : testClass1
@@ -204,8 +221,18 @@
         	Line numbers   : 141-145
         	Modified       : None
         	std.code.complexity:cyclomatic: 0
+        	std.code.complexity:cyclomatic_switch_case_once: 0
 
 ./sample.cs:: info: Overall metrics for 'std.code.complexity:cyclomatic' metric
+	Average        : 0.0
+	Minimum        : 0
+	Maximum        : 0
+	Total          : 0.0
+	Distribution   : 18 regions in total (including 0 suppressed)
+	  Metric value : Ratio : R-sum : Number of regions
+	             0 : 1.000 : 1.000 : 18	||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+./sample.cs:: info: Overall metrics for 'std.code.complexity:cyclomatic_switch_case_once' metric
 	Average        : 0.0
 	Minimum        : 0
 	Maximum        : 0

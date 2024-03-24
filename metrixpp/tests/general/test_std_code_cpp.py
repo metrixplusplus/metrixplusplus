@@ -14,7 +14,9 @@ class Test(tests.common.TestCase):
 
     def test_parser(self):
         
-        runner = tests.common.ToolRunner('collect', ['--std.code.complexity.cyclomatic'])
+        runner = tests.common.ToolRunner('collect',
+                                         ['--std.code.complexity.cyclomatic',
+                                          '--std.code.complexity.cyclomatic_switch_case_once'])
         self.assertExec(runner.run())
 
         runner = tests.common.ToolRunner('view', opts_list=['--format=xml'])

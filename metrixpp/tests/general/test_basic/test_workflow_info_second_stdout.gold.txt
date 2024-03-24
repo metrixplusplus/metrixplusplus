@@ -17,6 +17,7 @@ test_workflow.db:: info: Created using plugins and settings:
 
 test_workflow.db:: info: Collected metrics:
 	std.code.complexity:cyclomatic: 
+	std.code.complexity:cyclomatic_switch_case_once: 
 	std.code.lines:code: 
 	std.code.lines:comments: 
 	std.code.lines:preprocessor: 
