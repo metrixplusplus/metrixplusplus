@@ -3,10 +3,12 @@ Usage: python metrix++.py --help
        python metrix++.py <action> [options] -- [path 1] ... [path N]
 
 Actions: 
+  
   collect
   export
   info
   limit
+  report
   test
   view
 

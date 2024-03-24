@@ -32,7 +32,7 @@ class Plugin(api.Plugin, api.IConfigurable, api.IRunable):
         if len(args) == 0 or tests_dir == os.path.abspath(args[0]):
             for fname in sorted(os.listdir(tests_dir)):
                 full_path = os.path.join(tests_dir, fname)
-                if os.path.isdir(full_path) and fname != "sources":
+                if os.path.isdir(full_path) and fname != "sources" and fname != "__pycache__":
                     exit_code += subprocess.call(itertools.chain(process_data, [full_path]),
                                                  cwd=os.environ['METRIXPLUSPLUS_INSTALL_DIR'])
         else:
