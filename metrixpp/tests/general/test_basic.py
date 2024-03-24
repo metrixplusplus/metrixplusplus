@@ -225,7 +225,7 @@ class Test(tests.common.TestCase):
 
         runner = tests.common.ToolRunner('collect',
                                          ['--std.code.complexity.cyclomatic',
-                                          '--exclude-directories=.*\/excluded'],
+                                          '--exclude-directories=.*\\/excluded'],
                                          prefix='excluding-directories',
                                          check_stderr=[(0, -1)],
                                          cwd="sources_exclude")
