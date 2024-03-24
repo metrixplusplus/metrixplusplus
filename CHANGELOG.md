@@ -1,3 +1,11 @@
+## 1.8.0 (March, 2024)
+- Improve C/C++ number parsing
+- Added new metric, ratio of comment lines to code lines 2
+- Detect correct file coding
+- report plugin
+- exclude directories option
+- cyclomatic complexity metric without switch case
+
 ## 1.7.1 (June, 2021)
 - improve C++ numbers parsing
 
