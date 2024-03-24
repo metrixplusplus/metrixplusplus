@@ -88,7 +88,7 @@ class CppCodeParser(object):
     def finalize_block(self, text, block, block_end):
         if block['type'] != '__global__':
             # do not trim spaces for __global__region
-            space_match = re.match('^\s*', text[block['start']:block_end], re.MULTILINE)
+            space_match = re.match('^\\s*', text[block['start']:block_end], re.MULTILINE)
             block['start'] += space_match.end() # trim spaces at the beginning
         block['end'] = block_end
 
